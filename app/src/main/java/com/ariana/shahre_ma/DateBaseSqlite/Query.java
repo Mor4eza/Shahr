@@ -343,6 +343,26 @@ public class Query {
         return Result;
     }
 
+    public Integer getCityId(Integer areaId) {
+
+        Integer Result = 0;
+
+        try {
+            SelectDataBaseSqlite dbs = new SelectDataBaseSqlite(context);
+            Cursor allrows = dbs.select_AreaId(areaId);
+            allrows.moveToFirst();
+            Result = allrows.getInt(0);
+            allrows.close();
+
+
+            // fc.SetBusiness_SubsetId(Result);
+        }
+        catch (Exception e) {
+            // Toast.makeText(activity, e.toString(), Toast.LENGTH_LONG).show();
+        }
+        return Result;
+    }
+
     public Integer getCountSubset() {
         Integer Result = 0;
         try {

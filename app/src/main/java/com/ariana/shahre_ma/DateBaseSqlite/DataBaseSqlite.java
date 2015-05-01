@@ -1306,7 +1306,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     public Cursor select_AllBusinessId(Integer id)
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT Id,Market,Phone,Mobile,Fax,Email,BusinessOwner,Address,Description,SubsetId,Latitude,Longitude,Field1,Field2,Field3,Field4,Field5,Field6,Field7,RateValue,AreaId,Src,CityId  FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE Id=" +id, null);
+        return db.rawQuery("SELECT Id,Market,Phone,Mobile,Fax,Email,BusinessOwner,Address,Description,SubsetId,Latitude,Longitude,Field1,Field2,Field3,Field4,Field5,Field6,Field7,RateValue,AreaId,Src,CityId,RateCount  FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE Id=" +id, null);
     }
 
     public Cursor select_BusinessAndBusinessImage(Integer id)
@@ -1384,6 +1384,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     public Cursor select_FieldActivityId(String fieldname)
     {
         SQLiteDatabase db = this.getReadableDatabase();
+        Log.i("query","SELECT Id FROM " + InstructionsSqlite.TABLE_NAME_FieldActivity +" WHERE Activity='"+fieldname+"'");
         return db.rawQuery("SELECT Id FROM " + InstructionsSqlite.TABLE_NAME_FieldActivity +" WHERE Activity='"+fieldname+"'" , null);
     }
     public Cursor select_SearchFieldActivityId(String fieldname)
@@ -1708,6 +1709,12 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     {
         SQLiteDatabase db=this.getReadableDatabase();
         return db.rawQuery("SELECT Id FROM "+ InstructionsSqlite.TABLE_NAME_City +" WHERE Name='"+cityname+"'",null);
+    }
+
+    public  Cursor select_AreaId(Integer Id)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return db.rawQuery("SELECT CityId FROM "+ InstructionsSqlite.TABLE_NAME_Area +" WHERE Id="+Id,null);
     }
 
     public  Cursor select_SubsetProperty_Product()

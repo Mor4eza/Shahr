@@ -74,6 +74,9 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
     AutoCompleteTextView Market_subset;
     AutoCompleteTextView Market_area;
     AutoCompleteTextView Market_city;
+    Integer Rate = 0;
+    Double value =0.0;
+    String src="";
     MultiAutoCompleteTextView Market_field;
     Integer Fields_ID[]=new Integer[7];
     DateTime dt=new DateTime();
@@ -172,6 +175,10 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
             Market_city.setText(query.getCityName(rows.getInt(22)));//City Name
             Market_subset.setText(query.getsubsetName(rows.getInt(9)));//Subset Name
 
+            value=rows.getDouble(19);
+            Rate=rows.getInt(23);
+            src=rows.getString(21);
+
             Cursor rows2 = sdb.select_AreaName(rows.getInt(20));
             rows2.moveToFirst();
             Market_area.setText(rows2.getString(0));
@@ -197,6 +204,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
         try {
 
             String str = "";
+            String strJson="";
             SelectDataBaseSqlite db = new SelectDataBaseSqlite(this);
             SqliteTOjson json = new SqliteTOjson(this);
 
@@ -208,14 +216,17 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
 
                 String resultNameField = strCount[i].replace(",", "");
                 String namefield = resultNameField.replaceAll("^\\s+|\\s+$", "");
-                Cursor rows = db.select_FieldActivityId(namefield);
-                rows.moveToFirst();
-                try {
-                    Fields_ID[i] = rows.getInt(0);
+                Log.e("field",namefield);
+                Cursor rows = db.select_FieldActivityId(namefield.trim());
+                if(rows.getCount() > 0) {
+                    rows.moveToFirst();
+                    try {
+                        Fields_ID[i] = rows.getInt(0);
 
 
-                } catch (Exception e) {
-                    Log.e("ExceptionFieldsID", e.toString());
+                    } catch (Exception e) {
+                        Log.e("ExceptionFieldsID", e.toString());
+                    }
                 }
 
 
@@ -270,7 +281,18 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
                         "null", "null",query.getMemberId(), Fields_ID[0], Fields_ID[1], Fields_ID[2],
                         Fields_ID[3], Fields_ID[4], Fields_ID[5], Fields_ID[6]);
 
+               strJson = json.getBusinessTOjson(fc.GetBusiness_Id(), Market_name.getText().toString().trim(),
+                        Market_tell.getText().toString().trim(), Market_mobile.getText().toString().trim(),
+                        Market_fax.getText().toString().trim(), Market_email.getText().toString().trim(),
+                        Market_owner.getText().toString().trim(), Market_address.getText().toString().trim(),
+                        Market_desc.getText().toString().trim(), ct.getGregorianDate()+dt.Time(), EXPDateTime(), "null"
+                        , query.getsubsetID(Market_subset.getText().toString().trim()),
+                        fc.GetLatitude_Business(), fc.GetLongtiude_Business(),
+                        query.getAreaID(Market_area.getText().toString().trim()),
+                        "null", "null",query.getMemberId(), Fields_ID[0], Fields_ID[1], Fields_ID[2],
+                        Fields_ID[3], Fields_ID[4], Fields_ID[5], Fields_ID[6],Rate,value,src);
 
+                    fc.SetEditBusiness_Json(strJson);
                 HTTPPostBusinessEditJson httpbusiness = new HTTPPostBusinessEditJson(this);
                 httpbusiness.SetBusinessJson(str);
                 httpbusiness.execute();
@@ -278,7 +300,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
         }
         catch (Exception e){
            MessageDialog messageDialog=new MessageDialog(this);
-            messageDialog.ShowMessage("پیام","ویرایش نشد . دوباره امتحان کنید","باشه","false");
+            messageDialog.ShowMessage("پیام", "ویرایش نشد . دوباره امتحان کنید", "باشه", "false");
         }
     }
 

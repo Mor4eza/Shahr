@@ -438,6 +438,11 @@ public class SelectDataBaseSqlite extends DataBaseSqlite {
     }
 
     @Override
+    public Cursor select_AreaId(Integer Id) {
+        return super.select_AreaId(Id);
+    }
+
+    @Override
     public Cursor select_AllCity() {
         return super.select_AllCity();
     }
