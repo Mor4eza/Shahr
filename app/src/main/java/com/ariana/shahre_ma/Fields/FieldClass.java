@@ -108,10 +108,17 @@ public class FieldClass
 
 //***********************************************************************
     // Set json Member
-    public void  SetMember_Json(String json_member)
-{
+    public void  SetMember_Json(String json_member) {
     data_json=json_member;
-}
+    }
+
+    public  void SetEditBusiness_Json(String json){
+        data_json=json;
+    }
+
+    public String GetEditBusiness_Json(){
+        return data_json;
+    }
 
     // Get  Member
     public String GetMember_json()
