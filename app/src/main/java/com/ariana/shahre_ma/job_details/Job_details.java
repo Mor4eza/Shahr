@@ -20,7 +20,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.GoogleMap;
+
 import com.ariana.shahre_ma.R;
 
 import org.osmdroid.DefaultResourceProxyImpl;
@@ -40,7 +40,7 @@ import java.util.Locale;
 
 public class Job_details extends ActionBarActivity implements ActionBar.TabListener {
 
-        GoogleMap mMap;
+
 
 
 

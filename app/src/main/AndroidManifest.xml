@@ -24,8 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name=".Jobs"
             android:label="@string/title_activity_jobs"
@@ -34,7 +32,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.MainActivity" />
         </activity>
-
         <activity
             android:name=".Jobs_List"
             android:label="@string/title_activity_jobs__list"
@@ -51,27 +48,23 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.Jobs_List" />
         </activity>
-
-
         <activity
             android:name=".job_details.job_details_1"
             android:label="@string/title_activity_job_details_1" >
         </activity>
-
         <activity
             android:name=".job_details.Job_details_map"
             android:label="@string/title_activity_job_details_map" >
         </activity>
-
         <activity
             android:name=".job_details.Job_details_comment"
             android:label="@string/title_activity_job_details_comment"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize" >
         </activity>
-
-
-
-
+        <activity
+            android:name=".Sign_Up"
+            android:label="@string/title_activity_sign__up" >
+        </activity>
     </application>
 
 </manifest>

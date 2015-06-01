@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -24,6 +25,7 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
+import com.software.shell.fab.ActionButton;
 
 import github.chenupt.dragtoplayout.DragTopLayout;
 
@@ -52,9 +54,27 @@ public class MainActivity extends ActionBarActivity {
 
         Image_slider();
         navigation();
+        fab();
+
+    }
+    public void fab_click(View v){
+
+        Intent i = new Intent(getApplicationContext(),Sign_Up.class);
+        startActivity(i);
+
+    }
+    public void fab (){
+
+
+        ActionButton Action = (ActionButton)findViewById(R.id.action_button);
+        Action.setButtonColor(getResources().getColor(R.color.fab_material_blue_500));
+        Action.setImageDrawable(getResources().getDrawable(R.drawable.fab_plus_icon));
 
 
     }
+
+
+
     private void Image_slider(){
         top =(DragTopLayout)findViewById(R.id.top);
 
