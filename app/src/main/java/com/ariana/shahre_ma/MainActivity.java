@@ -9,7 +9,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
@@ -34,7 +36,7 @@ public class MainActivity extends ActionBarActivity {
     FragmentPagerAdapter adapterViewPager;
     SliderLayout slider;
     DragTopLayout top;
-
+    ScrollView sv_f1;
     private static final int PROFILE_SETTING = 1;
     private AccountHeader.Result headerResult = null;
     private Drawer.Result result = null;
@@ -44,8 +46,15 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //findViewsAndConfigure();
+        
+       /* sv_f1=(ScrollView)findViewById(R.id.frag1_main_scroll);
+        sv_f1.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                finish();
 
-
+            }
+        });*/
 
 
         ViewPager vpPager = (ViewPager) findViewById(R.id.viewPager);
@@ -125,11 +134,12 @@ public class MainActivity extends ActionBarActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0: // Fragment # 0 - This will show FirstFragment
-                    return Frag_main_1.newInstance(0, "Page # 1");
+
+                    return Frag_main_1.newInstance(1,"new");
                 case 1: // Fragment # 0 - This will show FirstFragment different title
-                    return Frag_main_1.newInstance(1, "Page # 2");
+                    return Frag_main_1.newInstance(2, "Page # 2");
                 case 2: // Fragment # 1 - This will show SecondFragment
-                    return Frag_main_1.newInstance(2, "Page # 3");
+                    return Frag_main_1.newInstance(3, "Page # 3");
                 default:
                     return null;
             }
@@ -138,7 +148,16 @@ public class MainActivity extends ActionBarActivity {
         // Returns the page title for the top indicator
         @Override
         public CharSequence getPageTitle(int position) {
-            return "Page " + position;
+            switch (position){
+                case 0:
+                    return "مشاغل برتر";
+                case 1:
+                    return "تخفیف های برتر";
+                case 2:
+                return "برترین های بازار";
+
+            }
+          return null;
         }
     }
 

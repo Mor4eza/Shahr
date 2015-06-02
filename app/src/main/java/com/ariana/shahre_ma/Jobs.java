@@ -104,29 +104,28 @@ public class Jobs extends ActionBarActivity {
 
     private void createCollection() {
         // preparing laptops collection(child)
-        String[] hpModels = { "شغل" ,"شغل" ,"شغل" };
-        String[] hclModels = { "شغل" ,"شغل" ,"شغل" };
-        String[] lenovoModels = { "شغل" ,"شغل" ,"شغل" ,"شغل"  };
-        String[] sonyModels = {"شغل" ,"شغل" ,"شغل" ,"شغل" ,"شغل" ,"شغل" ,"شغل"  };
-        String[] dellModels = {"شغل" ,"شغل" ,"شغل" ,"شغل" ,"شغل"  };
+        String[] pooshak = { "زنانه" ,"بچه گانه" ,"مردانه" };
+        String[] arayeshi = { "شغل" ,"شغل" ,"شغل" };
+        String[] resturan = { "شغل" ,"شغل" ,"شغل" ,"شغل"  };
+        String[] lavazem_yadaki = {"شغل" ,"شغل" ,"شغل" ,"شغل" ,"شغل" ,"شغل" ,"شغل"  };
+        String[] more = {"شغل" ,"شغل" ,"شغل" ,"شغل" ,"شغل"  };
         String[] samsungModels = {"شغل" ,"شغل" ,"شغل" ,"شغل" ,"شغل" ,"شغل" };
 
         laptopCollection = new LinkedHashMap<String, List<String>>();
 
         for (String laptop : groupList) {
             if (laptop.equals("پوشاک")) {
-                loadChild(hpModels);
-
+                loadChild(pooshak);
             } else if (laptop.equals("لوازم آرایشی"))
-                loadChild(dellModels);
+                loadChild(arayeshi);
             else if (laptop.equals("رستوران"))
-                loadChild(sonyModels);
+                loadChild(resturan);
             else if (laptop.equals("لوازم یدکی"))
-                loadChild(hclModels);
+                loadChild(lavazem_yadaki);
             else if (laptop.equals("بیشتر..."))
-                loadChild(samsungModels);
+                loadChild(more);
             else
-                loadChild(lenovoModels);
+                loadChild(samsungModels);
 
             laptopCollection.put(laptop, childList);
         }
