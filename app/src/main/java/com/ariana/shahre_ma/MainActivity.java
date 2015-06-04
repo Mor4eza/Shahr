@@ -2,15 +2,19 @@ package com.ariana.shahre_ma;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
@@ -27,6 +31,7 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
+import com.neno0o.lighttextviewlib.LightTextView;
 import com.software.shell.fab.ActionButton;
 
 import github.chenupt.dragtoplayout.DragTopLayout;
@@ -46,16 +51,6 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //findViewsAndConfigure();
-        
-       /* sv_f1=(ScrollView)findViewById(R.id.frag1_main_scroll);
-        sv_f1.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-            @Override
-            public void onScrollChanged() {
-                finish();
-
-            }
-        });*/
-
 
         ViewPager vpPager = (ViewPager) findViewById(R.id.viewPager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
@@ -64,14 +59,14 @@ public class MainActivity extends ActionBarActivity {
         Image_slider();
         navigation();
         fab();
-
+       // Hints();
     }
-    public void fab_click(View v){
 
+    public void fab_click(View v){
         Intent i = new Intent(getApplicationContext(),Sign_Up.class);
         startActivity(i);
-
     }
+
     public void fab (){
 
 
@@ -80,8 +75,23 @@ public class MainActivity extends ActionBarActivity {
         Action.setImageDrawable(getResources().getDrawable(R.drawable.fab_plus_icon));
 
 
+
     }
 
+    public void Hints (){
+
+        ImageView img_jobs = (ImageView)findViewById(R.id.img_thumbnail);
+        LightTextView lightTextView = new LightTextView(this);
+        lightTextView.setText("HD");
+        lightTextView.setBackgroundColor(Color.BLUE);
+        lightTextView.setCurrentView(img_jobs);
+        lightTextView.bringToFront();
+
+
+
+
+
+    }
 
 
     private void Image_slider(){

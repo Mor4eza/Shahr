@@ -26,6 +26,10 @@ dependencies {
         transitive = true
     }
     compile files('libs/osmbonuspack_v5.0.jar')
+
+    compile 'net.simonvt.menudrawer:menudrawer:3.0.6'
+    compile 'com.neno0o.lighttextview:lib:1.1'
+
     compile 'com.github.shell-software:fab:1.1.1'
     compile 'com.android.support:appcompat-v7:22.1.1'
 

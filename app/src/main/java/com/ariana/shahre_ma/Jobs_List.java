@@ -10,12 +10,19 @@ import android.widget.ImageView;
 
 import com.ariana.shahre_ma.job_details.Job_details;
 
+import net.simonvt.menudrawer.MenuDrawer;
+import net.simonvt.menudrawer.Position;
+
 
 public class Jobs_List extends ActionBarActivity {
 
+    MenuDrawer mDrawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         setContentView(R.layout.activity_jobs__list);
         ImageView img_m =(ImageView)findViewById(R.id.image_market);
 
@@ -23,11 +30,18 @@ public class Jobs_List extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                Intent i =new Intent(getApplicationContext(),Job_details.class);
+                Intent i = new Intent(getApplicationContext(), Job_details.class);
                 startActivity(i);
 
             }
         });
+
+
+       // mDrawer = MenuDrawer.attach(this, Position.RIGHT);
+
+        /*mDrawer.setContentView(R.layout.activity_jobs__list);
+        mDrawer.setMenuView(R.layout.activity_jobs);*/
+
     }
 
 

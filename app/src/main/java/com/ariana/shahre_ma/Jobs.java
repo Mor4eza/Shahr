@@ -9,6 +9,8 @@ import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 
+import net.simonvt.menudrawer.MenuDrawer;
+import net.simonvt.menudrawer.Position;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -44,6 +46,7 @@ public class Jobs extends ActionBarActivity {
 
 
         expListView = (ExpandableListView) findViewById(R.id.laptop_list);
+
         final ExpandableListAdapter expListAdapter = new ExpandableListAdapter(
                 this, groupList, laptopCollection) {
 
@@ -79,7 +82,11 @@ public class Jobs extends ActionBarActivity {
                 return true;
             }
         });
+
     }
+
+
+
 
     /* private void createGroupIcon(){
 
@@ -105,10 +112,10 @@ public class Jobs extends ActionBarActivity {
     private void createCollection() {
         // preparing laptops collection(child)
         String[] pooshak = { "زنانه" ,"بچه گانه" ,"مردانه" };
-        String[] arayeshi = { "شغل" ,"شغل" ,"شغل" };
-        String[] resturan = { "شغل" ,"شغل" ,"شغل" ,"شغل"  };
-        String[] lavazem_yadaki = {"شغل" ,"شغل" ,"شغل" ,"شغل" ,"شغل" ,"شغل" ,"شغل"  };
-        String[] more = {"شغل" ,"شغل" ,"شغل" ,"شغل" ,"شغل"  };
+        String[] arayeshi = { "پوست" ,"مو" ,"بهداشتی و آرایشی" };
+        String[] resturan = { "فست فود" ,"چلوکبابی" ,"جگرکی" ,"بگیروببر"  };
+        String[] lavazem_yadaki = {"سبک" ,"سنگین" ,"ایرانخودرو" ,"سایپا" };
+        String[] more = {"لوازم التحریر" ,"کتابفروشی" ,"ابزارآلات" ,"آموزشگاه" ,"عطاری"  };
         String[] samsungModels = {"شغل" ,"شغل" ,"شغل" ,"شغل" ,"شغل" ,"شغل" };
 
         laptopCollection = new LinkedHashMap<String, List<String>>();

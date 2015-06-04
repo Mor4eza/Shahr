@@ -24,6 +24,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         nature.setName("پوشاک کودکان");
         nature.setDes("یه فروشگاه خوب و عالی که هم جنساش خوبه هم قیمتاش ارزونه");
         nature.setThumbnail(R.drawable.pooshak);
+
         mItems.add(nature);
 
 
