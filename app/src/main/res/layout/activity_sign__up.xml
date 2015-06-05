@@ -28,7 +28,7 @@
         android:layout_marginTop="15dp"
         android:drawableLeft="@android:drawable/sym_action_chat"
 
-        />
+        android:inputType="textPersonName" />
 
 
     <EditText
@@ -39,7 +39,7 @@
         android:layout_marginTop="15dp"
         android:height="40dp"
         android:drawableLeft="@android:drawable/sym_action_email"
-        />
+        android:inputType="textPersonName" />
 
 
     <EditText
@@ -51,7 +51,7 @@
         android:height="40dp"
         android:drawableLeft="@android:drawable/ic_menu_mylocation"
 
-        />
+        android:inputType="textPersonName" />
 
     <EditText
         android:layout_width="fill_parent"
@@ -61,7 +61,7 @@
         android:layout_marginTop="15dp"
         android:height="40dp"
         android:drawableLeft="@android:drawable/stat_sys_phone_call"
-        />
+        android:inputType="number" />
 
 
     <EditText
@@ -86,7 +86,7 @@
         android:layout_marginTop="15dp"
         android:height="20dp"
 
-         >
+        >
 
     </Spinner>
 
@@ -99,7 +99,7 @@
         android:layout_marginTop="15dp"
         android:height="40dp"
         android:drawableLeft="@android:drawable/ic_menu_my_calendar"
-        />
+        android:inputType="textPersonName" />
 
 
     <EditText
@@ -110,7 +110,7 @@
         android:height="40dp"
         android:id="@+id/txtpass"
         android:drawableLeft="@android:drawable/ic_partial_secure"
-        />
+        android:inputType="textPersonName" />
 
     <Button
         android:layout_width="wrap_content"
@@ -122,6 +122,13 @@
         android:height="40dp"
 
         android:onClick="AddTOmember" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button"
+        android:onClick="Intmeme" />
 
 </LinearLayout>
 </ScrollView>

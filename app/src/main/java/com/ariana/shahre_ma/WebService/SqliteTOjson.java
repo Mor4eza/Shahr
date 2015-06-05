@@ -76,28 +76,24 @@ public class SqliteTOjson
 
     }*/
 
-    public String getSqliteTOjson() {
+
+    // convert data to json
+    public String getSqliteTOjson(String j_name,String j_email,String j_mobile,Integer j_age,Boolean j_sex,String j_username,String j_password,Integer j_cityid) {
         String field_Json="";
         try {
 
-
-            JSONArray resultSet = new JSONArray();
+          // JSONobject get key/value convert to json
             JSONObject rowObject = new JSONObject();
                                     rowObject.put("Id",1);
-                                    rowObject.put("Name","hamed");
-                                    rowObject.put("Mobile","369852");
-                                    rowObject.put("Email","hamed@gmail.com");
-                                    rowObject.put("Age",23);
-                                    rowObject.put("Sex",true);
-                                    rowObject.put("UserName","222");
-                                    rowObject.put("Password","222");
-                                    rowObject.put("CityId",1);
-                resultSet.put(rowObject);
-               // ja.put(rowObject);
-
-
-
-            field_Json=resultSet.toString();
+                                    rowObject.put("Name",j_name);
+                                    rowObject.put("Mobile",j_mobile);
+                                    rowObject.put("Email",j_email);
+                                    rowObject.put("Age",j_age);
+                                    rowObject.put("Sex",j_sex);
+                                    rowObject.put("UserName",j_username);
+                                    rowObject.put("Password",j_password);
+                                    rowObject.put("CityId",j_cityid);
+            field_Json=rowObject.toString();
 
         }
         catch (Exception e){
@@ -105,4 +101,5 @@ public class SqliteTOjson
        return  field_Json;
 
     }
+
 }

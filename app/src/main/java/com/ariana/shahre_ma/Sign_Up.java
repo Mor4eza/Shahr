@@ -15,15 +15,21 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.MemberSqlite;
+import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.WebService.HTTPPostMemberJson;
 import com.ariana.shahre_ma.WebService.SqliteTOjson;
 
 
 public class Sign_Up extends ActionBarActivity {
 
 
+    //Class
     MemberSqlite mem;
+    FieldClass fc=new FieldClass();
+    HTTPPostMemberJson sendPost ;
+    SqliteTOjson json=new SqliteTOjson();
 
-
+    //Component
     EditText name;
     EditText email;
     EditText city;
@@ -33,8 +39,13 @@ public class Sign_Up extends ActionBarActivity {
     EditText username;
     EditText pass;
 
+    //Variable
     Boolean _sex=false;
 
+    String Aname,Aemail,Acity,Aphone,Ausername,Apass;
+    Boolean Asex;
+    Integer Aage;
+    String _json;
 
     private static final String DATABASE_NAME = "DBshahrma.db";
     // Books table name
@@ -47,7 +58,7 @@ public class Sign_Up extends ActionBarActivity {
         Intialize();
 
         Spinner spn1 = (Spinner) findViewById(R.id.Spiner_Sex);
-        String[] list1 = {"مرد", "زن"};
+        String[] list1 = {"جنسیت خود را انتخاب کنید","مرد", "زن"};
         ArrayAdapter<String> Adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list1);
         Adapter1.setDropDownViewResource(
                 android.R.layout.simple_spinner_dropdown_item);
@@ -80,9 +91,8 @@ public class Sign_Up extends ActionBarActivity {
 
     public  void  AddTOmember(View v)
     {
-        String Aname,Aemail,Acity,Aphone,Ausername,Apass;
-        Boolean Asex;
-        Integer Aage;
+        try
+        {
 
         Aname=name.getText().toString();
         Aemail=email.getText().toString();
@@ -92,19 +102,33 @@ public class Sign_Up extends ActionBarActivity {
         Asex=_sex;
         Ausername=username.getText().toString();
         Apass=pass.getText().toString();
-        try {
-            mem.Add(Aname, Aemail, Aphone, Aage, Asex, Ausername, Apass, Integer.parseInt(Acity));
-            String Result;
-            SQLiteDatabase mydb = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
-            Cursor allrows = mydb.rawQuery("SELECT Name FROM " +TABLE_MEMBER , null);
-            allrows.moveToFirst();
-            Result = allrows.getString(0);
-            allrows.close();
-            mydb.close();
-            SqliteTOjson json=new SqliteTOjson();
-           // Toast.makeText(getApplication(),json.getSqliteTOjson(),Toast.LENGTH_LONG).show();
-            name.setText(json.getSqliteTOjson());
 
+
+
+            _json=(json.getSqliteTOjson(Aname, Aemail, Aphone, Aage, Asex, Ausername, Apass, Integer.parseInt(Acity)));
+            fc.SetMember_Name(Aname);
+            fc.SetMember_Email(Aemail);
+            fc.SetMember_Mobile(Aphone);
+            fc.SetMember_Age(Aage);
+            fc.SetMember_Sex(Asex);
+            fc.SetMember_UserName(Ausername);
+            fc.SetMember_Password(Apass);
+            fc.SetMember_CityId(Integer.parseInt(Acity));
+            sendPost = new HTTPPostMemberJson(this);
+            sendPost.SetMember_Json(_json);
+            sendPost.execute();
+
+
+           /* android.os.Handler ha = new android.os.Handler();
+            ha.postDelayed(new Runnable() {
+
+                               @Override
+                               public void run() {
+
+                                   }
+
+                               },
+                        3000);*/
         }
         catch (Exception e){
             Toast.makeText(getApplication(),e.toString(),Toast.LENGTH_LONG).show();}
@@ -120,6 +144,22 @@ public class Sign_Up extends ActionBarActivity {
         sex=(Spinner) findViewById(R.id.Spiner_Sex);
         username=(EditText) findViewById(R.id.txtUsername);
         pass=(EditText) findViewById(R.id.txtpass);
+    }
+
+    public  void Intmeme(View v)
+    {
+        SQLiteDatabase mydb = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE,null);
+
+        Cursor allrows  = mydb.rawQuery("SELECT * FROM "+  TABLE_MEMBER, null);
+        if (allrows.moveToFirst()) {
+            do {
+
+
+                Toast.makeText(getApplication(),allrows.getInt(0)+allrows.getString(1),Toast.LENGTH_LONG).show();
+
+            } while (allrows.moveToNext());
+        }
+        mydb.close();
     }
 
 }

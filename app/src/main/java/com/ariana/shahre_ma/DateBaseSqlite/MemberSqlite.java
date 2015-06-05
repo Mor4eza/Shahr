@@ -35,7 +35,7 @@ public class MemberSqlite extends SQLiteOpenHelper{
 
     // SQL statement to create Member table
     private static final String CREATE_MEMBER_TABLE  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_MEMBER + " (" +
-            " Id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            " Id INTEGER PRIMARY KEY," +
             " Name TEXT ," +
             " Email TEXT ," +
             " Mobile TEXT ," +
@@ -68,7 +68,7 @@ public class MemberSqlite extends SQLiteOpenHelper{
         this.onCreate(db);
     }
 
-    public void Add(String name,String email,String mobile,Integer age,Boolean sex,String username,String password,Integer cityid)
+    public void Add(Integer id,String name,String email,String mobile,Integer age,Boolean sex,String username,String password,Integer cityid)
     {
 
         // 1. get reference to writable DB
@@ -76,6 +76,7 @@ public class MemberSqlite extends SQLiteOpenHelper{
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
+        values.put(ID,id);
         values.put(NAME,name);
         values.put(EMAIL,email);
         values.put(MOBILE, mobile);
