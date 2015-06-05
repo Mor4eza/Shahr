@@ -29,6 +29,8 @@
     <string name="title_activity_job_details_map">Job_details_map</string>
     <string name="title_activity_google_maps">Map</string>
     <string name="title_activity_job_details_comment">Job_details_comment</string>
-    <string name="title_activity_sign__up">Sign_Up</string>
+    <string name="title_activity_sign__up">ثبت نام</string>
+
+
 
 </resources>

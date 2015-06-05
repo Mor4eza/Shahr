@@ -21,7 +21,7 @@ public class MemberSqlite extends SQLiteOpenHelper{
     // Database Name
     private static final String DATABASE_NAME = "DBshahrma.db";
     // Books table name
-    private static final String TABLE_BOOKS_MEMBER = "member";
+    private static final String TABLE_MEMBER = "member";
     //Books Table Columns names
     private static final String ID = "id";
     private static final String NAME = "Name";
@@ -33,6 +33,19 @@ public class MemberSqlite extends SQLiteOpenHelper{
     private static final String PASSWORD = "Password";
     private static final String CITYID = "CityId";
 
+    // SQL statement to create Member table
+    private static final String CREATE_MEMBER_TABLE  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_MEMBER + " (" +
+            " Id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            " Name TEXT ," +
+            " Email TEXT ," +
+            " Mobile TEXT ," +
+            " Age INTEGER ," +
+            " Sex Boolean ," +
+            " UserName TEXT ," +
+            " Password TEXT ," +
+            " CityId INTEGER " +
+            ");";
+
     public  MemberSqlite(Context context)
     {
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
@@ -41,11 +54,8 @@ public class MemberSqlite extends SQLiteOpenHelper{
     @Override
     public  void onCreate(SQLiteDatabase db)
     {
-        // SQL statement to create book table
-        String CREATE_BOOK_TABLE = "";
-
         // create books table
-        db.execSQL(CREATE_BOOK_TABLE);
+        db.execSQL(CREATE_MEMBER_TABLE);
     }
 
     @Override
@@ -77,7 +87,7 @@ public class MemberSqlite extends SQLiteOpenHelper{
 
 
         // 3. insert
-        db.insert(TABLE_BOOKS_MEMBER, // table
+        db.insert(TABLE_MEMBER, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -90,7 +100,7 @@ public class MemberSqlite extends SQLiteOpenHelper{
         List<String> books = new LinkedList<>();
 
         // 1. build the query
-        String query = "SELECT  * FROM " + TABLE_BOOKS_MEMBER;
+        String query = "SELECT  * FROM " + TABLE_MEMBER;
 
         // 2. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
