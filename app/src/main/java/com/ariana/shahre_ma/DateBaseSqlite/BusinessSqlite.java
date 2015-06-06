@@ -17,9 +17,9 @@ public class BusinessSqlite extends SQLiteOpenHelper {
     //Database Version
     private static final int DATABASE_VERSION = 1;
     // Database Name
-    private static final String DATABASE_NAME = "DBshahrma.db";
+    private static final String DATABASE_NAME = "DBshahrma";
     // business table name
-    private static final String TABLE_NAME_BUSINESS = "business";
+    private static final String TABLE_NAME_BUSINESS = "tttbusiness_tbl";
     //business Table Columns names
     private static final String ID = "Id";
     private static final String MARKET = "Market";

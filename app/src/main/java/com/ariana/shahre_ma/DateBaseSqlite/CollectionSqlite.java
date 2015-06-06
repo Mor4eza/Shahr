@@ -24,7 +24,7 @@ public class CollectionSqlite  extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "DBshahrma";
 
     // collection table name
-    private static final String TABLE_NAME_COLLECTION = "collection";
+    private static final String TABLE_NAME_COLLECTION = "collection_tbl";
 
     //collection Table Columns names
     private static final String ID = "Id";

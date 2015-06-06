@@ -20,7 +20,7 @@ public class SubsetSqlite extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // Database Name
-    private static final String DATABASE_NAME = "DBshahrma.db";
+    private static final String DATABASE_NAME = "DBshahrma";
 
     // subset table name
     private static final String TABLE_NAME_SUBSET= "subset";

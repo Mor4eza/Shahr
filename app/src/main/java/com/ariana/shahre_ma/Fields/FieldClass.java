@@ -8,7 +8,7 @@ public class FieldClass
     // variable get json
     private static String data_json;
 
-    // variable get table member
+    // Field  member table
     private static String Name;
     private static String Email;
     private static String Mobile;
@@ -17,6 +17,13 @@ public class FieldClass
     private static String UserName;
     private static String Password;
     private static Integer CityId;
+
+    // Field  Opinion table
+    private static String Description;
+    private static String Date;
+    private static String OpinionType;
+    private static Integer Erja;
+
 
     // get/set
 
@@ -116,5 +123,50 @@ public class FieldClass
         return  CityId;
     }
 
+
+    // Get and Set field opinion
+
+    // Set  opinion
+    public void  SetOpinion_Description(String description)
+    {
+        Description=description;
+    }
+    // Set  opinion
+    public void  SetOpinion_Date(String date)
+    {
+        Date=date;
+    }
+    // Set  opinion
+    public void  SetOpinion_OpinionType(String opiniontype)
+    {
+        OpinionType=opiniontype;
+    }
+    // Set  opinion
+    public void  SetOpinion_Erja(Integer erja)
+    {
+        Erja=erja;
+    }
+
+
+    // Get  opinion
+    public String  GetOpinion_Description()
+    {
+        return Description;
+    }
+    // Get  opinion
+    public String  GetOpinion_Date()
+    {
+        return  Date;
+    }
+    // Get  opinion
+    public String  GetOpinion_OpinionType()
+    {
+        return  OpinionType;
+    }
+    // Get  opinion
+    public Integer  GetOpinion_Erja()
+    {
+        return  Erja;
+    }
 
 }

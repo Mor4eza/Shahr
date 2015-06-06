@@ -19,7 +19,7 @@ public class MemberSqlite extends SQLiteOpenHelper{
     //Database Version
     private static final int DATABASE_VERSION = 1;
     // Database Name
-    private static final String DATABASE_NAME = "DBshahrma.db";
+    private static final String DATABASE_NAME = "DBshahrma";
 
     // Books table name
     private static final String TABLE_MEMBER = "member";

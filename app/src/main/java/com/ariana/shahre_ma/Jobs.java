@@ -1,6 +1,9 @@
 package com.ariana.shahre_ma;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
@@ -31,8 +34,12 @@ public class Jobs extends ActionBarActivity {
 
 
 
+    Integer Id_co;
+    Integer Collection_ID_subset;
 
-
+    private static final String DATABASE_NAME = "DBshahrma.db";
+    private static final String TABLE_NAME_COLLECTION = "collection";
+    private static final String TABLE_NAME_SUBSET= "subset";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +48,9 @@ public class Jobs extends ActionBarActivity {
 
 
 
-        createGroupList();
-        createCollection();
+       // createGroupList();
+      //  createCollection();
+        LoadCollecdtion_Subset();
 
 
         expListView = (ExpandableListView) findViewById(R.id.laptop_list);
@@ -160,6 +168,41 @@ public class Jobs extends ActionBarActivity {
         final float scale = getResources().getDisplayMetrics().density;
         // Convert the dps to pixels, based on density scale
         return (int) (pixels * scale + 5f);
+    }
+
+   private void LoadCollecdtion_Subset() {
+
+       try {
+           SQLiteDatabase mydb = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
+           Cursor allrows_Collection = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_COLLECTION, null);
+           Cursor allrows_Subset = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_SUBSET, null);
+           groupList = new ArrayList<String>();
+           childList = new ArrayList<String>();
+           laptopCollection = new LinkedHashMap<String, List<String>>();
+           if (allrows_Collection.moveToFirst()) {
+               do {
+
+                   Id_co = allrows_Collection.getInt(0);
+                   groupList.add(allrows_Collection.getString(1));
+                   if (allrows_Subset.moveToFirst()) {
+                       do {
+                           Collection_ID_subset = allrows_Subset.getInt(0);
+                           if (Collection_ID_subset == Id_co) {
+                               childList.add(allrows_Subset.getString(1));
+                           }
+                       } while (allrows_Subset.moveToNext());
+                   }
+                   laptopCollection.put(allrows_Collection.getString(1), groupList);
+               } while (allrows_Collection.moveToNext());
+           }
+           mydb.close();
+
+
+
+
+
+       }
+       catch (Exception e){}
     }
 
 

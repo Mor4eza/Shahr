@@ -15,7 +15,7 @@ public class FileCache {
     public FileCache(Context context){
         //Find the dir to save cached images
         if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
-            cacheDir=new File(android.os.Environment.getExternalStorageDirectory(),"myFolder/.hidden_folder"); // point to folder be hidden
+            cacheDir=new File(android.os.Environment.getExternalStorageDirectory(),"myFolder/image_folder"); // point to folder be hidden
         else
             cacheDir=context.getCacheDir();
         if(!cacheDir.exists())

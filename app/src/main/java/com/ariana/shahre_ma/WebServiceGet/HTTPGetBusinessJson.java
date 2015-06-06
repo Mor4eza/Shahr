@@ -25,7 +25,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
     private static Context context;
 
-    private static final String url_collection="http://test.shahrma.com/api/apigivecollection";
+    private static final String url_Business="http://test.shahrma.com/api/test";
 
     Integer Id[];
     String market[];
@@ -67,7 +67,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
         try {
 
 
-            InputStream jsonStream = getStreamFromURL(url_collection, "GET");
+            InputStream jsonStream = getStreamFromURL(url_Business, "GET");
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);
             onPostExecute();
@@ -82,6 +82,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
     protected void onPostExecute() {
         try {
 
+            Toast.makeText(context,market[0], Toast.LENGTH_LONG).show();
             BusinessSqlite businSql = new BusinessSqlite(context);
 
 
@@ -124,7 +125,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
             area1=new String[areas.length()];
             user=new String[areas.length()];
             userid=new Integer[areas.length()];
-            field1=new Integer[areas.length()];
+           field1=new Integer[areas.length()];
             field2=new Integer[areas.length()];
             field3=new Integer[areas.length()];
             field4=new Integer[areas.length()];
@@ -138,7 +139,6 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
                 JSONObject area = areas.getJSONObject(i);
                 Id[i]=area.getInt("Id");
-
                 market[i]=area.getString("Market");
                 code[i]=area.getString("Code");
                 phone[i]=area.getString("Phone");
@@ -160,15 +160,15 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
                 user[i]=area.getString("User");
                 userid[i]=area.getInt("UserId");
 
-                field1[i]=area.getInt("Field1");
+               /* field1[i]=area.getInt("Field1");
                 field2[i]=area.getInt("Field2");
                 field3[i]=area.getInt("Field3");
                 field4[i]=area.getInt("Field4");
                 field5[i]=area.getInt("Field5");
                 field6[i]=area.getInt("Field6");
-                field7[i]=area.getInt("Field7");
-                ratecount[i]=area.getInt("Field6");
-                ratevalue[i]=area.getDouble("Field7");
+                field7[i]=area.getInt("Field7");*/
+                /*ratecount[i]=area.getInt("Field6");
+                ratevalue[i]=area.getDouble("Field7");*/
 
 
             }
@@ -214,4 +214,10 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
         return result;
     }
 
+    public  String GetM()
+    {
+        String ss;
+        ss=market[0];
+        return ss ;
+    }
 }

@@ -9,13 +9,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.DateBaseSqlite.BusinessSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.CollectionSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.MemberSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.SubsetSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.ImageDownload.ImageLoader;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
@@ -53,16 +57,15 @@ public class Sign_Up extends ActionBarActivity {
     Integer Aage;
     String _json;
 
-    private static final String DATABASE_NAME = "DBshahrma.db";
+    private static final String DATABASE_NAME = "DBshahrma";
     // Books table name
     private static final String TABLE_MEMBER = "member";
-
-    private static final String TABLE_NAME_COLLECTION = "collection";
+    private static final String TABLE_NAME_BUSINESS = "tttbusiness_tbl";
+    private static final String TABLE_NAME_COLLECTION = "collection_tbl";
     private static final String TABLE_NAME_SUBSET= "subset";
 
 
-
-
+    private ImageLoader imgLoader;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +104,13 @@ public class Sign_Up extends ActionBarActivity {
 
             }
         });
+
+
+        imgLoader = new ImageLoader(this); // important
+
+        ImageView iv_1 = (ImageView) findViewById(R.id.imageView2);
+        String image_url_1 = "https://www.google.com/images/srpr/logo11w.png";
+        imgLoader.DisplayImage(image_url_1, iv_1);
     }
 
     public void AddTOmember(View v) {
@@ -165,7 +175,15 @@ public class Sign_Up extends ActionBarActivity {
        // httpSub.execute();
             try {
                 SQLiteDatabase mydb = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
-                Cursor allrows = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_SUBSET, null);
+               /* Cursor c = mydb.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
+
+                if (c.moveToFirst()) {
+                    while ( !c.isAfterLast() ) {
+                        Toast.makeText(getApplication(), "Table Name=> "+c.getString(0), Toast.LENGTH_LONG).show();
+                        c.moveToNext();
+                    }
+                }*/
+                Cursor allrows = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_BUSINESS, null);
                 if (allrows.moveToFirst()) {
                     do {
                          Toast.makeText(getApplication(),allrows.getInt(0)+allrows.getString(1),Toast.LENGTH_LONG).show();
@@ -182,9 +200,15 @@ public class Sign_Up extends ActionBarActivity {
 
     public void ssssssmm(View v) {
 
-         HTTPGetCollectionJson httpColl=new HTTPGetCollectionJson(Sign_Up.this);
+        try
+        {
+         HTTPGetBusinessJson httpColl=new HTTPGetBusinessJson(Sign_Up.this);
          httpColl.execute();
 
+        BusinessSqlite bus=new BusinessSqlite(Sign_Up.this);
+        Toast.makeText(getApplication(),httpColl.GetM(), Toast.LENGTH_LONG).show();
+    }
+    catch (Exception e){Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}
        // HTTPGetSubsetJson httpSub=new HTTPGetSubsetJson(Sign_Up.this);
        // httpSub.execute();
 
