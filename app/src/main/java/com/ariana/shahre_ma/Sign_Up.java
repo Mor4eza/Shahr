@@ -14,7 +14,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.DateBaseSqlite.CollectionSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.MemberSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.SubsetSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.WebService.HTTPPostMemberJson;
 import com.ariana.shahre_ma.WebService.SqliteTOjson;
@@ -25,9 +27,12 @@ public class Sign_Up extends ActionBarActivity {
 
     //Class
     MemberSqlite mem;
-    FieldClass fc=new FieldClass();
-    HTTPPostMemberJson sendPost ;
-    SqliteTOjson json=new SqliteTOjson();
+    CollectionSqlite coll;
+    SubsetSqlite sub;
+    FieldClass fc = new FieldClass();
+    HTTPPostMemberJson sendPost;
+    SqliteTOjson json = new SqliteTOjson();
+
 
     //Component
     EditText name;
@@ -40,9 +45,9 @@ public class Sign_Up extends ActionBarActivity {
     EditText pass;
 
     //Variable
-    Boolean _sex=false;
+    Boolean _sex = false;
 
-    String Aname,Aemail,Acity,Aphone,Ausername,Apass;
+    String Aname, Aemail, Acity, Aphone, Ausername, Apass;
     Boolean Asex;
     Integer Aage;
     String _json;
@@ -50,15 +55,21 @@ public class Sign_Up extends ActionBarActivity {
     private static final String DATABASE_NAME = "DBshahrma.db";
     // Books table name
     private static final String TABLE_MEMBER = "member";
+    private static final String TABLE_NAME_COLLECTION = "collection";
+    private static final String TABLE_NAME_SUBSET= "subset";
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign__up);
-        mem=new MemberSqlite(this);
+        CollectionSqlite   coll = new CollectionSqlite(Sign_Up.this);
+
         Intialize();
 
         Spinner spn1 = (Spinner) findViewById(R.id.Spiner_Sex);
-        String[] list1 = {"جنسیت خود را انتخاب کنید","مرد", "زن"};
+        String[] list1 = {"جنسیت خود را انتخاب کنید", "مرد", "زن"};
         ArrayAdapter<String> Adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list1);
         Adapter1.setDropDownViewResource(
                 android.R.layout.simple_spinner_dropdown_item);
@@ -72,11 +83,11 @@ public class Sign_Up extends ActionBarActivity {
                 switch (pos) {
                     case 0:
                         // Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_LONG).show();
-                        _sex=true;
+                        _sex = true;
                         break;
                     case 1:
                         //Toast.makeText(getApplicationContext(), "6", Toast.LENGTH_LONG).show();
-                        _sex=false;
+                        _sex = false;
                         break;
 
                 }
@@ -89,23 +100,20 @@ public class Sign_Up extends ActionBarActivity {
         });
     }
 
-    public  void  AddTOmember(View v)
-    {
-        try
-        {
+    public void AddTOmember(View v) {
+        try {
 
-        Aname=name.getText().toString();
-        Aemail=email.getText().toString();
-        Acity=city.getText().toString();
-        Aphone=phone.getText().toString();
-        Aage=Integer.parseInt(age.getText().toString());
-        Asex=_sex;
-        Ausername=username.getText().toString();
-        Apass=pass.getText().toString();
+            Aname = name.getText().toString();
+            Aemail = email.getText().toString();
+            Acity = city.getText().toString();
+            Aphone = phone.getText().toString();
+            Aage = Integer.parseInt(age.getText().toString());
+            Asex = _sex;
+            Ausername = username.getText().toString();
+            Apass = pass.getText().toString();
 
 
-
-            _json=(json.getSqliteTOjson(Aname, Aemail, Aphone, Aage, Asex, Ausername, Apass, Integer.parseInt(Acity)));
+            _json = (json.getSqliteTOjson(Aname, Aemail, Aphone, Aage, Asex, Ausername, Apass, Integer.parseInt(Acity)));
             fc.SetMember_Name(Aname);
             fc.SetMember_Email(Aemail);
             fc.SetMember_Mobile(Aphone);
@@ -129,37 +137,49 @@ public class Sign_Up extends ActionBarActivity {
 
                                },
                         3000);*/
+        } catch (Exception e) {
+            Toast.makeText(getApplication(), e.toString(), Toast.LENGTH_LONG).show();
         }
-        catch (Exception e){
-            Toast.makeText(getApplication(),e.toString(),Toast.LENGTH_LONG).show();}
     }
 
-    public  void Intialize()
-    {
-        name=(EditText) findViewById(R.id.txtName);
-        email=(EditText) findViewById(R.id.txtEmail);
-        city=(EditText) findViewById(R.id.txtCity);
-        phone=(EditText) findViewById(R.id.txtPhone);
-        age=(EditText) findViewById(R.id.txtAge);
-        sex=(Spinner) findViewById(R.id.Spiner_Sex);
-        username=(EditText) findViewById(R.id.txtUsername);
-        pass=(EditText) findViewById(R.id.txtpass);
+    public void Intialize() {
+        name = (EditText) findViewById(R.id.txtName);
+        email = (EditText) findViewById(R.id.txtEmail);
+        city = (EditText) findViewById(R.id.txtCity);
+        phone = (EditText) findViewById(R.id.txtPhone);
+        age = (EditText) findViewById(R.id.txtAge);
+        sex = (Spinner) findViewById(R.id.Spiner_Sex);
+        username = (EditText) findViewById(R.id.txtUsername);
+        pass = (EditText) findViewById(R.id.txtpass);
     }
 
-    public  void Intmeme(View v)
-    {
-        SQLiteDatabase mydb = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE,null);
+    public void Intmeme(View v) {
 
-        Cursor allrows  = mydb.rawQuery("SELECT * FROM "+  TABLE_MEMBER, null);
-        if (allrows.moveToFirst()) {
-            do {
+        try {
+            CollectionSqlite   coll1 = new CollectionSqlite(Sign_Up.this);
+          //  SubsetSqlite sub=new SubsetSqlite(Sign_Up.this);
+           // sub.Add(1,"marco",1);
+            coll1.Add(1, "mm");
+            coll1.Add(2,"bb");
+            coll1.Add(3,"cc");
+            /*
+            SQLiteDatabase mydb = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
+
+           Cursor allrows = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_COLLECTION, null);
+            if (allrows.moveToFirst()) {
+                do {
 
 
-                Toast.makeText(getApplication(),allrows.getInt(0)+allrows.getString(1),Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(), allrows.getInt(0) + allrows.getString(1)+allrows.getString(2), Toast.LENGTH_LONG).show();
 
-            } while (allrows.moveToNext());
+                } while (allrows.moveToNext());
+            }
+            mydb.close();*/
+
+
+        } catch (Exception e) {
+            Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();
         }
-        mydb.close();
-    }
 
+    }
 }

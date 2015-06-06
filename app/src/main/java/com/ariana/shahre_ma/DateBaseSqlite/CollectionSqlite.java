@@ -14,20 +14,25 @@ import java.util.List;
  * Created by ariana on 6/1/2015.
  */
 public class CollectionSqlite  extends SQLiteOpenHelper {
+
+
     //Database Version
     private static final int DATABASE_VERSION = 1;
+
     // Database Name
     private static final String DATABASE_NAME = "DBshahrma.db";
+
     // collection table name
     private static final String TABLE_NAME_COLLECTION   = "collection";
+
     //collection Table Columns names
     private static final String ID = "Id";
     private static final String COLLECTIONNAME = "CollectionName";
 
-
+    // SQL statement to create Collection table
     private static final String CREATE_TABLE_Collection  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_COLLECTION + " (" +
-            "Id INTEGER PRIMARY KEY ," +
-            "CollectionName TEXT" +
+            " Id INTEGER PRIMARY KEY ," +
+            " CollectionName TEXT" +
             ");";
 
     public CollectionSqlite(Context context) {
@@ -36,11 +41,9 @@ public class CollectionSqlite  extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // SQL statement to create book table
-        String CREATE_BOOK_TABLE = "";
 
-        // create books table
-        db.execSQL(CREATE_BOOK_TABLE);
+        // create collection table
+        db.execSQL(CREATE_TABLE_Collection);
     }
 
     @Override
@@ -52,13 +55,14 @@ public class CollectionSqlite  extends SQLiteOpenHelper {
         this.onCreate(db);
     }
 
-    public void Add( String collectionname) {
+    public void Add(Integer id, String collectionname) {
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
+        values.put(ID, id);
         values.put(COLLECTIONNAME, collectionname);
 
         // 3. insert

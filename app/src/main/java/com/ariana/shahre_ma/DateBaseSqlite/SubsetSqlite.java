@@ -14,19 +14,25 @@ import java.util.List;
  * Created by ariana on 6/1/2015.
  */
 public class SubsetSqlite extends SQLiteOpenHelper {
+
+
     //Database Version
     private static final int DATABASE_VERSION = 1;
+
     // Database Name
     private static final String DATABASE_NAME = "DBshahrma.db";
+
     // subset table name
     private static final String TABLE_NAME_SUBSET= "subset";
+
     //subset Table Columns names
     private static final String ID = "Id";
     private static final String SUBSETNAME = "SubsetName";
     private static final String COLLECTIONID = "CollectionId";
 
+    // SQL statement to create Subset table
     private static final String CREATE_TABLE_Subset  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_SUBSET + " (" +
-            "Id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "Id INTEGER PRIMARY KEY ," +
             "SubsetName TEXT," +
             "CollectionId INTEGER" +
             ");";
@@ -37,11 +43,9 @@ public class SubsetSqlite extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // SQL statement to create book table
-        String CREATE_BOOK_TABLE = "";
 
         // create books table
-        db.execSQL(CREATE_BOOK_TABLE);
+        db.execSQL(CREATE_TABLE_Subset);
     }
 
     @Override
@@ -53,13 +57,14 @@ public class SubsetSqlite extends SQLiteOpenHelper {
         this.onCreate(db);
     }
 
-    public void Add( String subsetname, Integer collectionid) {
+    public void Add(Integer id, String subsetname, Integer collectionid) {
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
+        values.put(ID, id);
         values.put(SUBSETNAME, subsetname);
         values.put(COLLECTIONID, collectionid);
 
