@@ -1,5 +1,8 @@
 package com.ariana.shahre_ma;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +16,8 @@ import com.ariana.shahre_ma.DateBaseSqlite.CollectionSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.MemberSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.SubsetSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
@@ -153,6 +158,35 @@ public class Sign_Up extends ActionBarActivity {
 
     public void Intmeme(View v) {
 
+      // HTTPGetCollectionJson httpColl=new HTTPGetCollectionJson(Sign_Up.this);
+       // httpColl.execute();
+
+       // HTTPGetSubsetJson httpSub=new HTTPGetSubsetJson(Sign_Up.this);
+       // httpSub.execute();
+            try {
+                SQLiteDatabase mydb = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
+                Cursor allrows = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_SUBSET, null);
+                if (allrows.moveToFirst()) {
+                    do {
+                         Toast.makeText(getApplication(),allrows.getInt(0)+allrows.getString(1),Toast.LENGTH_LONG).show();
+
+
+                    } while (allrows.moveToNext());
+                  //  Toast.makeText(getApplication(), allrows.getInt(0) + allrows.getString(1), Toast.LENGTH_LONG).show();
+                }
+                mydb.close();
+            }
+            catch (Exception e){Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}
+
+    }
+
+    public void ssssssmm(View v) {
+
+         HTTPGetCollectionJson httpColl=new HTTPGetCollectionJson(Sign_Up.this);
+         httpColl.execute();
+
+       // HTTPGetSubsetJson httpSub=new HTTPGetSubsetJson(Sign_Up.this);
+       // httpSub.execute();
 
 
     }

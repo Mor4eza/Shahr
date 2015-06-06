@@ -49,6 +49,8 @@ public class BusinessSqlite extends SQLiteOpenHelper {
     private static final String FIELD5 = "Field5";
     private static final String FIELD6 = "Field6";
     private static final String FIELD7 = "Field7";
+    private static final String RATECOUNT = "RateCount";
+    private static final String RATEVALUE = "RateValue";
 
 
 
@@ -80,7 +82,9 @@ public class BusinessSqlite extends SQLiteOpenHelper {
             " Field4 INTEGER," +
             " Field5 INTEGER," +
             " Field6 INTEGER," +
-            " Field7 INTEGER " +
+            " Field7 INTEGER, " +
+            " RateCount INTEGER ," +
+            " RateValue DOUBLE " +
 
             ");";
 
@@ -106,7 +110,7 @@ public class BusinessSqlite extends SQLiteOpenHelper {
         this.onCreate(db);
     }
 
-    public void Add(Integer id,String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid, String longitude, String latitude, Integer areaid, String area, String user, Integer userid,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7) {
+    public void Add(Integer id,String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid, String longitude, String latitude, Integer areaid, String area, String user, Integer userid,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7,Integer ratecount,Double ratevalue) {
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -141,6 +145,8 @@ public class BusinessSqlite extends SQLiteOpenHelper {
         values.put(FIELD5, field5);
         values.put(FIELD6, field6);
         values.put(FIELD7, field7);
+        values.put(FIELD6, ratecount);
+        values.put(FIELD7, ratevalue);
 
 
         // 3. insert

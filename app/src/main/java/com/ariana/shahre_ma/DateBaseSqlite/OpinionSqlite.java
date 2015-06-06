@@ -11,61 +11,63 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by ariana on 6/1/2015.
+ * Created by ariana2 on 6/6/2015.
  */
-public class RateSqlite extends SQLiteOpenHelper
+public class OpinionSqlite extends SQLiteOpenHelper
 
+{
+
+
+    //Database Version
+    private static final int DATABASE_VERSION = 1;
+
+    // Database Name
+    private static final String DATABASE_NAME = "DBshahrma.db";
+
+    // Opinion table name
+    private static final String TABLE_NAME_OPINION = "opinion";
+
+    //Opinion Table Columns names
+    private static final String ID = "Id";
+    private static final String DESCRIPTION = "Description";
+    private static final String DATE = "Date";
+    private static final String OPINIONTYPE = "OpinionType";
+    private static final String ERJA = "Erja";
+
+    // SQL statement to create Rate table
+    private static final String CREATE_TABLE_Rate  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_OPINION + " (" +
+            "Id INTEGER PRIMARY KEY ," +
+            "Description TEXT," +
+            "Date TEXT," +
+            "OpinionType TEXT," +
+            "Erja INTEGER" +
+            ");";
+
+
+    public  OpinionSqlite(Context context)
+    {
+        super(context,DATABASE_NAME,null,DATABASE_VERSION);
+    }
+
+    @Override
+    public  void onCreate(SQLiteDatabase db)
     {
 
+        // create opinion table
+        db.execSQL(CREATE_TABLE_Rate);
+    }
 
-        //Database Version
-        private static final int DATABASE_VERSION = 1;
+    @Override
+    public void onUpgrade(SQLiteDatabase db,int oldVersion,int newVersion)
+    {
+        // Drop older books table if existed
+        db.execSQL("DROP TABLE IF EXISTS books");
 
-        // Database Name
-        private static final String DATABASE_NAME = "DBshahrma.db";
+        // create fresh books table
+        this.onCreate(db);
+    }
 
-        // Rate table name
-        private static final String TABLE_NAME_RATE = "rate";
-
-        //Rate Table Columns names
-        private static final String ID = "Id";
-        private static final String RATE = "Rate";
-        private static final String BUSINESSID = "BusinessId";
-        private static final String MEMBERID = "MemberId";
-
-        // SQL statement to create Rate table
-        private static final String CREATE_TABLE_Rate  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_RATE + " (" +
-                "Id INTEGER PRIMARY KEY ," +
-                "Rate DOUBLE," +
-                "BusinessId INTEGER," +
-                "MemberId INTEGER" +
-                ");";
-
-
-        public  RateSqlite(Context context)
-        {
-            super(context,DATABASE_NAME,null,DATABASE_VERSION);
-        }
-
-        @Override
-        public  void onCreate(SQLiteDatabase db)
-        {
-
-            // create books table
-            db.execSQL(CREATE_TABLE_Rate);
-        }
-
-        @Override
-        public void onUpgrade(SQLiteDatabase db,int oldVersion,int newVersion)
-        {
-            // Drop older books table if existed
-            db.execSQL("DROP TABLE IF EXISTS books");
-
-            // create fresh books table
-            this.onCreate(db);
-        }
-
-    public void Add(Integer id,Double rate,Integer businessid,Integer memberid)
+    public void Add(Integer id,String description,String date,String opiniontype,Integer erja)
     {
 
         // 1. get reference to writable DB
@@ -74,14 +76,15 @@ public class RateSqlite extends SQLiteOpenHelper
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
         values.put(ID,id);
-        values.put(RATE,rate);
-        values.put(BUSINESSID,businessid);
-        values.put(MEMBERID, memberid);
+        values.put(DESCRIPTION,description);
+        values.put(DATE,date);
+        values.put(OPINIONTYPE, opiniontype);
+        values.put(ERJA, ERJA);
 
 
 
         // 3. insert
-        db.insert(TABLE_NAME_RATE, // table
+        db.insert(TABLE_NAME_OPINION, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -94,14 +97,14 @@ public class RateSqlite extends SQLiteOpenHelper
         List<String> books = new LinkedList<>();
 
         // 1. build the query
-        String query = "SELECT  * FROM " + TABLE_NAME_RATE;
+        String query = "SELECT  * FROM " + TABLE_NAME_OPINION;
 
         // 2. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
         // 3. go over each row, build book and add it to list
-       // Book book = null;
+        // Book book = null;
         if (cursor.moveToFirst()) {
             do {
              /*  book = new Book();
@@ -110,7 +113,7 @@ public class RateSqlite extends SQLiteOpenHelper
                 book.setAuthor(cursor.getString(2));*/
 
                 // Add book to books
-              //  books.add(book);
+                //  books.add(book);
             } while (cursor.moveToNext());
         }
 

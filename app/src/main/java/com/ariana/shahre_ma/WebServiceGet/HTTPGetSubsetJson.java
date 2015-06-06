@@ -81,9 +81,10 @@ public class HTTPGetSubsetJson extends AsyncTask<String, String, String>
             for (int i = 0; i < areas.length(); i++) {
 
                 JSONObject area = areas.getJSONObject(i);
+                collectionId[i]=area.getInt("CollectionId");
                 Id[i]=area.getInt("Id");
                 subsetname[i]=area.getString("Name");
-                collectionId[i]=area.getInt("Id");
+
 
             }
 

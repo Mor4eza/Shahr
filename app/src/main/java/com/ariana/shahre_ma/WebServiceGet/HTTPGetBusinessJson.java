@@ -55,6 +55,8 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
     Integer field5[];
     Integer field6[];
     Integer field7[];
+    Integer ratecount[];
+    Double ratevalue[];
 
     Integer len;
 
@@ -85,7 +87,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
             for (int i = 0; i <len; i++)
             {
-                businSql.Add(Id[i],market[i], code[i],phone[i],mobile[i],fax[i], email[i],businessowner[i],address[i],description[i],startdate[i], expirationdate[i], inactive[i],subset[i],  subsetid[i], longitude[i], latitude[i],  areaid[i], area1[i], user[i],userid[i],field1[i],field2[i],field3[i],field4[i],field5[i],field6[i],field7[i]);
+                businSql.Add(Id[i],market[i], code[i],phone[i],mobile[i],fax[i], email[i],businessowner[i],address[i],description[i],startdate[i], expirationdate[i], inactive[i],subset[i],  subsetid[i], longitude[i], latitude[i],  areaid[i], area1[i], user[i],userid[i],field1[i],field2[i],field3[i],field4[i],field5[i],field6[i],field7[i],ratecount[i],ratevalue[i]);
 
             }
         } catch (Exception e) {
@@ -129,7 +131,8 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
             field5=new Integer[areas.length()];
             field6=new Integer[areas.length()];
             field7=new Integer[areas.length()];
-
+            ratecount=new Integer[areas.length()];
+            ratevalue=new Double[areas.length()];
             len=areas.length();
             for (int i = 0; i < areas.length(); i++) {
 
@@ -164,6 +167,8 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
                 field5[i]=area.getInt("Field5");
                 field6[i]=area.getInt("Field6");
                 field7[i]=area.getInt("Field7");
+                ratecount[i]=area.getInt("Field6");
+                ratevalue[i]=area.getDouble("Field7");
 
 
             }
