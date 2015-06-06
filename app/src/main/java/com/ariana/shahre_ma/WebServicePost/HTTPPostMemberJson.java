@@ -1,4 +1,4 @@
-package com.ariana.shahre_ma.WebService;
+package com.ariana.shahre_ma.WebServicePost;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -17,8 +17,6 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;

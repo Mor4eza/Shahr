@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -20,10 +21,10 @@ public class CollectionSqlite  extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // Database Name
-    private static final String DATABASE_NAME = "DBshahrma.db";
+    private static final String DATABASE_NAME = "DBshahrma";
 
     // collection table name
-    private static final String TABLE_NAME_COLLECTION   = "collection";
+    private static final String TABLE_NAME_COLLECTION = "collection";
 
     //collection Table Columns names
     private static final String ID = "Id";
@@ -75,7 +76,7 @@ public class CollectionSqlite  extends SQLiteOpenHelper {
     }
 
     // Get All Books
-    public List<String> getAllBooks() {
+    public void getAllBooks() {
         List<String> books = new LinkedList<>();
 
         // 1. build the query
@@ -89,20 +90,16 @@ public class CollectionSqlite  extends SQLiteOpenHelper {
       //  Book book = null;
         if (cursor.moveToFirst()) {
             do {
-             /*  book = new Book();
-                book.setId(Integer.parseInt(cursor.getString(0)));
-                book.setTitle(cursor.getString(1));
-                book.setAuthor(cursor.getString(2));*/
 
-                // Add book to books
-               // books.add(book);
+
+
             } while (cursor.moveToNext());
         }
 
         Log.d("getAllBooks()", books.toString());
 
         // return books
-        return books;
+       // return books;
     }
 
     // Deleting single book

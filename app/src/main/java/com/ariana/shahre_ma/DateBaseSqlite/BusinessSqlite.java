@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by ariana on 6/1/2015.
  */
-public class Business extends SQLiteOpenHelper {
+public class BusinessSqlite extends SQLiteOpenHelper {
     //Database Version
     private static final int DATABASE_VERSION = 1;
     // Database Name
@@ -42,9 +42,18 @@ public class Business extends SQLiteOpenHelper {
     private static final String AREA = "Area";
     private static final String USER = "User";
     private static final String USERID = "UserId";
+    private static final String FIELD1 = "Field1";
+    private static final String FIELD2 = "Field2";
+    private static final String FIELD3 = "Field3";
+    private static final String FIELD4 = "Field4";
+    private static final String FIELD5 = "Field5";
+    private static final String FIELD6 = "Field6";
+    private static final String FIELD7 = "Field7";
 
-    private static final String CREATE_TABLE_Business = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_BUSINESS + " (" +
-            " Id INTEGER PRIMARY KEY AUTOINCREMENT," +
+
+
+    private static final String CREATE_TABLE_Business  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_BUSINESS + " (" +
+            " Id INTEGER PRIMARY KEY ," +
             " Market TEXT ," +
             " Code TEXT ," +
             " Phone TEXT ," +
@@ -64,10 +73,18 @@ public class Business extends SQLiteOpenHelper {
             " AreaId INTEGER ," +
             " Area TEXT ," +
             " User TEXT ," +
-            " UserId INTEGER " +
+            " UserId INTEGER," +
+            " Field1 INTEGER," +
+            " Field2 INTEGER," +
+            " Field3 INTEGER," +
+            " Field4 INTEGER," +
+            " Field5 INTEGER," +
+            " Field6 INTEGER," +
+            " Field7 INTEGER " +
+
             ");";
 
-    public Business(Context context) {
+    public BusinessSqlite(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -89,13 +106,14 @@ public class Business extends SQLiteOpenHelper {
         this.onCreate(db);
     }
 
-    public void Add(String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid, String longitude, String latitude, Integer areaid, String area, String user, Integer userid) {
+    public void Add(Integer id,String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid, String longitude, String latitude, Integer areaid, String area, String user, Integer userid,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7) {
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
+        values.put(ID, id);
         values.put(MARKET, market);
         values.put(CODE, code);
         values.put(PHONE, phone);
@@ -116,6 +134,13 @@ public class Business extends SQLiteOpenHelper {
         values.put(AREA, area);
         values.put(USER, user);
         values.put(USERID, userid);
+        values.put(FIELD1, field1);
+        values.put(FIELD2, field2);
+        values.put(FIELD3, field3);
+        values.put(FIELD4, field4);
+        values.put(FIELD5, field5);
+        values.put(FIELD6, field6);
+        values.put(FIELD7, field7);
 
 
         // 3. insert

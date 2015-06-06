@@ -1,12 +1,7 @@
 package com.ariana.shahre_ma;
 
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,8 +13,9 @@ import com.ariana.shahre_ma.DateBaseSqlite.CollectionSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.MemberSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.SubsetSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
-import com.ariana.shahre_ma.WebService.HTTPPostMemberJson;
-import com.ariana.shahre_ma.WebService.SqliteTOjson;
+import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
+import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
+import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
 
 
 public class Sign_Up extends ActionBarActivity {
@@ -55,8 +51,10 @@ public class Sign_Up extends ActionBarActivity {
     private static final String DATABASE_NAME = "DBshahrma.db";
     // Books table name
     private static final String TABLE_MEMBER = "member";
+
     private static final String TABLE_NAME_COLLECTION = "collection";
     private static final String TABLE_NAME_SUBSET= "subset";
+
 
 
 
@@ -155,31 +153,7 @@ public class Sign_Up extends ActionBarActivity {
 
     public void Intmeme(View v) {
 
-        try {
-            CollectionSqlite   coll1 = new CollectionSqlite(Sign_Up.this);
-          //  SubsetSqlite sub=new SubsetSqlite(Sign_Up.this);
-           // sub.Add(1,"marco",1);
-            coll1.Add(1, "mm");
-            coll1.Add(2,"bb");
-            coll1.Add(3,"cc");
-            /*
-            SQLiteDatabase mydb = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
 
-           Cursor allrows = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_COLLECTION, null);
-            if (allrows.moveToFirst()) {
-                do {
-
-
-                    Toast.makeText(getApplication(), allrows.getInt(0) + allrows.getString(1)+allrows.getString(2), Toast.LENGTH_LONG).show();
-
-                } while (allrows.moveToNext());
-            }
-            mydb.close();*/
-
-
-        } catch (Exception e) {
-            Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();
-        }
 
     }
 }

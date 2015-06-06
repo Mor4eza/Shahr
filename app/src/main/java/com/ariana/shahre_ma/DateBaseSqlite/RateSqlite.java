@@ -20,15 +20,26 @@ public class RateSqlite extends SQLiteOpenHelper
 
         //Database Version
         private static final int DATABASE_VERSION = 1;
+
         // Database Name
         private static final String DATABASE_NAME = "DBshahrma.db";
+
         // Rate table name
-        private static final String TABLE_BOOKS_RATE = "rate";
+        private static final String TABLE_NAME_RATE = "rate";
+
         //Rate Table Columns names
         private static final String ID = "Id";
         private static final String RATE = "Rate";
         private static final String BUSINESSID = "BusinessId";
         private static final String MEMBERID = "MemberId";
+
+        // SQL statement to create Rate table
+        private static final String CREATE_TABLE_Rate  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_RATE + " (" +
+                "Id INTEGER PRIMARY KEY ," +
+                "Rate TEXT," +
+                "BusinessId INTEGER," +
+                "MemberId INTEGER" +
+                ");";
 
 
         public  RateSqlite(Context context)
@@ -39,11 +50,9 @@ public class RateSqlite extends SQLiteOpenHelper
         @Override
         public  void onCreate(SQLiteDatabase db)
         {
-            // SQL statement to create book table
-            String CREATE_BOOK_TABLE = "";
 
             // create books table
-            db.execSQL(CREATE_BOOK_TABLE);
+            db.execSQL(CREATE_TABLE_Rate);
         }
 
         @Override
@@ -56,7 +65,7 @@ public class RateSqlite extends SQLiteOpenHelper
             this.onCreate(db);
         }
 
-    public void Add(Double rate,Integer businessid,Integer memberid)
+    public void Add(Integer id,Double rate,Integer businessid,Integer memberid)
     {
 
         // 1. get reference to writable DB
@@ -64,6 +73,7 @@ public class RateSqlite extends SQLiteOpenHelper
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
+        values.put(ID,id);
         values.put(RATE,rate);
         values.put(BUSINESSID,businessid);
         values.put(MEMBERID, memberid);
@@ -71,7 +81,7 @@ public class RateSqlite extends SQLiteOpenHelper
 
 
         // 3. insert
-        db.insert(TABLE_BOOKS_RATE, // table
+        db.insert(TABLE_NAME_RATE, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -84,7 +94,7 @@ public class RateSqlite extends SQLiteOpenHelper
         List<String> books = new LinkedList<>();
 
         // 1. build the query
-        String query = "SELECT  * FROM " + TABLE_BOOKS_RATE;
+        String query = "SELECT  * FROM " + TABLE_NAME_RATE;
 
         // 2. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();

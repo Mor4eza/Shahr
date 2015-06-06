@@ -1,11 +1,8 @@
-package com.ariana.shahre_ma.WebService;
+package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
 import android.widget.Toast;
 
-import com.ariana.shahre_ma.Sign_Up;
-
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
