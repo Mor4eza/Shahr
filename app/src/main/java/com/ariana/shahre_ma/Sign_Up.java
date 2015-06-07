@@ -228,7 +228,7 @@ public class Sign_Up extends ActionBarActivity {
 
        // BusinessSqlite bus=new BusinessSqlite(Sign_Up.this);
         //   bus.Add(0,"a","b","c","d","f","g","h","c","ee","r","r","q","r",0,"f","f",0,"x","x",0,0,0,0,0,0,0,0,0,1.3);
-           // Toast.makeText(getApplication(),httpColl.GetM(), Toast.LENGTH_LONG).show();
+
     }
     catch (SQLiteException e){Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}
        // HTTPGetSubsetJson httpSub=new HTTPGetSubsetJson(Sign_Up.this);
