@@ -21,7 +21,7 @@ public class FieldClass
     // Field  Opinion table
     private static String Description;
     private static String Date;
-    private static String OpinionType;
+    private static Integer OpinionType;
     private static Integer Erja;
 
 
@@ -137,7 +137,7 @@ public class FieldClass
         Date=date;
     }
     // Set  opinion
-    public void  SetOpinion_OpinionType(String opiniontype)
+    public void  SetOpinion_OpinionType(Integer opiniontype)
     {
         OpinionType=opiniontype;
     }
@@ -159,7 +159,7 @@ public class FieldClass
         return  Date;
     }
     // Get  opinion
-    public String  GetOpinion_OpinionType()
+    public Integer  GetOpinion_OpinionType()
     {
         return  OpinionType;
     }

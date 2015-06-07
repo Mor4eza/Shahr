@@ -48,9 +48,9 @@ public class Jobs extends ActionBarActivity {
 
 
 
-       // createGroupList();
-      //  createCollection();
-        LoadCollecdtion_Subset();
+        createGroupList();
+        createCollection();
+       // LoadCollecdtion_Subset();
 
 
         expListView = (ExpandableListView) findViewById(R.id.laptop_list);

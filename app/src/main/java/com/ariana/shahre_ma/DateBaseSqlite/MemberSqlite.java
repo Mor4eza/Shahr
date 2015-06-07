@@ -128,6 +128,31 @@ public class MemberSqlite extends SQLiteOpenHelper{
         return books;
     }
 
+
+
+    // Get Id Memeber table
+    public Integer getID_Memeber() {
+
+       Integer id=0;
+        // 1. build the query
+        String query = "SELECT  Id FROM " + TABLE_MEMBER;
+
+        // 2. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                id=cursor.getInt(0);
+            } while (cursor.moveToNext());
+        }
+
+
+        // return id
+        return id;
+    }
+
+
     // Deleting single book
     public void delete(Integer id) {
 

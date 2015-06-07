@@ -82,7 +82,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
     protected void onPostExecute() {
         try {
 
-            Toast.makeText(context,market[0], Toast.LENGTH_LONG).show();
+          //  Toast.makeText(context,market[0], Toast.LENGTH_LONG).show();
             BusinessSqlite businSql = new BusinessSqlite(context);
 
 
@@ -125,7 +125,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
             area1=new String[areas.length()];
             user=new String[areas.length()];
             userid=new Integer[areas.length()];
-           field1=new Integer[areas.length()];
+            field1=new Integer[areas.length()];
             field2=new Integer[areas.length()];
             field3=new Integer[areas.length()];
             field4=new Integer[areas.length()];
@@ -138,37 +138,37 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
             for (int i = 0; i < areas.length(); i++) {
 
                 JSONObject area = areas.getJSONObject(i);
-                Id[i]=area.getInt("Id");
-                market[i]=area.getString("Market");
-                code[i]=area.getString("Code");
-                phone[i]=area.getString("Phone");
-                mobile[i]=area.getString("Mobile");
-                fax[i]=area.getString("Fax");
-                email[i]=area.getString("Email");
-                businessowner[i]=area.getString("BusinessOwner");
                 address[i]=area.getString("Address");
+                area1[i]=area.getString("Area");
+                areaid[i]=area.getInt("AreaId");
+                businessowner[i]=area.getString("BusinessOwner");
+                code[i]=area.getString("Code");
                 description[i]=area.getString("Description");
-                startdate[i]=area.getString("Startdate");
+                email[i]=area.getString("Email");
                 expirationdate[i]=area.getString("ExpirationDate");
+                fax[i]=area.getString("Fax");
+                Id[i]=area.getInt("Id");
                 inactive[i]=area.getString("Inactive");
+                latitude[i]=area.getString("Latitude");
+                longitude[i]=area.getString("Longitude");
+                market[i]=area.getString("Market");
+                mobile[i]=area.getString("Mobile");
+                phone[i]=area.getString("Phone");
+                startdate[i]=area.getString("Startdate");
                 subset[i]=area.getString("Subset");
                 subsetid[i]=area.getInt("SubsetId");
-                longitude[i]=area.getString("Longitude");
-                latitude[i]=area.getString("Latitude");
-                areaid[i]=area.getInt("AreaId");
-                area1[i]=area.getString("Area");
                 user[i]=area.getString("User");
                 userid[i]=area.getInt("UserId");
 
-               /* field1[i]=area.getInt("Field1");
-                field2[i]=area.getInt("Field2");
-                field3[i]=area.getInt("Field3");
-                field4[i]=area.getInt("Field4");
-                field5[i]=area.getInt("Field5");
-                field6[i]=area.getInt("Field6");
-                field7[i]=area.getInt("Field7");*/
-                /*ratecount[i]=area.getInt("Field6");
-                ratevalue[i]=area.getDouble("Field7");*/
+                field1[i]=0;
+                field2[i]=0;
+                field3[i]=0;
+                field4[i]=0;
+                field5[i]=0;
+                field6[i]=0;
+                field7[i]=0;
+                ratecount[i]=0;
+                ratevalue[i]=1.1;
 
 
             }

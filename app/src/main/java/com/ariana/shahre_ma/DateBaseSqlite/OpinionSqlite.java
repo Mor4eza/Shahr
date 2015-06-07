@@ -22,10 +22,10 @@ public class OpinionSqlite extends SQLiteOpenHelper
     private static final int DATABASE_VERSION = 1;
 
     // Database Name
-    private static final String DATABASE_NAME = "DBshahrma.db";
+    private static final String DATABASE_NAME = "DBshahrma";
 
     // Opinion table name
-    private static final String TABLE_NAME_OPINION = "opinion";
+    private static final String TABLE_NAME_OPINION = "opinion_tbl";
 
     //Opinion Table Columns names
     private static final String ID = "Id";
@@ -34,12 +34,12 @@ public class OpinionSqlite extends SQLiteOpenHelper
     private static final String OPINIONTYPE = "OpinionType";
     private static final String ERJA = "Erja";
 
-    // SQL statement to create Rate table
-    private static final String CREATE_TABLE_Rate  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_OPINION + " (" +
+    // SQL statement to create Opinion table
+    private static final String CREATE_TABLE_Opinion  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_OPINION + " (" +
             "Id INTEGER PRIMARY KEY ," +
             "Description TEXT," +
             "Date TEXT," +
-            "OpinionType TEXT," +
+            "OpinionType INTEGER," +
             "Erja INTEGER" +
             ");";
 
@@ -54,7 +54,7 @@ public class OpinionSqlite extends SQLiteOpenHelper
     {
 
         // create opinion table
-        db.execSQL(CREATE_TABLE_Rate);
+        db.execSQL(CREATE_TABLE_Opinion);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class OpinionSqlite extends SQLiteOpenHelper
         this.onCreate(db);
     }
 
-    public void Add(Integer id,String description,String date,String opiniontype,Integer erja)
+    public void Add(Integer id,String description,String date,Integer opiniontype,Integer erja)
     {
 
         // 1. get reference to writable DB
@@ -79,7 +79,7 @@ public class OpinionSqlite extends SQLiteOpenHelper
         values.put(DESCRIPTION,description);
         values.put(DATE,date);
         values.put(OPINIONTYPE, opiniontype);
-        values.put(ERJA, ERJA);
+        values.put(ERJA, erja);
 
 
 

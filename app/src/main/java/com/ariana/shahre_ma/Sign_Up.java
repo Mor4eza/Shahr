@@ -3,6 +3,7 @@ package com.ariana.shahre_ma;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,15 +17,18 @@ import android.widget.Toast;
 import com.ariana.shahre_ma.DateBaseSqlite.BusinessSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.CollectionSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.MemberSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.OpinionSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.SubsetSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.ImageDownload.ImageLoader;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetOpinionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
+import com.ariana.shahre_ma.WebServicePost.HTTPPostOpinionJson;
 
 
 public class Sign_Up extends ActionBarActivity {
@@ -59,6 +63,7 @@ public class Sign_Up extends ActionBarActivity {
 
     private static final String DATABASE_NAME = "DBshahrma";
     // Books table name
+    private static final String TABLE_NAME_OPINION = "opinion_tbl";
     private static final String TABLE_MEMBER = "member";
     private static final String TABLE_NAME_BUSINESS = "tttbusiness_tbl";
     private static final String TABLE_NAME_COLLECTION = "collection_tbl";
@@ -174,7 +179,7 @@ public class Sign_Up extends ActionBarActivity {
        // HTTPGetSubsetJson httpSub=new HTTPGetSubsetJson(Sign_Up.this);
        // httpSub.execute();
             try {
-                SQLiteDatabase mydb = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
+               SQLiteDatabase mydb = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
                /* Cursor c = mydb.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
 
                 if (c.moveToFirst()) {
@@ -183,7 +188,7 @@ public class Sign_Up extends ActionBarActivity {
                         c.moveToNext();
                     }
                 }*/
-                Cursor allrows = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_BUSINESS, null);
+               Cursor allrows = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_OPINION, null);
                 if (allrows.moveToFirst()) {
                     do {
                          Toast.makeText(getApplication(),allrows.getInt(0)+allrows.getString(1),Toast.LENGTH_LONG).show();
@@ -193,6 +198,7 @@ public class Sign_Up extends ActionBarActivity {
                   //  Toast.makeText(getApplication(), allrows.getInt(0) + allrows.getString(1), Toast.LENGTH_LONG).show();
                 }
                 mydb.close();
+
             }
             catch (Exception e){Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}
 
@@ -202,13 +208,29 @@ public class Sign_Up extends ActionBarActivity {
 
         try
         {
-         HTTPGetBusinessJson httpColl=new HTTPGetBusinessJson(Sign_Up.this);
-         httpColl.execute();
+         HTTPGetOpinionJson httpColl=new HTTPGetOpinionJson(this);
+        httpColl.execute();
 
-        BusinessSqlite bus=new BusinessSqlite(Sign_Up.this);
-        Toast.makeText(getApplication(),httpColl.GetM(), Toast.LENGTH_LONG).show();
+           //httpColl.Add(1,"nazar","1394",1,186);
+          /*  Aname = name.getText().toString();
+            Aemail = email.getText().toString();
+
+            _json = (json.getOpinionTOjson(Aname,Aemail,1,186));
+
+            fc.SetOpinion_Description(Aname);
+            fc.SetOpinion_Date(Aemail);
+            fc.SetOpinion_OpinionType(1);
+            fc.SetOpinion_Erja(186);
+            city.setText(_json);
+            HTTPPostOpinionJson sendPost1 = new HTTPPostOpinionJson(this);
+            sendPost1.SetOpinion_Json(_json);
+            sendPost1.execute();*/
+
+       // BusinessSqlite bus=new BusinessSqlite(Sign_Up.this);
+        //   bus.Add(0,"a","b","c","d","f","g","h","c","ee","r","r","q","r",0,"f","f",0,"x","x",0,0,0,0,0,0,0,0,0,1.3);
+           // Toast.makeText(getApplication(),httpColl.GetM(), Toast.LENGTH_LONG).show();
     }
-    catch (Exception e){Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}
+    catch (SQLiteException e){Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}
        // HTTPGetSubsetJson httpSub=new HTTPGetSubsetJson(Sign_Up.this);
        // httpSub.execute();
 

@@ -94,11 +94,10 @@ public class BusinessSqlite extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // SQL statement to create book table
-        String CREATE_BOOK_TABLE = "";
+
 
         // create books table
-        db.execSQL(CREATE_BOOK_TABLE);
+        db.execSQL(CREATE_TABLE_Business);
     }
 
     @Override

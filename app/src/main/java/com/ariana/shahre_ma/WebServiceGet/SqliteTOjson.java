@@ -74,7 +74,7 @@ public class SqliteTOjson
     }*/
 
 
-    // convert data to json
+    // convert Member to json
     public String getSqliteTOjson(String j_name,String j_email,String j_mobile,Integer j_age,Boolean j_sex,String j_username,String j_password,Integer j_cityid) {
         String field_Json="";
         try {
@@ -96,6 +96,28 @@ public class SqliteTOjson
         catch (Exception e){
             Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();}
        return  field_Json;
+
+    }
+
+    // convert opinion to json
+    public String getOpinionTOjson( String description,String date,Integer opiniontype,Integer erja) {
+        String field_Json="";
+        try {
+
+            // JSONobject get key/value convert to json
+            JSONObject rowObject = new JSONObject();
+            rowObject.put("Id",1);
+            rowObject.put("Description",description);
+            rowObject.put("Date",date);
+            rowObject.put("OpinionType",opiniontype);
+            rowObject.put("ErJa",erja);
+
+            field_Json=rowObject.toString();
+
+        }
+        catch (Exception e){
+            Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();}
+        return  field_Json;
 
     }
 

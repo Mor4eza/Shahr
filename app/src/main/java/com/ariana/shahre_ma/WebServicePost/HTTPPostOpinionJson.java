@@ -29,7 +29,7 @@ import java.io.InputStreamReader;
  */
 public class HTTPPostOpinionJson extends AsyncTask<String, Long, Object>
 {
-    private static  final  String url_Opinion="http://test.shahrma.com/api/ApiTakeMembers";
+    private static  final  String url_Opinion="http://test.shahrma.com/api/ApiTakeOpinion";
 
 
     // variable get json
@@ -43,13 +43,13 @@ public class HTTPPostOpinionJson extends AsyncTask<String, Long, Object>
 
     // get/set
 
-    // Set json Member
+    // Set json opinion
     public void  SetOpinion_Json(String json_member)
     {
         data_json=json_member;
     }
 
-    // Get Josn Member
+    // Get Josn opinion
     public String GetOpinion_json()
     {
         return data_json;
@@ -87,7 +87,7 @@ public class HTTPPostOpinionJson extends AsyncTask<String, Long, Object>
     protected String doInBackground(String... params) {
         try {
 
-            onPostExecute();
+            //onPostExecute();
             JSONObject json = new JSONObject(GetOpinion_json()); //your array;
             HttpClient httpClient = new DefaultHttpClient();
             HttpContext httpContext = new BasicHttpContext();
@@ -116,7 +116,7 @@ public class HTTPPostOpinionJson extends AsyncTask<String, Long, Object>
             }
 
             //SetResponse(json_String);
-            onPostExecute();
+           onPostExecute();
         } catch (Exception e) {
             e.printStackTrace();
             // Toast.makeText(, e.toString(), Toast.LENGTH_LONG).show();
@@ -132,7 +132,7 @@ public class HTTPPostOpinionJson extends AsyncTask<String, Long, Object>
         Integer ID = Integer.parseInt(GetResponse());
         if (ID >= 0) {
             opinSql.Add(ID, fc.GetOpinion_Description(), fc.GetOpinion_Date(), fc.GetOpinion_OpinionType(), fc.GetOpinion_Erja());          if (dialog.isShowing()) {
-                dialog.dismiss();
+              //  dialog.dismiss();
             }
         } else {
             Toast.makeText(context, "کاربر ساخته نشد دوباره امتحان کنید", Toast.LENGTH_LONG).show();
