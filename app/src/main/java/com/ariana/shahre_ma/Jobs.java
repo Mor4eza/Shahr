@@ -12,6 +12,7 @@ import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 
+import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 
@@ -41,6 +42,7 @@ public class Jobs extends ActionBarActivity {
     Integer Id_co;
     Integer Collection_ID_subset;
 
+    FieldClass fc=new FieldClass();
     private static final String DATABASE_NAME = "DBshahrma";
     private static final String TABLE_NAME_COLLECTION = "collection_tbl";
     private static final String TABLE_NAME_SUBSET= "subset";
@@ -89,8 +91,11 @@ public class Jobs extends ActionBarActivity {
                         groupPosition, childPosition);
                 Toast.makeText(getBaseContext(), selected, Toast.LENGTH_LONG)
                         .show();
+                fc.SetSelected_job(selected);
                 Intent i = new Intent(getApplicationContext(), Jobs_List.class);
                 startActivity(i);
+
+
                 return true;
             }
         });
@@ -101,18 +106,21 @@ public class Jobs extends ActionBarActivity {
 
     private void createCollection() {
 
+           Boolean f=true;
 
         try {
             SQLiteDatabase mydb = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
             Cursor allrows_Collection = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_COLLECTION, null);
             Cursor allrows_Subset = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_SUBSET, null);
             groupList = new ArrayList<String>();
-            childList = new ArrayList<String>();
-            String laptop;
+
+
+            String laptop="";
             laptopCollection = new LinkedHashMap<String, List<String>>();
+
             if (allrows_Collection.moveToFirst()) {
                 do {
-
+                    childList = new ArrayList<String>();
                     Id_co = allrows_Collection.getInt(0);
 
                    groupList.add(allrows_Collection.getString(1));
@@ -121,22 +129,26 @@ public class Jobs extends ActionBarActivity {
                             {
                                 do {
 
-
                                     Collection_ID_subset = allrows_Subset.getInt(2);
-                                    if (Collection_ID_subset == Id_co)
-                                    {
-                                        childList.add(allrows_Subset.getString(1));
-                                        laptopCollection.put(laptop, childList);
 
-                                    }
+
+                                         if (Collection_ID_subset == Id_co)
+                                         {
+                                             childList.add(allrows_Subset.getString(1));
+
+
+
+                                         }
+
                                 } while (allrows_Subset.moveToNext());
+
                             }
 
-                   // laptopCollection.put(laptop, childList);
-                   // childList.clear();
+                      laptopCollection.put(laptop,childList);
 
                 } while (allrows_Collection.moveToNext());
             }
+
             mydb.close();
         }
         catch (Exception e){ Toast.makeText(getBaseContext(),e.toString(), Toast.LENGTH_LONG).show();}

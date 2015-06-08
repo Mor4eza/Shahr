@@ -37,6 +37,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         nature.setThumbnail(R.drawable.haftkhan);
         mItems.add(nature);
 
+
         nature = new Jobs_item();
         nature.setName("تیراژه");
         nature.setDes("پر از کفشای جور واجور، واسه هر سلیقه ای...");

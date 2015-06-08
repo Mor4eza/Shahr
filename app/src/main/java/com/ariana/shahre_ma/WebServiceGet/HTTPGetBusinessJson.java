@@ -4,8 +4,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import com.ariana.shahre_ma.DateBaseSqlite.BusinessSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.CollectionSqlite;
+
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,7 +25,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
     private static Context context;
 
-    private static final String url_Business="http://test.shahrma.com/api/test";
+    private  String url_Business;
 
     Integer Id[];
     String market[];
@@ -60,6 +60,16 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
     Integer len;
 
+    public   void SetUrl_business(Integer SubsetID)
+    {
+        url_Business="http://test.shahrma.com/api/test?subsetid="+SubsetID;
+    }
+
+    private String GetUrl_business()
+    {
+        return  url_Business;
+    }
+
     public HTTPGetBusinessJson(Context c) {
         context = c;
     }
@@ -67,7 +77,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
         try {
 
 
-            InputStream jsonStream = getStreamFromURL(url_Business, "GET");
+            InputStream jsonStream = getStreamFromURL(GetUrl_business(), "GET");
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);
             onPostExecute();
@@ -83,12 +93,12 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
         try {
 
           //  Toast.makeText(context,market[0], Toast.LENGTH_LONG).show();
-            BusinessSqlite businSql = new BusinessSqlite(context);
+            DataBaseSqlite dbs = new DataBaseSqlite(context);
 
 
             for (int i = 0; i <len; i++)
             {
-                businSql.Add(Id[i],market[i], code[i],phone[i],mobile[i],fax[i], email[i],businessowner[i],address[i],description[i],startdate[i], expirationdate[i], inactive[i],subset[i],  subsetid[i], longitude[i], latitude[i],  areaid[i], area1[i], user[i],userid[i],field1[i],field2[i],field3[i],field4[i],field5[i],field6[i],field7[i],ratecount[i],ratevalue[i]);
+                dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
 
             }
         } catch (Exception e) {

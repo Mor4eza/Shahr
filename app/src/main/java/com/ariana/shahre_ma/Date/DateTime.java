@@ -1,4 +1,4 @@
-package com.ariana.shahre_ma;
+package com.ariana.shahre_ma.Date;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,25 +11,25 @@ public class DateTime
     SimpleDateFormat sdf ;
     String currentDateandTime;
 
-    public String Yaer()
+    public Integer Yaer()
     {
         sdf=new SimpleDateFormat("yyyy");
         currentDateandTime = sdf.format(new Date());
-        return currentDateandTime.toString();
+        return Integer.parseInt(currentDateandTime);
     }
 
-    public String Month() {
+    public Integer Month() {
         sdf=new SimpleDateFormat("MM");
         currentDateandTime = sdf.format(new Date());
-        return currentDateandTime.toString();
+        return Integer.parseInt(currentDateandTime);
     }
 
 
-    public String Day()
+    public Integer Day()
     {
         sdf=new SimpleDateFormat("dd");
         currentDateandTime = sdf.format(new Date());
-        return currentDateandTime.toString();
+        return Integer.parseInt(currentDateandTime);
     }
 
     public  String Hours()

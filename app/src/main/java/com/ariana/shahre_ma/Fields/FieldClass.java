@@ -24,6 +24,8 @@ public class FieldClass
     private static Integer OpinionType;
     private static Integer Erja;
 
+    private static String selected_job;
+
 
     // get/set
 
@@ -169,4 +171,14 @@ public class FieldClass
         return  Erja;
     }
 
+
+    // Set and Get Selected_job
+    public void  SetSelected_job(String selected)
+    {
+        selected_job=selected;
+    }
+    public String  GetSelected_job()
+    {
+        return  selected_job;
+    }
 }

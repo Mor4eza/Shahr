@@ -48,16 +48,14 @@
         android:inputType="textPersonName" />
 
 
-    <EditText
-        android:layout_width="fill_parent"
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="شهر"
-        android:id="@+id/txtCity"
+        android:text=""
+        android:id="@+id/autoCompletecCity"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp"
-        android:height="40dp"
-        android:drawableLeft="@android:drawable/ic_menu_mylocation"
-
-        android:inputType="textPersonName" />
+        android:hint="شهر" />
 
     <EditText
         android:layout_width="fill_parent"
@@ -92,6 +90,7 @@
         android:layout_marginTop="15dp"
         android:height="20dp"
 
+
         >
 
     </Spinner>
@@ -117,6 +116,8 @@
         android:id="@+id/txtpass"
         android:drawableLeft="@android:drawable/ic_partial_secure"
         android:inputType="textPersonName" />
+
+
 
     <Button
         android:layout_width="wrap_content"

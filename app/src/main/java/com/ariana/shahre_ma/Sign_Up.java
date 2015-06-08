@@ -9,31 +9,29 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.ariana.shahre_ma.DateBaseSqlite.BusinessSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.CollectionSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.MemberSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.OpinionSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.SubsetSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.ImageDownload.ImageLoader;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Sign_Up extends ActionBarActivity {
 
 
     //Class
-    MemberSqlite mem;
-    CollectionSqlite coll;
-    SubsetSqlite sub;
+
     FieldClass fc = new FieldClass();
     HTTPPostMemberJson sendPost;
     SqliteTOjson json = new SqliteTOjson();
@@ -42,7 +40,7 @@ public class Sign_Up extends ActionBarActivity {
     //Component
     EditText name;
     EditText email;
-    EditText city;
+    AutoCompleteTextView city;
     EditText phone;
     EditText age;
     Spinner sex;
@@ -57,8 +55,8 @@ public class Sign_Up extends ActionBarActivity {
     Integer Aage;
     String _json;
 
-    private static final String DATABASE_NAME = "DBshahrma";
-    // Books table name
+    private static final String DATABASE_NAME = "DBshahrma.db";
+    private static final String TABLE_NAME_City   = "city";
     private static final String TABLE_NAME_OPINION = "opinion_tbl";
     private static final String TABLE_MEMBER = "member";
     private static final String TABLE_NAME_BUSINESS = "tttbusiness_tbl";
@@ -71,17 +69,21 @@ public class Sign_Up extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign__up);
-        CollectionSqlite   coll = new CollectionSqlite(Sign_Up.this);
 
+        DataBaseSqlite dbs=new DataBaseSqlite(this);
+
+        HTTPGetCityJson httpcity=new HTTPGetCityJson(this);
+        httpcity.execute();
+
+        getNameCity();
         Intialize();
 
 
 
-        HTTPGetSubsetJson httpSub=new HTTPGetSubsetJson(this);
-        httpSub.execute();
+
 
         Spinner spn1 = (Spinner) findViewById(R.id.Spiner_Sex);
-        String[] list1 = {"جنسیت خود را انتخاب کنید", "مرد", "زن"};
+        String[] list1 = { "مرد", "زن"};
         ArrayAdapter<String> Adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list1);
         Adapter1.setDropDownViewResource(
                 android.R.layout.simple_spinner_dropdown_item);
@@ -166,7 +168,7 @@ public class Sign_Up extends ActionBarActivity {
     public void Intialize() {
         name = (EditText) findViewById(R.id.txtName);
         email = (EditText) findViewById(R.id.txtEmail);
-        city = (EditText) findViewById(R.id.txtCity);
+        city = (AutoCompleteTextView) findViewById(R.id.autoCompletecCity);
         phone = (EditText) findViewById(R.id.txtPhone);
         age = (EditText) findViewById(R.id.txtAge);
         sex = (Spinner) findViewById(R.id.Spiner_Sex);
@@ -184,15 +186,15 @@ public class Sign_Up extends ActionBarActivity {
             try {
                SQLiteDatabase mydb = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
 
-               /* Cursor c = mydb.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
+               Cursor c = mydb.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
 
                 if (c.moveToFirst()) {
                     while ( !c.isAfterLast() ) {
                         Toast.makeText(getApplication(), "Table Name=> "+c.getString(0), Toast.LENGTH_LONG).show();
                         c.moveToNext();
                     }
-                }*/
-               Cursor allrows = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_SUBSET, null);
+                }
+               /*Cursor allrows = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_SUBSET, null);
                 if (allrows.moveToFirst()) {
                     do {
                         Toast.makeText(getApplication(),allrows.getInt(0)+allrows.getString(1),Toast.LENGTH_LONG).show();
@@ -202,7 +204,7 @@ public class Sign_Up extends ActionBarActivity {
 
                     //  Toast.makeText(getApplication(), allrows.getInt(0) + allrows.getString(1), Toast.LENGTH_LONG).show();
                 }
-                mydb.close();
+                mydb.close();*/
 
             }
             catch (Exception e){Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}
@@ -214,11 +216,11 @@ public class Sign_Up extends ActionBarActivity {
         try
         {
 
-        HTTPGetCollectionJson httpColl =new HTTPGetCollectionJson(this);
-       httpColl.execute();
+      //  HTTPGetCollectionJson httpColl =new HTTPGetCollectionJson(this);
+     //  httpColl.execute();
 
 
-//CollectionSqlite h=new CollectionSqlite(Sign_Up.this);
+       //CollectionSqlite h=new CollectionSqlite(Sign_Up.this);
           //  h.Add(1,"h");
            //httpColl.Add(1,"nazar","1394",1,186);
           /*  Aname = name.getText().toString();
@@ -244,5 +246,37 @@ public class Sign_Up extends ActionBarActivity {
        // httpSub.execute();
 
 
+    }
+
+    public List<String> getId() {
+
+        SQLiteDatabase mydb = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE,null);
+        List<String> studentList = new ArrayList<>();
+        Cursor allrows  = mydb.rawQuery("SELECT * FROM "+  TABLE_NAME_City, null);
+        if (allrows.moveToFirst()) {
+            do {
+
+                studentList.add(allrows.getString(1));
+
+            } while (allrows.moveToNext());
+        }
+        mydb.close();
+        return studentList;
+    }
+
+    public void getNameCity()
+    {
+        try
+        {
+            AutoCompleteTextView et2=(AutoCompleteTextView) findViewById(R.id.autoCompletecCity);
+            ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,getId());
+            et2.setAdapter(adapter);
+
+            //  multiAutoComplete.setAdapter(adapter);
+
+            et2.setThreshold(1);
+        }
+        catch (Exception e) {
+        }
     }
 }
