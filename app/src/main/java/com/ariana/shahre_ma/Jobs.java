@@ -12,6 +12,9 @@ import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
+
 import net.simonvt.menudrawer.MenuDrawer;
 import net.simonvt.menudrawer.Position;
 
@@ -33,12 +36,13 @@ public class Jobs extends ActionBarActivity {
     int lastExpandedPosition = -1;
 
 
-
+    Integer id[];
+    Integer Collection_id[];
     Integer Id_co;
     Integer Collection_ID_subset;
 
-    private static final String DATABASE_NAME = "DBshahrma.db";
-    private static final String TABLE_NAME_COLLECTION = "collection";
+    private static final String DATABASE_NAME = "DBshahrma";
+    private static final String TABLE_NAME_COLLECTION = "collection_tbl";
     private static final String TABLE_NAME_SUBSET= "subset";
 
     @Override
@@ -48,15 +52,15 @@ public class Jobs extends ActionBarActivity {
 
 
 
-        createGroupList();
+
         createCollection();
-       // LoadCollecdtion_Subset();
+
 
 
         expListView = (ExpandableListView) findViewById(R.id.laptop_list);
 
         final ExpandableListAdapter expListAdapter = new ExpandableListAdapter(
-                this, groupList, laptopCollection) {
+                this, groupList,laptopCollection) {
 
         };
         expListView.setAdapter(expListAdapter);
@@ -85,7 +89,7 @@ public class Jobs extends ActionBarActivity {
                         groupPosition, childPosition);
                 Toast.makeText(getBaseContext(), selected, Toast.LENGTH_LONG)
                         .show();
-                Intent i = new Intent (getApplicationContext(),Jobs_List.class);
+                Intent i = new Intent(getApplicationContext(), Jobs_List.class);
                 startActivity(i);
                 return true;
             }
@@ -95,62 +99,52 @@ public class Jobs extends ActionBarActivity {
 
 
 
-
-    /* private void createGroupIcon(){
-
-
-
-       //  for (String laptop : groupList) {
-           //  if (laptop.equals("پوشاک")) {
-
-         img.setImageResource(R.drawable.marker);
-          //   } else if (laptop.equals("لوازم آرایشی"))
-              //   img.setImageResource(R.drawable.marker);
-         }
-     //}*/
-    private void createGroupList() {
-        groupList = new ArrayList<String>();
-        groupList.add("پوشاک");
-        groupList.add("لوازم آرایشی");
-        groupList.add("رستوران");
-        groupList.add("لوازم یدکی");
-        groupList.add("بیشتر...");
-    }
-
     private void createCollection() {
-        // preparing laptops collection(child)
-        String[] pooshak = { "زنانه" ,"بچه گانه" ,"مردانه" };
-        String[] arayeshi = { "پوست" ,"مو" ,"بهداشتی و آرایشی" };
-        String[] resturan = { "فست فود" ,"چلوکبابی" ,"جگرکی" ,"بگیروببر"  };
-        String[] lavazem_yadaki = {"سبک" ,"سنگین" ,"ایرانخودرو" ,"سایپا" };
-        String[] more = {"لوازم التحریر" ,"کتابفروشی" ,"ابزارآلات" ,"آموزشگاه" ,"عطاری"  };
-        String[] samsungModels = {"شغل" ,"شغل" ,"شغل" ,"شغل" ,"شغل" ,"شغل" };
 
-        laptopCollection = new LinkedHashMap<String, List<String>>();
 
-        for (String laptop : groupList) {
-            if (laptop.equals("پوشاک")) {
-                loadChild(pooshak);
-            } else if (laptop.equals("لوازم آرایشی"))
-                loadChild(arayeshi);
-            else if (laptop.equals("رستوران"))
-                loadChild(resturan);
-            else if (laptop.equals("لوازم یدکی"))
-                loadChild(lavazem_yadaki);
-            else if (laptop.equals("بیشتر..."))
-                loadChild(more);
-            else
-                loadChild(samsungModels);
+        try {
+            SQLiteDatabase mydb = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
+            Cursor allrows_Collection = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_COLLECTION, null);
+            Cursor allrows_Subset = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_SUBSET, null);
+            groupList = new ArrayList<String>();
+            childList = new ArrayList<String>();
+            String laptop;
+            laptopCollection = new LinkedHashMap<String, List<String>>();
+            if (allrows_Collection.moveToFirst()) {
+                do {
 
-            laptopCollection.put(laptop, childList);
+                    Id_co = allrows_Collection.getInt(0);
+
+                   groupList.add(allrows_Collection.getString(1));
+                    laptop=allrows_Collection.getString(1);
+                            if (allrows_Subset.moveToFirst())
+                            {
+                                do {
+
+
+                                    Collection_ID_subset = allrows_Subset.getInt(2);
+                                    if (Collection_ID_subset == Id_co)
+                                    {
+                                        childList.add(allrows_Subset.getString(1));
+                                        laptopCollection.put(laptop, childList);
+
+                                    }
+                                } while (allrows_Subset.moveToNext());
+                            }
+
+                   // laptopCollection.put(laptop, childList);
+                   // childList.clear();
+
+                } while (allrows_Collection.moveToNext());
+            }
+            mydb.close();
         }
+        catch (Exception e){ Toast.makeText(getBaseContext(),e.toString(), Toast.LENGTH_LONG).show();}
+
+
+
     }
 
-    private void loadChild(String[] laptopModels) {
-        childList = new ArrayList<String>();
-        for (String model : laptopModels)
-            childList.add(model);
-    }
 
     private void setGroupIndicatorToRight() {
 		/* Get the screen width */
@@ -170,40 +164,6 @@ public class Jobs extends ActionBarActivity {
         return (int) (pixels * scale + 5f);
     }
 
-   private void LoadCollecdtion_Subset() {
-
-       try {
-           SQLiteDatabase mydb = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
-           Cursor allrows_Collection = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_COLLECTION, null);
-           Cursor allrows_Subset = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_SUBSET, null);
-           groupList = new ArrayList<String>();
-           childList = new ArrayList<String>();
-           laptopCollection = new LinkedHashMap<String, List<String>>();
-           if (allrows_Collection.moveToFirst()) {
-               do {
-
-                   Id_co = allrows_Collection.getInt(0);
-                   groupList.add(allrows_Collection.getString(1));
-                   if (allrows_Subset.moveToFirst()) {
-                       do {
-                           Collection_ID_subset = allrows_Subset.getInt(0);
-                           if (Collection_ID_subset == Id_co) {
-                               childList.add(allrows_Subset.getString(1));
-                           }
-                       } while (allrows_Subset.moveToNext());
-                   }
-                   laptopCollection.put(allrows_Collection.getString(1), groupList);
-               } while (allrows_Collection.moveToNext());
-           }
-           mydb.close();
-
-
-
-
-
-       }
-       catch (Exception e){}
-    }
 
 
 

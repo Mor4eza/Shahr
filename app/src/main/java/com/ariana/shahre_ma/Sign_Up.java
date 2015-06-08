@@ -21,14 +21,10 @@ import com.ariana.shahre_ma.DateBaseSqlite.OpinionSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.SubsetSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.ImageDownload.ImageLoader;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetOpinionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
-import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
-import com.ariana.shahre_ma.WebServicePost.HTTPPostOpinionJson;
 
 
 public class Sign_Up extends ActionBarActivity {
@@ -78,6 +74,11 @@ public class Sign_Up extends ActionBarActivity {
         CollectionSqlite   coll = new CollectionSqlite(Sign_Up.this);
 
         Intialize();
+
+
+
+        HTTPGetSubsetJson httpSub=new HTTPGetSubsetJson(this);
+        httpSub.execute();
 
         Spinner spn1 = (Spinner) findViewById(R.id.Spiner_Sex);
         String[] list1 = {"جنسیت خود را انتخاب کنید", "مرد", "زن"};
@@ -132,6 +133,7 @@ public class Sign_Up extends ActionBarActivity {
 
 
             _json = (json.getSqliteTOjson(Aname, Aemail, Aphone, Aage, Asex, Ausername, Apass, Integer.parseInt(Acity)));
+            email.setText(_json);
             fc.SetMember_Name(Aname);
             fc.SetMember_Email(Aemail);
             fc.SetMember_Mobile(Aphone);
@@ -140,6 +142,7 @@ public class Sign_Up extends ActionBarActivity {
             fc.SetMember_UserName(Ausername);
             fc.SetMember_Password(Apass);
             fc.SetMember_CityId(Integer.parseInt(Acity));
+
             sendPost = new HTTPPostMemberJson(this);
             sendPost.SetMember_Json(_json);
             sendPost.execute();
@@ -180,6 +183,7 @@ public class Sign_Up extends ActionBarActivity {
        // httpSub.execute();
             try {
                SQLiteDatabase mydb = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
+
                /* Cursor c = mydb.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
 
                 if (c.moveToFirst()) {
@@ -188,14 +192,15 @@ public class Sign_Up extends ActionBarActivity {
                         c.moveToNext();
                     }
                 }*/
-               Cursor allrows = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_OPINION, null);
+               Cursor allrows = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_SUBSET, null);
                 if (allrows.moveToFirst()) {
                     do {
-                         Toast.makeText(getApplication(),allrows.getInt(0)+allrows.getString(1),Toast.LENGTH_LONG).show();
-
+                        Toast.makeText(getApplication(),allrows.getInt(0)+allrows.getString(1),Toast.LENGTH_LONG).show();
 
                     } while (allrows.moveToNext());
-                  //  Toast.makeText(getApplication(), allrows.getInt(0) + allrows.getString(1), Toast.LENGTH_LONG).show();
+                   // Toast.makeText(getApplication(),allrows.getInt(0)+allrows.getString(1),Toast.LENGTH_LONG).show();
+
+                    //  Toast.makeText(getApplication(), allrows.getInt(0) + allrows.getString(1), Toast.LENGTH_LONG).show();
                 }
                 mydb.close();
 
@@ -208,9 +213,13 @@ public class Sign_Up extends ActionBarActivity {
 
         try
         {
-         HTTPGetOpinionJson httpColl=new HTTPGetOpinionJson(this);
-        httpColl.execute();
 
+        HTTPGetCollectionJson httpColl =new HTTPGetCollectionJson(this);
+       httpColl.execute();
+
+
+//CollectionSqlite h=new CollectionSqlite(Sign_Up.this);
+          //  h.Add(1,"h");
            //httpColl.Add(1,"nazar","1394",1,186);
           /*  Aname = name.getText().toString();
             Aemail = email.getText().toString();

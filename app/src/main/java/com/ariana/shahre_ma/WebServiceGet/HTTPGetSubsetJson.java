@@ -4,7 +4,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import com.ariana.shahre_ma.DateBaseSqlite.SubsetSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,12 +54,12 @@ public class HTTPGetSubsetJson extends AsyncTask<String, String, String>
     protected void onPostExecute() {
         try {
 
-            SubsetSqlite subSql = new SubsetSqlite(context);
+            DataBaseSqlite dbs = new DataBaseSqlite(context);
 
 
             for (int i = 0; i <len; i++)
               {
-                subSql.Add(Id[i], subsetname[i],collectionId[i]);
+                  dbs.Add_subset(Id[i], subsetname[i],collectionId[i]);
 
               }
         } catch (Exception e) {

@@ -6,7 +6,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.ariana.shahre_ma.DateBaseSqlite.MemberSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+
 import com.ariana.shahre_ma.Fields.FieldClass;
 
 import org.apache.http.HttpEntity;
@@ -29,6 +30,10 @@ import java.io.InputStreamReader;
 public class HTTPPostMemberJson extends AsyncTask<String, Long, Object> {
 
 private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMembers";
+
+
+    private ProgressDialog mProgressDialog;
+
 
 
     // variable get json
@@ -72,11 +77,12 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
     }
 
 
-    protected void onPostExecute(String file_url) {
+    protected void onPostExecute_start() {
         try {
-
-            this.dialog.setMessage("صبر کنید ...");
-            this.dialog.show();
+            mProgressDialog = new ProgressDialog(context);
+            mProgressDialog.setIndeterminate(false);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            mProgressDialog.show();
 
         } catch (Exception e) {
         }
@@ -86,7 +92,7 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
     protected String doInBackground(String... params) {
         try {
 
-            onPostExecute();
+            onPostExecute_start();
             JSONObject json = new JSONObject(GetMember_json()); //your array;
             HttpClient httpClient = new DefaultHttpClient();
             HttpContext httpContext = new BasicHttpContext();
@@ -127,13 +133,11 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
     protected void onPostExecute() {
             /* Download complete. Lets update UI */
 
-                MemberSqlite mem = new MemberSqlite(context);
+        DataBaseSqlite dbs = new DataBaseSqlite(context);
                 Integer ID = Integer.parseInt(GetResponse());
                 if (ID >= 0) {
-                    mem.Add(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
-                    if (dialog.isShowing()) {
-                        dialog.dismiss();
-                    }
+                    dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
+                    mProgressDialog.dismiss();
                 } else {
                     Toast.makeText(context, "کاربر ساخته نشد دوباره امتحان کنید", Toast.LENGTH_LONG).show();
                 }

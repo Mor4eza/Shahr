@@ -4,7 +4,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import com.ariana.shahre_ma.DateBaseSqlite.CollectionSqlite;
+
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,12 +53,12 @@ public class HTTPGetCollectionJson extends AsyncTask<String, String, String>
     protected void onPostExecute() {
         try {
 
-            CollectionSqlite collSql = new CollectionSqlite(context);
+            DataBaseSqlite dbs = new DataBaseSqlite(context);
 
 
             for (int i = 0; i <len; i++)
             {
-                collSql.Add(Id[i],collectionname[i]);
+                dbs.Add_collection(Id[i],collectionname[i]);
 
             }
         } catch (Exception e) {

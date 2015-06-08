@@ -49,7 +49,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         TextView item = (TextView) convertView.findViewById(R.id.laptop);
 
+
+
         ImageView delete = (ImageView) convertView.findViewById(R.id.delete);
+
+
+
        /* delete.setOnClickListener(new OnClickListener() {
 
            public void onClick(View v) {

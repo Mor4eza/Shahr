@@ -2,12 +2,10 @@ package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.provider.MediaStore;
 import android.widget.Toast;
 
-import com.ariana.shahre_ma.DateBaseSqlite.MemberSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.OpinionSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.SubsetSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -66,12 +64,12 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
     protected void onPostExecute() {
         try {
 
-            OpinionSqlite opinSql = new OpinionSqlite(context);
+            DataBaseSqlite dbs = new DataBaseSqlite(context);
 
 
             for (int i = 0; i <len; i++)
             {
-                opinSql.Add(Id[i],description[i],date[i],opiniontype[i],erja[i]);
+                dbs.Add_opinion(Id[i],description[i],date[i],opiniontype[i],erja[i]);
 
             }
         } catch (Exception e) {

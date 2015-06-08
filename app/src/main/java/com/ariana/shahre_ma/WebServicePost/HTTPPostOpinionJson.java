@@ -6,8 +6,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.ariana.shahre_ma.DateBaseSqlite.MemberSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.OpinionSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+
 import com.ariana.shahre_ma.Fields.FieldClass;
 
 import org.apache.http.HttpEntity;
@@ -128,10 +128,10 @@ public class HTTPPostOpinionJson extends AsyncTask<String, Long, Object>
     protected void onPostExecute() {
             /* Download complete. Lets update UI */
 
-        OpinionSqlite opinSql = new OpinionSqlite(context);
+        DataBaseSqlite dbs = new DataBaseSqlite(context);
         Integer ID = Integer.parseInt(GetResponse());
         if (ID >= 0) {
-            opinSql.Add(ID, fc.GetOpinion_Description(), fc.GetOpinion_Date(), fc.GetOpinion_OpinionType(), fc.GetOpinion_Erja());          if (dialog.isShowing()) {
+            dbs.Add_opinion(ID, fc.GetOpinion_Description(), fc.GetOpinion_Date(), fc.GetOpinion_OpinionType(), fc.GetOpinion_Erja());          if (dialog.isShowing()) {
               //  dialog.dismiss();
             }
         } else {
