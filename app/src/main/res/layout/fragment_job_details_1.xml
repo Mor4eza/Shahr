@@ -1,12 +1,13 @@
-<ScrollView
 
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+<RelativeLayout
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -17,37 +18,45 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
+        android:id="@+id/market_image"
         android:src="@drawable/pooshak"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="39dp"
-        android:layout_marginStart="39dp"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/imageView"
+        android:layout_below="@+id/market_image"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_gravity="right">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/market_name"
             android:text="فروشگاه پوشاک نی نی"
-            android:layout_gravity="end"
+            android:layout_gravity="center_horizontal"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="30dp"/>
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="تلقن:"
+            android:text="تلفن:"
+            android:id="@+id/market_tel"
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/market_web"
             android:text="وب سایت:"
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
@@ -55,24 +64,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="صاحب فروشگاه:"
+            android:id="@+id/market_owner"
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="آدرس"
+            android:text="زیر مجموعه:"
+            android:id="@+id/market_subset"
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="توضیحات"
+            android:id="@+id/market_zamine"
+            android:text="زمینه کاری:"
+            android:layout_gravity="end"
+            android:layout_marginBottom="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="آدرس:"
+            android:id="@+id/market_address"
+            android:layout_gravity="end"
+            android:layout_marginBottom="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="توضیحات:"
+            android:id="@+id/market_desc"
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
 
 
 
         </LinearLayout>
-
 </RelativeLayout>
     </ScrollView>
