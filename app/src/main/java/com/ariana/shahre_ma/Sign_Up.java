@@ -185,8 +185,8 @@ public class Sign_Up extends ActionBarActivity {
        // httpSub.execute();
             try {
                // SQLiteDatabase mydb = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
-               DataBaseSqlite mydb= new DataBaseSqlite(this);
-                Cursor allrows=mydb.select_business();
+             //  DataBaseSqlite mydb= new DataBaseSqlite(this);
+              //  Cursor allrows=mydb.select_business();
 
              /*  Cursor c = mydb.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
 
@@ -197,7 +197,7 @@ public class Sign_Up extends ActionBarActivity {
                     }
                 }*/
               // Cursor allrows = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_SUBSET, null);
-                if (allrows.moveToFirst()) {
+            /*    if (allrows.moveToFirst()) {
                     do {
                         Toast.makeText(getApplication(),allrows.getInt(0)+allrows.getString(1),Toast.LENGTH_LONG).show();
 
@@ -206,7 +206,7 @@ public class Sign_Up extends ActionBarActivity {
 
                     //  Toast.makeText(getApplication(), allrows.getInt(0) + allrows.getString(1), Toast.LENGTH_LONG).show();
                 }
-                mydb.close();
+                mydb.close();*/
 
             }
             catch (Exception e){Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}

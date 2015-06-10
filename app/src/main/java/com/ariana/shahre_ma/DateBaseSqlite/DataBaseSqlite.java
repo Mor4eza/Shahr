@@ -446,13 +446,13 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     }
 
 
-    public Cursor select_business()
+    public Cursor select_business_SubsetId(Integer subsetID)
     {
-        Cursor allrows;
-        SQLiteDatabase db = this.getReadableDatabase();
-        allrows= db.rawQuery("SELECT * FROM " + TABLE_NAME_BUSINESS, null);
-        db.close();
-        return  allrows;
+
+                SQLiteDatabase db = this.getReadableDatabase();
+                return db.rawQuery("SELECT * FROM " + TABLE_NAME_BUSINESS + "  WHERE SubsetId=" + subsetID, null);
+
+
     }
 
     // Deleting single

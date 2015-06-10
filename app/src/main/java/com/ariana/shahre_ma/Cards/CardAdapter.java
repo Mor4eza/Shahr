@@ -19,12 +19,15 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     public CardAdapter() {
 
         super();
+
         mItems = new ArrayList<Jobs_item>();
+
+
+
         Jobs_item nature = new Jobs_item();
         nature.setName("پوشاک کودکان");
         nature.setDes("یه فروشگاه خوب و عالی که هم جنساش خوبه هم قیمتاش ارزونه");
         nature.setThumbnail(R.drawable.pooshak);
-
         mItems.add(nature);
 
 

@@ -26,6 +26,8 @@ public class FieldClass
 
     private static String selected_job;
 
+    private  static Integer Business_SubsetId;
+
 
     // get/set
 
@@ -181,4 +183,16 @@ public class FieldClass
     {
         return  selected_job;
     }
+
+
+    // Set and Get Selected_job
+    public void  SetBusiness_SubsetId(Integer SubsetId)
+    {
+        Business_SubsetId=SubsetId;
+    }
+    public Integer  GetBusiness_SubsetIdb()
+    {
+        return  Business_SubsetId;
+    }
+
 }

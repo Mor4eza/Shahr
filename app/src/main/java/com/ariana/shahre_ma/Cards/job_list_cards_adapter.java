@@ -15,6 +15,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 
 import java.util.ArrayList;
@@ -31,42 +32,44 @@ public class job_list_cards_adapter extends RecyclerView.Adapter<job_list_cards_
     private static final int DATABASE_VERSION = 1;
 
     List<Job_lists_card_item> mItems;
+    Job_lists_card_item nature;
+    FieldClass fc=new FieldClass();
 private  static Context context;
 
 
-    public  job_list_cards_adapter(Context context) {
-      this.context=context;
-    }
-
-    public job_list_cards_adapter() {
-
+    public  job_list_cards_adapter(Context context)
+    {
         super();
+      this.context=context;
 
 
 
-       DataBaseSqlite mydb= new DataBaseSqlite(context);
-        Cursor allrows= mydb.select_business();
+
+        try {
+
+                DataBaseSqlite mydb = new DataBaseSqlite(context);
+                Cursor allrows = mydb.select_business_SubsetId(fc.GetBusiness_SubsetIdb());
+
+                if (allrows.moveToFirst()) {
+                    mItems = new ArrayList<Job_lists_card_item>();
+                    do {
 
 
+                        Job_lists_card_item nature = new Job_lists_card_item();
+                        nature.setName(allrows.getString(1));
+                        nature.setDes(allrows.getString(9));
+                        nature.setThumbnail(R.drawable.pooshak);
+                        nature.setRate(2.5);
 
-       if (allrows.moveToFirst()) {
-            do {
+                        mItems.add(nature);
 
-
-                mItems = new ArrayList<Job_lists_card_item>();
-                Job_lists_card_item nature = new Job_lists_card_item();
-                nature.setName(allrows.getString(1));
-                nature.setDes(allrows.getString(9));
-                nature.setThumbnail(R.drawable.pooshak);
-                nature.setRate(2.5);
-                mItems.add(nature);
-
-            } while (allrows.moveToNext());
+                    } while (allrows.moveToNext());
+                }
         }
-
-        mydb.close();
+        catch (Exception e){}
 
     }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -88,7 +91,9 @@ private  static Context context;
     @Override
     public int getItemCount() {
 
-        return mItems.size();
+
+            return mItems.size();
+
     }
 
 

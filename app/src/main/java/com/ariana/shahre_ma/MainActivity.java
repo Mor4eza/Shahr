@@ -1,20 +1,14 @@
 package com.ariana.shahre_ma;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
@@ -33,7 +27,6 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
-import com.neno0o.lighttextviewlib.LightTextView;
 import com.software.shell.fab.ActionButton;
 
 import github.chenupt.dragtoplayout.DragTopLayout;
@@ -85,6 +78,7 @@ public class MainActivity extends ActionBarActivity {
 
 
     }
+/*
 
     public void Hints (){
 
@@ -95,11 +89,12 @@ public class MainActivity extends ActionBarActivity {
         lightTextView.setCurrentView(img_jobs);
         lightTextView.bringToFront();
 
+}
+*/
 
 
 
 
-    }
 
 
     private void Image_slider(){

@@ -49,8 +49,7 @@ public class Jobs_List extends ActionBarActivity {
 
 
 
-        setContentView(R.layout.activity_jobs__list);
-        setCards();
+
 
 
 
@@ -61,7 +60,8 @@ public class Jobs_List extends ActionBarActivity {
 
 
 
-
+        setContentView(R.layout.activity_jobs__list);
+        setCards();
 
        // mDrawer = MenuDrawer.attach(this, Position.RIGHT);
 
@@ -71,7 +71,8 @@ public class Jobs_List extends ActionBarActivity {
     }
         public void img_click(View v){
 
-            Toast.makeText(getApplicationContext(),"hi Lor",Toast.LENGTH_LONG).show();
+            Intent i = new Intent(getApplicationContext(),Job_details.class);
+            startActivity(i);
 
         }
 
@@ -89,17 +90,21 @@ public class Jobs_List extends ActionBarActivity {
                 allrows.close();
                 mydb.close();
 
+                fc.SetBusiness_SubsetId(Result);
         return Result;
     }
     private void setCards(){
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_Jobs);
-        mRecyclerView.setHasFixedSize(true);
+        try {
+            mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_Jobs);
+            mRecyclerView.setHasFixedSize(true);
 
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+            mLayoutManager = new LinearLayoutManager(this);
+            mRecyclerView.setLayoutManager(mLayoutManager);
 
-        job_list_Adapter = new job_list_cards_adapter(this);
-        mRecyclerView.setAdapter(job_list_Adapter);
+            job_list_Adapter = new job_list_cards_adapter(this);
+            mRecyclerView.setAdapter(job_list_Adapter);
+        }
+        catch (Exception e){}
 
 
     }
