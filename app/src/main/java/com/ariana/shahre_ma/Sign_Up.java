@@ -57,10 +57,10 @@ public class Sign_Up extends ActionBarActivity {
 
     private static final String DATABASE_NAME = "DBshahrma.db";
     private static final String TABLE_NAME_City   = "city";
-    private static final String TABLE_NAME_OPINION = "opinion_tbl";
+    private static final String TABLE_NAME_OPINION = "opinion";
     private static final String TABLE_MEMBER = "member";
-    private static final String TABLE_NAME_BUSINESS = "tttbusiness_tbl";
-    private static final String TABLE_NAME_COLLECTION = "collection_tbl";
+    private static final String TABLE_NAME_BUSINESS = "business";
+    private static final String TABLE_NAME_COLLECTION = "collection";
     private static final String TABLE_NAME_SUBSET= "subset";
 
 
@@ -184,17 +184,19 @@ public class Sign_Up extends ActionBarActivity {
        // HTTPGetSubsetJson httpSub=new HTTPGetSubsetJson(Sign_Up.this);
        // httpSub.execute();
             try {
-               SQLiteDatabase mydb = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
+               // SQLiteDatabase mydb = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
+               DataBaseSqlite mydb= new DataBaseSqlite(this);
+                Cursor allrows=mydb.select_business();
 
-               Cursor c = mydb.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
+             /*  Cursor c = mydb.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
 
                 if (c.moveToFirst()) {
                     while ( !c.isAfterLast() ) {
                         Toast.makeText(getApplication(), "Table Name=> "+c.getString(0), Toast.LENGTH_LONG).show();
                         c.moveToNext();
                     }
-                }
-               /*Cursor allrows = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_SUBSET, null);
+                }*/
+              // Cursor allrows = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_SUBSET, null);
                 if (allrows.moveToFirst()) {
                     do {
                         Toast.makeText(getApplication(),allrows.getInt(0)+allrows.getString(1),Toast.LENGTH_LONG).show();
@@ -204,7 +206,7 @@ public class Sign_Up extends ActionBarActivity {
 
                     //  Toast.makeText(getApplication(), allrows.getInt(0) + allrows.getString(1), Toast.LENGTH_LONG).show();
                 }
-                mydb.close();*/
+                mydb.close();
 
             }
             catch (Exception e){Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}

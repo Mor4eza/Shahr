@@ -2,6 +2,7 @@ package com.ariana.shahre_ma.DateBaseSqlite;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -442,6 +443,16 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
         // 4. close
         db.close();
+    }
+
+
+    public Cursor select_business()
+    {
+        Cursor allrows;
+        SQLiteDatabase db = this.getReadableDatabase();
+        allrows= db.rawQuery("SELECT * FROM " + TABLE_NAME_BUSINESS, null);
+        db.close();
+        return  allrows;
     }
 
     // Deleting single

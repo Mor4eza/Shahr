@@ -43,8 +43,8 @@ public class Jobs extends ActionBarActivity {
     Integer Collection_ID_subset;
 
     FieldClass fc=new FieldClass();
-    private static final String DATABASE_NAME = "DBshahrma";
-    private static final String TABLE_NAME_COLLECTION = "collection_tbl";
+    private static final String DATABASE_NAME = "DBshahrma.db";
+    private static final String TABLE_NAME_COLLECTION = "collection";
     private static final String TABLE_NAME_SUBSET= "subset";
 
     @Override
