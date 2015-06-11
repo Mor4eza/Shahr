@@ -1,12 +1,17 @@
 package com.ariana.shahre_ma.Cards;
 
+import android.content.Context;
+import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 
 import java.util.ArrayList;
@@ -15,20 +20,42 @@ import java.util.List;
 public class Comment_Card_Adapter extends RecyclerView.Adapter<Comment_Card_Adapter.ViewHolder> {
 
     List<Comment_Card_items> mItems;
+   FieldClass fc=new FieldClass();
 
-    public Comment_Card_Adapter() {
+    private  static Context context;
+
+    public Comment_Card_Adapter(Context context) {
 
         super();
 
-        mItems = new ArrayList<Comment_Card_items>();
+          this.context=context;
 
 
 
-        Comment_Card_items nature = new Comment_Card_items();
-        nature.setmUser("مرتضی");
-        nature.setmComm("خیلی خوبه");
-        nature.setmDate("1394/3/15");
-        mItems.add(nature);
+
+      try {
+
+          DataBaseSqlite mydb = new DataBaseSqlite(context);
+            Cursor allrows = mydb.select_opinion(fc.GetBusiness_Id());
+
+
+            if (allrows.moveToFirst()) {
+
+                mItems = new ArrayList<Comment_Card_items>();
+                do {
+
+
+                    Comment_Card_items nature = new Comment_Card_items();
+                    nature.setmUser("مرتضی");
+                    nature.setmDate(allrows.getString(2));
+                    nature.setmComm(allrows.getString(1));
+
+                    mItems.add(nature);
+
+                } while (allrows.moveToNext());
+            }
+        }
+        catch (Exception e){}
 
     }
 

@@ -28,6 +28,8 @@ public class FieldClass
 
     private static Integer Business_SubsetId;
 
+    private static Integer Business_Id;
+
     private static String Market_Business;
     private static String Address_Business;
 
@@ -225,5 +227,17 @@ public class FieldClass
     {
         return  Address_Business;
     }
+
+
+    // Set and Get Business_Id
+    public void  SetBusiness_Id(Integer id)
+    {
+        Business_Id=id;
+    }
+    public Integer  GetBusiness_Id()
+    {
+        return  Business_Id;
+    }
+
 
 }

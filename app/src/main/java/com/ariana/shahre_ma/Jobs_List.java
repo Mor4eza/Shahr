@@ -37,6 +37,7 @@ public class Jobs_List extends ActionBarActivity {
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter job_list_Adapter;
 
+    private static final String TABLE_NAME_BUSINESS = "business";
     private static final String DATABASE_NAME = "DBshahrma.db";
     private static final String TABLE_NAME_COLLECTION = "collection_tbl";
     private static final String TABLE_NAME_SUBSET= "subset";
@@ -52,14 +53,17 @@ public class Jobs_List extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
 
+
+
         HTTPGetBusinessJson httpbusin=new HTTPGetBusinessJson(this);
         httpbusin.SetUrl_business(getsubsetID());
         httpbusin.execute();
 
-
-
         setContentView(R.layout.activity_jobs__list);
-        setCards();
+
+
+                setCards();
+
 
        // mDrawer = MenuDrawer.attach(this, Position.RIGHT);
 
@@ -100,6 +104,9 @@ public class Jobs_List extends ActionBarActivity {
                 fc.SetBusiness_SubsetId(Result);
         return Result;
     }
+
+
+
     private void setCards(){
         try {
             mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_Jobs);

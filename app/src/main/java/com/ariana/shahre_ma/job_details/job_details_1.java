@@ -70,6 +70,7 @@ public class job_details_1 extends ActionBarActivity {
             View rootView = inflater.inflate(R.layout.fragment_job_details_1, container, false);
 
 
+
             name=(TextView) rootView.findViewById(R.id.market_name);
             tel=(TextView) rootView.findViewById(R.id.market_tel);
             web=(TextView) rootView.findViewById(R.id.market_web);
@@ -94,6 +95,7 @@ public class job_details_1 extends ActionBarActivity {
         allrows.moveToNext();
 
 
+        fc.SetBusiness_Id(allrows.getInt(0));
 
           name.setText(allrows.getString(1));
             tel.setText(allrows.getString(3));
@@ -101,8 +103,10 @@ public class job_details_1 extends ActionBarActivity {
             owner.setText(allrows.getString(7));
             subset.setText(allrows.getString(13));
             // zamine.setText(allrows.getString(25));
-            address.setText(allrows.getString(8));
-            des.setText(allrows.getString(9));
+        address.setText(allrows.getString(8));
+        des.setText(allrows.getString(9));
+
+
 
 
 

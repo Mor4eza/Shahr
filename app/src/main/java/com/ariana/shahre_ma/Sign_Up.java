@@ -35,6 +35,7 @@ public class Sign_Up extends ActionBarActivity {
 
     //Class
 
+    CalendarTool ct=new CalendarTool();
     FieldClass fc = new FieldClass();
     HTTPPostMemberJson sendPost;
     SqliteTOjson json = new SqliteTOjson();
@@ -67,7 +68,7 @@ public class Sign_Up extends ActionBarActivity {
     private static final String TABLE_NAME_SUBSET= "subset";
 
 
-    CalendarTool ct=new CalendarTool();
+
 
     private ImageLoader imgLoader;
     @Override
@@ -183,38 +184,19 @@ public class Sign_Up extends ActionBarActivity {
 
     public void Intmeme(View v) {
 
-      // HTTPGetCollectionJson httpColl=new HTTPGetCollectionJson(Sign_Up.this);
-       // httpColl.execute();
 
-       // HTTPGetSubsetJson httpSub=new HTTPGetSubsetJson(Sign_Up.this);
-       // httpSub.execute();
-            try {
-               // SQLiteDatabase mydb = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
-             //  DataBaseSqlite mydb= new DataBaseSqlite(this);
-              //  Cursor allrows=mydb.select_business();
 
-             /*  Cursor c = mydb.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
-
-                if (c.moveToFirst()) {
-                    while ( !c.isAfterLast() ) {
-                        Toast.makeText(getApplication(), "Table Name=> "+c.getString(0), Toast.LENGTH_LONG).show();
-                        c.moveToNext();
-                    }
-                }*/
-              // Cursor allrows = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_SUBSET, null);
-            /*    if (allrows.moveToFirst()) {
+        DataBaseSqlite mydb = new DataBaseSqlite(this);
+        Cursor allrows = mydb.select_opinion(186);
+              if (allrows.moveToFirst()) {
                     do {
                         Toast.makeText(getApplication(),allrows.getInt(0)+allrows.getString(1),Toast.LENGTH_LONG).show();
 
                     } while (allrows.moveToNext());
-                   // Toast.makeText(getApplication(),allrows.getInt(0)+allrows.getString(1),Toast.LENGTH_LONG).show();
 
-                    //  Toast.makeText(getApplication(), allrows.getInt(0) + allrows.getString(1), Toast.LENGTH_LONG).show();
                 }
-                mydb.close();*/
+                mydb.close();
 
-            }
-            catch (Exception e){Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}
 
     }
 

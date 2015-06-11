@@ -449,8 +449,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     public Cursor select_business_SubsetId(Integer subsetID)
     {
 
-                SQLiteDatabase db = this.getReadableDatabase();
-
+        SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM " + TABLE_NAME_BUSINESS + "  WHERE SubsetId=" + subsetID, null);
 
     }
@@ -460,6 +459,14 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM " + TABLE_NAME_BUSINESS + "  WHERE Market='" + market+"' AND Address='"+address+"'", null);
+
+    }
+
+    public Cursor select_opinion(Integer busintessid)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + TABLE_NAME_OPINION+ "  WHERE Erja="+busintessid, null);
 
     }
 

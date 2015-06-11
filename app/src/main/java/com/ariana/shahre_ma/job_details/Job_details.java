@@ -28,9 +28,13 @@ import android.widget.Toast;
 import com.ariana.shahre_ma.Cards.Comment_Card_Adapter;
 import com.ariana.shahre_ma.Cards.Job_lists_card_item;
 import com.ariana.shahre_ma.Cards.job_list_cards_adapter;
+import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
+import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
+import com.ariana.shahre_ma.WebServicePost.HTTPPostOpinionJson;
 
 import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.ResourceProxy;
@@ -52,8 +56,11 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
 
 
 
-
-
+    CalendarTool ct=new CalendarTool();
+    FieldClass fc = new FieldClass();
+    HTTPPostMemberJson sendPost;
+    SqliteTOjson json = new SqliteTOjson();
+    String _json;
 
 
     SectionsPagerAdapter mSectionsPagerAdapter;
@@ -112,11 +119,6 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
     }
 
 
-
-    public void onClick(View v) {
-
-        Toast.makeText(getBaseContext(), "clicked", Toast.LENGTH_LONG).show();
-    }
 
 
     @Override
