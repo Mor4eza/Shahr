@@ -52,14 +52,6 @@ public class Jobs_List extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
 
-
-
-
-
-
-
-
-
         HTTPGetBusinessJson httpbusin=new HTTPGetBusinessJson(this);
         httpbusin.SetUrl_business(getsubsetID());
         httpbusin.execute();

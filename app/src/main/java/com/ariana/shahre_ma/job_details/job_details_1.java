@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.TextView;
 
 import com.ariana.shahre_ma.R;
 
@@ -20,6 +21,8 @@ public class job_details_1 extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_details_1);
+
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
@@ -41,6 +44,9 @@ public class job_details_1 extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_job_details_1, container, false);
+
+            TextView t = (TextView) rootView.findViewById(R.id.market_name);
+            t.setText("Text to Display");
 
             return rootView;
         }

@@ -11,6 +11,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,7 +25,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.ariana.shahre_ma.Cards.Comment_Card_Adapter;
 import com.ariana.shahre_ma.Cards.Job_lists_card_item;
+import com.ariana.shahre_ma.Cards.job_list_cards_adapter;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
@@ -48,6 +52,9 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
 
 
 
+    RecyclerView mRecyclerView;
+    RecyclerView.LayoutManager mLayoutManager;
+    RecyclerView.Adapter Comment_adapter;
 
     FieldClass fc=new FieldClass();
 
@@ -117,12 +124,6 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
 
 
     public void onClick(View v) {
-       CardView comm=(CardView)findViewById(R.id.com_card);
-        LinearLayout feed=(LinearLayout)findViewById(R.id.feed_detail);
-        /*comm.setLayoutParams(new CardView.LayoutParams(
-                CardView.LayoutParams.WRAP_CONTENT,
-                CardView.LayoutParams.WRAP_CONTENT));
-        feed.addView(comm);*/
 
         Toast.makeText(getBaseContext(), "clicked", Toast.LENGTH_LONG).show();
     }
@@ -138,10 +139,9 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
        map();
        route();
 
-        }else if(tab.getPosition()==0){
+        }else if(tab.getPosition()==3){
 
-            display_detail();
-            //Toast.makeText(getApplication(),"sd",Toast.LENGTH_SHORT).show();
+          setCards();
 
         }
     }
@@ -289,10 +289,10 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
         Cursor allrows = mydb.select_business_Detail(fc.GetMarket_Business(), fc.GetAddress_Business());
         allrows.moveToNext();
 
-       Toast.makeText(getApplication(),allrows.getString(1),Toast.LENGTH_SHORT).show();
+       Toast.makeText(getApplication(), allrows.getString(1), Toast.LENGTH_SHORT).show();
 
 
-            name.setText("jjjffjfj");
+          //  name.setText("jjjffjfj");
          /*   tel.setText(allrows.getString(3));
             web.setText(allrows.getString(6));
             owner.setText(allrows.getString(7));
@@ -306,7 +306,21 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
 
 
     }
+    private void setCards(){
+        try {
+            mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_comments);
+            mRecyclerView.setHasFixedSize(true);
 
+            mLayoutManager = new LinearLayoutManager(this);
+            mRecyclerView.setLayoutManager(mLayoutManager);
+
+            Comment_adapter = new Comment_Card_Adapter();
+            mRecyclerView.setAdapter(Comment_adapter);
+        }
+        catch (Exception e){}
+
+
+    }
 
 
 }
