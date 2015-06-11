@@ -26,7 +26,10 @@ public class FieldClass
 
     private static String selected_job;
 
-    private  static Integer Business_SubsetId;
+    private static Integer Business_SubsetId;
+
+    private static String Market_Business;
+    private static String Address_Business;
 
 
     // get/set
@@ -193,6 +196,34 @@ public class FieldClass
     public Integer  GetBusiness_SubsetIdb()
     {
         return  Business_SubsetId;
+    }
+
+
+    // Set and Get Description_business/Market_Business
+
+    // Set  Market_Business
+    public void  SetMarket_Business(String market)
+    {
+        Market_Business=market;
+    }
+
+    // Set  Description_business
+    public void  SetAddress_Business(String tozih)
+    {
+        Address_Business=tozih;
+    }
+
+
+    // Get  Market_Business
+    public String  GetMarket_Business()
+    {
+        return Market_Business;
+    }
+
+    // Get  Description_business
+    public String  GetAddress_Business()
+    {
+        return  Address_Business;
     }
 
 }

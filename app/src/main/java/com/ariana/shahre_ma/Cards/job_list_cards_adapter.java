@@ -57,7 +57,7 @@ private  static Context context;
 
                         Job_lists_card_item nature = new Job_lists_card_item();
                         nature.setName(allrows.getString(1));
-                        nature.setDes(allrows.getString(9));
+                        nature.setDes(allrows.getString(8));
                         nature.setThumbnail(R.drawable.pooshak);
                         nature.setRate(2.5);
 

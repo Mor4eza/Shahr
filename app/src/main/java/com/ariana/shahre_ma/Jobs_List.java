@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Cards.CardAdapter;
@@ -42,9 +43,14 @@ public class Jobs_List extends ActionBarActivity {
 
     FieldClass fc=new FieldClass();
     MenuDrawer mDrawer;
+
+
+    TextView tvMarket;
+    TextView tvDescription;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
 
 
@@ -71,8 +77,17 @@ public class Jobs_List extends ActionBarActivity {
     }
         public void img_click(View v){
 
-            Intent i = new Intent(getApplicationContext(),Job_details.class);
+            tvDescription=(TextView) findViewById(R.id.tv_address);
+            tvMarket=(TextView) findViewById(R.id.tv_title);
+
+            fc.SetMarket_Business(tvMarket.getText().toString());
+            fc.SetAddress_Business(tvDescription.getText().toString());
+
+           Intent i = new Intent(getApplicationContext(),Job_details.class);
             startActivity(i);
+
+
+
 
         }
 

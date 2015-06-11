@@ -41,6 +41,7 @@ public class job_details_1 extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_job_details_1, container, false);
+
             return rootView;
         }
     }

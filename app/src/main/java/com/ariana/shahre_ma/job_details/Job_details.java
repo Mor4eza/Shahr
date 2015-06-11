@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.job_details;
 
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,9 +19,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.ariana.shahre_ma.Cards.Job_lists_card_item;
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 
 import org.osmdroid.DefaultResourceProxyImpl;
@@ -44,8 +49,19 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
 
 
 
+    FieldClass fc=new FieldClass();
 
     SectionsPagerAdapter mSectionsPagerAdapter;
+
+
+    TextView name;
+    TextView tel;
+    TextView web;
+    TextView owner;
+    TextView subset;
+    TextView zamine;
+    TextView address;
+    TextView des;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -58,11 +74,11 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
         setContentView(R.layout.activity_job_details);
 
 
+
+
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -93,6 +109,9 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
+
+
+
     }
 
 
@@ -114,12 +133,16 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
         // When the given tab is selected, switch to the corresponding page in
         // the ViewPager.
         mViewPager.setCurrentItem(tab.getPosition());
+
         if (tab.getPosition()==2){
-
-
-
        map();
        route();
+
+        }else if(tab.getPosition()==0){
+
+            display_detail();
+            //Toast.makeText(getApplication(),"sd",Toast.LENGTH_SHORT).show();
+
         }
     }
 
@@ -249,6 +272,40 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
 
     }
 
+
+
+    private  void display_detail()
+    {
+        name=(TextView) findViewById(R.id.market_name);
+        tel=(TextView) findViewById(R.id.market_tel);
+        web=(TextView) findViewById(R.id.market_web);
+        owner=(TextView) findViewById(R.id.market_owner);
+        subset=(TextView) findViewById(R.id.market_subset);
+        zamine=(TextView) findViewById(R.id.market_zamine);
+        address=(TextView) findViewById(R.id.market_address);
+        des=(TextView) findViewById(R.id.market_desc);
+
+        DataBaseSqlite mydb = new DataBaseSqlite(this);
+        Cursor allrows = mydb.select_business_Detail(fc.GetMarket_Business(), fc.GetAddress_Business());
+        allrows.moveToNext();
+
+       Toast.makeText(getApplication(),allrows.getString(1),Toast.LENGTH_SHORT).show();
+
+
+            name.setText("jjjffjfj");
+         /*   tel.setText(allrows.getString(3));
+            web.setText(allrows.getString(6));
+            owner.setText(allrows.getString(7));
+            subset.setText(allrows.getString(13));
+            // zamine.setText(allrows.getString(25));
+            address.setText(allrows.getString(8));
+            des.setText(allrows.getString(9));*/
+
+
+
+
+
+    }
 
 
 
