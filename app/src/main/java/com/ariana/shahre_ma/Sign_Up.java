@@ -156,16 +156,8 @@ public class Sign_Up extends ActionBarActivity {
             sendPost.execute();
 
 
-           /* android.os.Handler ha = new android.os.Handler();
-            ha.postDelayed(new Runnable() {
 
-                               @Override
-                               public void run() {
 
-                                   }
-
-                               },
-                        3000);*/
         } catch (Exception e) {
             Toast.makeText(getApplication(), e.toString(), Toast.LENGTH_LONG).show();
         }
@@ -182,50 +174,8 @@ public class Sign_Up extends ActionBarActivity {
         pass = (EditText) findViewById(R.id.txtpass);
     }
 
-    public void Intmeme(View v) {
 
 
-
-        DataBaseSqlite mydb = new DataBaseSqlite(this);
-        Cursor allrows = mydb.select_opinion(186);
-              if (allrows.moveToFirst()) {
-                    do {
-                        Toast.makeText(getApplication(),allrows.getInt(0)+allrows.getString(1),Toast.LENGTH_LONG).show();
-
-                    } while (allrows.moveToNext());
-
-                }
-                mydb.close();
-
-
-    }
-
-    public void ssssssmm(View v) {
-
-        try
-        {
-
-      //  HTTPGetCollectionJson httpColl =new HTTPGetCollectionJson(this);
-     //  httpColl.execute();
-
-
-       //CollectionSqlite h=new CollectionSqlite(Sign_Up.this);
-          //  h.Add(1,"h");
-           //httpColl.Add(1,"nazar","1394",1,186);
-
-
-       ;
-
-       // BusinessSqlite bus=new BusinessSqlite(Sign_Up.this);
-        //   bus.Add(0,"a","b","c","d","f","g","h","c","ee","r","r","q","r",0,"f","f",0,"x","x",0,0,0,0,0,0,0,0,0,1.3);
-
-    }
-    catch (SQLiteException e){Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}
-       // HTTPGetSubsetJson httpSub=new HTTPGetSubsetJson(Sign_Up.this);
-       // httpSub.execute();
-
-
-    }
 
     public List<String> getId() {
 

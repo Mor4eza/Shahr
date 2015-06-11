@@ -463,13 +463,19 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     }
 
     public Cursor select_opinion(Integer busintessid)
+{
+
+    SQLiteDatabase db = this.getReadableDatabase();
+    return db.rawQuery("SELECT * FROM " + TABLE_NAME_OPINION+ "  WHERE Erja="+busintessid, null);
+
+}
+    public Cursor select_Member()
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + TABLE_NAME_OPINION+ "  WHERE Erja="+busintessid, null);
+        return db.rawQuery("SELECT * FROM " + TABLE_NAME_MEMBER, null);
 
     }
-
     // Deleting single
    /* public void delete(Integer id) {
 

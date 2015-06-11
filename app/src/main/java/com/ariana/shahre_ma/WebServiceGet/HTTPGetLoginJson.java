@@ -1,6 +1,11 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+
+import com.ariana.shahre_ma.MainActivity;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -20,10 +25,17 @@ import java.net.URLDecoder;
 /**
  * Created by ariana2 on 6/8/2015.
  */
-public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer> {
+public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
 
     Integer mesage;
     private String[] blogTitles;
+    Context context;
+
+    public HTTPGetLoginJson(Context context)
+    {
+        this.context=context;
+
+    }
 
     @Override
     protected void onPreExecute() {
@@ -100,8 +112,11 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer> {
     protected void onPostExecute(Integer result) {
             /* Download complete. Lets update UI */
         // progressDialog.dismiss();
-        if (result == 1) {
+        if (mesage == 1) {
 
+
+            Intent i=new Intent(context, MainActivity.class);
+            context.startActivity(i);
 
         } else {
 

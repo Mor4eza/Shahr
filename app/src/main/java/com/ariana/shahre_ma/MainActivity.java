@@ -64,7 +64,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void fab_click(View v){
-        Intent i = new Intent(getApplicationContext(),Sign_Up.class);
+        Intent i = new Intent(getApplicationContext(),Log_In.class);
         startActivity(i);
     }
 
