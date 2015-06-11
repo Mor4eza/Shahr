@@ -25,7 +25,7 @@ public class Comment_Card_Adapter extends RecyclerView.Adapter<Comment_Card_Adap
 
 
         Comment_Card_items nature = new Comment_Card_items();
-        nature.setmUser("mori");
+        nature.setmUser("مرتضی");
         nature.setmComm("خیلی خوبه");
         nature.setmDate("1394/3/15");
         mItems.add(nature);
@@ -35,7 +35,7 @@ public class Comment_Card_Adapter extends RecyclerView.Adapter<Comment_Card_Adap
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.card_view, viewGroup, false);
+                .inflate(R.layout.comment_cards, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }

@@ -52,9 +52,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
 
 
 
-    RecyclerView mRecyclerView;
-    RecyclerView.LayoutManager mLayoutManager;
-    RecyclerView.Adapter Comment_adapter;
+
 
 
 
@@ -133,7 +131,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
 
         }else if(tab.getPosition()==3){
 
-          setCards();
+
 
         }
     }
@@ -267,21 +265,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
 
 
 
-    private void setCards(){
-        try {
-            mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_comments);
-            mRecyclerView.setHasFixedSize(true);
 
-            mLayoutManager = new LinearLayoutManager(this);
-            mRecyclerView.setLayoutManager(mLayoutManager);
-
-            Comment_adapter = new Comment_Card_Adapter();
-            mRecyclerView.setAdapter(Comment_adapter);
-        }
-        catch (Exception e){}
-
-
-    }
 
 
 }
