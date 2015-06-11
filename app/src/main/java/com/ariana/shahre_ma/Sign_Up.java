@@ -15,13 +15,16 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.ImageDownload.ImageLoader;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetOpinionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
+import com.ariana.shahre_ma.WebServicePost.HTTPPostOpinionJson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +66,8 @@ public class Sign_Up extends ActionBarActivity {
     private static final String TABLE_NAME_COLLECTION = "collection";
     private static final String TABLE_NAME_SUBSET= "subset";
 
+
+    CalendarTool ct=new CalendarTool();
 
     private ImageLoader imgLoader;
     @Override
@@ -225,19 +230,9 @@ public class Sign_Up extends ActionBarActivity {
        //CollectionSqlite h=new CollectionSqlite(Sign_Up.this);
           //  h.Add(1,"h");
            //httpColl.Add(1,"nazar","1394",1,186);
-          /*  Aname = name.getText().toString();
-            Aemail = email.getText().toString();
 
-            _json = (json.getOpinionTOjson(Aname,Aemail,1,186));
 
-            fc.SetOpinion_Description(Aname);
-            fc.SetOpinion_Date(Aemail);
-            fc.SetOpinion_OpinionType(1);
-            fc.SetOpinion_Erja(186);
-            city.setText(_json);
-            HTTPPostOpinionJson sendPost1 = new HTTPPostOpinionJson(this);
-            sendPost1.SetOpinion_Json(_json);
-            sendPost1.execute();*/
+       ;
 
        // BusinessSqlite bus=new BusinessSqlite(Sign_Up.this);
         //   bus.Add(0,"a","b","c","d","f","g","h","c","ee","r","r","q","r",0,"f","f",0,"x","x",0,0,0,0,0,0,0,0,0,1.3);

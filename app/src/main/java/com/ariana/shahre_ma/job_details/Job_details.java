@@ -56,19 +56,11 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter Comment_adapter;
 
-    FieldClass fc=new FieldClass();
+
 
     SectionsPagerAdapter mSectionsPagerAdapter;
 
 
-    TextView name;
-    TextView tel;
-    TextView web;
-    TextView owner;
-    TextView subset;
-    TextView zamine;
-    TextView address;
-    TextView des;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -274,38 +266,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
 
 
 
-    private  void display_detail()
-    {
-        name=(TextView) findViewById(R.id.market_name);
-        tel=(TextView) findViewById(R.id.market_tel);
-        web=(TextView) findViewById(R.id.market_web);
-        owner=(TextView) findViewById(R.id.market_owner);
-        subset=(TextView) findViewById(R.id.market_subset);
-        zamine=(TextView) findViewById(R.id.market_zamine);
-        address=(TextView) findViewById(R.id.market_address);
-        des=(TextView) findViewById(R.id.market_desc);
 
-        DataBaseSqlite mydb = new DataBaseSqlite(this);
-        Cursor allrows = mydb.select_business_Detail(fc.GetMarket_Business(), fc.GetAddress_Business());
-        allrows.moveToNext();
-
-       Toast.makeText(getApplication(), allrows.getString(1), Toast.LENGTH_SHORT).show();
-
-
-          //  name.setText("jjjffjfj");
-         /*   tel.setText(allrows.getString(3));
-            web.setText(allrows.getString(6));
-            owner.setText(allrows.getString(7));
-            subset.setText(allrows.getString(13));
-            // zamine.setText(allrows.getString(25));
-            address.setText(allrows.getString(8));
-            des.setText(allrows.getString(9));*/
-
-
-
-
-
-    }
     private void setCards(){
         try {
             mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_comments);

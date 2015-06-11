@@ -1,5 +1,7 @@
 package com.ariana.shahre_ma.job_details;
 
+import android.content.Context;
+import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -11,11 +13,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 
 
 public class job_details_1 extends ActionBarActivity {
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +46,68 @@ public class job_details_1 extends ActionBarActivity {
      */
     public static class PlaceholderFragment extends Fragment {
 
+        TextView name;
+        TextView tel;
+        TextView web;
+        TextView owner;
+        TextView subset;
+        TextView zamine;
+        TextView address;
+        TextView des;
+        FieldClass fc=new FieldClass();
+
+
+
         public PlaceholderFragment() {
+
+
         }
+
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_job_details_1, container, false);
 
-            TextView t = (TextView) rootView.findViewById(R.id.market_name);
-            t.setText("Text to Display");
+
+            name=(TextView) rootView.findViewById(R.id.market_name);
+            tel=(TextView) rootView.findViewById(R.id.market_tel);
+            web=(TextView) rootView.findViewById(R.id.market_web);
+            owner=(TextView) rootView.findViewById(R.id.market_owner);
+            subset=(TextView) rootView.findViewById(R.id.market_subset);
+            zamine=(TextView) rootView.findViewById(R.id.market_zamine);
+            address=(TextView) rootView.findViewById(R.id.market_address);
+            des=(TextView) rootView.findViewById(R.id.market_desc);
+
+            display_detail();
 
             return rootView;
         }
+
+
+    private  void display_detail()
+    {
+
+
+        DataBaseSqlite mydb = new DataBaseSqlite(getActivity());
+        Cursor allrows = mydb.select_business_Detail(fc.GetMarket_Business(), fc.GetAddress_Business());
+        allrows.moveToNext();
+
+
+
+          name.setText(allrows.getString(1));
+            tel.setText(allrows.getString(3));
+            web.setText(allrows.getString(6));
+            owner.setText(allrows.getString(7));
+            subset.setText(allrows.getString(13));
+            // zamine.setText(allrows.getString(25));
+            address.setText(allrows.getString(8));
+            des.setText(allrows.getString(9));
+
+
+
+
+
     }
+}
 }
