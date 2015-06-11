@@ -32,12 +32,19 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
     Integer opiniontype[];
     Integer erja[];
     Integer len;
+    Integer BusintessId;
+
+
+    public void seturl_opinion(Integer business_id) {
+
+        this.BusintessId=business_id;
+    }
 
     private String geturl_opinion()
     {
-      //  MemberSqlite memSql=new MemberSqlite(context);
+
         String Result="";
-        Result="http://test.shahrma.com/api/ApiGiveOpinion?businessId=186";
+        Result="http://test.shahrma.com/api/ApiGiveOpinion?businessId="+this.BusintessId;
         return  Result;
     }
 
