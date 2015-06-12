@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MainActivity;
 
 import org.apache.http.HttpEntity;
@@ -27,7 +30,9 @@ import java.net.URLDecoder;
  */
 public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
 
-    Integer mesage;
+    String mesage;
+    Integer ID=0;
+    FieldClass fc=new FieldClass();
     private String[] blogTitles;
     Context context;
 
@@ -40,7 +45,27 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        // progressDialog = ProgressDialog.show(LoginActivity.this, "صبر کنید", "در حال دریافت اطلاعات ...");
+        try {
+            JSONObject area = new JSONObject(mesage);
+            DataBaseSqlite dbs = new DataBaseSqlite(context);
+             ID = area.getInt("Id");
+            fc.SetMember_Name(area.getString("Name"));
+            fc.SetMember_Email(area.getString("Email"));
+            fc.SetMember_Mobile(area.getString("Mobile"));
+            fc.SetMember_Age(area.getInt("Age"));
+            fc.SetMember_Sex(area.getBoolean("Sex"));
+            fc.SetMember_UserName(area.getString("UserName"));
+            fc.SetMember_Password(area.getString("Password"));
+            fc.SetMember_CityId(area.getInt("CityId"));
+
+            if (ID >= 0) {
+                dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
+
+            } else {
+                Toast.makeText(context, "کاربر ساخته نشد دوباره امتحان کنید", Toast.LENGTH_LONG).show();
+            }
+        }
+        catch (Exception e){}
     }
     @Override
     protected Integer doInBackground(String... params) {
@@ -77,7 +102,7 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
             InputStream webs = entity.getContent();
             try {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(webs, "UTF-8"), 8);
-                mesage = Integer.parseInt(reader.readLine());
+                mesage =reader.readLine();
                 webs.close();
             } catch (Exception e) {
 
@@ -104,6 +129,7 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
 
         }
 
+
         return result; //"Failed to fetch data!";
     }
 
@@ -112,15 +138,7 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
     protected void onPostExecute(Integer result) {
             /* Download complete. Lets update UI */
         // progressDialog.dismiss();
-        if (mesage == 1) {
 
-
-            Intent i=new Intent(context, MainActivity.class);
-            context.startActivity(i);
-
-        } else {
-
-        }
     }
 
 
@@ -162,5 +180,11 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
         } catch (JSONException e) {
            // e.printStackTrace();
         }
+    }
+
+
+    public  Integer get_Message_Login()
+    {
+        return ID;
     }
 }

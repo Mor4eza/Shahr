@@ -128,7 +128,7 @@
         android:layout_marginTop="15dp"
         android:height="40dp"
 
-        android:onClick="Intmeme" />
+        android:onClick="AddTOmember" />
 
     <Button
         android:layout_width="wrap_content"

@@ -1,11 +1,13 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.MainActivity;
 
 
 import org.json.JSONArray;
@@ -23,6 +25,7 @@ import java.net.URL;
  */
 public class HTTPGetCollectionJson extends AsyncTask<String, String, String>
     {
+        ProgressDialog pd;
 
         private static Context context;
         public HTTPGetCollectionJson(Context c) {
@@ -33,6 +36,15 @@ public class HTTPGetCollectionJson extends AsyncTask<String, String, String>
         Integer Id[];
         String collectionname[];
         Integer len;
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd = new ProgressDialog(context);
+            pd.setMessage("loading");
+            pd.show();
+        }
 
     protected String doInBackground(String... args) {
         try {
@@ -61,6 +73,7 @@ public class HTTPGetCollectionJson extends AsyncTask<String, String, String>
                 dbs.Add_collection(Id[i],collectionname[i]);
 
             }
+            pd.dismiss();
         } catch (Exception e) {
             Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
         }

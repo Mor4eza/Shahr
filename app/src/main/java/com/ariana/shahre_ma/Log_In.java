@@ -7,16 +7,20 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetLoginJson;
 
 
 public class Log_In extends ActionBarActivity {
 
 
-    TextView username;
-    TextView password;
+    EditText username;
+    EditText password;
+    TextView error;
 
 
     @Override
@@ -25,14 +29,18 @@ public class Log_In extends ActionBarActivity {
         setContentView(R.layout.activity_log__in);
 
 
-        username=(TextView) findViewById(R.id.et_username);
-        password=(TextView) findViewById(R.id.et_password);
+        username=(EditText) findViewById(R.id.et_username);
+        password=(EditText) findViewById(R.id.et_password);
+        error=(TextView) findViewById(R.id.tverror);
 
-        DataBaseSqlite db=new DataBaseSqlite(this);
-        Cursor allrows=db.select_Member();
-        allrows.moveToNext();
-        username.setText(allrows.getString(6));
-        password.setText(allrows.getString(7));
+        try {
+            DataBaseSqlite db = new DataBaseSqlite(this);
+            Cursor allrows = db.select_Member();
+            allrows.moveToNext();
+            username.setText(allrows.getString(6));
+            password.setText(allrows.getString(7));
+        }
+        catch (Exception e){}
     }
 
     public void  register(View v){
@@ -45,16 +53,36 @@ public class Log_In extends ActionBarActivity {
     public void Click_Login(View v)
     {
 
-        android.os.Handler ha = new android.os.Handler();
-        ha.postDelayed(new Runnable() {
 
-                           @Override
-                           public void run() {
+        if(username.getText().toString()==null && password.getText().toString()==null) {
 
-                           }
+            error.setText("ثبت نام کنید");
+        }
+        else {
+            final String url = "http://test.shahrma.com/api/ApiGiveMembersPermission?userName=" + username.getText().toString() + "&Password=" + password.getText().toString();
+            final HTTPGetLoginJson httplogin=new HTTPGetLoginJson(this);
+            httplogin.execute(url);
 
-                       },
-                3000);
+            android.os.Handler ha = new android.os.Handler();
+            ha.postDelayed(new Runnable() {
+
+                               @Override
+                               public void run() {
+                                   if (httplogin.get_Message_Login()>=0) {
+
+
+                                       Intent i=new Intent(getApplicationContext(), MainActivity.class);
+                                       startActivity(i);
+
+                                   } else {
+
+                                   }
+
+                               }
+
+                           },
+                    3000);
+        }
 
     }
 }

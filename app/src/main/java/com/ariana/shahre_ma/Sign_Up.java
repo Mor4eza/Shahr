@@ -66,10 +66,7 @@ public class Sign_Up extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign__up);
 
-        DataBaseSqlite dbs=new DataBaseSqlite(this);
 
-        HTTPGetCityJson httpcity=new HTTPGetCityJson(this);
-        httpcity.execute();
 
         getNameCity();
         Intialize();
@@ -129,9 +126,10 @@ public class Sign_Up extends ActionBarActivity {
             Ausername = username.getText().toString();
             Apass = pass.getText().toString();
 
-
-            _json = (json.getSqliteTOjson(Aname, Aemail, Aphone, Aage, Asex, Ausername, Apass, Integer.parseInt(Acity)));
-            email.setText(_json);
+            Integer cityid=0;
+            cityid=getCityId();
+            _json = (json.getSqliteTOjson(Aname, Aemail, Aphone, Aage, Asex, Ausername, Apass,cityid));
+          //  email.setText(_json);
             fc.SetMember_Name(Aname);
             fc.SetMember_Email(Aemail);
             fc.SetMember_Mobile(Aphone);
@@ -139,7 +137,7 @@ public class Sign_Up extends ActionBarActivity {
             fc.SetMember_Sex(Asex);
             fc.SetMember_UserName(Ausername);
             fc.SetMember_Password(Apass);
-            fc.SetMember_CityId(Integer.parseInt(Acity));
+            fc.SetMember_CityId(cityid);
 
             sendPost = new HTTPPostMemberJson(this);
             sendPost.SetMember_Json(_json);
@@ -197,5 +195,23 @@ public class Sign_Up extends ActionBarActivity {
         }
         catch (Exception e) {
         }
+    }
+
+    private Integer getCityId() {
+
+
+
+        Integer Result = 0;
+
+
+        SQLiteDatabase mydb = openOrCreateDatabase(fc.GetDataBaseName(), Context.MODE_PRIVATE, null);
+        Cursor allrows = mydb.rawQuery("SELECT Id FROM " + fc.GetTableNamecity()+ "  WHERE Name='" +city.getText().toString()+ "'", null);
+        allrows.moveToFirst();
+        Result = allrows.getInt(0);
+        allrows.close();
+        mydb.close();
+
+
+        return Result;
     }
 }

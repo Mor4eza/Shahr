@@ -133,6 +133,7 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
     protected void onPostExecute() {
             /* Download complete. Lets update UI */
 
+
         DataBaseSqlite dbs = new DataBaseSqlite(context);
                 Integer ID = Integer.parseInt(GetResponse());
                 if (ID >= 0) {

@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 import com.daimajia.slider.library.SliderLayout;
@@ -50,8 +51,15 @@ public class MainActivity extends ActionBarActivity {
         HTTPGetSubsetJson httpsubset=new HTTPGetSubsetJson(this);
         httpsubset.execute();
 
+
+
+        HTTPGetCityJson httpcity=new HTTPGetCityJson(this);
+        httpcity.execute();
+
+
         HTTPGetCollectionJson httpcoll=new HTTPGetCollectionJson(this);
         httpcoll.execute();
+
 
         ViewPager vpPager = (ViewPager) findViewById(R.id.viewPager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
