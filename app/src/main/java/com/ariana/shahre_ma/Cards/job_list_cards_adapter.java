@@ -27,9 +27,6 @@ import java.util.List;
  */
 public class job_list_cards_adapter extends RecyclerView.Adapter<job_list_cards_adapter.ViewHolder>  {
 
-    private static final String TABLE_NAME_BUSINESS = "business";
-    private static final String DATABASE_NAME = "DBshahrma.db";
-    private static final int DATABASE_VERSION = 1;
 
     List<Job_lists_card_item> mItems;
     Job_lists_card_item nature;

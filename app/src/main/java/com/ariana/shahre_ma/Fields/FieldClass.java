@@ -5,6 +5,24 @@ package com.ariana.shahre_ma.Fields;
  */
 public class FieldClass
 {
+
+
+
+    // Database Name
+    private static final String DATABASE_NAME = "DBshahrma.db";
+
+    // Database table name
+    private static final String TABLE_NAME_SUBSET= "subset";
+    private static final String TABLE_NAME_COLLECTION = "collection";
+    private static final String TABLE_NAME_MEMBER = "member";
+    private static final String TABLE_NAME_OPINION = "opinion";
+    private static final String TABLE_NAME_BUSINESS = "business";
+    private static final String TABLE_NAME_City   = "city";
+    private static final String TABLE_NAME_Bookmark = "bookmark";
+    private static final String TABLE_NAME_Area = "area";
+
+
+
     // variable get json
     private static String data_json;
 
@@ -240,4 +258,53 @@ public class FieldClass
     }
 
 
+
+    // Get database
+
+    // Get  subset
+    public String  GetTableNameSubset()
+    {
+        return  TABLE_NAME_SUBSET ;
+    }
+    // Get  collection
+    public String  GetTableNameCollection()
+    {
+        return  TABLE_NAME_COLLECTION;
+    }
+    // Get  member
+    public String  GetTableNameMember()
+    {
+        return  TABLE_NAME_MEMBER;
+    }
+    // Get  opinion
+    public String  GetTableNameOpinion()
+    {
+        return  TABLE_NAME_OPINION;
+    }
+    // Get  business
+    public String  GeTableNameBusiness()
+    {
+        return TABLE_NAME_BUSINESS;
+    }
+    // Get  city
+    public String  GetTableNamecity()
+    {
+        return  TABLE_NAME_City;
+    }
+    // Get  bookmark
+    public String  GetTableNameBookmark()
+    {
+        return  TABLE_NAME_Bookmark;
+    }
+    // Get  area
+    public String  GetMeTableNameArea()
+    {
+        return  TABLE_NAME_Area;
+    }
+
+    // Get  database
+    public String  GetDataBaseName()
+    {
+        return  DATABASE_NAME;
+    }
 }

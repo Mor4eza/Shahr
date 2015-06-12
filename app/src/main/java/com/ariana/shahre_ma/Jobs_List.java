@@ -37,10 +37,6 @@ public class Jobs_List extends ActionBarActivity {
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter job_list_Adapter;
 
-    private static final String TABLE_NAME_BUSINESS = "business";
-    private static final String DATABASE_NAME = "DBshahrma.db";
-    private static final String TABLE_NAME_COLLECTION = "collection_tbl";
-    private static final String TABLE_NAME_SUBSET= "subset";
 
     FieldClass fc=new FieldClass();
     MenuDrawer mDrawer;
@@ -94,8 +90,8 @@ public class Jobs_List extends ActionBarActivity {
             Integer Result = 0;
 
 
-                SQLiteDatabase mydb = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
-                Cursor allrows = mydb.rawQuery("SELECT Id FROM " + TABLE_NAME_SUBSET+ "  WHERE SubsetName='" +fc.GetSelected_job()+ "'", null);
+                SQLiteDatabase mydb = openOrCreateDatabase(fc.GetDataBaseName(), Context.MODE_PRIVATE, null);
+                Cursor allrows = mydb.rawQuery("SELECT Id FROM " + fc.GetTableNameSubset()+ "  WHERE SubsetName='" +fc.GetSelected_job()+ "'", null);
                 allrows.moveToFirst();
                 Result = allrows.getInt(0);
                 allrows.close();

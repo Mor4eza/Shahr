@@ -43,9 +43,7 @@ public class Jobs extends ActionBarActivity {
     Integer Collection_ID_subset;
 
     FieldClass fc=new FieldClass();
-    private static final String DATABASE_NAME = "DBshahrma.db";
-    private static final String TABLE_NAME_COLLECTION = "collection";
-    private static final String TABLE_NAME_SUBSET= "subset";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,9 +107,9 @@ public class Jobs extends ActionBarActivity {
            Boolean f=true;
 
         try {
-            SQLiteDatabase mydb = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
-            Cursor allrows_Collection = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_COLLECTION, null);
-            Cursor allrows_Subset = mydb.rawQuery("SELECT * FROM " + TABLE_NAME_SUBSET, null);
+            SQLiteDatabase mydb = openOrCreateDatabase(fc.GetDataBaseName(), Context.MODE_PRIVATE, null);
+            Cursor allrows_Collection = mydb.rawQuery("SELECT * FROM " + fc.GetTableNameCollection(), null);
+            Cursor allrows_Subset = mydb.rawQuery("SELECT * FROM " + fc.GetTableNameSubset(), null);
             groupList = new ArrayList<String>();
 
 

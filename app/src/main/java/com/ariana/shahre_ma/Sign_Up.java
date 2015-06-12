@@ -59,16 +59,6 @@ public class Sign_Up extends ActionBarActivity {
     Integer Aage;
     String _json;
 
-    private static final String DATABASE_NAME = "DBshahrma.db";
-    private static final String TABLE_NAME_City   = "city";
-    private static final String TABLE_NAME_OPINION = "opinion";
-    private static final String TABLE_MEMBER = "member";
-    private static final String TABLE_NAME_BUSINESS = "business";
-    private static final String TABLE_NAME_COLLECTION = "collection";
-    private static final String TABLE_NAME_SUBSET= "subset";
-
-
-
 
     private ImageLoader imgLoader;
     @Override
@@ -179,9 +169,9 @@ public class Sign_Up extends ActionBarActivity {
 
     public List<String> getId() {
 
-        SQLiteDatabase mydb = openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE,null);
+        SQLiteDatabase mydb = openOrCreateDatabase(fc.GetDataBaseName(), Context.MODE_PRIVATE,null);
         List<String> studentList = new ArrayList<>();
-        Cursor allrows  = mydb.rawQuery("SELECT * FROM "+  TABLE_NAME_City, null);
+        Cursor allrows  = mydb.rawQuery("SELECT * FROM "+  fc.GetTableNamecity(), null);
         if (allrows.moveToFirst()) {
             do {
 
