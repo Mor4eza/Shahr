@@ -54,6 +54,7 @@ public class Log_In extends ActionBarActivity {
     {
 
 
+        //Code Login
         if(username.getText().toString()==null && password.getText().toString()==null) {
 
             error.setText("ثبت نام کنید");
