@@ -1,6 +1,7 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.Cards.job_list_cards_adapter;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Jobs_List;
 import com.ariana.shahre_ma.R;
 
 import org.json.JSONArray;
@@ -66,7 +68,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
     Integer ratecount[];
     Double ratevalue[];
 
-    Integer len;
+    Integer len=0;
 
     Integer End=0;
 
@@ -111,7 +113,15 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
                 dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
 
             }
-            End=1;
+
+            if(len==0) {
+                Toast.makeText(context, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
+            }
+            else {
+                Intent i = new Intent(this.context, Jobs_List.class);
+                this.context.startActivity(i);
+            }
+
         } catch (Exception e) {
             Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
         }
@@ -235,9 +245,4 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
         return result;
     }
 
-
-    public  Integer get_end()
-    {
-        return End;
-    }
 }

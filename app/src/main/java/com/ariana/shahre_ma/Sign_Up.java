@@ -214,4 +214,19 @@ public class Sign_Up extends ActionBarActivity {
 
         return Result;
     }
+
+    public  void fahmidan(View v)
+    {
+        DataBaseSqlite mydb = new DataBaseSqlite(this);
+        Cursor allrows = mydb.select_business_SubsetId(14);
+
+        try {
+            allrows.moveToFirst();
+            Toast.makeText(getApplication(), allrows.getString(1), Toast.LENGTH_LONG).show();
+
+            allrows.close();
+        }
+        catch (Exception e){ Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}
+
+    }
 }

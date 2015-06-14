@@ -12,7 +12,10 @@ import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.NetWorkInternet.NetState;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 
@@ -44,14 +47,15 @@ public class Jobs extends ActionBarActivity {
 
     FieldClass fc=new FieldClass();
 
-
+    HTTPGetBusinessJson httpbusin;
+    NetState ns;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jobs);
 
-
-
+        httpbusin=new HTTPGetBusinessJson(this);
+     ns=new NetState(this);
 
         createCollection();
 
@@ -89,13 +93,34 @@ public class Jobs extends ActionBarActivity {
                         groupPosition, childPosition);
                 Toast.makeText(getBaseContext(), selected, Toast.LENGTH_LONG)
                         .show();
+
                 fc.SetSelected_job(selected);
-                Intent i = new Intent(getApplicationContext(), Jobs_List.class);
-                startActivity(i);
+
+              int count=getCountBusiness();
+
+
+
+                    if (ns.checkInternetConnection() == false) {
+                        getsubsetID();
+                        if (count == 0)
+                        {
+                        }
+                        else {
+                            Intent i = new Intent(getApplicationContext(), Jobs_List.class);
+                            startActivity(i);
+                        }
+
+                    } else {
+
+                        httpbusin=new HTTPGetBusinessJson(Jobs.this);
+                        httpbusin.SetUrl_business(getsubsetID());
+                        httpbusin.execute();
+                    }
 
 
                 return true;
             }
+
         });
 
     }
@@ -174,6 +199,42 @@ public class Jobs extends ActionBarActivity {
         return (int) (pixels * scale + 5f);
     }
 
+
+    private Integer getsubsetID() {
+
+
+
+        Integer Result = 0;
+
+
+        SQLiteDatabase mydb = openOrCreateDatabase(fc.GetDataBaseName(), Context.MODE_PRIVATE, null);
+        Cursor allrows = mydb.rawQuery("SELECT Id FROM " + fc.GetTableNameSubset()+ "  WHERE SubsetName='" +fc.GetSelected_job()+ "'", null);
+        allrows.moveToFirst();
+        Result = allrows.getInt(0);
+        allrows.close();
+        mydb.close();
+
+        fc.SetBusiness_SubsetId(Result);
+        return Result;
+    }
+
+    private Integer getCountBusiness() {
+
+
+
+        Integer Result = 0;
+
+try {
+    DataBaseSqlite dbs = new DataBaseSqlite(this);
+    Cursor allrows = dbs.select_business_SubsetId(getsubsetID());
+    allrows.moveToFirst();
+    Result = allrows.getInt(0);
+    allrows.close();
+}
+catch (Exception e){}
+
+        return Result;
+    }
 
 
 

@@ -52,9 +52,7 @@ public class Jobs_List extends ActionBarActivity {
 
 
 
-        HTTPGetBusinessJson httpbusin=new HTTPGetBusinessJson(this);
-        httpbusin.SetUrl_business(getsubsetID());
-        httpbusin.execute();
+
 
         setContentView(R.layout.activity_jobs__list);
 
@@ -83,23 +81,7 @@ public class Jobs_List extends ActionBarActivity {
 
         }
 
-    private Integer getsubsetID() {
 
-
-
-            Integer Result = 0;
-
-
-                SQLiteDatabase mydb = openOrCreateDatabase(fc.GetDataBaseName(), Context.MODE_PRIVATE, null);
-                Cursor allrows = mydb.rawQuery("SELECT Id FROM " + fc.GetTableNameSubset()+ "  WHERE SubsetName='" +fc.GetSelected_job()+ "'", null);
-                allrows.moveToFirst();
-                Result = allrows.getInt(0);
-                allrows.close();
-                mydb.close();
-
-                fc.SetBusiness_SubsetId(Result);
-        return Result;
-    }
 
 
 

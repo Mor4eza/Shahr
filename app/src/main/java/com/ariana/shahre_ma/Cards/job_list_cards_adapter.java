@@ -95,6 +95,14 @@ private  static Context context;
 
 
 
+    public void onClick_image( View view,RecyclerView vie) {
+   
+        int itemPosition = vie.getChildPosition(view);
+
+        String item =String.valueOf(itemPosition);
+       // Toast.makeText(mContext, getp, Toast.LENGTH_LONG).show();
+    }
+    
     class ViewHolder extends RecyclerView.ViewHolder{
 
         public ImageView imgThumbnail;
