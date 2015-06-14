@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
@@ -48,17 +49,22 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         //findViewsAndConfigure();
 
-        HTTPGetSubsetJson httpsubset=new HTTPGetSubsetJson(this);
-        httpsubset.execute();
+        NetState ns=new NetState(this);
+        if(ns.checkInternetConnection()==false) {
+            Toast.makeText(getApplication(),"شبکه اینترنت قطع می باشد",Toast.LENGTH_LONG).show();
+        }
+        else {
+            HTTPGetSubsetJson httpsubset = new HTTPGetSubsetJson(this);
+            httpsubset.execute();
 
 
+            HTTPGetCityJson httpcity = new HTTPGetCityJson(this);
+            httpcity.execute();
 
-        HTTPGetCityJson httpcity=new HTTPGetCityJson(this);
-        httpcity.execute();
 
-
-        HTTPGetCollectionJson httpcoll=new HTTPGetCollectionJson(this);
-        httpcoll.execute();
+            HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
+            httpcoll.execute();
+        }
 
 
         ViewPager vpPager = (ViewPager) findViewById(R.id.viewPager);

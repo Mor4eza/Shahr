@@ -105,6 +105,7 @@ public class Job_details_comment extends ActionBarActivity {
             } catch (Exception e) {
             }
 
+            txtComm.setText("");
             return rootView;
         }
         public void onClick(View v) {

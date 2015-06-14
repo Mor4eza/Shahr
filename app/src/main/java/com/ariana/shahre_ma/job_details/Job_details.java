@@ -62,8 +62,6 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
     SqliteTOjson json = new SqliteTOjson();
     String _json;
 
-    int lat=0;
-    int longt=0;
     SectionsPagerAdapter mSectionsPagerAdapter;
 
 
@@ -231,10 +229,10 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
         map.setMultiTouchControls(true);
 
         map.getController().setZoom(15);
-        map.getController().animateTo(new GeoPoint(35.6877315,51.0240054));
+        map.getController().animateTo(new GeoPoint(Double.parseDouble(fc.GetLatitude_Business()),Double.parseDouble(fc.GetLongtiude_Business())));
 
         ArrayList<OverlayItem> overlays = new ArrayList<OverlayItem>();
-        overlays.add(new OverlayItem("اندیشه", "داده پردازان آریانا", new GeoPoint(35.6876661, 51.0195912)));
+        overlays.add(new OverlayItem("اندیشه", "داده پردازان آریانا", new GeoPoint(Double.parseDouble(fc.GetLatitude_Business()),Double.parseDouble(fc.GetLongtiude_Business()))));
         Drawable marker=this.getResources().getDrawable(R.drawable.marker);
 
         resourceProxy = new DefaultResourceProxyImpl(getApplicationContext());
