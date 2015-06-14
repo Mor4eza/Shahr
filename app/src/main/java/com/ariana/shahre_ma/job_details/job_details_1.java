@@ -82,6 +82,8 @@ public class job_details_1 extends ActionBarActivity {
 
             display_detail();
 
+
+
             return rootView;
         }
 

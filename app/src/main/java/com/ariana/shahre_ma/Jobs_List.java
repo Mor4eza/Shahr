@@ -22,6 +22,7 @@ import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.ImageDownload.ImageLoader;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 import com.ariana.shahre_ma.job_details.Job_details;
+import com.ariana.shahre_ma.job_details.job_details_1;
 
 import net.simonvt.menudrawer.MenuDrawer;
 import net.simonvt.menudrawer.Position;
@@ -74,6 +75,8 @@ public class Jobs_List extends ActionBarActivity {
 
             fc.SetMarket_Business(tvMarket.getText().toString());
             fc.SetAddress_Business(tvDescription.getText().toString());
+
+
 
           //  sss=fc.SetMarket_Business();
            // Toast.makeText(getApplication(),sss,Toast.LENGTH_LONG).show();
