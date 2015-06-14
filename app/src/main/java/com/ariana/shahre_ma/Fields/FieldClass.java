@@ -42,14 +42,18 @@ public class FieldClass
     private static Integer OpinionType;
     private static Integer Erja;
 
+
     private static String selected_job;
 
     private static Integer Business_SubsetId;
 
     private static Integer Business_Id;
-
     private static String Market_Business;
     private static String Address_Business;
+
+
+    private static String Latitude_Business;
+    private static String Longtiude_Business;
 
 
     // get/set
@@ -306,5 +310,26 @@ public class FieldClass
     public String  GetDataBaseName()
     {
         return  DATABASE_NAME;
+    }
+
+
+   // get and set latitude/longtiude
+
+    public String  GetLatitude_Business()
+    {
+        return Latitude_Business;
+    }
+    public String  GetLongtiude_Business()
+    {
+        return  Longtiude_Business;
+    }
+
+    public void  SetLatitude_Business(String latitude)
+    {
+        Latitude_Business=latitude;
+    }
+    public void  SetLongtiude_Business(String longtiude)
+    {
+        Longtiude_Business=longtiude;
     }
 }

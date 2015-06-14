@@ -62,7 +62,8 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
     SqliteTOjson json = new SqliteTOjson();
     String _json;
 
-
+    int lat=0;
+    int longt=0;
     SectionsPagerAdapter mSectionsPagerAdapter;
 
 
@@ -129,7 +130,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
 
         if (tab.getPosition()==2){
        map();
-       route();
+      // route();
 
         }else if(tab.getPosition()==3){
 
@@ -245,7 +246,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
 
 
     }
-   public void route(){
+  /* public void route(){
 
         MapView map = (MapView) findViewById(R.id.map);
         RoadManager roadManager = new OSRMRoadManager();
@@ -263,7 +264,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
         map.invalidate();
 
     }
-
+*/
 
 
 
