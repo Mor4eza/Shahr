@@ -25,6 +25,8 @@
                 android:layout_height="250dp"
                 android:scaleType="centerCrop"
                 android:layout_marginBottom="50dp"
+                android:clickable="true"
+                android:background="?android:selectableItemBackground"
                 android:onClick="img_click" />
             <TextView
 

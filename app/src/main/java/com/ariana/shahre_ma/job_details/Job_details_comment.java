@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.job_details;
 
+import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -18,7 +19,9 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.Cards.Comment_Card_Adapter;
 import com.ariana.shahre_ma.Date.CalendarTool;
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetOpinionJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
@@ -59,7 +62,7 @@ public class Job_details_comment extends ActionBarActivity {
         String _json;
 
         EditText txtComm;
-
+        NetState ns;
 
         public PlaceholderFragment() {
         }
@@ -69,27 +72,67 @@ public class Job_details_comment extends ActionBarActivity {
                                  Bundle savedInstanceState) {
             final View rootView = inflater.inflate(R.layout.fragment_job_details_comment, container, false);
 
+            ns=new NetState(getActivity());
 
-            HTTPGetOpinionJson httponion=new HTTPGetOpinionJson(getActivity());
-            httponion.seturl_opinion(186);
-            httponion.execute();
+
+
 
             final Button btnsend = (Button)rootView.findViewById(R.id.bnt_send);
 
             btnsend.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                txtComm=(EditText) rootView.findViewById(R.id.txt_comm);
+                    txtComm = (EditText) rootView.findViewById(R.id.txt_comm);
+                    if(ns.checkInternetConnection()==false) {
+                        Toast.makeText(getActivity(),"شبکه اینترنت قطع می باشد",Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+                            try {
+                                _json = (json.getOpinionTOjson(txtComm.getText().toString(), ct.getIranianDate(), 1, 186));
+                                fc.SetOpinion_Description(txtComm.getText().toString());
+                                fc.SetOpinion_Date(ct.getIranianDate().toString());
+                                fc.SetOpinion_OpinionType(1);
+                                fc.SetOpinion_Erja(fc.GetBusiness_SubsetIdb());
 
-                    _json = (json.getOpinionTOjson(txtComm.getText().toString(),ct.getIranianDate(),1,186));
-                    fc.SetOpinion_Description(txtComm.getText().toString());
-                    fc.SetOpinion_Date(ct.getIranianDate().toString());
-                    fc.SetOpinion_OpinionType(1);
-                    fc.SetOpinion_Erja(fc.GetBusiness_SubsetIdb());
+                                HTTPPostOpinionJson sendPost1 = new HTTPPostOpinionJson(getActivity());
+                                sendPost1.SetOpinion_Json(_json);
+                                sendPost1.execute();
+                                txtComm.setText("");
+                            } catch (Exception e) {
+                            }
+                    }
+                }
+            });
 
-                    HTTPPostOpinionJson sendPost1 = new HTTPPostOpinionJson(getActivity());
-                    sendPost1.SetOpinion_Json(_json);
-                    sendPost1.execute();
+            final Button btnsend1 = (Button)rootView.findViewById(R.id.button2);
+
+            btnsend1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    DataBaseSqlite mydb = new DataBaseSqlite(getActivity());
+                    Cursor allrows = mydb.select_opinion(186);
+                    try {
+                        if(allrows.moveToFirst())
+
+                        {
+                            do {
+                                Toast.makeText(getActivity(), allrows.getString(1), Toast.LENGTH_LONG).show();
+
+                            } while (allrows.moveToNext());
+                        }
+                        allrows.close();
+                        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_comments);
+                        mRecyclerView.setHasFixedSize(true);
+
+                        mLayoutManager = new LinearLayoutManager(getActivity());
+                        mRecyclerView.setLayoutManager(mLayoutManager);
+
+                        Comment_adapter = new Comment_Card_Adapter(getActivity());
+                        mRecyclerView.setAdapter(Comment_adapter);
+                    }
+                    catch (Exception e){ Toast.makeText(getActivity(),e.toString(), Toast.LENGTH_LONG).show();}
                 }
             });
 
@@ -105,24 +148,10 @@ public class Job_details_comment extends ActionBarActivity {
             } catch (Exception e) {
             }
 
-            txtComm.setText("");
+
             return rootView;
         }
-        public void onClick(View v) {
 
-             Toast.makeText(getActivity(), "clicked", Toast.LENGTH_LONG).show();
-
-/*
-            _json = (json.getOpinionTOjson(Aname,Aemail,1,186));
-            fc.SetOpinion_Description(Aname);
-            fc.SetOpinion_Date(ct.getIranianDate().toString());
-            fc.SetOpinion_OpinionType(1);
-            fc.SetOpinion_Erja(fc.GetBusiness_SubsetIdb());
-
-            HTTPPostOpinionJson sendPost1 = new HTTPPostOpinionJson(this);
-            sendPost1.SetOpinion_Json(_json);
-            sendPost1.execute();*/
-        }
 
 
 

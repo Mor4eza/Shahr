@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetOpinionJson;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -134,6 +135,10 @@ public class HTTPPostOpinionJson extends AsyncTask<String, Long, Object>
             dbs.Add_opinion(ID, fc.GetOpinion_Description(), fc.GetOpinion_Date(), fc.GetOpinion_OpinionType(), fc.GetOpinion_Erja());          if (dialog.isShowing()) {
               //  dialog.dismiss();
             }
+
+            HTTPGetOpinionJson httponion = new HTTPGetOpinionJson(context);
+            httponion.seturl_opinion(186);
+            httponion.execute();
         } else {
             Toast.makeText(context, "کاربر ساخته نشد دوباره امتحان کنید", Toast.LENGTH_LONG).show();
         }

@@ -476,21 +476,21 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         return db.rawQuery("SELECT * FROM " + TABLE_NAME_MEMBER, null);
 
     }
-    // Deleting single
-   /* public void delete(Integer id) {
+    // Deleting Opinion
+    public void delete_Opinion() {
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
-
+        db.execSQL("DELETE FROM  " + TABLE_NAME_OPINION);
         // 2. delete
         // db.delete(TABLE_BOOKS_MEMBER,ID," =",id);
 
         // 3. close
         db.close();
 
-        // Log.d("deleteBook", book.toString());
 
-    }*/
+
+    }
 
     // Updating single
    /* public int update(Integer id) {

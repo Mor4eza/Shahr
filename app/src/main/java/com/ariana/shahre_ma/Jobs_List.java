@@ -74,10 +74,8 @@ public class Jobs_List extends ActionBarActivity {
             fc.SetMarket_Business(tvMarket.getText().toString());
             fc.SetAddress_Business(tvDescription.getText().toString());
 
-
-
-          //  sss=fc.SetMarket_Business();
-           // Toast.makeText(getApplication(),sss,Toast.LENGTH_LONG).show();
+            Intent i = new Intent(getApplicationContext(), Job_details.class);
+            startActivity(i);
 
         }
 

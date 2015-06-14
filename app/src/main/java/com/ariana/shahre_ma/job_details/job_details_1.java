@@ -17,7 +17,9 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetOpinionJson;
 
 
 public class job_details_1 extends ActionBarActivity {
@@ -55,7 +57,7 @@ public class job_details_1 extends ActionBarActivity {
         TextView address;
         TextView des;
         FieldClass fc=new FieldClass();
-
+NetState ns;
 
 
         public PlaceholderFragment() {
@@ -68,8 +70,19 @@ public class job_details_1 extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_job_details_1, container, false);
+ns=new NetState(getActivity());
 
+            if(ns.checkInternetConnection()==false) {
 
+            }
+            else
+            {
+                DataBaseSqlite dbs=new DataBaseSqlite(getActivity());
+                dbs.delete_Opinion();
+                HTTPGetOpinionJson httponion = new HTTPGetOpinionJson(getActivity());
+                httponion.seturl_opinion(186);
+                httponion.execute();
+            }
 
             name=(TextView) rootView.findViewById(R.id.market_name);
             tel=(TextView) rootView.findViewById(R.id.market_tel);
