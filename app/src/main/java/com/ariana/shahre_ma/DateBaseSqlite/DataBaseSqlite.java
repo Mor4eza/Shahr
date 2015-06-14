@@ -476,6 +476,14 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         return db.rawQuery("SELECT * FROM " + TABLE_NAME_MEMBER, null);
 
     }
+
+    public Cursor select_Member_Name()
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT Name FROM " + TABLE_NAME_MEMBER, null);
+
+    }
     // Deleting Opinion
     public void delete_Opinion() {
 

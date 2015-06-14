@@ -39,6 +39,13 @@ private  static Context context;
         super();
       this.context=context;
 
+       /* Job_lists_card_item nature1 = new Job_lists_card_item();
+        nature1.setName("asd");
+        nature1.setDes("weh");
+        nature1.setThumbnail(R.drawable.pooshak);
+        nature1.setRate(2.5);
+
+        mItems.add(nature1);*/
 
 
 

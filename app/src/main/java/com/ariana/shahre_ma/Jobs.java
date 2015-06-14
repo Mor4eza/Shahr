@@ -11,16 +11,12 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
-
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 
 import net.simonvt.menudrawer.MenuDrawer;
-import net.simonvt.menudrawer.Position;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -39,6 +35,7 @@ public class Jobs extends ActionBarActivity {
     ExpandableListView expListView;
     int lastExpandedPosition = -1;
 
+    MenuDrawer mDrawer;
 
     Integer id[];
     Integer Collection_id[];
@@ -54,8 +51,17 @@ public class Jobs extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jobs);
 
+/*
+
+        mDrawer = MenuDrawer.attach(this, Position.RIGHT);
+        mDrawer.setMenuView(R.layout.activity_jobs);
+        mDrawer.setContentView(R.layout.activity_job_details_map);
+*/
+
+
+
         httpbusin=new HTTPGetBusinessJson(this);
-     ns=new NetState(this);
+        ns=new NetState(this);
 
         createCollection();
 
@@ -96,32 +102,32 @@ public class Jobs extends ActionBarActivity {
 
                 fc.SetSelected_job(selected);
 
-              int count=getCountBusiness();
+                int count = getCountBusiness();
 
 
-
-                    if (ns.checkInternetConnection() == false) {
-                        getsubsetID();
-                        if (count == 0)
-                        {
-                        }
-                        else {
-                            Intent i = new Intent(getApplicationContext(), Jobs_List.class);
-                            startActivity(i);
-                        }
-
+                if (ns.checkInternetConnection() == false) {
+                    getsubsetID();
+                    if (count == 0) {
                     } else {
-
-                        httpbusin=new HTTPGetBusinessJson(Jobs.this);
-                        httpbusin.SetUrl_business(getsubsetID());
-                        httpbusin.execute();
+                        Intent i = new Intent(getApplicationContext(), Jobs_List.class);
+                        startActivity(i);
                     }
+
+                } else {
+
+                    httpbusin = new HTTPGetBusinessJson(Jobs.this);
+                    httpbusin.SetUrl_business(getsubsetID());
+                    httpbusin.execute();
+                }
 
 
                 return true;
             }
 
         });
+
+
+
 
     }
 

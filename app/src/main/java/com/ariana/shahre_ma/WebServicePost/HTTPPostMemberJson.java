@@ -2,13 +2,14 @@ package com.ariana.shahre_ma.WebServicePost;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
-
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.Log_In;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -139,9 +140,17 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
                 if (ID >= 0) {
                     dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
                     mProgressDialog.dismiss();
+
+                    Intent i = new Intent(this.context, Log_In.class);
+                    this.context.startActivity(i);
+                    Toast.makeText(context, "کاربر ثبت شد!", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(context, "کاربر ساخته نشد دوباره امتحان کنید", Toast.LENGTH_LONG).show();
                 }
+
+
+
+
 
     }
 }

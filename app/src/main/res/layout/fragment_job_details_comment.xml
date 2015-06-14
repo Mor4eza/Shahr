@@ -19,7 +19,9 @@
         android:hint="ارسال نظر..."
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        />
+        android:layout_toRightOf="@+id/bnt_send"
+        android:layout_toEndOf="@+id/bnt_send" />
+
     <Button
         android:id="@+id/bnt_send"
         android:layout_width="wrap_content"
@@ -28,15 +30,6 @@
         android:text="ارسال"
         android:onClick="onClick"
         />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button2"
-        android:layout_alignTop="@+id/bnt_send"
-        android:layout_toRightOf="@+id/bnt_send"
-        android:layout_toEndOf="@+id/bnt_send" />
 
 
 </RelativeLayout>

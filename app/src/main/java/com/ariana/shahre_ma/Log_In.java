@@ -2,17 +2,16 @@ package com.ariana.shahre_ma;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetLoginJson;
+
+import java.net.URLEncoder;
 
 
 public class Log_In extends ActionBarActivity {
@@ -55,34 +54,41 @@ public class Log_In extends ActionBarActivity {
 
 
         //Code Login
-        if(username.getText().toString()==null && password.getText().toString()==null) {
+        if(username.getText().toString()==null || password.getText().toString()==null) {
 
-            error.setText("ثبت نام کنید");
+            error.setText("نام کاربری و رمز عبور را وارد کنید");
         }
         else {
-            final String url = "http://test.shahrma.com/api/ApiGiveMembersPermission?userName=" + username.getText().toString() + "&Password=" + password.getText().toString();
-            final HTTPGetLoginJson httplogin=new HTTPGetLoginJson(this);
-            httplogin.execute(url);
+            try {
+                String nameuser = URLEncoder.encode(username.getText().toString(), "UTF-8");
+                String passworduser = URLEncoder.encode(password.getText().toString(), "UTF-8");
+                final String url = "http://test.shahrma.com/api/ApiGiveMembersPermission?userName=" + nameuser + "&Password=" + passworduser;
+                final HTTPGetLoginJson httplogin = new HTTPGetLoginJson(this);
+                httplogin.execute(url);
 
-            android.os.Handler ha = new android.os.Handler();
-            ha.postDelayed(new Runnable() {
+                android.os.Handler ha = new android.os.Handler();
+                ha.postDelayed(new Runnable() {
 
-                               @Override
-                               public void run() {
-                                   if (httplogin.get_Message_Login()>=0) {
+                                   @Override
+                                   public void run() {
+                                 /*  if (httplogin.get_Message_Login()>0) {
+
 
 
                                        Intent i=new Intent(getApplicationContext(), MainActivity.class);
                                        startActivity(i);
 
-                                   } else {
+                                   } else {*/
+                                       // error.setText("نام کاربری یا رمز عبور اشتباه است");
+                                       //  Toast.makeText(getApplication(), httplogin.get_Message_Login().toString(), Toast.LENGTH_LONG).show();
+                                       //}
 
                                    }
 
-                               }
-
-                           },
-                    3000);
+                               },
+                        3000);
+            }
+            catch (Exception e){}
         }
 
     }

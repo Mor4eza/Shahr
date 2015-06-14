@@ -1,6 +1,7 @@
 package com.ariana.shahre_ma;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
@@ -92,19 +94,6 @@ public class MainActivity extends ActionBarActivity {
 
 
     }
-/*
-
-    public void Hints (){
-
-        ImageView img_jobs = (ImageView)findViewById(R.id.img_thumbnail);
-        LightTextView lightTextView = new LightTextView(this);
-        lightTextView.setText("HD");
-        lightTextView.setBackgroundColor(Color.BLUE);
-        lightTextView.setCurrentView(img_jobs);
-        lightTextView.bringToFront();
-
-}
-*/
 
 
 
@@ -207,11 +196,19 @@ public class MainActivity extends ActionBarActivity {
      }*/
     public void navigation() {
 
-
+        String uName="شهرما";
+        try {
+            DataBaseSqlite dbs = new DataBaseSqlite(this);
+            Cursor allrows = dbs.select_Member_Name();
+            allrows.moveToNext();
+            uName = allrows.getString(0);
+            allrows.close();
+        }
+        catch (Exception e) {Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();}
         //drawer
 
 
-        final IProfile profile = new ProfileDrawerItem().withName(" مرتضی قره داغی ").withIcon(getResources().getDrawable(R.mipmap.profile3));
+        final IProfile profile = new ProfileDrawerItem().withName(uName).withIcon(getResources().getDrawable(R.mipmap.profile3));
 
 
         headerResult = new AccountHeader()

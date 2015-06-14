@@ -3,15 +3,13 @@ package com.ariana.shahre_ma;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -19,12 +17,8 @@ import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.ImageDownload.ImageLoader;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetOpinionJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
-import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
-import com.ariana.shahre_ma.WebServicePost.HTTPPostOpinionJson;
+import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,11 +101,6 @@ public class Sign_Up extends ActionBarActivity {
         });
 
 
-        imgLoader = new ImageLoader(this); // important
-
-        ImageView iv_1 = (ImageView) findViewById(R.id.imageView2);
-        String image_url_1 = "https://www.google.com/images/srpr/logo11w.png";
-        imgLoader.DisplayImage(image_url_1, iv_1);
     }
 
     public void AddTOmember(View v) {

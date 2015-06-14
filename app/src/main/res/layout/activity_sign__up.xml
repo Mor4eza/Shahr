@@ -17,12 +17,6 @@
     tools:context="com.ariana.shahre_ma.Sign_Up">
 
 
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:id="@+id/imageView2"
-        android:layout_gravity="center_horizontal" />
-
     <EditText
 
         android:layout_width="fill_parent"

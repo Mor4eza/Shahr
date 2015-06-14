@@ -1,29 +1,22 @@
 package com.ariana.shahre_ma.job_details;
 
-import android.database.Cursor;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Cards.Comment_Card_Adapter;
 import com.ariana.shahre_ma.Date.CalendarTool;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetOpinionJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostOpinionJson;
@@ -105,36 +98,6 @@ public class Job_details_comment extends ActionBarActivity {
                 }
             });
 
-            final Button btnsend1 = (Button)rootView.findViewById(R.id.button2);
-
-            btnsend1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    DataBaseSqlite mydb = new DataBaseSqlite(getActivity());
-                    Cursor allrows = mydb.select_opinion(186);
-                    try {
-                        if(allrows.moveToFirst())
-
-                        {
-                            do {
-                                Toast.makeText(getActivity(), allrows.getString(1), Toast.LENGTH_LONG).show();
-
-                            } while (allrows.moveToNext());
-                        }
-                        allrows.close();
-                        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_comments);
-                        mRecyclerView.setHasFixedSize(true);
-
-                        mLayoutManager = new LinearLayoutManager(getActivity());
-                        mRecyclerView.setLayoutManager(mLayoutManager);
-
-                        Comment_adapter = new Comment_Card_Adapter(getActivity());
-                        mRecyclerView.setAdapter(Comment_adapter);
-                    }
-                    catch (Exception e){ Toast.makeText(getActivity(),e.toString(), Toast.LENGTH_LONG).show();}
-                }
-            });
 
            try {
                 mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_comments);

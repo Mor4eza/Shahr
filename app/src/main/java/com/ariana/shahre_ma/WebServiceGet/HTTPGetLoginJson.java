@@ -1,14 +1,11 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
-import com.ariana.shahre_ma.MainActivity;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -42,7 +39,7 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
 
     }
 
-    @Override
+
     protected void onPreExecute() {
         super.onPreExecute();
         try {
@@ -103,6 +100,7 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
             try {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(webs, "UTF-8"), 8);
                 mesage =reader.readLine();
+                Toast.makeText(context,mesage, Toast.LENGTH_LONG).show();
                 webs.close();
             } catch (Exception e) {
 
@@ -134,7 +132,6 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
     }
 
 
-    @Override
     protected void onPostExecute(Integer result) {
             /* Download complete. Lets update UI */
         // progressDialog.dismiss();
@@ -183,8 +180,8 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
     }
 
 
-    public  Integer get_Message_Login()
+    public  String get_Message_Login()
     {
-        return ID;
+        return mesage;
     }
 }
