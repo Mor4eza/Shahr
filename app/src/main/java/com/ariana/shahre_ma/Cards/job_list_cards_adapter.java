@@ -1,11 +1,7 @@
 package com.ariana.shahre_ma.Cards;
 
-import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,13 +15,12 @@ import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
  * Created by ariana2 on 6/8/2015.
  */
-public class job_list_cards_adapter extends RecyclerView.Adapter<job_list_cards_adapter.ViewHolder>  {
+public class job_list_cards_adapter extends RecyclerView.Adapter<job_list_cards_adapter.ViewHolder> {
 
 
     List<Job_lists_card_item> mItems;
@@ -39,13 +34,6 @@ private  static Context context;
         super();
       this.context=context;
 
-       /* Job_lists_card_item nature1 = new Job_lists_card_item();
-        nature1.setName("asd");
-        nature1.setDes("weh");
-        nature1.setThumbnail(R.drawable.pooshak);
-        nature1.setRate(2.5);
-
-        mItems.add(nature1);*/
 
 
 
@@ -80,8 +68,13 @@ private  static Context context;
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.job_lists_card, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(v);
+
         return viewHolder;
+
+
     }
+
+
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
@@ -109,7 +102,8 @@ private  static Context context;
         String item =String.valueOf(itemPosition);
        // Toast.makeText(mContext, getp, Toast.LENGTH_LONG).show();
     }
-    
+
+
     class ViewHolder extends RecyclerView.ViewHolder{
 
         public ImageView imgThumbnail;
@@ -126,4 +120,6 @@ private  static Context context;
         }
 
     }
+
+
 }
