@@ -1,6 +1,7 @@
 package com.ariana.shahre_ma.Cards;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +73,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         return mItems.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+   public class ViewHolder extends RecyclerView.ViewHolder{
 
         public ImageView imgThumbnail;
         public TextView tvNature;
@@ -80,9 +81,19 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
         public ViewHolder(View itemView) {
             super(itemView);
+
             imgThumbnail = (ImageView)itemView.findViewById(R.id.img_thumbnail);
             tvNature = (TextView)itemView.findViewById(R.id.tv_nature);
             tvDesNature = (TextView)itemView.findViewById(R.id.tv_des_nature);
+            itemView.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+
+                    Log.i("ON_______CLICK",tvNature.getText().toString());
+                }
+            });
+
         }
     }
 }

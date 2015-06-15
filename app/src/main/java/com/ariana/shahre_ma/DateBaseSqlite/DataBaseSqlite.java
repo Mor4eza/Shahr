@@ -143,7 +143,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     // SQL statement to create ZamanSanj table
     private static final String CREATE_TABLE_ZamanSanj  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_ZamanSanj + " (" +
-            "TTime TEXT PRIMARY KEY ," +
+            "TTime TEXT," +
             "DDate TEXT" +
 
             ");";

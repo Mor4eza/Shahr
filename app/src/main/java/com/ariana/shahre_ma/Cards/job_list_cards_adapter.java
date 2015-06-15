@@ -104,12 +104,14 @@ private  static Context context;
     }
 
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder{
+
 
         public ImageView imgThumbnail;
         public TextView tvNature;
         public TextView tvDesNature;
         public RatingBar rates;
+        FieldClass fc=new FieldClass();
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -117,6 +119,15 @@ private  static Context context;
             tvNature = (TextView)itemView.findViewById(R.id.tv_title);
             tvDesNature = (TextView)itemView.findViewById(R.id.tv_address);
             rates = (RatingBar)itemView.findViewById(R.id.rates);
+            itemView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    fc.SetMarket_Business(tvNature.getText().toString());
+                    fc.SetAddress_Business(tvDesNature.getText().toString());
+                }
+            });
         }
 
     }

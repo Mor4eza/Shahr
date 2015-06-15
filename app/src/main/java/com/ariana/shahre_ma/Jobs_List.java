@@ -44,11 +44,11 @@ public class Jobs_List extends ActionBarActivity {
     }
         public void img_click(View v){
           //  String sss;
-            tvDescription=(TextView) findViewById(R.id.tv_address);
-            tvMarket=(TextView) findViewById(R.id.tv_title);
+            /*tvDescription=(TextView) findViewById(R.id.tv_address);
+            tvMarket=(TextView) findViewById(R.id.tv_title);*/
 
-            fc.SetMarket_Business(tvMarket.getText().toString());
-            fc.SetAddress_Business(tvDescription.getText().toString());
+            /*fc.SetMarket_Business(tvMarket.getText().toString());
+            fc.SetAddress_Business(tvDescription.getText().toString());*/
 
             Intent i = new Intent(getApplicationContext(), Job_details.class);
             startActivity(i);

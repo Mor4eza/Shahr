@@ -111,7 +111,9 @@ DateTime dt=new DateTime();
 
                                 if (ns.checkInternetConnection() == false) {
                                     getsubsetID();
-                                    if (count == 0) {
+                                    if (count == 0)
+                                    {
+                                        Toast.makeText(getApplicationContext(),"0",Toast.LENGTH_LONG).show();
                                     } else {
                                         Intent i = new Intent(getApplicationContext(), Jobs_List.class);
                                         startActivity(i);
@@ -123,7 +125,7 @@ DateTime dt=new DateTime();
 
                                     if(time=="")
                                     {
-                                        DataBaseSqlite dbs=new DataBaseSqlite(Jobs.this);
+                                       DataBaseSqlite dbs=new DataBaseSqlite(Jobs.this);
                                         dbs.Add_ZamanSanj(dt.Hours(), dt.Now());
 
                                         httpbusin = new HTTPGetBusinessJson(Jobs.this);
@@ -132,7 +134,7 @@ DateTime dt=new DateTime();
                     }
                     else
                     {
-                        if(Integer.parseInt(dt.Hours())>=Integer.parseInt(time+3) || date!=dt.Now())
+                       if(Integer.parseInt(dt.Hours())>=Integer.parseInt(time+3) || date!=dt.Now())
                         {
                             DataBaseSqlite dbs=new DataBaseSqlite(Jobs.this);
                             dbs.delete_ZamanSanj();
@@ -149,8 +151,8 @@ DateTime dt=new DateTime();
                             startActivity(i);
                             Toast.makeText(getBaseContext(),"0", Toast.LENGTH_LONG);
                         }
-                    }
-                }
+                   }
+               }
 
 
                 return true;
