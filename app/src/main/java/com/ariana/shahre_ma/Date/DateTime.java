@@ -60,4 +60,11 @@ public class DateTime
         currentDateandTime = sdf.format(new Date());
         return currentDateandTime.toString();
     }
+
+    public String Time()
+    {
+        sdf=new SimpleDateFormat("hh-mm");
+        currentDateandTime = sdf.format(new Date());
+        return currentDateandTime.toString();
+    }
 }

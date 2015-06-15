@@ -26,7 +26,12 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     private static final String TABLE_NAME_City   = "city";
     private static final String TABLE_NAME_Bookmark = "bookmark";
     private static final String TABLE_NAME_Area = "area";
+    private static final String TABLE_NAME_ZamanSanj = "Zamansanj";
 
+
+    //ZamanSanj Table Columns names
+    private static final String SAAT_ZamanSanj = "TTime";
+    private static final String TARIKH_ZamanSanj = "DDate";
 
     //Area Table Columns names
     private static final String ID_area = "Id";
@@ -121,6 +126,13 @@ public class DataBaseSqlite extends SQLiteOpenHelper
             "Id INTEGER PRIMARY KEY ," +
             "Name TEXT," +
             "ProvinceId INTEGER" +
+            ");";
+
+    // SQL statement to create ZamanSanj table
+    private static final String CREATE_TABLE_ZamanSanj  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_ZamanSanj + " (" +
+            "TTime TEXT PRIMARY KEY ," +
+            "DDate TEXT" +
+
             ");";
 
     // SQL statement to create business table
@@ -222,6 +234,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.execSQL(CREATE_TABLE_City);
         db.execSQL(CREATE_TABLE_Bookmark);
         db.execSQL(CREATE_TABLE_Area);
+        db.execSQL(CREATE_TABLE_ZamanSanj);
     }
 
     @Override
@@ -235,7 +248,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME_City);
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME_Bookmark);
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME_Area);
-
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME_ZamanSanj);
         // create fresh  tables
         this.onCreate(db);
     }
@@ -446,6 +459,26 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     }
 
 
+    public void Add_ZamanSanj( String time,String date) {
+
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put(SAAT_ZamanSanj, time);
+        values.put(TARIKH_ZamanSanj, date);
+
+        // 3. insert
+        db.insert(TABLE_NAME_ZamanSanj, // table
+                null, //nullColumnHack
+                values); // key/value
+
+        // 4. close
+        db.close();
+    }
+
+
     public Cursor select_business_SubsetId(Integer subsetID)
     {
 
@@ -477,6 +510,20 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     }
 
+    public Cursor select_Time_ZamanSanj()
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT TTime FROM " + TABLE_NAME_ZamanSanj, null);
+
+    }
+    public Cursor select_Date_ZamanSanj()
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT DDate FROM " + TABLE_NAME_ZamanSanj, null);
+
+    }
     public Cursor select_Member_Name()
     {
 
@@ -500,6 +547,25 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     }
 
+
+
+    // Deleting ZamanSanj
+    public void delete_ZamanSanj() {
+
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. delete
+        db.execSQL("DELETE FROM  " + TABLE_NAME_ZamanSanj);
+
+
+
+        // 3. close
+        db.close();
+
+
+
+    }
     // Updating single
    /* public int update(Integer id) {
 

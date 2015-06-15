@@ -20,6 +20,7 @@ public class FieldClass
     private static final String TABLE_NAME_City   = "city";
     private static final String TABLE_NAME_Bookmark = "bookmark";
     private static final String TABLE_NAME_Area = "area";
+    private static final String TABLE_NAME_ZamanSanj = "Zamansanj";
 
 
 
@@ -301,9 +302,15 @@ public class FieldClass
         return  TABLE_NAME_Bookmark;
     }
     // Get  area
-    public String  GetMeTableNameArea()
+    public String  GetTableNameArea()
     {
         return  TABLE_NAME_Area;
+    }
+
+    // Get  ZamanSanj
+    public String  GetTableNameZamanSanj()
+    {
+        return  TABLE_NAME_ZamanSanj;
     }
 
     // Get  database

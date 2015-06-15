@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
@@ -34,7 +35,7 @@ public class Jobs extends ActionBarActivity {
     Map<String, List<String>> laptopCollection;
     ExpandableListView expListView;
     int lastExpandedPosition = -1;
-
+DateTime dt=new DateTime();
     MenuDrawer mDrawer;
 
     Integer id[];
@@ -88,36 +89,67 @@ public class Jobs extends ActionBarActivity {
             }
         });
 
-        // setGroupIndicatorToRight();
+                        // setGroupIndicatorToRight();
 
 
-        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+                        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
-            public boolean onChildClick(ExpandableListView parent, View v,
-                                        int groupPosition, int childPosition, long id) {
-                final String selected = (String) expListAdapter.getChild(
-                        groupPosition, childPosition);
-                Toast.makeText(getBaseContext(), selected, Toast.LENGTH_LONG)
-                        .show();
+                            public boolean onChildClick(ExpandableListView parent, View v,
+                                                        int groupPosition, int childPosition, long id) {
+                                final String selected = (String) expListAdapter.getChild(
+                                        groupPosition, childPosition);
+                                Toast.makeText(getBaseContext(), selected, Toast.LENGTH_LONG)
+                                        .show();
 
-                fc.SetSelected_job(selected);
+                                fc.SetSelected_job(selected);
 
-                int count = getCountBusiness();
+                                int count = getCountBusiness();
+
+                                String time=getTime_ZamanSanj();
+                                String date=getDate_ZamanSanj();
 
 
-                if (ns.checkInternetConnection() == false) {
-                    getsubsetID();
-                    if (count == 0) {
-                    } else {
-                        Intent i = new Intent(getApplicationContext(), Jobs_List.class);
-                        startActivity(i);
+                                if (ns.checkInternetConnection() == false) {
+                                    getsubsetID();
+                                    if (count == 0) {
+                                    } else {
+                                        Intent i = new Intent(getApplicationContext(), Jobs_List.class);
+                                        startActivity(i);
+
+                                    }
+
+                                } else {
+
+
+                                    if(time=="")
+                                    {
+                                        DataBaseSqlite dbs=new DataBaseSqlite(Jobs.this);
+                                        dbs.Add_ZamanSanj(dt.Hours(), dt.Now());
+
+                                        httpbusin = new HTTPGetBusinessJson(Jobs.this);
+                                        httpbusin.SetUrl_business(getsubsetID());
+                                        httpbusin.execute();
                     }
+                    else
+                    {
+                        if(Integer.parseInt(dt.Hours())>=Integer.parseInt(time+3) || date!=dt.Now())
+                        {
+                            DataBaseSqlite dbs=new DataBaseSqlite(Jobs.this);
+                            dbs.delete_ZamanSanj();
+                            dbs.Add_ZamanSanj(dt.Hours(), dt.Now());
 
-                } else {
-
-                    httpbusin = new HTTPGetBusinessJson(Jobs.this);
-                    httpbusin.SetUrl_business(getsubsetID());
-                    httpbusin.execute();
+                            httpbusin = new HTTPGetBusinessJson(Jobs.this);
+                            httpbusin.SetUrl_business(getsubsetID());
+                            httpbusin.execute();
+                            Toast.makeText(getBaseContext(), "1", Toast.LENGTH_LONG);
+                        }
+                        else
+                        {
+                            Intent i = new Intent(getApplicationContext(), Jobs_List.class);
+                            startActivity(i);
+                            Toast.makeText(getBaseContext(),"0", Toast.LENGTH_LONG);
+                        }
+                    }
                 }
 
 
@@ -224,24 +256,52 @@ public class Jobs extends ActionBarActivity {
         return Result;
     }
 
-    private Integer getCountBusiness() {
-
-
-
+        private Integer getCountBusiness() {
         Integer Result = 0;
 
-try {
-    DataBaseSqlite dbs = new DataBaseSqlite(this);
-    Cursor allrows = dbs.select_business_SubsetId(getsubsetID());
-    allrows.moveToFirst();
-    Result = allrows.getInt(0);
-    allrows.close();
-}
-catch (Exception e){}
+        try {
+            DataBaseSqlite dbs = new DataBaseSqlite(this);
+            Cursor allrows = dbs.select_business_SubsetId(getsubsetID());
+            allrows.moveToFirst();
+            Result = allrows.getInt(0);
+            allrows.close();
+        }
+        catch (Exception e)
+        {}
 
         return Result;
     }
 
 
+    private String getTime_ZamanSanj() {
+        String Result ="";
 
+        try {
+            DataBaseSqlite dbs = new DataBaseSqlite(this);
+            Cursor allrows = dbs.select_Time_ZamanSanj();
+            allrows.moveToFirst();
+            Result = allrows.getString(0);
+            allrows.close();
+        }
+        catch (Exception e)
+        {}
+
+        return Result;
+    }
+
+    private String getDate_ZamanSanj() {
+        String Result ="";
+
+        try {
+            DataBaseSqlite dbs = new DataBaseSqlite(this);
+            Cursor allrows = dbs.select_Date_ZamanSanj();
+            allrows.moveToFirst();
+            Result = allrows.getString(0);
+            allrows.close();
+        }
+        catch (Exception e)
+        {}
+
+        return Result;
+    }
 }
