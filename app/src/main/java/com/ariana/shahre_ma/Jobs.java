@@ -114,13 +114,17 @@ DateTime dt=new DateTime();
                                     if (count == 0)
                                     {
                                         Toast.makeText(getApplicationContext(),"0",Toast.LENGTH_LONG).show();
-                                    } else {
+                                    }
+                                    else
+                                    {
                                         Intent i = new Intent(getApplicationContext(), Jobs_List.class);
                                         startActivity(i);
 
                                     }
 
-                                } else {
+                                }
+                                else
+                                {
 
 
                                     if(time=="")
@@ -246,15 +250,17 @@ DateTime dt=new DateTime();
 
         Integer Result = 0;
 
+            try {
+                SQLiteDatabase mydb = openOrCreateDatabase(fc.GetDataBaseName(), Context.MODE_PRIVATE, null);
+                Cursor allrows = mydb.rawQuery("SELECT Id FROM " + fc.GetTableNameSubset() + "  WHERE SubsetName='" + fc.GetSelected_job() + "'", null);
+                allrows.moveToFirst();
+                Result = allrows.getInt(0);
+                allrows.close();
+                mydb.close();
 
-        SQLiteDatabase mydb = openOrCreateDatabase(fc.GetDataBaseName(), Context.MODE_PRIVATE, null);
-        Cursor allrows = mydb.rawQuery("SELECT Id FROM " + fc.GetTableNameSubset()+ "  WHERE SubsetName='" +fc.GetSelected_job()+ "'", null);
-        allrows.moveToFirst();
-        Result = allrows.getInt(0);
-        allrows.close();
-        mydb.close();
-
-        fc.SetBusiness_SubsetId(Result);
+                fc.SetBusiness_SubsetId(Result);
+            }
+            catch (Exception e){Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();}
         return Result;
     }
 

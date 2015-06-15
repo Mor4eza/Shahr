@@ -14,7 +14,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.ImageDownload.ImageLoader;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
@@ -206,16 +205,20 @@ public class Sign_Up extends ActionBarActivity {
 
     public  void fahmidan(View v)
     {
-        DataBaseSqlite mydb = new DataBaseSqlite(this);
+     /*   DataBaseSqlite mydb = new DataBaseSqlite(this);
         Cursor allrows = mydb.select_business_SubsetId(14);
 
         try {
-            allrows.moveToFirst();
-            Toast.makeText(getApplication(), allrows.getString(1), Toast.LENGTH_LONG).show();
-
+            if ( allrows.moveToFirst()) {
+                do {
+                    Toast.makeText(getApplication(), allrows.getString(1), Toast.LENGTH_LONG).show();
+                }while (allrows.moveToNext());
+            }
             allrows.close();
         }
         catch (Exception e){ Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}
-
+*/
+        EditText em=(EditText) findViewById(R.id.txtEmail);
+                em.setText(fc.GetMember_Email());
     }
 }

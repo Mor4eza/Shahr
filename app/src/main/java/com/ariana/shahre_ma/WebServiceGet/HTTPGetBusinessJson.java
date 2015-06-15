@@ -3,15 +3,12 @@ package com.ariana.shahre_ma.WebServiceGet;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-
-import com.ariana.shahre_ma.Cards.job_list_cards_adapter;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Jobs_List;
-import com.ariana.shahre_ma.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -74,7 +71,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
     public   void SetUrl_business(Integer SubsetID)
     {
-        url_Business="http://test.shahrma.com/api/test?subsetid="+SubsetID;
+        url_Business="http://test.shahrma.com/api/ApiGiveBusiness?subsetId="+SubsetID;
     }
 
     private String GetUrl_business()
@@ -108,6 +105,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
             DataBaseSqlite dbs = new DataBaseSqlite(context);
 
 
+            dbs.delete_Business();
             for (int i = 0; i <len; i++)
             {
                 dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
@@ -132,6 +130,8 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
         Integer ii = 0;
         try {
+
+            FieldClass fc=new FieldClass();
 
             JSONArray areas = new JSONArray(JSONString);
 
@@ -178,6 +178,13 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
                 email[i]=area.getString("Email");
                 expirationdate[i]=area.getString("ExpirationDate");
                 fax[i]=area.getString("Fax");
+                field1[i]=area.getInt("Field1");
+                field2[i]=area.getInt("Field2");
+                field3[i]=area.getInt("Field3");
+                field4[i]=area.getInt("Field4");
+                field5[i]=area.getInt("Field5");
+                field6[i] = area.getInt("Field6");
+                field7[i] = area.getInt("Field7");
                 Id[i]=area.getInt("Id");
                 inactive[i]=area.getString("Inactive");
                 latitude[i]=area.getString("Latitude");
@@ -191,16 +198,10 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
                 user[i]=area.getString("User");
                 userid[i]=area.getInt("UserId");
 
-                field1[i]=0;
-                field2[i]=0;
-                field3[i]=0;
-                field4[i]=0;
-                field5[i]=0;
-                field6[i]=0;
-                field7[i]=0;
+
                 ratecount[i]=0;
                 ratevalue[i]=1.1;
-
+                fc.SetMember_Email(market[i]);
 
             }
 

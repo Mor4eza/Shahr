@@ -637,6 +637,15 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
 
     }
+
+    public  void delete_Business()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+       // delete
+        db.execSQL("DELETE FROM  " + TABLE_NAME_BUSINESS);
+        //close
+        db.close();
+    }
     // Updating single
    /* public int update(Integer id) {
 
