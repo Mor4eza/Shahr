@@ -39,7 +39,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
     CalendarTool ct=new CalendarTool();
     FieldClass fc = new FieldClass();
     HTTPPostMemberJson sendPost;
-    SqliteTOjson json = new SqliteTOjson();
+    SqliteTOjson json = new SqliteTOjson(this);
     String _json;
     SectionsPagerAdapter mSectionsPagerAdapter;
 

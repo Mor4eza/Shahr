@@ -51,7 +51,7 @@ public class Job_details_comment extends ActionBarActivity {
         CalendarTool ct=new CalendarTool();
         FieldClass fc = new FieldClass();
         HTTPPostMemberJson sendPost;
-        SqliteTOjson json = new SqliteTOjson();
+        SqliteTOjson json ;
         String _json;
 
         EditText txtComm;
@@ -67,7 +67,7 @@ public class Job_details_comment extends ActionBarActivity {
 
             ns=new NetState(getActivity());
 
-
+            json = new SqliteTOjson(getActivity());
 
 
             final Button btnsend = (Button)rootView.findViewById(R.id.bnt_send);

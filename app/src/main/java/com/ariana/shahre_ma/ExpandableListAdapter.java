@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private Map<String, List<String>> laptopCollections;
     private List<String> laptops;
 
+    Integer subsetid=0;
+    Integer memberid=0;
     FieldClass fc=new FieldClass();
 
     public ExpandableListAdapter(Activity context, List<String> laptops,
@@ -83,11 +86,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                                         groupPosition, childPosition);
 
               Toast.makeText(context, selected,Toast.LENGTH_LONG).show();
-                          //    Integer subsetid=  getsubsetID(selected);
-                               Integer memberid=getMemberID();
+                               subsetid=  getsubsetID(selected);
+                               memberid=getMemberID();
+
 
                                 DataBaseSqlite db=new DataBaseSqlite(context);
-                                db.Add_Interest(14,1);
+                                db.Add_Interest(subsetid,1);
 
                             }
                         });
@@ -163,6 +167,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
         catch (Exception e){
            // Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
+            Log.i("SUBSETID",e.toString());
         }
         return Result;
     }
@@ -185,6 +190,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
         catch (Exception e){
             // Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
+            Log.i("MEMBERID",e.toString());
         }
         return Result;
     }

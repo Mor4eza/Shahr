@@ -32,7 +32,7 @@ public class Sign_Up extends ActionBarActivity {
     CalendarTool ct=new CalendarTool();
     FieldClass fc = new FieldClass();
     HTTPPostMemberJson sendPost;
-    SqliteTOjson json = new SqliteTOjson();
+    SqliteTOjson json = new SqliteTOjson(this);
 
 
     //Component
@@ -208,7 +208,7 @@ public class Sign_Up extends ActionBarActivity {
     {
 
        // Toast.makeText(getApplication(),fc.GetMember_Email(), Toast.LENGTH_LONG).show();
-       DataBaseSqlite mydb = new DataBaseSqlite(this);
+/*      DataBaseSqlite mydb = new DataBaseSqlite(this);
         Cursor allrows = mydb.select_Interest();
 
         try {
@@ -219,7 +219,11 @@ public class Sign_Up extends ActionBarActivity {
             }
             allrows.close();
         }
-        catch (Exception e){ Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}
+        catch (Exception e){ Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}*/
+
+        SqliteTOjson json=new SqliteTOjson(this);
+      //  json.getSqliteInterestTOjson();
+      email.setText(json.getSqliteInterestTOjson());
 
 
     }

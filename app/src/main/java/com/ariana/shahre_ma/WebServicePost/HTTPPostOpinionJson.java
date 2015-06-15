@@ -136,7 +136,7 @@ public class HTTPPostOpinionJson extends AsyncTask<String, Long, Object>
               //  dialog.dismiss();
             }
 
-            HTTPGetOpinionJson httponion = new HTTPGetOpinionJson(context);
+          HTTPGetOpinionJson httponion = new HTTPGetOpinionJson(context);
             httponion.seturl_opinion(186);
             httponion.execute();
         } else {

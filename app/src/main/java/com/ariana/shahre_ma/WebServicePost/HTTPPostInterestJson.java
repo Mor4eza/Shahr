@@ -18,6 +18,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -36,10 +37,10 @@ public class HTTPPostInterestJson     extends AsyncTask<String, Long, Object>
         private static String data_json;
         // variable response
         private  static String response_message;
+        private static Context context;
 
-
-        FieldClass fc=new FieldClass();
-        private ProgressDialog dialog;
+       /* FieldClass fc=new FieldClass();
+        private ProgressDialog dialog;*/
 
         // get/set
 
@@ -67,17 +68,18 @@ public class HTTPPostInterestJson     extends AsyncTask<String, Long, Object>
         return response_message;
     }
 
-    private static Context context;
+
+
     public HTTPPostInterestJson(Context c) {
-        context = c;
+        this.context = c;
     }
 
 
     protected void onPostExecute(String file_url) {
         try {
 
-            this.dialog.setMessage("صبر کنید ...");
-            this.dialog.show();
+           /* this.dialog.setMessage("صبر کنید ...");
+            this.dialog.show();*/
 
         } catch (Exception e) {
         }
@@ -88,7 +90,9 @@ public class HTTPPostInterestJson     extends AsyncTask<String, Long, Object>
         try {
 
             //onPostExecute();
-            JSONObject json = new JSONObject(GetInterest_json()); //your array;
+            Log.e("JSON: ",GetInterest_json());
+           // JSONObject json = new JSONObject(GetInterest_json()); //your array;
+            JSONArray json = new JSONArray(GetInterest_json()); //your array;
             HttpClient httpClient = new DefaultHttpClient();
             HttpContext httpContext = new BasicHttpContext();
             HttpPost httpPost = new HttpPost(url_Interest);
@@ -119,6 +123,7 @@ public class HTTPPostInterestJson     extends AsyncTask<String, Long, Object>
             onPostExecute();
         } catch (Exception e) {
             e.printStackTrace();
+            Log.e("Error in Exception: ", e.toString());
             // Toast.makeText(, e.toString(), Toast.LENGTH_LONG).show();
         }
         String s="1";

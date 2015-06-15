@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -35,6 +36,7 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
     Integer erja[];
     Integer countlike[];
     Integer countdislike[];
+
     Integer len;
     Integer BusintessId;
 
@@ -55,6 +57,7 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
 
     public HTTPGetOpinionJson(Context c) {
         context = c;
+
     }
     protected String doInBackground(String... args) {
         try {
@@ -81,7 +84,8 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
 
             for (int i = 0; i <len; i++)
             {
-                dbs.Add_opinion(Id[i],description[i],date[i],erja[i],countlike[i],countdislike[i],membername[i]);
+                dbs.Add_opinion(Id[i], description[i], date[i], erja[i], countlike[i], countdislike[i], membername[i]);
+
 
             }
         } catch (Exception e) {
@@ -92,7 +96,7 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
 
     void parseJSON(String JSONString) {
 
-        Integer ii = 0;
+
         try {
 
             Log.i("JSON",JSONString);
@@ -112,16 +116,28 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
                 JSONObject area = areas.getJSONObject(i);
 
 
+
+
                 date[i]=area.getString("Date");
                 description[i] = area.getString("Description");
                 countdislike[i]= area.getInt("DisLikeCount");
-                countlike[i]=area.getInt("LikeCount");
-                erja[i]=area.getInt("ErJa");
+                erja[i]=area.getInt("Erja");
                 Id[i]=area.getInt("Id");
+                countlike[i]=area.getInt("LikeCount");
                 membername[i]= area.getString("Member");
 
 
 
+
+
+/*
+                date[i]="1394/03/23";
+                description[i] = "Tank you";
+                countdislike[i]= 10;
+                countlike[i]=2;
+                erja[i]=186;
+                Id[i]=i+1;
+                membername[i]= "کاربری یک"+i;*/
 
 
 
@@ -130,7 +146,8 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
             }
 
         } catch (JSONException e) {
-            // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
+            // Toast.makeText(activity,e.toString(), Toast.LENGTH_LONG).show();
+            Log.i("JSONException",e.toString());
         }
     }
 

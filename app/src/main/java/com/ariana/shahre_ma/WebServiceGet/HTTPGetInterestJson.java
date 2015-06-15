@@ -36,7 +36,7 @@ public class HTTPGetInterestJson  extends AsyncTask<String, String, String>
     public HTTPGetInterestJson(Context c) {
         context = c;
     }
-    private static final String url_collection="http://test.shahrma.com/api/apigivecollection";
+    private static final String url_collection="http://test.shahrma.com/api/ApiGiveInterest?memberId=1";
 
 
     Integer subsetid[];
@@ -101,8 +101,8 @@ public class HTTPGetInterestJson  extends AsyncTask<String, String, String>
 
                 JSONObject area = areas.getJSONObject(i);
 
-                subsetid[i]=area.getInt("Id");
-                memberid[i]=area.getInt("Id");
+                subsetid[i]=area.getInt("SubsetId");
+                memberid[i]=area.getInt("MemberId");
 
 
             }

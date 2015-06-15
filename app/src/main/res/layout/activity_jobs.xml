@@ -12,9 +12,33 @@
 
         android:dividerHeight="0.9dp"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="430dp"
         android:drawSelectorOnTop="false"
       >
     </ExpandableListView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button2"
+        android:onClick="SendPostInterest"
+        android:layout_below="@+id/laptop_list"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="29dp"
+        android:layout_marginStart="29dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button1"
+        android:id="@+id/button3"
+        android:layout_alignBottom="@+id/button2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="36dp"
+        android:layout_marginEnd="36dp"
+        android:onClick="GetPostInterest" />
 
 </RelativeLayout>

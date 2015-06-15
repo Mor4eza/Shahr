@@ -17,6 +17,9 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetInterestJson;
+import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
+import com.ariana.shahre_ma.WebServicePost.HTTPPostInterestJson;
 
 import net.simonvt.menudrawer.MenuDrawer;
 
@@ -331,5 +334,24 @@ DateTime dt=new DateTime();
         {}
 
         return Result;
+    }
+
+    public void SendPostInterest(View v)
+    {
+        SqliteTOjson json=new SqliteTOjson(this);
+        Toast.makeText(getApplicationContext(),json.getSqliteInterestTOjson(),Toast.LENGTH_LONG).show();
+        HTTPPostInterestJson httpinterest=new HTTPPostInterestJson(this);
+        httpinterest.SetInterest_Json(json.getSqliteInterestTOjson());
+        httpinterest.execute();
+    }
+
+
+    public void GetPostInterest(View v)
+    {
+
+
+        HTTPGetInterestJson httpinterest=new HTTPGetInterestJson(this);
+
+        httpinterest.execute();
     }
 }

@@ -2,6 +2,7 @@ package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
@@ -16,6 +17,11 @@ public class SqliteTOjson {
 
     private static Context context;
 
+
+    public  SqliteTOjson(Context context)
+    {
+        this.context=context;
+    }
     /*public void getSqliteTOjson() {
         try {
 
@@ -130,30 +136,36 @@ public class SqliteTOjson {
 
     public String getSqliteInterestTOjson() {
         String Sqlite_Json="";
+
+        DataBaseSqlite db = new DataBaseSqlite(context);
+        Cursor cursor = db.select_Interest();
+        JSONArray resultSet = new JSONArray();
+
         try {
 
 
 
-            DataBaseSqlite db = new DataBaseSqlite(context);
-            Cursor cursor = db.select_Interest();
-            JSONArray resultSet = new JSONArray();
 
+
+            //Log.i("SQLITEtoJSON",String.valueOf(cursor.getInt(1)));
             cursor.moveToFirst();
             while (cursor.isAfterLast() == false) {
 
                 int totalColumn = cursor.getColumnCount();
                 JSONObject rowObject = new JSONObject();
 
-                for (int i = 0; i < totalColumn; i++) {
-                    if (cursor.getColumnName(i) != null) {
+                for (int i = 0; i < totalColumn; i++)
+                {
+                    if (cursor.getColumnName(i) != null)
+                    {
                         try {
-                            if (cursor.getString(i) != null) {
+
 
                                 rowObject.put(cursor.getColumnName(i), cursor.getInt(i));
 
-                            } else {
-                                rowObject.put(cursor.getColumnName(i), "");
-                            }
+
+
+
                         } catch (Exception e) {
                             //  Log.d("TAG_NAME", e.getMessage()  );
                         }
@@ -166,10 +178,11 @@ public class SqliteTOjson {
             cursor.close();
             Sqlite_Json = resultSet.toString();
 
+
             // Log.d("TAG_NAME", resultSet.toString() );
             //Toast.makeText(getApplicationContext(), resultSet.toString(), Toast.LENGTH_LONG).show();
         } catch (Exception e) {
-            Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
+            Log.i("SQLITEtoJSON",e.toString());
         }
 
          return Sqlite_Json;
