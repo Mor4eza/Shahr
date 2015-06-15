@@ -21,6 +21,8 @@ public class FieldClass
     private static final String TABLE_NAME_Bookmark = "bookmark";
     private static final String TABLE_NAME_Area = "area";
     private static final String TABLE_NAME_ZamanSanj = "Zamansanj";
+    private static final String TABLE_NAME_Like = "Like";
+    private static final String TABLE_NAME_Interest = "Interest";
 
 
 
@@ -306,7 +308,16 @@ public class FieldClass
     {
         return  TABLE_NAME_Area;
     }
-
+    // Get  Interest
+    public String  GetTableNameInterest()
+    {
+        return  TABLE_NAME_Interest;
+    }
+    // Get  Like
+    public String  GetMeTableNameLike()
+    {
+        return  TABLE_NAME_Like;
+    }
     // Get  ZamanSanj
     public String  GetTableNameZamanSanj()
     {

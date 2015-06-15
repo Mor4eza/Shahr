@@ -27,6 +27,8 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     private static final String TABLE_NAME_Bookmark = "bookmark";
     private static final String TABLE_NAME_Area = "area";
     private static final String TABLE_NAME_ZamanSanj = "Zamansanj";
+    private static final String TABLE_NAME_Like = "Like";
+    private static final String TABLE_NAME_Interest = "Interest";
 
 
     //ZamanSanj Table Columns names
@@ -48,6 +50,17 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     private static final String ID_city = "Id";
     private static final String NAME_city = "Name";
     private static final String PROVINCEID_city = "ProvinceId";
+
+    //Like Table Columns names
+    private static final String ID_Like = "Id";
+    private static final String LIKE_Like = "Like";
+    private static final String MEMBERID_Like = "MemberId";
+    private static final String OPINION_Like = "OpinionId";
+
+    //Interest Table Columns names
+    private static final String ID_Interest = "Id";
+    private static final String SUBSETID_Interest = "SubsetId";
+    private static final String MEMBERID_Interest = "MemberId";
 
 
     //Opinion Table Columns names
@@ -170,6 +183,21 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
             ");";
 
+    // SQL statement to create Like table
+    private static final String CREATE_TABLE_Like  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_Like + " (" +
+            "Id INTEGER PRIMARY KEY ," +
+            "Like BOOLEAN," +
+            "MemberId TEXT," +
+            "OpinionID INTEGER" +
+
+            ");";
+
+    // SQL statement to create Interest table
+    private static final String CREATE_TABLE_Interest = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_Interest + " (" +
+            "Id INTEGER PRIMARY KEY ," +
+            "SubsetId INTEGER," +
+            "MemberId INTEGER" +
+            ");";
 
     // SQL statement to create Opinion table
     private static final String CREATE_TABLE_Opinion  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_OPINION + " (" +
@@ -478,6 +506,49 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.close();
     }
 
+
+    public void Add_Like(Integer id,Boolean like,Integer memberid,Integer opinionid) {
+
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put(ID_Like, id);
+        values.put(LIKE_Like, like);
+        values.put(MEMBERID_Like, memberid);
+        values.put(OPINION_Like, opinionid);
+
+        // 3. insert
+        db.insert(TABLE_NAME_Like, // table
+                null, //nullColumnHack
+                values); // key/value
+
+        // 4. close
+        db.close();
+    }
+
+
+    public void Add_Interest(Integer id,Integer subsetid,Integer memberid) {
+
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put(ID_Like, id);
+        values.put(LIKE_Like, subsetid);
+        values.put(MEMBERID_Like, memberid);
+
+
+        // 3. insert
+        db.insert(TABLE_NAME_Interest, // table
+                null, //nullColumnHack
+                values); // key/value
+
+        // 4. close
+        db.close();
+    }
 
     public Cursor select_business_SubsetId(Integer subsetID)
     {
