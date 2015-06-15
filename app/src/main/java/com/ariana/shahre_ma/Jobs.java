@@ -103,12 +103,12 @@ DateTime dt=new DateTime();
 
                                 fc.SetSelected_job(selected);
 
-                                int count = getCountBusiness();
+                                Integer count = getCountBusiness();
 
                                 String time=getTime_ZamanSanj();
                                 String date=getDate_ZamanSanj();
 
-
+                                Toast.makeText(getApplicationContext(),count.toString(),Toast.LENGTH_LONG).show();
                                 if (ns.checkInternetConnection() == false) {
                                     getsubsetID();
                                     if (count == 0)

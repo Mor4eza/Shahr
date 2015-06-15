@@ -110,7 +110,7 @@ ns=new NetState(getActivity());
         allrows.moveToNext();
 
 
-        fc.SetBusiness_Id(allrows.getInt(0));
+   /*     fc.SetBusiness_Id(allrows.getInt(0));
         fc.SetLatitude_Business(allrows.getString(15));
         fc.SetLongtiude_Business(allrows.getString(16));
 
@@ -121,7 +121,7 @@ ns=new NetState(getActivity());
             subset.setText(allrows.getString(13));
             // zamine.setText(allrows.getString(25));
             address.setText(allrows.getString(8));
-            des.setText(allrows.getString(9));
+            des.setText(allrows.getString(9));*/
 
 
 

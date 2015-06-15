@@ -3,6 +3,7 @@ package com.ariana.shahre_ma.Cards;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,7 @@ private  static Context context;
         try {
 
                 DataBaseSqlite mydb = new DataBaseSqlite(context);
-                Cursor allrows = mydb.select_business_SubsetId(fc.GetBusiness_SubsetIdb());
+                Cursor allrows = mydb.select_business(fc.GetBusiness_SubsetIdb());
 
                 if (allrows.moveToFirst()) {
                     mItems = new ArrayList<Job_lists_card_item>();
@@ -124,6 +125,7 @@ private  static Context context;
                 @Override
                 public void onClick(View v) {
 
+                    Log.i("ONCLICK---:::::","OK___________________________________________*********");
                     fc.SetMarket_Business(tvNature.getText().toString());
                     fc.SetAddress_Business(tvDesNature.getText().toString());
                 }
