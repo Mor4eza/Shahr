@@ -3,8 +3,11 @@ package com.ariana.shahre_ma;
 /**
  * Created by Mori on 5/14/2015.
  */
+
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.Map;
@@ -51,26 +55,28 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
 
 
-        ImageView delete = (ImageView) convertView.findViewById(R.id.delete);
 
-
-
-       /* delete.setOnClickListener(new OnClickListener() {
+        final ImageView Star = (ImageView) convertView.findViewById(R.id.delete);
+        Star.setOnClickListener(new View.OnClickListener() {
 
            public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setMessage("Do you want to remove?");
+                builder.setMessage("اضافه کردن این مجموعه به علاقه مندیها؟!");
                 builder.setCancelable(false);
-                builder.setPositiveButton("Yes",
+                builder.setPositiveButton("بله",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                List<String> child =
+                                /*List<String> child =
                                         laptopCollections.get(laptops.get(groupPosition));
                                 child.remove(childPosition);
-                                notifyDataSetChanged();
+                                notifyDataSetChanged();*/
+                                final String selected = (String) getChild(
+                                        groupPosition, childPosition);
+                                Toast.makeText(context,selected,Toast.LENGTH_LONG).show();
+
                             }
                         });
-                builder.setNegativeButton("No",
+                builder.setNegativeButton("نه",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
@@ -79,7 +85,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
             }
-        });*/
+        });
 
         item.setText(laptop);
         return convertView;

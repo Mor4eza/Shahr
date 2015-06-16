@@ -10,8 +10,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -33,14 +36,11 @@ import java.util.Locale;
 public class Job_details extends ActionBarActivity implements ActionBar.TabListener {
 
 
-
-
     CalendarTool ct=new CalendarTool();
     FieldClass fc = new FieldClass();
     HTTPPostMemberJson sendPost;
     SqliteTOjson json = new SqliteTOjson();
     String _json;
-
     SectionsPagerAdapter mSectionsPagerAdapter;
 
 
@@ -199,10 +199,6 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
 
 
    public void map(){
-
-
-
-
         ResourceProxy resourceProxy;
         MapView map = (MapView) findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
@@ -245,9 +241,27 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
     }
 */
 
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+      // Inflate the menu; this adds items to the action bar if it is present.
+      getMenuInflater().inflate(R.menu.menu_job_details, menu);
+      return true;
+  }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_Fav) {
+            Toast.makeText(getApplication(),"پین شد...",Toast.LENGTH_LONG).show();
+            return true;
+        }
 
-
+        return super.onOptionsItemSelected(item);
+    }
 
 }

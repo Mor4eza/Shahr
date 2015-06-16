@@ -31,7 +31,8 @@
     <string name="title_activity_job_details_comment">Job_details_comment</string>
     <string name="title_activity_sign__up">ثبت نام</string>
     <string name="title_activity_log__in">Log_In</string>
-
+    <string name="favorites">اضافه کردن به علاقه مندیها</string>
+    <string name="title_activity_hs">hs</string>
 
 
 </resources>
