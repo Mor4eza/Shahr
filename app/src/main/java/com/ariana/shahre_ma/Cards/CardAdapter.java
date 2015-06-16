@@ -91,6 +91,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
                 public void onClick(View v) {
 
                     Log.i("ON_______CLICK",tvNature.getText().toString());
+
+
                 }
             });
 
