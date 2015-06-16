@@ -31,12 +31,21 @@ public class Comment_Card_Adapter extends RecyclerView.Adapter<Comment_Card_Adap
           this.context=context;
 
 
+        mItems = new ArrayList<Comment_Card_items>();
+
+
+            Comment_Card_items nature = new Comment_Card_items();
+            nature.setmUser("مرتضی");
+            nature.setmDate("111");
+            nature.setmComm("11");
+
+            mItems.add(nature);
 
 
       try {
 
           DataBaseSqlite mydb = new DataBaseSqlite(context);
-            Cursor allrows = mydb.select_opinion_BusinessId(fc.GetBusiness_Id());
+            Cursor allrows = mydb.select_opinion();
 
 
             if (allrows.moveToFirst()) {
@@ -45,8 +54,8 @@ public class Comment_Card_Adapter extends RecyclerView.Adapter<Comment_Card_Adap
                 do {
 
 
-                    Comment_Card_items nature = new Comment_Card_items();
-                    nature.setmUser("مرتضی");
+                     nature = new Comment_Card_items();
+                    nature.setmUser(allrows.getString(6));
                     nature.setmDate(allrows.getString(2));
                     nature.setmComm(allrows.getString(1));
 
@@ -56,6 +65,7 @@ public class Comment_Card_Adapter extends RecyclerView.Adapter<Comment_Card_Adap
             }
         }
         catch (Exception e){}
+
 
     }
 

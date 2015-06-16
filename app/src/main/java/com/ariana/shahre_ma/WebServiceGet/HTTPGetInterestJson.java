@@ -38,7 +38,7 @@ public class HTTPGetInterestJson  extends AsyncTask<String, String, String>
     }
     private static final String url_collection="http://test.shahrma.com/api/apigivecollection";
 
-    Integer Id[];
+
     Integer subsetid[];
     Integer memberid[];
     Integer len;
@@ -76,7 +76,7 @@ public class HTTPGetInterestJson  extends AsyncTask<String, String, String>
 
             for (int i = 0; i <len; i++)
             {
-                dbs.Add_Interest(Id[i], subsetid[i], memberid[i]);
+                dbs.Add_Interest( subsetid[i], memberid[i]);
 
             }
             pd.dismiss();
@@ -93,14 +93,14 @@ public class HTTPGetInterestJson  extends AsyncTask<String, String, String>
 
             JSONArray areas = new JSONArray(JSONString);
 
-            Id=new Integer[areas.length()];
+
             subsetid=new Integer[areas.length()];
             memberid=new Integer[areas.length()];
             len=areas.length();
             for (int i = 0; i < areas.length(); i++) {
 
                 JSONObject area = areas.getJSONObject(i);
-                Id[i]=area.getInt("Id");
+
                 subsetid[i]=area.getInt("Id");
                 memberid[i]=area.getInt("Id");
 

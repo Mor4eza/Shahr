@@ -7,7 +7,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
-
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetOpinionJson;
 
@@ -26,32 +25,32 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
- * Created by ariana2 on 6/6/2015.
+ * Created by ariana on 6/16/2015.
  */
-public class HTTPPostOpinionJson extends AsyncTask<String, Long, Object>
-{
-    private static  final  String url_Opinion="http://test.shahrma.com/api/ApiTakeOpinion";
-
-
-    // variable get json
-    private static String data_json;
-    // variable response
-    private  static String response_message;
-
-
-    FieldClass fc=new FieldClass();
-    private ProgressDialog dialog;
-
-    // get/set
-
-    // Set json opinion
-    public void  SetOpinion_Json(String json_member)
+public class HTTPPostInterestJson     extends AsyncTask<String, Long, Object>
     {
-        data_json=json_member;
+        private static  final  String url_Interest="http://test.shahrma.com/api/ApiTakeInterest";
+
+
+        // variable get json
+        private static String data_json;
+        // variable response
+        private  static String response_message;
+
+
+        FieldClass fc=new FieldClass();
+        private ProgressDialog dialog;
+
+        // get/set
+
+        // Set json opinion
+    public void  SetInterest_Json(String json_Interest)
+    {
+        data_json=json_Interest;
     }
 
     // Get Josn opinion
-    public String GetOpinion_json()
+    public String GetInterest_json()
     {
         return data_json;
     }
@@ -69,7 +68,7 @@ public class HTTPPostOpinionJson extends AsyncTask<String, Long, Object>
     }
 
     private static Context context;
-    public HTTPPostOpinionJson(Context c) {
+    public HTTPPostInterestJson(Context c) {
         context = c;
     }
 
@@ -89,10 +88,10 @@ public class HTTPPostOpinionJson extends AsyncTask<String, Long, Object>
         try {
 
             //onPostExecute();
-            JSONObject json = new JSONObject(GetOpinion_json()); //your array;
+            JSONObject json = new JSONObject(GetInterest_json()); //your array;
             HttpClient httpClient = new DefaultHttpClient();
             HttpContext httpContext = new BasicHttpContext();
-            HttpPost httpPost = new HttpPost(url_Opinion);
+            HttpPost httpPost = new HttpPost(url_Interest);
 
             StringEntity se = new StringEntity(json.toString(),"UTF-8");
 
@@ -117,7 +116,7 @@ public class HTTPPostOpinionJson extends AsyncTask<String, Long, Object>
             }
 
             //SetResponse(json_String);
-           onPostExecute();
+            onPostExecute();
         } catch (Exception e) {
             e.printStackTrace();
             // Toast.makeText(, e.toString(), Toast.LENGTH_LONG).show();
@@ -129,19 +128,14 @@ public class HTTPPostOpinionJson extends AsyncTask<String, Long, Object>
     protected void onPostExecute() {
             /* Download complete. Lets update UI */
 
-        DataBaseSqlite dbs = new DataBaseSqlite(context);
+        /*DataBaseSqlite dbs = new DataBaseSqlite(context);
         Integer ID = Integer.parseInt(GetResponse());
         if (ID >= 0) {
-            dbs.Add_opinion(ID, fc.GetOpinion_Description(), fc.GetOpinion_Date(), fc.GetOpinion_Erja(),fc.GetOpinion_CountLike(),fc.GetOpinion_CountDisLike(),fc.GetOpinion_MemberName());          if (dialog.isShowing()) {
-              //  dialog.dismiss();
+            dbs.Add_Interest(1, fc.GetBusiness_SubsetIdb(),1) ;
+                //  dialog.dismiss();
             }
+*/
 
-            HTTPGetOpinionJson httponion = new HTTPGetOpinionJson(context);
-            httponion.seturl_opinion(186);
-            httponion.execute();
-        } else {
-            Toast.makeText(context, "کاربر ساخته نشد دوباره امتحان کنید", Toast.LENGTH_LONG).show();
-        }
 
     }
 }

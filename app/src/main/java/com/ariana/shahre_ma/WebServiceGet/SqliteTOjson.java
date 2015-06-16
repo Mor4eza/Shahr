@@ -1,17 +1,20 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
  * Created by ariana2 on 6/5/2015.
  */
-public class SqliteTOjson
-{
+public class SqliteTOjson {
 
-    private  static Context context;
+    private static Context context;
 
     /*public void getSqliteTOjson() {
         try {
@@ -75,51 +78,105 @@ public class SqliteTOjson
 
 
     // convert Member to json
-    public String getSqliteTOjson(String j_name,String j_email,String j_mobile,Integer j_age,Boolean j_sex,String j_username,String j_password,Integer j_cityid) {
-        String field_Json="";
-        try {
-
-          // JSONobject get key/value convert to json
-            JSONObject rowObject = new JSONObject();
-                                    rowObject.put("Id",1);
-                                    rowObject.put("Name",j_name);
-                                    rowObject.put("Mobile",j_mobile);
-                                    rowObject.put("Email",j_email);
-                                    rowObject.put("Age",j_age);
-                                    rowObject.put("Sex",j_sex);
-                                    rowObject.put("UserName",j_username);
-                                    rowObject.put("Password",j_password);
-                                    rowObject.put("CityId",j_cityid);
-            field_Json=rowObject.toString();
-
-        }
-        catch (Exception e){
-            Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();}
-       return  field_Json;
-
-    }
-
-    // convert opinion to json
-    public String getOpinionTOjson( String description,String date,Integer opiniontype,Integer erja,Integer countlike,Integer countdislike) {
-        String field_Json="";
+    public String getSqliteTOjson(String j_name, String j_email, String j_mobile, Integer j_age, Boolean j_sex, String j_username, String j_password, Integer j_cityid) {
+        String field_Json = "";
         try {
 
             // JSONobject get key/value convert to json
             JSONObject rowObject = new JSONObject();
-            rowObject.put("Id",1);
-            rowObject.put("Description",description);
-            rowObject.put("Date",date);
-            rowObject.put("OpinionType",opiniontype);
-            rowObject.put("ErJa",erja);
-            rowObject.put("LikeCount",countlike);
-            rowObject.put("DisLikeCount",countdislike);
-            field_Json=rowObject.toString();
+            rowObject.put("Id", 1);
+            rowObject.put("Name", j_name);
+            rowObject.put("Mobile", j_mobile);
+            rowObject.put("Email", j_email);
+            rowObject.put("Age", j_age);
+            rowObject.put("Sex", j_sex);
+            rowObject.put("UserName", j_username);
+            rowObject.put("Password", j_password);
+            rowObject.put("CityId", j_cityid);
+            field_Json = rowObject.toString();
 
+        } catch (Exception e) {
+            Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
         }
-        catch (Exception e){
-            Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();}
-        return  field_Json;
+        return field_Json;
 
     }
+
+    // convert opinion to json
+    public String getOpinionTOjson(String description, String date, Integer memberId, Integer erja) {
+        String field_Json = "";
+        try {
+
+            // JSONobject get key/value convert to json
+            JSONObject rowObject = new JSONObject();
+            rowObject.put("Id", 1);
+            rowObject.put("Description", description);
+            rowObject.put("Date", date);
+            rowObject.put("memberId", memberId);
+            rowObject.put("OpinionType", 1);
+            rowObject.put("ErJa", erja);
+
+            field_Json = rowObject.toString();
+
+        } catch (Exception e) {
+            Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
+        }
+        return field_Json;
+
+    }
+
+    // convert Interest to json
+
+
+    public String getSqliteInterestTOjson() {
+        String Sqlite_Json="";
+        try {
+
+
+
+            DataBaseSqlite db = new DataBaseSqlite(context);
+            Cursor cursor = db.select_Interest();
+            JSONArray resultSet = new JSONArray();
+
+            cursor.moveToFirst();
+            while (cursor.isAfterLast() == false) {
+
+                int totalColumn = cursor.getColumnCount();
+                JSONObject rowObject = new JSONObject();
+
+                for (int i = 0; i < totalColumn; i++) {
+                    if (cursor.getColumnName(i) != null) {
+                        try {
+                            if (cursor.getString(i) != null) {
+
+                                rowObject.put(cursor.getColumnName(i), cursor.getInt(i));
+
+                            } else {
+                                rowObject.put(cursor.getColumnName(i), "");
+                            }
+                        } catch (Exception e) {
+                            //  Log.d("TAG_NAME", e.getMessage()  );
+                        }
+                    }
+                }
+                resultSet.put(rowObject);
+                // ja.put(rowObject);
+                cursor.moveToNext();
+            }
+            cursor.close();
+            Sqlite_Json = resultSet.toString();
+
+            // Log.d("TAG_NAME", resultSet.toString() );
+            //Toast.makeText(getApplicationContext(), resultSet.toString(), Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
+        }
+
+         return Sqlite_Json;
+    }
+
+
+
+
 
 }

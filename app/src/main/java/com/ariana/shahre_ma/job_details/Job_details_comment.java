@@ -82,10 +82,10 @@ public class Job_details_comment extends ActionBarActivity {
                     else
                     {
                             try {
-                                _json = (json.getOpinionTOjson(txtComm.getText().toString(), ct.getIranianDate(), 1,186,0,0));
+                                _json = (json.getOpinionTOjson(txtComm.getText().toString(), ct.getIranianDate(),1,186));
                                 fc.SetOpinion_Description(txtComm.getText().toString());
                                 fc.SetOpinion_Date(ct.getIranianDate().toString());
-                                fc.SetOpinion_OpinionType(1);
+                                fc.SetOpinion_MemberName("");
                                 fc.SetOpinion_Erja(fc.GetBusiness_SubsetIdb());
 
                                 HTTPPostOpinionJson sendPost1 = new HTTPPostOpinionJson(getActivity());

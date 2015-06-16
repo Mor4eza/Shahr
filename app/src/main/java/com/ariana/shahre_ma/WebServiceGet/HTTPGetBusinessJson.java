@@ -203,7 +203,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
                 ratecount[i]=0;
                 ratevalue[i]=1.1;
-                fc.SetMember_Email(market[i]);
+
 
             }
 

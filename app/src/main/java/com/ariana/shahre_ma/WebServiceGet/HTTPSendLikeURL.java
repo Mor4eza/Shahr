@@ -54,9 +54,10 @@ public class HTTPSendLikeURL extends AsyncTask<String, Void, Integer> {
         this.like=like;
     }
 
-    public void GetURL()
+    public String GetURL()
     {
-
+       String url=" http://test.shahrma.com/api/ApiTakeLike?opinionId="+this.opinionid+"&memberId="+this.memberid+"&value="+this.like;
+        return url;
     }
     @Override
     protected Integer doInBackground(String... params) {
@@ -72,7 +73,7 @@ public class HTTPSendLikeURL extends AsyncTask<String, Void, Integer> {
             // String paramString = URLEncodedUtils.format(params, "utf-8");
             String sss = URLDecoder.decode(params[0], "UTF-8");
 
-            HttpGet httpGet = new HttpGet(params[0]);
+            HttpGet httpGet = new HttpGet(GetURL());
 
 
 

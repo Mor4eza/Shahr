@@ -206,13 +206,15 @@ public class Sign_Up extends ActionBarActivity {
 
     public  void fahmidan(View v)
     {
+
+       // Toast.makeText(getApplication(),fc.GetMember_Email(), Toast.LENGTH_LONG).show();
        DataBaseSqlite mydb = new DataBaseSqlite(this);
-        Cursor allrows = mydb.select_business(14);
+        Cursor allrows = mydb.select_Interest();
 
         try {
             if ( allrows.moveToFirst()) {
                 do {
-                    Toast.makeText(getApplication(), allrows.getString(1), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(),String.valueOf(allrows.getInt(1)), Toast.LENGTH_LONG).show();
                 }while (allrows.moveToNext());
             }
             allrows.close();

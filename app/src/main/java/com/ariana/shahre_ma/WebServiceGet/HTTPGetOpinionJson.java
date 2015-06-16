@@ -2,9 +2,11 @@ package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Fields.FieldClass;
 
 
 import org.json.JSONArray;
@@ -29,7 +31,7 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
     Integer Id[];
     String description[];
     String date[];
-    Integer opiniontype[];
+    String membername[];
     Integer erja[];
     Integer countlike[];
     Integer countdislike[];
@@ -37,6 +39,7 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
     Integer BusintessId;
 
 
+    FieldClass fc=new FieldClass();
     public void seturl_opinion(Integer business_id) {
 
         this.BusintessId=business_id;
@@ -78,11 +81,11 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
 
             for (int i = 0; i <len; i++)
             {
-                dbs.Add_opinion(Id[i],description[i],date[i],opiniontype[i],erja[i],countlike[i],countdislike[i]);
+                dbs.Add_opinion(Id[i],description[i],date[i],erja[i],countlike[i],countdislike[i],membername[i]);
 
             }
         } catch (Exception e) {
-            Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
+            Toast.makeText(context.getApplicationContext(), "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -92,28 +95,38 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
         Integer ii = 0;
         try {
 
+            Log.i("JSON",JSONString);
             JSONArray areas = new JSONArray(JSONString);
 
             Id=new Integer[areas.length()];
             description=new String[areas.length()];
             date=new String[areas.length()];
-            opiniontype=new Integer[areas.length()];
             erja=new Integer[areas.length()];
             countlike=new Integer[areas.length()];
             countdislike=new Integer[areas.length()];
+            membername=new String[areas.length()];
             len=areas.length();
 
             for (int i = 0; i < areas.length(); i++) {
 
                 JSONObject area = areas.getJSONObject(i);
+
+
                 date[i]=area.getString("Date");
-                description[i]=area.getString("Description");
+                description[i] = area.getString("Description");
+                countdislike[i]= area.getInt("DisLikeCount");
+                countlike[i]=area.getInt("LikeCount");
                 erja[i]=area.getInt("ErJa");
                 Id[i]=area.getInt("Id");
-                opiniontype[i]= area.getInt("OpinionType");
-                countlike[i]=area.getInt("LikeCount");
-                countdislike[i]= area.getInt("DisLikeCount");
+                membername[i]= area.getString("Member");
 
+
+
+
+
+
+
+         
             }
 
         } catch (JSONException e) {

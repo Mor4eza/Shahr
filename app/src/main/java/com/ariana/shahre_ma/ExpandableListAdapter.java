@@ -8,6 +8,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,18 +19,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Fields.FieldClass;
+
 import java.util.List;
 import java.util.Map;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Activity context;
+
     private Map<String, List<String>> laptopCollections;
     private List<String> laptops;
+
+    FieldClass fc=new FieldClass();
 
     public ExpandableListAdapter(Activity context, List<String> laptops,
                                  Map<String, List<String>> laptopCollections) {
         this.context = context;
+
         this.laptopCollections = laptopCollections;
         this.laptops = laptops;
     }
@@ -72,7 +81,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                                 notifyDataSetChanged();*/
                                 final String selected = (String) getChild(
                                         groupPosition, childPosition);
-                                Toast.makeText(context,selected,Toast.LENGTH_LONG).show();
+
+              Toast.makeText(context, selected,Toast.LENGTH_LONG).show();
+                          //    Integer subsetid=  getsubsetID(selected);
+                               Integer memberid=getMemberID();
+
+                                DataBaseSqlite db=new DataBaseSqlite(context);
+                                db.Add_Interest(14,1);
 
                             }
                         });
@@ -128,5 +143,49 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
+    }
+
+    private Integer getsubsetID(String subsetname) {
+
+
+
+        Integer Result = 0;
+
+        try {
+            DataBaseSqlite db=new DataBaseSqlite(context);
+            Cursor allrows = db.select_SubsetId(subsetname);
+            allrows.moveToFirst();
+            Result = allrows.getInt(0);
+            allrows.close();
+
+
+            fc.SetBusiness_SubsetId(Result);
+        }
+        catch (Exception e){
+           // Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
+        }
+        return Result;
+    }
+
+    private Integer getMemberID() {
+
+
+
+        Integer Result = 0;
+
+        try {
+            DataBaseSqlite db=new DataBaseSqlite(context);
+            Cursor allrows = db.select_Member();
+            allrows.moveToFirst();
+            Result = allrows.getInt(0);
+            allrows.close();
+
+
+            fc.SetBusiness_SubsetId(Result);
+        }
+        catch (Exception e){
+            // Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
+        }
+        return Result;
     }
 }

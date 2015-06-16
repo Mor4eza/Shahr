@@ -59,7 +59,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     private static final String OPINION_Like = "OpinionId";
 
     //Interest Table Columns names
-    private static final String ID_Interest = "Id";
+
     private static final String SUBSETID_Interest = "SubsetId";
     private static final String MEMBERID_Interest = "MemberId";
 
@@ -68,7 +68,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     private static final String ID_opinion = "Id";
     private static final String DESCRIPTION_opinion = "Description";
     private static final String DATE_opinion = "Date";
-    private static final String OPINIONTYPE_opinion = "OpinionType";
+    private static final String MEMBERNAME_opinion = "MemberName";
     private static final String ERJA_opinion = "Erja";
     private static final String COUNTLIKE_opinion = "CountLike";
     private static final String COUNTDISLIKE_opinion = "CountDisLike";
@@ -198,7 +198,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     // SQL statement to create Interest table
     private static final String CREATE_TABLE_Interest = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_Interest + " (" +
-            "Id INTEGER PRIMARY KEY ," +
+            "Id INTEGER PRIMARY KEY AUTOINCREMENT ," +
             "SubsetId INTEGER," +
             "MemberId INTEGER" +
             ");";
@@ -208,10 +208,10 @@ public class DataBaseSqlite extends SQLiteOpenHelper
             "Id INTEGER PRIMARY KEY ," +
             "Description TEXT," +
             "Date TEXT," +
-            "OpinionType INTEGER," +
             "Erja INTEGER," +
             "CountLike INTEGER," +
-            "CountDisLike INTEGER" +
+            "CountDisLike INTEGER," +
+            "MemberName TEXT" +
             ");";
 
 
@@ -269,6 +269,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.execSQL(CREATE_TABLE_Bookmark);
         db.execSQL(CREATE_TABLE_Area);
         db.execSQL(CREATE_TABLE_UpdateTime);
+        db.execSQL(CREATE_TABLE_Interest);
     }
 
     @Override
@@ -283,6 +284,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_Bookmark);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_Area);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_UpdateTime);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_Interest);
         // create fresh  tables
         this.onCreate(db);
     }
@@ -354,7 +356,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.close();
     }
 
-    public void Add_opinion(Integer id,String description,String date,Integer opiniontype,Integer erja,Integer countlike,Integer countdislike)
+    public void Add_opinion(Integer id,String description,String date,Integer erja,Integer countlike,Integer countdislike,String membername)
     {
 
         // 1. get reference to writable DB
@@ -365,11 +367,11 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         values.put(ID_opinion,id);
         values.put(DESCRIPTION_opinion,description);
         values.put(DATE_opinion,date);
-        values.put(OPINIONTYPE_opinion, opiniontype);
+
         values.put(ERJA_opinion, erja);
         values.put(COUNTLIKE_opinion, countlike);
         values.put(COUNTDISLIKE_opinion, countdislike);
-
+        values.put(MEMBERNAME_opinion, membername);
 
 
         // 3. insert
@@ -538,16 +540,16 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     }
 
 
-    public void Add_Interest(Integer id,Integer subsetid,Integer memberid) {
+    public void Add_Interest(Integer subsetid,Integer memberid) {
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(ID_Like, id);
-        values.put(LIKE_Like, subsetid);
-        values.put(MEMBERID_Like, memberid);
+
+        values.put(SUBSETID_Interest, subsetid);
+        values.put(MEMBERID_Interest, memberid);
 
 
         // 3. insert
@@ -591,6 +593,11 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     }
 
+    public  Cursor select_Interest()
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + TABLE_NAME_Interest, null);
+    }
     public Cursor select_opinion()
     {
 
