@@ -81,7 +81,7 @@ ns=new NetState(getActivity());
                 DataBaseSqlite dbs=new DataBaseSqlite(getActivity());
                 dbs.delete_Opinion();
                 HTTPGetOpinionJson httponion = new HTTPGetOpinionJson(getActivity());
-                httponion.seturl_opinion(168);
+                httponion.seturl_opinion(186);
                 httponion.execute();
             }
 

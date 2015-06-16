@@ -114,7 +114,6 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
                 countlike[i]=area.getInt("LikeCount");
                 countdislike[i]= area.getInt("DisLikeCount");
 
-
             }
 
         } catch (JSONException e) {
