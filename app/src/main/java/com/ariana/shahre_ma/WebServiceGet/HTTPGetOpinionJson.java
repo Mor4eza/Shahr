@@ -31,6 +31,8 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
     String date[];
     Integer opiniontype[];
     Integer erja[];
+    Integer countlike[];
+    Integer countdislike[];
     Integer len;
     Integer BusintessId;
 
@@ -76,7 +78,7 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
 
             for (int i = 0; i <len; i++)
             {
-                dbs.Add_opinion(Id[i],description[i],date[i],opiniontype[i],erja[i]);
+                dbs.Add_opinion(Id[i],description[i],date[i],opiniontype[i],erja[i],countlike[i],countdislike[i]);
 
             }
         } catch (Exception e) {
@@ -97,6 +99,8 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
             date=new String[areas.length()];
             opiniontype=new Integer[areas.length()];
             erja=new Integer[areas.length()];
+            countlike=new Integer[areas.length()];
+            countdislike=new Integer[areas.length()];
             len=areas.length();
 
             for (int i = 0; i < areas.length(); i++) {
@@ -107,6 +111,8 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
                 erja[i]=area.getInt("ErJa");
                 Id[i]=area.getInt("Id");
                 opiniontype[i]= area.getInt("OpinionType");
+                countlike[i]=area.getInt("LikeCount");
+                countdislike[i]= area.getInt("DisLikeCount");
 
 
             }

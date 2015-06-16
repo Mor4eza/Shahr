@@ -77,10 +77,11 @@ ns=new NetState(getActivity());
             }
             else
             {
+
                 DataBaseSqlite dbs=new DataBaseSqlite(getActivity());
                 dbs.delete_Opinion();
                 HTTPGetOpinionJson httponion = new HTTPGetOpinionJson(getActivity());
-                httponion.seturl_opinion(186);
+                httponion.seturl_opinion(168);
                 httponion.execute();
             }
 
@@ -110,19 +111,21 @@ ns=new NetState(getActivity());
         allrows.moveToNext();
 
 
-   /*     fc.SetBusiness_Id(allrows.getInt(0));
-        fc.SetLatitude_Business(allrows.getString(15));
-        fc.SetLongtiude_Business(allrows.getString(16));
+        try {
+            fc.SetBusiness_Id(allrows.getInt(0));
+            fc.SetLatitude_Business(allrows.getString(15));
+            fc.SetLongtiude_Business(allrows.getString(16));
 
-          name.setText(allrows.getString(1));
+            name.setText(allrows.getString(1));
             tel.setText(allrows.getString(3));
             web.setText(allrows.getString(6));
             owner.setText(allrows.getString(7));
             subset.setText(allrows.getString(13));
             // zamine.setText(allrows.getString(25));
             address.setText(allrows.getString(8));
-            des.setText(allrows.getString(9));*/
-
+            des.setText(allrows.getString(9));
+        }
+        catch (Exception e){Toast.makeText(getActivity(),e.toString(),Toast.LENGTH_LONG).show();}
 
 
 

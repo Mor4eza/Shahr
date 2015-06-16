@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
@@ -113,7 +114,8 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
             }
 
             if(len==0) {
-                Toast.makeText(context, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
+              //  Toast.makeText(get, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
+                Log.i("Count Business : ","فروشگاه ثبت نشد");
             }
             else {
                 Intent i = new Intent(this.context, Jobs_List.class);

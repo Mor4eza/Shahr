@@ -36,7 +36,7 @@ public class Comment_Card_Adapter extends RecyclerView.Adapter<Comment_Card_Adap
       try {
 
           DataBaseSqlite mydb = new DataBaseSqlite(context);
-            Cursor allrows = mydb.select_opinion(fc.GetBusiness_Id());
+            Cursor allrows = mydb.select_opinion_BusinessId(fc.GetBusiness_Id());
 
 
             if (allrows.moveToFirst()) {

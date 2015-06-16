@@ -20,7 +20,7 @@ public class FieldClass
     private static final String TABLE_NAME_City   = "city";
     private static final String TABLE_NAME_Bookmark = "bookmark";
     private static final String TABLE_NAME_Area = "area";
-    private static final String TABLE_NAME_ZamanSanj = "Zamansanj";
+    private static final String TABLE_NAME_UpdateTime = "UpdateTime";
     private static final String TABLE_NAME_Like = "Like";
     private static final String TABLE_NAME_Interest = "Interest";
 
@@ -44,7 +44,8 @@ public class FieldClass
     private static String Date;
     private static Integer OpinionType;
     private static Integer Erja;
-
+    private static Integer CountLike;
+    private static Integer CountDisLike;
 
     private static String selected_job;
 
@@ -180,6 +181,16 @@ public class FieldClass
     {
         Erja=erja;
     }
+    // Set  opinion
+    public void  SetOpinion_CountLike(Integer countlike)
+    {
+        CountLike=countlike;
+    }
+    // Set  opinion
+    public void  SetOpinion_CountDisLike(Integer countdislike)
+    {
+        CountDisLike=countdislike;
+    }
 
 
     // Get  opinion
@@ -201,6 +212,16 @@ public class FieldClass
     public Integer  GetOpinion_Erja()
     {
         return  Erja;
+    }
+    // Get  opinion
+    public Integer  GetOpinion_CountLike()
+    {
+        return  CountLike;
+    }
+    // Get  opinion
+    public Integer  GetOpinion_CountDisLike()
+    {
+        return  CountDisLike;
     }
 
 
@@ -319,9 +340,9 @@ public class FieldClass
         return  TABLE_NAME_Like;
     }
     // Get  ZamanSanj
-    public String  GetTableNameZamanSanj()
+    public String  GetTableNameUpdateTime()
     {
-        return  TABLE_NAME_ZamanSanj;
+        return  TABLE_NAME_UpdateTime;
     }
 
     // Get  database

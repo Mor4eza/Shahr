@@ -206,8 +206,8 @@ public class Sign_Up extends ActionBarActivity {
 
     public  void fahmidan(View v)
     {
-/*       DataBaseSqlite mydb = new DataBaseSqlite(this);
-        Cursor allrows = mydb.select_business();
+       DataBaseSqlite mydb = new DataBaseSqlite(this);
+        Cursor allrows = mydb.select_business(14);
 
         try {
             if ( allrows.moveToFirst()) {
@@ -217,7 +217,7 @@ public class Sign_Up extends ActionBarActivity {
             }
             allrows.close();
         }
-        catch (Exception e){ Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}*/
+        catch (Exception e){ Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}
 
 
     }

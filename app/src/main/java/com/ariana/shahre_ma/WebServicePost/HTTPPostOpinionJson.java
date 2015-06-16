@@ -132,7 +132,7 @@ public class HTTPPostOpinionJson extends AsyncTask<String, Long, Object>
         DataBaseSqlite dbs = new DataBaseSqlite(context);
         Integer ID = Integer.parseInt(GetResponse());
         if (ID >= 0) {
-            dbs.Add_opinion(ID, fc.GetOpinion_Description(), fc.GetOpinion_Date(), fc.GetOpinion_OpinionType(), fc.GetOpinion_Erja());          if (dialog.isShowing()) {
+            dbs.Add_opinion(ID, fc.GetOpinion_Description(), fc.GetOpinion_Date(), fc.GetOpinion_OpinionType(), fc.GetOpinion_Erja(),fc.GetOpinion_CountLike(),fc.GetOpinion_CountDisLike());          if (dialog.isShowing()) {
               //  dialog.dismiss();
             }
 

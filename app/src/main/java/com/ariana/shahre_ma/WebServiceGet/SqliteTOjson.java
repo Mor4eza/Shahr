@@ -100,7 +100,7 @@ public class SqliteTOjson
     }
 
     // convert opinion to json
-    public String getOpinionTOjson( String description,String date,Integer opiniontype,Integer erja) {
+    public String getOpinionTOjson( String description,String date,Integer opiniontype,Integer erja,Integer countlike,Integer countdislike) {
         String field_Json="";
         try {
 
@@ -111,7 +111,8 @@ public class SqliteTOjson
             rowObject.put("Date",date);
             rowObject.put("OpinionType",opiniontype);
             rowObject.put("ErJa",erja);
-
+            rowObject.put("LikeCount",countlike);
+            rowObject.put("DisLikeCount",countdislike);
             field_Json=rowObject.toString();
 
         }

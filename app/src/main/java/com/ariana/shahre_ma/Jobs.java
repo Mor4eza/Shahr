@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
@@ -28,7 +29,10 @@ import java.util.Map;
 public class Jobs extends ActionBarActivity {
 
 
+    Integer count = 0;
 
+    String time="";
+    String date="";
 
     List<String> groupList;
     List<String> childList;
@@ -98,22 +102,24 @@ DateTime dt=new DateTime();
                                                         int groupPosition, int childPosition, long id) {
                                 final String selected = (String) expListAdapter.getChild(
                                         groupPosition, childPosition);
-                                Toast.makeText(getBaseContext(), selected, Toast.LENGTH_LONG)
+                                Toast.makeText(getApplicationContext(), selected, Toast.LENGTH_LONG)
                                         .show();
 
                                 fc.SetSelected_job(selected);
 
-                                Integer count = getCountBusiness();
+                               count = getCountBusiness();
 
-                                String time=getTime_ZamanSanj();
-                                String date=getDate_ZamanSanj();
+                                time=getTime_ZamanSanj();
+                                 date=getDate_ZamanSanj();
+
+
 
                                 Toast.makeText(getApplicationContext(),count.toString(),Toast.LENGTH_LONG).show();
-                                if (ns.checkInternetConnection() == false) {
-                                    getsubsetID();
+                               if (ns.checkInternetConnection() == false) {
+
                                     if (count == 0)
                                     {
-                                        Toast.makeText(getApplicationContext(),"0",Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getApplicationContext(),"فروشگاه ثبت نشده",Toast.LENGTH_LONG).show();
                                     }
                                     else
                                     {
@@ -127,35 +133,49 @@ DateTime dt=new DateTime();
                                 {
 
 
-                                    if(time=="")
-                                    {
-                                       DataBaseSqlite dbs=new DataBaseSqlite(Jobs.this);
-                                        dbs.Add_ZamanSanj(dt.Hours(), dt.Now());
-
+                                    if (count == 0 ) {
+                                      //  Toast.makeText(getApplicationContext(),"فروشگاه ثبت نشده",Toast.LENGTH_LONG).show();
                                         httpbusin = new HTTPGetBusinessJson(Jobs.this);
                                         httpbusin.SetUrl_business(getsubsetID());
                                         httpbusin.execute();
-                    }
-                    else
-                    {
-                       if(Integer.parseInt(dt.Hours())>=Integer.parseInt(time+3) || date!=dt.Now())
-                        {
-                            DataBaseSqlite dbs=new DataBaseSqlite(Jobs.this);
-                            dbs.delete_ZamanSanj();
-                            dbs.Add_ZamanSanj(dt.Hours(), dt.Now());
 
-                            httpbusin = new HTTPGetBusinessJson(Jobs.this);
-                            httpbusin.SetUrl_business(getsubsetID());
-                            httpbusin.execute();
-                            Toast.makeText(getBaseContext(), "1", Toast.LENGTH_LONG);
-                        }
-                        else
-                        {
-                            Intent i = new Intent(getApplicationContext(), Jobs_List.class);
-                            startActivity(i);
-                            Toast.makeText(getBaseContext(),"0", Toast.LENGTH_LONG);
-                        }
-                   }
+                                        Log.i("Count ==0 "," ok");
+                                    }
+                                    else
+                                    {
+                                                    if (time == "")
+                                                    {
+                                                        Toast.makeText(getApplicationContext(), "Time: " + time, Toast.LENGTH_LONG).show();
+                                                        DataBaseSqlite dbs = new DataBaseSqlite(Jobs.this);
+                                                        dbs.Add_UpdateTime(fc.GetTableNameUpdateTime(), dt.Hours(), dt.Now());
+
+                                                        httpbusin = new HTTPGetBusinessJson(Jobs.this);
+                                                        httpbusin.SetUrl_business(getsubsetID());
+                                                        httpbusin.execute();
+                                                        Log.i("Time == 0", " ok");
+                                                    }
+                                                    else
+                                                    {
+                                                            if (Integer.parseInt(dt.Hours()) >= Integer.parseInt(time + 3) || date != dt.Now()) {
+                                                                DataBaseSqlite dbs = new DataBaseSqlite(Jobs.this);
+                                                                dbs.delete_UpdateTime(fc.GetTableNameUpdateTime());
+                                                                dbs.Add_UpdateTime(fc.GetTableNameUpdateTime(), dt.Hours(), dt.Now());
+
+                                                                httpbusin = new HTTPGetBusinessJson(Jobs.this);
+                                                                httpbusin.SetUrl_business(getsubsetID());
+                                                                httpbusin.execute();
+                                                                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_LONG).show();
+                                                                Log.i("Time > Time+3 ", "ok");
+                                                            }
+                                                            else
+                                                            {
+                                                                Intent i = new Intent(getApplicationContext(), Jobs_List.class);
+                                                                startActivity(i);
+                                                                Toast.makeText(getApplicationContext(), "0", Toast.LENGTH_LONG).show();
+                                                                Log.i("NOT IF And Eles ", "Ok");
+                                                            }
+                                                    }
+                                    }
                }
 
 
@@ -286,9 +306,9 @@ DateTime dt=new DateTime();
 
         try {
             DataBaseSqlite dbs = new DataBaseSqlite(this);
-            Cursor allrows = dbs.select_Time_ZamanSanj();
+            Cursor allrows = dbs.select_UpdateTime(fc.GetTableNameUpdateTime());
             allrows.moveToFirst();
-            Result = allrows.getString(0);
+            Result = allrows.getString(1);
             allrows.close();
         }
         catch (Exception e)
@@ -302,9 +322,9 @@ DateTime dt=new DateTime();
 
         try {
             DataBaseSqlite dbs = new DataBaseSqlite(this);
-            Cursor allrows = dbs.select_Date_ZamanSanj();
+            Cursor allrows = dbs.select_UpdateTime(fc.GetTableNameUpdateTime());
             allrows.moveToFirst();
-            Result = allrows.getString(0);
+            Result = allrows.getString(2);
             allrows.close();
         }
         catch (Exception e)

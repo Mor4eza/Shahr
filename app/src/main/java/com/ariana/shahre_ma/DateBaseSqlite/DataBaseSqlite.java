@@ -26,14 +26,15 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     private static final String TABLE_NAME_City   = "city";
     private static final String TABLE_NAME_Bookmark = "bookmark";
     private static final String TABLE_NAME_Area = "area";
-    private static final String TABLE_NAME_ZamanSanj = "Zamansanj";
+    private static final String TABLE_NAME_UpdateTime = "UpdateTime";
     private static final String TABLE_NAME_Like = "Like";
     private static final String TABLE_NAME_Interest = "Interest";
 
 
-    //ZamanSanj Table Columns names
-    private static final String SAAT_ZamanSanj = "TTime";
-    private static final String TARIKH_ZamanSanj = "DDate";
+    //UpdateTime Table Columns names
+    private static final String FIELDNAME_UpdateTime = "FieldName";
+    private static final String SAAT_UpdateTime = "TTime";
+    private static final String TARIKH_UpdateTime = "DDate";
 
     //Area Table Columns names
     private static final String ID_area = "Id";
@@ -69,6 +70,8 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     private static final String DATE_opinion = "Date";
     private static final String OPINIONTYPE_opinion = "OpinionType";
     private static final String ERJA_opinion = "Erja";
+    private static final String COUNTLIKE_opinion = "CountLike";
+    private static final String COUNTDISLIKE_opinion = "CountDisLike";
 
 
     //subset Table Columns names
@@ -142,7 +145,8 @@ public class DataBaseSqlite extends SQLiteOpenHelper
             ");";
 
     // SQL statement to create ZamanSanj table
-    private static final String CREATE_TABLE_ZamanSanj  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_ZamanSanj + " (" +
+    private static final String CREATE_TABLE_UpdateTime = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_UpdateTime + " (" +
+            "FieldName TEXT PRIMARY KEY," +
             "TTime TEXT," +
             "DDate TEXT" +
 
@@ -205,7 +209,9 @@ public class DataBaseSqlite extends SQLiteOpenHelper
             "Description TEXT," +
             "Date TEXT," +
             "OpinionType INTEGER," +
-            "Erja INTEGER" +
+            "Erja INTEGER," +
+            "CountLike INTEGER," +
+            "CountDisLike INTEGER" +
             ");";
 
 
@@ -262,7 +268,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.execSQL(CREATE_TABLE_City);
         db.execSQL(CREATE_TABLE_Bookmark);
         db.execSQL(CREATE_TABLE_Area);
-        db.execSQL(CREATE_TABLE_ZamanSanj);
+        db.execSQL(CREATE_TABLE_UpdateTime);
     }
 
     @Override
@@ -273,10 +279,10 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME_MEMBER);
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME_OPINION);
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME_BUSINESS);
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME_City);
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME_Bookmark);
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME_Area);
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME_ZamanSanj);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_City);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_Bookmark);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_Area);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_UpdateTime);
         // create fresh  tables
         this.onCreate(db);
     }
@@ -348,7 +354,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.close();
     }
 
-    public void Add_opinion(Integer id,String description,String date,Integer opiniontype,Integer erja)
+    public void Add_opinion(Integer id,String description,String date,Integer opiniontype,Integer erja,Integer countlike,Integer countdislike)
     {
 
         // 1. get reference to writable DB
@@ -361,6 +367,8 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         values.put(DATE_opinion,date);
         values.put(OPINIONTYPE_opinion, opiniontype);
         values.put(ERJA_opinion, erja);
+        values.put(COUNTLIKE_opinion, countlike);
+        values.put(COUNTDISLIKE_opinion, countdislike);
 
 
 
@@ -487,18 +495,19 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     }
 
 
-    public void Add_ZamanSanj( String time,String date) {
+    public void Add_UpdateTime(String fieldname ,String time,String date) {
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(SAAT_ZamanSanj, time);
-        values.put(TARIKH_ZamanSanj, date);
+        values.put(FIELDNAME_UpdateTime, fieldname);
+        values.put(SAAT_UpdateTime, time);
+        values.put(TARIKH_UpdateTime, date);
 
         // 3. insert
-        db.insert(TABLE_NAME_ZamanSanj, // table
+        db.insert(TABLE_NAME_UpdateTime, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -550,6 +559,14 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.close();
     }
 
+    public Cursor select_SubsetId(String subsetname)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT Id FROM " + TABLE_NAME_SUBSET + "  WHERE SubsetName=" + subsetname, null);
+
+    }
+
     public Cursor select_business_SubsetId(Integer subsetID)
     {
 
@@ -574,35 +591,36 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     }
 
-    public Cursor select_opinion(Integer busintessid)
-{
+    public Cursor select_opinion()
+    {
 
     SQLiteDatabase db = this.getReadableDatabase();
-    return db.rawQuery("SELECT * FROM " + TABLE_NAME_OPINION+ "  WHERE Erja="+busintessid, null);
+    return db.rawQuery("SELECT * FROM " + TABLE_NAME_OPINION, null);
 
-}
+    }
+
+    public Cursor select_opinion_BusinessId(Integer busintessid)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + TABLE_NAME_OPINION+ "  WHERE Erja="+busintessid, null);
+
+    }
+
     public Cursor select_Member()
     {
-
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM " + TABLE_NAME_MEMBER, null);
-
     }
 
-    public Cursor select_Time_ZamanSanj()
+    public Cursor select_UpdateTime(String fieldname)
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT TTime FROM " + TABLE_NAME_ZamanSanj, null);
+        return db.rawQuery("SELECT * FROM " + TABLE_NAME_UpdateTime +" WHERE FieldName='"+fieldname+"'", null);
 
     }
-    public Cursor select_Date_ZamanSanj()
-    {
 
-        SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT DDate FROM " + TABLE_NAME_ZamanSanj, null);
-
-    }
     public Cursor select_Member_Name()
     {
 
@@ -629,13 +647,13 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
 
     // Deleting ZamanSanj
-    public void delete_ZamanSanj() {
+    public void delete_UpdateTime(String fieldname) {
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 
         // 2. delete
-        db.execSQL("DELETE FROM  " + TABLE_NAME_ZamanSanj);
+        db.execSQL("DELETE FROM  " + TABLE_NAME_UpdateTime +" WHERE FieldName='"+fieldname+"'");
 
 
 
