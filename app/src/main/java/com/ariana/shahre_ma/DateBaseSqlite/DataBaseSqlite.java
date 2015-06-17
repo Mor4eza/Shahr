@@ -585,6 +585,14 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     }
 
+    public Cursor select_business_NameMarket(Integer businessID)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT Market FROM " + TABLE_NAME_BUSINESS + "  WHERE Id=" +businessID , null);
+
+    }
+
     public Cursor select_business_Detail(String market,String address)
     {
 

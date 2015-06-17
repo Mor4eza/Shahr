@@ -1,7 +1,6 @@
 package com.ariana.shahre_ma.job_details;
 
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,18 +19,10 @@ import android.widget.Toast;
 import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
-import com.ariana.shahre_ma.WebServiceGet.HTTPSendBookMarkURL;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetBookMarkJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.ResourceProxy;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
@@ -40,7 +31,6 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.OverlayItem;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -270,15 +260,16 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_Fav) {
             Toast.makeText(getApplication(),"پین شد...",Toast.LENGTH_LONG).show();
-            HTTPSendBookMarkURL httpbookmark=new HTTPSendBookMarkURL(this);
+
+          /*  HTTPSendBookMarkURL httpbookmark=new HTTPSendBookMarkURL(this);
             httpbookmark.SetBusinessid(187);
             httpbookmark.SetMemberid(1);
-            httpbookmark.execute();
+            httpbookmark.execute();*/
 
-          /*  new JSONAsyncTask().execute();
+            //new JSONAsyncTask().execute();
             HTTPGetBookMarkJson b=new HTTPGetBookMarkJson(this);
             b.SetUrl_MemberId(1);
-            b.execute();*/
+            b.execute();
 
 
             return true;
@@ -287,49 +278,5 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
         return super.onOptionsItemSelected(item);
     }
 
-    class JSONAsyncTask extends AsyncTask<String, Void, Boolean> {
 
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-        }
-
-        @Override
-        protected Boolean doInBackground(String... urls) {
-            try {
-
-                //------------------>>
-                HttpGet httppost = new HttpGet("http://test.shahrma.com/api/ApiTakeBookmark?businessId=186&memberId=1");
-                HttpClient httpclient = new DefaultHttpClient();
-                HttpResponse response = httpclient.execute(httppost);
-
-                // StatusLine stat = response.getStatusLine();
-                int status = response.getStatusLine().getStatusCode();
-
-                if (status == 200) {
-                    HttpEntity entity = response.getEntity();
-                    String data = EntityUtils.toString(entity);
-
-
-                    JSONObject jsono = new JSONObject(data);
-
-                    return true;
-                }
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-
-                e.printStackTrace();
-            }
-            return false;
-        }
-
-        protected void onPostExecute(Boolean result) {
-
-        }
-    }
 }

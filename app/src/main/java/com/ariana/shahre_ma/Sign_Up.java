@@ -209,7 +209,7 @@ public class Sign_Up extends ActionBarActivity {
         try {
             if ( allrows.moveToFirst()) {
                 do {
-                    Toast.makeText(getApplication(), String.valueOf(allrows.getInt(0) + allrows.getInt(1) + allrows.getInt(1)), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(), String.valueOf(allrows.getInt(1)), Toast.LENGTH_LONG).show();
                 }while (allrows.moveToNext());
             }
             allrows.close();
