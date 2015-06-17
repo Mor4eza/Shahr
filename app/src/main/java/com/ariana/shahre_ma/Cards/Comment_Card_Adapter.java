@@ -3,12 +3,12 @@ package com.ariana.shahre_ma.Cards;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -58,7 +58,8 @@ public class Comment_Card_Adapter extends RecyclerView.Adapter<Comment_Card_Adap
                     nature.setmUser(allrows.getString(6));
                     nature.setmDate(allrows.getString(2));
                     nature.setmComm(allrows.getString(1));
-
+                   // nature.setmlike(allrows.getInt(4));
+                 //   nature.setmdisslike(allrows.getInt(5));
                     mItems.add(nature);
 
                 } while (allrows.moveToNext());
@@ -83,6 +84,9 @@ public class Comment_Card_Adapter extends RecyclerView.Adapter<Comment_Card_Adap
         viewHolder.tvuser.setText(nature.getmUser());
         viewHolder.tvdate.setText(nature.getmDate());
         viewHolder.tvcomm.setText(nature.getmComm());
+       // viewHolder.tvlike.setText(nature.getmlike());
+       // viewHolder.tvdisslike.setText(nature.getmdisslike());
+
     }
 
     @Override
@@ -91,17 +95,43 @@ public class Comment_Card_Adapter extends RecyclerView.Adapter<Comment_Card_Adap
         return mItems.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView tvuser;
         public TextView tvdate;
         public TextView tvcomm;
+        public TextView tvlike;
+        public TextView tvdisslike;
+        public ImageButton btn_like;
+        public ImageButton btn_disslike;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
+            //itemView.setOnClickListener(this);
             tvuser = (TextView)itemView.findViewById(R.id.tv_user);
             tvdate = (TextView)itemView.findViewById(R.id.tv_date);
             tvcomm = (TextView)itemView.findViewById(R.id.tv_comment);
+            tvlike =(TextView)itemView.findViewById(R.id.txt_like);
+            tvdisslike =(TextView)itemView.findViewById(R.id.txt_disslike);
+            btn_like = (ImageButton)itemView.findViewById(R.id.btn_like);
+            btn_disslike = (ImageButton)itemView.findViewById(R.id.btn_disslike);
+            btn_like.setOnClickListener(this);
+            btn_disslike.setOnClickListener(this);
+        }
+
+
+        @Override
+        public void onClick(View v) {
+            if(v==btn_like){
+                int Likes=0;
+                Likes++;
+            tvlike.setText(String.valueOf(Likes));
+            }else{
+                Log.i("DissLike", "onClick " + getPosition() + " " + tvcomm.getText().toString());
+            }
+
         }
     }
+
 }
