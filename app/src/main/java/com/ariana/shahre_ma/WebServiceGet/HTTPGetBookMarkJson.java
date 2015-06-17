@@ -43,6 +43,7 @@ public class HTTPGetBookMarkJson
 
     Integer End=0;
 
+    //Url Bookmark
     public   void SetUrl_MemberId(Integer memberid)
     {
         this.MEMberID=memberid;
