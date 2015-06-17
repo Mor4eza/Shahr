@@ -3,12 +3,15 @@ package com.ariana.shahre_ma.Cards;
 /**
  * Created by ariana2 on 6/11/2015.
  */
+
 public class Comment_Card_items {
 
 
     private String mUser;
     private String mDate;
     private String mComm;
+    int mlike;
+    int mdisslike;
 
     public String getmUser() {
         return mUser;
@@ -33,7 +36,25 @@ public class Comment_Card_items {
     public void setmComm(String comm) {
         this.mComm = comm;
     }
+
+    public int getmlike() {
+        return mlike;
+    }
+
+    public void setmlike(int like) {
+        this.mlike = like;
+    }
+
+    public int getmdisslike() {
+        return mdisslike;
+    }
+
+    public void setmdisslike(int disslike) {
+        this.mdisslike = disslike;
+    }
 }
+
+
 
 
 
