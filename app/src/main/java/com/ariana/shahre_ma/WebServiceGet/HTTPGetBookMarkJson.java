@@ -5,4 +5,5 @@ package com.ariana.shahre_ma.WebServiceGet;
  */
 public class HTTPGetBookMarkJson
 {
+    ///
 }
