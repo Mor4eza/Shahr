@@ -2,13 +2,13 @@ package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,12 +17,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URLDecoder;
 
 /**
  * Created by ariana on 6/16/2015.
  */
-public class HTTPSendRateURL extends AsyncTask<String, Void, Integer> {
+public class HTTPSendRateURL extends AsyncTask<String, Void, Boolean> {
 
     private String[] blogTitles;
     private static final String TAG = "Http Connection";
@@ -61,93 +60,55 @@ public class HTTPSendRateURL extends AsyncTask<String, Void, Integer> {
         String url="http://test.shahrma.com/api/ApiTakeRate?businessId="+businessid+"&memberId="+memberid+"&rate="+rate;
         return url;
     }
-    @Override
-    protected Integer doInBackground(String... params) {
-        InputStream inputStream = null;
 
-        Integer result = 0;
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+
+    }
+
+    @Override
+    protected Boolean doInBackground(String... urls) {
         try {
-                /* create Apache HttpClient */
+
+            //------------------>>
+            HttpGet httppost = new HttpGet(GetURL());
             HttpClient httpclient = new DefaultHttpClient();
+            HttpResponse response = httpclient.execute(httppost);
 
-                /* HttpGet Method */
+            // StatusLine stat = response.getStatusLine();
+            int status = response.getStatusLine().getStatusCode();
 
-            // String paramString = URLEncodedUtils.format(params, "utf-8");
-            String sss = URLDecoder.decode(params[0], "UTF-8");
-
-            HttpGet httpGet = new HttpGet(GetURL());
-
-
-
-
-                /* optional request header */
-            httpGet.setHeader("Content-Type", "application/json");
+            if (status == 200) {
+                HttpEntity entity = response.getEntity();
+                String data = EntityUtils.toString(entity);
 
 
-                /* optional request header */
-            httpGet.setHeader("Accept", "application/json");
+                JSONObject jsono = new JSONObject(data);
 
-                /* Make http request call */
-            // Toast.makeText(getApplicationContext(), "send", Toast.LENGTH_LONG).show();
-            HttpResponse httpResponse = httpclient.execute(httpGet);
-
-
-
-
-            //mesage=httpResponse.getStatusLine().toString();
-
-            HttpEntity entity = httpResponse.getEntity();
-            InputStream webs = entity.getContent();
-            try {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(webs, "UTF-8"), 8);
-                mesage = (reader.readLine());
-                // Toast.makeText(getApplicationContext(), mesage.toString(), Toast.LENGTH_LONG).show();
-                webs.close();
-            } catch (Exception e) {
-                Log.e("Error in conversion: ", e.toString());
-                // Toast.makeText(getApplicationContext(), "errorr", Toast.LENGTH_LONG).show();
-            }
-            int statusCode = httpResponse.getStatusLine().getStatusCode();
-
-                /* 200 represents HTTP OK */
-            if (statusCode == 200) {
-
-                    /* receive response as inputStream */
-                inputStream = httpResponse.getEntity().getContent();
-
-                String response = convertInputStreamToString(inputStream);
-
-                parseResult(response);
-
-                result = 1; // Successful
-
-            } else {
-                result = 0; //"Failed to fetch data!";
+                return true;
             }
 
-        } catch (Exception e) {
-            Log.d(TAG, e.getLocalizedMessage());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+
+            e.printStackTrace();
         }
-
-        return result; //"Failed to fetch data!";
+        return false;
     }
 
+    protected void onPostExecute(Boolean result) {
 
-    @Override
-    protected void onPostExecute(Integer result) {
-            /* Download complete. Lets update UI */
-        //  Toast.makeText(getApplicationContext(),mesage,Toast.LENGTH_LONG).show();
 
-        if (result == 1) {
-            Log.e("mesage ",mesage);
-            //arrayAdapter = new ArrayAdapter(AreaActivity.this, android.R.layout.simple_list_item_1, blogTitles);
+        if (result == true) {
 
-            //listView.setAdapter(arrayAdapter);
+
         } else {
-            Log.e(TAG, "Failed to fetch data!");
+
         }
     }
-
 
     private String convertInputStreamToString(InputStream inputStream) throws IOException {
 
