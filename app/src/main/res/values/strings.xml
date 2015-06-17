@@ -33,6 +33,7 @@
     <string name="title_activity_log__in">Log_In</string>
     <string name="favorites">اضافه کردن به علاقه مندیها</string>
     <string name="title_activity_hs">hs</string>
+    <string name="title_activity_book_mark">BookMark</string>
 
 
 </resources>

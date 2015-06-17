@@ -74,6 +74,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.MainActivity" />
         </activity>
+        <activity
+            android:name=".BookMark"
+            android:label="@string/title_activity_book_mark"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ariana.shahre_ma.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

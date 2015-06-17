@@ -265,13 +265,13 @@ public class MainActivity extends ActionBarActivity {
                     Intent i=new Intent(getApplicationContext(),Jobs.class);
                     startActivity(i);
                 }
-                if (position==2){
-
+                if (position==6){
+                    Intent i=new Intent(getApplicationContext(),BookMark.class);
+                    startActivity(i);
                 }
             }
         });
         drawer.build();
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 

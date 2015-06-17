@@ -1,9 +1,9 @@
 package com.ariana.shahre_ma.Cards;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.job_details.Job_details;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,7 +106,7 @@ private  static Context context;
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
 
         public ImageView imgThumbnail;
@@ -120,19 +121,17 @@ private  static Context context;
             tvNature = (TextView)itemView.findViewById(R.id.tv_title);
             tvDesNature = (TextView)itemView.findViewById(R.id.tv_address);
             rates = (RatingBar)itemView.findViewById(R.id.rates);
+            imgThumbnail.setOnClickListener(this);
 
-            itemView.setOnClickListener(new View.OnClickListener(){
-
-                @Override
-                public void onClick(View v) {
-
-                    Log.i("ONCLICK---:::::","OK___________________________________________*********");
-                    fc.SetMarket_Business(tvNature.getText().toString());
-                    fc.SetAddress_Business(tvDesNature.getText().toString());
-                }
-            });
         }
 
+        @Override
+        public void onClick(View v) {
+            fc.SetMarket_Business(tvNature.getText().toString());
+            fc.SetAddress_Business(tvDesNature.getText().toString());
+            Intent i =new Intent(context,Job_details.class);
+            context.startActivity(i);
+        }
     }
 
 
