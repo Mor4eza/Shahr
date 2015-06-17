@@ -38,6 +38,16 @@ private  static Context context;
 
 
 
+        mItems = new ArrayList<Job_lists_card_item>();
+
+
+            Job_lists_card_item nature = new Job_lists_card_item();
+            nature.setName("");
+            nature.setDes("");
+            nature.setThumbnail(R.drawable.pooshak);
+            nature.setRate(2.5);
+
+            mItems.add(nature);
 
         try {
 
@@ -49,7 +59,7 @@ private  static Context context;
                     do {
 
 
-                        Job_lists_card_item nature = new Job_lists_card_item();
+                         nature = new Job_lists_card_item();
                         nature.setName(allrows.getString(1));
                         nature.setDes(allrows.getString(8));
                         nature.setThumbnail(R.drawable.pooshak);

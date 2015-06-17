@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.ImageDownload.ImageLoader;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
@@ -202,22 +203,22 @@ public class Sign_Up extends ActionBarActivity {
     {
 
        // Toast.makeText(getApplication(),fc.GetMember_Email(), Toast.LENGTH_LONG).show();
-/*      DataBaseSqlite mydb = new DataBaseSqlite(this);
-        Cursor allrows = mydb.select_Interest();
+     DataBaseSqlite mydb = new DataBaseSqlite(this);
+        Cursor allrows = mydb.select_bookmark();
 
         try {
             if ( allrows.moveToFirst()) {
                 do {
-                    Toast.makeText(getApplication(),String.valueOf(allrows.getInt(1)), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(), String.valueOf(allrows.getInt(0) + allrows.getInt(1) + allrows.getInt(1)), Toast.LENGTH_LONG).show();
                 }while (allrows.moveToNext());
             }
             allrows.close();
         }
-        catch (Exception e){ Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}*/
+        catch (Exception e){ Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}
 
-        SqliteTOjson json=new SqliteTOjson(this);
+     /*   SqliteTOjson json=new SqliteTOjson(this);
       //  json.getSqliteInterestTOjson();
-      email.setText(json.getSqliteInterestTOjson());
+      email.setText(json.getSqliteInterestTOjson());*/
 
 
     }

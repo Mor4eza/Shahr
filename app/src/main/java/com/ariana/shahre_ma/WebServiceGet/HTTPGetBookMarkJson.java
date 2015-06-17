@@ -1,15 +1,12 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
-import com.ariana.shahre_ma.Fields.FieldClass;
-import com.ariana.shahre_ma.Jobs_List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,13 +38,13 @@ public class HTTPGetBookMarkJson
 
     Integer len=0;
 
-    Integer End=0;
+
 
     //Url Bookmark
     public   void SetUrl_MemberId(Integer memberid)
     {
         this.MEMberID=memberid;
-        url_Business="http://test.shahrma.com/api/ApiTakeBookmark?businessId=186&memberId="+memberid;
+        url_Business="http://test.shahrma.com/api/ApiGiveBookmark?6&memberId="+memberid;
     }
 
     private String GetUrl_business()
@@ -88,27 +85,21 @@ public class HTTPGetBookMarkJson
 
             }
 
-            if(len==0) {
-                //  Toast.makeText(get, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
-                Log.i("Count Business : ", "فروشگاه ثبت نشد");
-            }
-            else {
-                Intent i = new Intent(this.context, Jobs_List.class);
-                this.context.startActivity(i);
-            }
+
 
         } catch (Exception e) {
             Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
+            Log.i("Exception", e.toString());
         }
     }
 
 
     void parseJSON(String JSONString) {
 
-        Integer ii = 0;
+
         try {
 
-            FieldClass fc=new FieldClass();
+
 
             JSONArray areas = new JSONArray(JSONString);
 
@@ -125,6 +116,7 @@ public class HTTPGetBookMarkJson
 
         } catch (JSONException e) {
             // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
+            Log.i("JSONException",e.toString());
         }
     }
 

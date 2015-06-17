@@ -606,6 +606,14 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     }
 
+    public Cursor select_bookmark()
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + TABLE_NAME_Bookmark, null);
+
+    }
+
     public Cursor select_opinion_BusinessId(Integer busintessid)
     {
 
