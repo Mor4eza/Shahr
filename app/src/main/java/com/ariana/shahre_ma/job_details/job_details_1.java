@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
@@ -51,6 +52,7 @@ public class job_details_1 extends ActionBarActivity {
      */
     public static class PlaceholderFragment extends Fragment {
 
+        Query query;
         TextView name;
         TextView tel;
         TextView web;
@@ -69,7 +71,7 @@ public class job_details_1 extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_job_details_1, container, false);
-
+            query=new Query(getActivity());
             ns=new NetState(getActivity());
 
             if(ns.checkInternetConnection()==false) {
@@ -78,10 +80,9 @@ public class job_details_1 extends ActionBarActivity {
             else
             {
 
-                DataBaseSqlite dbs=new DataBaseSqlite(getActivity());
-               dbs.delete_Opinion();
+
                 HTTPGetOpinionJson httponion = new HTTPGetOpinionJson(getActivity());
-                httponion.seturl_opinion(186);
+                httponion.seturl_opinion(fc.GetBusiness_Id());
                 httponion.execute();
             }
 
@@ -109,8 +110,8 @@ public class job_details_1 extends ActionBarActivity {
                 public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
 
                     HTTPSendRateURL httprate=new HTTPSendRateURL(getActivity());
-                    httprate.SetBusinessId(298);
-                    httprate.SetMemberId(1);
+                    httprate.SetBusinessId(fc.GetBusiness_Id());
+                    httprate.SetMemberId(query.getMemberId());
                     httprate.SetRate(Double.valueOf(rating));
                     httprate.execute();
                 }

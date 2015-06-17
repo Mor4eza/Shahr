@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
@@ -37,6 +38,7 @@ public class Jobs extends ActionBarActivity {
     String time="";
     String date="";
 
+    Query query;
     List<String> groupList;
     List<String> childList;
     Map<String, List<String>> laptopCollection;
@@ -58,7 +60,7 @@ DateTime dt=new DateTime();
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jobs);
-
+        query=new Query(this);
 /*
 
         mDrawer = MenuDrawer.attach(this, Position.RIGHT);
@@ -107,17 +109,17 @@ DateTime dt=new DateTime();
                                         groupPosition, childPosition);
                                 Toast.makeText(getApplicationContext(), selected, Toast.LENGTH_LONG)
                                         .show();
-
+                                //query=new Query(Jobs.this,Jobs.this);
                                 fc.SetSelected_job(selected);
 
-                               count = getCountBusiness();
+                               count = query.getCountBusiness(query.getsubsetID(selected));
 
-                                time=getTime_ZamanSanj();
-                                 date=getDate_ZamanSanj();
+                                time=query.getTime_ZamanSanj();
+                                 date=query.getDate_ZamanSanj();
 
 
 
-                                Toast.makeText(getApplicationContext(),count.toString(),Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),query.getsubsetID(selected).toString(),Toast.LENGTH_LONG).show();
                                if (ns.checkInternetConnection() == false) {
 
                                     if (count == 0)
@@ -139,7 +141,7 @@ DateTime dt=new DateTime();
                                     if (count == 0 ) {
                                       //  Toast.makeText(getApplicationContext(),"فروشگاه ثبت نشده",Toast.LENGTH_LONG).show();
                                         httpbusin = new HTTPGetBusinessJson(Jobs.this);
-                                        httpbusin.SetUrl_business(getsubsetID());
+                                        httpbusin.SetUrl_business(query.getsubsetID(selected));
                                         httpbusin.execute();
 
                                         Log.i("Count ==0 "," ok");
@@ -153,7 +155,7 @@ DateTime dt=new DateTime();
                                                         dbs.Add_UpdateTime(fc.GetTableNameUpdateTime(), dt.Hours(), dt.Now());
 
                                                         httpbusin = new HTTPGetBusinessJson(Jobs.this);
-                                                        httpbusin.SetUrl_business(getsubsetID());
+                                                        httpbusin.SetUrl_business(query.getsubsetID(selected));
                                                         httpbusin.execute();
                                                         Log.i("Time == 0", " ok");
                                                     }
@@ -165,7 +167,7 @@ DateTime dt=new DateTime();
                                                                 dbs.Add_UpdateTime(fc.GetTableNameUpdateTime(), dt.Hours(), dt.Now());
 
                                                                 httpbusin = new HTTPGetBusinessJson(Jobs.this);
-                                                                httpbusin.SetUrl_business(getsubsetID());
+                                                                httpbusin.SetUrl_business(query.getsubsetID(selected));
                                                                 httpbusin.execute();
                                                                 Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_LONG).show();
                                                                 Log.i("Time > Time+3 ", "ok");
@@ -266,75 +268,6 @@ DateTime dt=new DateTime();
         return (int) (pixels * scale + 5f);
     }
 
-
-    private Integer getsubsetID() {
-
-
-
-        Integer Result = 0;
-
-            try {
-                SQLiteDatabase mydb = openOrCreateDatabase(fc.GetDataBaseName(), Context.MODE_PRIVATE, null);
-                Cursor allrows = mydb.rawQuery("SELECT Id FROM " + fc.GetTableNameSubset() + "  WHERE SubsetName='" + fc.GetSelected_job() + "'", null);
-                allrows.moveToFirst();
-                Result = allrows.getInt(0);
-                allrows.close();
-                mydb.close();
-
-                fc.SetBusiness_SubsetId(Result);
-            }
-            catch (Exception e){Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();}
-        return Result;
-    }
-
-        private Integer getCountBusiness() {
-        Integer Result = 0;
-
-        try {
-            DataBaseSqlite dbs = new DataBaseSqlite(this);
-            Cursor allrows = dbs.select_business_SubsetId(getsubsetID());
-            allrows.moveToFirst();
-            Result = allrows.getInt(0);
-            allrows.close();
-        }
-        catch (Exception e)
-        {}
-
-        return Result;
-    }
-
-
-    private String getTime_ZamanSanj() {
-        String Result ="";
-
-        try {
-            DataBaseSqlite dbs = new DataBaseSqlite(this);
-            Cursor allrows = dbs.select_UpdateTime(fc.GetTableNameUpdateTime());
-            allrows.moveToFirst();
-            Result = allrows.getString(1);
-            allrows.close();
-        }
-        catch (Exception e)
-        {}
-
-        return Result;
-    }
-
-    private String getDate_ZamanSanj() {
-        String Result ="";
-
-        try {
-            DataBaseSqlite dbs = new DataBaseSqlite(this);
-            Cursor allrows = dbs.select_UpdateTime(fc.GetTableNameUpdateTime());
-            allrows.moveToFirst();
-            Result = allrows.getString(2);
-            allrows.close();
-        }
-        catch (Exception e)
-        {}
-
-        return Result;
-    }
 
 
 

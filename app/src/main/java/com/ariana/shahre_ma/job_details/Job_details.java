@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBookMarkJson;
@@ -37,6 +38,7 @@ import java.util.Locale;
 public class Job_details extends ActionBarActivity implements ActionBar.TabListener {
 
 
+    Query query;
     CalendarTool ct=new CalendarTool();
     FieldClass fc = new FieldClass();
     HTTPPostMemberJson sendPost;
@@ -55,7 +57,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_details);
-
+query=new Query(this);
 
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
@@ -261,14 +263,14 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
         if (id == R.id.action_Fav) {
             Toast.makeText(getApplication(),"پین شد...",Toast.LENGTH_LONG).show();
 
-          /*  HTTPSendBookMarkURL httpbookmark=new HTTPSendBookMarkURL(this);
-            httpbookmark.SetBusinessid(187);
-            httpbookmark.SetMemberid(1);
+           /* HTTPSendBookMarkURL httpbookmark=new HTTPSendBookMarkURL(this);
+            httpbookmark.SetBusinessid(query.getBusinessId());
+            httpbookmark.SetMemberid(query.getMemberId());
             httpbookmark.execute();*/
 
             //new JSONAsyncTask().execute();
             HTTPGetBookMarkJson b=new HTTPGetBookMarkJson(this);
-            b.SetUrl_MemberId(1);
+            b.SetUrl_MemberId(query.getMemberId());
             b.execute();
 
 

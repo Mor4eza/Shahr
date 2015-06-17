@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPSendLikeURL;
@@ -36,7 +37,7 @@ public class Comment_Card_Adapter extends RecyclerView.Adapter<Comment_Card_Adap
 
     List<Comment_Card_items> mItems;
    FieldClass fc=new FieldClass();
-
+Query query;
     private  static Context context;
 
     public Comment_Card_Adapter(Context context) {
@@ -47,7 +48,7 @@ public class Comment_Card_Adapter extends RecyclerView.Adapter<Comment_Card_Adap
 
 
         mItems = new ArrayList<Comment_Card_items>();
-
+        query=new Query(this.context);
 
             Comment_Card_items nature = new Comment_Card_items();
             nature.setmUser("مرتضی");

@@ -49,8 +49,6 @@ public class BookMark extends ActionBarActivity {
         {
             do
             {
-
-
                 Cursor row = db.select_business_NameMarket(allrows.getInt(1));
                 row.moveToNext();
                 item.add(row.getString(0));

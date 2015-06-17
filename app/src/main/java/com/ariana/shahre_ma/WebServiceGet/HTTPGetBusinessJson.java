@@ -202,7 +202,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
 
                 ratecount[i]=area.getInt("RateCount");
-                ratevalue[i]=area.getDouble("RateAverage");
+                ratevalue[i]=area.getDouble("RateAverage=");
 
 
             }

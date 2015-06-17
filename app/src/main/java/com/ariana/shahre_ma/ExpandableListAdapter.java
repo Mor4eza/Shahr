@@ -8,10 +8,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 
 import java.util.List;
@@ -33,6 +31,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private Map<String, List<String>> laptopCollections;
     private List<String> laptops;
 
+    Query query;
     Integer subsetid=0;
     Integer memberid=0;
     FieldClass fc=new FieldClass();
@@ -85,13 +84,14 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                                 final String selected = (String) getChild(
                                         groupPosition, childPosition);
 
+                                query=new Query(context);
               Toast.makeText(context, selected,Toast.LENGTH_LONG).show();
-                               subsetid=  getsubsetID(selected);
-                               memberid=getMemberID();
+                               subsetid= query.getsubsetID(selected);
+                               memberid=query.getMemberId();
 
 
                                 DataBaseSqlite db=new DataBaseSqlite(context);
-                                db.Add_Interest(subsetid,1);
+                                db.Add_Interest(subsetid,query.getMemberId());
 
                             }
                         });
@@ -149,49 +149,4 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         return true;
     }
 
-    private Integer getsubsetID(String subsetname) {
-
-
-
-        Integer Result = 0;
-
-        try {
-            DataBaseSqlite db=new DataBaseSqlite(context);
-            Cursor allrows = db.select_SubsetId(subsetname);
-            allrows.moveToFirst();
-            Result = allrows.getInt(0);
-            allrows.close();
-
-
-            fc.SetBusiness_SubsetId(Result);
-        }
-        catch (Exception e){
-           // Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
-            Log.i("SUBSETID",e.toString());
-        }
-        return Result;
-    }
-
-    private Integer getMemberID() {
-
-
-
-        Integer Result = 0;
-
-        try {
-            DataBaseSqlite db=new DataBaseSqlite(context);
-            Cursor allrows = db.select_Member();
-            allrows.moveToFirst();
-            Result = allrows.getInt(0);
-            allrows.close();
-
-
-            fc.SetBusiness_SubsetId(Result);
-        }
-        catch (Exception e){
-            // Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
-            Log.i("MEMBERID",e.toString());
-        }
-        return Result;
-    }
 }

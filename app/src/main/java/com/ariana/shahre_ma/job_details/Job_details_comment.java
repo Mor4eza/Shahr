@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.Cards.Comment_Card_Adapter;
 import com.ariana.shahre_ma.Date.CalendarTool;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
@@ -22,6 +23,7 @@ import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostOpinionJson;
 
 public class Job_details_comment extends ActionBarActivity {
+
 
 
 
@@ -53,7 +55,7 @@ public class Job_details_comment extends ActionBarActivity {
         HTTPPostMemberJson sendPost;
         SqliteTOjson json ;
         String _json;
-
+        Query query;
         EditText txtComm;
         NetState ns;
 
@@ -68,7 +70,7 @@ public class Job_details_comment extends ActionBarActivity {
             ns=new NetState(getActivity());
 
             json = new SqliteTOjson(getActivity());
-
+query=new Query(getActivity());
 
             final Button btnsend = (Button)rootView.findViewById(R.id.bnt_send);
 
@@ -82,7 +84,7 @@ public class Job_details_comment extends ActionBarActivity {
                     else
                     {
                             try {
-                                _json = (json.getOpinionTOjson(txtComm.getText().toString(), ct.getIranianDate(),1,186));
+                                _json = (json.getOpinionTOjson(txtComm.getText().toString(), ct.getIranianDate(),query.getMemberId(),fc.GetBusiness_Id()));
                                 fc.SetOpinion_Description(txtComm.getText().toString());
                                 fc.SetOpinion_Date(ct.getIranianDate().toString());
                                 fc.SetOpinion_MemberName("");

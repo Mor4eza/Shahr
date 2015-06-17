@@ -1,6 +1,5 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -8,7 +7,6 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,6 +80,7 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
             DataBaseSqlite dbs = new DataBaseSqlite(context);
 
 
+            dbs.delete_Opinion();
             for (int i = 0; i <len; i++)
             {
                 dbs.Add_opinion(Id[i], description[i], date[i], erja[i], countlike[i], countdislike[i], membername[i]);
