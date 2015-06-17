@@ -53,7 +53,7 @@ private  static Context context;
                         nature.setName(allrows.getString(1));
                         nature.setDes(allrows.getString(8));
                         nature.setThumbnail(R.drawable.pooshak);
-                        nature.setRate(2.5);
+                        nature.setRate(allrows.getDouble(29));
 
                         mItems.add(nature);
 

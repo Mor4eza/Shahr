@@ -20,46 +20,46 @@ import java.io.InputStreamReader;
 import java.net.URLDecoder;
 
 /**
- * Created by ariana on 6/15/2015.
+ * Created by ariana on 6/16/2015.
  */
-public class HTTPSendLikeURL extends AsyncTask<String, Void, Integer> {
+public class HTTPSendRateURL extends AsyncTask<String, Void, Integer> {
 
     private String[] blogTitles;
     private static final String TAG = "Http Connection";
     private  String mesage;
 
-    Boolean like;
-    Integer opinionid;
+
+    Integer businessid;
     Integer memberid;
 
+    Double rate;
     Context context;
 
-    public HTTPSendLikeURL(Context context)
+    public HTTPSendRateURL(Context context)
     {
         this.context=context;
     }
 
-    public void Setopinionid(Integer opinionid)
+
+    public void SetBusinessId(Integer opinionid)
     {
-        this.opinionid=opinionid;
+        this.businessid=opinionid;
     }
 
-    public void SetMemberid(Integer memberid)
+    public void SetMemberId(Integer memberid)
     {
         this.memberid=memberid;
     }
 
-    public void SetLike(Boolean like)
+    public void SetRate(Double rate)
     {
-        this.like=like;
+        this.rate=rate;
     }
 
     public String GetURL()
     {
-       String url="http://test.shahrma.com/api/ApiTakeLike?opinionId="+opinionid+"&memberId="+memberid+"&value="+like;
-        Log.i("URL",url);
+        String url="http://test.shahrma.com/api/ApiTakeRate?businessId="+businessid+"&memberId="+memberid+"&rate="+rate;
         return url;
-
     }
     @Override
     protected Integer doInBackground(String... params) {
@@ -67,34 +67,66 @@ public class HTTPSendLikeURL extends AsyncTask<String, Void, Integer> {
 
         Integer result = 0;
         try {
-
+                /* create Apache HttpClient */
             HttpClient httpclient = new DefaultHttpClient();
+
+                /* HttpGet Method */
+
+            // String paramString = URLEncodedUtils.format(params, "utf-8");
+            String sss = URLDecoder.decode(params[0], "UTF-8");
+
             HttpGet httpGet = new HttpGet(GetURL());
+
+
+
+
+                /* optional request header */
+            httpGet.setHeader("Content-Type", "application/json");
+
+
+                /* optional request header */
+            httpGet.setHeader("Accept", "application/json");
+
+                /* Make http request call */
+            // Toast.makeText(getApplicationContext(), "send", Toast.LENGTH_LONG).show();
             HttpResponse httpResponse = httpclient.execute(httpGet);
+
+
+
+
+            //mesage=httpResponse.getStatusLine().toString();
+
             HttpEntity entity = httpResponse.getEntity();
             InputStream webs = entity.getContent();
             try {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(webs, "UTF-8"), 8);
                 mesage = (reader.readLine());
-
+                // Toast.makeText(getApplicationContext(), mesage.toString(), Toast.LENGTH_LONG).show();
                 webs.close();
             } catch (Exception e) {
                 Log.e("Error in conversion: ", e.toString());
+                // Toast.makeText(getApplicationContext(), "errorr", Toast.LENGTH_LONG).show();
             }
             int statusCode = httpResponse.getStatusLine().getStatusCode();
+
                 /* 200 represents HTTP OK */
             if (statusCode == 200) {
+
                     /* receive response as inputStream */
                 inputStream = httpResponse.getEntity().getContent();
+
                 String response = convertInputStreamToString(inputStream);
+
                 parseResult(response);
+
                 result = 1; // Successful
+
             } else {
                 result = 0; //"Failed to fetch data!";
             }
+
         } catch (Exception e) {
-            Log.i(TAG, e.getLocalizedMessage());
-            Log.i("Exception", e.toString());
+            Log.d(TAG, e.getLocalizedMessage());
         }
 
         return result; //"Failed to fetch data!";
@@ -107,7 +139,7 @@ public class HTTPSendLikeURL extends AsyncTask<String, Void, Integer> {
         //  Toast.makeText(getApplicationContext(),mesage,Toast.LENGTH_LONG).show();
 
         if (result == 1) {
-            Log.i("mesage ",mesage);
+            Log.e("mesage ",mesage);
             //arrayAdapter = new ArrayAdapter(AreaActivity.this, android.R.layout.simple_list_item_1, blogTitles);
 
             //listView.setAdapter(arrayAdapter);
@@ -160,7 +192,6 @@ public class HTTPSendLikeURL extends AsyncTask<String, Void, Integer> {
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Log.i("JSONException",e.toString());
         }
     }
 }
