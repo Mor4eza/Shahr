@@ -14,7 +14,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.ImageDownload.ImageLoader;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
@@ -83,11 +82,11 @@ public class Sign_Up extends ActionBarActivity {
 
                 switch (pos) {
                     case 0:
-                        // Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_LONG).show();
+
                         _sex = true;
                         break;
                     case 1:
-                        //Toast.makeText(getApplicationContext(), "6", Toast.LENGTH_LONG).show();
+
                         _sex = false;
                         break;
 
@@ -118,7 +117,6 @@ public class Sign_Up extends ActionBarActivity {
             Integer cityid=0;
             cityid=getCityId();
             _json = (json.getSqliteTOjson(Aname, Aemail, Aphone, Aage, Asex, Ausername, Apass,cityid));
-          //  email.setText(_json);
             fc.SetMember_Name(Aname);
             fc.SetMember_Email(Aemail);
             fc.SetMember_Mobile(Aphone);
@@ -187,11 +185,7 @@ public class Sign_Up extends ActionBarActivity {
     }
 
     private Integer getCityId() {
-
-
-
         Integer Result = 0;
-
 
         SQLiteDatabase mydb = openOrCreateDatabase(fc.GetDataBaseName(), Context.MODE_PRIVATE, null);
         Cursor allrows = mydb.rawQuery("SELECT Id FROM " + fc.GetTableNamecity()+ "  WHERE Name='" +city.getText().toString()+ "'", null);

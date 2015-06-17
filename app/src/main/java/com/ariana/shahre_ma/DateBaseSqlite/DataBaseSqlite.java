@@ -245,7 +245,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     // SQL statement to create bookmark table
     private static final String CREATE_TABLE_Bookmark = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_Bookmark + " (" +
-            "Id INTEGER PRIMARY KEY ," +
+            "Id INTEGER PRIMARY KEY AUTOINCREMENT," +
             "BusinessId INTEGER," +
             "MemberId INTEGER" +
             ");";
@@ -456,7 +456,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.close();
     }
 
-    public void Add_bookmark(Integer id,Integer businessid,Integer memberid)
+    public void Add_bookmark(Integer businessid,Integer memberid)
     {
 
         // 1. get reference to writable DB
@@ -464,7 +464,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(ID_bookmark,id);
+
         values.put(BUSINESSID_bookmark,businessid);
         values.put(MEMBERID_bookmark, memberid);
 

@@ -39,6 +39,12 @@ public class FieldClass
     private static String Password;
     private static Integer CityId;
 
+
+    //Field BookMark table
+    private static Integer Id_Bookmark;
+    private static Integer Businessid_Bookmark;
+    private static Integer Memberid_Bookmark;
+
     // Field  Opinion table
     private static String Description;
     private static String Date;
@@ -244,6 +250,28 @@ public class FieldClass
     public Integer  GetBusiness_SubsetIdb()
     {
         return  Business_SubsetId;
+    }
+
+
+    // Set  BookMark
+    public void  SetMemberid_BookMark(Integer memberid)
+    {
+        Memberid_Bookmark=memberid;
+    }
+    public void  SetBusinessid_BookMark(Integer businessid)
+    {
+          Businessid_Bookmark=businessid;
+    }
+
+
+    //  Get BookMark
+    public Integer  GetMemberid_BookMark()
+    {
+        return Memberid_Bookmark;
+    }
+    public Integer  GetBusinessid_BookMark()
+    {
+        return  Businessid_Bookmark;
     }
 
 
