@@ -16,6 +16,7 @@ import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetOpinionJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPSendRateURL;
 
 
 public class job_details_1 extends ActionBarActivity {
@@ -106,7 +107,12 @@ public class job_details_1 extends ActionBarActivity {
             rate1.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
                 @Override
                 public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                    Toast.makeText(getActivity(), String.valueOf(rating),Toast.LENGTH_LONG).show();
+
+                    HTTPSendRateURL httprate=new HTTPSendRateURL(getActivity());
+                    httprate.SetBusinessId(298);
+                    httprate.SetMemberId(1);
+                    httprate.SetRate(Double.valueOf(rating));
+                    httprate.execute();
                 }
             });
 

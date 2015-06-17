@@ -29,7 +29,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -158,12 +157,12 @@ public class Comment_Card_Adapter extends RecyclerView.Adapter<Comment_Card_Adap
             else
             {
 
-               // HTTPSendLikeURL httplike=new HTTPSendLikeURL(context);
-                new HTTPSendLikeURL1(context).execute("http://test.shahrma.com/api/ApiTakeLike?opinionId=34&memberId=1&value=true");
-             //  httplike.SetLike(false);
-              //  httplike.SetMemberid(1);
-              //  httplike.Setopinionid(getIdOpinion());
-             //  httplike.execute();
+                HTTPSendLikeURL httplike=new HTTPSendLikeURL(context);
+
+                httplike.SetLike(false);
+                httplike.SetMemberid(1);
+                httplike.Setopinionid(getIdOpinion());
+                httplike.execute();
 
                 //Log.i("DissLike", "onClick " + getPosition() + " " + tvcomm.getText().toString());
             }
