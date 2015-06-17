@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
@@ -46,6 +47,7 @@ import java.util.Locale;
 
 public class Job_details extends ActionBarActivity implements ActionBar.TabListener {
 
+    RatingBar rates;
 
     CalendarTool ct=new CalendarTool();
     FieldClass fc = new FieldClass();
@@ -70,6 +72,8 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -118,8 +122,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
        map();
       // route();
 
-        }else if(tab.getPosition()==3){
-
+        }else if(tab.getPosition()==0){
 
 
         }

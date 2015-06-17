@@ -1,17 +1,13 @@
 package com.ariana.shahre_ma.job_details;
 
-import android.content.Context;
 import android.database.Cursor;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +34,13 @@ public class job_details_1 extends ActionBarActivity {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
+
+
+
+
         }
+
+
     }
 
 
@@ -57,20 +59,18 @@ public class job_details_1 extends ActionBarActivity {
         TextView address;
         TextView des;
         FieldClass fc=new FieldClass();
-NetState ns;
-
-
+        NetState ns;
+        RatingBar rate1;
         public PlaceholderFragment() {
-
-
         }
 
-
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+        public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_job_details_1, container, false);
-ns=new NetState(getActivity());
+
+
+            ns=new NetState(getActivity());
 
             if(ns.checkInternetConnection()==false) {
 
@@ -93,14 +93,25 @@ ns=new NetState(getActivity());
             zamine=(TextView) rootView.findViewById(R.id.market_zamine);
             address=(TextView) rootView.findViewById(R.id.market_address);
             des=(TextView) rootView.findViewById(R.id.market_desc);
-
+            rate1=(RatingBar) rootView.findViewById(R.id.ratingBar1);
             display_detail();
-
-
+            rates_change();
 
             return rootView;
         }
 
+        private  void rates_change(){
+
+
+            Toast.makeText(getActivity(),"this",Toast.LENGTH_LONG).show();
+            rate1.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                @Override
+                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                    Toast.makeText(getActivity(), String.valueOf(rating),Toast.LENGTH_LONG).show();
+                }
+            });
+
+        }
 
     private  void display_detail()
     {
