@@ -69,7 +69,6 @@ public class job_details_1 extends ActionBarActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_job_details_1, container, false);
 
-
             ns=new NetState(getActivity());
 
             if(ns.checkInternetConnection()==false) {

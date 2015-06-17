@@ -15,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
@@ -47,7 +46,6 @@ import java.util.Locale;
 
 public class Job_details extends ActionBarActivity implements ActionBar.TabListener {
 
-    RatingBar rates;
 
     CalendarTool ct=new CalendarTool();
     FieldClass fc = new FieldClass();

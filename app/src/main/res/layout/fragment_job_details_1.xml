@@ -58,7 +58,8 @@
             android:progressBackgroundTint="#ff31bdff"
             android:progressTintMode="multiply"
             android:secondaryProgressTint="#ffff3013"
-            android:secondaryProgressTintMode="multiply" />
+            android:secondaryProgressTintMode="multiply"
+            />
 
         <TextView
             android:layout_width="wrap_content"
