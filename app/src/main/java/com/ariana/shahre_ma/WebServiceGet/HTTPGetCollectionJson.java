@@ -42,7 +42,8 @@ public class HTTPGetCollectionJson extends AsyncTask<String, String, String>
         protected void onPreExecute() {
             super.onPreExecute();
             pd = new ProgressDialog(context);
-            pd.setMessage("loading");
+            pd.setMessage("در حال بروزرسانی...");
+            pd.setCancelable(false);
             pd.show();
         }
 

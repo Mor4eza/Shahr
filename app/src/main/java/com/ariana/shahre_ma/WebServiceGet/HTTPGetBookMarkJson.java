@@ -25,9 +25,6 @@ public class HTTPGetBookMarkJson
         extends AsyncTask<String, String, String>
 {
 
-    RecyclerView mRecyclerView;
-    RecyclerView.LayoutManager mLayoutManager;
-    RecyclerView.Adapter job_list_Adapter;
 
     private static Context context;
 

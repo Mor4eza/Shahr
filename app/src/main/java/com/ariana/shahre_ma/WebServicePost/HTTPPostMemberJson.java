@@ -5,11 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Log_In;
+import com.ariana.shahre_ma.R;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -32,17 +36,11 @@ public class HTTPPostMemberJson extends AsyncTask<String, Long, Object> {
 
 private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMembers";
 
-
     private ProgressDialog mProgressDialog;
-
-
-
     // variable get json
     private static String data_json;
     // variable response
     private  static String response_message;
-
-
     FieldClass fc=new FieldClass();
     private ProgressDialog dialog;
 
@@ -141,11 +139,13 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
                     dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
                     mProgressDialog.dismiss();
 
+
+
                     Intent i = new Intent(this.context, Log_In.class);
                     this.context.startActivity(i);
-                    Toast.makeText(context, "کاربر ثبت شد!", Toast.LENGTH_LONG).show();
+                   // Toast.makeText(context, "کاربر ثبت شد!", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(context, "کاربر ساخته نشد دوباره امتحان کنید", Toast.LENGTH_LONG).show();
+                  //  Toast.makeText(context, "کاربر ساخته نشد دوباره امتحان کنید", Toast.LENGTH_LONG).show();
                 }
 
 

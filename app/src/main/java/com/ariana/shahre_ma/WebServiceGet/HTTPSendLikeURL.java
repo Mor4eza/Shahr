@@ -80,8 +80,9 @@ public class HTTPSendLikeURL extends AsyncTask<String, Void, Boolean> {
             int status = response.getStatusLine().getStatusCode();
 
             if (status == 200) {
-                HttpEntity entity = response.getEntity();
-                String data = EntityUtils.toString(entity);
+
+                HttpEntity en=response.getEntity();
+                String data = EntityUtils.toString(en);
 
 
                 mesage=data;

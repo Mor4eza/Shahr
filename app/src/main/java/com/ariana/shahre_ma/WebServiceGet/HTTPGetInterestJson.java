@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Jobs;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -38,7 +39,7 @@ public class HTTPGetInterestJson  extends AsyncTask<String, String, String>
     }
     private static final String url_collection="http://test.shahrma.com/api/ApiGiveInterest?memberId=1";
 
-
+Jobs job=new Jobs();
     Integer subsetid[];
     Integer memberid[];
     Integer len;
@@ -73,7 +74,7 @@ public class HTTPGetInterestJson  extends AsyncTask<String, String, String>
 
             DataBaseSqlite dbs = new DataBaseSqlite(context);
 
-
+          // job.mSwipeRefreshLayout.setRefreshing(false);
             for (int i = 0; i <len; i++)
             {
                 dbs.Add_Interest( subsetid[i], memberid[i]);
@@ -81,7 +82,8 @@ public class HTTPGetInterestJson  extends AsyncTask<String, String, String>
             }
             pd.dismiss();
         } catch (Exception e) {
-            Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
+           // Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
+            Log.e("Exception",e.toString());
         }
     }
 

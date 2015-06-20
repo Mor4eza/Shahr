@@ -1,9 +1,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/jobs_relative"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
 
     <ExpandableListView
         android:id="@+id/laptop_list"
@@ -14,13 +23,14 @@
         android:layout_width="match_parent"
         android:layout_height="430dp"
         android:drawSelectorOnTop="false"
-      >
+        >
     </ExpandableListView>
 
+    </android.support.v4.widget.SwipeRefreshLayout>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="ارسال علاقه مندی ها"
         android:id="@+id/button2"
         android:onClick="SendPostInterest"
         android:layout_below="@+id/laptop_list"
@@ -32,13 +42,16 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button1"
+        android:text="دریافت علاقه مندی ها"
         android:id="@+id/button3"
         android:layout_alignBottom="@+id/button2"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="36dp"
         android:layout_marginEnd="36dp"
-        android:onClick="GetPostInterest" />
+        android:onClick="GetPostInterest"
+        android:layout_marginTop="0dp" />
+
+
 
 </RelativeLayout>

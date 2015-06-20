@@ -1,9 +1,14 @@
 package com.ariana.shahre_ma.DateBaseSqlite;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.Jobs_List;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 
 /**
  * Created by ariana2 on 6/17/2015.
@@ -143,4 +148,68 @@ public class Query {
     }
 
 
+
+/*
+    if (ns.checkInternetConnection() == false) {
+
+        if (count == 0)
+        {
+            Toast.makeText(getApplicationContext(), "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            Intent i = new Intent(getApplicationContext(), Jobs_List.class);
+            startActivity(i);
+
+        }
+
+    }
+    else
+    {
+
+
+        if (count == 0 ) {
+            //  Toast.makeText(getApplicationContext(),"فروشگاه ثبت نشده",Toast.LENGTH_LONG).show();
+            httpbusin = new HTTPGetBusinessJson(Jobs.this);
+            httpbusin.SetUrl_business(query.getsubsetID(selected));
+            httpbusin.execute();
+
+            Log.i("Count ==0 ", " ok");
+        }
+        else
+        {
+            if (time == "")
+            {
+                Toast.makeText(getApplicationContext(), "Time: " + time, Toast.LENGTH_LONG).show();
+                DataBaseSqlite dbs = new DataBaseSqlite(Jobs.this);
+                dbs.Add_UpdateTime(fc.GetTableNameUpdateTime(), dt.Hours(), dt.Now());
+
+                httpbusin = new HTTPGetBusinessJson(Jobs.this);
+                httpbusin.SetUrl_business(query.getsubsetID(selected));
+                httpbusin.execute();
+                Log.i("Time == 0", " ok");
+            }
+            else
+            {
+                if (Integer.parseInt(dt.Hours()) >= Integer.parseInt(time + 3) || date != dt.Now()) {
+                    DataBaseSqlite dbs = new DataBaseSqlite(Jobs.this);
+                    dbs.delete_UpdateTime(fc.GetTableNameUpdateTime());
+                    dbs.Add_UpdateTime(fc.GetTableNameUpdateTime(), dt.Hours(), dt.Now());
+
+                    httpbusin = new HTTPGetBusinessJson(Jobs.this);
+                    httpbusin.SetUrl_business(query.getsubsetID(selected));
+                    httpbusin.execute();
+                    Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_LONG).show();
+                    Log.i("Time > Time+3 ", "ok");
+                }
+                else
+                {
+                    Intent i = new Intent(getApplicationContext(), Jobs_List.class);
+                    startActivity(i);
+                    Toast.makeText(getApplicationContext(), "0", Toast.LENGTH_LONG).show();
+                    Log.i("NOT IF And Eles ", "Ok");
+                }
+            }
+        }
+    }*/
 }

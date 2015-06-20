@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -37,7 +38,7 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
 
     Integer len;
     Integer BusintessId;
-
+ProgressDialog pd;
 
     FieldClass fc=new FieldClass();
     public void seturl_opinion(Integer business_id) {
@@ -56,6 +57,15 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
     public HTTPGetOpinionJson(Context c) {
         context = c;
 
+    }
+
+    @Override
+    protected void onPreExecute() {
+  /*      super.onPreExecute();
+        pd = new ProgressDialog(context);
+        pd.setMessage("در حال بروزرسانی...");
+        pd.setCancelable(false);
+        pd.show();*/
     }
     protected String doInBackground(String... args) {
         try {
@@ -87,6 +97,7 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
 
 
             }
+            //pd.dismiss();
         } catch (Exception e) {
             Toast.makeText(context.getApplicationContext(), "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
         }
@@ -126,22 +137,6 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
                 membername[i]= area.getString("Member");
 
 
-
-
-
-/*
-                date[i]="1394/03/23";
-                description[i] = "Tank you";
-                countdislike[i]= 10;
-                countlike[i]=2;
-                erja[i]=186;
-                Id[i]=i+1;
-                membername[i]= "کاربری یک"+i;*/
-
-
-
-
-         
             }
 
         } catch (JSONException e) {

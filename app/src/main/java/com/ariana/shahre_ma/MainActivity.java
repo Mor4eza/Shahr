@@ -204,7 +204,9 @@ public class MainActivity extends ActionBarActivity {
             uName = allrows.getString(0);
             allrows.close();
         }
-        catch (Exception e) {Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();}
+        catch (Exception e) {
+            //Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
+        }
         //drawer
 
 

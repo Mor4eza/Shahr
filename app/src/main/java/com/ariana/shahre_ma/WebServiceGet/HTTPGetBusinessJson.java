@@ -202,13 +202,16 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
 
                 ratecount[i]=area.getInt("RateCount");
-                ratevalue[i]=area.getDouble("RateAverage=");
+                ratevalue[i]=area.getDouble("RateAverage");
+
+
 
 
             }
 
         } catch (JSONException e) {
             // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
+            Log.i("JSONException",e.toString());
         }
     }
 

@@ -269,10 +269,10 @@ query=new Query(this);
             httpbookmark.execute();*/
 
             //new JSONAsyncTask().execute();
-            HTTPGetBookMarkJson b=new HTTPGetBookMarkJson(this);
+          /*  HTTPGetBookMarkJson b=new HTTPGetBookMarkJson(this);
             b.SetUrl_MemberId(query.getMemberId());
             b.execute();
-
+*/
 
             return true;
         }

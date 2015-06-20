@@ -5,15 +5,13 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
-
 import com.ariana.shahre_ma.Date.DateTime;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
@@ -21,9 +19,7 @@ import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetInterestJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostInterestJson;
-
 import net.simonvt.menudrawer.MenuDrawer;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -37,7 +33,7 @@ public class Jobs extends ActionBarActivity {
 
     String time="";
     String date="";
-
+    public SwipeRefreshLayout mSwipeRefreshLayout = null;
     Query query;
     List<String> groupList;
     List<String> childList;
@@ -75,7 +71,19 @@ DateTime dt=new DateTime();
 
         createCollection();
 
-
+        //Initialize swipe to refresh view
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //Refreshing data on server
+            Toast.makeText(getApplicationContext(),"ok",Toast.LENGTH_LONG).show();
+            }
+        });
 
         expListView = (ExpandableListView) findViewById(R.id.laptop_list);
 
@@ -112,82 +120,36 @@ DateTime dt=new DateTime();
                                 //query=new Query(Jobs.this,Jobs.this);
                                 fc.SetSelected_job(selected);
 
-                               count = query.getCountBusiness(query.getsubsetID(selected));
+                                count = query.getCountBusiness(query.getsubsetID(selected));
 
-                                time=query.getTime_ZamanSanj();
-                                 date=query.getDate_ZamanSanj();
+                                time = query.getTime_ZamanSanj();
+                                date = query.getDate_ZamanSanj();
 
 
+                                Toast.makeText(getApplicationContext(), query.getsubsetID(selected).toString(), Toast.LENGTH_LONG).show();
+                                if (ns.checkInternetConnection() == false) {
 
-                                Toast.makeText(getApplicationContext(),query.getsubsetID(selected).toString(),Toast.LENGTH_LONG).show();
-                               if (ns.checkInternetConnection() == false) {
 
-                                    if (count == 0)
-                                    {
-                                        Toast.makeText(getApplicationContext(),"فروشگاه ثبت نشده",Toast.LENGTH_LONG).show();
-                                    }
-                                    else
-                                    {
-                                        Intent i = new Intent(getApplicationContext(), Jobs_List.class);
-                                        startActivity(i);
+                                    Toast.makeText(getApplicationContext(), "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
 
-                                    }
+                                    Intent i = new Intent(getApplicationContext(), Jobs_List.class);
+                                    startActivity(i);
+
+
+                                } else {
+
+                                    httpbusin = new HTTPGetBusinessJson(Jobs.this);
+                                    httpbusin.SetUrl_business(query.getsubsetID(selected));
+                                    httpbusin.execute();
+                                    Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_LONG).show();
 
                                 }
-                                else
-                                {
 
 
-                                    if (count == 0 ) {
-                                      //  Toast.makeText(getApplicationContext(),"فروشگاه ثبت نشده",Toast.LENGTH_LONG).show();
-                                        httpbusin = new HTTPGetBusinessJson(Jobs.this);
-                                        httpbusin.SetUrl_business(query.getsubsetID(selected));
-                                        httpbusin.execute();
+                                return true;
+                            }
 
-                                        Log.i("Count ==0 "," ok");
-                                    }
-                                    else
-                                    {
-                                                    if (time == "")
-                                                    {
-                                                        Toast.makeText(getApplicationContext(), "Time: " + time, Toast.LENGTH_LONG).show();
-                                                        DataBaseSqlite dbs = new DataBaseSqlite(Jobs.this);
-                                                        dbs.Add_UpdateTime(fc.GetTableNameUpdateTime(), dt.Hours(), dt.Now());
-
-                                                        httpbusin = new HTTPGetBusinessJson(Jobs.this);
-                                                        httpbusin.SetUrl_business(query.getsubsetID(selected));
-                                                        httpbusin.execute();
-                                                        Log.i("Time == 0", " ok");
-                                                    }
-                                                    else
-                                                    {
-                                                            if (Integer.parseInt(dt.Hours()) >= Integer.parseInt(time + 3) || date != dt.Now()) {
-                                                                DataBaseSqlite dbs = new DataBaseSqlite(Jobs.this);
-                                                                dbs.delete_UpdateTime(fc.GetTableNameUpdateTime());
-                                                                dbs.Add_UpdateTime(fc.GetTableNameUpdateTime(), dt.Hours(), dt.Now());
-
-                                                                httpbusin = new HTTPGetBusinessJson(Jobs.this);
-                                                                httpbusin.SetUrl_business(query.getsubsetID(selected));
-                                                                httpbusin.execute();
-                                                                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_LONG).show();
-                                                                Log.i("Time > Time+3 ", "ok");
-                                                            }
-                                                            else
-                                                            {
-                                                                Intent i = new Intent(getApplicationContext(), Jobs_List.class);
-                                                                startActivity(i);
-                                                                Toast.makeText(getApplicationContext(), "0", Toast.LENGTH_LONG).show();
-                                                                Log.i("NOT IF And Eles ", "Ok");
-                                                            }
-                                                    }
-                                    }
-               }
-
-
-                return true;
-            }
-
-        });
+                        });
 
 
 
@@ -283,6 +245,7 @@ DateTime dt=new DateTime();
 
     public void GetPostInterest(View v)
     {
+
 
 
         HTTPGetInterestJson httpinterest=new HTTPGetInterestJson(this);
