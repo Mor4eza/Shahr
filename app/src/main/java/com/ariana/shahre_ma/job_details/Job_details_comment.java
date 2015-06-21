@@ -84,7 +84,7 @@ query=new Query(getActivity());
                     else
                     {
                             try {
-                                _json = (json.getOpinionTOjson(txtComm.getText().toString(), ct.getIranianDate(),query.getMemberId(),fc.GetBusiness_Id()));
+                                _json = (json.getOpinionTOjson(txtComm.getText().toString(), ct.getIranianDate(),62,186));
                                 fc.SetOpinion_Description(txtComm.getText().toString());
                                 fc.SetOpinion_Date(ct.getIranianDate().toString());
                                 fc.SetOpinion_MemberName("");

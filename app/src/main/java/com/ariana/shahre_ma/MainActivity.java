@@ -16,6 +16,9 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBookMarkJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.mikepenz.iconics.typeface.FontAwesome;
@@ -60,7 +63,7 @@ public class MainActivity extends ActionBarActivity {
             b.SetUrl_MemberId(query.getMemberId());
             b.execute();
 
-      /*      HTTPGetSubsetJson httpsubset = new HTTPGetSubsetJson(this);
+           HTTPGetSubsetJson httpsubset = new HTTPGetSubsetJson(this);
             httpsubset.execute();
 
 
@@ -69,7 +72,7 @@ public class MainActivity extends ActionBarActivity {
 
 
             HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
-            httpcoll.execute();*/
+            httpcoll.execute();
         }
 
 

@@ -11,6 +11,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 /**
  * Created by ariana2 on 6/5/2015.
  */
@@ -124,12 +130,13 @@ public class SqliteTOjson {
             rowObject.put("ErJa", erja);
 
             field_Json = rowObject.toString();
+            writeToFile(field_Json);
 
         } catch (Exception e) {
             Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
         }
-        return field_Json;
 
+        return field_Json;
     }
 
     // convert Interest to json
@@ -178,6 +185,7 @@ public class SqliteTOjson {
             Log.i("SQLITEtoJSON",e.toString());
         }
 
+
          return Sqlite_Json;
     }
 
@@ -222,10 +230,31 @@ public class SqliteTOjson {
         } catch (Exception e) {
             Log.i("SQLITEtoJSON",e.toString());
         }
-
+     //   writeToFile(Sqlite_Json);
         return Sqlite_Json;
     }
 
+    private void writeToFile(String Json) {
+        File root = android.os.Environment.getExternalStorageDirectory();
 
+        File dir = new File(root.getAbsolutePath() + "/myFolder");
+        dir.mkdirs(); // build directory
+        File file = new File(dir, "bokkmarks.txt");
+
+        try {
+            FileOutputStream f = new FileOutputStream(file);
+            PrintWriter pw = new PrintWriter(f);
+
+            pw.println(Json);
+
+            pw.flush();
+            pw.close();
+            f.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
