@@ -17,7 +17,6 @@ import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBookMarkJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
@@ -71,8 +70,8 @@ public class MainActivity extends ActionBarActivity {
             httpcity.execute();
 
 
-           HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
-            httpcoll.execute();
+       /*    HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
+            httpcoll.execute();*/
         }
 
 

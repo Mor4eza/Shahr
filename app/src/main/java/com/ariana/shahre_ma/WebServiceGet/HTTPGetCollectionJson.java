@@ -1,13 +1,16 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Jobs;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,16 +25,16 @@ import java.net.URL;
 /**
  * Created by ariana2 on 6/6/2015.
  */
-public class HTTPGetCollectionJson extends AsyncTask<String, String, String>
-    {
-        ProgressDialog pd;
-        public SwipeRefreshLayout swipeRefresh = null;
+public class HTTPGetCollectionJson extends AsyncTask<String, String, String> {
 
+        ProgressDialog pd;
+        Activity activity;
+    SwipeRefreshLayout mswip;
         private static Context context;
 ;
-        public HTTPGetCollectionJson(Context c) {
+        public HTTPGetCollectionJson(Context c,Activity activity) {
         context = c;
-
+this.activity=activity;
 
     }
         private static final String url_collection="http://test.shahrma.com/api/apigivecollection";
@@ -82,10 +85,16 @@ public class HTTPGetCollectionJson extends AsyncTask<String, String, String>
 
             }
             pd.dismiss();
-         //   swipeRefresh.setRefreshing(false);
+
+         //   mswip=(SwipeRefreshLayout) this.activity.findViewById(R.id.swipeRefreshLayout);
+           // mswip.setRefreshing(false);
+            Jobs m=new Jobs();
+
+            m.mSwipeRefreshLayout.setRefreshing(false);
 
         } catch (Exception e) {
             Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
+            Log.i("Exception",e.toString());
         }
     }
 

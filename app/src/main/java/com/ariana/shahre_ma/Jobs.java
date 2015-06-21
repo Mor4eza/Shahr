@@ -19,8 +19,6 @@ import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetInterestJson;
-import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
-import com.ariana.shahre_ma.WebServicePost.HTTPPostInterestJson;
 
 import net.simonvt.menudrawer.MenuDrawer;
 
@@ -77,6 +75,7 @@ DateTime dt=new DateTime();
 
         //Initialize swipe to refresh view
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+
         mSwipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
@@ -85,11 +84,14 @@ DateTime dt=new DateTime();
             @Override
             public void onRefresh() {
                 //Refreshing data on server
-            Toast.makeText(getApplicationContext(),"ok",Toast.LENGTH_LONG).show();
-                HTTPGetCollectionJson  httpcoll=new HTTPGetCollectionJson(Jobs.this);
-                httpcoll.execute();
+                Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_LONG).show();
+                HTTPGetCollectionJson http = new HTTPGetCollectionJson(Jobs.this, Jobs.this);
+                http.execute();
+
             }
         });
+
+
 
         expListView = (ExpandableListView) findViewById(R.id.laptop_list);
 
@@ -237,19 +239,16 @@ DateTime dt=new DateTime();
     }
 
 
-    public  void FINISH()
-    {
-        mSwipeRefreshLayout.setRefreshing(false);
-    }
-
 
     public void SendPostInterest(View v)
     {
-        SqliteTOjson json=new SqliteTOjson(this);
+       /* SqliteTOjson json=new SqliteTOjson(this);
         Toast.makeText(getApplicationContext(),json.getSqliteInterestTOjson(),Toast.LENGTH_LONG).show();
         HTTPPostInterestJson httpinterest=new HTTPPostInterestJson(this);
         httpinterest.SetInterest_Json(json.getSqliteInterestTOjson());
-        httpinterest.execute();
+        httpinterest.execute();*/
+        mSwipeRefreshLayout.setRefreshing(false);
+
     }
 
 
