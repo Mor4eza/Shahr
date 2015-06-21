@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -135,17 +136,14 @@ public class SqliteTOjson {
 
 
     public String getSqliteInterestTOjson() {
-        String Sqlite_Json="";
 
+        String Sqlite_Json="";
         DataBaseSqlite db = new DataBaseSqlite(context);
         Cursor cursor = db.select_Interest();
         JSONArray resultSet = new JSONArray();
 
+
         try {
-
-
-
-
 
             //Log.i("SQLITEtoJSON",String.valueOf(cursor.getInt(1)));
             cursor.moveToFirst();
@@ -158,14 +156,9 @@ public class SqliteTOjson {
                 {
                     if (cursor.getColumnName(i) != null)
                     {
-                        try {
-
-
+                        try
+                        {
                                 rowObject.put(cursor.getColumnName(i), cursor.getInt(i));
-
-
-
-
                         } catch (Exception e) {
                             //  Log.d("TAG_NAME", e.getMessage()  );
                         }
@@ -189,6 +182,49 @@ public class SqliteTOjson {
     }
 
 
+    public String getSqliteBookmarkTOjson() {
+        String Sqlite_Json="";
+        DataBaseSqlite db = new DataBaseSqlite(context);
+        Cursor cursor = db.select_bookmark();
+        JSONArray resultSet = new JSONArray();
+        try {
+
+            cursor.moveToFirst();
+            while (cursor.isAfterLast() == false) {
+
+                int totalColumn = cursor.getColumnCount();
+                JSONObject rowObject = new JSONObject();
+
+                for (int i = 0; i < totalColumn; i++)
+                {
+                    if (cursor.getColumnName(i) != null)
+                    {
+                        try {
+
+
+                            rowObject.put(cursor.getColumnName(i), cursor.getInt(i));
+
+
+
+
+                        } catch (JSONException e) {
+                             Log.d("TAG_NAME", e.getMessage()  );
+                        }
+                    }
+                }
+                resultSet.put(rowObject);
+                // ja.put(rowObject);
+                cursor.moveToNext();
+            }
+            cursor.close();
+            Sqlite_Json = resultSet.toString();
+
+        } catch (Exception e) {
+            Log.i("SQLITEtoJSON",e.toString());
+        }
+
+        return Sqlite_Json;
+    }
 
 
 

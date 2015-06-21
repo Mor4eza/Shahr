@@ -1,14 +1,9 @@
 package com.ariana.shahre_ma.DateBaseSqlite;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.ariana.shahre_ma.Fields.FieldClass;
-import com.ariana.shahre_ma.Jobs_List;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 
 /**
  * Created by ariana2 on 6/17/2015.
@@ -136,7 +131,7 @@ public class Query {
 
         try {
             DataBaseSqlite dbs = new DataBaseSqlite(context);
-            Cursor allrows = dbs.select_business(1);
+            Cursor allrows = dbs.select_business(14);
             allrows.moveToFirst();
             Result = allrows.getInt(0);
             allrows.close();

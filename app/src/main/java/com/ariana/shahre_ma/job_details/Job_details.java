@@ -20,7 +20,7 @@ import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetBookMarkJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPSendBookMarkURL;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
 
@@ -263,16 +263,13 @@ query=new Query(this);
         if (id == R.id.action_Fav) {
             Toast.makeText(getApplication(),"پین شد...",Toast.LENGTH_LONG).show();
 
-           /* HTTPSendBookMarkURL httpbookmark=new HTTPSendBookMarkURL(this);
+            HTTPSendBookMarkURL httpbookmark=new HTTPSendBookMarkURL(this);
             httpbookmark.SetBusinessid(query.getBusinessId());
             httpbookmark.SetMemberid(query.getMemberId());
-            httpbookmark.execute();*/
+            httpbookmark.execute();
 
-            //new JSONAsyncTask().execute();
-          /*  HTTPGetBookMarkJson b=new HTTPGetBookMarkJson(this);
-            b.SetUrl_MemberId(query.getMemberId());
-            b.execute();
-*/
+
+
 
             return true;
         }

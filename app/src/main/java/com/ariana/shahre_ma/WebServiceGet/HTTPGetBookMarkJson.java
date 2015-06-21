@@ -2,7 +2,6 @@ package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -42,6 +41,7 @@ public class HTTPGetBookMarkJson
     {
         this.MEMberID=memberid;
         url_Business="http://test.shahrma.com/api/ApiGiveBookmark?6&memberId="+memberid;
+        Log.i("URLurl",url_Business);
     }
 
     private String GetUrl_business()
@@ -62,6 +62,7 @@ public class HTTPGetBookMarkJson
             onPostExecute();
         } catch (Exception e) {
             // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
+            Log.i("Exception",e.toString());
         }
         return null;
 

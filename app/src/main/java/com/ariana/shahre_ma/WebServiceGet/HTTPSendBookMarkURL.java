@@ -2,6 +2,7 @@ package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -59,6 +60,7 @@ public class HTTPSendBookMarkURL extends AsyncTask<String, Void, Boolean> {
     {
         String url="";
         url="http://test.shahrma.com/api/ApiTakeBookmark?businessId="+businessid+"&memberId="+memberid;
+        Log.i("URLurl",url);
         return url;
     }
 

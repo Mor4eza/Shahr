@@ -19,6 +19,7 @@ public class BookMark extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_mark);
         bookmark();
+
     }
 
 
@@ -31,9 +32,6 @@ public class BookMark extends ActionBarActivity {
             ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,getbookmark());
             lv.setAdapter(adapter);
 
-            //  multiAutoComplete.setAdapter(adapter);
-
-            //et2.setThreshold(1);
         }
         catch (Exception e) {
         }

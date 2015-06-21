@@ -10,14 +10,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetBookMarkJson;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.mikepenz.iconics.typeface.FontAwesome;
@@ -40,7 +38,8 @@ public class MainActivity extends ActionBarActivity {
     FragmentPagerAdapter adapterViewPager;
     SliderLayout slider;
     DragTopLayout top;
-    ScrollView sv_f1;
+
+    Query query=new Query(this);
     private static final int PROFILE_SETTING = 1;
     private AccountHeader.Result headerResult = null;
     private Drawer.Result result = null;
@@ -56,7 +55,12 @@ public class MainActivity extends ActionBarActivity {
             Toast.makeText(getApplication(),"شبکه اینترنت قطع می باشد",Toast.LENGTH_LONG).show();
         }
         else {
-            HTTPGetSubsetJson httpsubset = new HTTPGetSubsetJson(this);
+
+            HTTPGetBookMarkJson b=new HTTPGetBookMarkJson(this);
+            b.SetUrl_MemberId(query.getMemberId());
+            b.execute();
+
+      /*      HTTPGetSubsetJson httpsubset = new HTTPGetSubsetJson(this);
             httpsubset.execute();
 
 
@@ -65,7 +69,7 @@ public class MainActivity extends ActionBarActivity {
 
 
             HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
-            httpcoll.execute();
+            httpcoll.execute();*/
         }
 
 

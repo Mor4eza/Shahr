@@ -2,6 +2,7 @@ package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
@@ -64,7 +65,9 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
                 Toast.makeText(context, "کاربر ساخته نشد دوباره امتحان کنید", Toast.LENGTH_LONG).show();
             }
         }
-        catch (Exception e){}
+        catch (Exception e){
+            Log.e("Exception SaVe", e.toString());
+        }
     }
     @Override
     protected Integer doInBackground(String... params) {
@@ -81,19 +84,13 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
 
             HttpGet httpGet = new HttpGet(params[0]);
 
-
-
-
                 /* optional request header */
             httpGet.setHeader("Content-Type", "application/json");
 
-
                 /* optional request header */
             httpGet.setHeader("Accept", "application/json");
-
                 /* Make http request call */
             HttpResponse httpResponse = httpclient.execute(httpGet);
-
 
             //mesage=httpResponse.getStatusLine().toString();
 
@@ -105,7 +102,7 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
                 Toast.makeText(context,mesage, Toast.LENGTH_LONG).show();
                 webs.close();
             } catch (Exception e) {
-
+             Log.e("Exception",e.toString());
             }
             int statusCode = httpResponse.getStatusLine().getStatusCode();
 
@@ -126,7 +123,7 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
             }
 
         } catch (Exception e) {
-
+            Log.e("Exception",e.toString());
         }
 
 
