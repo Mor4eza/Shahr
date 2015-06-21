@@ -15,8 +15,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -29,8 +33,12 @@ import java.util.List;
 
 
 public class BookMark extends ActionBarActivity {
+
+    Integer BusinessID[];
+    Integer len;
     ListView lv;
     SqliteTOjson sqltojson =new SqliteTOjson(this);
+    Query query=new Query(this);
     FieldClass fc = new FieldClass();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,5 +177,27 @@ public class BookMark extends ActionBarActivity {
 
         return ret;
 
+
     }
+
+    public void SaveBookmarJsonToSqlite()
+    {
+        JSONArray array=new JSONArray();
+        BusinessID=new Integer[array.length()];
+        len=array.length();
+        try {
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject json = new JSONObject();
+                BusinessID[i] = json.getInt("BusinessId");
+            }
+
+            DataBaseSqlite db=new DataBaseSqlite(this);
+            for (int i = 0; i <len; i++)
+            {
+             db.Add_bookmark(BusinessID[i],query.getMemberId());
+            }
+        }
+        catch (Exception e){}
+    }
+
 }

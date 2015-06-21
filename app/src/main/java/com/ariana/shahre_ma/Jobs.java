@@ -11,15 +11,19 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
+
 import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetInterestJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostInterestJson;
+
 import net.simonvt.menudrawer.MenuDrawer;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -82,6 +86,8 @@ DateTime dt=new DateTime();
             public void onRefresh() {
                 //Refreshing data on server
             Toast.makeText(getApplicationContext(),"ok",Toast.LENGTH_LONG).show();
+                HTTPGetCollectionJson  httpcoll=new HTTPGetCollectionJson(Jobs.this);
+                httpcoll.execute();
             }
         });
 
@@ -231,6 +237,10 @@ DateTime dt=new DateTime();
     }
 
 
+    public  void FINISH()
+    {
+        mSwipeRefreshLayout.setRefreshing(false);
+    }
 
 
     public void SendPostInterest(View v)

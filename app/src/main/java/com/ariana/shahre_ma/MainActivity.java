@@ -71,7 +71,7 @@ public class MainActivity extends ActionBarActivity {
             httpcity.execute();
 
 
-            HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
+           HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
             httpcoll.execute();
         }
 

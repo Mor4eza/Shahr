@@ -3,12 +3,11 @@ package com.ariana.shahre_ma.WebServiceGet;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.widget.ListView;
 import android.widget.Toast;
 
-
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
-import com.ariana.shahre_ma.MainActivity;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,16 +25,23 @@ import java.net.URL;
 public class HTTPGetCollectionJson extends AsyncTask<String, String, String>
     {
         ProgressDialog pd;
+        public SwipeRefreshLayout swipeRefresh = null;
 
         private static Context context;
+;
         public HTTPGetCollectionJson(Context c) {
         context = c;
+
+
     }
         private static final String url_collection="http://test.shahrma.com/api/apigivecollection";
 
         Integer Id[];
         String collectionname[];
         Integer len;
+         ListView lv;
+
+
 
 
         @Override
@@ -49,6 +55,7 @@ public class HTTPGetCollectionJson extends AsyncTask<String, String, String>
 
     protected String doInBackground(String... args) {
         try {
+
 
 
             InputStream jsonStream = getStreamFromURL(url_collection, "GET");
@@ -75,6 +82,8 @@ public class HTTPGetCollectionJson extends AsyncTask<String, String, String>
 
             }
             pd.dismiss();
+         //   swipeRefresh.setRefreshing(false);
+
         } catch (Exception e) {
             Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
         }
