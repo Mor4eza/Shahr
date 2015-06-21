@@ -121,8 +121,8 @@ public class BookMark extends ActionBarActivity {
             shareData();
             return true;
         }else if(id == R.id.install){
+install();
 
-        Toast.makeText(getApplicationContext(),install().toString(),Toast.LENGTH_LONG).show();
         }
 
 
@@ -146,7 +146,7 @@ public class BookMark extends ActionBarActivity {
         startActivity(Intent.createChooser(intent, "ارسال با بلوتوث"));
     }
 
-    public String install(){
+    public void install(){
         String ret = "";
         File root = android.os.Environment.getExternalStorageDirectory();
         File dir = new File(root.getAbsolutePath() + "/myFolder");
@@ -169,32 +169,34 @@ public class BookMark extends ActionBarActivity {
                 inputStream.close();
                 ret = stringBuilder.toString();
             }
+
+            SaveBookmarJsonToSqlite(ret);
         } catch (FileNotFoundException e) {
             Log.v("login activity", "File not found: " + e.toString());
         } catch (IOException e) {
             Log.v("login activity", "Can not read file: " + e.toString());
         }
 
-        return ret;
+
 
 
     }
 
-    public void SaveBookmarJsonToSqlite()
+    public void SaveBookmarJsonToSqlite(String json1)
     {
-        JSONArray array=new JSONArray();
-        BusinessID=new Integer[array.length()];
-        len=array.length();
+
         try {
+            JSONArray array=new JSONArray(json1);
+            BusinessID=new Integer[array.length()];
+            len=array.length();
             for (int i = 0; i < array.length(); i++) {
-                JSONObject json = new JSONObject();
+                JSONObject json =array.getJSONObject(i);
                 BusinessID[i] = json.getInt("BusinessId");
             }
 
             DataBaseSqlite db=new DataBaseSqlite(this);
-            for (int i = 0; i <len; i++)
-            {
-             db.Add_bookmark(BusinessID[i],query.getMemberId());
+            for (int i = 0; i <len; i++) {
+                db.Add_bookmark(BusinessID[i],query.getMemberId());
             }
         }
         catch (Exception e){}
