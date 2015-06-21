@@ -130,7 +130,7 @@ public class SqliteTOjson {
             rowObject.put("ErJa", erja);
 
             field_Json = rowObject.toString();
-            writeToFile(field_Json);
+
 
         } catch (Exception e) {
             Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
@@ -226,11 +226,11 @@ public class SqliteTOjson {
             }
             cursor.close();
             Sqlite_Json = resultSet.toString();
-
+            writeToFile(Sqlite_Json);
         } catch (Exception e) {
             Log.i("SQLITEtoJSON",e.toString());
         }
-     //   writeToFile(Sqlite_Json);
+
         return Sqlite_Json;
     }
 
@@ -239,7 +239,7 @@ public class SqliteTOjson {
 
         File dir = new File(root.getAbsolutePath() + "/myFolder");
         dir.mkdirs(); // build directory
-        File file = new File(dir, "bokkmarks.txt");
+        File file = new File(dir, "bookmarks.book");
 
         try {
             FileOutputStream f = new FileOutputStream(file);

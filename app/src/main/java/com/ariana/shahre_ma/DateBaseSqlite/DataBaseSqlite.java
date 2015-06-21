@@ -695,6 +695,13 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         //close
         db.close();
     }
+
+    public  void delete_bookmark()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE FROM "+TABLE_NAME_Bookmark);
+        db.close();
+    }
     // Updating single
    /* public int update(Integer id) {
 

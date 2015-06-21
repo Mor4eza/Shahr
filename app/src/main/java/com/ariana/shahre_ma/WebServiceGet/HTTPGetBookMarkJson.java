@@ -76,7 +76,7 @@ public class HTTPGetBookMarkJson
             DataBaseSqlite dbs = new DataBaseSqlite(context);
 
 
-            dbs.delete_Business();
+            dbs.delete_bookmark();
             for (int i = 0; i <len; i++)
             {
                 dbs.Add_bookmark(Id[i], MEMberID);

@@ -1,6 +1,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" tools:context="com.ariana.shahre_ma.BookMark">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.ariana.shahre_ma.BookMark">
+    <item android:id="@+id/share"
+        android:title="به اشتراک گذاری"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:icon="@drawable/share"/>
+    <item
+        android:icon="@drawable/install"
+        android:id="@+id/install"
+        app:showAsAction="always"
+        android:title="نصب بوک مارکهای دریافتی"
+        />
 </menu>
