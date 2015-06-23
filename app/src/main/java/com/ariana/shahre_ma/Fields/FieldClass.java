@@ -54,7 +54,7 @@ public class FieldClass
     private static Integer CountDisLike;
 
     private static String selected_job;
-
+    private static Integer Count_Business;
     private static Integer Business_SubsetId;
 
     private static Integer Business_Id;
@@ -398,5 +398,17 @@ public class FieldClass
     public void  SetLongtiude_Business(String longtiude)
     {
         Longtiude_Business=longtiude;
+    }
+
+    /**
+     * Get and Set Count Business
+     */
+    public void  SetCount_Business(Integer count)
+    {
+        Count_Business=count;
+    }
+    public Integer  GetCount_Business()
+    {
+        return Count_Business;
     }
 }

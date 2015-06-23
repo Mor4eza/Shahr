@@ -13,7 +13,8 @@
         android:paddingLeft="25dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:gravity="start" />
+        android:gravity="start"
+        android:textColor="#ff000000" />
 
     <ImageView
         android:id="@+id/delete"

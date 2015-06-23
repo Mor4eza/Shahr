@@ -21,7 +21,7 @@ import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetInterestJson;
 
-import net.simonvt.menudrawer.MenuDrawer;
+
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -43,7 +43,7 @@ public class Jobs extends ActionBarActivity {
     ExpandableListView expListView;
     int lastExpandedPosition = -1;
 DateTime dt=new DateTime();
-    MenuDrawer mDrawer;
+
 
     Integer id[];
     Integer Collection_id[];
@@ -59,6 +59,8 @@ DateTime dt=new DateTime();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jobs);
         query=new Query(this);
+
+
 /*
 
         mDrawer = MenuDrawer.attach(this, Position.RIGHT);
@@ -160,7 +162,7 @@ DateTime dt=new DateTime();
                                     httpbusin = new HTTPGetBusinessJson(Jobs.this);
                                     httpbusin.SetUrl_business(query.getsubsetID(selected));
                                     httpbusin.execute();
-                                    Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "online", Toast.LENGTH_LONG).show();
 
                                 }
 

@@ -34,6 +34,8 @@
     <string name="favorites">اضافه کردن به علاقه مندیها</string>
     <string name="title_activity_hs">hs</string>
     <string name="title_activity_book_mark">BookMark</string>
+    <string name="title_activity_maps">نقشه</string>
+    <string name="Map">نقشه</string>
 
 
 </resources>

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Jobs_List;
 
@@ -32,7 +33,8 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
     RecyclerView.Adapter job_list_Adapter;
 
     private static Context context;
-
+    FieldClass fc=new FieldClass();
+    Query query;
     private  String url_Business;
 
     Integer Id[];
@@ -118,6 +120,8 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
                 Log.i("Count Business : ","فروشگاه ثبت نشد");
             }
             else {
+                query=new Query(context);
+                fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
                 Intent i = new Intent(this.context, Jobs_List.class);
                 this.context.startActivity(i);
             }

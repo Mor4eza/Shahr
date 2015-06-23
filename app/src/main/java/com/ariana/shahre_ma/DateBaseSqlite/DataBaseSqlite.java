@@ -156,14 +156,14 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     private static final String CREATE_TABLE_Notification = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_NOTIFICATION + " (" +
             "Id INTEGER PRIMARY KEY ," +
             "OpinionType INTEGER," +
-            "ErJa INTEGER" +
+            "ErJa INTEGER," +
             "ExecutionTime BOOLEAN ," +
             "Description TEXT ," +
             "ExpirationDate TEXT ," +
             "City TEXT," +
             "CityId INTEGER," +
             "Subset TEXT ," +
-            "SubsetId INTEGER ," +
+            "SubsetId INTEGER " +
             ");";
 
     // SQL statement to create city table
