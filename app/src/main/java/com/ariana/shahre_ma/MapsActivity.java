@@ -105,7 +105,7 @@ public class MapsActivity extends ActionBarActivity {
             for (int i = 0; i < len; i++) {
             /*    Latitude[i] = String.valueOf(51.3214002);
                 Longtitude[i] = String.valueOf(31.147001);*/
-              Marker  marker = mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(Latitude[i]), Double.parseDouble(Longtitude[i] ))).title("market"));
+              Marker  marker = mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(Latitude[i]), Double.parseDouble(Longtitude[i] ))).title(Market[i]));
             }
 
 

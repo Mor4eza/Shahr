@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -261,17 +262,14 @@ query=new Query(this);
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_Fav) {
-            Toast.makeText(getApplication(),"پین شد...",Toast.LENGTH_LONG).show();
 
             HTTPSendBookMarkURL httpbookmark=new HTTPSendBookMarkURL(this);
             httpbookmark.SetBusinessid(query.getBusinessId());
+            Log.i("getBusinessId",String.valueOf(query.getBusinessId())  );
             httpbookmark.SetMemberid(query.getMemberId());
+            Log.i("getMemberId",String.valueOf(query.getMemberId()) );
             httpbookmark.execute();
             Toast.makeText(getApplication(),String.valueOf(query.getMemberId()),Toast.LENGTH_LONG).show();
-
-
-
-
             return true;
         }
 
