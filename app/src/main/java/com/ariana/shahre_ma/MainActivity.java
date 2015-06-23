@@ -222,8 +222,7 @@ public class MainActivity extends ActionBarActivity {
         //drawer
 
 
-        final IProfile profile = new ProfileDrawerItem().withName(uName).withIcon(getResources().getDrawable(R.mipmap.profile3));
-
+        final IProfile profile = new ProfileDrawerItem().withName(uName).withIcon(getResources().getDrawable(R.mipmap.profile3)).withEmail("کرج");
 
         headerResult = new AccountHeader()
                 .withActivity(this)
@@ -232,13 +231,12 @@ public class MainActivity extends ActionBarActivity {
                 .withSelectionListEnabledForSingleProfile(false)
                 .withHeightDp(150)
                 .withTranslucentStatusBar(true)
-
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
 
                     @Override
 
                     public void onProfileChanged(View view, IProfile profile) {
-
+                    Toast.makeText(getApplicationContext(),"hi",Toast.LENGTH_LONG).show();
                     }
                 })
 

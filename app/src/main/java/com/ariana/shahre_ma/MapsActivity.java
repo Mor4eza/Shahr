@@ -1,13 +1,17 @@
 package com.ariana.shahre_ma;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.job_details.Job_details;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -30,6 +34,36 @@ public class MapsActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
+        mMap.setMyLocationEnabled(true);
+        mMap.getUiSettings().setMapToolbarEnabled(false);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+
+        DataBaseSqlite mydb = new DataBaseSqlite(this);
+        Cursor allrows = mydb.select_business(fc.GetBusiness_SubsetIdb());
+        String lat[] = new String[fc.GetCount_Business()];
+        String Longt[] = new String[fc.GetCount_Business()];
+        Integer l=0;
+            if (allrows.moveToFirst()) {
+
+                do {
+                    lat[l] =allrows.getString(15);
+                    Longt[l] =allrows.getString(16);
+                    l++;
+
+                } while (allrows.moveToNext());
+            }
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(lat[0]),Double.parseDouble(Longt[0])), 18.0f), 2000, null);
+
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                fc.SetMarket_Business(marker.getTitle().toString());
+                Toast.makeText(getApplicationContext(), marker.getTitle(), Toast.LENGTH_LONG).show();
+                Intent i=new Intent(getApplicationContext(), Job_details.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -96,16 +130,18 @@ public class MapsActivity extends ActionBarActivity {
                     Log.i("Longtitude",String.valueOf(Longtitude[l]));
                     Log.i("Market",String.valueOf(Market[l]));
                     Rate[l] = allrows.getDouble(29);
+                    Log.i("Rate",String.valueOf(Market[l]));
                     l++;
 
                 } while (allrows.moveToNext());
             }
 
 
+
             for (int i = 0; i < len; i++) {
-            /*    Latitude[i] = String.valueOf(51.3214002);
-                Longtitude[i] = String.valueOf(31.147001);*/
-              Marker  marker = mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(Latitude[i]), Double.parseDouble(Longtitude[i] ))).title(Market[i]));
+                Marker  marker = mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(Latitude[i]), Double.parseDouble(Longtitude[i] ))).title("\u200e"+Market[i]).snippet(String.valueOf(Rate[i])));
+                marker.showInfoWindow();
+
             }
 
 
