@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
@@ -29,7 +30,6 @@ import java.util.Map;
 
 
 public class Jobs extends ActionBarActivity {
-
 
     Integer count = 0;
 
@@ -87,6 +87,17 @@ DateTime dt=new DateTime();
                 Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_LONG).show();
                 HTTPGetCollectionJson http = new HTTPGetCollectionJson(Jobs.this, Jobs.this);
                 http.execute();
+
+                new CountDownTimer(5000, 1000) {
+
+                    public void onTick(long millisUntilFinished) {
+
+                    }
+
+                    public void onFinish() {
+                      mSwipeRefreshLayout.setRefreshing(false);
+                    }
+                }.start();
 
             }
         });

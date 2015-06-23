@@ -29,6 +29,22 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     private static final String TABLE_NAME_UpdateTime = "UpdateTime";
     private static final String TABLE_NAME_Like = "Like";
     private static final String TABLE_NAME_Interest = "Interest";
+    private static final String TABLE_NAME_NOTIFICATION="Notification";
+
+
+
+    //Notifaction table
+
+    private static final String ID_Notification="Id";
+    private static final String OpinionType_Notification="OpinionType";
+    private static final String ErJa_Notification="Erja";
+    private static final String ExecutionTime_Notification="ExecutionTime";
+    private static final String Description_Notification="Description";
+    private static final String ExpirationDate_Notification="ExpirationDate";
+    private static final String City_Notification="City";
+    private static final String CityId_Notification="CityId";
+    private static final String Subset_Notification="Subset";
+    private static final String SubsetId_Notification="SubsetId";
 
 
     //UpdateTime Table Columns names
@@ -136,6 +152,19 @@ public class DataBaseSqlite extends SQLiteOpenHelper
             "CityId INTEGER" +
             ");";
 
+    //SQL statement to create notification table
+    private static final String CREATE_TABLE_Notification = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_NOTIFICATION + " (" +
+            "Id INTEGER PRIMARY KEY ," +
+            "OpinionType INTEGER," +
+            "ErJa INTEGER" +
+            "ExecutionTime BOOLEAN ," +
+            "Description TEXT ," +
+            "ExpirationDate TEXT ," +
+            "City TEXT," +
+            "CityId INTEGER," +
+            "Subset TEXT ," +
+            "SubsetId INTEGER ," +
+            ");";
 
     // SQL statement to create city table
     private static final String CREATE_TABLE_City  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_City + " (" +
@@ -270,6 +299,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.execSQL(CREATE_TABLE_Area);
         db.execSQL(CREATE_TABLE_UpdateTime);
         db.execSQL(CREATE_TABLE_Interest);
+        db.execSQL(CREATE_TABLE_Notification);
     }
 
     @Override
@@ -285,6 +315,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_Area);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_UpdateTime);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_Interest);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_NOTIFICATION);
         // create fresh  tables
         this.onCreate(db);
     }
@@ -308,6 +339,36 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         // 4. close
         db.close();
     }
+
+    public void Add_Notification(Integer id,Integer OpinionType,Integer erja,Boolean ExecutionTime,String Description,String ExpirationDate,String City,Integer CityId,String Subset,Integer SubsetId){
+
+
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put(ID_Notification, id);
+        values.put(OpinionType_Notification,OpinionType);
+        values.put(ErJa_Notification,erja);
+        values.put(ExecutionTime_Notification, ExecutionTime);
+        values.put(Description_Notification,Description);
+        values.put(ExpirationDate_Notification,ExpirationDate);
+        values.put(City_Notification, City);
+        values.put(CityId_Notification,CityId);
+        values.put(Subset_Notification,Subset);
+        values.put(SubsetId_Notification,SubsetId);
+
+        // 3. insert
+        db.insert(TABLE_NAME_NOTIFICATION, // table
+                null, //nullColumnHack
+                values); // key/value
+
+        // 4. close
+        db.close();
+
+}
+
 
     public void Add_collection(Integer id, String collectionname) {
 

@@ -10,7 +10,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
-import com.ariana.shahre_ma.Jobs;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -85,12 +84,6 @@ this.activity=activity;
 
             }
             pd.dismiss();
-
-         //   mswip=(SwipeRefreshLayout) this.activity.findViewById(R.id.swipeRefreshLayout);
-           // mswip.setRefreshing(false);
-            Jobs m=new Jobs();
-
-            m.mSwipeRefreshLayout.setRefreshing(false);
 
         } catch (Exception e) {
             Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();

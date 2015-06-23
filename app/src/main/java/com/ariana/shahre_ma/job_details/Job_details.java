@@ -267,6 +267,7 @@ query=new Query(this);
             httpbookmark.SetBusinessid(query.getBusinessId());
             httpbookmark.SetMemberid(query.getMemberId());
             httpbookmark.execute();
+            Toast.makeText(getApplication(),String.valueOf(query.getMemberId()),Toast.LENGTH_LONG).show();
 
 
 

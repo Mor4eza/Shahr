@@ -40,6 +40,8 @@ public class BookMark extends ActionBarActivity {
     SqliteTOjson sqltojson =new SqliteTOjson(this);
     Query query=new Query(this);
     FieldClass fc = new FieldClass();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +61,21 @@ public class BookMark extends ActionBarActivity {
 
             }
         });
+
         bookmark();
+
+        t.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String selected = (String) lv.getItemAtPosition(position);
+                //adapter.remove(selected);
+                //adapter.notifyDataSetChanged();
+                Toast.makeText(getApplicationContext(),"deleted",Toast.LENGTH_LONG).show();
+
+                return false;
+            }
+        });
 
     }
 
@@ -70,7 +86,7 @@ public class BookMark extends ActionBarActivity {
         try
         {
 
-            ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,getbookmark());
+           ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,getbookmark());
             lv.setAdapter(adapter);
 
         }
@@ -121,7 +137,7 @@ public class BookMark extends ActionBarActivity {
             shareData();
             return true;
         }else if(id == R.id.install){
-install();
+            install();
 
         }
 

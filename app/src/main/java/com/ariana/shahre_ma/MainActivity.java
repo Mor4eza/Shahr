@@ -15,8 +15,10 @@ import android.widget.Toast;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
+import com.ariana.shahre_ma.Notification.Notify;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBookMarkJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
@@ -52,6 +54,8 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         //findViewsAndConfigure();
 
+        Notify.Notificationm(this);
+
         NetState ns=new NetState(this);
         if(ns.checkInternetConnection()==false) {
             Toast.makeText(getApplication(),"شبکه اینترنت قطع می باشد",Toast.LENGTH_LONG).show();
@@ -70,8 +74,8 @@ public class MainActivity extends ActionBarActivity {
             httpcity.execute();
 
 
-       /*    HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
-            httpcoll.execute();*/
+          HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this,this);
+            httpcoll.execute();
         }
 
 
@@ -109,6 +113,8 @@ public class MainActivity extends ActionBarActivity {
     private void Image_slider(){
         top =(DragTopLayout)findViewById(R.id.top);
 
+        top.setTouchMode(true);
+        top.setOverDrag(false);
         slider = (SliderLayout)findViewById(R.id.slider);
 
         TextSliderView textSliderView = new TextSliderView(this);
