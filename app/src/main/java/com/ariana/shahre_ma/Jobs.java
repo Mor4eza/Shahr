@@ -11,6 +11,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
@@ -21,8 +22,10 @@ import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.Service.MainService;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetInterestJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -70,6 +73,9 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
         createCollection();
 
+
+
+
         //Initialize swipe to refresh view
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         mSwipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
@@ -80,11 +86,12 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
             @Override
             public void onRefresh() {
                 //Refreshing data on server
-                Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_LONG).show();
-                HTTPGetCollectionJson http = new HTTPGetCollectionJson(Jobs.this, Jobs.this);
+              //  Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_LONG).show();
+                mSwipeRefreshLayout.setRefreshing(false);
+                HTTPGetCollectionJson http = new HTTPGetCollectionJson(Jobs.this,mSwipeRefreshLayout);
                 http.execute();
 
-                new CountDownTimer(5000, 1000) {
+            /*    new CountDownTimer(5000, 1000) {
 
                     public void onTick(long millisUntilFinished) {
 
@@ -95,6 +102,8 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
                     }
                 }.start();
 
+
+*/
             }
         });
 
@@ -141,24 +150,27 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
 
                                 Toast.makeText(getApplicationContext(), query.getsubsetID(selected).toString(), Toast.LENGTH_LONG).show();
-                                if (ns.checkInternetConnection() == false) {
-
-
-                                    Toast.makeText(getApplicationContext(), "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
-
+                                if (ns.checkInternetConnection() == false)
+                                {
                                     Intent i = new Intent(getApplicationContext(), Jobs_List.class);
                                     startActivity(i);
-
-
-                                } else {
-
-                                    httpbusin = new HTTPGetBusinessJson(Jobs.this);
-                                    httpbusin.SetUrl_business(query.getsubsetID(selected));
-                                    httpbusin.execute();
-                                    Toast.makeText(getApplicationContext(), "online", Toast.LENGTH_LONG).show();
-
                                 }
-
+                                else
+                                {
+                                    if(count>0)
+                                    {
+                                        Intent i = new Intent(getApplicationContext(), Jobs_List.class);
+                                        startActivity(i);
+                                        Log.i("Count>","1");
+                                    }
+                                    else
+                                    {
+                                        httpbusin = new HTTPGetBusinessJson(Jobs.this);
+                                        httpbusin.SetUrl_business(query.getsubsetID(selected));
+                                        httpbusin.execute();
+                                        Log.i("Count<", "0");
+                                    }
+                                }
 
                                 return true;
                             }
@@ -253,14 +265,20 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
 
 
-    public void SendPostInterest(View v)
+    public void SendPostInterest()
     {
        /* SqliteTOjson json=new SqliteTOjson(this);
         Toast.makeText(getApplicationContext(),json.getSqliteInterestTOjson(),Toast.LENGTH_LONG).show();
         HTTPPostInterestJson httpinterest=new HTTPPostInterestJson(this);
         httpinterest.SetInterest_Json(json.getSqliteInterestTOjson());
         httpinterest.execute();*/
-        mSwipeRefreshLayout.setRefreshing(false);
+
+        Log.i("mSwipeRefreshLayout","true");
+        if(mSwipeRefreshLayout.isRefreshing()) {
+            Log.i("mSwipeRefreshLayout","true");
+            mSwipeRefreshLayout.setRefreshing(false);
+            Log.i("mSwipeRefreshLayout", "false");
+        }
 
     }
 

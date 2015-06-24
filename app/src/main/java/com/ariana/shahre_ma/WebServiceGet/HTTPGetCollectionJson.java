@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Jobs;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,13 +28,13 @@ import java.net.URL;
 public class HTTPGetCollectionJson extends AsyncTask<String, String, String> {
 
         ProgressDialog pd;
-        Activity activity;
-    SwipeRefreshLayout mswip;
+        Jobs activity;
+         SwipeRefreshLayout mswip;
         private static Context context;
 ;
-        public HTTPGetCollectionJson(Context c,Activity activity) {
+        public HTTPGetCollectionJson(Context c,SwipeRefreshLayout mswipe) {
         context = c;
-this.activity=activity;
+        this.mswip=mswipe;
 
     }
         private static final String url_collection="http://test.shahrma.com/api/apigivecollection";
@@ -84,7 +85,7 @@ this.activity=activity;
 
             }
             pd.dismiss();
-
+          mswip.setRefreshing(false);
         } catch (Exception e) {
             Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
             Log.i("Exception",e.toString());
