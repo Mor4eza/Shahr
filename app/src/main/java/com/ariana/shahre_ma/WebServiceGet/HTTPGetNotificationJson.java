@@ -91,7 +91,6 @@ public class HTTPGetNotificationJson extends AsyncTask<String,String,String> {
             SubsetId=new Integer[areas.length()];
             len=areas.length();
             for (int i = 0; i < areas.length(); i++) {
-
                 JSONObject area = areas.getJSONObject(i);
                 Id[i]=area.getInt("Id");
                 OpinionType[i]=area.getInt("OpinionType");

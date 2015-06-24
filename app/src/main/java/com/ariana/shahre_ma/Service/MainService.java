@@ -151,10 +151,10 @@ public class MainService extends Service
                 for (int i = 0; i < len; i++)
                 {
                     dbs.Add_Notification(Id[i], OpinionType[i], erja[i], ExecutionTime[i], Description[i], ExpirationDate[i], City[i], CityId[i], Subset[i], SubsetId[i]);
-                    Notify.Notificationm(context,Description[i]);
+
                 }
 
-
+                Notify.Notificationm(context);
 
 
             }

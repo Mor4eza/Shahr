@@ -101,7 +101,11 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.MainActivity" />
+
         </activity>
+        <service android:name=".Service.MainService">
+
+        </service>
     </application>
 
 </manifest>

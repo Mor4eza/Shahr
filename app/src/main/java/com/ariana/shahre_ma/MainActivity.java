@@ -277,7 +277,7 @@ public class MainActivity extends ActionBarActivity {
 
                     Intent i=new Intent(getApplicationContext(),Jobs.class);
                     startActivity(i);
-                    MainActivity.this.finish();
+
                 }
                 if (position==6) {
                     Intent i = new Intent(getApplicationContext(), BookMark.class);

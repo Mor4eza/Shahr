@@ -13,30 +13,22 @@ import com.ariana.shahre_ma.WebServiceGet.HTTPGetNotificationJson;
 public class Notify {
     Context context;
 
-    static String titles="";
     public Notify(Context context){
 
      this.context=context;
 
     }
 
-   public   String Titel_Notitication(String title){
-       this.titles=title;
-
-       return  this.titles;
-   }
 
 
-    void Add_Notify_Sql(){
-
-    }
 
 
-    public static void Notificationm(Context context,String titles1){
-        String test="test";
+
+    public static void Notificationm(Context context){
+
         HTTPGetNotificationJson notificationJson= new HTTPGetNotificationJson(context);
         notificationJson.execute();
-        test = notificationJson.test;
+
 
 
         NotificationManager nm=(NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -45,12 +37,12 @@ public class Notify {
         notify.flags |= Notification.FLAG_SHOW_LIGHTS;
         notify.defaults |= Notification.DEFAULT_LIGHTS;
         notify.defaults |= Notification.DEFAULT_SOUND;
-        CharSequence title=titles1;
+        CharSequence title="شهرما";
         CharSequence detils="اعلانات";
 
-        Intent intent=new Intent(context,Jobs.class);
+        Intent intent=new Intent(context,Activity_notify.class);
         PendingIntent pend=PendingIntent.getActivity(context, 0, intent, 0);
-        notify.setLatestEventInfo(context, title, test, pend);
+        notify.setLatestEventInfo(context, title, detils, pend);
         nm.notify(0,notify);
 
     }

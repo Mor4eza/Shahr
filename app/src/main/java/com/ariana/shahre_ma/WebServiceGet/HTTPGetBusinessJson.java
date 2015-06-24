@@ -2,6 +2,7 @@ package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -104,13 +105,21 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
     protected void onPostExecute() {
         try {
 
+            Integer count=0;
           //  Toast.makeText(context,market[0], Toast.LENGTH_LONG).show();
             DataBaseSqlite dbs = new DataBaseSqlite(context);
 
 
-            dbs.delete_Business();
+          //  dbs.delete_Business();
             for (int i = 0; i <len; i++)
             {
+                Cursor rows=dbs.select_businessId(Id[i]);
+                rows.moveToFirst();
+                count=rows.getInt(0);
+                rows.close();
+                Log.i("ID", String.valueOf(Id[i]));
+                Log.i("count",String.valueOf(count));
+                if(count==0)
                 dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
 
             }

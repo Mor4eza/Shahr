@@ -1,6 +1,8 @@
 package com.ariana.shahre_ma.Cards;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.R;
 
 import java.util.ArrayList;
@@ -19,7 +22,7 @@ import java.util.List;
 public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapter.ViewHolder> {
 
     List<Notify_Card_Items> mItems;
-
+    Notify_Card_Items nci;
 
     private  static Context context;
 
@@ -27,31 +30,23 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
         super();
         this.context=context;
 
+
         mItems = new ArrayList<Notify_Card_Items>();
+        DataBaseSqlite db=new DataBaseSqlite(context);
+        Cursor rowalls=db.select_Notification();
 
-        Notify_Card_Items Notification = new Notify_Card_Items();
-        Notification.setNdate("1394");
-        Notification.setNdetail("یه فروشگاه خوب و عالی که هم جنساش خوبه هم قیمتاش ارزونه");
-        Notification.setNmarket("1فروشگاه");
-        mItems.add(Notification);
-
-        Notification=new Notify_Card_Items();
-        Notification.setNdate("1394");
-        Notification.setNdetail("یه فروشگاه خوب و عالی که هم جنساش خوبه هم قیمتاش ارزونه");
-        Notification.setNmarket("2فروشگاه");
-        mItems.add(Notification);
-
-        Notification=new Notify_Card_Items();
-        Notification.setNdate("1394");
-        Notification.setNdetail("یه فروشگاه خوب و عالی که هم جنساش خوبه هم قیمتاش ارزونه");
-        Notification.setNmarket("3فروشگاه");
-        mItems.add(Notification);
-
-        Notification=new Notify_Card_Items();
-        Notification.setNdate("1394");
-        Notification.setNdetail("یه فروشگاه خوب و عالی که هم جنساش خوبه هم قیمتاش ارزونه");
-        Notification.setNmarket("4فروشگاه");
-        mItems.add(Notification);
+        if(rowalls.moveToFirst())
+        {
+            mItems = new ArrayList<Notify_Card_Items>();
+            do
+            {
+                 nci=new Notify_Card_Items();
+                nci.setNdate(rowalls.getString(5));
+                nci.setNdetail(rowalls.getString(4));
+                nci.setNmarket(market_Name_Business(rowalls.getInt(2)));
+                mItems.add(nci);
+            }while (rowalls.moveToNext());
+        }
 
 
 
@@ -103,5 +98,20 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
             });
 
         }
+    }
+
+    public String market_Name_Business(Integer id)
+    {
+        String result="";
+        try
+        {
+            DataBaseSqlite db=new DataBaseSqlite(context);
+            Cursor rowalls=db.select_business_NameMarket(id);
+            rowalls.moveToFirst();
+            result=rowalls.getString(0);
+            rowalls.close();
+        }
+        catch (SQLException e){}
+        return  result;
     }
 }

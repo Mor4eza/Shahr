@@ -203,13 +203,13 @@ public class Sign_Up extends ActionBarActivity {
     {
 
        // Toast.makeText(getApplication(),fc.GetMember_Email(), Toast.LENGTH_LONG).show();
-     DataBaseSqlite mydb = new DataBaseSqlite(this);
-        Cursor allrows = mydb.select_bookmark();
+        DataBaseSqlite db=new DataBaseSqlite(this);
+        Cursor allrows=db.select_business();
 
         try {
             if ( allrows.moveToFirst()) {
                 do {
-                    Toast.makeText(getApplication(), String.valueOf(allrows.getInt(1)), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(), String.valueOf(allrows.getString(0)), Toast.LENGTH_LONG).show();
                 }while (allrows.moveToNext());
             }
             allrows.close();
