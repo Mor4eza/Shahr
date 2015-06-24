@@ -64,6 +64,7 @@ private  static Context context;
                         nature.setDes(allrows.getString(8));
                         nature.setThumbnail(R.drawable.pooshak);
                         nature.setRate(allrows.getDouble(29));
+                        nature.setmId(allrows.getInt(0));
 
                         mItems.add(nature);
 
@@ -95,6 +96,7 @@ private  static Context context;
         viewHolder.tvDesNature.setText(nature.getDes());
         viewHolder.imgThumbnail.setImageResource(nature.getThumbnail());
         viewHolder.rates.setRating((float) nature.getRate());
+        viewHolder.rates.setTag(nature.getmId());
     }
 
     @Override
@@ -131,14 +133,17 @@ private  static Context context;
             tvNature = (TextView)itemView.findViewById(R.id.tv_title);
             tvDesNature = (TextView)itemView.findViewById(R.id.tv_address);
             rates = (RatingBar)itemView.findViewById(R.id.rates);
+
             imgThumbnail.setOnClickListener(this);
 
         }
 
         @Override
         public void onClick(View v) {
-            fc.SetMarket_Business(tvNature.getText().toString());
-            fc.SetAddress_Business(tvDesNature.getText().toString());
+         /*   fc.SetMarket_Business(tvNature.getText().toString());
+            fc.SetAddress_Business(tvDesNature.getText().toString());*/
+
+            fc.SetBusiness_Id((Integer)rates.getTag());
             Intent i =new Intent(context,Job_details.class);
             context.startActivity(i);
         }

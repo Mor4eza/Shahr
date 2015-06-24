@@ -768,6 +768,12 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         SQLiteDatabase db=this.getReadableDatabase();
         return  db.rawQuery("SELECT * FROM "+TABLE_NAME_SUBSET+" WHERE SubsetName LIKE '%"+subsetName+"%'",null);
     }
+
+    public  Cursor select_AllNotificaton(Integer erja)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return db.rawQuery("SELECTE * FROM "+TABLE_NAME_NOTIFICATION,null);
+    }
     // Deleting Opinion
     public void delete_Opinion() {
 
@@ -779,11 +785,15 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
         // 3. close
         db.close();
-
-
-
     }
 
+
+
+    public void delete_Notification(String date)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE FROM "+TABLE_NAME_NOTIFICATION+" WHERE ExpirationDate='"+date+"'",null);
+    }
 
 
     // Deleting ZamanSanj

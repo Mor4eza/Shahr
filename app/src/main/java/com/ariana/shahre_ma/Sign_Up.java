@@ -19,9 +19,11 @@ import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.ImageDownload.ImageLoader;
+import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
 
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -224,9 +226,8 @@ public class Sign_Up extends ActionBarActivity {
       //  json.getSqliteInterestTOjson();
       email.setText(json.getSqliteInterestTOjson());*/
 
-        SharedPreferences pre=getSharedPreferences("Setting",MODE_PRIVATE);
-
-        Toast.makeText(getApplication(),pre.getString("AMtime",""), Toast.LENGTH_LONG).show();
+        KeySettings sett=new KeySettings(this);
+        Toast.makeText(getApplication(),sett.getPMtime(), Toast.LENGTH_LONG).show();
 
 
     }

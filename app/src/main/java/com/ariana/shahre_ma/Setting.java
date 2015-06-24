@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.android.datetimepicker.time.RadialPickerLayout;
 import com.android.datetimepicker.time.TimePickerDialog;
+import com.ariana.shahre_ma.Settings.KeySettings;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,6 +21,7 @@ import java.util.List;
 public class Setting extends ActionBarActivity implements TimePickerDialog.OnTimeSetListener{
 
     Calendar calendar;
+    KeySettings setting;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,10 +44,9 @@ public class Setting extends ActionBarActivity implements TimePickerDialog.OnTim
                         @Override
                         public void onTimeSet(RadialPickerLayout radialPickerLayout, int i, int i1) {
 
-                            SharedPreferences per=getSharedPreferences("Setting",MODE_PRIVATE);
-                            SharedPreferences.Editor editor=per.edit();
-                            editor.putString("AMtime",String.valueOf(i)+":" +String.valueOf(i1));
-                            editor.apply();
+                            setting=new KeySettings(Setting.this);
+                            setting.saveAMtime(String.valueOf(i)+":" +String.valueOf(i1));
+
                             Toast.makeText(getApplicationContext(),String.valueOf(i)+":" +String.valueOf(i1),Toast.LENGTH_LONG).show();
                         }
                     });
@@ -60,12 +61,9 @@ public class Setting extends ActionBarActivity implements TimePickerDialog.OnTim
                         @Override
                         public void onTimeSet(RadialPickerLayout radialPickerLayout, int i, int i1) {
 
-                            SharedPreferences per=getSharedPreferences("Setting", MODE_PRIVATE);
-                            SharedPreferences.Editor editor=per.edit();
-                            editor.putString("PMtime",String.valueOf(i)+":" +String.valueOf(i1));
-                            editor.apply();
+                            setting=new KeySettings(Setting.this);
+                            setting.savePMtime(String.valueOf(i)+":" +String.valueOf(i1));
 
-                            Toast.makeText(getApplication(),"time :  "+per.getString("PMtime",""), Toast.LENGTH_LONG).show();
                             Toast.makeText(getApplicationContext(),String.valueOf(i)+":" +String.valueOf(i1),Toast.LENGTH_LONG).show();
                         }
                     });
