@@ -1,11 +1,16 @@
-package com.ariana.shahre_ma.WebServiceGet;
+package com.ariana.shahre_ma.Service;
 
+import android.app.Notification;
+import android.app.Service;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Notification.Notify;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,9 +23,30 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by ariana2 on 6/22/2015.
+ * Created by ariana on 6/23/2015.
  */
-public class HTTPGetNotificationJson extends AsyncTask<String,String,String> {
+public class MainService extends Service
+{
+
+    HTTPGetNotificationJson_service noti;
+    @Override
+    public int onStartCommand(Intent intent,int flags,int startId)
+    {
+        noti=new HTTPGetNotificationJson_service(this);
+        noti.SetUrl_MemberId(1);
+        noti.execute();
+
+        Log.d("onStartCommand","service");
+        return Service.START_STICKY;
+    }
+    @Override
+    public IBinder onBind(Intent intent) {
+        Log.d("onBind","service");
+        return null;
+    }
+}
+
+ class HTTPGetNotificationJson_service extends AsyncTask<String,String,String> {
 
     public static String test;
     private static Context context;
@@ -50,7 +76,7 @@ public class HTTPGetNotificationJson extends AsyncTask<String,String,String> {
         return  url_Notification;
     }
 
-    public HTTPGetNotificationJson(Context c) {
+    public HTTPGetNotificationJson_service(Context c) {
         context = c;
     }
 
@@ -91,6 +117,7 @@ public class HTTPGetNotificationJson extends AsyncTask<String,String,String> {
             SubsetId=new Integer[areas.length()];
             len=areas.length();
             for (int i = 0; i < areas.length(); i++) {
+
                 JSONObject area = areas.getJSONObject(i);
                 Id[i]=area.getInt("Id");
                 OpinionType[i]=area.getInt("OpinionType");
@@ -103,7 +130,7 @@ public class HTTPGetNotificationJson extends AsyncTask<String,String,String> {
                 Subset[i]=area.getString("Subset");
                 SubsetId[i]=area.getInt("SubsetId");
                 test=area.getString("Description");
-        }
+            }
 
         } catch (JSONException e) {
             // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
@@ -118,15 +145,19 @@ public class HTTPGetNotificationJson extends AsyncTask<String,String,String> {
             //  Toast.makeText(context,market[0], Toast.LENGTH_LONG).show();
             DataBaseSqlite dbs = new DataBaseSqlite(context);
 
-
-
-            for (int i = 0; i <len; i++)
+            if(len>0)
             {
-                dbs.Add_Notification(Id[i], OpinionType[i],erja[i],ExecutionTime[i],Description[i],ExpirationDate[i],City[i],CityId[i],Subset[i],SubsetId[i]);
+
+                for (int i = 0; i < len; i++)
+                {
+                    dbs.Add_Notification(Id[i], OpinionType[i], erja[i], ExecutionTime[i], Description[i], ExpirationDate[i], City[i], CityId[i], Subset[i], SubsetId[i]);
+
+                }
+
+                Notify.Notificationm(context);
+
 
             }
-
-
 
         } catch (Exception e) {
             Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();

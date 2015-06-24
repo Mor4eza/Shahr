@@ -483,8 +483,8 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         values.put(FIELD5_business, field5);
         values.put(FIELD6_business, field6);
         values.put(FIELD7_business, field7);
-        values.put(FIELD6_business, ratecount);
-        values.put(FIELD7_business, ratevalue);
+        values.put(RATECOUNT_business, ratecount);
+        values.put(RATEVALUE_business, ratevalue);
 
 
         // 3. insert
@@ -638,6 +638,14 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     }
 
+    public Cursor select_businessId(Integer id)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT COUNT(*) FROM " + TABLE_NAME_BUSINESS + "  WHERE Id=" + id, null);
+
+    }
+
     public Cursor select_business(Integer subsetID)
     {
 
@@ -652,6 +660,14 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT Market FROM " + TABLE_NAME_BUSINESS + "  WHERE Id=" +businessID , null);
+
+    }
+
+    public Cursor select_business()
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT Market FROM " + TABLE_NAME_BUSINESS, null);
 
     }
 
@@ -708,10 +724,13 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     public Cursor select_Member_Name()
     {
-
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT Name FROM " + TABLE_NAME_MEMBER, null);
+    }
 
+    public Cursor select_Notification() {
+    SQLiteDatabase db=this.getReadableDatabase();
+        return  db.rawQuery("SELECT * FROM "+TABLE_NAME_NOTIFICATION,null);
     }
     // Deleting Opinion
     public void delete_Opinion() {

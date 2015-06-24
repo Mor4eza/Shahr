@@ -19,39 +19,30 @@ public class Notify {
 
     }
 
-   public static void Json_Notify(){
 
 
 
-
-   }
-
-
-    void Add_Notify_Sql(){
-
-    }
 
 
     public static void Notificationm(Context context){
-        String test="test";
+
         HTTPGetNotificationJson notificationJson= new HTTPGetNotificationJson(context);
         notificationJson.execute();
-        test = notificationJson.test;
+
 
 
         NotificationManager nm=(NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Notification notify=new Notification(R.mipmap.ic_launcher,"شما یک پیام دارید",System.currentTimeMillis());
         notify.flags |= Notification.FLAG_AUTO_CANCEL;
-        notify.flags |= Notification.FLAG_NO_CLEAR;
         notify.flags |= Notification.FLAG_SHOW_LIGHTS;
         notify.defaults |= Notification.DEFAULT_LIGHTS;
         notify.defaults |= Notification.DEFAULT_SOUND;
         CharSequence title="شهرما";
         CharSequence detils="اعلانات";
 
-        Intent intent=new Intent(context,Jobs.class);
+        Intent intent=new Intent(context,Activity_notify.class);
         PendingIntent pend=PendingIntent.getActivity(context, 0, intent, 0);
-        notify.setLatestEventInfo(context, title, test, pend);
+        notify.setLatestEventInfo(context, title, detils, pend);
         nm.notify(0,notify);
 
     }

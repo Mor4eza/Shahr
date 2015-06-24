@@ -2,6 +2,7 @@ package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -85,6 +86,7 @@ public class HTTPSendRateURL extends AsyncTask<String, Void, Boolean> {
 
 
                 JSONObject jsono = new JSONObject(data);
+                Log.i("", String.valueOf(jsono));
 
                 return true;
             }
