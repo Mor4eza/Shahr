@@ -483,8 +483,8 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         values.put(FIELD5_business, field5);
         values.put(FIELD6_business, field6);
         values.put(FIELD7_business, field7);
-        values.put(FIELD6_business, ratecount);
-        values.put(FIELD7_business, ratevalue);
+        values.put(RATECOUNT_business, ratecount);
+        values.put(RATEVALUE_business, ratevalue);
 
 
         // 3. insert

@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -111,8 +112,11 @@ public class job_details_1 extends ActionBarActivity {
 
                     HTTPSendRateURL httprate=new HTTPSendRateURL(getActivity());
                     httprate.SetBusinessId(fc.GetBusiness_Id());
+                    Log.i("SetBusinessId", String.valueOf(fc.GetBusiness_Id()));
                     httprate.SetMemberId(query.getMemberId());
+                    Log.i("SetMemberId",String.valueOf(query.getMemberId()));
                     httprate.SetRate(Double.valueOf(rating));
+                    Log.i("SetRate",String.valueOf(Double.valueOf(rating)));
                     httprate.execute();
                 }
             });

@@ -13,17 +13,17 @@ import com.ariana.shahre_ma.WebServiceGet.HTTPGetNotificationJson;
 public class Notify {
     Context context;
 
+    static String titles="";
     public Notify(Context context){
 
      this.context=context;
 
     }
 
-   public static void Json_Notify(){
+   public   String Titel_Notitication(String title){
+       this.titles=title;
 
-
-
-
+       return  this.titles;
    }
 
 
@@ -32,7 +32,7 @@ public class Notify {
     }
 
 
-    public static void Notificationm(Context context){
+    public static void Notificationm(Context context,String titles1){
         String test="test";
         HTTPGetNotificationJson notificationJson= new HTTPGetNotificationJson(context);
         notificationJson.execute();
@@ -42,11 +42,10 @@ public class Notify {
         NotificationManager nm=(NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Notification notify=new Notification(R.mipmap.ic_launcher,"شما یک پیام دارید",System.currentTimeMillis());
         notify.flags |= Notification.FLAG_AUTO_CANCEL;
-        notify.flags |= Notification.FLAG_NO_CLEAR;
         notify.flags |= Notification.FLAG_SHOW_LIGHTS;
         notify.defaults |= Notification.DEFAULT_LIGHTS;
         notify.defaults |= Notification.DEFAULT_SOUND;
-        CharSequence title="شهرما";
+        CharSequence title=titles1;
         CharSequence detils="اعلانات";
 
         Intent intent=new Intent(context,Jobs.class);

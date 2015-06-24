@@ -17,6 +17,7 @@ import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
+import com.ariana.shahre_ma.Service.MainService;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetInterestJson;
@@ -72,6 +73,10 @@ DateTime dt=new DateTime();
 
         httpbusin=new HTTPGetBusinessJson(this);
         ns=new NetState(this);
+
+        Context context=getApplication();
+        Intent intent=new Intent(context, MainService.class);
+        context.startService(intent);
 
         createCollection();
 

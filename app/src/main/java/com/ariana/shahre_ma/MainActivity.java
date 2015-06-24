@@ -55,7 +55,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         //findViewsAndConfigure();
 
-        Notify.Notificationm(this);
+
 
         NetState ns=new NetState(this);
         if(ns.checkInternetConnection()==false) {
@@ -277,6 +277,7 @@ public class MainActivity extends ActionBarActivity {
 
                     Intent i=new Intent(getApplicationContext(),Jobs.class);
                     startActivity(i);
+                    MainActivity.this.finish();
                 }
                 if (position==6) {
                     Intent i = new Intent(getApplicationContext(), BookMark.class);

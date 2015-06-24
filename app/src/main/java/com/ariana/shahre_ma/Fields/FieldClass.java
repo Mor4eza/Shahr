@@ -23,6 +23,7 @@ public class FieldClass
     private static final String TABLE_NAME_UpdateTime = "UpdateTime";
     private static final String TABLE_NAME_Like = "Like";
     private static final String TABLE_NAME_Interest = "Interest";
+    private static final String TABLE_NAME_NOTIFICATION="Notification";
 
 
 
@@ -371,6 +372,11 @@ public class FieldClass
     public String  GetTableNameUpdateTime()
     {
         return  TABLE_NAME_UpdateTime;
+    }
+    // Get  Notification
+    public String  GetTableNameNotification()
+    {
+        return  TABLE_NAME_NOTIFICATION;
     }
 
     // Get  database
