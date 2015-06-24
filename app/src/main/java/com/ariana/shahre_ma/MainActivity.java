@@ -87,7 +87,6 @@ public class MainActivity extends ActionBarActivity {
         Image_slider();
         navigation();
         fab();
-
     }
 
     public void fab_click(View v){

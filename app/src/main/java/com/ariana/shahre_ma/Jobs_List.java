@@ -94,8 +94,8 @@ public class Jobs_List extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_Map) {
-          //  Intent i = new Intent(this,MapsActivity.class);
-          //  startActivity(i);
+           Intent i = new Intent(this,MapsActivity.class);
+           startActivity(i);
 
 
 

@@ -117,20 +117,25 @@ public class MapsActivity extends ActionBarActivity {
 
         DataBaseSqlite mydb = new DataBaseSqlite(this);
         Cursor allrows = mydb.select_business(fc.GetBusiness_SubsetIdb());
-        try {
+       try {
 
 
             if (allrows.moveToFirst()) {
 
                 do {
-                    Market[l] = allrows.getString(1);
-                    Latitude[l] =allrows.getString(15);
-                    Longtitude[l] =allrows.getString(16);
-                    Log.i("Latitude", String.valueOf(Latitude[l]));
-                    Log.i("Longtitude",String.valueOf(Longtitude[l]));
-                    Log.i("Market",String.valueOf(Market[l]));
-                    Rate[l] = allrows.getDouble(29);
-                    Log.i("Rate",String.valueOf(Market[l]));
+                    Log.i("Latitude", allrows.getString(15));
+                    if(allrows.getString(15).equals(null))
+                    {
+
+                        Market[l] = allrows.getString(1);
+                        Latitude[l] = allrows.getString(15);
+                        Longtitude[l] = allrows.getString(16);
+                        Log.i("Latitude", String.valueOf(Latitude[l]));
+                        Log.i("Longtitude", String.valueOf(Longtitude[l]));
+                        Log.i("Market", String.valueOf(Market[l]));
+                        Rate[l] = allrows.getDouble(29);
+                        Log.i("Rate", String.valueOf(Rate[l]));
+                    }
                     l++;
 
                 } while (allrows.moveToNext());
@@ -139,14 +144,15 @@ public class MapsActivity extends ActionBarActivity {
 
 
             for (int i = 0; i < len; i++) {
-                Marker  marker = mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(Latitude[i]), Double.parseDouble(Longtitude[i] ))).title("\u200e"+Market[i]).snippet(String.valueOf(Rate[i])));
-                marker.showInfoWindow();
 
+                    Marker  marker = mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(Latitude[i]), Double.parseDouble(Longtitude[i] ))).title("\u200e"+Market[i]).snippet(String.valueOf(Rate[i])));
+                    marker.showInfoWindow();
             }
 
 
-        }catch (Exception e){
-
+       }catch (Exception e)
+        {
+            Log.i("ExceptionMAPS",e.toString());
         }
 
     }

@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.SearchView;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ExpandableListView;
@@ -21,18 +23,15 @@ import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetInterestJson;
 
-
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 
-public class Jobs extends ActionBarActivity {
-
+public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
+    private SearchView search;
     Integer count = 0;
-
     String time="";
     String date="";
     public SwipeRefreshLayout mSwipeRefreshLayout = null;
@@ -42,8 +41,7 @@ public class Jobs extends ActionBarActivity {
     Map<String, List<String>> laptopCollection;
     ExpandableListView expListView;
     int lastExpandedPosition = -1;
-DateTime dt=new DateTime();
-
+    DateTime dt=new DateTime();
 
     Integer id[];
     Integer Collection_id[];
@@ -61,14 +59,6 @@ DateTime dt=new DateTime();
         query=new Query(this);
 
 
-/*
-
-        mDrawer = MenuDrawer.attach(this, Position.RIGHT);
-        mDrawer.setMenuView(R.layout.activity_jobs);
-        mDrawer.setContentView(R.layout.activity_job_details_map);
-*/
-
-
 
         httpbusin=new HTTPGetBusinessJson(this);
         ns=new NetState(this);
@@ -77,7 +67,6 @@ DateTime dt=new DateTime();
 
         //Initialize swipe to refresh view
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
-
         mSwipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
@@ -108,8 +97,7 @@ DateTime dt=new DateTime();
 
         expListView = (ExpandableListView) findViewById(R.id.laptop_list);
 
-        final ExpandableListAdapter expListAdapter = new ExpandableListAdapter(
-                this, groupList,laptopCollection) {
+      final ExpandableListAdapter expListAdapter = new ExpandableListAdapter(this, groupList,laptopCollection) {
 
         };
         expListView.setAdapter(expListAdapter);
@@ -171,6 +159,13 @@ DateTime dt=new DateTime();
                             }
 
                         });
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        search=(SearchView)findViewById(R.id.search_jobs);
+        search.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        search.setIconifiedByDefault(false);
+        search.setOnQueryTextListener(this);
+        search.setOnCloseListener(this);
 
 
 
@@ -273,5 +268,22 @@ DateTime dt=new DateTime();
         HTTPGetInterestJson httpinterest=new HTTPGetInterestJson(this);
 
         httpinterest.execute();
+    }
+
+    @Override
+    public boolean onClose() {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+
+        Toast.makeText(getApplicationContext(),"Typing...",Toast.LENGTH_LONG).show();
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
     }
 }
