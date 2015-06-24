@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
+import com.ariana.shahre_ma.Notification.Activity_notify;
 import com.ariana.shahre_ma.Notification.Notify;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBookMarkJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
@@ -86,7 +87,7 @@ public class MainActivity extends ActionBarActivity {
         Image_slider();
         navigation();
         fab();
-       // Hints();
+
     }
 
     public void fab_click(View v){
@@ -117,12 +118,11 @@ public class MainActivity extends ActionBarActivity {
         top.setOverDrag(false);
         slider = (SliderLayout)findViewById(R.id.slider);
 
-        TextSliderView textSliderView = new TextSliderView(this);
+        final TextSliderView textSliderView = new TextSliderView(this);
         textSliderView
                 .description("چهار باغ")
                 .image(R.drawable.charbagh);
         slider.addSlider(textSliderView);
-
 
         TextSliderView textSliderView2 = new TextSliderView(this);
         textSliderView2
@@ -136,6 +136,7 @@ public class MainActivity extends ActionBarActivity {
                 .description("تیراژه")
                 .image(R.drawable.rest_tirajhe);
         slider.addSlider(textSliderView3);
+
 
         slider.setPresetTransformer(SliderLayout.Transformer.Accordion);
         slider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
@@ -277,8 +278,13 @@ public class MainActivity extends ActionBarActivity {
                     Intent i=new Intent(getApplicationContext(),Jobs.class);
                     startActivity(i);
                 }
-                if (position==6){
-                    Intent i=new Intent(getApplicationContext(),BookMark.class);
+                if (position==6) {
+                    Intent i = new Intent(getApplicationContext(), BookMark.class);
+                    startActivity(i);
+                }
+                if (position==7){
+
+                    Intent i=new Intent(getApplicationContext(),Activity_notify.class);
                     startActivity(i);
                 }
             }

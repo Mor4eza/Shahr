@@ -3,6 +3,7 @@ package com.ariana.shahre_ma;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -13,8 +14,6 @@ import android.widget.TextView;
 import com.ariana.shahre_ma.Cards.job_list_cards_adapter;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.job_details.Job_details;
-
-
 
 
 public class Jobs_List extends ActionBarActivity {
@@ -63,14 +62,18 @@ public class Jobs_List extends ActionBarActivity {
 
     private void setCards(){
         try {
-            mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_Jobs);
-            mRecyclerView.setHasFixedSize(true);
 
+
+            mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_Jobs);
+            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            mRecyclerView.getItemAnimator().setAddDuration(5000);
+            mRecyclerView.getItemAnimator().setChangeDuration(5000);
+            mRecyclerView.setHasFixedSize(true);
             mLayoutManager = new LinearLayoutManager(this);
             mRecyclerView.setLayoutManager(mLayoutManager);
-
             job_list_Adapter = new job_list_cards_adapter(this);
             mRecyclerView.setAdapter(job_list_Adapter);
+
         }
         catch (Exception e){}
     }
@@ -91,8 +94,12 @@ public class Jobs_List extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_Map) {
-            Intent i = new Intent(this,MapsActivity.class);
-            startActivity(i);
+          //  Intent i = new Intent(this,MapsActivity.class);
+          //  startActivity(i);
+
+
+
+
             return true;
         }
 

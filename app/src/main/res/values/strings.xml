@@ -36,6 +36,8 @@
     <string name="title_activity_book_mark">BookMark</string>
     <string name="title_activity_maps">نقشه</string>
     <string name="Map">نقشه</string>
+    <string name="title_activity_notification">Notification</string>
+    <string name="title_activity_activity_notify">اعلانات</string>
 
 
 </resources>

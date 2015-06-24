@@ -30,6 +30,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.1.1'
 
    // compile 'com.android.support:appcompat-v7:22.2.0'
+    compile 'jp.wasabeef:recyclerview-animators:1.2.0@aar'
     compile 'com.github.orangegangsters:swipy:1.2.0@aar'
     compile 'com.android.support:support-v4:22.2.0'
     compile 'com.neno0o.lighttextview:lib:1.1'
