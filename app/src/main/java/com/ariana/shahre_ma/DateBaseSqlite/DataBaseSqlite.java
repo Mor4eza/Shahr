@@ -733,6 +733,13 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM " + TABLE_NAME_FieldActivity , null);
+    }
+
+    public Cursor select_FieldActivityId(String fieldname)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT Id FROM " + TABLE_NAME_FieldActivity+" WHERE Activity='"+fieldname+"'" , null);
 
     }
 
