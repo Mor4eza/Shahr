@@ -1,6 +1,7 @@
 package com.ariana.shahre_ma;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -204,7 +205,7 @@ public class Sign_Up extends ActionBarActivity {
     {
 
        // Toast.makeText(getApplication(),fc.GetMember_Email(), Toast.LENGTH_LONG).show();
-        DataBaseSqlite db=new DataBaseSqlite(this);
+  /*      DataBaseSqlite db=new DataBaseSqlite(this);
         Cursor allrows=db.select_AllBusiness();
 
 
@@ -218,10 +219,14 @@ public class Sign_Up extends ActionBarActivity {
             allrows.close();
         }
         catch (Exception e){ Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}
-
+*/
      /*   SqliteTOjson json=new SqliteTOjson(this);
       //  json.getSqliteInterestTOjson();
       email.setText(json.getSqliteInterestTOjson());*/
+
+        SharedPreferences pre=getSharedPreferences("Setting",MODE_PRIVATE);
+
+        Toast.makeText(getApplication(),pre.getString("AMtime",""), Toast.LENGTH_LONG).show();
 
 
     }
