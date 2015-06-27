@@ -38,6 +38,8 @@ public class MapsActivity extends ActionBarActivity {
         mMap.getUiSettings().setMapToolbarEnabled(false);
         mMap.getUiSettings().setZoomControlsEnabled(true);*/
 
+        // DataBase
+
         DataBaseSqlite mydb = new DataBaseSqlite(this);
         Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb());
         String lat[] = new String[fc.GetCount_Business()];
