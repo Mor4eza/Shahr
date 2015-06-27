@@ -41,7 +41,7 @@ public class Setting extends ActionBarActivity implements TimePickerDialog.OnTim
                     t.setOnTimeSetListener(new TimePickerDialog.OnTimeSetListener() {
                         @Override
                         public void onTimeSet(RadialPickerLayout radialPickerLayout, int i, int i1) {
-//detect
+
                             SharedPreferences per=getSharedPreferences("Setting",MODE_PRIVATE);
                             SharedPreferences.Editor editor=per.edit();
                             editor.putString("AMtime",String.valueOf(i)+":" +String.valueOf(i1));
