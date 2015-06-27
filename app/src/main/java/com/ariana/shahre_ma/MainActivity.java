@@ -18,6 +18,7 @@ import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.Notification.Activity_notify;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBookMarkJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;

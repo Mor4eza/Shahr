@@ -17,6 +17,7 @@ import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.DateTime;
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
@@ -193,12 +194,10 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
     private void createCollection() {
 
-           Boolean f=true;
-
         try {
-            SQLiteDatabase mydb = openOrCreateDatabase(fc.GetDataBaseName(), Context.MODE_PRIVATE, null);
-            Cursor allrows_Collection = mydb.rawQuery("SELECT * FROM " + fc.GetTableNameCollection(), null);
-            Cursor allrows_Subset = mydb.rawQuery("SELECT * FROM " + fc.GetTableNameSubset(), null);
+            DataBaseSqlite db=new DataBaseSqlite(this);
+            Cursor allrows_Collection =db.select_Collection();
+            Cursor allrows_Subset =db.select_Subset();
             groupList = new ArrayList<String>();
 
 
@@ -236,7 +235,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
                 } while (allrows_Collection.moveToNext());
             }
 
-            mydb.close();
+
         }
         catch (Exception e){ Toast.makeText(getBaseContext(),e.toString(), Toast.LENGTH_LONG).show();}
 
@@ -306,7 +305,9 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
     }
 
     @Override
-    public boolean onQueryTextChange(String newText) {
+    public boolean onQueryTextChange(String newText)
+    {
+
         return false;
     }
 }

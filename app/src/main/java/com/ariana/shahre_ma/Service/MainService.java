@@ -152,6 +152,7 @@ public class MainService extends Service
                 {
                     dbs.Add_Notification(Id[i], OpinionType[i], erja[i], ExecutionTime[i], Description[i], ExpirationDate[i], City[i], CityId[i], Subset[i], SubsetId[i]);
 
+
                 }
 
                 Notify.Notificationm(context);

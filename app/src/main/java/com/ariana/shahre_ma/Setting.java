@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -40,6 +41,11 @@ public class Setting extends ActionBarActivity implements TimePickerDialog.OnTim
                     t.setOnTimeSetListener(new TimePickerDialog.OnTimeSetListener() {
                         @Override
                         public void onTimeSet(RadialPickerLayout radialPickerLayout, int i, int i1) {
+
+                            SharedPreferences per=getSharedPreferences("Setting",MODE_PRIVATE);
+                            SharedPreferences.Editor editor=per.edit();
+                            editor.putString("AMtime",String.valueOf(i)+":" +String.valueOf(i1));
+
                             Toast.makeText(getApplicationContext(),String.valueOf(i)+":" +String.valueOf(i1),Toast.LENGTH_LONG).show();
                         }
                     });
@@ -53,6 +59,10 @@ public class Setting extends ActionBarActivity implements TimePickerDialog.OnTim
                     t.setOnTimeSetListener(new TimePickerDialog.OnTimeSetListener() {
                         @Override
                         public void onTimeSet(RadialPickerLayout radialPickerLayout, int i, int i1) {
+
+                            SharedPreferences per=getSharedPreferences("Setting",MODE_PRIVATE);
+                            SharedPreferences.Editor editor=per.edit();
+                            editor.putString("PMtime",String.valueOf(i)+":" +String.valueOf(i1));
                             Toast.makeText(getApplicationContext(),String.valueOf(i)+":" +String.valueOf(i1),Toast.LENGTH_LONG).show();
                         }
                     });

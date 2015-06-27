@@ -750,6 +750,24 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     SQLiteDatabase db=this.getReadableDatabase();
         return  db.rawQuery("SELECT * FROM "+TABLE_NAME_NOTIFICATION,null);
     }
+
+    public Cursor select_Collection()
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return  db.rawQuery("SELECT * FROM "+TABLE_NAME_COLLECTION,null);
+    }
+
+    public Cursor select_Subset()
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return  db.rawQuery("SELECT * FROM "+TABLE_NAME_SUBSET,null);
+    }
+
+    public Cursor select_SearchSubset(String subsetName)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return  db.rawQuery("SELECT * FROM "+TABLE_NAME_SUBSET+" WHERE SubsetName LIKE '%"+subsetName+"%'",null);
+    }
     // Deleting Opinion
     public void delete_Opinion() {
 
