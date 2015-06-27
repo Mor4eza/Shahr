@@ -34,9 +34,11 @@ public class MapsActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
-        mMap.setMyLocationEnabled(true);
+   /*     mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setMapToolbarEnabled(false);
-        mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.getUiSettings().setZoomControlsEnabled(true);*/
+
+        // DataBase
 
         DataBaseSqlite mydb = new DataBaseSqlite(this);
         Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb());
