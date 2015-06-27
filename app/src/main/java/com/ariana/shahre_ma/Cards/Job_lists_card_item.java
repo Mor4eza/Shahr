@@ -11,6 +11,7 @@ public class Job_lists_card_item {
     double rate;
     private String mAdd;
     private int mThumbnail;
+    private Integer mId;
 
     public double getRate() {
         return rate;
@@ -43,5 +44,13 @@ public class Job_lists_card_item {
 
     public void setThumbnail(int thumbnail) {
         this.mThumbnail = thumbnail;
+    }
+
+    public Integer getmId() {
+        return mId;
+    }
+
+    public void setmId(Integer id) {
+        this.mId = id;
     }
 }

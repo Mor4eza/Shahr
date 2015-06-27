@@ -34,12 +34,12 @@ public class MapsActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
-      //  mMap.setMyLocationEnabled(true);
+        mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setMapToolbarEnabled(false);
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
         DataBaseSqlite mydb = new DataBaseSqlite(this);
-        Cursor allrows = mydb.select_business(fc.GetBusiness_SubsetIdb());
+        Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb());
         String lat[] = new String[fc.GetCount_Business()];
         String Longt[] = new String[fc.GetCount_Business()];
         Integer l=0;
@@ -55,10 +55,12 @@ public class MapsActivity extends ActionBarActivity {
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(lat[0]),Double.parseDouble(Longt[0])), 18.0f), 2000, null);
 
 
-        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
+
                 fc.SetMarket_Business(marker.getTitle().toString());
+
                 Toast.makeText(getApplicationContext(), marker.getTitle(), Toast.LENGTH_LONG).show();
                 Intent i=new Intent(getApplicationContext(), Job_details.class);
                 startActivity(i);
@@ -116,7 +118,7 @@ public class MapsActivity extends ActionBarActivity {
         len=fc.GetCount_Business();
 
         DataBaseSqlite mydb = new DataBaseSqlite(this);
-        Cursor allrows = mydb.select_business(fc.GetBusiness_SubsetIdb());
+        Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb());
        try {
 
 

@@ -1,6 +1,7 @@
 package com.ariana.shahre_ma.Cards;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +12,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.job_details.Job_details;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,14 +26,14 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
 
     List<Notify_Card_Items> mItems;
     Notify_Card_Items nci;
-
+    FieldClass fc=new FieldClass();
     private  static Context context;
 
     public Notify_Card_Adapter(Context context) {
         super();
         this.context=context;
 
-
+Integer i=0;
         mItems = new ArrayList<Notify_Card_Items>();
         DataBaseSqlite db=new DataBaseSqlite(context);
         Cursor rowalls=db.select_Notification();
@@ -40,11 +43,19 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
             mItems = new ArrayList<Notify_Card_Items>();
             do
             {
-                 nci=new Notify_Card_Items();
-                nci.setNdate(rowalls.getString(5));
-                nci.setNdetail(rowalls.getString(4));
-                nci.setNmarket(market_Name_Business(rowalls.getInt(2)));
-                mItems.add(nci);
+                try {
+                    nci = new Notify_Card_Items();
+                    nci.setNdate(rowalls.getString(5));
+                    nci.setNdetail(rowalls.getString(4));
+                    nci.setNmarket(market_Name_Business(463 + i));
+                    nci.setNId(rowalls.getInt(2));
+                    mItems.add(nci);
+                }
+                catch (Exception e)
+                {
+                    Log.e("Exception",e.toString());
+                }
+                i++;
             }while (rowalls.moveToNext());
         }
 
@@ -66,6 +77,7 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
         viewHolder.tvdate.setText(nature.getNdate());
         viewHolder.tvmarket.setText(nature.getNmarket());
         viewHolder.tvdetail.setText(nature.getNdetail());
+        viewHolder.tvmarket.setTag(nature.getNId());
     }
 
     @Override
@@ -92,6 +104,9 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
                 public void onClick(View v) {
 
                     Log.i("ON_______CLICK", tvmarket.getText().toString());
+                    fc.SetBusiness_Id((Integer)tvmarket.getTag());
+                    Intent i = new Intent(context, Job_details.class);
+                    context.startActivity(i);
 
 
                 }
@@ -111,7 +126,7 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
             result=rowalls.getString(0);
             rowalls.close();
         }
-        catch (SQLException e){}
+        catch (SQLException e){Log.e("SQLException",e.toString());}
         return  result;
     }
 }

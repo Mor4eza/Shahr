@@ -50,7 +50,7 @@ public class Query {
 
         try {
             DataBaseSqlite dbs = new DataBaseSqlite(context);
-            Cursor allrows = dbs.select_business_SubsetId(subsetid);
+            Cursor allrows = dbs.select_CountBusiness_SubsetId(subsetid);
             allrows.moveToFirst();
             Result = allrows.getInt(0);
             allrows.close();
@@ -131,7 +131,7 @@ public class Query {
 
         try {
             DataBaseSqlite dbs = new DataBaseSqlite(context);
-            Cursor allrows = dbs.select_business(14);
+            Cursor allrows = dbs.select_CountBusiness_SubsetId(14);
             allrows.moveToFirst();
             Result = allrows.getInt(0);
             allrows.close();

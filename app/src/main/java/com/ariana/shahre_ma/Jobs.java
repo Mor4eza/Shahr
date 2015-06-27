@@ -88,7 +88,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
                 //Refreshing data on server
               //  Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_LONG).show();
                 mSwipeRefreshLayout.setRefreshing(false);
-                HTTPGetCollectionJson http = new HTTPGetCollectionJson(Jobs.this,mSwipeRefreshLayout);
+                HTTPGetCollectionJson http = new HTTPGetCollectionJson(Jobs.this);
                 http.execute();
 
             /*    new CountDownTimer(5000, 1000) {

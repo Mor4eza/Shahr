@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -204,12 +205,14 @@ public class Sign_Up extends ActionBarActivity {
 
        // Toast.makeText(getApplication(),fc.GetMember_Email(), Toast.LENGTH_LONG).show();
         DataBaseSqlite db=new DataBaseSqlite(this);
-        Cursor allrows=db.select_business();
+        Cursor allrows=db.select_AllBusiness();
+
 
         try {
             if ( allrows.moveToFirst()) {
                 do {
-                    Toast.makeText(getApplication(), String.valueOf(allrows.getString(0)), Toast.LENGTH_LONG).show();
+                   // Toast.makeText(getApplication(), String.valueOf(allrows.getString(0)), Toast.LENGTH_LONG).show();
+                    Log.i("Business ID", String.valueOf(allrows.getString(0)));
                 }while (allrows.moveToNext());
             }
             allrows.close();

@@ -8,6 +8,11 @@ public class Notify_Card_Items {
     private String Ndate;
     private String Nmarket;
     private String Ndetail;
+    private Integer NId;
+
+    public Integer getNId(){return  NId;}
+
+    public void setNId(Integer id){NId=id;}
 
     public String getNdate() {
         return Ndate;

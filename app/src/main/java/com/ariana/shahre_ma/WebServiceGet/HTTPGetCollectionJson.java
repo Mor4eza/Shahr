@@ -28,13 +28,13 @@ import java.net.URL;
 public class HTTPGetCollectionJson extends AsyncTask<String, String, String> {
 
         ProgressDialog pd;
-        Jobs activity;
-         SwipeRefreshLayout mswip;
+
+
         private static Context context;
 ;
-        public HTTPGetCollectionJson(Context c,SwipeRefreshLayout mswipe) {
+        public HTTPGetCollectionJson(Context c) {
         context = c;
-        this.mswip=mswipe;
+
 
     }
         private static final String url_collection="http://test.shahrma.com/api/apigivecollection";
@@ -85,7 +85,7 @@ public class HTTPGetCollectionJson extends AsyncTask<String, String, String> {
 
             }
             pd.dismiss();
-          mswip.setRefreshing(false);
+
         } catch (Exception e) {
             Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
             Log.i("Exception",e.toString());

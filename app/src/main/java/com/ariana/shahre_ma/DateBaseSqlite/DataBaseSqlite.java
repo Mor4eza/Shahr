@@ -622,15 +622,21 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.close();
     }
 
-    public Cursor select_SubsetId(String subsetname)
+    /**
+     * SelectBusiness
+     * @param
+     * @return
+     */
+
+    public Cursor select_AllBusiness()
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT Id FROM " + TABLE_NAME_SUBSET + "  WHERE SubsetName='" + subsetname+"'", null);
+        return db.rawQuery("SELECT* FROM " + TABLE_NAME_BUSINESS , null);
 
     }
 
-    public Cursor select_business_SubsetId(Integer subsetID)
+    public Cursor select_CountBusiness_SubsetId(Integer subsetID)
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -638,7 +644,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     }
 
-    public Cursor select_businessId(Integer id)
+    public Cursor select_CountBusinessId(Integer id)
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -646,7 +652,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     }
 
-    public Cursor select_business(Integer subsetID)
+    public Cursor select_AllBusiness(Integer subsetID)
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -654,6 +660,13 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     }
 
+    public Cursor select_AllBusinessId(Integer id)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + TABLE_NAME_BUSINESS + "  WHERE Id=" +id, null);
+
+    }
 
     public Cursor select_business_NameMarket(Integer businessID)
     {
@@ -663,11 +676,16 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     }
 
-    public Cursor select_business()
+    //End Select Business
+
+
+
+
+    public Cursor select_SubsetId(String subsetname)
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT Market FROM " + TABLE_NAME_BUSINESS, null);
+        return db.rawQuery("SELECT Id FROM " + TABLE_NAME_SUBSET + "  WHERE SubsetName='" + subsetname+"'", null);
 
     }
 

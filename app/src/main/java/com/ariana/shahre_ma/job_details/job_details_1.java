@@ -128,7 +128,8 @@ public class job_details_1 extends ActionBarActivity {
 
 
         DataBaseSqlite mydb = new DataBaseSqlite(getActivity());
-        Cursor allrows = mydb.select_business_Detail(fc.GetMarket_Business(), fc.GetAddress_Business());
+     //   Cursor allrows = mydb.select_business_Detail(fc.GetMarket_Business(), fc.GetAddress_Business());
+           Cursor allrows = mydb.select_AllBusinessId(fc.GetBusiness_Id());
         allrows.moveToNext();
 
 

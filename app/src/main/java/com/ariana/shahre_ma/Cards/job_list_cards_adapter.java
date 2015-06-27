@@ -52,7 +52,7 @@ private  static Context context;
         try {
 
                 DataBaseSqlite mydb = new DataBaseSqlite(context);
-                Cursor allrows = mydb.select_business(fc.GetBusiness_SubsetIdb());
+                Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb());
 
                 if (allrows.moveToFirst()) {
                     mItems = new ArrayList<Job_lists_card_item>();
