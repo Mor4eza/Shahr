@@ -143,10 +143,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
     void parseJSON(String JSONString) {
 
-        Integer ii = 0;
         try {
-
-            FieldClass fc=new FieldClass();
 
             JSONArray areas = new JSONArray(JSONString);
 
@@ -216,10 +213,6 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
                 ratecount[i]=area.getInt("RateCount");
                 ratevalue[i]=area.getDouble("RateAverage");
-
-
-
-
             }
 
         } catch (JSONException e) {
