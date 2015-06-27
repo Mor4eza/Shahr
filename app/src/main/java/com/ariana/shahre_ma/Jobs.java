@@ -4,9 +4,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
@@ -23,10 +21,8 @@ import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.Service.MainService;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetInterestJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -160,6 +156,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
                                 {
                                     if(count>0)
                                     {
+                                        fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
                                         Intent i = new Intent(getApplicationContext(), Jobs_List.class);
                                         startActivity(i);
                                         Log.i("Count>","1");

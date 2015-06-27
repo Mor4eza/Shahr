@@ -52,7 +52,7 @@ public class MapsActivity extends ActionBarActivity {
 
                 } while (allrows.moveToNext());
             }
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(lat[0]),Double.parseDouble(Longt[0])), 18.0f), 2000, null);
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(lat[0]),Double.parseDouble(Longt[0])), 12.0f), 2000, null);
 
 
          mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
@@ -60,7 +60,6 @@ public class MapsActivity extends ActionBarActivity {
             public void onInfoWindowClick(Marker marker) {
 
                 fc.SetMarket_Business(marker.getTitle().toString());
-
                 Toast.makeText(getApplicationContext(), marker.getTitle(), Toast.LENGTH_LONG).show();
                 Intent i=new Intent(getApplicationContext(), Job_details.class);
                 startActivity(i);
@@ -118,6 +117,7 @@ public class MapsActivity extends ActionBarActivity {
         len=fc.GetCount_Business();
 
         DataBaseSqlite mydb = new DataBaseSqlite(this);
+        Log.i("SubsetID",String.valueOf(fc.GetBusiness_SubsetIdb()) );
         Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb());
        try {
 
@@ -126,8 +126,8 @@ public class MapsActivity extends ActionBarActivity {
 
                 do {
                     Log.i("Latitude", allrows.getString(15));
-                    if(allrows.getString(15).equals(null))
-                    {
+
+
 
                         Market[l] = allrows.getString(1);
                         Latitude[l] = allrows.getString(15);
@@ -137,7 +137,7 @@ public class MapsActivity extends ActionBarActivity {
                         Log.i("Market", String.valueOf(Market[l]));
                         Rate[l] = allrows.getDouble(29);
                         Log.i("Rate", String.valueOf(Rate[l]));
-                    }
+
                     l++;
 
                 } while (allrows.moveToNext());

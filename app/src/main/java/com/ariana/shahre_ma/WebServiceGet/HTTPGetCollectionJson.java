@@ -1,16 +1,13 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
-import com.ariana.shahre_ma.Jobs;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,7 +28,7 @@ public class HTTPGetCollectionJson extends AsyncTask<String, String, String> {
 
 
         private static Context context;
-;
+
         public HTTPGetCollectionJson(Context c) {
         context = c;
 

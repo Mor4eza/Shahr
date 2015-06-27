@@ -96,10 +96,6 @@ public class Jobs_List extends ActionBarActivity {
         if (id == R.id.action_Map) {
            Intent i = new Intent(this,MapsActivity.class);
            startActivity(i);
-
-
-
-
             return true;
         }
 
