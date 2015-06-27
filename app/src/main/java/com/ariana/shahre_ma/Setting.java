@@ -32,9 +32,34 @@ public class Setting extends ActionBarActivity implements TimePickerDialog.OnTim
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0){
-                 TimePickerDialog.newInstance(Setting.this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show(getFragmentManager(), "timePicker");                }
+               //     TimePickerDialog.newInstance(Setting.this, calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE), false).show(getFragmentManager(), "timePicker");
+
+                    TimePickerDialog t=new TimePickerDialog();
+                    t.initialize(Setting.this,9,00,false);
+                    t.show(getFragmentManager(), "end");
+                    t.setOnTimeSetListener(new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(RadialPickerLayout radialPickerLayout, int i, int i1) {
+                            Toast.makeText(getApplicationContext(),String.valueOf(i)+":" +String.valueOf(i1),Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }else if (position==1){
+
+                    TimePickerDialog t=new TimePickerDialog();
+                    t.initialize(Setting.this,16,00,false);
+                    t.show(getFragmentManager(), "end");
+                    t.setUserVisibleHint(true);
+                    t.setOnTimeSetListener(new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(RadialPickerLayout radialPickerLayout, int i, int i1) {
+                            Toast.makeText(getApplicationContext(),String.valueOf(i)+":" +String.valueOf(i1),Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
             }
         });
+
 
     }
     private List<String> getnotification() {
@@ -46,7 +71,7 @@ public class Setting extends ActionBarActivity implements TimePickerDialog.OnTim
 
     @Override
     public void onTimeSet(RadialPickerLayout radialPickerLayout, int i, int i1) {
-        Toast.makeText(getApplicationContext(),String.valueOf(i + i1),Toast.LENGTH_LONG).show();
+
     }
 }
 
