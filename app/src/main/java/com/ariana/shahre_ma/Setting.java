@@ -45,7 +45,7 @@ public class Setting extends ActionBarActivity implements TimePickerDialog.OnTim
                             SharedPreferences per=getSharedPreferences("Setting",MODE_PRIVATE);
                             SharedPreferences.Editor editor=per.edit();
                             editor.putString("AMtime",String.valueOf(i)+":" +String.valueOf(i1));
-
+                            editor.apply();
                             Toast.makeText(getApplicationContext(),String.valueOf(i)+":" +String.valueOf(i1),Toast.LENGTH_LONG).show();
                         }
                     });
@@ -60,9 +60,12 @@ public class Setting extends ActionBarActivity implements TimePickerDialog.OnTim
                         @Override
                         public void onTimeSet(RadialPickerLayout radialPickerLayout, int i, int i1) {
 
-                            SharedPreferences per=getSharedPreferences("Setting",MODE_PRIVATE);
+                            SharedPreferences per=getSharedPreferences("Setting", MODE_PRIVATE);
                             SharedPreferences.Editor editor=per.edit();
                             editor.putString("PMtime",String.valueOf(i)+":" +String.valueOf(i1));
+                            editor.apply();
+
+                            Toast.makeText(getApplication(),"time :  "+per.getString("PMtime",""), Toast.LENGTH_LONG).show();
                             Toast.makeText(getApplicationContext(),String.valueOf(i)+":" +String.valueOf(i1),Toast.LENGTH_LONG).show();
                         }
                     });

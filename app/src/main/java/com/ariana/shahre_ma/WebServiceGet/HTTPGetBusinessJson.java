@@ -75,7 +75,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
     public   void SetUrl_business(Integer SubsetID)
     {
-        url_Business="http://test.shahrma.com/api/ApiGiveBusiness?subsetId="+SubsetID;
+        url_Business="http://test.shahrma.com/api/ApiGiveBusiness?subsetId="+SubsetID+"&cityid=68";
     }
 
     private String GetUrl_business()
