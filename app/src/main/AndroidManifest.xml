@@ -101,11 +101,19 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.MainActivity" />
-
         </activity>
-        <service android:name=".Service.MainService">
 
+        <service android:name=".Service.MainService" >
         </service>
+
+        <activity
+            android:name=".Setting"
+            android:label="@string/title_activity_setting"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ariana.shahre_ma.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
