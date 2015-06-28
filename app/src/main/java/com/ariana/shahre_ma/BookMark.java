@@ -18,6 +18,7 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
+import com.neno0o.lighttextviewlib.LightTextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -34,13 +35,14 @@ import java.util.List;
 
 public class BookMark extends ActionBarActivity {
 
-    Integer BusinessID[];
-    Integer len;
+
+Integer BusinessID[];
     ListView lv;
     SqliteTOjson sqltojson =new SqliteTOjson(this);
     Query query=new Query(this);
     FieldClass fc = new FieldClass();
-
+    Integer len=0;
+    Integer BusinessId[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +57,8 @@ public class BookMark extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 String selected = (String) lv.getItemAtPosition(position);
-                Toast.makeText(getApplicationContext(),selected,Toast.LENGTH_LONG).show();
+                String Id = (String) lv.getTag(position);
+                Toast.makeText(getApplicationContext(),selected+"  "+Id,Toast.LENGTH_LONG).show();
 
                 fc.SetMarket_Business(selected.toString());
 
@@ -85,8 +88,12 @@ public class BookMark extends ActionBarActivity {
     {
         try
         {
-
+         getbookmark1();
            ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,getbookmark());
+           // ArrayAdapter adapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,getbookmark1());
+            for(int i=0;i<len;i++)
+            lv.setTag(BusinessId[i]);
+
             lv.setAdapter(adapter);
 
         }
@@ -108,6 +115,7 @@ public class BookMark extends ActionBarActivity {
                 row.moveToNext();
                 item.add(row.getString(0));
 
+
             }while (allrows.moveToNext());
 
         }
@@ -117,6 +125,26 @@ public class BookMark extends ActionBarActivity {
         return item;
     }
 
+    private void getbookmark1() {
+
+        DataBaseSqlite db=new DataBaseSqlite(this);
+        Cursor allrows = db.select_bookmark();
+        Integer i=0;
+        BusinessId=new Integer[allrows.getCount()];
+        len=allrows.getCount();
+        if(allrows.moveToFirst())
+        {
+            do
+            {
+
+                BusinessId[i]=allrows.getInt(1);
+               i++;
+            }while (allrows.moveToNext());
+
+        }
+        allrows.close();
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

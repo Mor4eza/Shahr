@@ -70,7 +70,8 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
     Double ratevalue[];
 
     Integer len=0;
-
+    Integer i=0;
+    Integer URLLEN=0;
     Integer End=0;
 
     public   void SetUrl_business(Integer SubsetID)
@@ -91,10 +92,16 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
         try {
 
 
-            InputStream jsonStream = getStreamFromURL(GetUrl_business(), "GET");
-            String jsonString = streamToString(jsonStream);
-            parseJSON(jsonString);
-            onPostExecute();
+
+            URLLEN=args.length;
+            for (int i = 0; i < args.length; i++) {
+                Log.i("url_Business",args[i]);
+                InputStream jsonStream = getStreamFromURL(args[i], "GET");
+                String jsonString = streamToString(jsonStream);
+                parseJSON(jsonString);
+                onPostExecute();
+            }
+
         } catch (Exception e) {
             // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
         }
@@ -128,12 +135,15 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
             if(len==0) {
               //  Toast.makeText(get, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
                 Log.i("Count Business : ","فروشگاه ثبت نشد");
+
             }
             else {
-                query=new Query(context);
+
+               /* query=new Query(context);
                 fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
                 Intent i = new Intent(this.context, Jobs_List.class);
-                this.context.startActivity(i);
+                this.context.startActivity(i);*/
+                Log.i("Count Business : ","ثبت شد");
             }
 
         } catch (Exception e) {
