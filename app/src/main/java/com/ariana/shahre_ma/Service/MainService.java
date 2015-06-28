@@ -44,7 +44,7 @@ public class MainService extends Service {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.add(Calendar.SECOND, 60); // first time
-        long frequency= 30 * 1000; // in ms
+        long frequency=60000* 1000; // in ms
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), frequency, pendingIntent);
     }
 
