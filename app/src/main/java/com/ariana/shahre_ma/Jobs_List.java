@@ -1,23 +1,31 @@
 package com.ariana.shahre_ma;
 
+import android.app.SearchManager;
+import android.app.SearchableInfo;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ariana.shahre_ma.Cards.job_list_cards_adapter;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.job_details.Job_details;
 
+import java.util.List;
 
-public class Jobs_List extends ActionBarActivity {
 
+public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTextListener, SearchView.OnCloseListener{
+
+    private SearchView mSearchView;
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter job_list_Adapter;
@@ -82,6 +90,9 @@ public class Jobs_List extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        mSearchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        setupSearchView();
+
         return true;
     }
 
@@ -99,6 +110,47 @@ public class Jobs_List extends ActionBarActivity {
             return true;
         }
 
+
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setupSearchView() {
+
+        mSearchView.setIconifiedByDefault(true);
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        if (searchManager != null) {
+            List<SearchableInfo> searchables = searchManager.getSearchablesInGlobalSearch();
+
+            // Try to use the "applications" global search provider
+            SearchableInfo info = searchManager.getSearchableInfo(getComponentName());
+            for (SearchableInfo inf : searchables) {
+                if (inf.getSuggestAuthority() != null
+                        && inf.getSuggestAuthority().startsWith("applications")) {
+                    info = inf;
+                }
+            }
+            mSearchView.setSearchableInfo(info);
+        }
+
+        mSearchView.setOnQueryTextListener(this);
+        mSearchView.setOnCloseListener(this);
+    }
+
+    @Override
+    public boolean onClose() {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        Toast.makeText(getApplicationContext(),newText,Toast.LENGTH_LONG).show();
+        return false;
     }
 }

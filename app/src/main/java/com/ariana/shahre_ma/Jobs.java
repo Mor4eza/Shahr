@@ -9,17 +9,19 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.SearchView;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.ListExpand.Continent;
+import com.ariana.shahre_ma.ListExpand.Country;
+import com.ariana.shahre_ma.ListExpand.MyListAdapter;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.Service.MyReceiver;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
@@ -28,13 +30,12 @@ import com.ariana.shahre_ma.WebServiceGet.HTTPGetInterestJson;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 
 public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
-    private SearchView search;
+
     Integer count = 0;
     String time="";
     String date="";
@@ -56,6 +57,16 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
     HTTPGetBusinessJson httpbusin;
     NetState ns;
+
+    private android.widget.SearchView search;
+    private MyListAdapter listAdapter;
+    private ExpandableListView myList;
+    private ArrayList<Continent> continentList = new ArrayList<Continent>();
+    ArrayList<Country> countryList;
+
+    Continent continent;
+    Country country;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,9 +78,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         httpbusin=new HTTPGetBusinessJson(this);
         ns=new NetState(this);
 
-      /*  Context context=getApplication();
-        Intent intent=new Intent(context, MainService.class);
-        context.startService(intent);*/
+
         Intent myIntent = new Intent(this, MyReceiver.class);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this  ,  0, myIntent, 0);
@@ -81,8 +90,9 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         long frequency= 60000 * 1000; // in ms
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), frequency, pendingIntent);
 
-        createCollection();
-
+        displayList();
+        //expandAll();
+        collapseAll();
 
 
 
@@ -96,7 +106,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
             @Override
             public void onRefresh() {
                 //Refreshing data on server
-              //  Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_LONG).show();
+                //  Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_LONG).show();
                 mSwipeRefreshLayout.setRefreshing(false);
                 HTTPGetCollectionJson http = new HTTPGetCollectionJson(Jobs.this);
                 http.execute();
@@ -119,12 +129,12 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
 
 
-        expListView = (ExpandableListView) findViewById(R.id.laptop_list);
+       expListView = (ExpandableListView) findViewById(R.id.laptop_list);
 
-      final ExpandableListAdapter expListAdapter = new ExpandableListAdapter(this, groupList,laptopCollection) {
+      final MyListAdapter expListAdapter = new MyListAdapter(getApplication(),continentList) {
 
         };
-        expListView.setAdapter(expListAdapter);
+        //expListView.setAdapter(expListAdapter);*/
 
 
         expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
@@ -146,8 +156,13 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
                             public boolean onChildClick(ExpandableListView parent, View v,
                                                         int groupPosition, int childPosition, long id) {
-                                final String selected = (String) expListAdapter.getChild(
-                                        groupPosition, childPosition);
+                                Continent headerInfo = continentList.get(groupPosition);
+                                Country detailInfo =  headerInfo.getCountryList().get(childPosition);
+
+                                Toast.makeText(getApplicationContext(),detailInfo.getName(),Toast.LENGTH_LONG).show();
+
+                             final String selected = (String) detailInfo.getName();
+
                                 Toast.makeText(getApplicationContext(), selected, Toast.LENGTH_LONG)
                                         .show();
                                 //query=new Query(Jobs.this,Jobs.this);
@@ -189,7 +204,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
                         });
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        search=(SearchView)findViewById(R.id.search_jobs);
+        search = (android.widget.SearchView) findViewById(R.id.search_jobs);
         search.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         search.setIconifiedByDefault(false);
         search.setOnQueryTextListener(this);
@@ -200,79 +215,50 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
     }
 
-
-
-    private void createCollection() {
-
-        try {
-            DataBaseSqlite db=new DataBaseSqlite(this);
-            Cursor allrows_Collection =db.select_Collection();
-            Cursor allrows_Subset =db.select_Subset();
-            groupList = new ArrayList<String>();
-
-
-            String laptop="";
-            laptopCollection = new LinkedHashMap<String, List<String>>();
-
-            if (allrows_Collection.moveToFirst()) {
-                do {
-                    childList = new ArrayList<String>();
-                    Id_co = allrows_Collection.getInt(0);
-
-                   groupList.add(allrows_Collection.getString(1));
-                    laptop=allrows_Collection.getString(1);
-                            if (allrows_Subset.moveToFirst())
-                            {
-                                do {
-
-                                    Collection_ID_subset = allrows_Subset.getInt(2);
-
-
-                                         if (Collection_ID_subset == Id_co)
-                                         {
-                                             childList.add(allrows_Subset.getString(1));
+/*
 
 
 
-                                         }
-
-                                } while (allrows_Subset.moveToNext());
-
-                            }
-
-                      laptopCollection.put(laptop,childList);
-
-                } while (allrows_Collection.moveToNext());
-            }
-
-
-        }
-        catch (Exception e){ Toast.makeText(getBaseContext(),e.toString(), Toast.LENGTH_LONG).show();}
-
-
-
-    }
-
-
-    private void setGroupIndicatorToRight() {
-		/* Get the screen width */
+  /*  private void setGroupIndicatorToRight() {
+		*//* Get the screen width *//*
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
 
         expListView.setIndicatorBounds(width - getDipsFromPixel(100), width
                 - getDipsFromPixel(5));
-    }
+    }*/
 
-    // Convert pixel to dip
+    /*// Convert pixel to dip
     public int getDipsFromPixel(float pixels) {
         // Get the screen's density scale
         final float scale = getResources().getDisplayMetrics().density;
         // Convert the dps to pixels, based on density scale
         return (int) (pixels * scale + 5f);
+    }*/
+
+    //method to expand all groups
+    private void expandAll() {
+        int count = listAdapter.getGroupCount();
+        for (int i = 0; i < count; i++){
+            myList.expandGroup(i);
+        }
     }
 
+    //method to expand all groups
+    private void displayList() {
 
+        //display the list
+        loadSomeData();
+
+        //get reference to the ExpandableListView
+        myList = (ExpandableListView) findViewById(R.id.laptop_list);
+        //create the adapter by passing your ArrayList data
+        listAdapter = new MyListAdapter(Jobs.this, continentList);
+        //attach the adapter to the list
+        myList.setAdapter(listAdapter);
+
+    }
 
     public void SendPostInterest()
     {
@@ -302,22 +288,83 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         httpinterest.execute();
     }
 
+
+
+    private void loadSomeData() {
+
+
+        try {
+            DataBaseSqlite db=new DataBaseSqlite(this);
+            Cursor allrows_Collection =db.select_Collection();
+            Cursor allrows_Subset =db.select_Subset();
+
+            if (allrows_Collection.moveToFirst()) {
+
+                do {
+
+                    Id_co = allrows_Collection.getInt(0);
+
+                    countryList = new ArrayList<Country>();
+                    if (allrows_Subset.moveToFirst())
+                    {
+                        do {
+
+                            Collection_ID_subset = allrows_Subset.getInt(2);
+
+
+                            if (Collection_ID_subset == Id_co)
+                            {
+                                // childList.add(allrows_Subset.getString(1));
+                                country = new Country(allrows_Subset.getString(1));
+                                countryList.add(country);
+
+
+                            }
+
+
+                        } while (allrows_Subset.moveToNext());
+                        continent = new Continent(allrows_Collection.getString(1),countryList);
+                    }
+                    continentList.add(continent);
+
+                    //   laptopCollection.put(laptop,childList);
+
+                } while (allrows_Collection.moveToNext());
+            }
+
+
+        }
+        catch (Exception e){ Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG).show();}
+
+    }
+
     @Override
     public boolean onClose() {
+        Log.i("onClose", "close");
+        listAdapter.filterData("");
+        expandAll();
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String query) {
+        Log.i("onQueryTextChange","change");
+        listAdapter.filterData(query);
+        expandAll();
         return false;
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-
-        Toast.makeText(getApplicationContext(),"Typing...",Toast.LENGTH_LONG).show();
+        Log.i("onQueryTextSubmit","submit");
+        listAdapter.filterData(query);
+        expandAll();
         return false;
     }
-
-    @Override
-    public boolean onQueryTextChange(String newText)
-    {
-
-        return false;
+    private void collapseAll() {
+        int count = listAdapter.getGroupCount();
+        for (int i = 0; i < count; i++){
+            myList.collapseGroup(i);
+        }
     }
 }

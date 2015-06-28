@@ -39,6 +39,7 @@
     <string name="title_activity_notification">Notification</string>
     <string name="title_activity_activity_notify">اعلانات</string>
     <string name="title_activity_setting">Setting</string>
+    <string name="title_activity_list">ListActivity</string>
 
 
 </resources>

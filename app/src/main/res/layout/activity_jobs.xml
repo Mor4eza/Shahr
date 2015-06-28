@@ -11,7 +11,7 @@
 
 
 
-    <android.support.v7.widget.SearchView
+    <SearchView
         android:id="@+id/search_jobs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
