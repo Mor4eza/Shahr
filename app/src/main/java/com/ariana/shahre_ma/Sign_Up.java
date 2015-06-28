@@ -1,7 +1,6 @@
 package com.ariana.shahre_ma;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -19,11 +18,9 @@ import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.ImageDownload.ImageLoader;
-import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
 
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -207,7 +204,7 @@ public class Sign_Up extends ActionBarActivity {
     {
 
        // Toast.makeText(getApplication(),fc.GetMember_Email(), Toast.LENGTH_LONG).show();
-  /*      DataBaseSqlite db=new DataBaseSqlite(this);
+        DataBaseSqlite db=new DataBaseSqlite(this);
         Cursor allrows=db.select_AllBusiness();
 
 
@@ -221,13 +218,13 @@ public class Sign_Up extends ActionBarActivity {
             allrows.close();
         }
         catch (Exception e){ Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}
-*/
+
      /*   SqliteTOjson json=new SqliteTOjson(this);
       //  json.getSqliteInterestTOjson();
       email.setText(json.getSqliteInterestTOjson());*/
 
-        KeySettings sett=new KeySettings(this);
-        Toast.makeText(getApplication(),sett.getPMtime(), Toast.LENGTH_LONG).show();
+       /* KeySettings sett=new KeySettings(this);
+        Toast.makeText(getApplication(),sett.getPMtime(), Toast.LENGTH_LONG).show();*/
 
 
     }

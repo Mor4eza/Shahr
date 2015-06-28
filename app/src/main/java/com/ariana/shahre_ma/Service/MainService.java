@@ -1,6 +1,7 @@
 package com.ariana.shahre_ma.Service;
 
-import android.app.Notification;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -22,24 +23,53 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Calendar;
 
 /**
  * Created by ariana on 6/23/2015.
  */
-public class MainService extends Service
-{
-
+public class MainService extends Service {
+    AlarmManager alarmManager;
     HTTPGetNotificationJson_service noti;
     @Override
-    public int onStartCommand(Intent intent,int flags,int startId)
+    public void onCreate()
     {
+        // TODO Auto-generated method stub
+        super.onCreate();
+        Toast.makeText(getApplicationContext(),"onCreate",Toast.LENGTH_LONG).show();
+        Intent myIntent = new Intent(this, MyReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this  ,  0, myIntent, 0);
+
+        AlarmManager alarmManager = (AlarmManager)this.getSystemService(this.ALARM_SERVICE);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.add(Calendar.SECOND, 60); // first time
+        long frequency= 30 * 1000; // in ms
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), frequency, pendingIntent);
+    }
+
+    @SuppressWarnings("static-access")
+    @Override
+    public void onStart(Intent intent, int startId)
+    {
+        super.onStart(intent, startId);
+
+        Log.i("Service", "onStart");
         noti=new HTTPGetNotificationJson_service(this);
         noti.SetUrl_MemberId(1);
-        noti.execute();
 
-        Log.d("onStartCommand","service");
-        return Service.START_STICKY;
+
+        noti.execute();
     }
+
+    @Override
+    public void onDestroy()
+    {
+
+        // TODO Auto-generated method stub
+        super.onDestroy();
+    }
+
     @Override
     public IBinder onBind(Intent intent) {
         Log.d("onBind","service");

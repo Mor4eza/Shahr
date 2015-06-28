@@ -50,9 +50,12 @@ Integer i=0;
             do
             {
                 try {
-                    if(Boolean.parseBoolean(rowalls.getString(3)) && setting.getAMtime().equals(t.Time())) {
-                        nci.setNId(rowalls.getInt(2));
                     nci = new Notify_Card_Items();
+                    Log.i("PMtime",String.valueOf(setting.getPMtime()));
+                    Log.i("Time",t.Time());
+                    Log.i("Boolean",String.valueOf(rowalls.getString(3)));
+                    if(Boolean.parseBoolean(rowalls.getString(3))==false && setting.getPMtime().equals(t.Time())) {
+                        nci.setNId(rowalls.getInt(2));
                     nci.setNdate(rowalls.getString(5));
                     nci.setNdetail(rowalls.getString(4));
                     nci.setNmarket(market_Name_Business(463 + i));

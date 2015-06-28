@@ -130,9 +130,9 @@ public class job_details_1 extends ActionBarActivity {
         DataBaseSqlite mydb = new DataBaseSqlite(getActivity());
      //   Cursor allrows = mydb.select_business_Detail(fc.GetMarket_Business(), fc.GetAddress_Business());
         Cursor allrows = mydb.select_AllBusinessId(fc.GetBusiness_Id());
-        Cursor row_notification=mydb.select_AllNotificaton(fc.GetBusiness_Id());
+    //    Cursor row_notification=mydb.select_AllNotificaton(fc.GetBusiness_Id());
         allrows.moveToNext();
-        row_notification.moveToNext();
+       // row_notification.moveToNext();
         DateTime time=new DateTime();
 
 
@@ -150,10 +150,10 @@ public class job_details_1 extends ActionBarActivity {
             address.setText(allrows.getString(8));
             des.setText(allrows.getString(9));
 
-            if(row_notification.getString(5).equals(time.Now()))
+            /*if(row_notification.getString(5).equals(time.Now()))
             {
                 mydb.delete_Notification(fc.GetBusiness_Id());
-            }
+            }*/
 
         }
         catch (Exception e){Toast.makeText(getActivity(),e.toString(),Toast.LENGTH_LONG).show();}
