@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.IBinder;
 import android.util.Log;
@@ -144,7 +145,7 @@ public class MainService extends Service
 
             //  Toast.makeText(context,market[0], Toast.LENGTH_LONG).show();
             DataBaseSqlite dbs = new DataBaseSqlite(context);
-
+            Cursor allrows=dbs.select_Notification();
             if(len>0)
             {
 
@@ -154,6 +155,8 @@ public class MainService extends Service
 
 
                 }
+
+
 
                 Notify.Notificationm(context);
 

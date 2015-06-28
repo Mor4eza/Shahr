@@ -789,10 +789,10 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
 
 
-    public void delete_Notification(String date)
+    public void delete_Notification(Integer erja)
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE FROM "+TABLE_NAME_NOTIFICATION+" WHERE ExpirationDate='"+date+"'",null);
+        db.execSQL("DELETE FROM "+TABLE_NAME_NOTIFICATION+" WHERE ErJa="+erja,null);
     }
 
 

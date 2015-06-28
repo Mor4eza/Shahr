@@ -11,9 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.job_details.Job_details;
 
 import java.util.ArrayList;
@@ -27,11 +29,15 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
     List<Notify_Card_Items> mItems;
     Notify_Card_Items nci;
     FieldClass fc=new FieldClass();
+    KeySettings setting;
+    DateTime t=new DateTime();
     private  static Context context;
+
 
     public Notify_Card_Adapter(Context context) {
         super();
         this.context=context;
+        setting=new KeySettings(context);
 
 Integer i=0;
         mItems = new ArrayList<Notify_Card_Items>();
@@ -44,12 +50,14 @@ Integer i=0;
             do
             {
                 try {
+                    if(Boolean.parseBoolean(rowalls.getString(3)) && setting.getAMtime().equals(t.Time())) {
+                        nci.setNId(rowalls.getInt(2));
                     nci = new Notify_Card_Items();
                     nci.setNdate(rowalls.getString(5));
                     nci.setNdetail(rowalls.getString(4));
                     nci.setNmarket(market_Name_Business(463 + i));
-                    nci.setNId(rowalls.getInt(2));
-                    mItems.add(nci);
+
+                    mItems.add(nci);}
                 }
                 catch (Exception e)
                 {
