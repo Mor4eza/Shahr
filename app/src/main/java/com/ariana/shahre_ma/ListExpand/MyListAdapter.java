@@ -108,6 +108,7 @@ public class MyListAdapter extends BaseExpandableListAdapter {
         query = query.toLowerCase();
         Log.v("MyListAdapter", String.valueOf(continentList.size()));
         continentList.clear();
+        //originalList.clear();
 
         if(query.isEmpty()){
             continentList.addAll(originalList);
@@ -121,6 +122,7 @@ public class MyListAdapter extends BaseExpandableListAdapter {
                 for(Country country: countryList){
                     if(country.getName().toLowerCase().contains(query)){
                         newList.add(country);
+                        notifyDataSetChanged();
                     }
                 }
                 if(newList.size() > 0){
@@ -131,7 +133,7 @@ public class MyListAdapter extends BaseExpandableListAdapter {
         }
 
         Log.v("MyListAdapter", String.valueOf(continentList.size()));
-        notifyDataSetChanged();
+       notifyDataSetChanged();
 
     }
 }

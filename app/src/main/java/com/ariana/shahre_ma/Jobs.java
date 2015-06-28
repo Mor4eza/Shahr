@@ -3,16 +3,19 @@ package com.ariana.shahre_ma;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.SearchManager;
+import android.app.SearchableInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.DateTime;
@@ -58,7 +61,8 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
     HTTPGetBusinessJson httpbusin;
     NetState ns;
 
-    private android.widget.SearchView search;
+    private SearchView mSearchView;
+    private SearchView search;
     private MyListAdapter listAdapter;
     private ExpandableListView myList;
     private ArrayList<Continent> continentList = new ArrayList<Continent>();
@@ -73,7 +77,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         setContentView(R.layout.activity_jobs);
         query=new Query(this);
 
-
+        setTitle("لیست مشاغل");
 
         httpbusin=new HTTPGetBusinessJson(this);
         ns=new NetState(this);
@@ -84,7 +88,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this  ,  0, myIntent, 0);
 
         AlarmManager alarmManager = (AlarmManager)this.getSystemService(this.ALARM_SERVICE);
-        Calendar calendar = Calendar.getInstance();
+        final Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.add(Calendar.SECOND, 60); // first time
         long frequency= 60000 * 1000; // in ms
@@ -92,7 +96,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
         displayList();
         //expandAll();
-        collapseAll();
+      //  collapseAll();
 
 
 
@@ -154,14 +158,16 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
                         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
-                            public boolean onChildClick(ExpandableListView parent, View v,
-                                                        int groupPosition, int childPosition, long id) {
+                            public boolean onChildClick(ExpandableListView parent, View v,int groupPosition, int childPosition, long id) {
+
                                 Continent headerInfo = continentList.get(groupPosition);
-                                Country detailInfo =  headerInfo.getCountryList().get(childPosition);
 
-                                Toast.makeText(getApplicationContext(),detailInfo.getName(),Toast.LENGTH_LONG).show();
+                                Country detailInfo = headerInfo.getCountryList().get(childPosition);
 
-                             final String selected = (String) detailInfo.getName();
+
+                               // Toast.makeText(getApplicationContext(),String.valueOf(id), Toast.LENGTH_LONG).show();
+
+                                final String selected = country.getName();
 
                                 Toast.makeText(getApplicationContext(), selected, Toast.LENGTH_LONG)
                                         .show();
@@ -175,22 +181,16 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
 
                                 Toast.makeText(getApplicationContext(), query.getsubsetID(selected).toString(), Toast.LENGTH_LONG).show();
-                                if (ns.checkInternetConnection() == false)
-                                {
+                                if (ns.checkInternetConnection() == false) {
                                     Intent i = new Intent(getApplicationContext(), Jobs_List.class);
                                     startActivity(i);
-                                }
-                                else
-                                {
-                                    if(count>0)
-                                    {
+                                } else {
+                                    if (count > 0) {
                                         fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
                                         Intent i = new Intent(getApplicationContext(), Jobs_List.class);
                                         startActivity(i);
-                                        Log.i("Count>","1");
-                                    }
-                                    else
-                                    {
+                                        Log.i("Count>", "1");
+                                    } else {
                                         httpbusin = new HTTPGetBusinessJson(Jobs.this);
                                         httpbusin.SetUrl_business(query.getsubsetID(selected));
                                         httpbusin.execute();
@@ -203,12 +203,12 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
                         });
 
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+       /* SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         search = (android.widget.SearchView) findViewById(R.id.search_jobs);
         search.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         search.setIconifiedByDefault(false);
         search.setOnQueryTextListener(this);
-        search.setOnCloseListener(this);
+        search.setOnCloseListener(this);*/
 
 
 
@@ -268,7 +268,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         httpinterest.SetInterest_Json(json.getSqliteInterestTOjson());
         httpinterest.execute();*/
 
-        Log.i("mSwipeRefreshLayout","true");
+        Log.i("mSwipeRefreshLayout", "true");
         if(mSwipeRefreshLayout.isRefreshing()) {
             Log.i("mSwipeRefreshLayout","true");
             mSwipeRefreshLayout.setRefreshing(false);
@@ -342,23 +342,28 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
     public boolean onClose() {
         Log.i("onClose", "close");
         listAdapter.filterData("");
-        expandAll();
+        collapseAll();
         return false;
     }
 
     @Override
     public boolean onQueryTextChange(String query) {
-        Log.i("onQueryTextChange","change");
-        listAdapter.filterData(query);
         expandAll();
+        Log.i("onQueryTextChange", "change");
+        listAdapter.filterData(query);
+
         return false;
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        Log.i("onQueryTextSubmit","submit");
-        listAdapter.filterData(query);
         expandAll();
+        Log.i("onQueryTextSubmit", "submit");
+        listAdapter.filterData(query);
+        final MyListAdapter expListAdapter = new MyListAdapter(getApplication(),continentList) {
+
+        };
+        expListAdapter.notifyDataSetChanged();
         return false;
     }
     private void collapseAll() {
@@ -367,4 +372,56 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
             myList.collapseGroup(i);
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_jobs, menu);
+        mSearchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        setupSearchView();
+
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_Map) {
+            Intent i = new Intent(this,MapsActivity.class);
+            startActivity(i);
+            return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
+    private void setupSearchView() {
+
+        mSearchView.setIconifiedByDefault(true);
+        mSearchView.setQueryHint("جستجو در مشاغل");
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        if (searchManager != null) {
+            List<SearchableInfo> searchables = searchManager.getSearchablesInGlobalSearch();
+
+            // Try to use the "applications" global search provider
+            SearchableInfo info = searchManager.getSearchableInfo(getComponentName());
+            for (SearchableInfo inf : searchables) {
+                if (inf.getSuggestAuthority() != null
+                        && inf.getSuggestAuthority().startsWith("applications")) {
+                    info = inf;
+                }
+            }
+            mSearchView.setSearchableInfo(info);
+        }
+
+        mSearchView.setOnQueryTextListener(this);
+        mSearchView.setOnCloseListener(this);
+    }
+
 }

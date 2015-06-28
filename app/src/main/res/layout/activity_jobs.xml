@@ -11,7 +11,7 @@
 
 
 
-    <SearchView
+   <!-- <SearchView
         android:id="@+id/search_jobs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:iconifiedByDefault="false" />
+        android:iconifiedByDefault="false" />-->
 
 
     <android.support.v4.widget.SwipeRefreshLayout
