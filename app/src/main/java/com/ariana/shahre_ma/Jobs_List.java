@@ -35,9 +35,6 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
     FieldClass fc=new FieldClass();
 
 
-
-    TextView tvMarket;
-    TextView tvDescription;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,23 +43,12 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
                 setCards();
 
 
-       // mDrawer = MenuDrawer.attach(this, Position.RIGHT);
-
-        /*mDrawer.setContentView(R.layout.activity_jobs__list);
-        mDrawer.setMenuView(R.layout.activity_jobs);*/
 
     }
-        public void img_click(View v){
-
-          /* tvDescription=(TextView) findViewById(R.id.tv_address);
-            tvMarket=(TextView) findViewById(R.id.tv_title);
-
-            fc.SetMarket_Business(tvMarket.getText().toString());
-            fc.SetAddress_Business(tvDescription.getText().toString());*/
-
+        public void img_click(View v)
+        {
             Intent i = new Intent(getApplicationContext(), Job_details.class);
             startActivity(i);
-
         }
 
 
@@ -133,7 +119,6 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
             }
             mSearchView.setSearchableInfo(info);
         }
-
         mSearchView.setOnQueryTextListener(this);
         mSearchView.setOnCloseListener(this);
     }
@@ -189,7 +174,6 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
         }
         else // Text Not Empty  Search Business
         {
-
             setting.saveSearchBusiness(true);
             fc.SetMarket_Business(newText);
             setCards();
