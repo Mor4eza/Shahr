@@ -164,7 +164,6 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
                                 Country detailInfo = headerInfo.getCountryList().get(childPosition);
 
-
                                // Toast.makeText(getApplicationContext(),String.valueOf(id), Toast.LENGTH_LONG).show();
 
                                 final String selected = detailInfo.getName();

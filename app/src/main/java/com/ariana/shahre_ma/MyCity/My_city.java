@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.Spinner;
@@ -19,6 +20,7 @@ import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
+import com.software.shell.fab.ActionButton;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -62,7 +64,7 @@ public class My_city extends ActionBarActivity {
         createCollection();
 
         SpinnerSetUp();
-
+        fab();
 
         expListView = (ExpandableListView) findViewById(R.id.expand_my_city);
 
@@ -231,4 +233,20 @@ public class My_city extends ActionBarActivity {
         Sp_City.setAdapter(dataAdapter);
 
     }
+
+    public void download(View v){
+        Toast.makeText(getApplicationContext(),"download",Toast.LENGTH_LONG).show();
+    }
+
+    public void fab (){
+
+
+        ActionButton Action = (ActionButton)findViewById(R.id.download_fab);
+        Action.setButtonColor(getResources().getColor(R.color.fab_material_blue_500));
+        Action.setImageDrawable(getResources().getDrawable(R.drawable.download));
+
+
+
+    }
+
 }
