@@ -230,21 +230,7 @@ public class Sign_Up extends ActionBarActivity {
         String links[]=new String[]{
                 "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=14&cityid=68",
                 "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=16&cityid=68",
-                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=24&cityid=68",
-                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=25&cityid=68",
-                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=26&cityid=68",
-                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=27&cityid=68",
-                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=42&cityid=68",
-                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=43&cityid=68",
-                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=47&cityid=68",
-                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=48&cityid=68",
-                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=49&cityid=68",
-                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=50&cityid=68",
-                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=55&cityid=68",
-                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=56&cityid=68",
-                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=57&cityid=68",
-                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=58&cityid=68",
-                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=59&cityid=68"
+                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=24&cityid=68"
         };
 
         HTTPGetBusinessJson getbusiness=new HTTPGetBusinessJson(this);

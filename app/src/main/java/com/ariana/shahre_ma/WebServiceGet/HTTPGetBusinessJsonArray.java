@@ -26,7 +26,7 @@ import java.net.URL;
 /**
  * Created by ariana2 on 6/6/2015.
  */
-public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
+public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
 {
 
     RecyclerView mRecyclerView;
@@ -85,17 +85,22 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
         return  url_Business;
     }
 
-    public HTTPGetBusinessJson(Context c) {
+    public HTTPGetBusinessJsonArray(Context c) {
         context = c;
     }
     protected String doInBackground(String... args) {
         try {
 
-                InputStream jsonStream = getStreamFromURL(GetUrl_business(), "GET");
+
+
+            URLLEN=args.length;
+            for (int i = 0; i < args.length; i++) {
+                Log.i("url_Business",args[i]);
+                InputStream jsonStream = getStreamFromURL(args[i], "GET");
                 String jsonString = streamToString(jsonStream);
                 parseJSON(jsonString);
                 onPostExecute();
-
+            }
 
         } catch (Exception e) {
             // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
@@ -109,11 +114,11 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
         try {
 
             Integer count=0;
-          //  Toast.makeText(context,market[0], Toast.LENGTH_LONG).show();
+            //  Toast.makeText(context,market[0], Toast.LENGTH_LONG).show();
             DataBaseSqlite dbs = new DataBaseSqlite(context);
 
 
-          //  dbs.delete_Business();
+            //  dbs.delete_Business();
             for (int i = 0; i <len; i++)
             {
                 Cursor rows=dbs.select_CountBusinessId(Id[i]);
@@ -123,22 +128,22 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
                 Log.i("ID", String.valueOf(Id[i]));
                 Log.i("count",String.valueOf(count));
                 if(count==0)
-                dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
+                    dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
 
             }
 
             if(len==0) {
-              //  Toast.makeText(get, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
+                //  Toast.makeText(get, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
                 Log.i("Count Business : ","فروشگاه ثبت نشد");
 
             }
             else {
 
-               query=new Query(context);
+               /* query=new Query(context);
                 fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
                 Intent i = new Intent(this.context, Jobs_List.class);
-                this.context.startActivity(i);
-                Log.i("Count Business : ","دریافت ثبت شده ها");
+                this.context.startActivity(i);*/
+                Log.i("Count Business : ","ثبت شد");
             }
 
         } catch (Exception e) {

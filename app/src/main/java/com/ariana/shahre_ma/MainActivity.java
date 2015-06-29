@@ -62,20 +62,22 @@ public class MainActivity extends ActionBarActivity {
         }
         else {
 
+            if(query.getCountSubset()==0)
+            {
+                HTTPGetSubsetJson httpsubset = new HTTPGetSubsetJson(this);
+                httpsubset.execute();
+            }
+            else if(query.getCountCollection()==0)
+            {
+                HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
+                httpcoll.execute();
+            }
             HTTPGetBookMarkJson b=new HTTPGetBookMarkJson(this);
             b.SetUrl_MemberId(query.getMemberId());
             b.execute();
 
-           HTTPGetSubsetJson httpsubset = new HTTPGetSubsetJson(this);
-            httpsubset.execute();
-
-
             HTTPGetCityJson httpcity = new HTTPGetCityJson(this);
             httpcity.execute();
-
-
-          HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
-            httpcoll.execute();
         }
 
 

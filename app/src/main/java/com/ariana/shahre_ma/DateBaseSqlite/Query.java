@@ -25,8 +25,6 @@ public class Query {
 
     public Integer getsubsetID(String subsetname) {
 
-
-
         Integer Result = 0;
 
         try {
@@ -41,6 +39,42 @@ public class Query {
         }
         catch (Exception e) {
             // Toast.makeText(activity, e.toString(), Toast.LENGTH_LONG).show();
+        }
+        return Result;
+    }
+
+    public Integer getCountSubset() {
+        Integer Result = 0;
+        try {
+            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            Cursor allrows = dbs.select_CountSubset();
+            allrows.moveToFirst();
+            Result = allrows.getInt(0);
+            allrows.close();
+
+
+            fc.SetBusiness_SubsetId(Result);
+        }
+        catch (Exception e) {
+
+        }
+        return Result;
+    }
+
+    public Integer getCountCollection() {
+        Integer Result = 0;
+        try {
+            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            Cursor allrows = dbs.select_CountCollection();
+            allrows.moveToFirst();
+            Result = allrows.getInt(0);
+            allrows.close();
+
+
+            fc.SetBusiness_SubsetId(Result);
+        }
+        catch (Exception e) {
+
         }
         return Result;
     }
