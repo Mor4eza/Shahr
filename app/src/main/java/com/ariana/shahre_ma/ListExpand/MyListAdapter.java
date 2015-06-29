@@ -50,7 +50,7 @@ public class MyListAdapter extends BaseExpandableListAdapter {
             view = layoutInflater.inflate(R.layout.child_item, null);
         }
 
-       final TextView name = (TextView) view.findViewById(R.id.laptop);
+       /*final TextView name = (TextView) view.findViewById(R.id.laptop);
         name.setText(country.getName().trim());
 
         name.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +59,7 @@ public class MyListAdapter extends BaseExpandableListAdapter {
                 Log.i("Clicked",String.valueOf(name.getText()));
             }
         });
-
+*/
 
         return view;
     }

@@ -29,10 +29,6 @@ import java.net.URL;
 public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 {
 
-    RecyclerView mRecyclerView;
-    RecyclerView.LayoutManager mLayoutManager;
-    RecyclerView.Adapter job_list_Adapter;
-
     private static Context context;
     FieldClass fc=new FieldClass();
     Query query;
@@ -71,23 +67,40 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
     Integer len=0;
     Integer i=0;
-    Integer URLLEN=0;
-    Integer End=0;
 
+
+    /**
+     *
+     * @param SubsetID
+     */
     public   void SetUrl_business(Integer SubsetID)
     {
         url_Business="http://test.shahrma.com/api/ApiGiveBusiness?subsetId="+SubsetID+"&cityid=68";
         Log.i("url_Business",url_Business);
     }
 
+    /**
+     *
+     * @return
+     */
     private String GetUrl_business()
     {
         return  url_Business;
     }
 
+    /**
+     *
+     * @param c
+     */
     public HTTPGetBusinessJson(Context c) {
         context = c;
     }
+
+    /**
+     *
+     * @param args
+     * @return
+     */
     protected String doInBackground(String... args) {
         try {
 
@@ -105,6 +118,9 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
     }
 
+    /**
+     *
+     */
     protected void onPostExecute() {
         try {
 
@@ -146,7 +162,10 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
         }
     }
 
-
+    /**
+     *
+     * @param JSONString
+     */
     void parseJSON(String JSONString) {
 
         try {
@@ -228,7 +247,12 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
     }
 
 
-
+    /**
+     *
+     * @param urlString
+     * @param method
+     * @return
+     */
     InputStream getStreamFromURL(String urlString, String method) {
         try {
             URL url = new URL(urlString);
@@ -247,6 +271,11 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
     }
 
+    /**
+     *
+     * @param is
+     * @return
+     */
     String streamToString(InputStream is) {
         String result = "";
         String line = null;

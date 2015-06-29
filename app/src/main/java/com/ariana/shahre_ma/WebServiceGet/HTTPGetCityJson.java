@@ -32,10 +32,19 @@ public class HTTPGetCityJson extends AsyncTask<String, String, String>
     private static Context context;
 
 
+    /**
+     *
+     * @param c
+     */
     public HTTPGetCityJson(Context c) {
         context = c;
     }
 
+    /**
+     *
+     * @param args
+     * @return
+     */
     protected String doInBackground(String... args) {
         try {
 
@@ -52,6 +61,9 @@ public class HTTPGetCityJson extends AsyncTask<String, String, String>
 
     }
 
+    /**
+     *
+     */
     protected void onPostExecute() {
         try {
 
@@ -67,6 +79,11 @@ public class HTTPGetCityJson extends AsyncTask<String, String, String>
             Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
         }
     }
+
+    /**
+     *
+     * @param file_url
+     */
     protected void onPostExecute(String file_url) {
         try {
 
@@ -75,6 +92,10 @@ public class HTTPGetCityJson extends AsyncTask<String, String, String>
     }
 
 
+    /**
+     *
+     * @param JSONString
+     */
     void parseJSON(String JSONString) {
 
         Integer ii = 0;
@@ -101,7 +122,12 @@ public class HTTPGetCityJson extends AsyncTask<String, String, String>
     }
 
 
-
+    /**
+     *
+     * @param urlString
+     * @param method
+     * @return
+     */
     InputStream getStreamFromURL(String urlString, String method) {
         try {
             URL url = new URL(urlString);
@@ -120,6 +146,11 @@ public class HTTPGetCityJson extends AsyncTask<String, String, String>
 
     }
 
+    /**
+     *
+     * @param is
+     * @return
+     */
     String streamToString(InputStream is) {
         String result = "";
         String line = null;

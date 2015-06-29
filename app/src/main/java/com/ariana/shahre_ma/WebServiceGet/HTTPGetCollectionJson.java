@@ -42,8 +42,9 @@ public class HTTPGetCollectionJson extends AsyncTask<String, String, String> {
          ListView lv;
 
 
-
-
+    /**
+     *
+     */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -53,6 +54,11 @@ public class HTTPGetCollectionJson extends AsyncTask<String, String, String> {
             pd.show();
         }
 
+    /**
+     *
+     * @param args
+     * @return
+     */
     protected String doInBackground(String... args) {
         try {
 
@@ -70,6 +76,9 @@ public class HTTPGetCollectionJson extends AsyncTask<String, String, String> {
 
     }
 
+    /**
+     *
+     */
     protected void onPostExecute() {
         try {
 
@@ -89,7 +98,10 @@ public class HTTPGetCollectionJson extends AsyncTask<String, String, String> {
         }
     }
 
-
+    /**
+     *
+     * @param JSONString
+     */
     void parseJSON(String JSONString) {
 
         Integer ii = 0;
@@ -115,7 +127,12 @@ public class HTTPGetCollectionJson extends AsyncTask<String, String, String> {
     }
 
 
-
+    /**
+     *
+     * @param urlString
+     * @param method
+     * @return
+     */
     InputStream getStreamFromURL(String urlString, String method) {
         try {
             URL url = new URL(urlString);
@@ -134,6 +151,11 @@ public class HTTPGetCollectionJson extends AsyncTask<String, String, String> {
 
     }
 
+    /**
+     *
+     * @param is
+     * @return
+     */
     String streamToString(InputStream is) {
         String result = "";
         String line = null;

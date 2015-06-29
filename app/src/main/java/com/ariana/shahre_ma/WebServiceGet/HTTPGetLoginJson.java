@@ -36,6 +36,10 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
     private String[] blogTitles;
     Context context;
 
+    /**
+     *
+     * @param context
+     */
     public HTTPGetLoginJson(Context context)
     {
         this.context=context;
@@ -43,6 +47,9 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
     }
 
 
+    /**
+     *
+     */
     protected void onPreExecute() {
         super.onPreExecute();
         try {
@@ -69,6 +76,12 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
             Log.e("Exception SaVe", e.toString());
         }
     }
+
+    /**
+     *
+     * @param params
+     * @return
+     */
     @Override
     protected Integer doInBackground(String... params) {
         InputStream inputStream = null;
@@ -130,14 +143,22 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
         return result; //"Failed to fetch data!";
     }
 
-
+    /**
+     *
+     * @param result
+     */
     protected void onPostExecute(Integer result) {
             /* Download complete. Lets update UI */
         // progressDialog.dismiss();
 
     }
 
-
+    /**
+     *
+     * @param inputStream
+     * @return
+     * @throws IOException
+     */
     private String convertInputStreamToString(InputStream inputStream) throws IOException {
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -157,6 +178,10 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
         return result;
     }
 
+    /**
+     *
+     * @param result
+     */
     private void parseResult(String result) {
 
         try {
@@ -178,7 +203,10 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
         }
     }
 
-
+    /**
+     *
+     * @return
+     */
     public  String get_Message_Login()
     {
         return mesage;

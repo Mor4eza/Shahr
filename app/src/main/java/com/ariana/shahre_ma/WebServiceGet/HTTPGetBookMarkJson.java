@@ -25,38 +25,51 @@ public class HTTPGetBookMarkJson
 {
 
 
-    private static Context context;
+    private static Context context;//context
 
-    private static   String url_Business;
+    private static   String bookmark;// business api url
 
-    private    Integer MEMberID;
+    private    Integer MEMberID; // member id
     Integer Id[];
 
     Integer len=0;
 
 
-
-    //Url Bookmark
+    /**
+     * Set url Member
+     * @param memberid
+     */
     public   void SetUrl_MemberId(Integer memberid)
     {
         this.MEMberID=memberid;
-        url_Business="http://test.shahrma.com/api/ApiGiveBookmark?6&memberId="+memberid;
-        Log.i("URLurl",url_Business);
+        bookmark="http://test.shahrma.com/api/ApiGiveBookmark?6&memberId="+memberid;
+        Log.i("URLurl",bookmark);
     }
 
-    private String GetUrl_business()
+    /**
+     * Return url bookmark
+     * @return
+     */
+    private String GetUrl_Bookmark()
     {
-        return  url_Business;
+        return  bookmark;
     }
 
-    public HTTPGetBookMarkJson(Context c) {
+    public HTTPGetBookMarkJson(Context c) //Constructor
+    {
         context = c;
     }
+
+    /**
+     * doInBackground
+     * @param args
+     * @return
+     */
     protected String doInBackground(String... args) {
         try {
 
 
-            InputStream jsonStream = getStreamFromURL(GetUrl_business(), "GET");
+            InputStream jsonStream = getStreamFromURL(GetUrl_Bookmark(), "GET");
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);
             onPostExecute();
@@ -69,6 +82,9 @@ public class HTTPGetBookMarkJson
 
     }
 
+    /**
+     *
+     */
     protected void onPostExecute() {
         try {
 
@@ -91,7 +107,10 @@ public class HTTPGetBookMarkJson
         }
     }
 
-
+    /**
+     *
+     * @param JSONString
+     */
     void parseJSON(String JSONString) {
 
 
@@ -119,7 +138,12 @@ public class HTTPGetBookMarkJson
     }
 
 
-
+    /**
+     *
+     * @param urlString
+     * @param method
+     * @return
+     */
     InputStream getStreamFromURL(String urlString, String method) {
         try {
             URL url = new URL(urlString);
@@ -138,6 +162,11 @@ public class HTTPGetBookMarkJson
 
     }
 
+    /**
+     *
+     * @param is
+     * @return
+     */
     String streamToString(InputStream is) {
         String result = "";
         String line = null;

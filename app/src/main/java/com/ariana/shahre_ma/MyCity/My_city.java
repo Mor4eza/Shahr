@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
@@ -20,6 +21,7 @@ import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJsonArray;
 import com.software.shell.fab.ActionButton;
 
 import java.util.ArrayList;
@@ -235,13 +237,32 @@ public class My_city extends ActionBarActivity {
     }
 
     public void download(View v){
+        // download multiple Business
+        Integer Result = 0;
+        Integer i=0;
+        DataBaseSqlite db=new DataBaseSqlite(this);
+        List<String> listurl=new ArrayList<String>();
+        String url[]=new String[fc.GetNameSubset().size()];
+        for(String name:fc.GetNameSubset()){
+
+            Cursor cursor=db.select_SubsetId(name);
+            cursor.moveToFirst();
+            Result=cursor.getInt(0);
+            url[i]="http://test.shahrma.com/api/ApiGiveBusiness?subsetId="+Result+"&cityid=68";
+            listurl.add("http://test.shahrma.com/api/ApiGiveBusiness?subsetId=" + Result + "&cityid=68");
+            Log.i("", "http://test.shahrma.com/api/ApiGiveBusiness?subsetId="+Result+"&cityid=68");
+            i++;
+        }
+
+        HTTPGetBusinessJsonArray business=new HTTPGetBusinessJsonArray(this);
+        business.execute(url);
         Toast.makeText(getApplicationContext(),"download",Toast.LENGTH_LONG).show();
     }
 
     public void fab (){
 
 
-        ActionButton Action = (ActionButton)findViewById(R.id.download_fab);
+        ActionButton Action = (ActionButton) findViewById(R.id.download_fab);
         Action.setButtonColor(getResources().getColor(R.color.fab_material_blue_500));
         Action.setImageDrawable(getResources().getDrawable(R.drawable.download));
 

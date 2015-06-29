@@ -38,6 +38,10 @@ public class HTTPGetNotificationJson extends AsyncTask<String,String,String> {
     Integer SubsetId[];
     Integer len=0;
 
+    /**
+     *
+     * @param memberid
+     */
     public   void SetUrl_MemberId(Integer memberid)
     {
         this.MEMberID=memberid;
@@ -45,15 +49,28 @@ public class HTTPGetNotificationJson extends AsyncTask<String,String,String> {
         Log.i("URLurl", url_Notification);
     }
 
+    /**
+     *
+     * @return
+     */
     private String GetUrl_business()
     {
         return  url_Notification;
     }
 
+    /**
+     *
+     * @param c
+     */
     public HTTPGetNotificationJson(Context c) {
         context = c;
     }
 
+    /**
+     *
+     * @param params
+     * @return
+     */
     @Override
     protected String doInBackground(String... params) {
         try {
@@ -70,6 +87,11 @@ public class HTTPGetNotificationJson extends AsyncTask<String,String,String> {
         }
         return null;
     }
+
+    /**
+     *
+     * @param JSONString
+     */
     void parseJSON(String JSONString) {
 
 
@@ -112,6 +134,9 @@ public class HTTPGetNotificationJson extends AsyncTask<String,String,String> {
     }
 
 
+    /**
+     *
+     */
     protected void onPostExecute() {
         try {
 
@@ -135,7 +160,12 @@ public class HTTPGetNotificationJson extends AsyncTask<String,String,String> {
     }
 
 
-
+    /**
+     *
+     * @param urlString
+     * @param method
+     * @return
+     */
     InputStream getStreamFromURL(String urlString, String method) {
         try {
             URL url = new URL(urlString);
@@ -154,6 +184,11 @@ public class HTTPGetNotificationJson extends AsyncTask<String,String,String> {
 
     }
 
+    /**
+     *
+     * @param is
+     * @return
+     */
     String streamToString(InputStream is) {
         String result = "";
         String line = null;

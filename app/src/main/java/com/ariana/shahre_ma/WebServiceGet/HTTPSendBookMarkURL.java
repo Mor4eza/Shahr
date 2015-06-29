@@ -39,23 +39,38 @@ public class HTTPSendBookMarkURL extends AsyncTask<String, Void, Boolean> {
 
     FieldClass fc=new FieldClass();
 
+    /**
+     *
+     * @param context
+     */
     public HTTPSendBookMarkURL(Context context)
     {
         this.context=context;
     }
 
+    /**
+     *
+     * @param businessid
+     */
     public void SetBusinessid(Integer businessid)
     {
         this.businessid=businessid;
     }
 
+    /**
+     *
+     * @param memberid
+     */
     public void SetMemberid(Integer memberid)
     {
         this.memberid=memberid;
     }
 
 
-
+    /**
+     *
+     * @return
+     */
     public String GetURL()
     {
         String url="";
@@ -64,12 +79,20 @@ public class HTTPSendBookMarkURL extends AsyncTask<String, Void, Boolean> {
         return url;
     }
 
+    /**
+     *
+     */
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
 
     }
 
+    /**
+     *
+     * @param urls
+     * @return
+     */
     @Override
     protected Boolean doInBackground(String... urls) {
         try {
@@ -102,6 +125,10 @@ public class HTTPSendBookMarkURL extends AsyncTask<String, Void, Boolean> {
         return false;
     }
 
+    /**
+     *
+     * @param result
+     */
     protected void onPostExecute(Boolean result) {
         DataBaseSqlite dbs = new DataBaseSqlite(context);
 
@@ -115,7 +142,12 @@ public class HTTPSendBookMarkURL extends AsyncTask<String, Void, Boolean> {
 
     }
 
-
+    /**
+     *
+     * @param inputStream
+     * @return
+     * @throws IOException
+     */
     private String convertInputStreamToString(InputStream inputStream) throws IOException {
 
         String line = "";
@@ -140,7 +172,10 @@ public class HTTPSendBookMarkURL extends AsyncTask<String, Void, Boolean> {
         return result;
     }
 
-
+    /**
+     *
+     * @param result
+     */
     private void parseResult(String result) {
 
         try {

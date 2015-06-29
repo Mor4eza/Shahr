@@ -24,9 +24,7 @@ public class HTTPGetSubsetJson extends AsyncTask<String, String, String>
 {
 
     private static Context context;
-    public HTTPGetSubsetJson(Context c) {
-        context = c;
-    }
+
     private static final String url_subset="http://test.shahrma.com/api/apigivesubset";
 
     Integer Id[];
@@ -34,6 +32,19 @@ public class HTTPGetSubsetJson extends AsyncTask<String, String, String>
     Integer collectionId[];
     Integer len;
 
+    /**
+     *
+     * @param c
+     */
+    public HTTPGetSubsetJson(Context c) {
+        context = c;
+    }
+
+    /**
+     *
+     * @param args
+     * @return
+     */
     protected String doInBackground(String... args) {
         try {
 
@@ -50,7 +61,9 @@ public class HTTPGetSubsetJson extends AsyncTask<String, String, String>
 
     }
 
-
+    /**
+     *
+     */
     protected void onPostExecute() {
         try {
 
@@ -95,7 +108,12 @@ public class HTTPGetSubsetJson extends AsyncTask<String, String, String>
     }
 
 
-
+    /**
+     *
+     * @param urlString
+     * @param method
+     * @return
+     */
     InputStream getStreamFromURL(String urlString, String method) {
         try {
             URL url = new URL(urlString);
@@ -114,6 +132,11 @@ public class HTTPGetSubsetJson extends AsyncTask<String, String, String>
 
     }
 
+    /**
+     *
+     * @param is
+     * @return
+     */
     String streamToString(InputStream is) {
         String result = "";
         String line = null;

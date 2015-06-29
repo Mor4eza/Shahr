@@ -7,6 +7,7 @@ package com.ariana.shahre_ma.MyCity;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         this.laptopCollections = laptopCollections;
         this.laptops = laptops;
+
     }
 
     public Object getChild(int groupPosition, int childPosition) {
@@ -78,12 +80,16 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
 
                     selectedsubset.add(selected);
+                    fc.SetNameSubset(selectedsubset);
                     Toast.makeText(context, selectedsubset.toString(), Toast.LENGTH_LONG).show();
+                    Log.i("SubsetName", selectedsubset.toString());
                 } else {
 
                     final String selected = (String) getChild(groupPosition, childPosition);
                     selectedsubset.remove(selected);
+                    fc.SetNameSubset(selectedsubset);
                     Toast.makeText(context,  selectedsubset.toString(), Toast.LENGTH_LONG).show();
+                    Log.i("SubsetName", selectedsubset.toString());
                 }
 
             }

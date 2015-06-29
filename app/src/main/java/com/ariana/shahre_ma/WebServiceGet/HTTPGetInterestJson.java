@@ -36,7 +36,9 @@ public class HTTPGetInterestJson  extends AsyncTask<String, String, String>
     Integer memberid[];
     Integer len;
 
-
+    /**
+     *
+     */
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -45,6 +47,11 @@ public class HTTPGetInterestJson  extends AsyncTask<String, String, String>
         pd.show();
     }
 
+    /**
+     *
+     * @param args
+     * @return
+     */
     protected String doInBackground(String... args) {
         try {
 
@@ -61,6 +68,9 @@ public class HTTPGetInterestJson  extends AsyncTask<String, String, String>
 
     }
 
+    /**
+     *
+     */
     protected void onPostExecute() {
         try {
 
@@ -79,7 +89,10 @@ public class HTTPGetInterestJson  extends AsyncTask<String, String, String>
         }
     }
 
-
+    /**
+     *
+     * @param JSONString
+     */
     void parseJSON(String JSONString) {
 
         Integer ii = 0;
@@ -106,7 +119,12 @@ public class HTTPGetInterestJson  extends AsyncTask<String, String, String>
         }
     }
 
-
+    /**
+     *
+     * @param urlString
+     * @param method
+     * @return
+     */
 
     InputStream getStreamFromURL(String urlString, String method) {
         try {
@@ -126,6 +144,11 @@ public class HTTPGetInterestJson  extends AsyncTask<String, String, String>
 
     }
 
+    /**
+     *
+     * @param is
+     * @return
+     */
     String streamToString(InputStream is) {
         String result = "";
         String line = null;

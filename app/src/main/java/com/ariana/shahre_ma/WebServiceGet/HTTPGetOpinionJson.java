@@ -41,11 +41,20 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
 ProgressDialog pd;
 
     FieldClass fc=new FieldClass();
+
+    /**
+     *
+     * @param business_id
+     */
     public void seturl_opinion(Integer business_id) {
 
         this.BusintessId=business_id;
     }
 
+    /**
+     *
+     * @return
+     */
     private String geturl_opinion()
     {
 
@@ -54,11 +63,18 @@ ProgressDialog pd;
         return  Result;
     }
 
+    /**
+     *
+     * @param c
+     */
     public HTTPGetOpinionJson(Context c) {
         context = c;
 
     }
 
+    /**
+     *
+     */
     @Override
     protected void onPreExecute() {
   /*      super.onPreExecute();
@@ -67,6 +83,12 @@ ProgressDialog pd;
         pd.setCancelable(false);
         pd.show();*/
     }
+
+    /**
+     *
+     * @param args
+     * @return
+     */
     protected String doInBackground(String... args) {
         try {
 
@@ -83,7 +105,9 @@ ProgressDialog pd;
 
     }
 
-
+    /**
+     *
+     */
     protected void onPostExecute() {
         try {
 
@@ -103,7 +127,10 @@ ProgressDialog pd;
         }
     }
 
-
+    /**
+     *
+     * @param JSONString
+     */
     void parseJSON(String JSONString) {
 
 
@@ -145,7 +172,12 @@ ProgressDialog pd;
         }
     }
 
-
+    /**
+     *
+     * @param urlString
+     * @param method
+     * @return
+     */
 
     InputStream getStreamFromURL(String urlString, String method) {
         try {
@@ -165,6 +197,11 @@ ProgressDialog pd;
 
     }
 
+    /**
+     *
+     * @param is
+     * @return
+     */
     String streamToString(InputStream is) {
         String result = "";
         String line = null;

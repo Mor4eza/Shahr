@@ -1,5 +1,8 @@
 package com.ariana.shahre_ma.Fields;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by ariana2 on 6/5/2015.
  */
@@ -67,6 +70,7 @@ public class FieldClass
     private static String Longtiude_Business;
 
 
+    private static List<String> NameSubset=new ArrayList<String>();
     // get/set
 
 //***********************************************************************
@@ -428,5 +432,18 @@ public class FieldClass
     public Integer  GetSubsetId()
     {
         return this.SubsetId;
+    }
+
+    /**
+     * Get and Set Namesubset Array
+     * Type List<String>
+     */
+    public void  SetNameSubset(List<String> subsetname)
+    {
+        NameSubset=subsetname;
+    }
+    public List<String>  GetNameSubset()
+    {
+        return NameSubset;
     }
 }

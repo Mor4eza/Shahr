@@ -25,9 +25,7 @@ public class HTTPGETLikeJson  extends AsyncTask<String, String, String>
     ProgressDialog pd;
 
     private static Context context;
-    public HTTPGETLikeJson(Context c) {
-        context = c;
-    }
+
     private static final String url_collection="http://test.shahrma.com/api/apigivecollection";
 
     Integer Id[];
@@ -37,6 +35,17 @@ public class HTTPGETLikeJson  extends AsyncTask<String, String, String>
     Integer len;
 
 
+    /**
+     *
+     * @param c
+     */
+    public HTTPGETLikeJson(Context c) {
+        context = c;
+    }
+
+    /**
+     *
+     */
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -45,6 +54,11 @@ public class HTTPGETLikeJson  extends AsyncTask<String, String, String>
         pd.show();
     }
 
+    /**
+     *
+     * @param args
+     * @return
+     */
     protected String doInBackground(String... args) {
         try {
 
@@ -61,6 +75,9 @@ public class HTTPGETLikeJson  extends AsyncTask<String, String, String>
 
     }
 
+    /**
+     *
+     */
     protected void onPostExecute() {
         try {
 
@@ -79,6 +96,10 @@ public class HTTPGETLikeJson  extends AsyncTask<String, String, String>
     }
 
 
+    /**
+     *
+     * @param JSONString
+     */
     void parseJSON(String JSONString) {
 
         Integer ii = 0;
@@ -108,7 +129,12 @@ public class HTTPGETLikeJson  extends AsyncTask<String, String, String>
     }
 
 
-
+    /**
+     *
+     * @param urlString
+     * @param method
+     * @return
+     */
     InputStream getStreamFromURL(String urlString, String method) {
         try {
             URL url = new URL(urlString);
@@ -127,6 +153,11 @@ public class HTTPGETLikeJson  extends AsyncTask<String, String, String>
 
     }
 
+    /**
+     *
+     * @param is
+     * @return
+     */
     String streamToString(InputStream is) {
         String result = "";
         String line = null;
