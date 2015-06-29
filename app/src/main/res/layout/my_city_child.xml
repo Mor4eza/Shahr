@@ -14,6 +14,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:gravity="start"
-        android:textColor="#ff000000" />
+        android:textColor="#ff000000"
+        android:focusable="true" />
 
 </RelativeLayout>

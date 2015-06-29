@@ -1,14 +1,21 @@
 package com.ariana.shahre_ma.ListExpand;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.Jobs_List;
+import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 
 import java.util.ArrayList;
 
@@ -17,10 +24,11 @@ import java.util.ArrayList;
  */
 public class MyListAdapter extends BaseExpandableListAdapter {
 
+    Integer count=0;
     private Context context;
     private ArrayList<Continent> continentList;
     private ArrayList<Continent> originalList;
-
+    private FieldClass fc=new FieldClass();
     public MyListAdapter(Context context, ArrayList<Continent> continentList) {
         this.context = context;
         this.continentList = new ArrayList<Continent>();
@@ -56,7 +64,31 @@ public class MyListAdapter extends BaseExpandableListAdapter {
         name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("Clicked",String.valueOf(name.getText()));
+               HTTPGetBusinessJson httpbusin;
+                httpbusin =new HTTPGetBusinessJson(context);
+                NetState ns=new NetState(context);
+                Query query=new Query(context);
+                Toast.makeText(context,country.getName(),Toast.LENGTH_LONG).show();
+                fc.SetSelected_job(country.getName());
+                count = query.getCountBusiness(query.getsubsetID(country.getName()));
+                fc.SetSubsetId(query.getsubsetID(country.getName()));
+                if (ns.checkInternetConnection() == false) {
+                    Intent i = new Intent(context, Jobs_List.class);
+                   context.startActivity(i);
+                } else {
+                    if (count > 0) {
+                        fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
+                        Intent i = new Intent(context, Jobs_List.class);
+                        context.startActivity(i);
+                        Log.i("Count>", "1");
+                    } else {
+                        httpbusin = new HTTPGetBusinessJson(context);
+                        httpbusin.SetUrl_business(query.getsubsetID(country.getName()));
+                        httpbusin.execute();
+                        Log.i("Count<", "0");
+                    }
+                }
+
             }
         });
 */

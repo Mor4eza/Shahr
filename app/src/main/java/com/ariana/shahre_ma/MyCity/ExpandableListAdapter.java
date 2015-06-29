@@ -69,7 +69,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
 
 
-      final CheckBox Checked = (CheckBox) convertView.findViewById(R.id.sub_check);
+       final CheckBox Checked = (CheckBox) convertView.findViewById(R.id.sub_check);
 
         Checked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
