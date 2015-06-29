@@ -156,7 +156,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
                         // setGroupIndicatorToRight();
 
 
-                        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            /*            expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
                             public boolean onChildClick(ExpandableListView parent, View v,int groupPosition, int childPosition, long id) {
 
@@ -198,7 +198,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
                                 return true;
                             }
 
-                        });
+                        });*/
 
        /* SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         search = (android.widget.SearchView) findViewById(R.id.search_jobs);
@@ -345,10 +345,9 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
     @Override
     public boolean onQueryTextChange(String query) {
-        expandAll();
         Log.i("onQueryTextChange", "change");
         listAdapter.filterData(query);
-
+        expandAll();
         return false;
     }
 
