@@ -168,9 +168,6 @@ public class My_city extends ActionBarActivity {
                             if (Collection_ID_subset == Id_co)
                             {
                                 childList.add(allrows_Subset.getString(1));
-
-
-
                             }
 
                         } while (allrows_Subset.moveToNext());
@@ -215,14 +212,19 @@ public class My_city extends ActionBarActivity {
     void SpinnerSetUp(){
 
         DataBaseSqlite db=new DataBaseSqlite(this);
-        Cursor allrow=db.select_ci
+        Cursor allrows=db.select_AllCity();
 
         Spinner Sp_City = (Spinner) findViewById(R.id.sp_city);
         Sp_City.setPrompt("انتخاب شهر:");
         List<String> list = new ArrayList<String>();
-        list.add("تهران");
-        list.add("کرج");
-        list.add("تبریز");
+        if(allrows.moveToFirst())
+        {
+            do
+            {
+                list.add(allrows.getString(1));
+
+            }while (allrows.moveToNext());
+        }
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -157,9 +156,10 @@ public class Sign_Up extends ActionBarActivity {
 
     public List<String> getId() {
 
-        SQLiteDatabase mydb = openOrCreateDatabase(fc.GetDataBaseName(), Context.MODE_PRIVATE,null);
+       DataBaseSqlite db=new DataBaseSqlite(this);
+
         List<String> studentList = new ArrayList<>();
-        Cursor allrows  = mydb.rawQuery("SELECT * FROM "+  fc.GetTableNamecity(), null);
+        Cursor allrows  = db.select_AllCity();
         if (allrows.moveToFirst()) {
             do {
 
@@ -167,7 +167,7 @@ public class Sign_Up extends ActionBarActivity {
 
             } while (allrows.moveToNext());
         }
-        mydb.close();
+
         return studentList;
     }
 

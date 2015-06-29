@@ -397,15 +397,15 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(ID_member,id);
-        values.put(NAME_member,name);
-        values.put(EMAIL_member,email);
+        values.put(ID_member, id);
+        values.put(NAME_member, name);
+        values.put(EMAIL_member, email);
         values.put(MOBILE_member, mobile);
-        values.put(AGE_member,age);
+        values.put(AGE_member, age);
         values.put(SEX_member, sex);
-        values.put(USERNAME_member,username);
-        values.put(PASSWORD_member,password);
-        values.put(CITYID_member,cityid);
+        values.put(USERNAME_member, username);
+        values.put(PASSWORD_member, password);
+        values.put(CITYID_member, cityid);
 
 
         // 3. insert
@@ -779,26 +779,33 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     public  Cursor select_AllNotificaton(Integer erja)
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        return db.rawQuery("SELECTE * FROM "+TABLE_NAME_NOTIFICATION,null);
+        return db.rawQuery("SELECT * FROM "+TABLE_NAME_NOTIFICATION,null);
     }
 
     public  Cursor select_NotificatonId(Integer Id)
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        return db.rawQuery("SELECTE Id FROM "+TABLE_NAME_NOTIFICATION +" WHERE Id="+Id,null);
+        return db.rawQuery("SELECT Id FROM "+TABLE_NAME_NOTIFICATION +" WHERE Id="+Id,null);
     }
 
     public  Cursor select_CountCollection()
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        return db.rawQuery("SELECTE COUNT(*) FROM "+TABLE_NAME_COLLECTION,null);
+        return db.rawQuery("SELECT COUNT(*) FROM "+TABLE_NAME_COLLECTION,null);
     }
 
     public  Cursor select_CountSubset()
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        return db.rawQuery("SELECTE COUNT(*) FROM "+TABLE_NAME_SUBSET,null);
+        return db.rawQuery("SELECT COUNT(*) FROM "+TABLE_NAME_SUBSET,null);
     }
+
+    public  Cursor select_AllCity()
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM "+TABLE_NAME_City,null);
+    }
+
 
     // Deleting Opinion
     public void delete_Opinion() {

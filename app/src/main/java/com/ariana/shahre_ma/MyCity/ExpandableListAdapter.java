@@ -20,6 +20,7 @@ import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +30,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Map<String, List<String>> laptopCollections;
     private List<String> laptops;
-
+    private List<String> selectedsubset=new ArrayList<String>();
     Query query;
     Integer subsetid=0;
     Integer memberid=0;
@@ -75,12 +76,14 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
                     final String selected = (String) getChild(groupPosition, childPosition);
 
-                    Toast.makeText(context, selected + String.valueOf(isChecked), Toast.LENGTH_LONG).show();
+
+                    selectedsubset.add(selected);
+                    Toast.makeText(context, selectedsubset.toString(), Toast.LENGTH_LONG).show();
                 } else {
 
                     final String selected = (String) getChild(groupPosition, childPosition);
-
-                    Toast.makeText(context, selected + String.valueOf(isChecked), Toast.LENGTH_LONG).show();
+                    selectedsubset.remove(selected);
+                    Toast.makeText(context,  selectedsubset.toString(), Toast.LENGTH_LONG).show();
                 }
 
             }
