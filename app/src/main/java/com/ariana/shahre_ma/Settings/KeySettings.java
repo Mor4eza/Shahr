@@ -78,14 +78,14 @@ public class KeySettings
     }
 
     /**
-     * Keep Boolean Search True/False
-     * @param bool
+     * Keep Boolean Sort True/False
+     * @param sortvalue
      */
-    public void saveSortBusiness(Boolean bool)
+    public void saveSortBusiness(String sortvalue)
     {
-        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
+        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting", Context.MODE_PRIVATE);
         editor=prefernc.edit();
-        editor.putBoolean("SortBool",bool);
+        editor.putString("SortBool", sortvalue);
         editor.apply();
     }
 
@@ -93,10 +93,10 @@ public class KeySettings
      * Return Boolean Sort True/False
      * @return
      */
-    public Boolean getSortBusiness()
+    public String getSortBusiness()
     {
         prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
-        return prefernc.getBoolean("SortBool",false);
+        return prefernc.getString("SortBool", "");
     }
 
     /**

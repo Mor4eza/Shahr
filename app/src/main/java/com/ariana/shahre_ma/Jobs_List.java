@@ -120,16 +120,18 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
                     if (item.getTitle().equals("مرتب سازی بر اساس نام"))
                     {
                         Toast.makeText(getApplicationContext(),item.getItemId(),Toast.LENGTH_LONG).show();
-
+                        setting.saveSortBusiness("name");
                         setCards();
                     }
                         else if(item.getTitle().equals("مرتب سازی بر اساس امتیاز"))
                     {
-                        setting.saveSortBusiness(true);
+                        setting.saveSortBusiness("rate");
 
                       setCards();
                     } else if(item.getTitle().equals("مرتب سازی بر اساس جدیدترینها")){
 
+                        setting.saveSortBusiness("date");
+                        setCards();
 
                     }
 
