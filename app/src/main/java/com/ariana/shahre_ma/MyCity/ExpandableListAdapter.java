@@ -1,26 +1,26 @@
-package com.ariana.shahre_ma;
+package com.ariana.shahre_ma.MyCity;
 
 /**
  * Created by Mori on 5/14/2015.
  */
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ImageView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.R;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +30,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Map<String, List<String>> laptopCollections;
     private List<String> laptops;
-
+    private List<String> selectedsubset=new ArrayList<String>();
     Query query;
     Integer subsetid=0;
     Integer memberid=0;
@@ -59,50 +59,33 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         LayoutInflater inflater = context.getLayoutInflater();
 
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.child_item, null);
+            convertView = inflater.inflate(R.layout.my_city_child, null);
         }
 
-        TextView item = (TextView) convertView.findViewById(R.id.laptop);
+        CheckBox item = (CheckBox) convertView.findViewById(R.id.sub_check);
 
 
 
 
-        final ImageView Star = (ImageView) convertView.findViewById(R.id.delete);
-        Star.setOnClickListener(new View.OnClickListener() {
+      final CheckBox Checked = (CheckBox) convertView.findViewById(R.id.sub_check);
 
-           public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setMessage("اضافه کردن این مجموعه به علاقه مندیها؟!");
-                builder.setCancelable(false);
-                builder.setPositiveButton("بله",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                /*List<String> child =
-                                        laptopCollections.get(laptops.get(groupPosition));
-                                child.remove(childPosition);
-                                notifyDataSetChanged();*/
-                                final String selected = (String) getChild(
-                                        groupPosition, childPosition);
+        Checked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked == true) {
 
-                                query=new Query(context);
-              Toast.makeText(context, selected,Toast.LENGTH_LONG).show();
-                               subsetid= query.getsubsetID(selected);
-                               memberid=query.getMemberId();
+                    final String selected = (String) getChild(groupPosition, childPosition);
 
 
-                                DataBaseSqlite db=new DataBaseSqlite(context);
-                                db.Add_Interest(subsetid,query.getMemberId());
+                    selectedsubset.add(selected);
+                    Toast.makeText(context, selectedsubset.toString(), Toast.LENGTH_LONG).show();
+                } else {
 
-                            }
-                        });
-                builder.setNegativeButton("نه",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
+                    final String selected = (String) getChild(groupPosition, childPosition);
+                    selectedsubset.remove(selected);
+                    Toast.makeText(context,  selectedsubset.toString(), Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 
@@ -135,7 +118,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.group_item,
                     null);
         }
-        TextView item = (TextView) convertView.findViewById(R.id.laptop);
+        TextView item = (TextView) convertView.findViewById(R.id.laptop1);
         item.setTypeface(null, Typeface.BOLD);
         item.setText(laptopName);
         return convertView;
