@@ -72,6 +72,7 @@ public class MainActivity extends ActionBarActivity {
                 HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
                 httpcoll.execute();
             }
+
             HTTPGetBookMarkJson b=new HTTPGetBookMarkJson(this);
             b.SetUrl_MemberId(query.getMemberId());
             b.execute();
