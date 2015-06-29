@@ -6,13 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +35,8 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
     FieldClass fc=new FieldClass();
 
 
+    TextView tvMarket;
+    TextView tvDescription;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,12 +45,23 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
                 setCards();
 
 
+       // mDrawer = MenuDrawer.attach(this, Position.RIGHT);
+
+        /*mDrawer.setContentView(R.layout.activity_jobs__list);
+        mDrawer.setMenuView(R.layout.activity_jobs);*/
 
     }
-        public void img_click(View v)
-        {
+        public void img_click(View v){
+
+          /* tvDescription=(TextView) findViewById(R.id.tv_address);
+            tvMarket=(TextView) findViewById(R.id.tv_title);
+
+            fc.SetMarket_Business(tvMarket.getText().toString());
+            fc.SetAddress_Business(tvDescription.getText().toString());*/
+
             Intent i = new Intent(getApplicationContext(), Job_details.class);
             startActivity(i);
+
         }
 
 
@@ -89,12 +102,42 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        View btnsort=findViewById(R.id.sort);
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_Map) {
            Intent i = new Intent(this,MapsActivity.class);
            startActivity(i);
             return true;
+
+        }else if(id== R.id.sort){
+
+            PopupMenu popupMenu=new PopupMenu(Jobs_List.this,btnsort);
+            popupMenu.getMenuInflater().inflate(R.menu.job_list_popupmenu, popupMenu.getMenu());
+            popupMenu.show();
+            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    if (item.getTitle().equals("مرتب سازی بر اساس نام"))
+                    {
+                        Toast.makeText(getApplicationContext(),item.getItemId(),Toast.LENGTH_LONG).show();
+                        setting.saveSortBusiness("name");
+                        setCards();
+                    }
+                        else if(item.getTitle().equals("مرتب سازی بر اساس امتیاز"))
+                    {
+                        setting.saveSortBusiness("rate");
+
+                      setCards();
+                    } else if(item.getTitle().equals("مرتب سازی بر اساس جدیدترینها")){
+
+                        setting.saveSortBusiness("date");
+                        setCards();
+
+                    }
+
+                    return false;
+                }
+            });
         }
 
 
@@ -119,6 +162,7 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
             }
             mSearchView.setSearchableInfo(info);
         }
+
         mSearchView.setOnQueryTextListener(this);
         mSearchView.setOnCloseListener(this);
     }
@@ -174,6 +218,7 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
         }
         else // Text Not Empty  Search Business
         {
+
             setting.saveSearchBusiness(true);
             fc.SetMarket_Business(newText);
             setCards();

@@ -14,4 +14,10 @@
         android:title="@string/search"
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="always"/>
+    <item
+        android:id="@+id/sort"
+        android:title="مرتب کردن"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        app:showAsAction="always"
+        />
 </menu>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,7 @@ private  static Context context;
 
 
             Job_lists_card_item nature = new Job_lists_card_item();
-            nature.setName("");
+            nature.setName("بدون اطلاعات");
             nature.setDes("");
             nature.setThumbnail(R.drawable.pooshak);
             nature.setRate(2.5);
@@ -54,13 +55,33 @@ private  static Context context;
 
         DataBaseSqlite mydb = new DataBaseSqlite(context);
 
-        if(setting.getSearchBusiness()==false) {
+        if(setting.getSearchBusiness()==false)
+        {
              allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb());
         }
-        else{
-             allrows = mydb.SearchBusiness(fc.GetMarket_Business(), fc.GetBusiness_SubsetIdb());
+        else
+        {
+            allrows = mydb.SearchBusiness(fc.GetMarket_Business(), fc.GetBusiness_SubsetIdb());
             setting.saveSearchBusiness(false); //No Search
         }
+
+         if(setting.getSortBusiness().equals("rate"))
+        {
+            allrows = mydb.select_SortRateBusiness(fc.GetBusiness_SubsetIdb());
+            setting.saveSortBusiness("0"); //No Sort
+
+            Log.i("rate",setting.getSortBusiness());
+        }  else if(setting.getSortBusiness().equals("name"))
+        {
+            allrows = mydb.select_SortNameBusiness(fc.GetBusiness_SubsetIdb());
+            setting.saveSortBusiness("0"); //No Sort
+            Log.i("name", setting.getSortBusiness());
+        }  else if(setting.getSortBusiness().equals("date")) {
+             allrows = mydb.select_SortDateBusiness(fc.GetBusiness_SubsetIdb());
+            setting.saveSortBusiness("0"); //No Sort
+            Log.i("date", setting.getSortBusiness());
+        }
+
 
         try {
 
