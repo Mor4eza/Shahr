@@ -54,10 +54,10 @@ public class FieldClass
     private static Integer CountLike;
     private static Integer CountDisLike;
 
-    private static String selected_job;
+    private static String  selected_job;
     private static Integer Count_Business;
     private static Integer Business_SubsetId;
-
+    private static Integer SubsetId;
     private static Integer Business_Id;
     private static String Market_Business;
     private static String Address_Business;
@@ -416,5 +416,17 @@ public class FieldClass
     public Integer  GetCount_Business()
     {
         return Count_Business;
+    }
+
+    /**
+     * Get and Set Count SubsetId
+     */
+    public void  SetSubsetId(Integer Idsubset)
+    {
+        this.SubsetId=Idsubset;
+    }
+    public Integer  GetSubsetId()
+    {
+        return this.SubsetId;
     }
 }

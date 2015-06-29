@@ -11,8 +11,10 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Notification.Notify;
+import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -79,10 +81,13 @@ public class MainService extends Service {
 
  class HTTPGetNotificationJson_service extends AsyncTask<String,String,String> {
 
+     DateTime t=new DateTime();
+     KeySettings setting;
     public static String test;
     private static Context context;
     private static   String url_Notification;
     private Integer MEMberID;
+     Integer NotifiId=0;
     Integer Id[];
     Integer OpinionType[];
     Integer erja[];
@@ -109,6 +114,7 @@ public class MainService extends Service {
 
     public HTTPGetNotificationJson_service(Context c) {
         context = c;
+        setting=new KeySettings(context);
     }
 
     @Override
@@ -181,16 +187,22 @@ public class MainService extends Service {
 
                 for (int i = 0; i < len; i++)
                 {
+                    Cursor rows=dbs.select_NotificatonId(Id[i]);
+                    rows.moveToFirst();
+                    NotifiId=rows.getInt(0);
+                    rows.close();
+                    Log.i("ID", String.valueOf(Id[i]));
+                    Log.i("count", String.valueOf(NotifiId));
+                    if(NotifiId==0)
                     dbs.Add_Notification(Id[i], OpinionType[i], erja[i], ExecutionTime[i], Description[i], ExpirationDate[i], City[i], CityId[i], Subset[i], SubsetId[i]);
 
 
                 }
 
-
-
-                Notify.Notificationm(context);
-
-
+                if(setting.getAMtime().equals(t.Time()))
+                    Notify.Notificationm(context);
+                else if(setting.getPMtime().equals(t.Time()))
+                    Notify.Notificationm(context);
             }
 
         } catch (Exception e) {

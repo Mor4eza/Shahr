@@ -676,6 +676,13 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     }
 
+    public Cursor SearchBusiness(String nameMarket,Integer subsetId)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetId+" AND Market LIKE '%"+nameMarket+"%'" , null);
+
+    }
     //End Select Business
 
 
@@ -774,6 +781,25 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         SQLiteDatabase db=this.getReadableDatabase();
         return db.rawQuery("SELECTE * FROM "+TABLE_NAME_NOTIFICATION,null);
     }
+
+    public  Cursor select_NotificatonId(Integer Id)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return db.rawQuery("SELECTE Id FROM "+TABLE_NAME_NOTIFICATION +" WHERE Id="+Id,null);
+    }
+
+    public  Cursor select_CountCollection()
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return db.rawQuery("SELECTE COUNT(*) FROM "+TABLE_NAME_COLLECTION,null);
+    }
+
+    public  Cursor select_CountSubset()
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return db.rawQuery("SELECTE COUNT(*) FROM "+TABLE_NAME_SUBSET,null);
+    }
+
     // Deleting Opinion
     public void delete_Opinion() {
 

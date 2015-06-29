@@ -175,9 +175,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
                                 fc.SetSelected_job(selected);
 
                                 count = query.getCountBusiness(query.getsubsetID(selected));
-
-                                time = query.getTime_ZamanSanj();
-                                date = query.getDate_ZamanSanj();
+                                fc.SetSubsetId(query.getsubsetID(selected));
 
 
                                 Toast.makeText(getApplicationContext(), query.getsubsetID(selected).toString(), Toast.LENGTH_LONG).show();

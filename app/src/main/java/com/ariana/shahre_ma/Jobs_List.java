@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.Cards.job_list_cards_adapter;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.job_details.Job_details;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter job_list_Adapter;
 
-
+    KeySettings setting = new KeySettings(this);
     FieldClass fc=new FieldClass();
 
 
@@ -73,9 +74,9 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
 
 
             mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_Jobs);
-            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+       /*     mRecyclerView.setItemAnimator(new DefaultItemAnimator());
             mRecyclerView.getItemAnimator().setAddDuration(5000);
-            mRecyclerView.getItemAnimator().setChangeDuration(5000);
+            mRecyclerView.getItemAnimator().setChangeDuration(5000);*/
             mRecyclerView.setHasFixedSize(true);
             mLayoutManager = new LinearLayoutManager(this);
             mRecyclerView.setLayoutManager(mLayoutManager);
@@ -137,20 +138,62 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
         mSearchView.setOnCloseListener(this);
     }
 
+    /**
+     * Search Jobs_List
+     * Search to Business
+     * @return
+     */
     @Override
-    public boolean onClose() {
+    public boolean onClose()
+    {
+        //Search stop Select Business All
+        KeySettings setting=new KeySettings(this);
+        setting.saveSearchBusiness(false);
+        setCards();
         return false;
     }
 
     @Override
-    public boolean onQueryTextSubmit(String query) {
+    public boolean onQueryTextSubmit(String query)
+    {
+        //Submit
+        // Search Sumbit To Business Parameters SubsetID and NameMarket
+
+        if(query.equals(""))
+        {
+            setting.saveSearchBusiness(false);
+            setCards();
+
+        }
+        else
+        {
+            setting.saveSearchBusiness(true);
+            fc.SetMarket_Business(query);
+            setCards();
+        }
 
         return false;
     }
 
     @Override
-    public boolean onQueryTextChange(String newText) {
-        Toast.makeText(getApplicationContext(),newText,Toast.LENGTH_LONG).show();
+    public boolean onQueryTextChange(String newText)
+    {
+
+        //Online Type change
+        // Search Online To Business Parameters SubsetID and NameMarket
+
+        if(newText.equals("")) // Text Empty Select Business All
+        {
+            setting.saveSearchBusiness(false);
+            setCards();
+        }
+        else // Text Not Empty  Search Business
+        {
+
+            setting.saveSearchBusiness(true);
+            fc.SetMarket_Business(newText);
+            setCards();
+        }
         return false;
     }
 }

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.job_details.Job_details;
 
 import java.util.ArrayList;
@@ -28,6 +29,8 @@ public class job_list_cards_adapter extends RecyclerView.Adapter<job_list_cards_
     List<Job_lists_card_item> mItems;
     Job_lists_card_item nature;
     FieldClass fc=new FieldClass();
+    KeySettings setting;
+    Cursor allrows;
 private  static Context context;
 
 
@@ -37,7 +40,7 @@ private  static Context context;
       this.context=context;
 
 
-
+        setting=new KeySettings(context);
         mItems = new ArrayList<Job_lists_card_item>();
 
 
@@ -49,10 +52,18 @@ private  static Context context;
 
             mItems.add(nature);
 
+        DataBaseSqlite mydb = new DataBaseSqlite(context);
+
+        if(setting.getSearchBusiness()==false) {
+             allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb());
+        }
+        else{
+             allrows = mydb.SearchBusiness(fc.GetMarket_Business(), fc.GetBusiness_SubsetIdb());
+            setting.saveSearchBusiness(false); //No Search
+        }
+
         try {
 
-                DataBaseSqlite mydb = new DataBaseSqlite(context);
-                Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb());
 
                 if (allrows.moveToFirst()) {
                     mItems = new ArrayList<Job_lists_card_item>();

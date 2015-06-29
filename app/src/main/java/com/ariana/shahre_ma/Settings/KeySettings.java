@@ -46,4 +46,17 @@ public class KeySettings
         return prefernc.getString("PMtime","");
     }
 
+    public void saveSearchBusiness(Boolean bool)
+    {
+        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
+        editor=prefernc.edit();
+        editor.putBoolean("SearchBool",bool);
+        editor.apply();
+    }
+
+    public Boolean getSearchBusiness()
+    {
+        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
+        return prefernc.getBoolean("SearchBool",false);
+    }
 }
