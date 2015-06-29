@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
+
 import com.ariana.shahre_ma.R;
+
 import java.util.ArrayList;
 
 /**
@@ -42,14 +44,22 @@ public class MyListAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild,
                              View view, ViewGroup parent) {
 
-        Country country = (Country) getChild(groupPosition, childPosition);
+        final Country country = (Country) getChild(groupPosition, childPosition);
         if (view == null) {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = layoutInflater.inflate(R.layout.child_item, null);
         }
 
-        TextView name = (TextView) view.findViewById(R.id.laptop);
+       final TextView name = (TextView) view.findViewById(R.id.laptop);
         name.setText(country.getName().trim());
+
+        name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("Clicked",String.valueOf(name.getText()));
+            }
+        });
+
 
         return view;
     }
