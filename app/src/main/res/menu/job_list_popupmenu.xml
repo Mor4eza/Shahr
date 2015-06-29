@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/by_name"
+        android:title="مرتب سازی بر اساس نام"
+
+        />
+    <item
+        android:id="@+id/by_rate"
+        android:title="مرتب سازی بر اساس امتیاز"
+    />
+    <item
+        android:id="@+id/by_new"
+        android:title="مرتب سازی بر اساس جدیدترینها"
+        />
+</menu>

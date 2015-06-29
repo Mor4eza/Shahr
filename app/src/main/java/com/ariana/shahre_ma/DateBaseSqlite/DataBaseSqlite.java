@@ -656,7 +656,16 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetID , null);
+        return db.rawQuery("SELECT * FROM " + TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetID+" ORDER BY "+MARKET_business + " ASC" , null);
+
+    }
+
+    public Cursor select_SortRateBusiness(Integer subsetID)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetID+" ORDER BY "+RATEVALUE_business +" ASC", null);
+
 
     }
 

@@ -45,7 +45,7 @@ private  static Context context;
 
 
             Job_lists_card_item nature = new Job_lists_card_item();
-            nature.setName("");
+            nature.setName("بدون اطلاعات");
             nature.setDes("");
             nature.setThumbnail(R.drawable.pooshak);
             nature.setRate(2.5);
@@ -57,7 +57,13 @@ private  static Context context;
         if(setting.getSearchBusiness()==false) {
              allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb());
         }
-        else{
+        else if(setting.getSortBusiness()==true)
+        {
+            allrows = mydb.select_SortRateBusiness(fc.GetBusiness_SubsetIdb());
+            setting.saveSortBusiness(false); //No Sort
+        }
+        else
+        {
              allrows = mydb.SearchBusiness(fc.GetMarket_Business(), fc.GetBusiness_SubsetIdb());
             setting.saveSearchBusiness(false); //No Search
         }

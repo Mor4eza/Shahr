@@ -78,6 +78,28 @@ public class KeySettings
     }
 
     /**
+     * Keep Boolean Search True/False
+     * @param bool
+     */
+    public void saveSortBusiness(Boolean bool)
+    {
+        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
+        editor=prefernc.edit();
+        editor.putBoolean("SortBool",bool);
+        editor.apply();
+    }
+
+    /**
+     * Return Boolean Sort True/False
+     * @return
+     */
+    public Boolean getSortBusiness()
+    {
+        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
+        return prefernc.getBoolean("SortBool",false);
+    }
+
+    /**
      * Return Boolean Search True/False
      * @return
      */
