@@ -167,7 +167,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
                                // Toast.makeText(getApplicationContext(),String.valueOf(id), Toast.LENGTH_LONG).show();
 
-                                final String selected = country.getName();
+                                final String selected = detailInfo.getName();
 
                                 Toast.makeText(getApplicationContext(), selected, Toast.LENGTH_LONG)
                                         .show();
@@ -360,10 +360,6 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         expandAll();
         Log.i("onQueryTextSubmit", "submit");
         listAdapter.filterData(query);
-        final MyListAdapter expListAdapter = new MyListAdapter(getApplication(),continentList) {
-
-        };
-        expListAdapter.notifyDataSetChanged();
         return false;
     }
     private void collapseAll() {
