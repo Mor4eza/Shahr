@@ -14,8 +14,8 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.MyCity.My_city;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
-import com.ariana.shahre_ma.Notification.Activity_notify;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBookMarkJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
@@ -283,7 +283,7 @@ public class MainActivity extends ActionBarActivity {
                 }
                 if (position==7){
 
-                    Intent i=new Intent(getApplicationContext(),Activity_notify.class);
+                    Intent i=new Intent(getApplicationContext(),My_city.class);
                     startActivity(i);
                 }
                 if (position==9){

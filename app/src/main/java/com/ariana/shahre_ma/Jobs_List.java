@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -73,9 +72,6 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
 
 
             mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_Jobs);
-            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-            mRecyclerView.getItemAnimator().setAddDuration(5000);
-            mRecyclerView.getItemAnimator().setChangeDuration(5000);
             mRecyclerView.setHasFixedSize(true);
             mLayoutManager = new LinearLayoutManager(this);
             mRecyclerView.setLayoutManager(mLayoutManager);
