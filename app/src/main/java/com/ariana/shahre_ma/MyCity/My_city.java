@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.DateTime;
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
@@ -212,6 +213,9 @@ public class My_city extends ActionBarActivity {
 
 
     void SpinnerSetUp(){
+
+        DataBaseSqlite db=new DataBaseSqlite(this);
+        Cursor allrow=db.select_ci
 
         Spinner Sp_City = (Spinner) findViewById(R.id.sp_city);
         Sp_City.setPrompt("انتخاب شهر:");
