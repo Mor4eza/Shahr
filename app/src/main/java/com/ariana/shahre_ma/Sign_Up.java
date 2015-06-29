@@ -18,6 +18,7 @@ import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.ImageDownload.ImageLoader;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
 
@@ -204,7 +205,7 @@ public class Sign_Up extends ActionBarActivity {
     {
 
        // Toast.makeText(getApplication(),fc.GetMember_Email(), Toast.LENGTH_LONG).show();
-        DataBaseSqlite db=new DataBaseSqlite(this);
+    /*    DataBaseSqlite db=new DataBaseSqlite(this);
         Cursor allrows=db.select_AllBusiness();
 
 
@@ -218,13 +219,36 @@ public class Sign_Up extends ActionBarActivity {
             allrows.close();
         }
         catch (Exception e){ Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}
-
+*/
      /*   SqliteTOjson json=new SqliteTOjson(this);
       //  json.getSqliteInterestTOjson();
       email.setText(json.getSqliteInterestTOjson());*/
 
        /* KeySettings sett=new KeySettings(this);
         Toast.makeText(getApplication(),sett.getPMtime(), Toast.LENGTH_LONG).show();*/
+
+        String links[]=new String[]{
+                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=14&cityid=68",
+                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=16&cityid=68",
+                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=24&cityid=68",
+                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=25&cityid=68",
+                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=26&cityid=68",
+                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=27&cityid=68",
+                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=42&cityid=68",
+                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=43&cityid=68",
+                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=47&cityid=68",
+                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=48&cityid=68",
+                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=49&cityid=68",
+                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=50&cityid=68",
+                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=55&cityid=68",
+                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=56&cityid=68",
+                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=57&cityid=68",
+                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=58&cityid=68",
+                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=59&cityid=68"
+        };
+
+        HTTPGetBusinessJson getbusiness=new HTTPGetBusinessJson(this);
+        getbusiness.execute(links);
 
 
     }

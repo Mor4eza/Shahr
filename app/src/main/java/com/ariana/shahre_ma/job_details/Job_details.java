@@ -264,7 +264,7 @@ query=new Query(this);
         if (id == R.id.action_Fav) {
 
             HTTPSendBookMarkURL httpbookmark=new HTTPSendBookMarkURL(this);
-            httpbookmark.SetBusinessid(query.getBusinessId());
+            httpbookmark.SetBusinessid(fc.GetBusiness_Id());
             Log.i("getBusinessId",String.valueOf(query.getBusinessId())  );
             httpbookmark.SetMemberid(query.getMemberId());
             Log.i("getMemberId",String.valueOf(query.getMemberId()) );
