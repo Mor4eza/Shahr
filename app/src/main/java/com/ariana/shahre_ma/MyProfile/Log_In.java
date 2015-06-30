@@ -1,4 +1,4 @@
-package com.ariana.shahre_ma;
+package com.ariana.shahre_ma.MyProfile;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.MainActivity;
+import com.ariana.shahre_ma.R;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

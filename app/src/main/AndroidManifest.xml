@@ -64,11 +64,11 @@
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
-            android:name=".Sign_Up"
+            android:name=".MyProfile.Sign_Up"
             android:label="@string/title_activity_sign__up" >
         </activity>
         <activity
-            android:name=".Log_In"
+            android:name=".MyProfile.Log_In"
             android:label="@string/title_activity_log__in"
             android:parentActivityName=".MainActivity" >
             <meta-data
@@ -138,6 +138,18 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.MainActivity" />
+        </activity>
+        <activity
+            android:name=".MyProfile.My_Profile"
+            android:label="@string/title_activity_my__profile" >
+        </activity>
+        <activity
+            android:name=".MyProfile.Edit_User"
+            android:label="@string/title_activity_edit__user"
+            android:parentActivityName=".MyProfile.My_Profile" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ariana.shahre_ma.MyProfile.My_Profile" />
         </activity>
     </application>
 

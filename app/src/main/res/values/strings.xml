@@ -41,6 +41,8 @@
     <string name="title_activity_setting">Setting</string>
     <string name="title_activity_list">ListActivity</string>
     <string name="title_activity_my_city">My_city</string>
+    <string name="title_activity_my__profile">My_Profile</string>
+    <string name="title_activity_edit__user">Edit_User</string>
 
 
 </resources>

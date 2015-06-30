@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.MyCity.My_city;
+import com.ariana.shahre_ma.MyProfile.Log_In;
+import com.ariana.shahre_ma.MyProfile.My_Profile;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBookMarkJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
@@ -276,6 +278,10 @@ public class MainActivity extends ActionBarActivity {
                     Intent i=new Intent(getApplicationContext(),Jobs.class);
                     startActivity(i);
 
+                }
+                if (position==5){
+                    Intent i = new Intent(getApplicationContext(), My_Profile.class);
+                    startActivity(i);
                 }
                 if (position==6) {
                     Intent i = new Intent(getApplicationContext(), BookMark.class);
