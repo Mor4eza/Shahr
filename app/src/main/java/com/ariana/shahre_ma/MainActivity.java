@@ -44,7 +44,7 @@ public class MainActivity extends ActionBarActivity {
     FragmentPagerAdapter adapterViewPager;
     SliderLayout slider;
     DragTopLayout top;
-
+    ActionButton Action;
     Query query=new Query(this);
     private static final int PROFILE_SETTING = 1;
     private AccountHeader.Result headerResult = null;
@@ -80,14 +80,27 @@ public class MainActivity extends ActionBarActivity {
             httpcity.execute();
         }
 
-
         ViewPager vpPager = (ViewPager) findViewById(R.id.viewPager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
+        fab();
+        try {
+            DataBaseSqlite db = new DataBaseSqlite(this);
+            Cursor allrows = db.select_Member();
+            allrows.moveToNext();
+         if(allrows.getString(6).equals(null)){
+            Action.show();
+         }else{
+             Action.dismiss();
+         }
+
+
+        } catch (Exception e) {
+        }
 
         Image_slider();
         navigation();
-        fab();
+
     }
 
     public void fab_click(View v){
@@ -98,7 +111,7 @@ public class MainActivity extends ActionBarActivity {
     public void fab (){
 
 
-        ActionButton Action = (ActionButton)findViewById(R.id.action_button);
+        Action = (ActionButton)findViewById(R.id.action_button);
         Action.setButtonColor(getResources().getColor(R.color.fab_material_blue_500));
         Action.setImageDrawable(getResources().getDrawable(R.drawable.fab_plus_icon));
 
@@ -269,7 +282,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
                 if (drawerItem instanceof Nameable) {
-                    Toast.makeText(MainActivity.this, MainActivity.this.getString(((Nameable) drawerItem).getNameRes()), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MainActivity.this, MainActivity.this.getString(((Nameable) drawerItem).getNameRes()), Toast.LENGTH_SHORT).show();
 
 
                 }
@@ -280,16 +293,19 @@ public class MainActivity extends ActionBarActivity {
 
                 }
                 if (position==5){
-                    DataBaseSqlite db=new DataBaseSqlite(MainActivity.this);
-                    Cursor cursor= db.select_Member();
-                    cursor.moveToFirst();
-                    if(cursor.getInt(0)>0) {
-                        Intent i = new Intent(getApplicationContext(), My_Profile.class);
-                        startActivity(i);
-                    }
-                    else
-                    {
-                        Toast.makeText(getApplicationContext(),"شما وارد حساب خود نشده اید",Toast.LENGTH_LONG).show();
+
+                    try {
+                        DataBaseSqlite db = new DataBaseSqlite(MainActivity.this);
+                        Cursor cursor = db.select_Member();
+                        cursor.moveToNext();
+                        if (cursor.getString(6).equals(null)) {
+
+                        } else {
+                            Intent i = new Intent(getApplicationContext(), My_Profile.class);
+                            startActivity(i);
+                        }
+                    }catch (Exception e){
+                        Toast.makeText(getApplicationContext(), "وارد حساب خود نشده اید...!", Toast.LENGTH_LONG).show();
                     }
                 }
                 if (position==6) {

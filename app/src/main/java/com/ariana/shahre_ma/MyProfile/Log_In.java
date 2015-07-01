@@ -56,6 +56,7 @@ public class Log_In extends ActionBarActivity {
             allrows.moveToNext();
             username.setText(allrows.getString(6));
             password.setText(allrows.getString(7));
+
         } catch (Exception e) {
         }
     }
@@ -201,7 +202,7 @@ public class Log_In extends ActionBarActivity {
 
                 if (ID >= 0) {
                     dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
-
+                    Log_In.this.finish();
                     Intent i=new Intent(getApplicationContext(),MainActivity.class);
                     startActivity(i);
 
