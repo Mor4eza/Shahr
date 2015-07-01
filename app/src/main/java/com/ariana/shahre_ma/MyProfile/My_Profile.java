@@ -81,7 +81,6 @@ public class My_Profile extends Activity {
      * @param v
      */
     public void Log_Out(View v){
-
         try {
             DataBaseSqlite db = new DataBaseSqlite(this);
             db.delete_Member();

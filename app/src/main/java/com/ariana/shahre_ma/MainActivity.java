@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.MyBusiness.My_Business;
 import com.ariana.shahre_ma.MyCity.My_city;
 import com.ariana.shahre_ma.MyProfile.Log_In;
 import com.ariana.shahre_ma.MyProfile.My_Profile;
@@ -267,7 +268,7 @@ public class MainActivity extends ActionBarActivity {
         drawer.addDrawerItems(
                 new PrimaryDrawerItem().withName(R.string.Works).withIcon(FontAwesome.Icon.faw_money),
                 new PrimaryDrawerItem().withName(R.string.Off).withIcon(FontAwesome.Icon.faw_coffee),
-                new PrimaryDrawerItem().withName(R.string.Near).withIcon(FontAwesome.Icon.faw_map_marker),
+                new PrimaryDrawerItem().withName(R.string.My_business).withIcon(FontAwesome.Icon.faw_briefcase),
 
                 new SectionDrawerItem().withName(R.string.My_city),
                 new SecondaryDrawerItem().withName(R.string.My_Account).withIcon(FontAwesome.Icon.faw_user),
@@ -290,6 +291,13 @@ public class MainActivity extends ActionBarActivity {
 
                     Intent i=new Intent(getApplicationContext(),Jobs.class);
                     startActivity(i);
+
+                }
+                if(position==3)
+                {
+                    Intent i =new Intent(getApplicationContext(), My_Business.class);
+                    startActivity(i);
+
 
                 }
                 if (position==5){

@@ -151,6 +151,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.MyProfile.My_Profile" />
         </activity>
+        <activity
+            android:name=".MyBusiness.My_Business"
+            android:label="@string/title_activity_my__business"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ariana.shahre_ma.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
