@@ -280,8 +280,17 @@ public class MainActivity extends ActionBarActivity {
 
                 }
                 if (position==5){
-                    Intent i = new Intent(getApplicationContext(), My_Profile.class);
-                    startActivity(i);
+                    DataBaseSqlite db=new DataBaseSqlite(MainActivity.this);
+                    Cursor cursor= db.select_Member();
+                    cursor.moveToFirst();
+                    if(cursor.getInt(0)>0) {
+                        Intent i = new Intent(getApplicationContext(), My_Profile.class);
+                        startActivity(i);
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(),"شما وارد حساب خود نشده اید",Toast.LENGTH_LONG).show();
+                    }
                 }
                 if (position==6) {
                     Intent i = new Intent(getApplicationContext(), BookMark.class);

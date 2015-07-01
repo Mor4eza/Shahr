@@ -16,6 +16,36 @@
         android:gravity="center_horizontal"
         android:background="?attr/colorPrimary">
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="100dp"
+            >
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:id="@+id/spinner_city"
+                android:left="@+id/textView2"
+                android:gravity="end"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/textView2"
+                android:layout_toStartOf="@+id/textView2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="انتخاب شهر پیشفرض:"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="40dp"
+                android:id="@+id/textView2"
+                android:gravity="right"
+                />
+
+
+        </RelativeLayout>
+
     </android.support.v7.widget.Toolbar>
  <ScrollView
      android:layout_width="fill_parent"
@@ -178,22 +208,12 @@
                 android:text="خروج کاربر"
                 android:background="@color/fab_material_deep_orange_500"
                 android:id="@+id/log_out"
+                android:onClick="Log_Out"
                 android:layout_gravity="center_horizontal" />
         </LinearLayout>
     </LinearLayout>
  </ScrollView>
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:id="@+id/spinner_city"
 
-        android:paddingTop="40dp"
-        android:paddingLeft="60dp"
-        android:layout_above="@+id/scrollView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="258dp"
-        android:layout_marginStart="258dp" />
 
 
 </RelativeLayout>
