@@ -45,5 +45,6 @@
     <string name="title_activity_edit__user">Edit_User</string>
     <string name="title_activity_my__business">کسب وکار من</string>
     <string name="My_business">کسب وکار من</string>
+    <string name="title_activity_add_business">Add_business</string>
 
 </resources>

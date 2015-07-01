@@ -1,12 +1,10 @@
 package com.ariana.shahre_ma.MyBusiness;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-
+import android.support.v7.app.ActionBarActivity;
+import android.view.View;
 import com.ariana.shahre_ma.R;
-
 public class My_Business extends ActionBarActivity {
 
     @Override
@@ -15,25 +13,9 @@ public class My_Business extends ActionBarActivity {
         setContentView(R.layout.activity_my__business);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_my__business, menu);
-        return true;
-    }
+    public void add_business(View v){
+        Intent i = new Intent(getApplicationContext(),Add_business.class);
+        startActivity(i);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }
