@@ -139,7 +139,9 @@
                 android:layout_height="wrap_content"
                 android:hint="زیر گروه"
                 android:id="@+id/ac_subset"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+
+                />
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
         <com.wrapp.floatlabelededittext.FloatLabeledEditText

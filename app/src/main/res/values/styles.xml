@@ -1,11 +1,14 @@
-
+<resources>
     <!-- Base application theme. -->
-   <!-- <style name="AppTheme" parent="">
-        &lt;!&ndash; Customize your theme here. &ndash;&gt;
-        &lt;!&ndash; MaterialDrawerTheme.Light.DarkToolbar.ActionBar &ndash;&gt;
+
+   <style name="AppTheme" parent="MaterialDrawerTheme.Light.DarkToolbar.ActionBar">
+      <!-- Customize your theme here -->
     </style>
--->
-    <resources>
+
+    </resources>
+
+
+   <!-- <resources>
 
         <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
             <item name="actionBarStyle">@style/ActionBarTheme</item>
@@ -17,14 +20,16 @@
 
 
 
+
         </style>
 
         <style name="ActionBarTheme" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
             <item name="background">@color/material_blue</item>
         </style>
 
-    <!-- ActionBar tabs styles -->
+    &lt;!&ndash; ActionBar tabs styles &ndash;&gt;
     <style name="MyActionBarStyle" parent="@android:style/Widget.Holo.ActionBar.TabView">
         <item name="android:background">@drawable/pooshak</item>
     </style>
     </resources>
+-->

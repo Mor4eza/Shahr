@@ -248,10 +248,10 @@ public class MainActivity extends ActionBarActivity {
                 .withTranslucentStatusBar(true)
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
 
-                    @Override
 
-                    public void onProfileChanged(View view, IProfile profile) {
-                    Toast.makeText(getApplicationContext(),"hi",Toast.LENGTH_LONG).show();
+                    @Override
+                    public boolean onProfileChanged(View view, IProfile iProfile, boolean b) {
+                        return false;
                     }
                 })
 
@@ -260,10 +260,10 @@ public class MainActivity extends ActionBarActivity {
         ////////////////////////
         Drawer drawer = new Drawer();
         drawer.withActivity(this);
-        drawer.withTranslucentStatusBar(true);
+        drawer.withTranslucentStatusBar(false);
         drawer.withHeaderDivider(true);
-
-        drawer.withActionBarDrawerToggleAnimated(true);
+        drawer.withDisplayBelowToolbar(false);
+        drawer.withActionBarDrawerToggleAnimated(false);
         drawer.withAccountHeader(headerResult);
         drawer.addDrawerItems(
                 new PrimaryDrawerItem().withName(R.string.Works).withIcon(FontAwesome.Icon.faw_money),
@@ -279,59 +279,58 @@ public class MainActivity extends ActionBarActivity {
                 new SecondaryDrawerItem().withName(R.string.action_settings).withIcon(FontAwesome.Icon.faw_gears),
                 new DividerDrawerItem()
         );
-        Drawer drawer1 = drawer.withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
-                if (drawerItem instanceof Nameable) {
-                    //Toast.makeText(MainActivity.this, MainActivity.this.getString(((Nameable) drawerItem).getNameRes()), Toast.LENGTH_SHORT).show();
+       drawer.withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
+               if (drawerItem instanceof Nameable) {
+                   Toast.makeText(MainActivity.this, MainActivity.this.getString(((Nameable) drawerItem).getNameRes()), Toast.LENGTH_SHORT).show();
 
 
-                }
-                if (position == 1) {
+               }
+               if (position == 0) {
 
-                    Intent i=new Intent(getApplicationContext(),Jobs.class);
-                    startActivity(i);
+                   Intent i = new Intent(getApplicationContext(), Jobs.class);
+                   startActivity(i);
 
-                }
-                if(position==3)
-                {
-                    Intent i =new Intent(getApplicationContext(), My_Business.class);
-                    startActivity(i);
+               }
+               if (position == 2) {
+                   Intent i = new Intent(getApplicationContext(), My_Business.class);
+                   startActivity(i);
 
 
-                }
-                if (position==5){
+               }
+               if (position == 4) {
 
-                    try {
-                        DataBaseSqlite db = new DataBaseSqlite(MainActivity.this);
-                        Cursor cursor = db.select_Member();
-                        cursor.moveToNext();
-                        if (cursor.getString(6).equals(null)) {
+                   try {
+                       DataBaseSqlite db = new DataBaseSqlite(MainActivity.this);
+                       Cursor cursor = db.select_Member();
+                       cursor.moveToNext();
+                       if (cursor.getString(6).equals(null)) {
 
-                        } else {
-                            Intent i = new Intent(getApplicationContext(), My_Profile.class);
-                            startActivity(i);
-                        }
-                    }catch (Exception e){
-                        Toast.makeText(getApplicationContext(), "وارد حساب خود نشده اید...!", Toast.LENGTH_LONG).show();
-                    }
-                }
-                if (position==6) {
-                    Intent i = new Intent(getApplicationContext(), BookMark.class);
-                    startActivity(i);
-                }
-                if (position==7){
+                       } else {
+                           Intent i = new Intent(getApplicationContext(), My_Profile.class);
+                           startActivity(i);
+                       }
+                   } catch (Exception e) {
+                       Toast.makeText(getApplicationContext(), "وارد حساب خود نشده اید...!", Toast.LENGTH_LONG).show();
+                   }
+               }
+               if (position == 5) {
+                   Intent i = new Intent(getApplicationContext(), BookMark.class);
+                   startActivity(i);
+               }
+               if (position == 6) {
 
-                    Intent i=new Intent(getApplicationContext(),My_city.class);
-                    startActivity(i);
-                }
-                if (position==9){
+                   Intent i = new Intent(getApplicationContext(), My_city.class);
+                   startActivity(i);
+               }
+               if (position == 8) {
 
-                    Intent i=new Intent(getApplicationContext(),Setting.class);
-                    startActivity(i);
-                }
-            }
-        });
+                   Intent i = new Intent(getApplicationContext(), Setting.class);
+                   startActivity(i);
+               }
+           }
+       });
         drawer.build();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
