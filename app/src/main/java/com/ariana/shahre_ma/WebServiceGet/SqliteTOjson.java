@@ -139,6 +139,47 @@ public class SqliteTOjson {
         return field_Json;
     }
 
+
+    public  String getBusinessTOjson(Integer id,String market,String phone,String mobile,String fax,String email,String businessowner,String address,String description,String startdate,String expirationdate,String inactive,String subset,Integer subsetid,String longitude,String latitude,Integer areaid,String area,String user,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7)
+    {
+        String Result_json="";
+        try{
+            JSONObject jsonobject=new JSONObject();
+            jsonobject.put("Id",id);
+            jsonobject.put("Market",market);
+            jsonobject.put("Phone",phone);
+            jsonobject.put("Mobile",mobile);
+            jsonobject.put("Fax",fax);
+            jsonobject.put("Email",email);
+            jsonobject.put("BusinessOwner",businessowner);
+            jsonobject.put("Address",address);
+            jsonobject.put("Description",description);
+            jsonobject.put("Startdate",startdate);
+            jsonobject.put("ExpirationDate",expirationdate);
+            jsonobject.put("Inactive",inactive);
+            jsonobject.put("Subset",subset);
+            jsonobject.put("SubsetId",subsetid);
+            jsonobject.put("Longitude",longitude);
+            jsonobject.put("Latitude",latitude);
+            jsonobject.put("AreaId",areaid);
+            jsonobject.put("Area",area);
+            jsonobject.put("User",user);
+            jsonobject.put("Field1",field1);
+            jsonobject.put("Field2",field2);
+            jsonobject.put("Field3",field3);
+            jsonobject.put("Field4",field4);
+            jsonobject.put("Field5",field5);
+            jsonobject.put("Field6",field6);
+            jsonobject.put("Field7",field7);
+
+            Result_json=jsonobject.toString();
+        }
+        catch (Exception e)
+        {
+
+        }
+        return Result_json;
+    }
     // convert Interest to json
 
 

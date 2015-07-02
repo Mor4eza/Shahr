@@ -139,7 +139,8 @@
                 android:layout_height="wrap_content"
                 android:hint="زیر گروه"
                 android:id="@+id/ac_subset"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:popupBackground="#ff626262"/>
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
         <com.wrapp.floatlabelededittext.FloatLabeledEditText
@@ -152,7 +153,8 @@
                 android:layout_height="wrap_content"
                 android:hint="زمینه فعالیت"
                 android:id="@+id/ac_field"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:popupBackground="#ff626262"/>
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
         <com.wrapp.floatlabelededittext.FloatLabeledEditText
@@ -164,7 +166,9 @@
                 android:layout_height="wrap_content"
                 android:hint="منطقه"
                 android:id="@+id/ac_area"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:popupBackground="#ff626262"
+                />
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
         <LinearLayout
