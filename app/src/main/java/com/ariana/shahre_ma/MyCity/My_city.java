@@ -1,6 +1,5 @@
 package com.ariana.shahre_ma.MyCity;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -29,7 +28,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
 
 
 
@@ -263,10 +261,9 @@ public class My_city extends ActionBarActivity {
 
         Toast.makeText(getApplicationContext(),"download",Toast.LENGTH_LONG).show();
 
-        Dialog dialog=new Dialog(this);
-        dialog.setContentView(R.layout.download_dialog);
-
+      Download_dialog dialog=new Download_dialog(this);
         dialog.show();
+
     }
 
     public void fab () {

@@ -52,15 +52,15 @@ public class Add_business extends ActionBarActivity {
    }
     void SpinnerSetUp(){
 
-        Spinner Sp_City = (Spinner) findViewById(R.id.sp_city);
-        Sp_City.setPrompt("مدت قرارداد");
+
+        Market_gharar.setPrompt("مدت قرارداد");
         List<String> list = new ArrayList<String>();
         list.add("3");
         list.add("6");
         list.add("9");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Sp_City.setAdapter(dataAdapter);
+        Market_gharar.setAdapter(dataAdapter);
 
     }
     public void save_edit(View v){
