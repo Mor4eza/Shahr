@@ -81,6 +81,17 @@
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:hint="نام کاربری"
+            android:inputType="number"
+            android:id="@+id/edit_username"
+            android:layout_marginTop="15dp"
+            android:height="50dp"
+            android:drawableLeft="@drawable/user"
+            />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:hint="رمز عبور"
             android:layout_marginTop="15dp"
             android:height="40dp"
