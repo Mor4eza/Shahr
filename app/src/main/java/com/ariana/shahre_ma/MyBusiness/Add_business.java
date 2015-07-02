@@ -1,10 +1,17 @@
 package com.ariana.shahre_ma.MyBusiness;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.widget.*;
 import android.view.*;
+
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +36,15 @@ public class Add_business extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_business);
-    Init_Views();
+
+        Initialize_Views();
+        GetAreaName();
+        GetSubSet();
+        GetNameActivity();
 
     }
     
-   void Init_Views(){
+   void Initialize_Views(){
        
        Market_name =(EditText)findViewById(R.id.add_market_name);
        Market_tell =(EditText)findViewById(R.id.add_market_tell);
@@ -65,8 +76,160 @@ public class Add_business extends ActionBarActivity {
     }
     public void save_edit(View v){
 
+        String str="";
+        DataBaseSqlite db=new DataBaseSqlite(this);
+        SqliteTOjson json=new SqliteTOjson(this);
+
+        str=  json.getBusinessTOjson(1,Market_name.getText().toString(),
+                Market_tell.getText().toString(),Market_mobile.getText().toString(),
+                Market_fax.getText().toString(),Market_email.getText().toString(),
+                Market_owner.getText().toString(),Market_address.getText().toString(),
+                Market_desc.getText().toString(),"startdate","expiratdate","true",null,1,
+                "long","lat",1,null,null,0,0,0,0,0,0,0);
+
+        Log.i("JSON",str);
+
+    }
 
 
+    public List<String> getId2() {
+
+        DataBaseSqlite db=new DataBaseSqlite(this);
+        List<String> studentList = new ArrayList<String>();
+        Cursor allrows=db.select_FieldActivity();
+        if (allrows.moveToFirst()) {
+            do {
+
+                studentList.add(allrows.getString(1));
+                Log.i("FieldActivity", String.valueOf(allrows.getInt(0)) + " : " + allrows.getString(1));
+
+
+            } while (allrows.moveToNext());
+        }
+
+        return studentList;
+    }
+
+    public void GetNameActivity()
+    {
+        try {
+
+            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, getId2());
+            Market_field.setAdapter(adapter);
+            Market_field.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+        }
+        catch (Exception e)
+        {
+          Log.e("ExceptionSQL",e.toString());
+        }
+    }
+    public List<String> getId() {
+
+        DataBaseSqlite db=new DataBaseSqlite(this);
+        List<String> studentList = new ArrayList<String>();
+        Cursor allrows  = db.select_AllArea();
+        if (allrows.moveToFirst()) {
+            do {
+
+                studentList.add(allrows.getString(1));
+
+
+            } while (allrows.moveToNext());
+        }
+
+        return studentList;
+    }
+
+    public void GetAreaName()
+    {
+        try {
+
+
+
+            ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getId());
+            Market_zone.setAdapter(adapter);
+
+            //  multiAutoComplete.setAdapter(adapter);
+
+            Market_zone.setThreshold(1);
+        }
+        catch (Exception e)
+        {
+
+        }
+    }
+
+    public List<String> getId1() {
+
+       DataBaseSqlite db=new DataBaseSqlite(this);
+        List<String> studentList = new ArrayList<String>();
+        Cursor allrows  =db.select_Subset();
+        if (allrows.moveToFirst()) {
+            do {
+
+                studentList.add(allrows.getString(1));
+
+
+            } while (allrows.moveToNext());
+        }
+
+        return studentList;
+    }
+
+    public void GetSubSet()
+    {
+        try {
+
+            ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getId1());
+            Market_subset.setAdapter(adapter);
+
+            //  multiAutoComplete.setAdapter(adapter);
+
+            Market_subset.setThreshold(1);
+        }
+        catch (Exception e)
+        {
+
+        }
+    }
+
+    public Integer AreaID(String Name)
+    {
+        Integer Result=0;
+        try {
+
+          DataBaseSqlite db=new DataBaseSqlite(this);
+            Cursor allrows = db.select_AreaId(Name);
+            allrows.moveToFirst();
+            Result = allrows.getInt(0);
+            allrows.close();
+
+        }
+
+        catch (Exception e)
+        {
+            // Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+        }
+        return  Result;
+    }
+
+    public Integer SubsetID(String Name)
+    {
+        Integer Result=0;
+        try {
+
+            DataBaseSqlite db=new DataBaseSqlite(this);
+            Cursor allrows = db.select_SubsetId(Name);
+            allrows.moveToFirst();
+            Result = allrows.getInt(0);
+            allrows.close();
+        }
+
+        catch (Exception e)
+        {
+            // Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+        }
+        return  Result;
     }
 
 }

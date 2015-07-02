@@ -19,9 +19,11 @@ import com.ariana.shahre_ma.MyCity.My_city;
 import com.ariana.shahre_ma.MyProfile.Log_In;
 import com.ariana.shahre_ma.MyProfile.My_Profile;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetAreaJosn;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBookMarkJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetFieldActivityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
@@ -65,7 +67,7 @@ public class MainActivity extends ActionBarActivity {
         }
         else {
 
-
+/*
                 HTTPGetSubsetJson httpsubset = new HTTPGetSubsetJson(this);
                 httpsubset.execute();
 
@@ -78,7 +80,13 @@ public class MainActivity extends ActionBarActivity {
             b.execute();
 
             HTTPGetCityJson httpcity = new HTTPGetCityJson(this);
-            httpcity.execute();
+            httpcity.execute();*/
+
+            HTTPGetFieldActivityJson httpfield=new HTTPGetFieldActivityJson(this);
+            httpfield.execute();
+
+            HTTPGetAreaJosn httparea=new HTTPGetAreaJosn(this);
+            httparea.execute();
         }
 
         ViewPager vpPager = (ViewPager) findViewById(R.id.viewPager);

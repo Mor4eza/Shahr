@@ -30,11 +30,11 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     private static final String TABLE_NAME_Like = "Like";
     private static final String TABLE_NAME_Interest = "Interest";
     private static final String TABLE_NAME_NOTIFICATION="Notification";
+    private static final String TABLE_NAME_FieldActivity="FieldActivity";
 
 
 
-    //Notifaction table
-
+    //Notification Table Columns names
     private static final String ID_Notification="Id";
     private static final String OpinionType_Notification="OpinionType";
     private static final String ErJa_Notification="Erja";
@@ -45,6 +45,11 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     private static final String CityId_Notification="CityId";
     private static final String Subset_Notification="Subset";
     private static final String SubsetId_Notification="SubsetId";
+
+
+    //FieldActivity Table Columns names
+    private static final String ID_FIELDACTIVITY="Id";
+    private static final String ACTIVITY_FIELDACTIVITY="Activity";
 
 
     //UpdateTime Table Columns names
@@ -164,6 +169,12 @@ public class DataBaseSqlite extends SQLiteOpenHelper
             "CityId INTEGER," +
             "Subset TEXT ," +
             "SubsetId INTEGER " +
+            ");";
+
+    // SQL statement to create fieldactivity table
+    private static final String CREATE_TABLE_FieldActivity = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_FieldActivity + " (" +
+            " Id INTEGER PRIMARY KEY ," +
+            " Activity TEXT" +
             ");";
 
     // SQL statement to create city table
@@ -300,6 +311,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.execSQL(CREATE_TABLE_UpdateTime);
         db.execSQL(CREATE_TABLE_Interest);
         db.execSQL(CREATE_TABLE_Notification);
+        db.execSQL(CREATE_TABLE_FieldActivity);
     }
 
     @Override
@@ -316,6 +328,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_UpdateTime);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_Interest);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_NOTIFICATION);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_FieldActivity);
         // create fresh  tables
         this.onCreate(db);
     }
@@ -538,13 +551,14 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.close();
     }
 
-    public void Add_area( String areaname, Integer cityid) {
+    public void Add_area(Integer id ,String areaname, Integer cityid) {
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
+        values.put(ID_area, id);
         values.put(NAME_area, areaname);
         values.put(CITYID_area, cityid);
 
@@ -622,6 +636,26 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.close();
     }
 
+    public void Add_FieldActivity(Integer id,String activity) {
+
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put(ID_FIELDACTIVITY,id);
+        values.put(ACTIVITY_FIELDACTIVITY, activity);
+
+
+        // 3. insert
+        db.insert(TABLE_NAME_FieldActivity, // table
+                null, //nullColumnHack
+                values); // key/value
+
+        // 4. close
+        db.close();
+    }
+
     /**
      * SelectBusiness
      * @param
@@ -691,6 +725,14 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT Market FROM " + TABLE_NAME_BUSINESS + "  WHERE Id=" +businessID , null);
+
+    }
+
+    public Cursor select_FieldActivity()
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + TABLE_NAME_FieldActivity , null);
 
     }
 
@@ -810,6 +852,18 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     {
         SQLiteDatabase db=this.getReadableDatabase();
         return db.rawQuery("SELECT COUNT(*) FROM "+TABLE_NAME_COLLECTION,null);
+    }
+
+    public  Cursor select_AllArea()
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM "+TABLE_NAME_Area,null);
+    }
+
+    public  Cursor select_AreaId(String name)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return db.rawQuery("SELECT Id FROM "+TABLE_NAME_Area+" WHERE AreaName='"+name+"'",null);
     }
 
     public  Cursor select_CountSubset()
