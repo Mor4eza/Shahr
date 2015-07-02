@@ -1,8 +1,22 @@
-<resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="MaterialDrawerTheme.Light.DarkToolbar.ActionBar">
-        <!-- Customize your theme here. -->
+   <!-- <style name="AppTheme" parent="">
+        &lt;!&ndash; Customize your theme here. &ndash;&gt;
+        &lt;!&ndash; MaterialDrawerTheme.Light.DarkToolbar.ActionBar &ndash;&gt;
     </style>
+-->
+    <resources>
 
-</resources>
+        <style name="AppTheme" parent="Theme.AppCompat.Light">
+            <item name="actionBarStyle">@style/ActionBarTheme</item>
+            <item name="android:colorPrimaryDark">@color/material_blue_dark</item>
+            <item name="android:navigationBarColor">@color/material_blue_nav</item>
+            <item name="android:textColorPrimary">@color/material_text_primary</item>
+            <item name="android:editTextColor">@android:color/black</item>
+        </style>
+
+        <style name="ActionBarTheme" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
+            <item name="background">@color/material_blue</item>
+        </style>
+
+    </resources>

@@ -14,7 +14,10 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.MyBusiness.My_Business;
 import com.ariana.shahre_ma.MyCity.My_city;
+import com.ariana.shahre_ma.MyProfile.Log_In;
+import com.ariana.shahre_ma.MyProfile.My_Profile;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBookMarkJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
@@ -42,7 +45,7 @@ public class MainActivity extends ActionBarActivity {
     FragmentPagerAdapter adapterViewPager;
     SliderLayout slider;
     DragTopLayout top;
-
+    ActionButton Action;
     Query query=new Query(this);
     private static final int PROFILE_SETTING = 1;
     private AccountHeader.Result headerResult = null;
@@ -78,14 +81,27 @@ public class MainActivity extends ActionBarActivity {
             httpcity.execute();
         }
 
-
         ViewPager vpPager = (ViewPager) findViewById(R.id.viewPager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
+        fab();
+        try {
+            DataBaseSqlite db = new DataBaseSqlite(this);
+            Cursor allrows = db.select_Member();
+            allrows.moveToNext();
+         if(allrows.getString(6).equals(null)){
+            Action.show();
+         }else{
+             Action.dismiss();
+         }
+
+
+        } catch (Exception e) {
+        }
 
         Image_slider();
         navigation();
-        fab();
+
     }
 
     public void fab_click(View v){
@@ -96,7 +112,7 @@ public class MainActivity extends ActionBarActivity {
     public void fab (){
 
 
-        ActionButton Action = (ActionButton)findViewById(R.id.action_button);
+        Action = (ActionButton)findViewById(R.id.action_button);
         Action.setButtonColor(getResources().getColor(R.color.fab_material_blue_500));
         Action.setImageDrawable(getResources().getDrawable(R.drawable.fab_plus_icon));
 
@@ -252,7 +268,7 @@ public class MainActivity extends ActionBarActivity {
         drawer.addDrawerItems(
                 new PrimaryDrawerItem().withName(R.string.Works).withIcon(FontAwesome.Icon.faw_money),
                 new PrimaryDrawerItem().withName(R.string.Off).withIcon(FontAwesome.Icon.faw_coffee),
-                new PrimaryDrawerItem().withName(R.string.Near).withIcon(FontAwesome.Icon.faw_map_marker),
+                new PrimaryDrawerItem().withName(R.string.My_business).withIcon(FontAwesome.Icon.faw_briefcase),
 
                 new SectionDrawerItem().withName(R.string.My_city),
                 new SecondaryDrawerItem().withName(R.string.My_Account).withIcon(FontAwesome.Icon.faw_user),
@@ -267,7 +283,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
                 if (drawerItem instanceof Nameable) {
-                    Toast.makeText(MainActivity.this, MainActivity.this.getString(((Nameable) drawerItem).getNameRes()), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MainActivity.this, MainActivity.this.getString(((Nameable) drawerItem).getNameRes()), Toast.LENGTH_SHORT).show();
 
 
                 }
@@ -276,6 +292,29 @@ public class MainActivity extends ActionBarActivity {
                     Intent i=new Intent(getApplicationContext(),Jobs.class);
                     startActivity(i);
 
+                }
+                if(position==3)
+                {
+                    Intent i =new Intent(getApplicationContext(), My_Business.class);
+                    startActivity(i);
+
+
+                }
+                if (position==5){
+
+                    try {
+                        DataBaseSqlite db = new DataBaseSqlite(MainActivity.this);
+                        Cursor cursor = db.select_Member();
+                        cursor.moveToNext();
+                        if (cursor.getString(6).equals(null)) {
+
+                        } else {
+                            Intent i = new Intent(getApplicationContext(), My_Profile.class);
+                            startActivity(i);
+                        }
+                    }catch (Exception e){
+                        Toast.makeText(getApplicationContext(), "وارد حساب خود نشده اید...!", Toast.LENGTH_LONG).show();
+                    }
                 }
                 if (position==6) {
                     Intent i = new Intent(getApplicationContext(), BookMark.class);

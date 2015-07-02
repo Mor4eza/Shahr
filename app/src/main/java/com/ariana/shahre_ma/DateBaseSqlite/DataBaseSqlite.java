@@ -306,10 +306,10 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older  tables if existed
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME_SUBSET);
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME_COLLECTION);
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME_MEMBER);
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME_OPINION);
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME_BUSINESS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_COLLECTION);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_MEMBER);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_OPINION);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_BUSINESS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_City);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_Bookmark);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_Area);
@@ -838,12 +838,26 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.close();
     }
 
+    /**
+     * delete table member
+     */
+    public void delete_Member()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE  FROM "+ TABLE_NAME_MEMBER);
+        db.close();
 
+    }
 
+    /**
+     * delete record Notification table
+     * @param erja
+     */
     public void delete_Notification(Integer erja)
     {
         SQLiteDatabase db=this.getWritableDatabase();
         db.execSQL("DELETE FROM "+TABLE_NAME_NOTIFICATION+" WHERE ErJa="+erja,null);
+        db.close();
     }
 
 

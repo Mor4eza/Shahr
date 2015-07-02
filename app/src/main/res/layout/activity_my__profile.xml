@@ -1,0 +1,219 @@
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.ariana.shahre_ma.MyProfile.My_Profile">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar1"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center_horizontal"
+        android:background="?attr/colorPrimary">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="100dp"
+            >
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:id="@+id/spinner_city"
+                android:left="@+id/textView2"
+                android:gravity="end"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/textView2"
+                android:layout_toStartOf="@+id/textView2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="انتخاب شهر پیشفرض:"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="40dp"
+                android:id="@+id/textView2"
+                android:gravity="right"
+                />
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+ <ScrollView
+     android:layout_width="fill_parent"
+     android:layout_height="fill_parent"
+     android:layout_below="@+id/toolbar1"
+     android:id="@+id/scrollView">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbar1"
+        android:id="@+id/linearLayout2">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:paddingTop="25dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="158dp"
+                android:id="@+id/tv_user_name"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingRight="0dp"
+                android:text="نام کاربری"
+                android:gravity="right" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/user"
+                android:paddingLeft="30dp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:paddingTop="25dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_user_email"
+                android:layout_width="154dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingRight="0dp"
+                android:text="ایمیل"
+                android:gravity="right" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/email"
+                android:paddingLeft="30dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:paddingTop="25dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="156dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:id="@+id/tv_user_phone"
+                android:paddingRight="0dp"
+                android:text="تلفن"
+                android:gravity="right" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/phone"
+                android:paddingLeft="30dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:paddingTop="25dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="162dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:id="@+id/tv_user_sex"
+                android:paddingRight="0dp"
+                android:text="جنسیت"
+                android:gravity="right" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/sex"
+                android:paddingLeft="30dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:paddingTop="25dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="171dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:id="@+id/tv_user_age"
+                android:paddingRight="0dp"
+                android:text="سن"
+                android:gravity="right" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/age"
+                android:paddingLeft="30dp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:layout_gravity="right"
+            android:paddingTop="50dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+
+                android:text="ویرایش"
+                android:background="@color/fab_material_light_blue_500"
+                android:id="@+id/user_edit"
+                android:layout_gravity="center_horizontal"
+                android:onClick="edit" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:layout_gravity="right"
+            android:paddingTop="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+
+                android:text="خروج کاربر"
+                android:background="@color/fab_material_deep_orange_500"
+                android:id="@+id/log_out"
+                android:onClick="Log_Out"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+    </LinearLayout>
+ </ScrollView>
+
+
+
+</RelativeLayout>

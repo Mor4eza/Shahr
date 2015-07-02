@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.MyCity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -28,6 +29,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+
 
 
 public class My_city extends ActionBarActivity {
@@ -238,7 +241,7 @@ public class My_city extends ActionBarActivity {
 
     public void download(View v){
         // download multiple Business
-        Integer Result = 0;
+       Integer Result = 0;
         Integer i=0;
         DataBaseSqlite db=new DataBaseSqlite(this);
         List<String> listurl=new ArrayList<String>();
@@ -250,24 +253,25 @@ public class My_city extends ActionBarActivity {
             Result=cursor.getInt(0);
             url[i]="http://test.shahrma.com/api/ApiGiveBusiness?subsetId="+Result+"&cityid=68";
             listurl.add("http://test.shahrma.com/api/ApiGiveBusiness?subsetId=" + Result + "&cityid=68");
-            Log.i("", "http://test.shahrma.com/api/ApiGiveBusiness?subsetId="+Result+"&cityid=68");
+            Log.i("", "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=" + Result + "&cityid=68");
             i++;
         }
 
         HTTPGetBusinessJsonArray business=new HTTPGetBusinessJsonArray(this);
         business.execute(url);
+
+
         Toast.makeText(getApplicationContext(),"download",Toast.LENGTH_LONG).show();
+
+        Dialog dialog=new Dialog(this);
+        dialog.setContentView(R.layout.download_dialog);
+
+        dialog.show();
     }
 
-    public void fab (){
-
-
+    public void fab () {
         ActionButton Action = (ActionButton) findViewById(R.id.download_fab);
         Action.setButtonColor(getResources().getColor(R.color.fab_material_blue_500));
         Action.setImageDrawable(getResources().getDrawable(R.drawable.download));
-
-
-
     }
-
 }

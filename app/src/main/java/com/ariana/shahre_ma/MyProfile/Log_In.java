@@ -1,4 +1,4 @@
-package com.ariana.shahre_ma;
+package com.ariana.shahre_ma.MyProfile;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.MainActivity;
+import com.ariana.shahre_ma.R;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -54,6 +56,7 @@ public class Log_In extends ActionBarActivity {
             allrows.moveToNext();
             username.setText(allrows.getString(6));
             password.setText(allrows.getString(7));
+
         } catch (Exception e) {
         }
     }
@@ -199,7 +202,7 @@ public class Log_In extends ActionBarActivity {
 
                 if (ID >= 0) {
                     dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
-
+                    Log_In.this.finish();
                     Intent i=new Intent(getApplicationContext(),MainActivity.class);
                     startActivity(i);
 
