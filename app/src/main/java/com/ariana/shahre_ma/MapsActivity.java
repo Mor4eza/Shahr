@@ -129,8 +129,6 @@ public class MapsActivity extends ActionBarActivity {
                 do {
                     Log.i("Latitude", allrows.getString(15));
 
-
-
                         Market[l] = allrows.getString(1);
                         Latitude[l] = allrows.getString(15);
                         Longtitude[l] = allrows.getString(16);
