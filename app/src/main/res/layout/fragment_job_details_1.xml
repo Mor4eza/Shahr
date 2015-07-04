@@ -60,57 +60,174 @@
             android:secondaryProgressTint="#ffff3013"
             android:secondaryProgressTintMode="multiply"
             />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:orientation="horizontal"
+            android:paddingTop="30dp"
+            >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="تلفن:"
+            android:text=""
             android:id="@+id/market_tel"
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
-        <TextView
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" تلفن: "
+                android:layout_gravity="end"
+                android:layout_marginBottom="20dp"/>
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:orientation="horizontal"
+        >
+
+    <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/market_web"
-            android:text="وب سایت:"
+            android:text=""
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="صاحب فروشگاه:"
-            android:id="@+id/market_owner"
+
+            android:text=" وب سایت:  "
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:orientation="horizontal"
+        >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/market_owner"
+        android:layout_gravity="end"
+        android:layout_marginBottom="20dp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="زیر مجموعه:"
+            android:text=" صاحب فروشگاه:  "
+
+            android:layout_gravity="end"
+            android:layout_marginBottom="20dp"/>
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:orientation="horizontal"
+        >
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
             android:id="@+id/market_subset"
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
+
+
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" زیر مجموعه:  "
+            android:layout_gravity="end"
+            android:layout_marginBottom="20dp"/>
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:orientation="horizontal"
+        >
+
+    <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/market_zamine"
-            android:text="زمینه کاری:"
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="آدرس:"
+            android:text=" زمینه کاری:  "
+            android:layout_gravity="end"
+            android:layout_marginBottom="20dp"/>
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:orientation="horizontal"
+        >
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
             android:id="@+id/market_address"
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="توضیحات:"
+            android:text=" آدرس:  "
+            android:layout_gravity="end"
+            android:layout_marginBottom="20dp"/>
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:orientation="horizontal"
+        >
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
             android:id="@+id/market_desc"
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" توضیحات:  "
+            android:layout_gravity="end"
+            android:layout_marginBottom="20dp"/>
+
+        </LinearLayout>
 
 
         </LinearLayout>

@@ -51,10 +51,9 @@ Query query;
         query=new Query(this.context);
 
             Comment_Card_items nature = new Comment_Card_items();
-            nature.setmUser("مرتضی");
-            nature.setmDate("111");
-            nature.setmComm("11");
-
+            nature.setmUser("");
+            nature.setmDate("");
+            nature.setmComm("  بدون نظر "  + "\n" +"اولین نظر را شما بفرستید");
             mItems.add(nature);
 
 

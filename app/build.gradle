@@ -53,5 +53,6 @@ dependencies {
     compile 'com.github.citux:datetimepicker:0.1.2'              // date & time picker
     compile 'com.android.support:design:22.2.0'                  //adnroid design
     compile 'com.wrapp.floatlabelededittext:library:0.0.6'       //floatable hints
-    compile 'com.github.panwrona:DownloadProgressBar:1.1'        //download progressbar
+    compile 'com.github.panwrona:DownloadProgressBar:1.1'        //Download progressbar
+    compile 'com.github.quentin7b:android-location-tracker:2.2' //Location Tracker
 }

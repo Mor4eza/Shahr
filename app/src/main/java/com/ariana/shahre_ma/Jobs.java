@@ -42,7 +42,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
     Integer count = 0;
     String time="";
     String date="";
-    public SwipeRefreshLayout mSwipeRefreshLayout = null;
+    public static SwipeRefreshLayout mSwipeRefreshLayout = null;
     Query query;
     List<String> groupList;
     List<String> childList;
@@ -106,28 +106,15 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                //Refreshing data on server
-                //  Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_LONG).show();
-                mSwipeRefreshLayout.setRefreshing(false);
+                mSwipeRefreshLayout.setEnabled(false);
                 HTTPGetCollectionJson http = new HTTPGetCollectionJson(Jobs.this);
                 http.execute();
 
-            /*    new CountDownTimer(5000, 1000) {
 
-                    public void onTick(long millisUntilFinished) {
-
-                    }
-
-                    public void onFinish() {
-                      mSwipeRefreshLayout.setRefreshing(false);
-                    }
-                }.start();
-
-
-*/
             }
         });
 

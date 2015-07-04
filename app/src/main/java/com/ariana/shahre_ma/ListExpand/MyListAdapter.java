@@ -64,6 +64,7 @@ public class MyListAdapter extends BaseExpandableListAdapter {
         name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                HTTPGetBusinessJson httpbusin;
                 httpbusin =new HTTPGetBusinessJson(context);
                 NetState ns=new NetState(context);
@@ -72,10 +73,14 @@ public class MyListAdapter extends BaseExpandableListAdapter {
                 fc.SetSelected_job(country.getName());
                 count = query.getCountBusiness(query.getsubsetID(country.getName()));
                 fc.SetSubsetId(query.getsubsetID(country.getName()));
+
                 if (ns.checkInternetConnection() == false) {
+                    fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
                     Intent i = new Intent(context, Jobs_List.class);
                    context.startActivity(i);
-                } else {
+                }
+                else
+                {
                     if (count > 0) {
                         fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
                         Intent i = new Intent(context, Jobs_List.class);
