@@ -180,7 +180,6 @@ public class Sign_Up extends ActionBarActivity {
             ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,getId());
             et2.setAdapter(adapter);
 
-            //  multiAutoComplete.setAdapter(adapter);
 
             et2.setThreshold(1);
         }

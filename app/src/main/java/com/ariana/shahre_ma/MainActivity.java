@@ -21,6 +21,7 @@ import com.ariana.shahre_ma.MyProfile.My_Profile;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetAreaJosn;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBookMarkJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessMemberJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetFieldActivityJson;
@@ -67,8 +68,8 @@ public class MainActivity extends ActionBarActivity {
         }
         else {
 
-
-      /*          HTTPGetSubsetJson httpsubset = new HTTPGetSubsetJson(this);
+/*
+               HTTPGetSubsetJson httpsubset = new HTTPGetSubsetJson(this);
                 httpsubset.execute();
 
                 HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
@@ -302,8 +303,12 @@ public class MainActivity extends ActionBarActivity {
 
                }
                if (position == 2) {
-                   Intent i = new Intent(getApplicationContext(), My_Business.class);
-                   startActivity(i);
+
+                   HTTPGetBusinessMemberJson httpbusinmember=new HTTPGetBusinessMemberJson(MainActivity.this);
+                   httpbusinmember.SetUrl_businessMember(query.getMemberId());
+                   httpbusinmember.execute();
+
+
 
 
                }
