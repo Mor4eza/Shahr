@@ -54,6 +54,17 @@ public class MapsActivity extends ActionBarActivity {
 
                 } while (allrows.moveToNext());
             }
+
+        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLng) {
+
+                Toast.makeText(getApplicationContext(),latLng.toString(),Toast.LENGTH_LONG).show();
+                Marker  marker = mMap.addMarker(new MarkerOptions().position(latLng).title("\u200e"+"اینجا"));
+
+            }
+        });
+
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(lat[0]),Double.parseDouble(Longt[0])), 12.0f), 2000, null);
 
 

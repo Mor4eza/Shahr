@@ -3,11 +3,16 @@ package com.ariana.shahre_ma.WebServiceGet;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Jobs;
+import com.ariana.shahre_ma.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,10 +53,10 @@ public class HTTPGetCollectionJson extends AsyncTask<String, String, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pd = new ProgressDialog(context);
+        /*    pd = new ProgressDialog(context);
             pd.setMessage("در حال بروزرسانی...");
             pd.setCancelable(false);
-            pd.show();
+            pd.show();*/
         }
 
     /**
@@ -90,7 +95,16 @@ public class HTTPGetCollectionJson extends AsyncTask<String, String, String> {
                 dbs.Add_collection(Id[i],collectionname[i]);
 
             }
-            pd.dismiss();
+            //pd.dismiss();
+
+            Jobs.mSwipeRefreshLayout.post(new Runnable() {
+                @Override
+                public void run() {
+                    Jobs.mSwipeRefreshLayout.setEnabled(true);
+                    Jobs.mSwipeRefreshLayout.setRefreshing(false);
+
+                }
+            });
 
         } catch (Exception e) {
             Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
