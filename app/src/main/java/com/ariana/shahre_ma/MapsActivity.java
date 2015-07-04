@@ -2,6 +2,7 @@ package com.ariana.shahre_ma;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -17,6 +18,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import fr.quentinklein.slt.LocationTracker;
+import fr.quentinklein.slt.TrackerSettings;
 
 public class MapsActivity extends ActionBarActivity {
 
@@ -55,17 +59,53 @@ public class MapsActivity extends ActionBarActivity {
                 } while (allrows.moveToNext());
             }
 
+        TrackerSettings settings =
+                new TrackerSettings()
+                        .setUseGPS(true)
+                        .setUseNetwork(true)
+                        .setTimeout(20000)
+                        .setUsePassive(true);
+
+        new LocationTracker(MapsActivity.this, settings) {
+
+            @Override
+            public void onLocationFound(Location location) {
+                // Do some stuff when a new GPS Location has been found
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()),15f));
+                stopListen();
+            }
+
+            @Override
+            public void onTimeout() {
+                Toast.makeText(getApplicationContext(),"مکان شما شناسایی نشد...!",Toast.LENGTH_LONG).show();
+            }
+        };
+
+        mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+            @Override
+            public void onMarkerDragStart(Marker marker) {
+
+            }
+
+            @Override
+            public void onMarkerDrag(Marker marker) {
+
+            }
+
+            @Override
+            public void onMarkerDragEnd(Marker marker) {
+        Toast.makeText(getApplicationContext(),String.valueOf(marker.getPosition().latitude), Toast.LENGTH_LONG).show();
+            }
+        });
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
             public void onMapLongClick(LatLng latLng) {
-
-                Toast.makeText(getApplicationContext(),latLng.toString(),Toast.LENGTH_LONG).show();
                 Marker  marker = mMap.addMarker(new MarkerOptions().position(latLng).title("\u200e"+"اینجا"));
-
+                marker.setDraggable(true);
             }
         });
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(lat[0]),Double.parseDouble(Longt[0])), 12.0f), 2000, null);
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(lat[0]), Double.parseDouble(Longt[0])), 12.0f), 2000, null);
 
 
          mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
