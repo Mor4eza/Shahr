@@ -67,8 +67,8 @@ public class MainActivity extends ActionBarActivity {
         }
         else {
 
-/*
-                HTTPGetSubsetJson httpsubset = new HTTPGetSubsetJson(this);
+
+      /*          HTTPGetSubsetJson httpsubset = new HTTPGetSubsetJson(this);
                 httpsubset.execute();
 
                 HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
@@ -80,13 +80,13 @@ public class MainActivity extends ActionBarActivity {
             b.execute();
 
             HTTPGetCityJson httpcity = new HTTPGetCityJson(this);
-            httpcity.execute();*/
+            httpcity.execute();
 
             HTTPGetFieldActivityJson httpfield=new HTTPGetFieldActivityJson(this);
             httpfield.execute();
 
             HTTPGetAreaJosn httparea=new HTTPGetAreaJosn(this);
-            httparea.execute();
+            httparea.execute();*/
         }
 
         ViewPager vpPager = (ViewPager) findViewById(R.id.viewPager);
