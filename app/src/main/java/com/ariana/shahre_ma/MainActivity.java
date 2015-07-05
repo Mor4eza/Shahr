@@ -262,6 +262,7 @@ public class MainActivity extends ActionBarActivity {
                 .withSelectionListEnabledForSingleProfile(false)
                 .withHeightDp(150)
                 .withTranslucentStatusBar(true)
+
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
 
 
@@ -276,16 +277,16 @@ public class MainActivity extends ActionBarActivity {
         ////////////////////////
         result = new DrawerBuilder()
         .withActivity(this)
-       .withTranslucentStatusBar(false)
-      .withHeaderDivider(true)
+        .withTranslucentStatusBar(false)
+        .withHeaderDivider(true)
         .withDisplayBelowToolbar(false)
-        .withActionBarDrawerToggleAnimated(false)
+        .withActionBarDrawerToggleAnimated(true)
         .withAccountHeader(headerResult)
+        .withAnimateDrawerItems(true)
         .addDrawerItems(
                 new PrimaryDrawerItem().withName(R.string.Works).withIcon(FontAwesome.Icon.faw_money),
                 new PrimaryDrawerItem().withName(R.string.Off).withIcon(FontAwesome.Icon.faw_coffee),
                 new PrimaryDrawerItem().withName(R.string.My_business).withIcon(FontAwesome.Icon.faw_briefcase),
-
                 new SectionDrawerItem().withName(R.string.My_city),
                 new SecondaryDrawerItem().withName(R.string.My_Account).withIcon(FontAwesome.Icon.faw_user),
                 new SecondaryDrawerItem().withName(R.string.My_Fav).withIcon(FontAwesome.Icon.faw_bookmark),
@@ -354,7 +355,7 @@ public class MainActivity extends ActionBarActivity {
            }
        }).build();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(false);
 
     }
 
