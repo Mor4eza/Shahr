@@ -2,14 +2,13 @@ package com.ariana.shahre_ma.WebServicePost;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
-
 import com.ariana.shahre_ma.Fields.FieldClass;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetOpinionJson;
+import com.ariana.shahre_ma.MyProfile.Log_In;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -26,32 +25,31 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
- * Created by ariana2 on 6/6/2015.
+ * Created by ariana on 7/5/2015.
  */
-public class HTTPPostOpinionJson extends AsyncTask<String, Void, Integer>
+public class HTTPPostMemberEditJson extends AsyncTask<String, Long, Object>
 {
-    private static  final  String url_Opinion="http://test.shahrma.com/api/ApiTakeOpinion";
 
+    private static  final  String url_Member="http://test.shahrma.com/api/ApiUpdateMembers";
 
+    private ProgressDialog mProgressDialog;
     // variable get json
     private static String data_json;
     // variable response
     private  static String response_message;
-
-
     FieldClass fc=new FieldClass();
     private ProgressDialog dialog;
 
     // get/set
 
-    // Set json opinion
-    public void  SetOpinion_Json(String json_member)
+    // Set json Member
+    public void  SetMember_Json(String json_member)
     {
         data_json=json_member;
     }
 
-    // Get Josn opinion
-    public String GetOpinion_json()
+    // Get Josn Member
+    public String GetMember_json()
     {
         return data_json;
     }
@@ -69,31 +67,32 @@ public class HTTPPostOpinionJson extends AsyncTask<String, Void, Integer>
     }
 
     private static Context context;
-    public HTTPPostOpinionJson(Context c) {
+    public HTTPPostMemberEditJson(Context c) {
         context = c;
     }
 
 
-    protected void onPostExecute(String file_url) {
+    protected void onPostExecute_start() {
         try {
-
-            this.dialog.setMessage("صبر کنید ...");
-            this.dialog.show();
+            super.onPreExecute();
+            mProgressDialog = new ProgressDialog(context);
+            mProgressDialog.setMessage("...در حال ساخت کاربر جدید");
+            mProgressDialog.setCancelable(false);
+            mProgressDialog.show();
 
         } catch (Exception e) {
         }
     }
 
     @Override
-    protected Integer doInBackground(String... params) {
-        Integer s=0;
+    protected String doInBackground(String... params) {
         try {
 
-            //onPostExecute();
-            JSONObject json = new JSONObject(GetOpinion_json()); //your array;
+            onPostExecute_start();
+            JSONObject json = new JSONObject(GetMember_json()); //your array;
             HttpClient httpClient = new DefaultHttpClient();
             HttpContext httpContext = new BasicHttpContext();
-            HttpPost httpPost = new HttpPost(url_Opinion);
+            HttpPost httpPost = new HttpPost(url_Member);
 
             StringEntity se = new StringEntity(json.toString(),"UTF-8");
 
@@ -113,47 +112,44 @@ public class HTTPPostOpinionJson extends AsyncTask<String, Void, Integer>
                 BufferedReader reader = new BufferedReader(new InputStreamReader(webs, "UTF-8"), 8);
                 response_message = (reader.readLine());
                 webs.close();
-                s=1;
             } catch (Exception e) {
                 Log.e("Error in conversion: ", e.toString());
             }
 
             //SetResponse(json_String);
-
+            onPostExecute();
         } catch (Exception e) {
             e.printStackTrace();
-            s=0;
             // Toast.makeText(, e.toString(), Toast.LENGTH_LONG).show();
         }
-
+        String s="1";
         return s;
     }
 
-    @Override
-    protected void onPostExecute(Integer result) {
+    protected void onPostExecute() {
             /* Download complete. Lets update UI */
 
-        if(result==1) {
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
-            Integer ID = Integer.parseInt(GetResponse());
-            if (ID >= 0) {
-                dbs.Add_opinion(ID, fc.GetOpinion_Description(), fc.GetOpinion_Date(), fc.GetOpinion_Erja(), fc.GetOpinion_CountLike(), fc.GetOpinion_CountDisLike(), fc.GetOpinion_MemberName());
-
-
-                    HTTPGetOpinionJson httponion = new HTTPGetOpinionJson(context);
-                    httponion.seturl_opinion(fc.GetBusiness_Id());
-                    httponion.execute();
-
-
-
-            } else {
-                Toast.makeText(context, "کاربر ساخته نشد دوباره امتحان کنید", Toast.LENGTH_LONG).show();
-            }
+        Log.i("onPostExecute","onPostExecute");
+        DataBaseSqlite dbs = new DataBaseSqlite(context);
+        Integer ID = Integer.parseInt(GetResponse());
+        if (ID >= 0) {
+            Log.i("fc.GetMember_Name()",fc.GetMember_Name());
+            dbs.delete_Member();
+            dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
+            mProgressDialog.dismiss();
+            Intent i = new Intent(this.context, Log_In.class);
+            this.context.startActivity(i);
+            // Toast.makeText(context, "کاربر ثبت شد!", Toast.LENGTH_LONG).show();
         }
         else
         {
-
+            //  Toast.makeText(context, "کاربر ساخته نشد دوباره امتحان کنید", Toast.LENGTH_LONG).show();
         }
 
+
+
+
+
     }
+
 }

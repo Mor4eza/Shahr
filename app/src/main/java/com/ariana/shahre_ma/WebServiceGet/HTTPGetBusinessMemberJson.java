@@ -12,6 +12,7 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Jobs_List;
+import com.ariana.shahre_ma.MyBusiness.My_Business;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +27,7 @@ import java.net.URL;
 /**
  * Created by ariana2 on 6/6/2015.
  */
-public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
+public class HTTPGetBusinessMemberJson extends AsyncTask<String, String, String>
 {
 
     private static Context context;
@@ -71,12 +72,12 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
     /**
      *
-     * @param SubsetID
+     * @param member
      */
-    public   void SetUrl_business(Integer SubsetID)
+    public   void SetUrl_businessMember(Integer member)
     {
 
-        url_Business="http://test.shahrma.com/api/ApiGiveBusiness?subsetId="+SubsetID+"&cityid=68";
+        url_Business="http://test.shahrma.com/api/ApiGiveMemberBusiness?memberId="+member;
         Log.i("url_Business",url_Business);
 
     }
@@ -94,7 +95,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
      *
      * @param c
      */
-    public HTTPGetBusinessJson(Context c) {
+    public HTTPGetBusinessMemberJson(Context c) {
         context = c;
     }
 
@@ -106,10 +107,10 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
     protected String doInBackground(String... args) {
         try {
 
-                InputStream jsonStream = getStreamFromURL(GetUrl_business(), "GET");
-                String jsonString = streamToString(jsonStream);
-                parseJSON(jsonString);
-                onPostExecute();
+            InputStream jsonStream = getStreamFromURL(GetUrl_business(), "GET");
+            String jsonString = streamToString(jsonStream);
+            parseJSON(jsonString);
+            onPostExecute();
 
 
         } catch (Exception e) {
@@ -127,11 +128,11 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
         try {
 
             Integer count=0;
-          //  Toast.makeText(context,market[0], Toast.LENGTH_LONG).show();
+            //  Toast.makeText(context,market[0], Toast.LENGTH_LONG).show();
             DataBaseSqlite dbs = new DataBaseSqlite(context);
 
 
-          //  dbs.delete_Business();
+            //  dbs.delete_Business();
             for (int i = 0; i <len; i++)
             {
                 Cursor rows=dbs.select_CountBusinessId(Id[i]);
@@ -141,20 +142,18 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
                 Log.i("ID", String.valueOf(Id[i]));
                 Log.i("count",String.valueOf(count));
                 if(count==0)
-                dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
+                    dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
 
             }
 
             if(len==0) {
-              //  Toast.makeText(get, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
+                //  Toast.makeText(get, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
                 Log.i("Count Business : ","فروشگاه ثبت نشد");
 
             }
             else {
 
-               query=new Query(context);
-                fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
-                Intent i = new Intent(this.context, Jobs_List.class);
+                Intent i = new Intent(this.context, My_Business.class);
                 this.context.startActivity(i);
                 Log.i("Count Business : ","دریافت ثبت شده ها");
             }
@@ -172,6 +171,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
         try {
 
+            Log.i("json",JSONString);
             JSONArray areas = new JSONArray(JSONString);
 
             Id=new Integer[areas.length()];
@@ -224,6 +224,9 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
                 field5[i]=area.getInt("Field5");
                 field6[i] = area.getInt("Field6");
                 field7[i] = area.getInt("Field7");
+
+                fc.SetBusiness_Id(area.getInt("Id"));
+
                 Id[i]=area.getInt("Id");
                 inactive[i]=area.getString("Inactive");
                 latitude[i]=area.getString("Latitude");

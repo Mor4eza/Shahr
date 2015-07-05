@@ -84,7 +84,7 @@ query=new Query(getActivity());
                     else
                     {
                             try {
-                                _json = (json.getOpinionTOjson(txtComm.getText().toString(), ct.getIranianDate(),62,186));
+                                _json = (json.getOpinionTOjson(txtComm.getText().toString(), ct.getIranianDate(),query.getMemberId(),fc.GetBusiness_Id()));
                                 fc.SetOpinion_Description(txtComm.getText().toString());
                                 fc.SetOpinion_Date(ct.getIranianDate().toString());
                                 fc.SetOpinion_MemberName("");
@@ -110,24 +110,13 @@ query=new Query(getActivity());
 
                 Comment_adapter = new Comment_Card_Adapter(getActivity());
                 mRecyclerView.setAdapter(Comment_adapter);
+               Comment_adapter.notifyDataSetChanged();
             } catch (Exception e) {
             }
 
 
             return rootView;
         }
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
 }

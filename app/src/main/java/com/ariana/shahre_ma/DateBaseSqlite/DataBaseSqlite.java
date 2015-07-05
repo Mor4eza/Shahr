@@ -737,10 +737,14 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     public Cursor select_FieldActivityId(String fieldname)
     {
-
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT Id FROM " + TABLE_NAME_FieldActivity+" WHERE Activity='"+fieldname+"'" , null);
+    }
 
+    public Cursor select_FieldActivityName(Integer id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT Activity FROM " + TABLE_NAME_FieldActivity+" WHERE Id="+id , null);
     }
 
     public Cursor SearchBusiness(String nameMarket,Integer subsetId)
@@ -760,6 +764,14 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT Id FROM " + TABLE_NAME_SUBSET + "  WHERE SubsetName='" + subsetname+"'", null);
+
+    }
+
+    public Cursor select_SubsetName(Integer id)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT SubsetName FROM " + TABLE_NAME_SUBSET + "  WHERE id=" +id, null);
 
     }
 
@@ -871,6 +883,12 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     {
         SQLiteDatabase db=this.getReadableDatabase();
         return db.rawQuery("SELECT Id FROM "+TABLE_NAME_Area+" WHERE AreaName='"+name+"'",null);
+    }
+
+    public  Cursor select_AreaName(Integer id)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return db.rawQuery("SELECT AreaName FROM "+TABLE_NAME_Area+" WHERE id="+id,null);
     }
 
     public  Cursor select_CountSubset()

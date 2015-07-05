@@ -10,6 +10,7 @@ public class Comment_Card_items {
     private String mUser;
     private String mDate;
     private String mComm;
+    private Integer tag;
     int mlike;
     int mdisslike;
 
@@ -52,6 +53,17 @@ public class Comment_Card_items {
     public void setmdisslike(int disslike) {
         this.mdisslike = disslike;
     }
+
+    public Integer gettag() {
+        return tag;
+    }
+
+    public void settag(Integer tag) {
+        this.tag = tag;
+    }
+
+
+
 }
 
 

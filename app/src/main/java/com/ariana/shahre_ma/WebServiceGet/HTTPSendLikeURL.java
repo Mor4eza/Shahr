@@ -22,7 +22,7 @@ import java.io.InputStreamReader;
 /**
  * Created by ariana on 6/15/2015.
  */
-public class HTTPSendLikeURL extends AsyncTask<String, Void, Boolean> {
+public class  HTTPSendLikeURL extends AsyncTask<String, Void, Boolean> {
 
     private String[] blogTitles;
     private static final String TAG = "Http Connection";

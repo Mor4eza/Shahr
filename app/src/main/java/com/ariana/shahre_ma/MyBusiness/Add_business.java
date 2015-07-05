@@ -14,8 +14,12 @@ import android.view.*;
 
 import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
+import com.ariana.shahre_ma.WebServicePost.HTTPPostBusinessEditJson;
+import com.ariana.shahre_ma.WebServicePost.HTTPPostBusinessJson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +40,8 @@ public class Add_business extends ActionBarActivity {
     Spinner Market_gharar;
     Integer Fields_ID[]=new Integer[7];
     DateTime dt=new DateTime();
-
+    FieldClass fc=new FieldClass();
+    Query query=new Query(Add_business.this);
 
     Integer modatgh=3;
     Integer month;
@@ -49,9 +54,12 @@ public class Add_business extends ActionBarActivity {
         setContentView(R.layout.activity_add_business);
 
         Initialize_Views();
+
         GetAreaName();
         GetSubSet();
         GetNameActivity();
+        Show_Business();
+
         Spinner spn1 = (Spinner) findViewById(R.id.spinner_gh);
         spn1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -106,6 +114,39 @@ public class Add_business extends ActionBarActivity {
        SpinnerSetUp();
        
    }
+
+    void Show_Business()
+    {
+
+        DataBaseSqlite db=new DataBaseSqlite(this);
+        Cursor rows=db.select_AllBusinessId(fc.GetBusiness_Id());
+        rows.moveToFirst();
+        Market_name.setText(rows.getString(1));
+        Market_tell.setText(rows.getString(2));
+        Market_mobile.setText(rows.getString(3));
+        Market_fax.setText(rows.getString(5));
+        Market_email.setText(rows.getString(6));
+        Market_owner.setText(rows.getString(7));
+        Market_address.setText(rows.getString(8));
+
+        Cursor rows1=db.select_SubsetName(rows.getInt(14));
+        rows1.moveToFirst();
+        Market_subset.setText(rows1.getString(0));
+
+        Cursor rows2=db.select_AreaName(rows.getInt(17));
+        rows2.moveToFirst();
+        Market_zone.setText(rows2.getString(0));
+
+        for(int i=0;i<6;i++)
+        {
+            if(rows.getInt(21+i)>0){
+            Cursor rows3=db.select_FieldActivityName(rows.getInt(21+i));
+            rows3.moveToFirst();
+            Market_field.setText(rows3.getString(0)+",");}
+        }
+
+       // Market_gharar.setText(rows.getString(8));
+    }
     void SpinnerSetUp(){
 
 
@@ -308,15 +349,23 @@ public class Add_business extends ActionBarActivity {
             alertDialog.show();*/
 
 
-        str=  json.getBusinessTOjson(1, Market_name.getText().toString(),
+        str=  json.getBusinessTOjsonArray(fc.GetBusiness_Id(), Market_name.getText().toString(),
                 Market_tell.getText().toString(), Market_mobile.getText().toString(),
                 Market_fax.getText().toString(), Market_email.getText().toString(),
                 Market_owner.getText().toString(), Market_address.getText().toString(),
-                Market_desc.getText().toString(),dt.Now(),EXPDateTime(), "true","subset",SubsetID(Market_subset.getText().toString().trim()),
-                "31.63636", "51.252525",AreaID(Market_zone.getText().toString().trim()),"area","user",Fields_ID[0],Fields_ID[1],Fields_ID[2],
+                Market_desc.getText().toString(),dt.Now(),EXPDateTime(),"null"
+                ,SubsetID(Market_subset.getText().toString().trim()),
+                "31.63636", "51.252525",AreaID(Market_zone.getText().toString().trim()),"null","null",Fields_ID[0],Fields_ID[1],Fields_ID[2],
                 Fields_ID[3],Fields_ID[4],Fields_ID[5],Fields_ID[6]);
 
         Log.i("JSON", str);
+       /* HTTPPostBusinessEditJson httpbusiness=new HTTPPostBusinessEditJson(this);
+        httpbusiness.SetBusinessJson(str);
+        httpbusiness.execute();*/
+
+        HTTPPostBusinessJson httpPostBusinessJson=new HTTPPostBusinessJson(this);
+        httpPostBusinessJson.SetBusinessJson(str);
+        httpPostBusinessJson.execute();
 
     }
 
