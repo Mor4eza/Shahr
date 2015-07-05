@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -22,7 +24,6 @@ import com.ariana.shahre_ma.MyProfile.My_Profile;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetAreaJosn;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBookMarkJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessMemberJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetFieldActivityJson;
@@ -30,8 +31,12 @@ import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.mikepenz.iconics.typeface.FontAwesome;
+
+import com.mikepenz.iconics.typeface.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
+import com.mikepenz.materialdrawer.accountswitcher.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
@@ -40,6 +45,7 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
+
 import com.software.shell.fab.ActionButton;
 
 import github.chenupt.dragtoplayout.DragTopLayout;
@@ -52,8 +58,8 @@ public class MainActivity extends ActionBarActivity {
     ActionButton Action;
     Query query=new Query(this);
     private static final int PROFILE_SETTING = 1;
-    private AccountHeader.Result headerResult = null;
-    private Drawer.Result result = null;
+    private AccountHeader headerResult = null;
+    private Drawer result=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,15 +68,11 @@ public class MainActivity extends ActionBarActivity {
         //findViewsAndConfigure();
 
 
-
-       /* ImageView iv_1 = (ImageView) findViewById(R.id.imageView1);
-        String image_url_1 = "http://www.kelidestan.com/fixed-url/Kelidestan_image_1.jpg";
-        imgLoader.DisplayImage(image_url_1, iv_1);*/
-
         NetState ns=new NetState(this);
         if(ns.checkInternetConnection()==false) {
             Toast.makeText(getApplication(),"شبکه اینترنت قطع می باشد",Toast.LENGTH_LONG).show();
         }
+
         else {
 
 
@@ -253,13 +255,14 @@ public class MainActivity extends ActionBarActivity {
 
         final IProfile profile = new ProfileDrawerItem().withName(uName).withIcon(getResources().getDrawable(R.mipmap.profile3)).withEmail("کرج");
 
-        headerResult = new AccountHeader()
+        AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withHeaderBackground(R.mipmap.header)
                 .addProfiles(profile)
                 .withSelectionListEnabledForSingleProfile(false)
                 .withHeightDp(150)
                 .withTranslucentStatusBar(true)
+
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
 
 
@@ -272,18 +275,18 @@ public class MainActivity extends ActionBarActivity {
                         //.withSavedInstance( savedInstanceState)
                 .build();
         ////////////////////////
-        Drawer drawer = new Drawer();
-        drawer.withActivity(this);
-        drawer.withTranslucentStatusBar(false);
-        drawer.withHeaderDivider(true);
-        drawer.withDisplayBelowToolbar(false);
-        drawer.withActionBarDrawerToggleAnimated(false);
-        drawer.withAccountHeader(headerResult);
-        drawer.addDrawerItems(
+        result = new DrawerBuilder()
+        .withActivity(this)
+        .withTranslucentStatusBar(false)
+        .withHeaderDivider(true)
+        .withDisplayBelowToolbar(false)
+        .withActionBarDrawerToggleAnimated(true)
+        .withAccountHeader(headerResult)
+        .withAnimateDrawerItems(true)
+        .addDrawerItems(
                 new PrimaryDrawerItem().withName(R.string.Works).withIcon(FontAwesome.Icon.faw_money),
                 new PrimaryDrawerItem().withName(R.string.Off).withIcon(FontAwesome.Icon.faw_coffee),
                 new PrimaryDrawerItem().withName(R.string.My_business).withIcon(FontAwesome.Icon.faw_briefcase),
-
                 new SectionDrawerItem().withName(R.string.My_city),
                 new SecondaryDrawerItem().withName(R.string.My_Account).withIcon(FontAwesome.Icon.faw_user),
                 new SecondaryDrawerItem().withName(R.string.My_Fav).withIcon(FontAwesome.Icon.faw_bookmark),
@@ -292,10 +295,10 @@ public class MainActivity extends ActionBarActivity {
                 new SectionDrawerItem().withName("برنامه"),
                 new SecondaryDrawerItem().withName(R.string.action_settings).withIcon(FontAwesome.Icon.faw_gears),
                 new DividerDrawerItem()
-        );
-       drawer.withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+        )
+       .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
            @Override
-           public void onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
+           public boolean onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
                if (drawerItem instanceof Nameable) {
                    Toast.makeText(MainActivity.this, MainActivity.this.getString(((Nameable) drawerItem).getNameRes()), Toast.LENGTH_SHORT).show();
 
@@ -308,9 +311,8 @@ public class MainActivity extends ActionBarActivity {
 
                }
                if (position == 2) {
-                   HTTPGetBusinessMemberJson httpbusinmember=new HTTPGetBusinessMemberJson(MainActivity.this);
-                   httpbusinmember.SetUrl_businessMember(1341);
-                   httpbusinmember.execute();
+                   Intent i = new Intent(getApplicationContext(), My_Business.class);
+                   startActivity(i);
 
 
                }
@@ -349,13 +351,41 @@ public class MainActivity extends ActionBarActivity {
                    Intent i = new Intent(getApplicationContext(), Setting.class);
                    startActivity(i);
                }
+               return false;
            }
-       });
-        drawer.build();
+       }).build();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(false);
 
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                if (result.isDrawerOpen())
+                    result.closeDrawer();
+                else {
+                    result.openDrawer();
+                }
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        //handle the back press :D close the drawer first and if the drawer is closed close the activity
+        if (result != null && result.isDrawerOpen()) {
+            result.closeDrawer();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
 
 }
 
