@@ -8,8 +8,9 @@
     <string name="Off">تخفیف ها</string>
     <string name="Near">نزدیک ترین حراجی ها</string>
     <string name="My_Account">حساب من</string>
-    <string name="My_Fav">علایق من</string>
+    <string name="My_Fav">نشانه گزاری شده ها</string>
     <string name="My_city">شهر من</string>
+    <string name="My_Intrest">علایق من</string>
     <string name="title_activity_jobs">Jobs</string>
     <string name="title_activity_tabbar">Tabbar</string>
     <string name="title_section1">پیشنهادات هفته</string>
@@ -47,5 +48,6 @@
     <string name="My_business">کسب وکار من</string>
     <string name="title_activity_add_business">Add_business</string>
     <string name="title_activity_my__business__map">انتخاب موقعیت</string>
+    <string name="title_activity_my__interest">My_Interest</string>
 
 </resources>

@@ -16,6 +16,7 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.MyBusiness.My_Business;
 import com.ariana.shahre_ma.MyCity.My_city;
+import com.ariana.shahre_ma.MyInterest.My_Interest;
 import com.ariana.shahre_ma.MyProfile.Log_In;
 import com.ariana.shahre_ma.MyProfile.My_Profile;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
@@ -280,9 +281,9 @@ public class MainActivity extends ActionBarActivity {
 
                 new SectionDrawerItem().withName(R.string.My_city),
                 new SecondaryDrawerItem().withName(R.string.My_Account).withIcon(FontAwesome.Icon.faw_user),
-                new SecondaryDrawerItem().withName(R.string.My_Fav).withIcon(FontAwesome.Icon.faw_heart_o),
+                new SecondaryDrawerItem().withName(R.string.My_Fav).withIcon(FontAwesome.Icon.faw_bookmark),
                 new SecondaryDrawerItem().withName(R.string.My_city).withIcon(FontAwesome.Icon.faw_building),
-
+                new SecondaryDrawerItem().withName(R.string.My_Intrest).withIcon(FontAwesome.Icon.faw_heart),
                 new SectionDrawerItem().withName("برنامه"),
                 new SecondaryDrawerItem().withName(R.string.action_settings).withIcon(FontAwesome.Icon.faw_gears),
                 new DividerDrawerItem()
@@ -332,7 +333,12 @@ public class MainActivity extends ActionBarActivity {
                    Intent i = new Intent(getApplicationContext(), My_city.class);
                    startActivity(i);
                }
-               if (position == 8) {
+               if (position == 7) {
+
+                   Intent i = new Intent(getApplicationContext(), My_Interest.class);
+                   startActivity(i);
+               }
+               if (position == 9) {
 
                    Intent i = new Intent(getApplicationContext(), Setting.class);
                    startActivity(i);
