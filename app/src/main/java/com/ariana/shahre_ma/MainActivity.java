@@ -21,6 +21,7 @@ import com.ariana.shahre_ma.MyProfile.My_Profile;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetAreaJosn;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBookMarkJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessMemberJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetFieldActivityJson;
@@ -60,6 +61,10 @@ public class MainActivity extends ActionBarActivity {
         //findViewsAndConfigure();
 
 
+
+       /* ImageView iv_1 = (ImageView) findViewById(R.id.imageView1);
+        String image_url_1 = "http://www.kelidestan.com/fixed-url/Kelidestan_image_1.jpg";
+        imgLoader.DisplayImage(image_url_1, iv_1);*/
 
         NetState ns=new NetState(this);
         if(ns.checkInternetConnection()==false) {
@@ -302,8 +307,9 @@ public class MainActivity extends ActionBarActivity {
 
                }
                if (position == 2) {
-                   Intent i = new Intent(getApplicationContext(), My_Business.class);
-                   startActivity(i);
+                   HTTPGetBusinessMemberJson httpbusinmember=new HTTPGetBusinessMemberJson(MainActivity.this);
+                   httpbusinmember.SetUrl_businessMember(1341);
+                   httpbusinmember.execute();
 
 
                }

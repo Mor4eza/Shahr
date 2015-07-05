@@ -32,6 +32,7 @@ public class My_Business extends ActionBarActivity {
         DataBaseSqlite db=new DataBaseSqlite(this);
         Cursor rows=db.select_AllBusinessId(fc.GetBusiness_Id());
         rows.moveToFirst();
+
         title.setText(rows.getString(1));
         address.setText(rows.getString(8));
         address.setTag(rows.getString(8));

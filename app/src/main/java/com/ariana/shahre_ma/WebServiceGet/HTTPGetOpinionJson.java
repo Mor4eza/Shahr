@@ -118,8 +118,6 @@ ProgressDialog pd;
             for (int i = 0; i <len; i++)
             {
                 dbs.Add_opinion(Id[i], description[i], date[i], erja[i], countlike[i], countdislike[i], membername[i]);
-
-
             }
             //pd.dismiss();
         } catch (Exception e) {

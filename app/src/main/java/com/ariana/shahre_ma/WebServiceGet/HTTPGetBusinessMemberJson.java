@@ -77,7 +77,7 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String, String, String>
     public   void SetUrl_businessMember(Integer member)
     {
 
-        url_Business="http://test.shahrma.com/api/ApiGiveMemberBusiness?memberId=167";
+        url_Business="http://test.shahrma.com/api/ApiGiveMemberBusiness?memberId="+member;
         Log.i("url_Business",url_Business);
 
     }

@@ -70,6 +70,7 @@ Query query;
 
 
                     nature = new Comment_Card_items();
+                    nature.settag(allrows.getInt(0));
                     nature.setmUser(allrows.getString(6));
                     nature.setmDate(allrows.getString(2));
                     nature.setmComm(allrows.getString(1));
@@ -101,7 +102,7 @@ Query query;
         viewHolder.tvuser.setText(nature.getmUser());
         viewHolder.tvdate.setText(nature.getmDate());
         viewHolder.tvcomm.setText(nature.getmComm());
-
+        viewHolder.tvcomm.setTag(String.valueOf(nature.gettag()));
         viewHolder.tvlike.setText(String.valueOf(nature.getmlike()));
         viewHolder.tvdisslike.setText(String.valueOf(nature.getmdisslike()));
 
@@ -148,7 +149,7 @@ Query query;
                 HTTPSendLikeURL httplike=new HTTPSendLikeURL(context);
                 httplike.SetLike(true);
                 httplike.SetMemberid(1);
-                httplike.Setopinionid(getIdOpinion());
+                httplike.Setopinionid(Integer.parseInt((String) tvcomm.getTag()));
                 httplike.execute();
            /*     Likes++;
             tvlike.setText(String.valueOf(Likes));*/
@@ -161,7 +162,7 @@ Query query;
 
                 httplike.SetLike(false);
                 httplike.SetMemberid(1);
-                httplike.Setopinionid(getIdOpinion());
+                httplike.Setopinionid(Integer.parseInt((String) tvcomm.getTag()));
                 httplike.execute();
 
                 //Log.i("DissLike", "onClick " + getPosition() + " " + tvcomm.getText().toString());
@@ -169,7 +170,7 @@ Query query;
 
         }
 
-        private Integer getIdMember() {
+  /*      private Integer getIdMember() {
             Integer Result =0;
 
             try {
@@ -185,7 +186,7 @@ Query query;
             }
 
             return Result;
-        }
+        }*/
 
         private Integer getIdOpinion() {
             Integer Result =0;
@@ -206,7 +207,7 @@ Query query;
         }
     }
 
-
+/*
      class HTTPSendLikeURL1 extends AsyncTask<String, Void, Integer> {
 
         private String[] blogTitles;
@@ -269,10 +270,10 @@ Query query;
                 }
                 int statusCode = httpResponse.getStatusLine().getStatusCode();
 
-                /* 200 represents HTTP OK */
+                *//* 200 represents HTTP OK *//*
                 if (statusCode == 200) {
 
-                    /* receive response as inputStream */
+                    *//* receive response as inputStream *//*
                     inputStream = httpResponse.getEntity().getContent();
 
                     String response = convertInputStreamToString(inputStream);
@@ -296,7 +297,7 @@ Query query;
 
         @Override
         protected void onPostExecute(Integer result) {
-            /* Download complete. Lets update UI */
+            *//* Download complete. Lets update UI *//*
             //  Toast.makeText(getApplicationContext(),mesage,Toast.LENGTH_LONG).show();
 
             if (result == 1) {
@@ -324,7 +325,7 @@ Query query;
                     result += line;
                 }
 
-            /* Close Stream */
+            *//* Close Stream *//*
                 if (null != inputStream) {
                     inputStream.close();
                 }
@@ -355,5 +356,5 @@ Query query;
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 }
