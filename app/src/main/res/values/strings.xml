@@ -46,5 +46,6 @@
     <string name="title_activity_my__business">کسب وکار من</string>
     <string name="My_business">کسب وکار من</string>
     <string name="title_activity_add_business">Add_business</string>
+    <string name="title_activity_my__business__map">انتخاب موقعیت</string>
 
 </resources>
