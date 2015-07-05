@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -33,6 +34,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
     FieldClass fc=new FieldClass();
     Query query;
     private  String url_Business;
+    ProgressDialog pd;
 
     Integer Id[];
     String market[];
@@ -98,6 +100,16 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
         context = c;
     }
 
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        pd = new ProgressDialog(context);
+        pd.setMessage("در حال بروزرسانی...");
+        pd.setCancelable(false);
+        pd.show();
+    }
+
     /**
      *
      * @param args
@@ -148,7 +160,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
             if(len==0) {
               //  Toast.makeText(get, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
                 Log.i("Count Business : ","فروشگاه ثبت نشد");
-
+                pd.dismiss();
             }
             else {
 
@@ -156,10 +168,12 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
                 fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
                 Intent i = new Intent(this.context, Jobs_List.class);
                 this.context.startActivity(i);
-                Log.i("Count Business : ","دریافت ثبت شده ها");
+                Log.i("Count Business : ", "دریافت ثبت شده ها");
+                pd.dismiss();
             }
 
         } catch (Exception e) {
+            pd.dismiss();
             Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
         }
     }

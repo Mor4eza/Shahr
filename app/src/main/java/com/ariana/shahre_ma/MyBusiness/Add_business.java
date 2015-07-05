@@ -349,7 +349,7 @@ public class Add_business extends ActionBarActivity {
             alertDialog.show();*/
 
 
-        str=  json.getBusinessTOjsonArray(fc.GetBusiness_Id(), Market_name.getText().toString(),
+        str=  json.getBusinessTOjson(fc.GetBusiness_Id(), Market_name.getText().toString(),
                 Market_tell.getText().toString(), Market_mobile.getText().toString(),
                 Market_fax.getText().toString(), Market_email.getText().toString(),
                 Market_owner.getText().toString(), Market_address.getText().toString(),
@@ -359,13 +359,13 @@ public class Add_business extends ActionBarActivity {
                 Fields_ID[3],Fields_ID[4],Fields_ID[5],Fields_ID[6]);
 
         Log.i("JSON", str);
-       /* HTTPPostBusinessEditJson httpbusiness=new HTTPPostBusinessEditJson(this);
+        HTTPPostBusinessEditJson httpbusiness=new HTTPPostBusinessEditJson(this);
         httpbusiness.SetBusinessJson(str);
-        httpbusiness.execute();*/
+        httpbusiness.execute();
 
-        HTTPPostBusinessJson httpPostBusinessJson=new HTTPPostBusinessJson(this);
+      /*  HTTPPostBusinessJson httpPostBusinessJson=new HTTPPostBusinessJson(this);
         httpPostBusinessJson.SetBusinessJson(str);
-        httpPostBusinessJson.execute();
+        httpPostBusinessJson.execute();*/
 
     }
 

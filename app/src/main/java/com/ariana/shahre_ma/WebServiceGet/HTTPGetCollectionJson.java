@@ -53,10 +53,10 @@ public class HTTPGetCollectionJson extends AsyncTask<String, String, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-        /*    pd = new ProgressDialog(context);
+           pd = new ProgressDialog(context);
             pd.setMessage("در حال بروزرسانی...");
             pd.setCancelable(false);
-            pd.show();*/
+            pd.show();
         }
 
     /**
@@ -95,7 +95,7 @@ public class HTTPGetCollectionJson extends AsyncTask<String, String, String> {
                 dbs.Add_collection(Id[i],collectionname[i]);
 
             }
-            //pd.dismiss();
+            pd.dismiss();
 
             Jobs.mSwipeRefreshLayout.post(new Runnable() {
                 @Override

@@ -39,6 +39,7 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
     FieldClass fc=new FieldClass();
     private ProgressDialog dialog;
 
+    ProgressDialog pd;
     // get/set
 
     // Set json Member
@@ -71,23 +72,23 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
     }
 
 
-    protected void onPostExecute_start() {
-        try {
-            super.onPreExecute();
-            mProgressDialog = new ProgressDialog(context);
-            mProgressDialog.setMessage("...در حال ساخت کاربر جدید");
-            mProgressDialog.setCancelable(false);
-            mProgressDialog.show();
-
-        } catch (Exception e) {
-        }
+    /**
+     *
+     */
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        pd = new ProgressDialog(context);
+        pd.setMessage("در حال بروزرسانی...");
+        pd.setCancelable(false);
+        pd.show();
     }
 
     @Override
     protected String doInBackground(String... params) {
         try {
 
-            onPostExecute_start();
+            //onPostExecute_start();
             JSONObject json = new JSONObject(GetMember_json()); //your array;
             HttpClient httpClient = new DefaultHttpClient();
             HttpContext httpContext = new BasicHttpContext();
@@ -134,13 +135,14 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
                 if (ID >= 0) {
                     Log.i("fc.GetMember_Name()",fc.GetMember_Name());
                     dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
-                    mProgressDialog.dismiss();
+                    pd.dismiss();
                     Intent i = new Intent(this.context, Log_In.class);
                     this.context.startActivity(i);
                    // Toast.makeText(context, "کاربر ثبت شد!", Toast.LENGTH_LONG).show();
                 }
                 else
                 {
+                    pd.dismiss();
                   //  Toast.makeText(context, "کاربر ساخته نشد دوباره امتحان کنید", Toast.LENGTH_LONG).show();
                 }
 

@@ -1,10 +1,15 @@
 package com.ariana.shahre_ma.WebServicePost;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.MainActivity;
+import com.ariana.shahre_ma.MyProfile.Log_In;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -97,9 +102,15 @@ public class HTTPPostBusinessEditJson extends AsyncTask<String,Long,Integer>
     @Override
     protected void onPostExecute(Integer integer) {
         super.onPostExecute(integer);
+        Log.i("onPostEecute",String.valueOf(
+                integer));
         if(integer==1)
         {
+            DataBaseSqlite db=new DataBaseSqlite(context);
+            db.delete_BusinessId(fc.GetBusiness_Id());
 
+            Intent i = new Intent(this.context, MainActivity.class);
+            this.context.startActivity(i);
         }
         else
         {
