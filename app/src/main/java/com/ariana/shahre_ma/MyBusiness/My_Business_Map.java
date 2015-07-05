@@ -26,6 +26,10 @@ public class My_Business_Map extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_business_map);
         setUpMapIfNeeded();
+        mMap.setMyLocationEnabled(true);
+        mMap.getUiSettings().setMapToolbarEnabled(false);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+
         Toast.makeText(getApplicationContext(),"نشانگر را گرفته و به مکان مورد نظر انتقال دهید",Toast.LENGTH_LONG).show();
         TrackerSettings settings =
                 new TrackerSettings()
