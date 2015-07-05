@@ -3,6 +3,7 @@ package com.ariana.shahre_ma.MyBusiness;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -526,6 +527,12 @@ public class Add_business extends ActionBarActivity {
 
          Toast.makeText(getApplicationContext(),date,Toast.LENGTH_LONG).show();
         return  date;
+
+    }
+    public void select_map(View v ){
+
+        Intent i = new Intent(getBaseContext(),My_Business_Map.class);
+        startActivity(i);
 
     }
 }

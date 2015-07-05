@@ -193,10 +193,22 @@
                 android:paddingLeft="80px"
                 android:paddingTop="20dp"/>
         </LinearLayout>
+
+        <Button
+            android:id="@+id/select_map"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" انتخاب موقعیت "
+            android:onClick="select_map"
+            android:layout_marginTop="20dp"
+            android:background="@color/material_blue"
+            />
+
         <Button
             android:id="@+id/save_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="ثبت و ویراش"
             android:onClick="save_edit"
             android:background="@color/material_blue"
