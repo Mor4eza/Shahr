@@ -16,6 +16,7 @@ import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostBusinessEditJson;
@@ -42,7 +43,7 @@ public class Add_business extends ActionBarActivity {
     DateTime dt=new DateTime();
     FieldClass fc=new FieldClass();
     Query query=new Query(Add_business.this);
-
+    NetState net=new NetState(this);
     Integer modatgh=3;
     Integer month;
     String date;
@@ -197,6 +198,7 @@ public class Add_business extends ActionBarActivity {
         if(Market_name.getText().toString().trim().equals("")) {
             AlertDialog alertDialog = new AlertDialog.Builder(Add_business.this).create();
             alertDialog.setTitle("هشدار");
+            alertDialog.setIcon(R.drawable.caution_sing_64);
             alertDialog.setMessage("نام فروشگاه را وارد کنید");
             alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
@@ -348,20 +350,34 @@ public class Add_business extends ActionBarActivity {
             // Showing Alert Message
             alertDialog.show();*/
 
+        else
+        {
 
-        str=  json.getBusinessTOjson(fc.GetBusiness_Id(), Market_name.getText().toString(),
-                Market_tell.getText().toString(), Market_mobile.getText().toString(),
-                Market_fax.getText().toString(), Market_email.getText().toString(),
-                Market_owner.getText().toString(), Market_address.getText().toString(),
-                Market_desc.getText().toString(),dt.Now(),EXPDateTime(),"null"
-                ,SubsetID(Market_subset.getText().toString().trim()),
-                "31.63636", "51.252525",AreaID(Market_zone.getText().toString().trim()),"null","null",Fields_ID[0],Fields_ID[1],Fields_ID[2],
-                Fields_ID[3],Fields_ID[4],Fields_ID[5],Fields_ID[6]);
+            if(net.checkInternetConnection())
+            {
+                str=  json.getBusinessTOjson(fc.GetBusiness_Id(), Market_name.getText().toString(),
+                        Market_tell.getText().toString(), Market_mobile.getText().toString(),
+                        Market_fax.getText().toString(), Market_email.getText().toString(),
+                        Market_owner.getText().toString(), Market_address.getText().toString(),
+                        Market_desc.getText().toString(),dt.Now(),EXPDateTime(),"null"
+                        ,SubsetID(Market_subset.getText().toString().trim()),
+                        "31.63636", "51.252525",AreaID(Market_zone.getText().toString().trim()),"null","null",Fields_ID[0],Fields_ID[1],Fields_ID[2],
+                        Fields_ID[3],Fields_ID[4],Fields_ID[5],Fields_ID[6]);
 
-        Log.i("JSON", str);
-        HTTPPostBusinessEditJson httpbusiness=new HTTPPostBusinessEditJson(this);
-        httpbusiness.SetBusinessJson(str);
-        httpbusiness.execute();
+
+                Log.i("JSON", str);
+                HTTPPostBusinessEditJson httpbusiness=new HTTPPostBusinessEditJson(this);
+                httpbusiness.SetBusinessJson(str);
+                httpbusiness.execute();
+            }
+            else
+            {
+
+            }
+        }
+
+
+
 
       /*  HTTPPostBusinessJson httpPostBusinessJson=new HTTPPostBusinessJson(this);
         httpPostBusinessJson.SetBusinessJson(str);
