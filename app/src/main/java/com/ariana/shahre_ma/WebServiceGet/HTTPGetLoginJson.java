@@ -2,12 +2,15 @@ package com.ariana.shahre_ma.WebServiceGet;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.MainActivity;
+import com.ariana.shahre_ma.MyProfile.Log_In;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -140,7 +143,10 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
         {
 
             try {
+                Log.i("mesage",mesage);
                 JSONObject area = new JSONObject(mesage);
+
+                try{
                 ID = area.getInt("Id");
                 fc.SetMember_Name(area.getString("Name"));
                 fc.SetMember_Email(area.getString("Email"));
@@ -149,10 +155,16 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
                 fc.SetMember_Sex(area.getBoolean("Sex"));
                 fc.SetMember_UserName(area.getString("UserName"));
                 fc.SetMember_Password(area.getString("Password"));
-                fc.SetMember_CityId(area.getInt("CityId"));
+                fc.SetMember_CityId(area.getInt("CityId"));}
+                catch (Exception e){}
 
                 if (ID >= 0) {
+                    Log.i("ID", String.valueOf(ID));
                     dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
+                    Intent  i=new Intent(context.getApplicationContext(), MainActivity.class);
+                    context.startActivity(i);
+                    Log_In log = new Log_In();
+                    log.finish();
                 } else {
                     pd.dismiss();
                     Toast.makeText(context, "کاربر ساخته نشد دوباره امتحان کنید", Toast.LENGTH_LONG).show();

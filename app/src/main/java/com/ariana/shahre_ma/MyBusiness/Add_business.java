@@ -124,8 +124,8 @@ public class Add_business extends ActionBarActivity {
             Cursor rows = db.select_AllBusinessId(fc.GetBusiness_Id());
             rows.moveToFirst();
             Market_name.setText(rows.getString(1));
-            Market_tell.setText(rows.getString(2));
-            Market_mobile.setText(rows.getString(3));
+            Market_tell.setText(rows.getString(3));
+            Market_mobile.setText(rows.getString(4));
             Market_fax.setText(rows.getString(5));
             Market_email.setText(rows.getString(6));
             Market_owner.setText(rows.getString(7));

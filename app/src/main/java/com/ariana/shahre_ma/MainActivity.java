@@ -80,7 +80,7 @@ public class MainActivity extends ActionBarActivity {
 
         else {
 
-/*
+
             HTTPGetSubsetJson httpsubset = new HTTPGetSubsetJson(this);
             httpsubset.execute();
 
@@ -99,7 +99,7 @@ public class MainActivity extends ActionBarActivity {
             httpfield.execute();
 
             HTTPGetAreaJosn httparea=new HTTPGetAreaJosn(this);
-            httparea.execute();*/
+            httparea.execute();
         }
 
         ViewPager vpPager = (ViewPager) findViewById(R.id.viewPager);
@@ -332,7 +332,7 @@ public class MainActivity extends ActionBarActivity {
                    } else {
 
                        HTTPGetBusinessMemberJson httpGetBusinessMemberJson=new HTTPGetBusinessMemberJson(MainActivity.this);
-                       httpGetBusinessMemberJson.SetUrl_businessMember(166);
+                       httpGetBusinessMemberJson.SetUrl_businessMember(query.getMemberId());
                        httpGetBusinessMemberJson.execute();
                        /*Intent i = new Intent(getApplicationContext(), My_Business.class);
                        startActivity(i);*/

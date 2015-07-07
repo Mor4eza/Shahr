@@ -148,7 +148,7 @@ Query query;
 
                 HTTPSendLikeURL httplike=new HTTPSendLikeURL(context);
                 httplike.SetLike(true);
-                httplike.SetMemberid(1);
+                httplike.SetMemberid(query.getMemberId());
                 httplike.Setopinionid(Integer.parseInt((String) tvcomm.getTag()));
                 httplike.execute();
            /*     Likes++;
@@ -161,7 +161,7 @@ Query query;
                 HTTPSendLikeURL httplike=new HTTPSendLikeURL(context);
 
                 httplike.SetLike(false);
-                httplike.SetMemberid(1);
+                httplike.SetMemberid(query.getMemberId());
                 httplike.Setopinionid(Integer.parseInt((String) tvcomm.getTag()));
                 httplike.execute();
 
