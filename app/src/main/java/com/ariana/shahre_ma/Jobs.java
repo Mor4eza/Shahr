@@ -86,7 +86,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         ns=new NetState(this);
 
 
-        Intent myIntent = new Intent(this, MyReceiver.class);
+        /*Intent myIntent = new Intent(this, MyReceiver.class);
 
 
 
@@ -98,7 +98,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         calendar.add(Calendar.SECOND, 3); // first time
         long frequency= 3 * 1000; // in ms
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), frequency, pendingIntent);
-
+*/
         displayList();
         //expandAll();
       //  collapseAll();
