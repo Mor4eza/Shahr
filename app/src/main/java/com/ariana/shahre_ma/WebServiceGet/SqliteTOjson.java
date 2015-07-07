@@ -185,15 +185,16 @@ public class SqliteTOjson {
         return Result_json;
     }
 
-    public  String getBusinessTOjsonArray(Integer id,String market,String phone,String mobile,String fax,String email,String businessowner,String address,String description,String startdate,String expirationdate,String subset,Integer subsetid,String longitude,String latitude,Integer areaid,String area,String user,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7)
+    public  String getBusinessTOjsonArray(Integer id,Integer memberId,String market,String phone,String mobile,String fax,String email,String businessowner,String address,String description,String startdate,String expirationdate,String subset,Integer subsetid,String longitude,String latitude,Integer areaid,String area,String user,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7)
     {
         String Result_json="";
         try{
             JSONObject jsonobject=new JSONObject();
 
-            JSONArray jsonArray=new JSONArray();
+
 
             jsonobject.put("Id",String.valueOf(id));
+            jsonobject.put("MemberId",memberId);
             jsonobject.put("Market",market);
             jsonobject.put("Phone",phone);
             jsonobject.put("Mobile",mobile);
@@ -221,8 +222,8 @@ public class SqliteTOjson {
             jsonobject.put("Field6",String.valueOf(field6));
             jsonobject.put("Field7",String.valueOf(field7));
 
-            jsonArray.put(jsonobject);
-            Result_json=jsonArray.toString();
+
+            Result_json=jsonobject.toString();
         }
         catch (Exception e)
         {

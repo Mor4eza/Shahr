@@ -382,7 +382,7 @@ public class Add_business extends ActionBarActivity {
                Log.i("BusinessID",String.valueOf(fc.GetBusiness_Id()));
                 if (fc.GetBusiness_Id()==0) {
 
-                str = json.getBusinessTOjsonArray(fc.GetBusiness_Id(), Market_name.getText().toString(),
+                str = json.getBusinessTOjsonArray(fc.GetBusiness_Id(),query.getMemberId(), Market_name.getText().toString(),
                         Market_tell.getText().toString(), Market_mobile.getText().toString(),
                         Market_fax.getText().toString(), Market_email.getText().toString(),
                         Market_owner.getText().toString(), Market_address.getText().toString(),

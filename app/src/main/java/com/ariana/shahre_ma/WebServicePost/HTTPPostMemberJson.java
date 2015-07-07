@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.MainActivity;
 import com.ariana.shahre_ma.MyProfile.Log_In;
 
 import org.apache.http.HttpEntity;
@@ -136,7 +137,7 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
                     Log.i("fc.GetMember_Name()",fc.GetMember_Name());
                     dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
                     pd.dismiss();
-                    Intent i = new Intent(this.context, Log_In.class);
+                    Intent i = new Intent(this.context, MainActivity.class);
                     this.context.startActivity(i);
                    // Toast.makeText(context, "کاربر ثبت شد!", Toast.LENGTH_LONG).show();
                 }
