@@ -15,6 +15,7 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MainActivity;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetLoginJson;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -91,7 +92,7 @@ public class Log_In extends ActionBarActivity {
     }
 
 
-    class HTTPGetLoginJson extends AsyncTask<String, Void, Integer> {
+  /*  class HTTPGetLoginJson extends AsyncTask<String, Void, Integer> {
 
 
         Integer ID = 0;
@@ -115,10 +116,10 @@ public class Log_In extends ActionBarActivity {
             InputStream inputStream = null;
             Integer result = 0;
             try {
-                /* create Apache HttpClient */
+                *//* create Apache HttpClient *//*
                 HttpClient httpclient = new DefaultHttpClient();
 
-                /* HttpGet Method */
+                *//* HttpGet Method *//*
 
                 // String paramString = URLEncodedUtils.format(params, "utf-8");
                 String sss = URLDecoder.decode(params[0], "UTF-8");
@@ -128,14 +129,14 @@ public class Log_In extends ActionBarActivity {
 
 
 
-                /* optional request header */
+                *//* optional request header *//*
                 httpGet.setHeader("Content-Type", "application/json");
 
 
-                /* optional request header */
+                *//* optional request header *//*
                 httpGet.setHeader("Accept", "application/json");
 
-                /* Make http request call */
+                *//* Make http request call *//*
                 HttpResponse httpResponse = httpclient.execute(httpGet);
 
 
@@ -154,10 +155,10 @@ public class Log_In extends ActionBarActivity {
                 }
                 int statusCode = httpResponse.getStatusLine().getStatusCode();
 
-                /* 200 represents HTTP OK */
+                *//* 200 represents HTTP OK *//*
                 if (statusCode == 200) {
 
-                    /* receive response as inputStream */
+                    *//* receive response as inputStream *//*
                     inputStream = httpResponse.getEntity().getContent();
 
                     String response = convertInputStreamToString(inputStream);
@@ -226,7 +227,7 @@ public class Log_In extends ActionBarActivity {
                 result += line;
             }
 
-            /* Close Stream */
+            *//* Close Stream *//*
             if (null != inputStream) {
                 inputStream.close();
             }
@@ -255,5 +256,5 @@ public class Log_In extends ActionBarActivity {
             }
         }
 
-    }
+    }*/
 }

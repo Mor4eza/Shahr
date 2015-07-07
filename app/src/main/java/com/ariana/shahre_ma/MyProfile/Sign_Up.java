@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -205,7 +206,7 @@ public class Sign_Up extends ActionBarActivity {
     {
 
        // Toast.makeText(getApplication(),fc.GetMember_Email(), Toast.LENGTH_LONG).show();
-    /*    DataBaseSqlite db=new DataBaseSqlite(this);
+   /*    DataBaseSqlite db=new DataBaseSqlite(this);
         Cursor allrows=db.select_AllBusiness();
 
 
@@ -218,8 +219,12 @@ public class Sign_Up extends ActionBarActivity {
             }
             allrows.close();
         }
-        catch (Exception e){ Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}
-*/
+        catch (Exception e){ Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}*/
+
+        DataBaseSqlite db=new DataBaseSqlite(this);
+
+        db.delete_BusinessId(1606);
+
      /*   SqliteTOjson json=new SqliteTOjson(this);
       //  json.getSqliteInterestTOjson();
       email.setText(json.getSqliteInterestTOjson());*/
@@ -227,14 +232,14 @@ public class Sign_Up extends ActionBarActivity {
        /* KeySettings sett=new KeySettings(this);
         Toast.makeText(getApplication(),sett.getPMtime(), Toast.LENGTH_LONG).show();*/
 
-        String links[]=new String[]{
+    /*    String links[]=new String[]{
                 "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=14&cityid=68",
                 "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=16&cityid=68",
                 "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=24&cityid=68"
         };
 
         HTTPGetBusinessJson getbusiness=new HTTPGetBusinessJson(this);
-        getbusiness.execute(links);
+        getbusiness.execute(links);*/
 
 
     }

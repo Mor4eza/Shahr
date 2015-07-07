@@ -61,7 +61,7 @@ public class FieldClass
     private static Integer Count_Business;
     private static Integer Business_SubsetId;
     private static Integer SubsetId;
-    private static Integer Business_Id;
+    private static Integer Business_Id=0;
     private static String Market_Business;
     private static String Address_Business;
 

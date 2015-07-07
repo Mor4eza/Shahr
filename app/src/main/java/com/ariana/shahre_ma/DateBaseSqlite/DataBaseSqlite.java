@@ -931,7 +931,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     public void delete_BusinessId(Integer id)
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ TABLE_NAME_MEMBER+" WHERE Id="+id);
+        db.execSQL("DELETE  FROM "+ TABLE_NAME_BUSINESS+" WHERE Id="+id);
         db.close();
 
     }

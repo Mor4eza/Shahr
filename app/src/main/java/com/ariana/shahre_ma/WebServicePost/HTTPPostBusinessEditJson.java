@@ -102,11 +102,11 @@ public class HTTPPostBusinessEditJson extends AsyncTask<String,Long,Integer>
     @Override
     protected void onPostExecute(Integer integer) {
         super.onPostExecute(integer);
-        Log.i("onPostEecute",String.valueOf(
-                integer));
+
         if(integer==1)
         {
             DataBaseSqlite db=new DataBaseSqlite(context);
+
             db.delete_BusinessId(fc.GetBusiness_Id());
 
             Intent i = new Intent(this.context, MainActivity.class);

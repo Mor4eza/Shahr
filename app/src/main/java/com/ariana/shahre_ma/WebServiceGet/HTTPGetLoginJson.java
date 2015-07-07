@@ -94,7 +94,7 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
             try {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(webs, "UTF-8"), 8);
                 mesage =reader.readLine();
-                Toast.makeText(context,mesage, Toast.LENGTH_LONG).show();
+               // Toast.makeText(context,mesage, Toast.LENGTH_LONG).show();
                 webs.close();
             } catch (Exception e) {
              Log.e("Exception",e.toString());
@@ -105,11 +105,11 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
             if (statusCode == 200) {
 
                     /* receive response as inputStream */
-                inputStream = httpResponse.getEntity().getContent();
+              /* inputStream = httpResponse.getEntity().getContent();
 
                 String response = convertInputStreamToString(inputStream);
 
-                parseResult(response);
+                parseResult(response);*/
 
                 result = 1; // Successful
 

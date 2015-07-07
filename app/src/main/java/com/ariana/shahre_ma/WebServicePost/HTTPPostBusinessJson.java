@@ -1,10 +1,12 @@
 package com.ariana.shahre_ma.WebServicePost;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.MainActivity;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -102,7 +104,8 @@ public class HTTPPostBusinessJson extends AsyncTask<String,Long,Integer>
         super.onPostExecute(integer);
         if(integer==1)
         {
-
+            Intent i = new Intent(this.context, MainActivity.class);
+            this.context.startActivity(i);
         }
         else
         {
