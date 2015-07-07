@@ -1,6 +1,8 @@
 package com.ariana.shahre_ma.MyProfile;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.ImageDownload.ImageLoader;
+import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
@@ -36,7 +39,7 @@ public class Sign_Up extends ActionBarActivity {
     HTTPPostMemberJson sendPost;
     SqliteTOjson json = new SqliteTOjson(this);
 
-
+    NetState net=new NetState(this);
     //Component
     EditText name;
     EditText email;
@@ -119,20 +122,106 @@ public class Sign_Up extends ActionBarActivity {
 
             Integer cityid=0;
             cityid=getCityId();
-            _json = (json.getSqliteTOjson(Aname, Aemail, Aphone, Aage, Asex, Ausername, Apass,cityid));
-            fc.SetMember_Name(Aname);
-            fc.SetMember_Email(Aemail);
-            fc.SetMember_Mobile(Aphone);
-            fc.SetMember_Age(Aage);
-            fc.SetMember_Sex(Asex);
-            fc.SetMember_UserName(Ausername);
-            fc.SetMember_Password(Apass);
-            fc.SetMember_CityId(cityid);
 
-            sendPost = new HTTPPostMemberJson(this);
-            sendPost.SetMember_Json(_json);
-            sendPost.execute();
+            if(net.checkInternetConnection())
+            {
+                AlertDialog alertDialog=new AlertDialog.Builder(Sign_Up.this).create();
+                alertDialog.setTitle("هشدار");
+                alertDialog.setMessage("اینترنت قطع می باشد");
+                alertDialog.setButton("خب",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Write your code here to execute after dialog closed
+                        //  Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
 
+                    }
+                });
+                alertDialog.show();
+            }
+            else if(Aname.length()==0)
+            {
+                AlertDialog alertDialog=new AlertDialog.Builder(Sign_Up.this).create();
+                alertDialog.setTitle("هشدار");
+                alertDialog.setMessage("نام خود را وارد کنید");
+                alertDialog.setButton("خب", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Write your code here to execute after dialog closed
+                        //  Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
+                        name.requestFocus();
+                    }
+                });
+                alertDialog.show();
+            }
+            else if(cityid==0)
+            {
+                AlertDialog alertDialog=new AlertDialog.Builder(Sign_Up.this).create();
+                alertDialog.setTitle("هشدار");
+                alertDialog.setMessage("نام شهر خود را وارد کنید");
+                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Write your code here to execute after dialog closed
+                        //  Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
+                        city.requestFocus();
+                    }
+                });
+                alertDialog.show();
+            }
+            else if(Asex.equals(null))
+            {
+                AlertDialog alertDialog=new AlertDialog.Builder(Sign_Up.this).create();
+                alertDialog.setTitle("هشدار");
+                alertDialog.setMessage("جنسیت خود را انتخاب کنید");
+                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Write your code here to execute after dialog closed
+                        //  Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
+                        sex.requestFocus();
+                    }
+                });
+                alertDialog.show();
+            }
+            else if(Ausername.length()==0)
+            {
+                AlertDialog alertDialog=new AlertDialog.Builder(Sign_Up.this).create();
+                alertDialog.setTitle("هشدار");
+                alertDialog.setMessage("نام کاربری خود را وارد کنید");
+                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Write your code here to execute after dialog closed
+                        //  Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
+                        username.requestFocus();
+                    }
+                });
+                alertDialog.show();
+            }
+            else if(Apass.length()==0)
+            {
+                AlertDialog alertDialog=new AlertDialog.Builder(Sign_Up.this).create();
+                alertDialog.setTitle("هشدار");
+                alertDialog.setMessage("رمز عبور خود را وارد کنید");
+                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Write your code here to execute after dialog closed
+                        //  Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
+                        pass.requestFocus();
+                    }
+                });
+                alertDialog.show();
+            }
+            else {
+                _json = (json.getSqliteTOjson(Aname, Aemail, Aphone, Aage, Asex, Ausername, Apass, cityid));
+                fc.SetMember_Name(Aname);
+                fc.SetMember_Email(Aemail);
+                fc.SetMember_Mobile(Aphone);
+                fc.SetMember_Age(Aage);
+                fc.SetMember_Sex(Asex);
+                fc.SetMember_UserName(Ausername);
+                fc.SetMember_Password(Apass);
+                fc.SetMember_CityId(cityid);
+
+                sendPost = new HTTPPostMemberJson(this);
+                sendPost.SetMember_Json(_json);
+                sendPost.execute();
+            }
 
 
 

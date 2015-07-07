@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -32,6 +33,7 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
 
     String mesage;
     Integer ID=0;
+    ProgressDialog pd;
     FieldClass fc=new FieldClass();
     private String[] blogTitles;
     Context context;
@@ -47,35 +49,15 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
     }
 
 
-    /**
-     *
-     */
+    @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        try {
-            JSONObject area = new JSONObject(mesage);
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
-            ID = area.getInt("Id");
-            fc.SetMember_Name(area.getString("Name"));
-            fc.SetMember_Email(area.getString("Email"));
-            fc.SetMember_Mobile(area.getString("Mobile"));
-            fc.SetMember_Age(area.getInt("Age"));
-            fc.SetMember_Sex(area.getBoolean("Sex"));
-            fc.SetMember_UserName(area.getString("UserName"));
-            fc.SetMember_Password(area.getString("Password"));
-            fc.SetMember_CityId(area.getInt("CityId"));
-
-            if (ID >= 0) {
-                dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
-
-            } else {
-                Toast.makeText(context, "کاربر ساخته نشد دوباره امتحان کنید", Toast.LENGTH_LONG).show();
-            }
-        }
-        catch (Exception e){
-            Log.e("Exception SaVe", e.toString());
-        }
+        pd = new ProgressDialog(context);
+        pd.setMessage("در حال بروزرسانی...");
+        pd.setCancelable(false);
+        pd.show();
     }
+
 
     /**
      *
@@ -148,8 +130,44 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
      * @param result
      */
     protected void onPostExecute(Integer result) {
-            /* Download complete. Lets update UI */
-        // progressDialog.dismiss();
+
+
+        DataBaseSqlite dbs = new DataBaseSqlite(context);
+
+        super.onPostExecute(result);
+
+        if(result==1)
+        {
+
+            try {
+                JSONObject area = new JSONObject(mesage);
+                ID = area.getInt("Id");
+                fc.SetMember_Name(area.getString("Name"));
+                fc.SetMember_Email(area.getString("Email"));
+                fc.SetMember_Mobile(area.getString("Mobile"));
+                fc.SetMember_Age(area.getInt("Age"));
+                fc.SetMember_Sex(area.getBoolean("Sex"));
+                fc.SetMember_UserName(area.getString("UserName"));
+                fc.SetMember_Password(area.getString("Password"));
+                fc.SetMember_CityId(area.getInt("CityId"));
+
+                if (ID >= 0) {
+                    dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
+                } else {
+                    pd.dismiss();
+                    Toast.makeText(context, "کاربر ساخته نشد دوباره امتحان کنید", Toast.LENGTH_LONG).show();
+                }
+                pd.dismiss();
+            }
+            catch (Exception e){
+                Log.e("Exception SaVe", e.toString());
+                pd.dismiss();
+            }
+        }
+        else
+        {
+            pd.dismiss();
+        }
 
     }
 

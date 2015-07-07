@@ -1,5 +1,7 @@
 package com.ariana.shahre_ma;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -24,6 +26,8 @@ import com.ariana.shahre_ma.MyProfile.My_Profile;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetAreaJosn;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBookMarkJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessMemberJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetFieldActivityJson;
@@ -56,6 +60,7 @@ public class MainActivity extends ActionBarActivity {
     SliderLayout slider;
     DragTopLayout top;
     ActionButton Action;
+    NetState net=new NetState(this);
     Query query=new Query(this);
     private static final int PROFILE_SETTING = 1;
     private AccountHeader headerResult = null;
@@ -68,8 +73,8 @@ public class MainActivity extends ActionBarActivity {
         //findViewsAndConfigure();
 
 
-        NetState ns=new NetState(this);
-        if(ns.checkInternetConnection()==false) {
+
+        if(net.checkInternetConnection()==false) {
             Toast.makeText(getApplication(),"شبکه اینترنت قطع می باشد",Toast.LENGTH_LONG).show();
         }
 
@@ -311,9 +316,27 @@ public class MainActivity extends ActionBarActivity {
 
                }
                if (position == 2) {
-                   Intent i = new Intent(getApplicationContext(), My_Business.class);
-                   startActivity(i);
 
+                   if (net.checkInternetConnection()==false) {
+                       AlertDialog alertDialog=new AlertDialog.Builder(MainActivity.this).create();
+                       alertDialog.setTitle("هشدار");
+                       alertDialog.setMessage("اینترنت قطع می باشد");
+                       alertDialog.setButton("خب",new DialogInterface.OnClickListener() {
+                           public void onClick(DialogInterface dialog, int which) {
+                               // Write your code here to execute after dialog closed
+                               //  Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
+
+                           }
+                       });
+                       alertDialog.show();
+                   } else {
+
+                       HTTPGetBusinessMemberJson httpGetBusinessMemberJson=new HTTPGetBusinessMemberJson(MainActivity.this);
+                       httpGetBusinessMemberJson.SetUrl_businessMember(1342);
+                       httpGetBusinessMemberJson.execute();
+                       /*Intent i = new Intent(getApplicationContext(), My_Business.class);
+                       startActivity(i);*/
+                   }
 
                }
                if (position == 4) {

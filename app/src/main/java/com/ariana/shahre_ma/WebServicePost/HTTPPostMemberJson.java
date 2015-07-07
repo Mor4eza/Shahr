@@ -5,10 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.MainActivity;
 import com.ariana.shahre_ma.MyProfile.Log_In;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetLoginJson;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -23,6 +26,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URLEncoder;
 
 /**
  * Created by ariana2 on 6/5/2015.
@@ -79,7 +83,7 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
     protected void onPreExecute() {
         super.onPreExecute();
         pd = new ProgressDialog(context);
-        pd.setMessage("در حال بروزرسانی...");
+        pd.setMessage("در حال ایجاد کاربر");
         pd.setCancelable(false);
         pd.show();
     }
@@ -133,17 +137,18 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
         DataBaseSqlite dbs = new DataBaseSqlite(context);
                 Integer ID = Integer.parseInt(GetResponse());
                 if (ID >= 0) {
-                    Log.i("fc.GetMember_Name()",fc.GetMember_Name());
+                    Log.i("fc.GetMember_Name()", fc.GetMember_Name());
                     dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
                     pd.dismiss();
-                    Intent i = new Intent(this.context, Log_In.class);
+
+
+                   Intent i = new Intent(this.context,MainActivity.class);
                     this.context.startActivity(i);
-                   // Toast.makeText(context, "کاربر ثبت شد!", Toast.LENGTH_LONG).show();
+
                 }
                 else
                 {
                     pd.dismiss();
-                  //  Toast.makeText(context, "کاربر ساخته نشد دوباره امتحان کنید", Toast.LENGTH_LONG).show();
                 }
 
 

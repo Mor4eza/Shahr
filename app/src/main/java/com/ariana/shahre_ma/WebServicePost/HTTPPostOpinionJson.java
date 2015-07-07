@@ -37,7 +37,7 @@ public class HTTPPostOpinionJson extends AsyncTask<String, Void, Integer>
     private static String data_json;
     // variable response
     private  static String response_message;
-
+    ProgressDialog pd;
 
     FieldClass fc=new FieldClass();
     private ProgressDialog dialog;
@@ -74,14 +74,13 @@ public class HTTPPostOpinionJson extends AsyncTask<String, Void, Integer>
     }
 
 
-    protected void onPostExecute(String file_url) {
-        try {
-
-            this.dialog.setMessage("صبر کنید ...");
-            this.dialog.show();
-
-        } catch (Exception e) {
-        }
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        pd = new ProgressDialog(context);
+        pd.setMessage("ارسال...");
+        pd.setCancelable(false);
+        pd.show();
     }
 
     @Override
@@ -140,19 +139,20 @@ public class HTTPPostOpinionJson extends AsyncTask<String, Void, Integer>
                 dbs.Add_opinion(ID, fc.GetOpinion_Description(), fc.GetOpinion_Date(), fc.GetOpinion_Erja(), fc.GetOpinion_CountLike(), fc.GetOpinion_CountDisLike(), fc.GetOpinion_MemberName());
 
 
-                    HTTPGetOpinionJson httponion = new HTTPGetOpinionJson(context);
+                  /*  HTTPGetOpinionJson httponion = new HTTPGetOpinionJson(context);
                     httponion.seturl_opinion(fc.GetBusiness_Id());
-                    httponion.execute();
-
+                    httponion.execute();*/
+                pd.dismiss();
 
 
             } else {
                 Toast.makeText(context, "کاربر ساخته نشد دوباره امتحان کنید", Toast.LENGTH_LONG).show();
+                pd.dismiss();
             }
         }
         else
         {
-
+            pd.dismiss();
         }
 
     }

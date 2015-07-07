@@ -165,6 +165,9 @@ Query query;
                 httplike.Setopinionid(Integer.parseInt((String) tvcomm.getTag()));
                 httplike.execute();
 
+             /*   fc.SetCount_like(Integer.parseInt(tvlike.getText().toString()));
+                fc.SetCount_Dislike(Integer.parseInt(tvdisslike.getText().toString()));*/
+
                 //Log.i("DissLike", "onClick " + getPosition() + " " + tvcomm.getText().toString());
             }
 

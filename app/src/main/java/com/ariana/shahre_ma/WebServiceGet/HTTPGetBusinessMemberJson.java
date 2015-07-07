@@ -148,7 +148,8 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String, String, String>
 
             if(len==0) {
                 //  Toast.makeText(get, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
-                Log.i("Count Business : ","فروشگاه ثبت نشد");
+                Intent i = new Intent(this.context, My_Business.class);
+                this.context.startActivity(i);
 
             }
             else {
@@ -218,12 +219,19 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String, String, String>
                 expirationdate[i]=area.getString("ExpirationDate");
                 fax[i]=area.getString("Fax");
                 field1[i]=area.getInt("Field1");
+                Log.i("Field1",String.valueOf(area.getInt("Field1")));
                 field2[i]=area.getInt("Field2");
+                Log.i("Field1",String.valueOf(area.getInt("Field2")));
                 field3[i]=area.getInt("Field3");
+                Log.i("Field1",String.valueOf(area.getInt("Field3")));
                 field4[i]=area.getInt("Field4");
+                Log.i("Field1",String.valueOf(area.getInt("Field4")));
                 field5[i]=area.getInt("Field5");
+                Log.i("Field1",String.valueOf(area.getInt("Field5")));
                 field6[i] = area.getInt("Field6");
+                Log.i("Field1",String.valueOf(area.getInt("Field6")));
                 field7[i] = area.getInt("Field7");
+                Log.i("Field1",String.valueOf(area.getInt("Field7")));
 
                 fc.SetBusiness_Id(area.getInt("Id"));
 

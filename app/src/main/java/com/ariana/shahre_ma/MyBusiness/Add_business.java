@@ -138,13 +138,21 @@ public class Add_business extends ActionBarActivity {
         rows2.moveToFirst();
         Market_zone.setText(rows2.getString(0));
 
-        for(int i=0;i<6;i++)
-        {
-            if(rows.getInt(21+i)>0){
-            Cursor rows3=db.select_FieldActivityName(rows.getInt(21+i));
+       // for(int i=0;i<6;i++)
+        //{
+           // if(rows.getInt(21+i)>0) {
+        try {
+            Cursor rows3 = db.select_FieldActivityName(rows.getInt(21));
             rows3.moveToFirst();
-            Market_field.setText(rows3.getString(0)+",");}
+            Log.i("FieldActivity",String.valueOf(rows.getInt(21)));
         }
+        catch (Exception e)
+        {
+            Log.i("FieldActivity",String.valueOf(rows.getInt(21)));
+            Log.i("ExceptionFieldActivity", e.toString());
+        }
+           // }
+        //}
 
        // Market_gharar.setText(rows.getString(8));
     }

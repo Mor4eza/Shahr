@@ -70,6 +70,9 @@ public class FieldClass
     private static String Longtiude_Business;
 
 
+    private static Integer Count_Like;
+    private static Integer Count_DisLike;
+
     private static List<String> NameSubset=new ArrayList<String>();
     // get/set
 
@@ -434,6 +437,26 @@ public class FieldClass
         return this.SubsetId;
     }
 
+    /**
+     * Get and Set Count Like/DisLike
+     */
+    public void  SetCount_like(Integer like)
+    {
+     Count_Like=like;
+    }
+    public void  SetCount_Dislike(Integer dislike)
+    {
+        Count_DisLike=dislike;
+    }
+    public Integer  GetCount_like()
+    {
+        return  Count_Like;
+    }
+
+    public Integer  GetCount_Dislike()
+    {
+        return  Count_DisLike;
+    }
     /**
      * Get and Set Namesubset Array
      * Type List<String>

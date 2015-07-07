@@ -2,6 +2,7 @@ package com.ariana.shahre_ma.MyBusiness;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -29,14 +30,20 @@ public class My_Business extends ActionBarActivity {
 
         Intialize();
         Log.i("BusinessID",String.valueOf(fc.GetBusiness_Id()));
-        DataBaseSqlite db=new DataBaseSqlite(this);
-        Cursor rows=db.select_AllBusinessId(fc.GetBusiness_Id());
-        rows.moveToFirst();
+        try {
+            DataBaseSqlite db = new DataBaseSqlite(this);
+            Cursor rows = db.select_AllBusinessId(fc.GetBusiness_Id());
+            rows.moveToFirst();
 
-        title.setText(rows.getString(1));
-        address.setText(rows.getString(8));
-        address.setTag(rows.getString(8));
-        rate.setRating(rows.getFloat(29));
+            title.setText(rows.getString(1));
+            address.setText(rows.getString(8));
+            address.setTag(rows.getString(8));
+            rate.setRating(rows.getFloat(29));
+        }
+        catch(SQLException e)
+        {
+            Log.e("SQLException",e.toString());
+        }
 
     }
 
