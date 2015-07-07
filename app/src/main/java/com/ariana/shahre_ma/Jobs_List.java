@@ -23,6 +23,9 @@ import com.ariana.shahre_ma.job_details.Job_details;
 
 import java.util.List;
 
+import jp.wasabeef.recyclerview.animators.OvershootInLeftAnimator;
+import jp.wasabeef.recyclerview.animators.adapters.ScaleInAnimationAdapter;
+
 
 public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTextListener, SearchView.OnCloseListener{
 
@@ -73,9 +76,26 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
 
 
             mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_Jobs);
-       /*     mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-            mRecyclerView.getItemAnimator().setAddDuration(5000);
-            mRecyclerView.getItemAnimator().setChangeDuration(5000);*/
+            mRecyclerView.setItemAnimator(new OvershootInLeftAnimator());
+            mRecyclerView.getItemAnimator().setAddDuration(1000);
+            mRecyclerView.getItemAnimator().setChangeDuration(1000);
+            mRecyclerView.setHasFixedSize(true);
+            mLayoutManager = new LinearLayoutManager(this);
+            mRecyclerView.setLayoutManager(mLayoutManager);
+            job_list_Adapter = new job_list_cards_adapter(this);
+            ScaleInAnimationAdapter alphaAdapter = new ScaleInAnimationAdapter(job_list_Adapter);
+            alphaAdapter.setDuration(400);
+            mRecyclerView.setAdapter(alphaAdapter);
+            job_list_Adapter.notifyItemChanged(0);
+
+        }
+        catch (Exception e){}
+    }
+    private void setCardsforsearch(){
+        try {
+
+
+            mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_Jobs);
             mRecyclerView.setHasFixedSize(true);
             mLayoutManager = new LinearLayoutManager(this);
             mRecyclerView.setLayoutManager(mLayoutManager);
@@ -85,7 +105,6 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
         }
         catch (Exception e){}
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -111,7 +130,7 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
 
         }else if(id== R.id.sort){
 
-            PopupMenu popupMenu=new PopupMenu(Jobs_List.this,btnsort);
+            final PopupMenu popupMenu=new PopupMenu(Jobs_List.this,btnsort);
             popupMenu.getMenuInflater().inflate(R.menu.job_list_popupmenu, popupMenu.getMenu());
             popupMenu.show();
             popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -191,14 +210,14 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
         if(query.equals(""))
         {
             setting.saveSearchBusiness(false);
-            setCards();
+            setCardsforsearch();
 
         }
         else
         {
             setting.saveSearchBusiness(true);
             fc.SetMarket_Business(query);
-            setCards();
+            setCardsforsearch();
         }
 
         return false;
@@ -214,14 +233,14 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
         if(newText.equals("")) // Text Empty Select Business All
         {
             setting.saveSearchBusiness(false);
-            setCards();
+            setCardsforsearch();
         }
         else // Text Not Empty  Search Business
         {
 
             setting.saveSearchBusiness(true);
             fc.SetMarket_Business(newText);
-            setCards();
+            setCardsforsearch();
         }
         return false;
     }

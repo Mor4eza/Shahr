@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,7 +21,7 @@ import fr.quentinklein.slt.TrackerSettings;
 public class My_Business_Map extends ActionBarActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-
+FieldClass fc=new FieldClass();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +31,7 @@ public class My_Business_Map extends ActionBarActivity {
         mMap.getUiSettings().setMapToolbarEnabled(false);
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
-        Toast.makeText(getApplicationContext(),"نشانگر را گرفته و به مکان مورد نظر انتقال دهید",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"انگشت خود را بر روی موقیعت مورد نظر چند لحظه نگه دارید",Toast.LENGTH_LONG).show();
         TrackerSettings settings =
                 new TrackerSettings()
                         .setUseGPS(true)
@@ -55,20 +56,15 @@ public class My_Business_Map extends ActionBarActivity {
             }
         };
 
-        mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
-            public void onMarkerDragStart(Marker marker) {
+            public void onMapLongClick(LatLng latLng) {
+                Toast.makeText(getApplicationContext(),"اینجا",Toast.LENGTH_LONG).show();
+                Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(latLng.latitude,latLng.longitude)).title("\u200e" + "اینجا"));
 
-            }
-
-            @Override
-            public void onMarkerDrag(Marker marker) {
-
-            }
-
-            @Override
-            public void onMarkerDragEnd(Marker marker) {
-            Toast.makeText(getApplicationContext(),"انتخاب شد" +marker.getPosition().toString(),Toast.LENGTH_LONG).show();
+                marker.showInfoWindow();
+                fc.SetLatitude_Business(String.valueOf(latLng.latitude));
+                fc.SetLongtiude_Business(String.valueOf(latLng.longitude));
             }
         });
 

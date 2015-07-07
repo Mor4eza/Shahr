@@ -1,10 +1,8 @@
-
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -114,16 +112,20 @@
 
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.dd.CircularProgressButton
+        android:id="@+id/pButton"
+        android:layout_width="196dp"
+        android:layout_height="64dp"
         android:layout_gravity="center"
-        android:text="ثبت نام"
-        android:id="@+id/btnSign_up"
-        android:layout_marginTop="15dp"
-        android:height="40dp"
+        android:layout_marginTop="16dp"
+        android:textColor="#ff000000"
+        android:textSize="18sp"
+        android:onClick="AddTOmember"
+        app:cpb_cornerRadius="48dp"
+        app:cpb_textComplete="ثبت شد"
+        app:cpb_textError="خطا"
+        app:cpb_textIdle="ثبت نام" />
 
-        android:onClick="AddTOmember" />
 
     <Button
         android:layout_width="wrap_content"
@@ -132,6 +134,7 @@
         android:id="@+id/button"
         android:layout_gravity="right"
         android:onClick="fahmidan" />
+
 
 </LinearLayout>
 </ScrollView>

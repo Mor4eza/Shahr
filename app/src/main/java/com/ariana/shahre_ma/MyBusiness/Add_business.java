@@ -138,21 +138,17 @@ public class Add_business extends ActionBarActivity {
         rows2.moveToFirst();
         Market_zone.setText(rows2.getString(0));
 
-       // for(int i=0;i<6;i++)
-        //{
-           // if(rows.getInt(21+i)>0) {
-        try {
-            Cursor rows3 = db.select_FieldActivityName(rows.getInt(21));
-            rows3.moveToFirst();
-            Log.i("FieldActivity",String.valueOf(rows.getInt(21)));
-        }
-        catch (Exception e)
+        for(int i=0;i<7;i++)
         {
-            Log.i("FieldActivity",String.valueOf(rows.getInt(21)));
-            Log.i("ExceptionFieldActivity", e.toString());
+            Log.i("CounterFor", String.valueOf(rows.getInt((21)+(i))));
+            if(rows.getInt((21)+(i))>0) {
+
+            Cursor rows3 = db.select_FieldActivityName(rows.getInt((21)+(i)));
+            rows3.moveToFirst();
+
+            Market_field.setText(rows3.getString(0)+",");
+            }
         }
-           // }
-        //}
 
        // Market_gharar.setText(rows.getString(8));
     }
@@ -369,7 +365,7 @@ public class Add_business extends ActionBarActivity {
                         Market_owner.getText().toString(), Market_address.getText().toString(),
                         Market_desc.getText().toString(),dt.Now(),EXPDateTime(),"null"
                         ,SubsetID(Market_subset.getText().toString().trim()),
-                        "31.63636", "51.252525",AreaID(Market_zone.getText().toString().trim()),"null","null",Fields_ID[0],Fields_ID[1],Fields_ID[2],
+                        fc.GetLatitude_Business(),fc.GetLongtiude_Business(),AreaID(Market_zone.getText().toString().trim()),"null","null",Fields_ID[0],Fields_ID[1],Fields_ID[2],
                         Fields_ID[3],Fields_ID[4],Fields_ID[5],Fields_ID[6]);
 
 

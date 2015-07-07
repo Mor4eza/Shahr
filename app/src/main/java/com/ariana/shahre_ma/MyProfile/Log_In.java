@@ -50,7 +50,7 @@ public class Log_In extends ActionBarActivity {
         password = (EditText) findViewById(R.id.et_password);
         error = (TextView) findViewById(R.id.tverror);
 
-     /*   try {
+        try {
             DataBaseSqlite db = new DataBaseSqlite(this);
             Cursor allrows = db.select_Member();
             allrows.moveToNext();
@@ -58,7 +58,7 @@ public class Log_In extends ActionBarActivity {
             password.setText(allrows.getString(7));
 
         } catch (Exception e) {
-        }*/
+        }
     }
 
     public void register(View v) {
