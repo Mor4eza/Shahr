@@ -172,8 +172,8 @@ private  static Context context;
 
         @Override
         public void onClick(View v) {
-         /*   fc.SetMarket_Business(tvNature.getText().toString());
-            fc.SetAddress_Business(tvDesNature.getText().toString());*/
+            fc.SetMarket_Business(tvNature.getText().toString());
+           // fc.SetAddress_Business(tvDesNature.getText().toString());*/
 
             fc.SetBusiness_Id((Integer)rates.getTag());
             Intent i =new Intent(context,Job_details.class);

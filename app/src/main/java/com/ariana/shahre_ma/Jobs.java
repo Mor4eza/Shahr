@@ -129,7 +129,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
         };
         //expListView.setAdapter(expListAdapter);*/
-        
+
         expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
             @Override
@@ -375,9 +375,9 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_Map) {
-            Intent i = new Intent(this,MapsActivity.class);
-            startActivity(i);
+        if (id == R.id.select_city) {
+            CityDialog cd = new CityDialog(this);
+            cd.show();
             return true;
         }
 

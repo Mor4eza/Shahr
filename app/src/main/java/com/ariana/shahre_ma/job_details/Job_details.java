@@ -58,7 +58,8 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_details);
-query=new Query(this);
+        setTitle(fc.GetMarket_Business());
+        query=new Query(this);
 
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();

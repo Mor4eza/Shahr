@@ -44,7 +44,7 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jobs__list);
-        
+            setTitle(fc.GetSelected_job());
                 setCards();
 
 
