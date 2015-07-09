@@ -146,7 +146,7 @@ public class Add_business extends ActionBarActivity {
                     Cursor rows3 = db.select_FieldActivityName(rows.getInt((21) + (i)));
                     rows3.moveToFirst();
 
-                    Market_field.setText(Market_field.getText().toString() + rows3.getString(0) + ",");
+                    Market_field.setText(Market_field.getText().toString() + rows3.getString(0) + ", ");
                 }
             }
         }
@@ -272,7 +272,7 @@ public class Add_business extends ActionBarActivity {
             alertDialog.show();
 
         }
-  /*      else if(StrAreaId==0)
+        else if(AreaID(Market_zone.getText().toString().trim())>0)
         {
             AlertDialog alertDialog = new AlertDialog.Builder(Add_business.this).create();
             alertDialog.setTitle("هشدار ");
@@ -290,7 +290,7 @@ public class Add_business extends ActionBarActivity {
 
         }
 
-        else if(StrSubsetId==0)
+        else if(SubsetID(Market_subset.getText().toString().trim())>0)
         {
             AlertDialog alertDialog = new AlertDialog.Builder(Add_business.this).create();
             alertDialog.setTitle("هشدار ");
@@ -306,7 +306,7 @@ public class Add_business extends ActionBarActivity {
             // Showing Alert Message
             alertDialog.show();
 
-        }*/
+        }
 
         else if(Fields_ID[0]==0 && Fields_ID[1]==0 && Fields_ID[2]==0 && Fields_ID[3]==0 && Fields_ID[4]==0 &&Fields_ID[5]==0 && Fields_ID[6]==0  )
         {
@@ -382,11 +382,11 @@ public class Add_business extends ActionBarActivity {
                Log.i("BusinessID",String.valueOf(fc.GetBusiness_Id()));
                 if (fc.GetBusiness_Id()==0) {
 
-                str = json.getBusinessTOjsonArray(fc.GetBusiness_Id(),query.getMemberId(), Market_name.getText().toString(),
-                        Market_tell.getText().toString(), Market_mobile.getText().toString(),
-                        Market_fax.getText().toString(), Market_email.getText().toString(),
-                        Market_owner.getText().toString(), Market_address.getText().toString(),
-                        Market_desc.getText().toString(), dt.Now(), EXPDateTime(), "null"
+                str = json.getBusinessTOjsonArray(fc.GetBusiness_Id(),query.getMemberId(), Market_name.getText().toString().trim(),
+                        Market_tell.getText().toString().trim(), Market_mobile.getText().toString().trim(),
+                        Market_fax.getText().toString().trim(), Market_email.getText().toString().trim(),
+                        Market_owner.getText().toString().trim(), Market_address.getText().toString().trim(),
+                        Market_desc.getText().toString().trim(), dt.Now(), EXPDateTime(), "null"
                         , SubsetID(Market_subset.getText().toString().trim()),
                         fc.GetLatitude_Business(), fc.GetLongtiude_Business(), AreaID(Market_zone.getText().toString().trim()), "null", "null", Fields_ID[0], Fields_ID[1], Fields_ID[2],
                         Fields_ID[3], Fields_ID[4], Fields_ID[5], Fields_ID[6]);
@@ -399,11 +399,11 @@ public class Add_business extends ActionBarActivity {
                 }
             else {
 
-                str = json.getBusinessTOjson(fc.GetBusiness_Id(), Market_name.getText().toString(),
-                        Market_tell.getText().toString(), Market_mobile.getText().toString(),
-                        Market_fax.getText().toString(), Market_email.getText().toString(),
-                        Market_owner.getText().toString(), Market_address.getText().toString(),
-                        Market_desc.getText().toString(), dt.Now(), EXPDateTime(), "null"
+                str = json.getBusinessTOjson(fc.GetBusiness_Id(), Market_name.getText().toString().trim(),
+                        Market_tell.getText().toString().trim(), Market_mobile.getText().toString().trim(),
+                        Market_fax.getText().toString().trim(), Market_email.getText().toString().trim(),
+                        Market_owner.getText().toString().trim(), Market_address.getText().toString().trim(),
+                        Market_desc.getText().toString().trim(), dt.Now(), EXPDateTime(), "null"
                         , SubsetID(Market_subset.getText().toString().trim()),
                         fc.GetLatitude_Business(), fc.GetLongtiude_Business(), AreaID(Market_zone.getText().toString().trim()), "null", "null", Fields_ID[0], Fields_ID[1], Fields_ID[2],
                         Fields_ID[3], Fields_ID[4], Fields_ID[5], Fields_ID[6]);
