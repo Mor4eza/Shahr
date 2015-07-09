@@ -56,11 +56,11 @@ public class My_Profile extends Activity {
 
             DataBaseSqlite db = new DataBaseSqlite(this);
             Cursor allrows = db.select_Member();
-            allrows.moveToNext();
+            allrows.moveToFirst();
             tv_user_email.setText(allrows.getString(2));
             tv_user_phone.setText(allrows.getString(3));
             tv_user_age.setText(String.valueOf(allrows.getInt(4)));
-            tv_user_name.setText(allrows.getString(6));
+            tv_user_name.setText(allrows.getString(1));
             String sex=allrows.getString(5);
                 if(sex.equals("true"))
                     tv_user_sex.setText("مرد");

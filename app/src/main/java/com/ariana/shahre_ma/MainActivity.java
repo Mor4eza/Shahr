@@ -344,12 +344,13 @@ public class MainActivity extends ActionBarActivity {
                    try {
                        DataBaseSqlite db = new DataBaseSqlite(MainActivity.this);
                        Cursor cursor = db.select_Member();
-                       cursor.moveToNext();
-                       if (cursor.getString(6).equals(null)) {
-
-                       } else {
+                       cursor.moveToFirst();
+                       Log.i("memberID",String.valueOf(cursor.getInt(0)));
+                       if (cursor.getInt(0)>0) {
                            Intent i = new Intent(getApplicationContext(), My_Profile.class);
                            startActivity(i);
+                       } else {
+                           Toast.makeText(getApplicationContext(), "وارد حساب خود نشده اید...!", Toast.LENGTH_LONG).show();
                        }
                    } catch (Exception e) {
                        Toast.makeText(getApplicationContext(), "وارد حساب خود نشده اید...!", Toast.LENGTH_LONG).show();
