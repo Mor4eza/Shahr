@@ -2,11 +2,13 @@ package com.ariana.shahre_ma.ListExpand;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -125,10 +127,10 @@ public class MyListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getGroupView(int groupPosition, boolean isLastChild, View view,
+    public View getGroupView(int groupPosition, boolean isExpanded, View view,
                              ViewGroup parent) {
 
-        Continent continent = (Continent) getGroup(groupPosition);
+        final Continent continent = (Continent) getGroup(groupPosition);
         if (view == null) {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = layoutInflater.inflate(R.layout.group_item, null);
@@ -136,7 +138,13 @@ public class MyListAdapter extends BaseExpandableListAdapter {
 
         TextView heading = (TextView) view.findViewById(R.id.laptop1);
         heading.setText(continent.getName().trim());
+        final RelativeLayout header=(RelativeLayout)view.findViewById(R.id.relative_parent);
 
+        if (isExpanded) {
+            view.setBackgroundColor(context.getResources().getColor(R.color.blue_focused));
+        } else {
+            view.setBackgroundColor(context.getResources().getColor(R.color.white));
+        }
         return view;
     }
 

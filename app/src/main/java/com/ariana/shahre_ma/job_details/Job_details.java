@@ -58,7 +58,8 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_details);
-query=new Query(this);
+        setTitle(fc.GetMarket_Business());
+        query=new Query(this);
 
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
@@ -275,6 +276,15 @@ query=new Query(this);
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        //handle the back press :D close the drawer first and if the drawer is closed close the activity
+            this.finish();
+            super.onBackPressed();
+
+    }
+
 
 
 }

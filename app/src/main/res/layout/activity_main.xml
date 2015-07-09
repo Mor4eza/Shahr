@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
                     android:background="#ff2195f2"
-                    android:textColor="#ff000000"
+                    android:textColor="#ffffffff"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp" />
 

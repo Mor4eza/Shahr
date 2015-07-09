@@ -181,7 +181,7 @@ public class MainActivity extends ActionBarActivity {
 
 
     public static class MyPagerAdapter extends FragmentPagerAdapter {
-        private static int NUM_ITEMS = 3;
+        private static int NUM_ITEMS = 2;
 
         public MyPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -202,8 +202,8 @@ public class MainActivity extends ActionBarActivity {
                     return Frag_main_1.newInstance(1,"new");
                 case 1: // Fragment # 0 - This will show FirstFragment different title
                     return Frag_main_1.newInstance(2, "Page # 2");
-                case 2: // Fragment # 1 - This will show SecondFragment
-                    return Frag_main_1.newInstance(3, "Page # 3");
+          /*      case 2: // Fragment # 1 - This will show SecondFragment
+                    return Frag_main_1.newInstance(3, "Page # 3");*/
                 default:
                     return null;
             }
@@ -217,8 +217,8 @@ public class MainActivity extends ActionBarActivity {
                     return "مشاغل برتر";
                 case 1:
                     return "تخفیف های برتر";
-                case 2:
-                return "برترین های بازار";
+           /*     case 2:
+                return "برترین های بازار";*/
 
             }
           return null;
@@ -292,12 +292,12 @@ public class MainActivity extends ActionBarActivity {
                 new PrimaryDrawerItem().withName(R.string.Works).withIcon(FontAwesome.Icon.faw_money),
                 new PrimaryDrawerItem().withName(R.string.Off).withIcon(FontAwesome.Icon.faw_coffee),
                 new PrimaryDrawerItem().withName(R.string.My_business).withIcon(FontAwesome.Icon.faw_briefcase),
-                new SectionDrawerItem().withName(R.string.My_city),
+                new SectionDrawerItem().withName(""),
                 new SecondaryDrawerItem().withName(R.string.My_Account).withIcon(FontAwesome.Icon.faw_user),
                 new SecondaryDrawerItem().withName(R.string.My_Fav).withIcon(FontAwesome.Icon.faw_bookmark),
                 new SecondaryDrawerItem().withName(R.string.My_city).withIcon(FontAwesome.Icon.faw_building),
                 new SecondaryDrawerItem().withName(R.string.My_Intrest).withIcon(FontAwesome.Icon.faw_heart),
-                new SectionDrawerItem().withName("برنامه"),
+                new SectionDrawerItem().withName(""),
                 new SecondaryDrawerItem().withName(R.string.action_settings).withIcon(FontAwesome.Icon.faw_gears),
                 new DividerDrawerItem()
         )
