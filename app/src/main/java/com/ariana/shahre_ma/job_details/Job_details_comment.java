@@ -121,4 +121,12 @@ query=new Query(getActivity());
         }
 
     }
+
+    @Override
+    public void onBackPressed() {
+        //handle the back press :D close the drawer first and if the drawer is closed close the activity
+        this.finish();
+        super.onBackPressed();
+
+    }
 }

@@ -7,6 +7,7 @@ import android.app.SearchableInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -35,6 +36,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
+
+import static android.graphics.Color.WHITE;
 
 
 public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
@@ -126,12 +129,13 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
         };
         //expListView.setAdapter(expListAdapter);*/
-
-
+        
         expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
             @Override
             public void onGroupExpand(int groupPosition) {
+
+
                 if (lastExpandedPosition != -1
                         && groupPosition != lastExpandedPosition) {
                     expListView.collapseGroup(lastExpandedPosition);
