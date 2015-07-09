@@ -3,6 +3,8 @@ package com.ariana.shahre_ma.Cards;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -98,6 +100,11 @@ private  static Context context;
                         nature.setRate(allrows.getDouble(29));
                         nature.setmId(allrows.getInt(0));
 
+                        if(allrows.getString(3).equals("")){
+                            nature.setTell(allrows.getString(4));
+                        }else{
+                            nature.setTell(allrows.getString(3));
+                        }
                         mItems.add(nature);
 
                     } while (allrows.moveToNext());
@@ -129,6 +136,7 @@ private  static Context context;
         viewHolder.imgThumbnail.setImageResource(nature.getThumbnail());
         viewHolder.rates.setRating((float) nature.getRate());
         viewHolder.rates.setTag(nature.getmId());
+        viewHolder.tvTell.setText(nature.getTell());
     }
 
     @Override
@@ -157,6 +165,8 @@ private  static Context context;
         public TextView tvNature;
         public TextView tvDesNature;
         public RatingBar rates;
+        public TextView tvTell;
+        public CardView cards;
         FieldClass fc=new FieldClass();
 
         public ViewHolder(View itemView) {
@@ -165,10 +175,22 @@ private  static Context context;
             tvNature = (TextView)itemView.findViewById(R.id.tv_title);
             tvDesNature = (TextView)itemView.findViewById(R.id.tv_address);
             rates = (RatingBar)itemView.findViewById(R.id.rates);
-
+            tvTell=(TextView)itemView.findViewById(R.id.tv_tell);
+            cards=(CardView)itemView.findViewById(R.id.cards);
             imgThumbnail.setOnClickListener(this);
 
+          /*  tvTell.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse(tvTell.getText().toString()));
+                    context.startActivity(intent);
+                }
+            });
+*/
         }
+
 
         @Override
         public void onClick(View v) {
