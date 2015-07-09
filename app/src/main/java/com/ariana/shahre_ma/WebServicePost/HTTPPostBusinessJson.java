@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.WebServicePost;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -32,7 +33,7 @@ public class HTTPPostBusinessJson extends AsyncTask<String,Long,Integer>
     Query query;
     FieldClass fc=new FieldClass();
     Context context;
-
+    ProgressDialog pd;
 
     /**
      *
@@ -60,6 +61,14 @@ public class HTTPPostBusinessJson extends AsyncTask<String,Long,Integer>
         return jsonstring;
     }
 
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        pd = new ProgressDialog(context);
+        pd.setMessage("ثبت...");
+        pd.setCancelable(false);
+        pd.show();
+    }
     /**
      *
      * @param params
@@ -104,12 +113,13 @@ public class HTTPPostBusinessJson extends AsyncTask<String,Long,Integer>
         super.onPostExecute(integer);
         if(integer==1)
         {
+            pd.dismiss();
             Intent i = new Intent(this.context, MainActivity.class);
             this.context.startActivity(i);
         }
         else
         {
-
+            pd.dismiss();
         }
     }
 }

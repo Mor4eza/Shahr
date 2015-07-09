@@ -63,7 +63,7 @@ public class DateTime
 
     public String Time()
     {
-        sdf=new SimpleDateFormat("hh:mm");
+        sdf=new SimpleDateFormat("HH:mm");
         currentDateandTime = sdf.format(new Date());
         return currentDateandTime.toString();
     }

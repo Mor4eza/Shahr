@@ -107,6 +107,7 @@ public class HTTPGetCollectionJson extends AsyncTask<String, String, String> {
             });
 
         } catch (Exception e) {
+            pd.dismiss();
             Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
             Log.i("Exception",e.toString());
         }

@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -24,6 +25,7 @@ import java.io.InputStreamReader;
  */
 public class HTTPSendRateURL extends AsyncTask<String, Void, Boolean> {
 
+    ProgressDialog pd;
     private String[] blogTitles;
     private static final String TAG = "Http Connection";
     private  String mesage;
@@ -65,7 +67,10 @@ public class HTTPSendRateURL extends AsyncTask<String, Void, Boolean> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-
+        pd = new ProgressDialog(context);
+        pd.setMessage("ارسال...");
+        pd.setCancelable(false);
+        pd.show();
     }
 
     @Override
@@ -106,9 +111,9 @@ public class HTTPSendRateURL extends AsyncTask<String, Void, Boolean> {
 
         if (result == true) {
 
-
+            pd.dismiss();
         } else {
-
+            pd.dismiss();
         }
     }
 

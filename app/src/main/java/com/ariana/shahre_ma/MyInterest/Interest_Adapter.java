@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Jobs_List;
@@ -91,6 +92,9 @@ public class Interest_Adapter extends BaseExpandableListAdapter {
                 if (star.getTag().toString().equals(country.getName()))
                 {
                     star.setImageDrawable(context.getResources().getDrawable(R.drawable.abc_btn_rating_star_on_mtrl_alpha));
+                    DataBaseSqlite db=new DataBaseSqlite(context);
+                    Query query=new Query(context);
+                    db.Add_Interest(query.getsubsetID(star.getTag().toString()),query.getMemberId());
                 }
             }
 

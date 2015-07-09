@@ -29,13 +29,22 @@ public class HTTPGetInterestJson  extends AsyncTask<String, String, String>
     public HTTPGetInterestJson(Context c) {
         context = c;
     }
-    private static final String url_collection="http://test.shahrma.com/api/ApiGiveInterest?memberId=1";
+    private static  String url_Interest;
 
     Jobs job=new Jobs();
     Integer subsetid[];
     Integer memberid[];
     Integer len;
 
+    public void SetUrl_Interest(Integer memberid)
+    {
+        url_Interest ="http://test.shahrma.com/api/ApiGiveInterest?memberId="+memberid;
+    }
+
+    private String getUrl_Interest()
+    {
+        return url_Interest;
+    }
     /**
      *
      */
@@ -56,7 +65,7 @@ public class HTTPGetInterestJson  extends AsyncTask<String, String, String>
         try {
 
 
-            InputStream jsonStream = getStreamFromURL(url_collection, "GET");
+            InputStream jsonStream = getStreamFromURL(getUrl_Interest(), "GET");
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);
             onPostExecute();

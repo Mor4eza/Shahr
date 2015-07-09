@@ -130,6 +130,7 @@ public class Add_business extends ActionBarActivity {
             Market_email.setText(rows.getString(6));
             Market_owner.setText(rows.getString(7));
             Market_address.setText(rows.getString(8));
+            Market_desc.setText(rows.getString(9));
 
             Cursor rows1 = db.select_SubsetName(rows.getInt(14));
             rows1.moveToFirst();
@@ -272,7 +273,7 @@ public class Add_business extends ActionBarActivity {
             alertDialog.show();
 
         }
-        else if(AreaID(Market_zone.getText().toString().trim())>0)
+     /*   else if(AreaID(Market_zone.getText().toString().trim())>0)
         {
             AlertDialog alertDialog = new AlertDialog.Builder(Add_business.this).create();
             alertDialog.setTitle("هشدار ");
@@ -288,9 +289,9 @@ public class Add_business extends ActionBarActivity {
             // Showing Alert Message
             alertDialog.show();
 
-        }
+        }*/
 
-        else if(SubsetID(Market_subset.getText().toString().trim())>0)
+       /* else if(SubsetID(Market_subset.getText().toString().trim())>0)
         {
             AlertDialog alertDialog = new AlertDialog.Builder(Add_business.this).create();
             alertDialog.setTitle("هشدار ");
@@ -306,7 +307,7 @@ public class Add_business extends ActionBarActivity {
             // Showing Alert Message
             alertDialog.show();
 
-        }
+        }*/
 
         else if(Fields_ID[0]==0 && Fields_ID[1]==0 && Fields_ID[2]==0 && Fields_ID[3]==0 && Fields_ID[4]==0 &&Fields_ID[5]==0 && Fields_ID[6]==0  )
         {

@@ -39,6 +39,8 @@ import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJsonArray;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetInterestJson;
+import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
+import com.ariana.shahre_ma.WebServicePost.HTTPPostInterestJson;
 import com.software.shell.fab.ActionButton;
 
 import java.util.ArrayList;
@@ -221,19 +223,20 @@ public class My_Interest extends ActionBarActivity implements SearchView.OnQuery
 
     }
 
-    public void SendPostInterest() {
-       /* SqliteTOjson json=new SqliteTOjson(this);
-        Toast.makeText(getApplicationContext(),json.getSqliteInterestTOjson(),Toast.LENGTH_LONG).show();
+    public void SendPostInterest(View v) {
+       SqliteTOjson json=new SqliteTOjson(this);
+        Log.i("",json.getSqliteInterestTOjson());
+
         HTTPPostInterestJson httpinterest=new HTTPPostInterestJson(this);
         httpinterest.SetInterest_Json(json.getSqliteInterestTOjson());
-        httpinterest.execute();*/
+        httpinterest.execute();
 
-        Log.i("mSwipeRefreshLayout", "true");
+    /*    Log.i("mSwipeRefreshLayout", "true");
         if (mSwipeRefreshLayout.isRefreshing()) {
             Log.i("mSwipeRefreshLayout", "true");
             mSwipeRefreshLayout.setRefreshing(false);
             Log.i("mSwipeRefreshLayout", "false");
-        }
+        }*/
 
     }
 

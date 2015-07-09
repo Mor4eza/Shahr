@@ -96,6 +96,7 @@ public class job_details_1 extends ActionBarActivity {
             address=(TextView) rootView.findViewById(R.id.market_address);
             des=(TextView) rootView.findViewById(R.id.market_desc);
             rate1=(RatingBar) rootView.findViewById(R.id.ratingBar1);
+
             display_detail();
             rates_change();
 
@@ -146,9 +147,24 @@ public class job_details_1 extends ActionBarActivity {
             web.setText(allrows.getString(6));
             owner.setText(allrows.getString(7));
             subset.setText(allrows.getString(13));
-            // zamine.setText(allrows.getString(25));
+
             address.setText(allrows.getString(8));
             des.setText(allrows.getString(9));
+
+
+                Cursor rows = mydb.select_AllBusinessId(fc.GetBusiness_Id());
+                rows.moveToFirst();
+
+                for (int i = 0; i < 7; i++) {
+                    Log.i("CounterFor", String.valueOf(rows.getInt((21) + (i))));
+                    if (rows.getInt((21) + (i)) > 0) {
+
+                        Cursor rows3 = mydb.select_FieldActivityName(rows.getInt((21) + (i)));
+                        rows3.moveToFirst();
+
+                        zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");
+                    }
+                }
 
             /*if(row_notification.getString(5).equals(time.Now()))
             {

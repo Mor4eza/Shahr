@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -27,7 +28,7 @@ public class  HTTPSendLikeURL extends AsyncTask<String, Void, Boolean> {
     private String[] blogTitles;
     private static final String TAG = "Http Connection";
     private  String mesage;
-
+    ProgressDialog pd;
     Boolean like;
     Integer opinionid;
     Integer memberid;
@@ -61,10 +62,15 @@ public class  HTTPSendLikeURL extends AsyncTask<String, Void, Boolean> {
         return url;
 
     }
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        pd = new ProgressDialog(context);
+        pd.setMessage("در حال بروزرسانی...");
 
+        pd.setCancelable(false);
+        pd.show();
     }
 
     @Override
@@ -107,9 +113,9 @@ public class  HTTPSendLikeURL extends AsyncTask<String, Void, Boolean> {
         if (result == true) {
 
             Log.i("JSONLike",mesage);
-
+            pd.dismiss();
         } else {
-
+            pd.dismiss();
         }
     }
 

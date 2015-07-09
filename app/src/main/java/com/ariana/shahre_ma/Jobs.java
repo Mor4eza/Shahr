@@ -90,8 +90,8 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         AlarmManager alarmManager = (AlarmManager)this.getSystemService(this.ALARM_SERVICE);
         final Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.add(Calendar.SECOND, 60); // first time
-        long frequency= 60000 * 1000; // in ms
+        calendar.add(Calendar.SECOND, 3); // first time
+        long frequency= 3 * 1000; // in ms
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), frequency, pendingIntent);
 
         displayList();
