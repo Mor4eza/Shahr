@@ -6,18 +6,23 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.androidmapsextensions.GoogleMap;
+import com.androidmapsextensions.Marker;
+import com.androidmapsextensions.MarkerOptions;
+import com.androidmapsextensions.SupportMapFragment;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.MyInterest.Interest_Adapter;
 import com.ariana.shahre_ma.job_details.Job_details;
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import fr.quentinklein.slt.LocationTracker;
 import fr.quentinklein.slt.TrackerSettings;
@@ -31,8 +36,12 @@ public class MapsActivity extends ActionBarActivity {
     String Market[];
     Double Rate[];
     Integer len;
+    Integer id[];
     FieldClass fc=new FieldClass();
     Query query=new Query(this);
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +50,47 @@ public class MapsActivity extends ActionBarActivity {
         mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setMapToolbarEnabled(false);
         mMap.getUiSettings().setZoomControlsEnabled(true);
+
+        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+
+
+            @Override
+            public View getInfoWindow(Marker marker) {
+
+                final View window = getLayoutInflater().inflate(
+                        R.layout.jobs_info_windows, null);
+
+                DataBaseSqlite mydb = new DataBaseSqlite(getApplicationContext());
+                Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb());
+                len=fc.GetCount_Business();
+
+
+                String title = marker.getTitle();
+                double rate = Double.parseDouble(marker.getSnippet());
+                Integer Id=marker.getData();
+                TextView tv_title = (TextView) window.findViewById(R.id.tv_info_title);
+                RatingBar Rates = (RatingBar) window.findViewById(R.id.info_rates);
+                TextView tv_id=(TextView)window.findViewById(R.id.tv_info_id);
+                tv_id.setText(String.valueOf(Id));
+
+                Rates.setRating((float) rate);
+                tv_title.setText(title);
+                return window;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+
+                return null;
+            }
+        });
+
+
+
+
+
+
+
 
         // DataBase
 
@@ -71,7 +121,7 @@ public class MapsActivity extends ActionBarActivity {
             @Override
             public void onLocationFound(Location location) {
                 // Do some stuff when a new GPS Location has been found
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()),15f));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 15f));
                 stopListen();
             }
 
@@ -81,43 +131,20 @@ public class MapsActivity extends ActionBarActivity {
             }
         };
 
-        mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
-            @Override
-            public void onMarkerDragStart(Marker marker) {
 
-            }
-
-            @Override
-            public void onMarkerDrag(Marker marker) {
-
-            }
-
-            @Override
-            public void onMarkerDragEnd(Marker marker) {
-        Toast.makeText(getApplicationContext(),String.valueOf(marker.getPosition().latitude), Toast.LENGTH_LONG).show();
-            }
-        });
-        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
-            @Override
-            public void onMapLongClick(LatLng latLng) {
-                Marker  marker = mMap.addMarker(new MarkerOptions().position(latLng).title("\u200e"+"اینجا"));
-                marker.setDraggable(true);
-            }
-        });
-
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(lat[0]), Double.parseDouble(Longt[0])), 12.0f), 2000, null);
-
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(lat[0]), Double.parseDouble(Longt[0])), 12.0f), 2000, null);
 
          mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
 
                 fc.SetMarket_Business(marker.getTitle().toString());
+                fc.SetBusiness_Id((Integer) marker.getData());
                 Toast.makeText(getApplicationContext(), marker.getTitle(), Toast.LENGTH_LONG).show();
                 Intent i=new Intent(getApplicationContext(), Job_details.class);
                 startActivity(i);
             }
-        });
+         });
     }
 
     @Override
@@ -146,7 +173,7 @@ public class MapsActivity extends ActionBarActivity {
         if (mMap == null) {
             // Try to obtain the map from the SupportMapFragment.
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
-                    .getMap();
+                    .getExtendedMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
                 setUpMap();
@@ -168,9 +195,9 @@ public class MapsActivity extends ActionBarActivity {
         Market=new String[fc.GetCount_Business()];
         Rate=new Double[fc.GetCount_Business()];
         len=fc.GetCount_Business();
+        id=new Integer[fc.GetCount_Business()];
 
         DataBaseSqlite mydb = new DataBaseSqlite(this);
-        Log.i("SubsetID",String.valueOf(fc.GetBusiness_SubsetIdb()) );
         Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb());
        try {
 
@@ -178,16 +205,14 @@ public class MapsActivity extends ActionBarActivity {
             if (allrows.moveToFirst()) {
 
                 do {
-                    Log.i("Latitude", allrows.getString(15));
-
                         Market[l] = allrows.getString(1);
                         Latitude[l] = allrows.getString(15);
                         Longtitude[l] = allrows.getString(16);
-                        Log.i("Latitude", String.valueOf(Latitude[l]));
-                        Log.i("Longtitude", String.valueOf(Longtitude[l]));
-                        Log.i("Market", String.valueOf(Market[l]));
+
                         Rate[l] = allrows.getDouble(29);
-                        Log.i("Rate", String.valueOf(Rate[l]));
+                        id[l]=allrows.getInt(0);
+
+                        Log.v("id", String.valueOf(Rate[l]));
 
                     l++;
 
@@ -199,7 +224,11 @@ public class MapsActivity extends ActionBarActivity {
             for (int i = 0; i < len; i++) {
 
                     Marker  marker = mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(Latitude[i]), Double.parseDouble(Longtitude[i] ))).title("\u200e"+Market[i]).snippet(String.valueOf(Rate[i])));
+                    marker.setData(id[i]);
                     marker.showInfoWindow();
+                    Log.i("id",String.valueOf(id[i]));
+
+
             }
 
 

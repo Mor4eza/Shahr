@@ -47,9 +47,9 @@ public class Job_details_comment extends ActionBarActivity {
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
-        RecyclerView mRecyclerView;
+        public static RecyclerView mRecyclerView;
         RecyclerView.LayoutManager mLayoutManager;
-        RecyclerView.Adapter Comment_adapter;
+        public static RecyclerView.Adapter Comment_adapter;
 
         CalendarTool ct=new CalendarTool();
         FieldClass fc = new FieldClass();

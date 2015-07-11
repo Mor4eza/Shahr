@@ -45,6 +45,30 @@ public class KeySettings
         editor.apply();
     }
 
+
+
+    /**
+     *
+     * @param cityname
+     */
+    public  void saveCityName(String cityname)
+    {
+        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
+        editor=prefernc.edit();
+        editor.putString("CityName",cityname);
+        editor.apply();
+    }
+
+    /**
+     * CityName
+     * @return
+     */
+    public String getCityName()
+    {
+        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
+        return  prefernc.getString("CityName","");
+    }
+
     /**
      * Return AM Time
      * @return

@@ -178,7 +178,8 @@ private  static Context context;
             tvTell=(TextView)itemView.findViewById(R.id.tv_tell);
             cards=(CardView)itemView.findViewById(R.id.cards);
             imgThumbnail.setOnClickListener(this);
-
+            tvNature.setOnClickListener(this);
+            cards.setOnClickListener(this);
           /*  tvTell.setOnClickListener(new View.OnClickListener() {
 
                 @Override
