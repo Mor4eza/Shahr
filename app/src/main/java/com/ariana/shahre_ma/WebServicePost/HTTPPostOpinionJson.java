@@ -139,10 +139,10 @@ public class HTTPPostOpinionJson extends AsyncTask<String, Void, Integer>
                 dbs.Add_opinion(ID, fc.GetOpinion_Description(), fc.GetOpinion_Date(), fc.GetOpinion_Erja(), fc.GetOpinion_CountLike(), fc.GetOpinion_CountDisLike(), fc.GetOpinion_MemberName());
 
 
-                  /*  HTTPGetOpinionJson httponion = new HTTPGetOpinionJson(context);
+                    HTTPGetOpinionJson httponion = new HTTPGetOpinionJson(context);
                     httponion.seturl_opinion(fc.GetBusiness_Id());
-                    httponion.execute();*/
-                pd.dismiss();
+                    httponion.execute();
+                    pd.dismiss();
 
 
             } else {

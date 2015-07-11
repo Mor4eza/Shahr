@@ -6,8 +6,10 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.Cards.Comment_Card_Adapter;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.job_details.Job_details_comment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -120,6 +122,26 @@ ProgressDialog pd;
                 dbs.Add_opinion(Id[i], description[i], date[i], erja[i], countlike[i], countdislike[i], membername[i]);
             }
             //pd.dismiss();
+
+            final Job_details_comment.PlaceholderFragment fragment=new Job_details_comment.PlaceholderFragment();
+            fragment.mRecyclerView.post(new Runnable() {
+                @Override
+                public void run() {
+
+                    Comment_Card_Adapter adapter = new Comment_Card_Adapter(context);
+                    fragment.mRecyclerView.setAdapter(adapter);
+                    fragment.mRecyclerView.scrollToPosition(adapter.getItemCount()-1);
+                    fragment.Comment_adapter.notifyDataSetChanged();
+
+
+                }
+            });
+
+
+
+
+
+
         } catch (Exception e) {
             Toast.makeText(context.getApplicationContext(), "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
         }

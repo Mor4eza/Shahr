@@ -4,12 +4,14 @@ import android.app.Dialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Settings.KeySettings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,11 @@ import java.util.List;
  */
 public class CityDialog extends Dialog {
 
+    KeySettings settings;
     Button btnchange;
+    Spinner Sp_City;
+    List<String> list;
+    ArrayAdapter<String> dataAdapter;
     public CityDialog(Context context) {
         super(context);
     }
@@ -28,11 +34,21 @@ public class CityDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.city_dialog_popup);
         super.onCreate(savedInstanceState);
+        settings=new KeySettings(getContext());
+
+        String compareValue =settings.getCityName().toString();
         sp();
+        int spinnerPosition = dataAdapter.getPosition(compareValue);
+        Sp_City.setSelection(spinnerPosition);
+
+
         btnchange = (Button)findViewById(R.id.btn_selected_city);
         btnchange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i("Spinner", Sp_City.getSelectedItem().toString());
+                settings.saveCityName(Sp_City.getSelectedItem().toString());
+
                 dismiss();
             }
         });
@@ -45,9 +61,9 @@ public class CityDialog extends Dialog {
         DataBaseSqlite db=new DataBaseSqlite(getContext());
         Cursor allrows=db.select_AllCity();
 
-        Spinner Sp_City = (Spinner) findViewById(R.id.select_city_dialog);
+        Sp_City = (Spinner) findViewById(R.id.select_city_dialog);
         Sp_City.setPrompt("انتخاب شهر:");
-        List<String> list = new ArrayList<String>();
+        list = new ArrayList<String>();
         if(allrows.moveToFirst())
         {
             do
@@ -56,7 +72,7 @@ public class CityDialog extends Dialog {
 
             }while (allrows.moveToNext());
         }
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(),
+        dataAdapter = new ArrayAdapter<String>(getContext(),
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Sp_City.setAdapter(dataAdapter);

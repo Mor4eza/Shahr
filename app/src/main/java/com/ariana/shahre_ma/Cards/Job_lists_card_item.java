@@ -9,6 +9,7 @@ public class Job_lists_card_item {
 
     private String mName;
     double rate;
+    private String mtell;
     private String mAdd;
     private int mThumbnail;
     private Integer mId;
@@ -52,5 +53,13 @@ public class Job_lists_card_item {
 
     public void setmId(Integer id) {
         this.mId = id;
+    }
+
+    public String getTell() {
+        return mtell;
+    }
+
+    public void setTell(String tell) {
+        this.mtell = tell;
     }
 }
