@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
@@ -19,11 +20,11 @@ import java.net.URL;
 /**
  * Created by ariana2 on 6/8/2015.
  */
-public class HTTPGetCityJson extends AsyncTask<String, String, String>
+public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
 {
 
     private String url_get_Proviced = "http://test.shahrma.com/api/ApiGivecity";
-
+    ProgressDialog pd;
     Integer Id_city[];
     String  Name_city[];
     Integer PROVINCEID_city[];
@@ -42,21 +43,34 @@ public class HTTPGetCityJson extends AsyncTask<String, String, String>
 
     /**
      *
+     */
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        pd = new ProgressDialog(context);
+        pd.setMessage("در حال بروزرسانی...");
+        pd.setCancelable(false);
+        pd.show();
+    }
+    /**
+     *
      * @param args
      * @return
      */
-    protected String doInBackground(String... args) {
+    protected Integer doInBackground(String... args) {
+        Integer result=0;
         try {
 
 
             InputStream jsonStream = getStreamFromURL(url_get_Proviced, "GET");
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);
-            onPostExecute();
+            result=1;
         } catch (Exception e) {
+            result=0;
             // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
         }
-        return null;
+        return result;
 
 
     }
@@ -64,19 +78,28 @@ public class HTTPGetCityJson extends AsyncTask<String, String, String>
     /**
      *
      */
-    protected void onPostExecute() {
-        try {
+    @Override
+    protected void onPostExecute(Integer result) {
+//        onPostExecute(result);
+        if(result==1) {
+            try {
 
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+                DataBaseSqlite dbs = new DataBaseSqlite(context);
 
+                dbs.delete_City();
+                for (int i = 0; i < len; i++) {
+                    dbs.Add_city(Id_city[i], Name_city[i], PROVINCEID_city[i]);
 
-            for (int i = 0; i <len; i++)
-            {
-                dbs.Add_city(Id_city[i],Name_city[i],PROVINCEID_city[i]);
-
+                }
+                pd.dismiss();
+            } catch (Exception e) {
+                pd.dismiss();
+                Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
             }
-        } catch (Exception e) {
-            Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            pd.dismiss();
         }
     }
 

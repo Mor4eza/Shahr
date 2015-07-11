@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -21,10 +22,10 @@ import java.net.URL;
  * Created by ariana2 on 6/17/2015.
  */
 public class HTTPGetBookMarkJson
-        extends AsyncTask<String, String, String>
+        extends AsyncTask<String,Void,Integer>
 {
 
-
+    ProgressDialog pd;
     private static Context context;//context
 
     private static   String bookmark;// business api url
@@ -61,23 +62,37 @@ public class HTTPGetBookMarkJson
     }
 
     /**
+     *
+     */
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        pd = new ProgressDialog(context);
+        pd.setMessage("دریافت اطلاعات...");
+        pd.setCancelable(false);
+        pd.show();
+    }
+    /**
      * doInBackground
      * @param args
      * @return
      */
-    protected String doInBackground(String... args) {
+    protected Integer doInBackground(String... args) {
+        Integer result=0;
         try {
 
 
             InputStream jsonStream = getStreamFromURL(GetUrl_Bookmark(), "GET");
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);
-            onPostExecute();
+             result=1;
+
         } catch (Exception e) {
+             result=0;
             // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
             Log.i("Exception",e.toString());
         }
-        return null;
+        return result;
 
 
     }
@@ -85,25 +100,33 @@ public class HTTPGetBookMarkJson
     /**
      *
      */
-    protected void onPostExecute() {
-        try {
+    @Override
+    protected void onPostExecute(Integer result) {
+        //onPostExecute(result);
+        if(result==1) {
+            try {
 
-            //  Toast.makeText(context,market[0], Toast.LENGTH_LONG).show();
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+                //  Toast.makeText(context,market[0], Toast.LENGTH_LONG).show();
+                DataBaseSqlite dbs = new DataBaseSqlite(context);
 
 
-            dbs.delete_bookmark();
-            for (int i = 0; i <len; i++)
-            {
-                dbs.Add_bookmark(Id[i], MEMberID);
+                dbs.delete_bookmark();
+                for (int i = 0; i < len; i++) {
+                    dbs.Add_bookmark(Id[i], MEMberID);
 
+                }
+                pd.dismiss();
+
+
+            } catch (Exception e) {
+                pd.dismiss();
+                Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
+                Log.i("Exception", e.toString());
             }
+        }
+        else
+        {
 
-
-
-        } catch (Exception e) {
-            Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
-            Log.i("Exception", e.toString());
         }
     }
 

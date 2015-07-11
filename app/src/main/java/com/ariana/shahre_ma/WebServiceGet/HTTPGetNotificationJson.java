@@ -1,7 +1,9 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -69,6 +71,12 @@ public class HTTPGetNotificationJson extends AsyncTask<String,Void,Integer> {
         context = c;
     }
 
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        DataBaseSqlite dbs = new DataBaseSqlite(context);
+        dbs.delete_Notification();
+    }
     /**
      * @param params
      * @return
@@ -143,28 +151,26 @@ public class HTTPGetNotificationJson extends AsyncTask<String,Void,Integer> {
     @Override
     protected void onPostExecute(Integer result) {
 
-        super.onPostExecute(result);
         setting=new KeySettings(context);
         Log.i("result", String.valueOf(result));
         if (result == 1){
             try {
-                Log.i("onPostExecute", "start");
-                //  Toast.makeText(context,market[0], Toast.LENGTH_LONG).show();
                DataBaseSqlite dbs = new DataBaseSqlite(context);
-                //Cursor allrows = dbs.select_Notification();
-               // allrows.moveToFirst();
+                dbs.delete_Notification();
                 if (len > 0) {
-
                     for (int i = 0; i < len; i++) {
-                        /*Cursor rows = dbs.select_NotificatonId(Id[i]);
-                        rows.moveToFirst();*/
-                       // Log.i("descriptionNotification", allrows.getString(4));
-                      /*  NotifiId = rows.getInt(0);
-                        rows.close();
-                        Log.i("ID", String.valueOf(Id[i]));
-                        Log.i("count", String.valueOf(NotifiId));
+                     /*   try {
+                            Cursor rows = dbs.select_NotificatonId(Id[i]);
+                            rows.moveToFirst();
+                            Log.i("descriptionNotification", allrows.getString(4));
+                            NotifiId = rows.getInt(0);
+                            rows.close();
+                            Log.i("ID", String.valueOf(Id[i]));
+                            Log.i("count", String.valueOf(NotifiId));
+                        }
+                        catch (SQLException e){}
                         if (NotifiId == 0)*/
-                            dbs.Add_Notification(Id[i], OpinionType[i], erja[i], ExecutionTime[i], Description[i], ExpirationDate[i], City[i], CityId[i], Subset[i], SubsetId[i]);
+                          dbs.Add_Notification(Id[i], OpinionType[i], erja[i], ExecutionTime[i], Description[i], ExpirationDate[i], City[i], CityId[i], Subset[i], SubsetId[i]);
 
 
                     }
@@ -182,11 +188,12 @@ public class HTTPGetNotificationJson extends AsyncTask<String,Void,Integer> {
 
                 Log.i("ExceptionOnpostexcut", e.toString());
             }
-    }
-    else
-    {
 
-    }
+        }
+        else
+        {
+
+        }
     }
 
 

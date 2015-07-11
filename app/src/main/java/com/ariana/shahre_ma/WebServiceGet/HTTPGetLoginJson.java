@@ -56,7 +56,7 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
     protected void onPreExecute() {
         super.onPreExecute();
         pd = new ProgressDialog(context);
-        pd.setMessage("در حال بروزرسانی...");
+        pd.setMessage("ورود...");
         pd.setCancelable(false);
         pd.show();
     }

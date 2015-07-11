@@ -68,7 +68,7 @@ public class HTTPGetSubsetJson extends AsyncTask<String, String, String>
         try {
 
             DataBaseSqlite dbs = new DataBaseSqlite(context);
-
+            dbs.delete_Subset();
 
             for (int i = 0; i <len; i++)
               {

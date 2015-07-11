@@ -245,6 +245,7 @@ public class My_Interest extends ActionBarActivity implements SearchView.OnQuery
 
 
         HTTPGetInterestJson httpinterest = new HTTPGetInterestJson(this);
+        httpinterest.SetUrl_Interest(query.getMemberId());
 
         httpinterest.execute();
     }

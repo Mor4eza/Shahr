@@ -88,6 +88,8 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
         Intent myIntent = new Intent(this, MyReceiver.class);
 
+
+
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this  ,  0, myIntent, 0);
 
         AlarmManager alarmManager = (AlarmManager)this.getSystemService(this.ALARM_SERVICE);

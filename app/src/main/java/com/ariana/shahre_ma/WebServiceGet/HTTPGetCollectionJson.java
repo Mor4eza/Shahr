@@ -88,7 +88,7 @@ public class HTTPGetCollectionJson extends AsyncTask<String, String, String> {
         try {
 
             DataBaseSqlite dbs = new DataBaseSqlite(context);
-
+            dbs.delete_Collection();
 
             for (int i = 0; i <len; i++)
             {

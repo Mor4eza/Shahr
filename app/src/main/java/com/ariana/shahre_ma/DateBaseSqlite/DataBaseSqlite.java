@@ -362,15 +362,15 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
         values.put(ID_Notification, id);
-        values.put(OpinionType_Notification,OpinionType);
-        values.put(ErJa_Notification,erja);
+        values.put(OpinionType_Notification, OpinionType);
+        values.put(ErJa_Notification, erja);
         values.put(ExecutionTime_Notification, ExecutionTime);
-        values.put(Description_Notification,Description);
-        values.put(ExpirationDate_Notification,ExpirationDate);
+        values.put(Description_Notification, Description);
+        values.put(ExpirationDate_Notification, ExpirationDate);
         values.put(City_Notification, City);
-        values.put(CityId_Notification,CityId);
-        values.put(Subset_Notification,Subset);
-        values.put(SubsetId_Notification,SubsetId);
+        values.put(CityId_Notification, CityId);
+        values.put(Subset_Notification, Subset);
+        values.put(SubsetId_Notification, SubsetId);
 
         // 3. insert
         db.insert(TABLE_NAME_NOTIFICATION, // table
@@ -863,8 +863,10 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     public  Cursor select_NotificatonId(Integer Id)
     {
-        SQLiteDatabase db=this.getReadableDatabase();
-        return db.rawQuery("SELECT Id FROM "+TABLE_NAME_NOTIFICATION +" WHERE Id="+Id,null);
+
+            SQLiteDatabase db = this.getReadableDatabase();
+            return db.rawQuery("SELECT Id FROM " + TABLE_NAME_NOTIFICATION + " WHERE Id=" + Id, null);
+
     }
 
     public  Cursor select_CountCollection()
@@ -918,7 +920,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     }
 
     /**
-     * delete table member
+     * delete all record table member
      */
     public void delete_Member()
     {
@@ -926,6 +928,70 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.execSQL("DELETE  FROM "+ TABLE_NAME_MEMBER);
         db.close();
 
+    }
+
+    /**
+     *
+     */
+    public void delete_Area()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE  FROM "+ TABLE_NAME_Area);
+        db.close();
+
+    }
+
+    /**
+     *
+     */
+    public void delete_City()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE  FROM "+ TABLE_NAME_City);
+        db.close();
+
+    }
+
+    /**
+     *
+     */
+    public void delete_FiledActivity()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE  FROM "+ TABLE_NAME_FieldActivity);
+        db.close();
+
+    }
+
+    /**
+     *
+     */
+    public void delete_Subset()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE  FROM "+ TABLE_NAME_SUBSET);
+        db.close();
+
+    }
+    /**
+     *
+     */
+    public void delete_Collection()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE  FROM "+ TABLE_NAME_COLLECTION);
+        db.close();
+
+    }
+    /**
+     * delete all record table notification
+     */
+
+    public void delete_Notification()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE  FROM "+ TABLE_NAME_NOTIFICATION );
+        db.close();
     }
 
     public void delete_BusinessId(Integer id)
@@ -936,16 +1002,13 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     }
 
-    /**
-     * delete record Notification table
-     * @param erja
-     */
-    public void delete_Notification(Integer erja)
+
+/*    public void delete_Notification(Integer erja)
     {
         SQLiteDatabase db=this.getWritableDatabase();
         db.execSQL("DELETE FROM "+TABLE_NAME_NOTIFICATION+" WHERE ErJa="+erja,null);
         db.close();
-    }
+    }*/
 
 
     // Deleting ZamanSanj

@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetBookMarkJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.neno0o.lighttextviewlib.LightTextView;
 
@@ -50,6 +51,11 @@ Integer BusinessID[];
         setContentView(R.layout.activity_book_mark);
 
         lv=(ListView) findViewById(R.id.lvbookmark);
+
+        HTTPGetBookMarkJson b=new HTTPGetBookMarkJson(this);
+        b.SetUrl_MemberId(query.getMemberId());
+        b.execute();
+
         final ListView t = (ListView)findViewById(R.id.lvbookmark);
         t.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -61,7 +61,7 @@ public class MainService extends Service {
 
         Log.i("Service", "onStart");
         noti=new HTTPGetNotificationJson(this);
-        noti.SetUrl_MemberId(1);
+        noti.SetUrl_MemberId(query.getMemberId());
         noti.execute();
     }
 

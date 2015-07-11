@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -29,7 +30,7 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
 {
 
     private String url1_get_FieldActivity= "http://test.shahrma.com/api/ApiGiveFieldActivity";
-
+    ProgressDialog pd;
     Integer id[];
     String activity[];
     Context context;
@@ -52,8 +53,11 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        pd = new ProgressDialog(context);
+        pd.setMessage("دریافت اطلاعات...");
+        pd.setCancelable(false);
+        pd.show();
     }
-
     /**
      *
      * @param params
@@ -166,23 +170,31 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
      */
     @Override
     protected void onPostExecute(Integer o) {
-        super.onPostExecute(o);
+      //  super.onPostExecute(o);
         try {
             Log.e("Integer",String.valueOf(o));
-            if (o == 1) {
-                if (len > 0) {
+            if (o == 1)
+            {
+                if (len > 0)
+                {
                     DataBaseSqlite db = new DataBaseSqlite(context);
+                    db.delete_FiledActivity();
                     for (int i = 0; i < len; i++)
                         db.Add_FieldActivity(id[i], activity[i]);
-
-                } else {
-
+                    pd.dismiss();
                 }
-            } else {
-
+                else
+                {
+                    pd.dismiss();
+                }
+            }
+            else
+            {
+                pd.dismiss();
             }
         }
         catch (Exception e){
+            pd.dismiss();
             Log.e("ExceptionFiledActivity",e.toString());
         }
     }

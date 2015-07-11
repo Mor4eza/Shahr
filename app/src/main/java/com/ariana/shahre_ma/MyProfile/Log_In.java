@@ -15,6 +15,7 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MainActivity;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetLoginJson;
 
 import org.apache.http.HttpEntity;
@@ -51,7 +52,9 @@ public class Log_In extends ActionBarActivity {
         password = (EditText) findViewById(R.id.et_password);
         error = (TextView) findViewById(R.id.tverror);
 
-        try {
+        HTTPGetCityJson httpcity = new HTTPGetCityJson(this);
+        httpcity.execute();
+     /*   try {
             DataBaseSqlite db = new DataBaseSqlite(this);
             Cursor allrows = db.select_Member();
             allrows.moveToNext();
@@ -59,7 +62,7 @@ public class Log_In extends ActionBarActivity {
             password.setText(allrows.getString(7));
 
         } catch (Exception e) {
-        }
+        }*/
     }
 
     public void register(View v) {

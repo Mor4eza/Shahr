@@ -85,6 +85,7 @@ public class My_Profile extends Activity {
             DataBaseSqlite db = new DataBaseSqlite(this);
             db.delete_Member();
 
+
             Intent i=new Intent(getApplicationContext(), MainActivity.class);
              startActivity(i);
         }

@@ -14,6 +14,8 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetAreaJosn;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetFieldActivityJson;
 
 public class My_Business extends ActionBarActivity {
 
@@ -29,6 +31,13 @@ public class My_Business extends ActionBarActivity {
         setContentView(R.layout.activity_my__business);
 
         Intialize();
+
+        HTTPGetFieldActivityJson httpfield=new HTTPGetFieldActivityJson(this);
+        httpfield.execute();
+
+        HTTPGetAreaJosn httparea=new HTTPGetAreaJosn(this);
+        httparea.execute();
+
         Log.i("BusinessID",String.valueOf(fc.GetBusiness_Id()));
         try {
             DataBaseSqlite db = new DataBaseSqlite(this);

@@ -81,25 +81,12 @@ public class MainActivity extends ActionBarActivity {
         else {
 
 
-            HTTPGetSubsetJson httpsubset = new HTTPGetSubsetJson(this);
-            httpsubset.execute();
+              HTTPGetSubsetJson httpsubset = new HTTPGetSubsetJson(this);
+              httpsubset.execute();
 
-                HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
-                httpcoll.execute();
+              HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
+              httpcoll.execute();
 
-
-            HTTPGetBookMarkJson b=new HTTPGetBookMarkJson(this);
-            b.SetUrl_MemberId(query.getMemberId());
-            b.execute();
-
-            HTTPGetCityJson httpcity = new HTTPGetCityJson(this);
-            httpcity.execute();
-
-            HTTPGetFieldActivityJson httpfield=new HTTPGetFieldActivityJson(this);
-            httpfield.execute();
-
-            HTTPGetAreaJosn httparea=new HTTPGetAreaJosn(this);
-            httparea.execute();
         }
 
         ViewPager vpPager = (ViewPager) findViewById(R.id.viewPager);

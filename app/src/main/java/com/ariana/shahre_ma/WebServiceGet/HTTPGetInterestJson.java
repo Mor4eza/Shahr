@@ -21,7 +21,7 @@ import java.net.URL;
 /**
  * Created by ariana on 6/15/2015.
  */
-public class HTTPGetInterestJson  extends AsyncTask<String, String, String>
+public class HTTPGetInterestJson  extends AsyncTask<String,Void, Integer>
 {
     ProgressDialog pd;
 
@@ -52,7 +52,7 @@ public class HTTPGetInterestJson  extends AsyncTask<String, String, String>
     protected void onPreExecute() {
         super.onPreExecute();
         pd = new ProgressDialog(context);
-        pd.setMessage("loading");
+        pd.setMessage("دریافت...");
         pd.show();
     }
 
@@ -61,18 +61,20 @@ public class HTTPGetInterestJson  extends AsyncTask<String, String, String>
      * @param args
      * @return
      */
-    protected String doInBackground(String... args) {
+    protected Integer doInBackground(String... args) {
+        Integer result=0;
         try {
 
 
             InputStream jsonStream = getStreamFromURL(getUrl_Interest(), "GET");
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);
-            onPostExecute();
+            result=1;
         } catch (Exception e) {
+            result=0;
             // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
         }
-        return null;
+        return result;
 
 
     }
@@ -80,21 +82,32 @@ public class HTTPGetInterestJson  extends AsyncTask<String, String, String>
     /**
      *
      */
-    protected void onPostExecute() {
-        try {
 
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+    @Override
+    protected void onPostExecute(Integer result) {
 
-          // job.mSwipeRefreshLayout.setRefreshing(false);
-            for (int i = 0; i <len; i++)
-            {
-                dbs.Add_Interest( subsetid[i], memberid[i]);
 
+        onPostExecute(result);
+        if (result == 1) {
+
+            try {
+
+                DataBaseSqlite dbs = new DataBaseSqlite(context);
+
+                // job.mSwipeRefreshLayout.setRefreshing(false);
+                for (int i = 0; i < len; i++) {
+                    dbs.Add_Interest(subsetid[i], memberid[i]);
+                    Log.i("onPostExecuteInterest", "strt1");
+                }
+                pd.dismiss();
+            } catch (Exception e) {
+                // Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
+                Log.e("ExceptionInterest", e.toString());
             }
-            pd.dismiss();
-        } catch (Exception e) {
-           // Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
-            Log.e("Exception",e.toString());
+        }
+        else
+        {
+
         }
     }
 
@@ -104,6 +117,7 @@ public class HTTPGetInterestJson  extends AsyncTask<String, String, String>
      */
     void parseJSON(String JSONString) {
 
+        Log.i("JsonInterest",JSONString);
         Integer ii = 0;
         try {
 
