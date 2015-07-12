@@ -92,7 +92,10 @@ public class Edit_User extends ActionBarActivity {
         Acity = city.getText().toString();
         Aphone = phone.getText().toString();
         Aage = Integer.parseInt(age.getText().toString());
-        Asex = _sex;
+        if(sex.equals("مرد"))
+        Asex = true;
+            else
+        Asex = false;
         Ausername = user.getText().toString();
         Apass = pass.getText().toString();
 
@@ -220,7 +223,7 @@ public class Edit_User extends ActionBarActivity {
         sex.setPrompt("جنسیت:");
         List<String> list = new ArrayList<String>();
        list.add("مرد");
-        list.add("ن");
+        list.add("زن");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
