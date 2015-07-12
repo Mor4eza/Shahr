@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="%"
+            android:id="@+id/textView4"
+            android:textColor="#fff25d2d"
+            android:textSize="40sp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="17dp"
+            />
+
+    <android.widget.NumberPicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/np1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
+
+
+<EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_desc"
+        android:background="@android:drawable/edit_text"
+        android:hint="توضیحات..."
+        android:maxLines="7"
+        android:inputType="textMultiLine"
+        android:editable="true"
+    android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:lines="3" />
+
+
+    <TextView
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:text="مدت زمان تخفیف:"
+        android:textSize="14dp"
+        android:layout_gravity="end"/>
+
+
+    <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sp_expire"
+            android:layout_gravity="center_horizontal"
+            />
+
+    <Button
+
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="ثبت تخفیف"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/discount_save"
+        />
+
+</LinearLayout>

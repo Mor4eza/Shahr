@@ -65,4 +65,9 @@ public class My_Business extends ActionBarActivity {
         title=(TextView) findViewById(R.id.my_business_title);
         address=(TextView) findViewById(R.id.my_business_address);
     }
+   public void discount(View v){
+
+    Intent i = new Intent(getApplicationContext(),Discount.class);
+       startActivity(i);
+   }
 }
