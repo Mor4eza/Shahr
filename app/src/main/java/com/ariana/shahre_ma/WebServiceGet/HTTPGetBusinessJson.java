@@ -75,10 +75,10 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
      *
      * @param SubsetID
      */
-    public   void SetUrl_business(Integer SubsetID)
+    public   void SetUrl_business(Integer SubsetID,Integer cityname)
     {
 
-        url_Business="http://test.shahrma.com/api/ApiGiveBusiness?subsetId="+SubsetID+"&cityid=68";
+        url_Business="http://test.shahrma.com/api/ApiGiveBusiness?subsetId="+SubsetID+"&cityid="+cityname;
         Log.i("url_Business",url_Business);
 
     }
@@ -143,7 +143,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
             DataBaseSqlite dbs = new DataBaseSqlite(context);
 
 
-          //  dbs.delete_Business();
+           // dbs.delete_Business();
             for (int i = 0; i <len; i++)
             {
                 Cursor rows=dbs.select_CountBusinessId(Id[i]);

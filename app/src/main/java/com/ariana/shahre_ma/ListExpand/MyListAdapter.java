@@ -17,6 +17,7 @@ import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Jobs_List;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
  */
 public class MyListAdapter extends BaseExpandableListAdapter {
 
+    KeySettings setting;
     Integer count=0;
     private Context context;
     private ArrayList<Continent> continentList;
@@ -83,17 +85,18 @@ public class MyListAdapter extends BaseExpandableListAdapter {
                 }
                 else
                 {
-                    if (count > 0) {
+                   /* if (count > 0) {
                         fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
                         Intent i = new Intent(context, Jobs_List.class);
                         context.startActivity(i);
                         Log.i("Count>", "1");
-                    } else {
+                    } else {*/
+                        setting=new KeySettings(context);
                         httpbusin = new HTTPGetBusinessJson(context);
-                        httpbusin.SetUrl_business(query.getsubsetID(country.getName()));
+                        httpbusin.SetUrl_business(query.getsubsetID(country.getName()),query.getCityId(setting.getCityName()));
                         httpbusin.execute();
                         Log.i("Count<", "0");
-                    }
+                    //}
                 }
 
             }
