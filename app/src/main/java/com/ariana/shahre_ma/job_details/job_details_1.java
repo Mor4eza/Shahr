@@ -111,14 +111,20 @@ public class job_details_1 extends ActionBarActivity {
                 @Override
                 public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
 
-                    HTTPSendRateURL httprate=new HTTPSendRateURL(getActivity());
-                    httprate.SetBusinessId(fc.GetBusiness_Id());
-                    Log.i("SetBusinessId", String.valueOf(fc.GetBusiness_Id()));
-                    httprate.SetMemberId(query.getMemberId());
-                    Log.i("SetMemberId",String.valueOf(query.getMemberId()));
-                    httprate.SetRate(Double.valueOf(rating));
-                    Log.i("SetRate",String.valueOf(Double.valueOf(rating)));
-                    httprate.execute();
+                    if(query.getMemberId()>0) {
+                        HTTPSendRateURL httprate = new HTTPSendRateURL(getActivity());
+                        httprate.SetBusinessId(fc.GetBusiness_Id());
+                        Log.i("SetBusinessId", String.valueOf(fc.GetBusiness_Id()));
+                        httprate.SetMemberId(query.getMemberId());
+                        Log.i("SetMemberId", String.valueOf(query.getMemberId()));
+                        httprate.SetRate(Double.valueOf(rating));
+                        Log.i("SetRate", String.valueOf(Double.valueOf(rating)));
+                        httprate.execute();
+                    }
+                    else
+                    {
+                        Toast.makeText(getActivity(),"کاربری وارد نشده است",Toast.LENGTH_LONG).show();
+                    }
                 }
             });
 
@@ -146,7 +152,7 @@ public class job_details_1 extends ActionBarActivity {
             tel.setText(allrows.getString(3));
             web.setText(allrows.getString(6));
             owner.setText(allrows.getString(7));
-            subset.setText(allrows.getString(13));
+            subset.setText( query.getsubsetName(allrows.getInt(14)));
 
             address.setText(allrows.getString(8));
             des.setText(allrows.getString(9));
@@ -154,6 +160,7 @@ public class job_details_1 extends ActionBarActivity {
 
                 Cursor rows = mydb.select_AllBusinessId(fc.GetBusiness_Id());
                 rows.moveToFirst();
+
 
                 for (int i = 0; i < 7; i++) {
                     Log.i("CounterFor", String.valueOf(rows.getInt((21) + (i))));

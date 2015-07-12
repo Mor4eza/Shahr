@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -94,10 +95,10 @@ public class SqliteTOjson {
     public String getSqliteTOjson(String j_name, String j_email, String j_mobile, Integer j_age, Boolean j_sex, String j_username, String j_password, Integer j_cityid) {
         String field_Json = "";
         try {
-
+            Query query=new Query(context);
             // JSONobject get key/value convert to json
             JSONObject rowObject = new JSONObject();
-            rowObject.put("Id", 1);
+            rowObject.put("Id",query.getMemberId());
             rowObject.put("Name", j_name);
             rowObject.put("Mobile", j_mobile);
             rowObject.put("Email", j_email);
@@ -139,6 +140,31 @@ public class SqliteTOjson {
         return field_Json;
     }
 
+
+    // convert DisCount to json
+    public String getDisCountTOjson(Integer id, String text,String image,String startdate,String expirationdate,String description,String percent, Integer businessid) {
+        String field_Json = "";
+        try {
+
+            // JSONobject get key/value convert to json
+            JSONObject rowObject = new JSONObject();
+            rowObject.put("Id",id);
+            rowObject.put("Text", text);
+            rowObject.put("Image", image);
+            rowObject.put("Startdate", startdate);
+            rowObject.put("ExpirationDate", expirationdate);
+            rowObject.put("Description", description);
+            rowObject.put("Percent", percent);
+            rowObject.put("BusinessId",businessid);
+
+            field_Json = rowObject.toString();
+
+        } catch (Exception e) {
+            Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
+        }
+
+        return field_Json;
+    }
 
     public  String getBusinessTOjson(Integer id,String market,String phone,String mobile,String fax,String email,String businessowner,String address,String description,String startdate,String expirationdate,String subset,Integer subsetid,String longitude,String latitude,Integer areaid,String area,String user,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7)
     {

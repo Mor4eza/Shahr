@@ -1,10 +1,12 @@
 package com.ariana.shahre_ma;
 
 import android.app.AlertDialog;
+import android.content.ContentProvider;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -304,11 +306,11 @@ public class MainActivity extends ActionBarActivity {
                }
                if (position == 2) {
 
-                   if (net.checkInternetConnection()==false) {
-                       AlertDialog alertDialog=new AlertDialog.Builder(MainActivity.this).create();
+                   if (net.checkInternetConnection() == false) {
+                       AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
                        alertDialog.setTitle("هشدار");
                        alertDialog.setMessage("اینترنت قطع می باشد");
-                       alertDialog.setButton("خب",new DialogInterface.OnClickListener() {
+                       alertDialog.setButton("خب", new DialogInterface.OnClickListener() {
                            public void onClick(DialogInterface dialog, int which) {
                                // Write your code here to execute after dialog closed
                                //  Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
@@ -318,7 +320,7 @@ public class MainActivity extends ActionBarActivity {
                        alertDialog.show();
                    } else {
 
-                       HTTPGetBusinessMemberJson httpGetBusinessMemberJson=new HTTPGetBusinessMemberJson(MainActivity.this);
+                       HTTPGetBusinessMemberJson httpGetBusinessMemberJson = new HTTPGetBusinessMemberJson(MainActivity.this);
                        httpGetBusinessMemberJson.SetUrl_businessMember(query.getMemberId());
                        httpGetBusinessMemberJson.execute();
                        /*Intent i = new Intent(getApplicationContext(), My_Business.class);
@@ -332,12 +334,24 @@ public class MainActivity extends ActionBarActivity {
                        DataBaseSqlite db = new DataBaseSqlite(MainActivity.this);
                        Cursor cursor = db.select_Member();
                        cursor.moveToFirst();
-                       Log.i("memberID",String.valueOf(cursor.getInt(0)));
-                       if (cursor.getInt(0)>0) {
+                       Log.i("memberID", String.valueOf(cursor.getInt(0)));
+                       if (cursor.getInt(0) > 0) {
                            Intent i = new Intent(getApplicationContext(), My_Profile.class);
                            startActivity(i);
                        } else {
-                           Toast.makeText(getApplicationContext(), "وارد حساب خود نشده اید...!", Toast.LENGTH_LONG).show();
+                             Toast.makeText(getApplicationContext(), "وارد حساب خود نشده اید...!", Toast.LENGTH_LONG).show();
+
+
+                           /*Snackbar.make(MainActivity.this, "", Snackbar.LENGTH_LONG)
+                                   .setAction("بستن!", new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View v) {
+                                           //کد
+                                       }
+                                   })
+                                   .show();*/
+
+
                        }
                    } catch (Exception e) {
                        Toast.makeText(getApplicationContext(), "وارد حساب خود نشده اید...!", Toast.LENGTH_LONG).show();

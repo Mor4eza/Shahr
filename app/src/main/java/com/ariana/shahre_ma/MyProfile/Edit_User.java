@@ -1,6 +1,8 @@
 package com.ariana.shahre_ma.MyProfile;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.widget.Spinner;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
@@ -29,13 +32,14 @@ public class Edit_User extends ActionBarActivity {
     CalendarTool ct=new CalendarTool();
     FieldClass fc = new FieldClass();
     HTTPPostMemberEditJson sendPost;
+    Query query=new Query(this);
     SqliteTOjson json = new SqliteTOjson(this);
 
     //Variable
     Boolean _sex = false;
 
     String Aname, Aemail, Acity, Aphone, Ausername, Apass;
-    Boolean Asex;
+    Boolean Asex=false;
     Integer Aage;
     String _json;
 
@@ -59,7 +63,7 @@ public class Edit_User extends ActionBarActivity {
 
         name.setText(allrows.getString(1));
         email.setText(allrows.getString(2));
-      //  city.setText(String.valueOf(allrows.getInt(8)));
+        city.setText(query.getCityName(allrows.getInt(8)));
         getNameCity();
         phone.setText(allrows.getString(3));
         age.setText(String.valueOf(allrows.getInt(4)));
@@ -92,22 +96,89 @@ public class Edit_User extends ActionBarActivity {
         Ausername = user.getText().toString();
         Apass = pass.getText().toString();
 
-        Integer cityid=0;
-        cityid=getCityId();
-        _json = (json.getSqliteTOjson(Aname, Aemail, Aphone, Aage, Asex, Ausername, Apass,cityid));
-        fc.SetMember_Name(Aname);
-        fc.SetMember_Email(Aemail);
-        fc.SetMember_Mobile(Aphone);
-        fc.SetMember_Age(Aage);
-        fc.SetMember_Sex(Asex);
-        fc.SetMember_UserName(Ausername);
-        fc.SetMember_Password(Apass);
-        fc.SetMember_CityId(cityid);
+        Integer cityid=query.getCityId(Acity);
 
-        sendPost = new HTTPPostMemberEditJson(this);
-        sendPost.SetMember_Json(_json);
-        Log.i("MemberJson",_json);
-        sendPost.execute();
+        if(cityid<=0)
+        {
+            AlertDialog alertDialog = new AlertDialog.Builder(Edit_User.this).create();
+            alertDialog.setTitle("هشدار ");
+            alertDialog.setMessage("شهر خود را انتخاب کنید");
+            alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // Write your code here to execute after dialog closed
+                    //Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
+                    city.requestFocus();
+
+                }
+            });
+
+            alertDialog.show();
+        }
+        else if(Aname.length()==0)
+        {
+            AlertDialog alertDialog = new AlertDialog.Builder(Edit_User.this).create();
+            alertDialog.setTitle("هشدار ");
+            alertDialog.setMessage("نام خود را وارد کنید");
+            alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // Write your code here to execute after dialog closed
+                    //Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
+                    name.requestFocus();
+
+                }
+            });
+
+            alertDialog.show();
+        }
+        else if(Ausername.length()==0)
+        {
+            AlertDialog alertDialog = new AlertDialog.Builder(Edit_User.this).create();
+            alertDialog.setTitle("هشدار ");
+            alertDialog.setMessage("نام کاربری را وارد کنید");
+            alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // Write your code here to execute after dialog closed
+                    //Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
+                 //   Ausername.requestFocus();
+
+                }
+            });
+
+            alertDialog.show();
+        }
+        else if(Apass.length()==0)
+        {
+            AlertDialog alertDialog = new AlertDialog.Builder(Edit_User.this).create();
+            alertDialog.setTitle("هشدار ");
+            alertDialog.setMessage("رمز را وارد کنید");
+            alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // Write your code here to execute after dialog closed
+                    //Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
+                    //Apass.requestFocus();
+
+                }
+            });
+
+            alertDialog.show();
+        }
+        else
+        {
+            _json = (json.getSqliteTOjson(Aname, Aemail, Aphone, Aage, Asex, Ausername, Apass, query.getCityId(Acity)));
+            fc.SetMember_Name(Aname);
+            fc.SetMember_Email(Aemail);
+            fc.SetMember_Mobile(Aphone);
+            fc.SetMember_Age(Aage);
+            fc.SetMember_Sex(Asex);
+            fc.SetMember_UserName(Ausername);
+            fc.SetMember_Password(Apass);
+            fc.SetMember_CityId(query.getCityId(Acity));
+
+            sendPost = new HTTPPostMemberEditJson(this);
+            sendPost.SetMember_Json(_json);
+            Log.i("MemberJson", _json);
+            sendPost.execute();
+        }
     }
 
 
@@ -157,17 +228,4 @@ public class Edit_User extends ActionBarActivity {
 
     }
 
-    private Integer getCityId() {
-        Integer Result = 0;
-
-        SQLiteDatabase mydb = openOrCreateDatabase(fc.GetDataBaseName(), Context.MODE_PRIVATE, null);
-        Cursor allrows = mydb.rawQuery("SELECT Id FROM " + fc.GetTableNamecity()+ "  WHERE Name='" +city.getText().toString()+ "'", null);
-        allrows.moveToFirst();
-        Result = allrows.getInt(0);
-        allrows.close();
-        mydb.close();
-
-
-        return Result;
-    }
 }

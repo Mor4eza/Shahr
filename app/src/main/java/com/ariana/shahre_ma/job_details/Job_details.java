@@ -264,12 +264,18 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_Fav) {
 
-            HTTPSendBookMarkURL httpbookmark=new HTTPSendBookMarkURL(this);
-            httpbookmark.SetBusinessid(fc.GetBusiness_Id());
-            Log.i("getBusinessId",String.valueOf(query.getBusinessId())  );
-            httpbookmark.SetMemberid(query.getMemberId());
-            Log.i("getMemberId",String.valueOf(query.getMemberId()) );
-            httpbookmark.execute();
+            if(query.getMemberId()>0) {
+                HTTPSendBookMarkURL httpbookmark = new HTTPSendBookMarkURL(this);
+                httpbookmark.SetBusinessid(fc.GetBusiness_Id());
+                Log.i("getBusinessId", String.valueOf(query.getBusinessId()));
+                httpbookmark.SetMemberid(query.getMemberId());
+                Log.i("getMemberId", String.valueOf(query.getMemberId()));
+                httpbookmark.execute();
+            }
+            else
+            {
+                Toast.makeText(getApplicationContext(),"کاربری وارد نشده است",Toast.LENGTH_LONG).show();
+            }
             Toast.makeText(getApplication(),String.valueOf(query.getMemberId()),Toast.LENGTH_LONG).show();
             return true;
         }

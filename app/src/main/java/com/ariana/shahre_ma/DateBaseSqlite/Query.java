@@ -22,7 +22,55 @@ public class Query {
 
 
 
+    public String getsubsetName(Integer id) {
 
+        String Result = "";
+
+        try {
+            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            Cursor allrows = dbs.select_SubsetName(id);
+            allrows.moveToFirst();
+            Result = allrows.getString(0);
+            allrows.close();
+
+
+        //    fc.SetBusiness_SubsetId(Result);
+        }
+        catch (Exception e) {
+            // Toast.makeText(activity, e.toString(), Toast.LENGTH_LONG).show();
+        }
+        return Result;
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public String getCityName(Integer id) {
+
+        String Result = "";
+
+        try {
+            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            Cursor allrows = dbs.select_CityName(id);
+            allrows.moveToFirst();
+            Result = allrows.getString(0);
+            allrows.close();
+
+
+            //    fc.SetBusiness_SubsetId(Result);
+        }
+        catch (Exception e) {
+            // Toast.makeText(activity, e.toString(), Toast.LENGTH_LONG).show();
+        }
+        return Result;
+    }
+    /**
+     *
+     * @param subsetname
+     * @return
+     */
     public Integer getsubsetID(String subsetname) {
 
         Integer Result = 0;
