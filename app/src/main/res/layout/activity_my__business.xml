@@ -49,6 +49,19 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
+         <android.support.design.widget.FloatingActionButton
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:id="@+id/btn_discount"
+             android:layout_above="@+id/my_business_rate"
+             android:layout_marginBottom="30dp"
+             android:layout_alignParentLeft="true"
+             android:layout_alignParentStart="true"
+             android:baselineAlignBottom="false"
+             android:cropToPadding="false"
+             android:onClick="discount"
+             android:src="@drawable/discount_tag" />
+
             <RatingBar
                 android:id="@+id/my_business_rate"
                 android:layout_alignBottom="@+id/my_business_image"

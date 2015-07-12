@@ -49,5 +49,6 @@
     <string name="title_activity_add_business">Add_business</string>
     <string name="title_activity_my__business__map">انتخاب موقعیت</string>
     <string name="title_activity_my__interest">My_Interest</string>
+    <string name="title_activity_discount">تخفیف ها</string>
 
 </resources>

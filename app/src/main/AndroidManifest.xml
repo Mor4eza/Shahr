@@ -19,8 +19,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -182,6 +182,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.MainActivity" />
+        </activity>
+        <activity
+            android:name=".MyBusiness.Discount"
+            android:label="@string/title_activity_discount"
+            android:parentActivityName=".MyBusiness.My_Business" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ariana.shahre_ma.MyBusiness.My_Business" />
         </activity>
     </application>
 
