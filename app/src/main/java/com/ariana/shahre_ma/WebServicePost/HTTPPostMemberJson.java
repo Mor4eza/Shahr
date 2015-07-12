@@ -68,7 +68,9 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
     }
 
     private static Context context;
-    public HTTPPostMemberJson(Context c) {
+    public
+
+    HTTPPostMemberJson(Context c) {
         context = c;
     }
 

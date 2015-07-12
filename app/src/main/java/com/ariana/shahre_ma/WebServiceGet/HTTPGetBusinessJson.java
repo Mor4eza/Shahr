@@ -143,7 +143,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
             DataBaseSqlite dbs = new DataBaseSqlite(context);
 
 
-           // dbs.delete_Business();
+           dbs.delete_Business();
             for (int i = 0; i <len; i++)
             {
                 Cursor rows=dbs.select_CountBusinessId(Id[i]);

@@ -131,8 +131,7 @@ Query query=new Query(this);
                 alertDialog.setMessage("شهر خود را انتخاب کنید");
                 alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // Write your code here to execute after dialog closed
-                        //Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
+
                         city.requestFocus();
 
                     }
@@ -147,8 +146,7 @@ Query query=new Query(this);
                 alertDialog.setMessage("نام خود را وارد کنید");
                 alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // Write your code here to execute after dialog closed
-                        //Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
+
                         name.requestFocus();
 
                     }
@@ -163,9 +161,7 @@ Query query=new Query(this);
                 alertDialog.setMessage("نام کاربری را وارد کنید");
                 alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // Write your code here to execute after dialog closed
-                        //Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
-                        //   Ausername.requestFocus();
+
 
                     }
                 });
@@ -179,9 +175,7 @@ Query query=new Query(this);
                 alertDialog.setMessage("رمز را وارد کنید");
                 alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // Write your code here to execute after dialog closed
-                        //Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
-                        //Apass.requestFocus();
+
 
                     }
                 });

@@ -67,7 +67,7 @@ public class  HTTPSendLikeURL extends AsyncTask<String, Void, Boolean> {
     protected void onPreExecute() {
         super.onPreExecute();
         pd = new ProgressDialog(context);
-        pd.setMessage("در حال بروزرسانی...");
+        pd.setMessage("ثبت...");
 
         pd.setCancelable(false);
         pd.show();
