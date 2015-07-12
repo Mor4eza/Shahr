@@ -905,6 +905,11 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         return db.rawQuery("SELECT * FROM "+TABLE_NAME_City,null);
     }
 
+    public  Cursor select_CityId(String cityname)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return db.rawQuery("SELECT Id FROM "+TABLE_NAME_City +" WHERE Name='"+cityname+"'",null);
+    }
 
     // Deleting Opinion
     public void delete_Opinion() {
