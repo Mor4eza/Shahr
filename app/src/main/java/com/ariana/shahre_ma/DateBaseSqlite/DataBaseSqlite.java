@@ -31,6 +31,9 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     private static final String TABLE_NAME_Interest = "Interest";
     private static final String TABLE_NAME_NOTIFICATION="Notification";
     private static final String TABLE_NAME_FieldActivity="FieldActivity";
+    private static final String TABLE_NAME_DisCount="DisCount";
+    private static final String TABLE_NAME_LikeDisCount="LikeDisCount";
+
 
 
 
@@ -84,6 +87,23 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     private static final String SUBSETID_Interest = "SubsetId";
     private static final String MEMBERID_Interest = "MemberId";
 
+
+    //LikeDisCount Table Columns names
+    private static final String ID_LIKEDISCOUNT = "Id";
+    private static final String MEMBERID_LIKEDISCOUNT = "MemberId";
+    private static final String LIKECOUNT_LIKEDISCOUNT = "LikeCount";
+    private static final String DISLIKECOUNT_LIKEDISCOUNT = "DisLikeCount";
+    private static final String BUSINESSID_LIKEDISCOUNT = "BusinessId";
+
+    //DisCoutn Table Columns names
+    private static final String ID_DISCOUNT = "Id";
+    private static final String TEXT_DISCOUNT = "Text";
+    private static final String IMAGE_DISCOUNT = "Image";
+    private static final String STARTDATE_DISCOUNT = "StartDate";
+    private static final String EXPIRATIONDATE_DISCOUNT = "ExpirationDate";
+    private static final String DESCRIPTION_DISCOUNT= "Description";
+    private static final String PERCENT_DISCOUNT = "Percent";
+    private static final String BUSINESSID_DISCOUNT = "BusinessId";
 
     //Opinion Table Columns names
     private static final String ID_opinion = "Id";
@@ -171,6 +191,26 @@ public class DataBaseSqlite extends SQLiteOpenHelper
             "SubsetId INTEGER " +
             ");";
 
+    //SQL statement to create DisCoutn table
+    private static final String CREATE_TABLE_DisCount = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_DisCount + " (" +
+            "Id INTEGER PRIMARY KEY ," +
+            "Text TEXT," +
+            "Image TEXT," +
+            "StartDate TEXT ," +
+            "ExpirationDate TEXT ," +
+            "Description TEXT ," +
+            "Percent TEXT," +
+            "BusinessId INTEGER" +
+            ");";
+
+    //SQL statement to create DisCoutn table
+    private static final String CREATE_TABLE_LikeDisCount = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_LikeDisCount + " (" +
+            "Id INTEGER PRIMARY KEY ," +
+            "MemberId INTEGER," +
+            "BusinessId INTEGER," +
+            "LikeCount INTEGER ," +
+            "DisLikeCount INTEGER " +
+            ");";
     // SQL statement to create fieldactivity table
     private static final String CREATE_TABLE_FieldActivity = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_FieldActivity + " (" +
             " Id INTEGER PRIMARY KEY ," +
@@ -312,6 +352,8 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.execSQL(CREATE_TABLE_Interest);
         db.execSQL(CREATE_TABLE_Notification);
         db.execSQL(CREATE_TABLE_FieldActivity);
+        db.execSQL(CREATE_TABLE_DisCount);
+        db.execSQL(CREATE_TABLE_LikeDisCount);
     }
 
     @Override
@@ -329,6 +371,8 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_Interest);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_NOTIFICATION);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_FieldActivity);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_DisCount);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_LikeDisCount);
         // create fresh  tables
         this.onCreate(db);
     }
@@ -353,9 +397,89 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.close();
     }
 
+    /**
+     *
+     * @param id
+     * @param memberid
+     * @param businessid
+     * @param likecount
+     * @param dislikecount
+     */
+    public void Add_LikeDisCount(Integer id,Integer memberid,Integer businessid,Integer likecount,Integer dislikecount){
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put(ID_LIKEDISCOUNT, id);
+        values.put(MEMBERID_LIKEDISCOUNT, memberid);
+        values.put(BUSINESSID_LIKEDISCOUNT, businessid);
+        values.put(LIKECOUNT_LIKEDISCOUNT, likecount);
+        values.put(DISLIKECOUNT_LIKEDISCOUNT, dislikecount );
+
+
+
+        // 3. insert
+        db.insert(TABLE_NAME_LikeDisCount, // table
+                null, //nullColumnHack
+                values); // key/value
+
+        // 4. close
+        db.close();
+
+    }
+
+    /**
+     *
+     * @param id
+     * @param text
+     * @param image
+     * @param startdate
+     * @param expirationdate
+     * @param description
+     * @param percent
+     * @param businessid
+     */
+    public void Add_DisCount(Integer id,String text,String image,String startdate,String expirationdate,String description,String percent,Integer businessid){
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put(ID_DISCOUNT, id);
+        values.put(TEXT_DISCOUNT, text);
+        values.put(IMAGE_DISCOUNT, image);
+        values.put(STARTDATE_DISCOUNT, startdate);
+        values.put(EXPIRATIONDATE_DISCOUNT, expirationdate);
+        values.put(DESCRIPTION_DISCOUNT, description);
+        values.put(PERCENT_DISCOUNT, percent);
+        values.put(BUSINESSID_DISCOUNT, businessid);
+
+
+        // 3. insert
+        db.insert(TABLE_NAME_DisCount, // table
+                null, //nullColumnHack
+                values); // key/value
+
+        // 4. close
+        db.close();
+
+    }
+
+    /**
+     *
+     * @param id
+     * @param OpinionType
+     * @param erja
+     * @param ExecutionTime
+     * @param Description
+     * @param ExpirationDate
+     * @param City
+     * @param CityId
+     * @param Subset
+     * @param SubsetId
+     */
     public void Add_Notification(Integer id,Integer OpinionType,Integer erja,Boolean ExecutionTime,String Description,String ExpirationDate,String City,Integer CityId,String Subset,Integer SubsetId){
-
-
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 

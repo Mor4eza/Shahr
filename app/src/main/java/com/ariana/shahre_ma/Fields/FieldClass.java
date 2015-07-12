@@ -43,6 +43,16 @@ public class FieldClass
     private static String Password;
     private static Integer CityId;
 
+    // Field  DisCount table
+    private static Integer Id_DisCount;
+    private static String Text_DisCount;
+    private static String Image_DisCount;
+    private static String Startdate_DisCount;
+    private static String Expirationdate_DisCount;
+    private static String Description_DisCount;
+    private static String Percent_DisCount;
+    private static Integer BusinessId_DisCount;
+
 
     //Field BookMark table
     private static Integer Id_Bookmark;
@@ -468,5 +478,93 @@ public class FieldClass
     public List<String>  GetNameSubset()
     {
         return NameSubset;
+    }
+
+
+    /**
+     * Get and Set DisCount
+     * File DisCount
+     */
+    // Set  Member
+    public void  SetId_DisCount(Integer id)
+    {
+        Id_DisCount=id;
+    }
+    // Set  Member
+    public void  SetText_DisCount(String text)
+    {
+        Text_DisCount=text;
+    }
+    // Set  Member
+    public void  SetImage_DisCount(String image)
+    {
+        Image_DisCount=image;
+    }
+    // Set  Member
+    public void  SetStartDate_DisCount(String startdate)
+    {
+        Startdate_DisCount=startdate;
+    }
+    // Set  Member
+    public void  SetExpirationDate_DisCount(String expirationdate)
+    {
+        Expirationdate_DisCount=expirationdate;
+    }
+    // Set  Member
+    public void  SetDescription_DisCount(String description)
+    {
+        Description_DisCount=description;
+    }
+    // Set  Member
+    public void  SetPercent_DisCount(String percent)
+    {
+        Percent_DisCount=percent;
+    }
+    // Set  Member
+    public void  SetBusinessId_DisCount(Integer businessid)
+    {
+        BusinessId_DisCount=businessid;
+    }
+
+
+    // Get  Member
+    public Integer  GetId_DisCount()
+    {
+        return  Id_DisCount ;
+    }
+    // Get  Member
+    public String  GetText_DisCount()
+    {
+        return  Text_DisCount;
+    }
+    // Get  Member
+    public String  GetImage_DisCount()
+    {
+        return  Image_DisCount;
+    }
+    // Get  Member
+    public String  GetStartDate_DisCount()
+    {
+        return  Startdate_DisCount;
+    }
+    // Get  Member
+    public String  GetExpirationDate_DisCount()
+    {
+        return Expirationdate_DisCount;
+    }
+    // Get  Member
+    public String  GetDescription_DisCount()
+    {
+        return  Description_DisCount;
+    }
+    // Get  Member
+    public String  GetPercent_DisCount()
+    {
+        return  Percent_DisCount;
+    }
+    // Get  Member
+    public Integer  GetBusinessId_DisCount()
+    {
+        return  BusinessId_DisCount;
     }
 }
