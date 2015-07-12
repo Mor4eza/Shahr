@@ -81,7 +81,8 @@ public class HTTPGetDisCountJson extends AsyncTask<String,Void,Integer> {
     protected void onPreExecute() {
        super.onPreExecute();
         pd = new ProgressDialog(context);
-        pd.setMessage("دریافت...");
+        pd.setMessage("دریافت..." +
+                "");
         pd.setCancelable(false);
         pd.show();
     }
