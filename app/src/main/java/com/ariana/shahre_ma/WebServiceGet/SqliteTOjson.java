@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -94,10 +95,10 @@ public class SqliteTOjson {
     public String getSqliteTOjson(String j_name, String j_email, String j_mobile, Integer j_age, Boolean j_sex, String j_username, String j_password, Integer j_cityid) {
         String field_Json = "";
         try {
-
+            Query query=new Query(context);
             // JSONobject get key/value convert to json
             JSONObject rowObject = new JSONObject();
-            rowObject.put("Id", 1);
+            rowObject.put("Id",query.getMemberId());
             rowObject.put("Name", j_name);
             rowObject.put("Mobile", j_mobile);
             rowObject.put("Email", j_email);

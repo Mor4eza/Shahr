@@ -899,6 +899,14 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     }
 
+    public Cursor select_CityName(Integer id)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT Name FROM " + TABLE_NAME_City + "  WHERE id=" +id, null);
+
+    }
+
     public Cursor select_business_Detail(String market,String address)
     {
 

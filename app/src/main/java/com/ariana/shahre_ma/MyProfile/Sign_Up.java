@@ -206,7 +206,7 @@ public class Sign_Up extends ActionBarActivity {
     {
 
        // Toast.makeText(getApplication(),fc.GetMember_Email(), Toast.LENGTH_LONG).show();
-   /*    DataBaseSqlite db=new DataBaseSqlite(this);
+      DataBaseSqlite db=new DataBaseSqlite(this);
         Cursor allrows=db.select_AllBusiness();
 
 
@@ -219,11 +219,12 @@ public class Sign_Up extends ActionBarActivity {
             }
             allrows.close();
         }
-        catch (Exception e){ Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}*/
+        catch (Exception e){ Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}
 
-        DataBaseSqlite db=new DataBaseSqlite(this);
 
-        db.delete_BusinessId(1606);
+/*       DataBaseSqlite db=new DataBaseSqlite(this);
+
+        db.delete_BusinessId(1606);*/
 
      /*   SqliteTOjson json=new SqliteTOjson(this);
       //  json.getSqliteInterestTOjson();
