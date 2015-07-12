@@ -79,14 +79,13 @@ query=new Query(getActivity());
                 @Override
                 public void onClick(View v) {
                     txtComm = (EditText) rootView.findViewById(R.id.txt_comm);
-                    if(ns.checkInternetConnection()==false) {
-                        Toast.makeText(getActivity(),"شبکه اینترنت قطع می باشد",Toast.LENGTH_LONG).show();
-                    }
-                    else
-                    {
-                            try {
+                    if (ns.checkInternetConnection() == false) {
+                        Toast.makeText(getActivity(), "شبکه اینترنت قطع می باشد", Toast.LENGTH_LONG).show();
+                    } else {
+                        try {
+                            if (query.getMemberId() > 0) {
                                 Log.i("getMemberId", String.valueOf(query.getMemberId()));
-                                _json = (json.getOpinionTOjson(txtComm.getText().toString(), ct.getIranianDate(),query.getMemberId(),fc.GetBusiness_Id()));
+                                _json = (json.getOpinionTOjson(txtComm.getText().toString(), ct.getIranianDate(), query.getMemberId(), fc.GetBusiness_Id()));
                                 fc.SetOpinion_Description(txtComm.getText().toString());
                                 fc.SetOpinion_Date(ct.getIranianDate().toString());
                                 fc.SetOpinion_MemberName("");
@@ -96,8 +95,11 @@ query=new Query(getActivity());
                                 sendPost1.SetOpinion_Json(_json);
                                 sendPost1.execute();
                                 txtComm.setText("");
-                            } catch (Exception e) {
+                            } else {
+                                Toast.makeText(getActivity(), "کاربری وارد نشد است", Toast.LENGTH_LONG).show();
                             }
+                        } catch (Exception e) {
+                        }
                     }
                 }
             });
