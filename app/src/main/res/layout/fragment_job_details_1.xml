@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/market_image"
-        android:src="@drawable/pooshak"
+        android:src="@drawable/pooshak1"
         android:layout_alignParentTop="true"
         android:scaleType="centerCrop"
         android:layout_alignParentLeft="true"

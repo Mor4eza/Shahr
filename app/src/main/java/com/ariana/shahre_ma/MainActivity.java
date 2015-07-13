@@ -379,8 +379,10 @@ public class MainActivity extends ActionBarActivity {
                return false;
            }
        }).build();
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(false);
+      //  getSupportActionBar().setIcon(R.drawable.ic_action_menu);
 
     }
 

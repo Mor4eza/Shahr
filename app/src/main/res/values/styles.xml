@@ -29,7 +29,7 @@
 
     &lt;!&ndash; ActionBar tabs styles &ndash;&gt;
     <style name="MyActionBarStyle" parent="@android:style/Widget.Holo.ActionBar.TabView">
-        <item name="android:background">@drawable/pooshak</item>
+        <item name="android:background">@drawable/pooshak1</item>
     </style>
     </resources>
 -->

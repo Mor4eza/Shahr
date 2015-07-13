@@ -7,6 +7,90 @@
     tools:context="com.z3_soft.shahre_ma.job_details.Job_details_discount$PlaceholderFragment">
 
 
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:id="@+id/imageView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/discount"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <RelativeLayout
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/discount_percent_tag"
+        android:layout_above="@+id/tv_dis_name"
+        android:layout_marginBottom="10dp"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_marginTop="144dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_alignLeft="@+id/imageView"
+        android:layout_alignStart="@+id/imageView">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffded8d9"
+            android:textSize="30sp"
+            android:layout_centerInParent="true"
+            android:text="20"
+            android:textAlignment="center"
+            android:textStyle="bold" />
 
 
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="نام تخفیف"
+        android:textSize="20sp"
+        android:id="@+id/tv_dis_name"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="تاریخ شروع"
+        android:drawableEnd="@drawable/discount_start"
+        android:drawableRight="@drawable/discount_start"
+        android:drawablePadding="10dp"
+        android:id="@+id/tv_dis_start"
+        android:layout_marginTop="50dp"
+       android:layout_alignTop="@id/tv_dis_name"
+        android:layout_alignRight="@+id/tv_dis_end"
+        android:layout_alignEnd="@+id/tv_dis_end" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="تاریخ پایان"
+        android:drawableEnd="@drawable/discount_end"
+        android:drawableRight="@drawable/discount_end"
+        android:drawablePadding="10dp"
+        android:id="@+id/tv_dis_end"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/tv_dis_start"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="توضیحات"
+        android:drawableEnd="@drawable/discount_perecent"
+        android:drawableRight="@drawable/discount_perecent"
+        android:drawablePadding="10dp"
+        android:id="@+id/textView6"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/tv_dis_end"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+
+</RelativeLayout>

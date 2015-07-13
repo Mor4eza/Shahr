@@ -4,7 +4,7 @@
     <item
         android:id="@+id/select_city"
         android:title="انتخاب شهر"
-        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:icon="@drawable/ic_change_city"
         app:showAsAction="always"
         />
     <item android:id="@+id/action_search"
