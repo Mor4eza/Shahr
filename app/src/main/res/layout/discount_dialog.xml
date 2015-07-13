@@ -6,7 +6,44 @@
     android:layout_height="match_parent"
 
     >
-    <LinearLayout
+
+    <EditText
+        android:id="@+id/et_discount_title"
+        android:layout_width="300dp"
+        android:hint="عنوان تخفیف"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@android:drawable/edit_text"
+
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginRight="5dp"
+        android:text="درصد تخفیف:"/>
+    <com.appyvet.rangebar.RangeBar
+        xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/rangebar"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        custom:rangeBar="false"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        custom:tickStart="1"
+        custom:tickInterval="1"
+        custom:barColor ="#ffff0019"
+        custom:tickEnd="100"
+        custom:pinColor="#ff23"
+        custom:selectorColor="#ffff0023"
+        custom:tickColor="#ff13c5ff"
+        custom:selectorSize="4dp"
+        />
+
+   <!-- <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -31,7 +68,7 @@
         android:layout_marginTop="40dp"
         android:layout_gravity="center_horizontal" />
 
-    </LinearLayout>
+    </LinearLayout>-->
 
 
 <EditText
@@ -43,16 +80,34 @@
         android:maxLines="7"
         android:inputType="textMultiLine"
         android:editable="true"
-    android:layout_gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
         android:layout_margin="10dp"
         android:lines="3" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+      <EditText
+          android:id="@+id/tv_discount_date"
+          android:layout_width="300dp"
+          android:hint="تاریخ شروع"
+          android:layout_height="wrap_content"
+          android:layout_margin="10dp"
+          android:layout_gravity="center_horizontal"
+          android:background="@android:drawable/edit_text"
+          android:inputType="date" />
+
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:text="مدت زمان تخفیف:"
         android:textSize="14dp"
+        android:layout_marginRight="5dp"
         android:layout_gravity="end"/>
 
 
@@ -69,10 +124,11 @@
         android:layout_height="wrap_content"
         android:text="ثبت تخفیف"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:id="@+id/discount_save"
+        android:onClick="save_discount"
         />
 
 </LinearLayout>

@@ -1,5 +1,4 @@
 package com.ariana.shahre_ma.job_details;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -10,7 +9,7 @@ import android.view.ViewGroup;
 import com.ariana.shahre_ma.R;
 
 
-public class Job_details_map extends FragmentActivity {
+public class job_details_discount extends FragmentActivity {
 
 
 
@@ -18,7 +17,7 @@ public class Job_details_map extends FragmentActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_job_details_map);
+        setContentView(R.layout.activity_job_details_discount);
 
 
         if (savedInstanceState == null) {
@@ -44,7 +43,7 @@ public class Job_details_map extends FragmentActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_job_details_map, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_job_details_discount, container, false);
 
             return rootView;
         }

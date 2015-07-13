@@ -146,6 +146,8 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
 
                 case 0:
                     return new job_details_1.PlaceholderFragment();
+                case 1:
+                    return new job_details_discount.PlaceholderFragment();
                case 2:
                     return new Job_details_map.PlaceholderFragment();
                 case 3:
