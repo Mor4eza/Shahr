@@ -83,11 +83,14 @@ public class MainActivity extends ActionBarActivity {
         else {
 
 
-              HTTPGetSubsetJson httpsubset = new HTTPGetSubsetJson(this);
-              httpsubset.execute();
+            HTTPGetCityJson httpcity = new HTTPGetCityJson(this);
+            httpcity.execute();
 
-              HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
-              httpcoll.execute();
+            HTTPGetSubsetJson httpsubset = new HTTPGetSubsetJson(this);
+            httpsubset.execute();
+
+            HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
+            httpcoll.execute();
 
         }
 
