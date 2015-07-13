@@ -27,15 +27,32 @@ import java.net.ConnectException;
  */
 public class HTTPPostDisCount extends AsyncTask<String,Void,Integer> {
 
+    String urlDisCount="http://test.shahrma.com/api/ApiTakeDisCount";
     FieldClass fc=new FieldClass();
     ProgressDialog pd;
     Context context;
     String mesage;
-
+    String jsonstring;
     public HTTPPostDisCount(Context context)
     {
         this.context=context;
     }
+
+    /**
+     *
+     * @param json
+     */
+    public void SetDisCountJson(String json)
+    {
+         jsonstring = json;
+
+    }
+
+    private String GetJson()
+    {
+        return jsonstring;
+    }
+
 
     /**
      *
@@ -44,7 +61,7 @@ public class HTTPPostDisCount extends AsyncTask<String,Void,Integer> {
     protected void onPreExecute() {
         super.onPreExecute();
         pd = new ProgressDialog(context);
-        pd.setMessage("ارسال و ثبت...");
+        pd.setMessage("Saveing...");
         pd.setCancelable(false);
         pd.show();
     }
@@ -61,8 +78,8 @@ public class HTTPPostDisCount extends AsyncTask<String,Void,Integer> {
         {
             HttpClient httpClient=new DefaultHttpClient();
             HttpContext httpContext=new BasicHttpContext();
-            HttpPost httpPost=new HttpPost("");
-            StringEntity se=new StringEntity("","UTF-8");
+            HttpPost httpPost=new HttpPost(urlDisCount);
+            StringEntity se=new StringEntity(GetJson(),"UTF-8");
 
             httpPost.setEntity(se);
             httpPost.setHeader("Accept", "application/json");
@@ -102,9 +119,10 @@ public class HTTPPostDisCount extends AsyncTask<String,Void,Integer> {
         super.onPostExecute(result);
         if(result==1)
         {
+            Log.i("JsonDisCount",GetJson());
             try {
                 DataBaseSqlite db = new DataBaseSqlite(context);
-                db.Add_DisCount(fc.GetId_DisCount(), fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());
+                db.Add_DisCountMember(fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());
                 pd.dismiss();
             }
             catch (Exception e)

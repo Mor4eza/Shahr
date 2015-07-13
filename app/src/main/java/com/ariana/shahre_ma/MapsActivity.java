@@ -20,6 +20,7 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MyInterest.Interest_Adapter;
+import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.job_details.Job_details;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -39,13 +40,18 @@ public class MapsActivity extends ActionBarActivity {
     Integer id[];
     FieldClass fc=new FieldClass();
     Query query=new Query(this);
-
+    Integer cityid=0;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        KeySettings setting=new KeySettings(getApplicationContext());
+        Integer cityid=0;
+        cityid=query.getCityId(setting.getCityName());
+
         setUpMapIfNeeded();
         mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setMapToolbarEnabled(false);
@@ -59,9 +65,11 @@ public class MapsActivity extends ActionBarActivity {
 
                 final View window = getLayoutInflater().inflate(
                         R.layout.jobs_info_windows, null);
-
+                KeySettings setting=new KeySettings(getApplicationContext());
+                Integer cityid=0;
+                cityid=query.getCityId(setting.getCityName());
                 DataBaseSqlite mydb = new DataBaseSqlite(getApplicationContext());
-                Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb());
+                Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb(),cityid);
                 len=fc.GetCount_Business();
 
 
@@ -94,8 +102,10 @@ public class MapsActivity extends ActionBarActivity {
 
         // DataBase
 
+
+
         DataBaseSqlite mydb = new DataBaseSqlite(this);
-        Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb());
+        Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb(),cityid);
         String lat[] = new String[fc.GetCount_Business()];
         String Longt[] = new String[fc.GetCount_Business()];
         Integer l=0;
@@ -198,7 +208,7 @@ public class MapsActivity extends ActionBarActivity {
         id=new Integer[fc.GetCount_Business()];
 
         DataBaseSqlite mydb = new DataBaseSqlite(this);
-        Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb());
+        Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb(),cityid);
        try {
 
 

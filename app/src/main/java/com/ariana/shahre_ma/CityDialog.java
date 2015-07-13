@@ -26,6 +26,7 @@ public class CityDialog extends Dialog {
     Spinner Sp_City;
     List<String> list;
     ArrayAdapter<String> dataAdapter;
+
     public CityDialog(Context context) {
         super(context);
     }

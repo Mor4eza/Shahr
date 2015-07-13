@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.MyBusiness;
 
+import android.database.Cursor;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.R;
 
 import java.util.ArrayList;
@@ -29,11 +31,11 @@ public class Discount extends ActionBarActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position== count -1){
-                    Discount_Dialog dialog=new Discount_Dialog(Discount.this);
+                if (position == count - 1) {
+                    Discount_Dialog dialog = new Discount_Dialog(Discount.this);
                     dialog.show();
-                }else{
-                    Toast.makeText(getApplicationContext(),"فقط مجاز به ویرایش آخرین تخفیف هستید",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "فقط مجاز به ویرایش آخرین تخفیف هستید", Toast.LENGTH_LONG).show();
                     Snackbar.make(listView, "test", Snackbar.LENGTH_LONG);
 
                 }
@@ -44,8 +46,16 @@ public class Discount extends ActionBarActivity {
 
     private ArrayList<discount_item> generateData(){
         ArrayList<discount_item> items = new ArrayList<discount_item>();
-        items.add(new discount_item("10% تخفیف","تخفیف برای پیراهن مردانه","1394/4/22"));
-        items.add(new discount_item("20% تخفیف", "به مناسبت روز مرد", "1394/5/8"));
+        DataBaseSqlite db=new DataBaseSqlite(this);
+        Cursor rows=db.select_AllDisCountMember();
+        if(rows.moveToFirst()) {
+            do {
+
+
+                items.add(new discount_item(" % تخفیف "+rows.getString(6),rows.getString(5),rows.getString(3)));
+                //  items.add(new discount_item("20% تخفیف", "به مناسبت روز مرد", "1394/5/8"));
+            }while (rows.moveToNext());
+        }
 
         return items;
     }

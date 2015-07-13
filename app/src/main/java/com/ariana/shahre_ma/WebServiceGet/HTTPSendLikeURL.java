@@ -98,9 +98,12 @@ public class  HTTPSendLikeURL extends AsyncTask<String, Void, Boolean> {
             }
 
 
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (JSONException e)
+        {
 
             e.printStackTrace();
         }
