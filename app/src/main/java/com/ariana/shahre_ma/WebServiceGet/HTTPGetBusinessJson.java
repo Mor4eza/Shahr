@@ -13,6 +13,7 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Jobs_List;
+import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,6 +68,15 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
     Integer ratecount[];
     Double ratevalue[];
 
+    Integer discountid[];
+    String discounttext[];
+    String discountimage[];
+    String discountstartdate[];
+    String discountexpirationdate[];
+    String discountdescription[];
+    String discountpercent[];
+    Integer discountbusinessid[];
+
     Integer len=0;
     Integer i=0;
 
@@ -105,7 +115,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
     protected void onPreExecute() {
         super.onPreExecute();
         pd = new ProgressDialog(context);
-        pd.setMessage("در حال بروزرسانی...");
+        pd.setMessage("دریافت...");
         pd.setCancelable(false);
         pd.show();
     }
@@ -139,23 +149,31 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
         try {
 
             Integer count=0;
+            Integer cityid=0;
+            Integer idsubset=0;
           //  Toast.makeText(context,market[0], Toast.LENGTH_LONG).show();
             DataBaseSqlite dbs = new DataBaseSqlite(context);
+            KeySettings setting=new KeySettings(context);
+            query=new Query(context);
+            cityid=query.getCityId(setting.getCityName());
+            idsubset=fc.GetSubsetId();
+            dbs.delete_Business(cityid, idsubset);
 
-
-           dbs.delete_Business();
             for (int i = 0; i <len; i++)
             {
-                Cursor rows=dbs.select_CountBusinessId(Id[i]);
-                rows.moveToFirst();
-                count=rows.getInt(0);
-                rows.close();
-                Log.i("ID", String.valueOf(Id[i]));
-                Log.i("count",String.valueOf(count));
-                if(count==0)
-                dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
+                dbs.delete_DisCount(discountid[i]);
+                if(discountid[i]==0) {
+                    Log.i("ifbusiness","0");
+                }
+                else
+                {
+                    Log.i("elsebusiness", "i>0");
+                    dbs.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i]);
+                }
+                dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i],cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
 
             }
+
 
             if(len==0) {
               //  Toast.makeText(get, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
@@ -164,7 +182,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
             }
             else {
 
-               query=new Query(context);
+
                 fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
                 Intent i = new Intent(this.context, Jobs_List.class);
                 this.context.startActivity(i);
@@ -174,7 +192,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
         } catch (Exception e) {
             pd.dismiss();
-            Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
+            Log.e("ExceptionBusinessJson",e.toString());
         }
     }
 
@@ -218,6 +236,17 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
             field7=new Integer[areas.length()];
             ratecount=new Integer[areas.length()];
             ratevalue=new Double[areas.length()];
+
+            discountid = new Integer[areas.length()];
+            discounttext = new String[areas.length()];
+            discountimage=new String[areas.length()];
+            discountstartdate=new String[areas.length()];
+            discountexpirationdate=new String[areas.length()];
+            discountdescription=new String[areas.length()];
+            discountpercent=new String[areas.length()];
+
+            discountbusinessid=new Integer[areas.length()];
+
             len=areas.length();
             for (int i = 0; i < areas.length(); i++) {
 
@@ -227,13 +256,13 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
                 areaid[i]=area.getInt("AreaId");
                 businessowner[i]=area.getString("BusinessOwner");
                 code[i]=area.getString("Code");
-                description[i]=area.getString("Description");
-                email[i]=area.getString("Email");
+                description[i] = area.getString("Description");
+                email[i] = area.getString("Email");
                 expirationdate[i]=area.getString("ExpirationDate");
                 fax[i]=area.getString("Fax");
                 field1[i]=area.getInt("Field1");
                 field2[i]=area.getInt("Field2");
-                field3[i]=area.getInt("Field3");
+                field3[i] = area.getInt("Field3");
                 field4[i]=area.getInt("Field4");
                 field5[i]=area.getInt("Field5");
                 field6[i] = area.getInt("Field6");
@@ -254,6 +283,17 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
                 ratecount[i]=area.getInt("RateCount");
                 ratevalue[i]=area.getDouble("RateAverage");
+
+
+                discountid[i]=area.getInt("DiscountId");
+                discounttext[i]=area.getString("DiscountText");
+                discountimage[i]=area.getString("DiscountImage");
+                discountstartdate[i]=area.getString("DiscountStartdate");
+                discountexpirationdate[i]=area.getString("DiscountExpirationDate");
+                discountpercent[i]=area.getString("DiscountPercent");
+                discountdescription[i]=area.getString("DiscountDescription");
+                discountbusinessid[i]=area.getInt("Id");
+
             }
 
         } catch (JSONException e) {

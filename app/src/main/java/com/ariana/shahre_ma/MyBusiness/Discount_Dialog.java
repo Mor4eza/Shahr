@@ -18,7 +18,10 @@ import android.widget.Toast;
 import com.android.datetimepicker.date.DatePickerDialog;
 import com.appyvet.rangebar.RangeBar;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
+import com.ariana.shahre_ma.WebServicePost.HTTPPostDisCount;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +37,8 @@ public class Discount_Dialog extends Dialog {
     EditText tv_title;
     Button btn_save;
     RangeBar rangeBar;
+    FieldClass fc=new FieldClass();
+    String percent="";
     public Discount_Dialog(Context context) {
         super(context);
     }
@@ -55,6 +60,7 @@ public class Discount_Dialog extends Dialog {
             @Override
             public void onRangeChangeListener(RangeBar rangeBar, int i, int i1, String s, String s1) {
                 Log.i("RangeBar", s1);
+                percent=s1;
             }
         });
 
@@ -63,6 +69,24 @@ public class Discount_Dialog extends Dialog {
             @Override
             public void onClick(View v) {
                 dismiss();
+
+                SqliteTOjson sqliteTOjson=new SqliteTOjson(context);
+
+                fc.SetId_DisCount(1);
+                fc.SetText_DisCount(tv_title.getText().toString());
+                fc.SetImage_DisCount("");
+                fc.SetStartDate_DisCount(tv_date.getText().toString());
+                fc.SetExpirationDate_DisCount("7/5/2015");
+                fc.SetDescription_DisCount(tv_desc.getText().toString());
+                fc.SetPercent_DisCount(percent);
+                fc.SetBusinessId_DisCount(fc.GetBusiness_Id());
+
+                String json;
+                json=sqliteTOjson.getDisCountTOjson(fc.GetId_DisCount(),fc.GetText_DisCount(),fc.GetImage_DisCount(),fc.GetStartDate_DisCount(),fc.GetExpirationDate_DisCount(),fc.GetDescription_DisCount(),fc.GetPercent_DisCount(),fc.GetBusinessId_DisCount());
+
+                HTTPPostDisCount httpPostDisCount=new HTTPPostDisCount(getContext());
+                httpPostDisCount.SetDisCountJson(json);
+                httpPostDisCount.execute();
             }
         });
 

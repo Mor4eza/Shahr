@@ -12,6 +12,7 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Jobs_List;
+import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -135,9 +136,15 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
         try {
 
             Integer count=0;
+            Integer cityid=0;
+            Integer idsubset=0;
             //  Toast.makeText(context,market[0], Toast.LENGTH_LONG).show();
             DataBaseSqlite dbs = new DataBaseSqlite(context);
-
+            KeySettings setting=new KeySettings(context);
+            query=new Query(context);
+            cityid=query.getCityId(setting.getCityName());
+            idsubset=fc.GetSubsetId();
+            dbs.delete_Business(cityid,idsubset);
 
             //  dbs.delete_Business();
             for (int i = 0; i <len; i++)
@@ -149,7 +156,7 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
                 Log.i("ID", String.valueOf(Id[i]));
                 Log.i("count",String.valueOf(count));
                 if(count==0)
-                    dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
+                    dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i],cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
 
             }
 

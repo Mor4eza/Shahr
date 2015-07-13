@@ -257,14 +257,14 @@ Query query=new Query(this);
 
        // Toast.makeText(getApplication(),fc.GetMember_Email(), Toast.LENGTH_LONG).show();
       DataBaseSqlite db=new DataBaseSqlite(this);
-        Cursor allrows=db.select_AllBusiness();
+        Cursor allrows=db.select_AllDisCountMember();
 
 
         try {
             if ( allrows.moveToFirst()) {
                 do {
                    // Toast.makeText(getApplication(), String.valueOf(allrows.getString(0)), Toast.LENGTH_LONG).show();
-                    Log.i("Business ID", String.valueOf(allrows.getString(0)));
+                    Log.i("Business ID", String.valueOf(allrows.getString(1)));
                 }while (allrows.moveToNext());
             }
             allrows.close();

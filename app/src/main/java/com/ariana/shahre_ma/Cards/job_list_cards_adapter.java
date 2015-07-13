@@ -15,6 +15,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.Settings.KeySettings;
@@ -41,6 +42,7 @@ private  static Context context;
     {
         super();
       this.context=context;
+      Query query=new Query(context);
 
 
         setting=new KeySettings(context);
@@ -56,10 +58,12 @@ private  static Context context;
             mItems.add(nature);
 
         DataBaseSqlite mydb = new DataBaseSqlite(context);
+        Integer cityid=0;
+        cityid=query.getCityId(setting.getCityName());
 
         if(setting.getSearchBusiness()==false)
         {
-             allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb());
+             allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb(),cityid);
         }
         else
         {

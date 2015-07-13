@@ -28,7 +28,7 @@ import java.lang.reflect.Field;
 public class HTTPPostBusinessJson extends AsyncTask<String,Long,Integer>
 {
 
-    String url_Business="http://test.shahrma.com/api/ApiGiveoneBusiness";
+    String url_Business="http://test.shahrma.com/api/ApiTakeoneBusiness";
     String jsonstring="";
     Query query;
     FieldClass fc=new FieldClass();
