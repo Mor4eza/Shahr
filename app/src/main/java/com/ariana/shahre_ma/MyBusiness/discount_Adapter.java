@@ -42,11 +42,17 @@ public class discount_Adapter extends ArrayAdapter<discount_item> {
         TextView labelView = (TextView) rowView.findViewById(R.id.label);
         TextView valueView = (TextView) rowView.findViewById(R.id.value);
         TextView dateView =  (TextView) rowView.findViewById(R.id.expire_date);
+        TextView Title =  (TextView) rowView.findViewById(R.id.tv_dis_title);
+        TextView StartTime =  (TextView) rowView.findViewById(R.id.tv_dis_sDate);
+        TextView Tv_id =  (TextView) rowView.findViewById(R.id.tv_dis_id);
 
         // 4. Set the text for textView
         labelView.setText(itemsArrayList.get(position).getTitle());
         valueView.setText(itemsArrayList.get(position).getDescription());
         dateView.setText(itemsArrayList.get(position).getExpireDate());
+        Title.setText(itemsArrayList.get(position).getMainTitle());
+        StartTime.setText(itemsArrayList.get(position).getStartDate());
+        Tv_id.setText(itemsArrayList.get(position).GetId());
         // 5. retrn rowView
         return rowView;
     }
