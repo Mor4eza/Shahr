@@ -26,7 +26,7 @@ public class HTTPGETLikeJson  extends AsyncTask<String, String, String>
 
     private static Context context;
 
-    private static final String url_collection="http://test.shahrma.com/api/apigivecollection";
+    private static final String url_Like="http://test.shahrma.com/api/apigivecollection";
 
     Integer Id[];
     Boolean like[];
@@ -63,7 +63,7 @@ public class HTTPGETLikeJson  extends AsyncTask<String, String, String>
         try {
 
 
-            InputStream jsonStream = getStreamFromURL(url_collection, "GET");
+            InputStream jsonStream = getStreamFromURL(url_Like, "GET");
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);
             onPostExecute();

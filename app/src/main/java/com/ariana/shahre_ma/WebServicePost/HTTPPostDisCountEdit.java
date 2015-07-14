@@ -26,14 +26,31 @@ import java.io.InputStreamReader;
  */
 public class HTTPPostDisCountEdit extends AsyncTask<String,Void,Integer>
 {
+    String urlDisCount="http://test.shahrma.com/api/ApiUpdateDisCount";
     FieldClass fc=new FieldClass();
     ProgressDialog pd;
     Context context;
     String mesage;
+    String jsonstring;
 
     public HTTPPostDisCountEdit(Context context)
     {
         this.context=context;
+    }
+
+    /**
+     *
+     * @param json
+     */
+    public void SetDisCountJson(String json)
+    {
+        jsonstring = json;
+
+    }
+
+    private String GetJson()
+    {
+        return jsonstring;
     }
 
     /**
@@ -60,8 +77,8 @@ public class HTTPPostDisCountEdit extends AsyncTask<String,Void,Integer>
         {
             HttpClient httpClient=new DefaultHttpClient();
             HttpContext httpContext=new BasicHttpContext();
-            HttpPost httpPost=new HttpPost("");
-            StringEntity se=new StringEntity("","UTF-8");
+            HttpPost httpPost=new HttpPost(urlDisCount);
+            StringEntity se=new StringEntity(GetJson(),"UTF-8");
 
             httpPost.setEntity(se);
             httpPost.setHeader("Accept", "application/json");
@@ -103,7 +120,8 @@ public class HTTPPostDisCountEdit extends AsyncTask<String,Void,Integer>
         {
             try {
                 DataBaseSqlite db = new DataBaseSqlite(context);
-                db.Add_DisCount(fc.GetId_DisCount(), fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());
+                db.delete_DisCountMember(Integer.parseInt(mesage));
+                db.Add_DisCountMember(Integer.parseInt(mesage), fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());
                 pd.dismiss();
             }
             catch (Exception e)

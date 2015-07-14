@@ -33,11 +33,11 @@ public class My_Business extends ActionBarActivity {
 
         Intialize();
 
-        HTTPGetFieldActivityJson httpfield=new HTTPGetFieldActivityJson(this);
+      /*  HTTPGetFieldActivityJson httpfield=new HTTPGetFieldActivityJson(this);
         httpfield.execute();
 
         HTTPGetAreaJosn httparea=new HTTPGetAreaJosn(this);
-        httparea.execute();
+        httparea.execute();*/
 
         Log.i("BusinessID",String.valueOf(fc.GetBusiness_Id()));
         try {

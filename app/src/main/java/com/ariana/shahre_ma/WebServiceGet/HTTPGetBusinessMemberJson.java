@@ -306,6 +306,7 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String, String, String>
                 result = line + "\n";
             }
         } catch (Exception e) {
+
         }
 
 

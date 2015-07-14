@@ -207,7 +207,7 @@ public class  InstructionsSqlite {
 
     //SQL statement to create DisCoutn table
     public static final String CREATE_TABLE_DisCountMember = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_DisCountMember + " (" +
-            "Id INTEGER PRIMARY KEY AUTOINCREMENT ," +
+            "Id INTEGER PRIMARY KEY  ," +
             "Text TEXT," +
             "Image TEXT," +
             "StartDate TEXT ," +

@@ -39,18 +39,18 @@ public class HTTPGetDisCountJson extends AsyncTask<String,Void,Integer> {
     Integer businessid[];
 
     Integer len;
-    Integer BusintessId;
+    Integer memberid;
     ProgressDialog pd;
 
     FieldClass fc=new FieldClass();
 
     /**
      *
-     * @param business_id
+     * @param memberid
      */
-    public void seturl_DisCount(Integer business_id) {
+    public void seturl_DisCount(Integer memberid) {
 
-        this.BusintessId=business_id;
+        this.memberid=memberid;
     }
 
     /**
@@ -61,7 +61,7 @@ public class HTTPGetDisCountJson extends AsyncTask<String,Void,Integer> {
     {
 
         String Result="";
-        Result="";
+        Result="http://test.shahrma.com/api/apiGiveDisCount?memberid="+memberid;
         return  Result;
     }
 
@@ -81,8 +81,7 @@ public class HTTPGetDisCountJson extends AsyncTask<String,Void,Integer> {
     protected void onPreExecute() {
        super.onPreExecute();
         pd = new ProgressDialog(context);
-        pd.setMessage("دریافت..." +
-                "");
+        pd.setMessage("دریافت..." );
         pd.setCancelable(false);
         pd.show();
     }
@@ -113,6 +112,7 @@ public class HTTPGetDisCountJson extends AsyncTask<String,Void,Integer> {
 
     /**
      *
+     * @param result
      */
     @Override
     protected void onPostExecute(Integer result) {

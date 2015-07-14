@@ -57,7 +57,8 @@ public class  HTTPSendLikeURL extends AsyncTask<String, Void, Boolean> {
 
     public String GetURL()
     {
-       String url="http://test.shahrma.com/api/ApiTakeLike?opinionId="+opinionid+"&memberId="+memberid+"&value="+like;
+       String url="http://test.shahrma.com/api/ApiTakeLike?erjaId="+opinionid+"&erjaType=0&memberId="+memberid+"&value="+like;
+
         Log.i("URL",url);
         return url;
 

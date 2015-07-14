@@ -22,6 +22,7 @@ import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostDisCount;
+import com.ariana.shahre_ma.WebServicePost.HTTPPostDisCountEdit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,7 @@ public class Discount_Dialog extends Dialog {
     RangeBar rangeBar;
     FieldClass fc=new FieldClass();
     String percent="";
+    Boolean SaveEdit=false;
     public Discount_Dialog(Context context) {
         super(context);
     }
@@ -55,6 +57,7 @@ public class Discount_Dialog extends Dialog {
         setTitle("ثبت تخفیف جدید");
         SpinnerSetUp();
         InitViews();
+        ShowEditDisCount();
         rangeBar.setRight(20);
         rangeBar.setOnRangeBarChangeListener(new RangeBar.OnRangeBarChangeListener() {
             @Override
@@ -70,23 +73,46 @@ public class Discount_Dialog extends Dialog {
             public void onClick(View v) {
                 dismiss();
 
-                SqliteTOjson sqliteTOjson=new SqliteTOjson(context);
-
-                fc.SetId_DisCount(1);
-                fc.SetText_DisCount(tv_title.getText().toString());
-                fc.SetImage_DisCount("");
-                fc.SetStartDate_DisCount(tv_date.getText().toString());
-                fc.SetExpirationDate_DisCount("7/5/2015");
-                fc.SetDescription_DisCount(tv_desc.getText().toString());
-                fc.SetPercent_DisCount(percent);
-                fc.SetBusinessId_DisCount(fc.GetBusiness_Id());
-
+                SqliteTOjson sqliteTOjson = new SqliteTOjson(context);
                 String json;
-                json=sqliteTOjson.getDisCountTOjson(fc.GetId_DisCount(),fc.GetText_DisCount(),fc.GetImage_DisCount(),fc.GetStartDate_DisCount(),fc.GetExpirationDate_DisCount(),fc.GetDescription_DisCount(),fc.GetPercent_DisCount(),fc.GetBusinessId_DisCount());
+                if(SaveEdit==true)
+                {
+                    Log.i("Edit","true");
+                    fc.SetId_DisCount(fc.GetId_DisCount());
+                    fc.SetText_DisCount(tv_title.getText().toString());
+                    fc.SetImage_DisCount("");
+                    fc.SetStartDate_DisCount(tv_date.getText().toString());
+                    fc.SetExpirationDate_DisCount("7/5/2015");
+                    fc.SetDescription_DisCount(tv_desc.getText().toString());
+                    fc.SetPercent_DisCount(percent);
+                    fc.SetBusinessId_DisCount(fc.GetBusiness_Id());
 
-                HTTPPostDisCount httpPostDisCount=new HTTPPostDisCount(getContext());
-                httpPostDisCount.SetDisCountJson(json);
-                httpPostDisCount.execute();
+
+                    json = sqliteTOjson.getDisCountTOjson(fc.GetId_DisCount(), fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());
+
+                    HTTPPostDisCountEdit httpPostDisCount = new HTTPPostDisCountEdit(getContext());
+                    httpPostDisCount.SetDisCountJson(json);
+                    httpPostDisCount.execute();
+                  }
+
+                  {
+                    Log.i("Save","false");
+                    fc.SetId_DisCount(1);
+                    fc.SetText_DisCount(tv_title.getText().toString());
+                    fc.SetImage_DisCount("");
+                    fc.SetStartDate_DisCount(tv_date.getText().toString());
+                    fc.SetExpirationDate_DisCount("7/5/2015");
+                    fc.SetDescription_DisCount(tv_desc.getText().toString());
+                    fc.SetPercent_DisCount(percent);
+                    fc.SetBusinessId_DisCount(fc.GetBusiness_Id());
+
+
+                    json = sqliteTOjson.getDisCountTOjson(fc.GetId_DisCount(), fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());
+
+                    HTTPPostDisCount httpPostDisCount = new HTTPPostDisCount(getContext());
+                    httpPostDisCount.SetDisCountJson(json);
+                    httpPostDisCount.execute();
+                }
             }
         });
 
@@ -117,6 +143,28 @@ public class Discount_Dialog extends Dialog {
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Sp_City.setAdapter(dataAdapter);
+
+    }
+
+    private  void ShowEditDisCount()
+    {
+        try {
+            DataBaseSqlite db = new DataBaseSqlite(getContext());
+            Log.i("Id-DisCount", String.valueOf(fc.GetId_DisCount()));
+            Cursor rows = db.select_AllDisCountMember(fc.GetId_DisCount());
+            rows.moveToFirst();
+            Log.i("Exception", rows.getString(1));
+            Log.i("Exception", rows.getString(5));
+            Log.i("Exception", rows.getString(3));
+            tv_title.setText(rows.getString(1));
+            tv_desc.setText(rows.getString(5));
+            tv_date.setText(rows.getString(3));
+            rangeBar.setRight(Integer.parseInt(rows.getString(6)));
+            if(fc.GetId_DisCount()>0)
+                SaveEdit=true;
+        }catch (Exception e){
+            Log.i("Exception",e.toString());
+        }
 
     }
 

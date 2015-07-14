@@ -20,7 +20,7 @@ import java.net.URL;
 /**
  * Created by ariana2 on 6/6/2015.
  */
-public class HTTPGetSubsetJson extends AsyncTask<String, String, String>
+public class HTTPGetSubsetJson extends AsyncTask<String,Void,Integer>
 {
 
     private static Context context;
@@ -45,38 +45,46 @@ public class HTTPGetSubsetJson extends AsyncTask<String, String, String>
      * @param args
      * @return
      */
-    protected String doInBackground(String... args) {
+    protected Integer doInBackground(String... args) {
+        Integer result=0;
         try {
 
 
             InputStream jsonStream = getStreamFromURL(url_subset, "GET");
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);
-            onPostExecute();
+            result=1;
         } catch (Exception e) {
+            result=0;
             // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
         }
-        return null;
+        return result;
 
 
     }
 
-    /**
-     *
-     */
-    protected void onPostExecute() {
-        try {
+    @Override
+    protected void onPostExecute(Integer result) {
+//        onPostExecute(result);
+        if(result==1) {
+            try {
 
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
-            dbs.delete_Subset();
+                if(len>0) {
+                    DataBaseSqlite dbs = new DataBaseSqlite(context);
+                    dbs.delete_Subset();
 
-            for (int i = 0; i <len; i++)
-              {
-                  dbs.Add_subset(Id[i], subsetname[i],collectionId[i]);
+                    for (int i = 0; i < len; i++) {
+                        dbs.Add_subset(Id[i], subsetname[i], collectionId[i]);
 
-              }
-        } catch (Exception e) {
-            Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
+                    }
+                }
+            } catch (Exception e) {
+                Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
+            }
+        }
+        else
+        {
+
         }
     }
 
@@ -121,6 +129,7 @@ public class HTTPGetSubsetJson extends AsyncTask<String, String, String>
             huc.setReadTimeout(10000);
             huc.setConnectTimeout(15000);
             huc.setRequestMethod(method);
+
             huc.setDoInput(true);
 
             huc.connect();

@@ -264,7 +264,7 @@ Query query=new Query(this);
             if ( allrows.moveToFirst()) {
                 do {
                    // Toast.makeText(getApplication(), String.valueOf(allrows.getString(0)), Toast.LENGTH_LONG).show();
-                    Log.i("Business ID", String.valueOf(allrows.getString(1)));
+                    Log.i("Business ID", String.valueOf(allrows.getString(0)));
                 }while (allrows.moveToNext());
             }
             allrows.close();

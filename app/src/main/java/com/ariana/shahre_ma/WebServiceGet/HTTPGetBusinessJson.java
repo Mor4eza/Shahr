@@ -77,6 +77,10 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
     String discountpercent[];
     Integer discountbusinessid[];
 
+    Integer likediscount[];
+    Integer dislikediscount[];
+
+
     Integer len=0;
     Integer i=0;
 
@@ -204,6 +208,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
         try {
 
+            Log.i("JSONString",JSONString);
             JSONArray areas = new JSONArray(JSONString);
 
             Id=new Integer[areas.length()];
@@ -227,6 +232,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
             area1=new String[areas.length()];
             user=new String[areas.length()];
             userid=new Integer[areas.length()];
+
             field1=new Integer[areas.length()];
             field2=new Integer[areas.length()];
             field3=new Integer[areas.length()];
@@ -234,9 +240,10 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
             field5=new Integer[areas.length()];
             field6=new Integer[areas.length()];
             field7=new Integer[areas.length()];
+
             ratecount=new Integer[areas.length()];
             ratevalue=new Double[areas.length()];
-
+            
             discountid = new Integer[areas.length()];
             discounttext = new String[areas.length()];
             discountimage=new String[areas.length()];
@@ -244,11 +251,14 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
             discountexpirationdate=new String[areas.length()];
             discountdescription=new String[areas.length()];
             discountpercent=new String[areas.length()];
-
             discountbusinessid=new Integer[areas.length()];
+
+            likediscount=new Integer[areas.length()];
+            dislikediscount=new Integer[areas.length()];
 
             len=areas.length();
             for (int i = 0; i < areas.length(); i++) {
+
 
                 JSONObject area = areas.getJSONObject(i);
                 address[i]=area.getString("Address");
@@ -293,6 +303,10 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
                 discountpercent[i]=area.getString("DiscountPercent");
                 discountdescription[i]=area.getString("DiscountDescription");
                 discountbusinessid[i]=area.getInt("Id");
+
+               /* likediscount[i]=area.getInt("DiscountLike");
+                dislikediscount[i]=area.getInt("DiscountDislike");*/
+
 
             }
 

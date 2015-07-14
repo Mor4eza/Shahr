@@ -20,13 +20,13 @@ import java.net.URL;
 /**
  * Created by ariana on 7/12/2015.
  */
-public class HTTPGetDisCount extends AsyncTask<String, String, String>
+public class HTTPGetLikeDisCount extends AsyncTask<String, String, String>
 {
     ProgressDialog pd;
 
     private static Context context;
 
-    private static final String url_collection="";
+    private static final String url_LikeDisCount="http://test.shahrma.com/api/apigivecollection";
 
     Integer Id[];
     Boolean like[];
@@ -41,7 +41,7 @@ public class HTTPGetDisCount extends AsyncTask<String, String, String>
      *
      * @param c
      */
-    public HTTPGetDisCount(Context c) {
+    public HTTPGetLikeDisCount(Context c) {
         context = c;
     }
 
@@ -65,7 +65,7 @@ public class HTTPGetDisCount extends AsyncTask<String, String, String>
         try {
 
 
-            InputStream jsonStream = getStreamFromURL(url_collection, "GET");
+            InputStream jsonStream = getStreamFromURL(url_LikeDisCount, "GET");
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);
             onPostExecute();

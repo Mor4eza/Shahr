@@ -52,7 +52,7 @@ public class discount_Adapter extends ArrayAdapter<discount_item> {
         dateView.setText(itemsArrayList.get(position).getExpireDate());
         Title.setText(itemsArrayList.get(position).getMainTitle());
         StartTime.setText(itemsArrayList.get(position).getStartDate());
-        Tv_id.setText(itemsArrayList.get(position).GetId());
+        Tv_id.setText(String.valueOf(itemsArrayList.get(position).GetId()));
         // 5. retrn rowView
         return rowView;
     }

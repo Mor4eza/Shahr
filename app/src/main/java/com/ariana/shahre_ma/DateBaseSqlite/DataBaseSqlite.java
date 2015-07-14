@@ -156,13 +156,14 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.close();
 
     }
-    public void Add_DisCountMember(String text,String image,String startdate,String expirationdate,String description,String percent,Integer businessid){
+    public void Add_DisCountMember(Integer id,String text,String image,String startdate,String expirationdate,String description,String percent,Integer businessid){
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
 
+        values.put(instructionsSqlite.ID_DISCOUNTMEMBER, id);
         values.put(instructionsSqlite.TEXT_DISCOUNTMEMBER, text);
         values.put(instructionsSqlite.IMAGE_DISCOUNTMEMBER, image);
         values.put(instructionsSqlite.STARTDATE_DISCOUNTMEMBER, startdate);
@@ -588,6 +589,13 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_DisCountMember , null);
     }
 
+    public Cursor select_AllDisCountMember(Integer id)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_DisCountMember +" WHERE Id="+id , null);
+    }
+
     public Cursor select_FieldActivityId(String fieldname)
     {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -827,6 +835,14 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     {
         SQLiteDatabase db=this.getWritableDatabase();
         db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_FieldActivity);
+        db.close();
+
+    }
+
+    public void delete_DisCountMember(Integer id)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_DisCountMember +" WHERE Id="+id);
         db.close();
 
     }

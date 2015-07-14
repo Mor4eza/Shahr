@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -19,7 +21,7 @@ import java.io.IOException;
 /**
  * Created by ariana on 7/12/2015.
  */
-public class HTTPSendDisCount extends AsyncTask<String,Void,Boolean>
+public class HTTPSendLikeDisCount extends AsyncTask<String,Void,Boolean>
 {
     ProgressDialog pd;
     String mesage;
@@ -28,7 +30,7 @@ public class HTTPSendDisCount extends AsyncTask<String,Void,Boolean>
     Integer discountid;
     Integer memberid;
 
-    public HTTPSendDisCount(Context context){this.context=context;}
+    public HTTPSendLikeDisCount(Context context){this.context=context;}
     public void SetDiscountid(Integer discountid)
     {
         this.discountid=discountid;
@@ -46,7 +48,7 @@ public class HTTPSendDisCount extends AsyncTask<String,Void,Boolean>
 
     public String GetURL()
     {
-        String url="";
+        String url="http://test.shahrma.com/api/ApiTakeLike?erjaId="+discountid+"&erjaType=0&memberId="+memberid+"&value="+like;
         Log.i("URL", url);
         return url;
 
@@ -65,7 +67,7 @@ public class HTTPSendDisCount extends AsyncTask<String,Void,Boolean>
     protected Boolean doInBackground(String... params) {
         try
         {
-            HttpGet httpget=new HttpGet("");
+            HttpGet httpget=new HttpGet(GetURL());
             HttpClient httpClient=new DefaultHttpClient();
             HttpResponse httpResponse=httpClient.execute(httpget);
 
@@ -90,8 +92,10 @@ public class HTTPSendDisCount extends AsyncTask<String,Void,Boolean>
     @Override
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
+        DataBaseSqlite db=new DataBaseSqlite(context);
         if(aBoolean==true)
         {
+
             pd.dismiss();
         }
         else

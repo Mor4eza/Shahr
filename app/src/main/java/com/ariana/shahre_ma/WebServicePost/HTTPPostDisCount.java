@@ -122,7 +122,7 @@ public class HTTPPostDisCount extends AsyncTask<String,Void,Integer> {
             Log.i("JsonDisCount",GetJson());
             try {
                 DataBaseSqlite db = new DataBaseSqlite(context);
-                db.Add_DisCountMember(fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());
+                db.Add_DisCountMember(Integer.parseInt(mesage),fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());
                 pd.dismiss();
             }
             catch (Exception e)
