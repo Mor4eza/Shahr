@@ -30,7 +30,6 @@ public class discount_item {
     public String getDescription() {
         return description;
     }
-
     public String getExpireDate() {
         return expireDate;
     }
@@ -46,6 +45,5 @@ public class discount_item {
     public int GetId() {
         return Id;
     }
-    // getters and setters...
 }
 

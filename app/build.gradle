@@ -52,7 +52,7 @@ dependencies {
     compile 'com.android.support:cardview-v7:22.2.0' //Card view
     compile 'com.android.support:recyclerview-v7:22.2.0' //recycle view
     compile 'com.github.chenupt.android:dragtoplayout:1.2.1@aar' //draggable top layout
-    compile 'com.squareup.picasso:picasso:2.3.2'  //for sliding image
+    compile 'com.squareup.picasso:picasso:2.5.2'  //for sliding image
     compile 'com.nineoldandroids:library:2.4.0' //support old android
     compile 'com.daimajia.slider:library:1.0.7@aar' //sliding image
     compile 'org.osmdroid:osmdroid-android:4.2'//open street map

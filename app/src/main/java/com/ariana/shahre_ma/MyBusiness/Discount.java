@@ -52,7 +52,7 @@ public class Discount extends ActionBarActivity {
             do {
 
 
-                items.add(new discount_item(" % تخفیف "+rows.getString(6),rows.getString(5),rows.getString(3)));
+                items.add(new discount_item(" % تخفیف "+rows.getString(6),rows.getString(5),rows.getString(3),"","",2));
                 //  items.add(new discount_item("20% تخفیف", "به مناسبت روز مرد", "1394/5/8"));
             }while (rows.moveToNext());
         }

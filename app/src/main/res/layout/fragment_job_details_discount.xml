@@ -92,5 +92,53 @@
         android:layout_alignParentEnd="true" />
 
 
+    <RelativeLayout
+        android:layout_width="80dp"
+        android:id="@+id/like_button"
+        android:layout_height="60dp"
+        android:background="@drawable/like_state"
+        android:clickable="true"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/dislike_button"
+        android:layout_toEndOf="@+id/dislike_button">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_discount_like"
+            android:paddingLeft="10dp"
+            android:text="10"
+            android:paddingBottom="15dp"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:id="@+id/dislike_button"
+        android:background="@drawable/dislike_state"
+        android:clickable="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_discount_unlike"
+            android:paddingLeft="10dp"
+            android:text="10"
+            android:paddingBottom="15dp"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+
+
 
 </RelativeLayout>
