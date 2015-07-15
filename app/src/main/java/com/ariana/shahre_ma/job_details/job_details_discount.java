@@ -54,13 +54,15 @@ public class job_details_discount extends FragmentActivity {
         Integer discountid=0;
         RelativeLayout like;
         RelativeLayout dislike;
-        TextView tv_like;
-        TextView tv_unlike;
+        public static TextView tv_like;
+        public static TextView tv_unlike;
         TextView tv_dis_percent;
         TextView tv_dis_name;
         TextView tv_dis_start;
         TextView tv_dis_end;
         TextView tv_dis_desc;
+        TransitionDrawable drawable_like;
+        TransitionDrawable drawable_unlike;
         public PlaceholderFragment() {
         }
 
@@ -93,15 +95,16 @@ public class job_details_discount extends FragmentActivity {
             tv_like.setText(String.valueOf(cursor.getInt(8)));
             tv_unlike.setText(String.valueOf(cursor.getInt(9)));
 
-
+            drawable_like = (TransitionDrawable) like.getBackground();
+            drawable_unlike = (TransitionDrawable) dislike.getBackground();
 
             like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    TransitionDrawable drawable = (TransitionDrawable) like.getBackground();
-                    drawable.startTransition(500);
+                    drawable_like.startTransition(500);
                     like.setEnabled(false);
-
+                    dislike.setEnabled(true);
+                    drawable_unlike.reverseTransition(500);
                     NetState ns = new NetState(getActivity()); // class state network
                     Query query = new Query(getActivity());
 
@@ -114,6 +117,7 @@ public class job_details_discount extends FragmentActivity {
                             httpSendLikeDisCount.SetMemberid(query.getMemberId());
                             httpSendLikeDisCount.SetLike(true);
                             httpSendLikeDisCount.execute();
+
                         } else {
 
                         }
@@ -126,10 +130,10 @@ public class job_details_discount extends FragmentActivity {
             dislike.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    TransitionDrawable drawable = (TransitionDrawable) dislike.getBackground();
-                    drawable.startTransition(500);
+                    drawable_unlike.startTransition(500);
                     dislike.setEnabled(false);
-
+                    like.setEnabled(true);
+                    drawable_like.reverseTransition(500);
                     NetState ns = new NetState(getActivity()); // class state network
                     Query query = new Query(getActivity());
 

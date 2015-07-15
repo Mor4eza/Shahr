@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.job_details.job_details_discount;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -14,6 +15,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,6 +33,9 @@ public class HTTPSendLikeDisCount extends AsyncTask<String,Void,Boolean>
     Integer discountid;
     Integer memberid;
     Integer businessid;
+
+    Integer likecount=0;
+    Integer dislikecount=0;
 
     public HTTPSendLikeDisCount(Context context){this.context=context;}
     public void SetBusinessid(Integer businessid)
@@ -95,6 +100,19 @@ public class HTTPSendLikeDisCount extends AsyncTask<String,Void,Boolean>
         return false;
     }
 
+    private void parsJSON(String json)
+    {
+        try {
+
+            JSONObject jsonObject = new JSONObject(json);
+            likecount=jsonObject.getInt("LikeCount");
+            dislikecount=jsonObject.getInt("DisLikeCount");
+
+        }
+        catch (Exception e){
+
+        }
+    }
     @Override
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
@@ -102,8 +120,12 @@ public class HTTPSendLikeDisCount extends AsyncTask<String,Void,Boolean>
         Log.i("JSONlikeDisCount",mesage);
         if(aBoolean==true)
         {
-            db.Add_LikeDisCount(like,memberid,discountid,businessid);
+            parsJSON(mesage);
+            db.Add_LikeDisCount(like, memberid, discountid, businessid);
+            job_details_discount.PlaceholderFragment.tv_like.setText(likecount.toString());
+            job_details_discount.PlaceholderFragment.tv_unlike.setText(dislikecount.toString());
             pd.dismiss();
+
         }
         else
         {

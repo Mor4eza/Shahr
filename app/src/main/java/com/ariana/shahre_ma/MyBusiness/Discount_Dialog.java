@@ -95,7 +95,7 @@ public class Discount_Dialog extends Dialog {
 
                     if (fc.GetText_DisCount().equals(""))
                     {
-                        AlertDialog alertDialog=new AlertDialog.Builder(context).create();
+                        AlertDialog alertDialog=new AlertDialog.Builder(getContext()).create();
                         alertDialog.setTitle("هشدار");
                         alertDialog.setMessage("متن تخفیف را وارد کنید");
                         alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
@@ -110,7 +110,7 @@ public class Discount_Dialog extends Dialog {
                         alertDialog.show();
                     } else if (fc.GetDescription_DisCount().equals(""))
                     {
-                        AlertDialog alertDialog=new AlertDialog.Builder(context).create();
+                        AlertDialog alertDialog=new AlertDialog.Builder(getContext()).create();
                         alertDialog.setTitle("هشدار");
                         alertDialog.setMessage("توضیحات برای تخیفیف را وارد کنید");
                         alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
@@ -126,7 +126,7 @@ public class Discount_Dialog extends Dialog {
 
                     } else if (fc.GetPercent_DisCount().length() == 0)
                     {
-                        AlertDialog alertDialog=new AlertDialog.Builder(context).create();
+                        AlertDialog alertDialog=new AlertDialog.Builder(getContext()).create();
                         alertDialog.setTitle("هشدار");
                         alertDialog.setMessage("درصد تخفیف را معیین کنید");
                         alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
@@ -165,7 +165,7 @@ public class Discount_Dialog extends Dialog {
 
                     if (fc.GetText_DisCount().equals(""))
                     {
-                        AlertDialog alertDialog=new AlertDialog.Builder(context).create();
+                        AlertDialog alertDialog=new AlertDialog.Builder(getContext()).create();
                         alertDialog.setTitle("هشدار");
                         alertDialog.setMessage("متن تخفیف را وارد کنید");
                         alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
@@ -180,7 +180,7 @@ public class Discount_Dialog extends Dialog {
                         alertDialog.show();
                     } else if (fc.GetDescription_DisCount().equals(""))
                     {
-                        AlertDialog alertDialog=new AlertDialog.Builder(context).create();
+                        AlertDialog alertDialog=new AlertDialog.Builder(getContext()).create();
                         alertDialog.setTitle("هشدار");
                         alertDialog.setMessage("توضیحات برای تخیفیف را وارد کنید");
                         alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
@@ -196,7 +196,7 @@ public class Discount_Dialog extends Dialog {
 
                     } else if (fc.GetPercent_DisCount().length() == 0)
                     {
-                        AlertDialog alertDialog=new AlertDialog.Builder(context).create();
+                        AlertDialog alertDialog=new AlertDialog.Builder(getContext()).create();
                         alertDialog.setTitle("هشدار");
                         alertDialog.setMessage("درصد تخفیف را معیین کنید");
                         alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
