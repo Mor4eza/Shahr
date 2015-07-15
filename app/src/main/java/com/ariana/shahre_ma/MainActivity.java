@@ -84,6 +84,11 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //findViewsAndConfigure();
+
+        /*ImageView iv_1 = (ImageView) findViewById(R.id.imageView1);
+        String image_url_1 = "";
+        imgLoader.DisplayImage(image_url_1, iv_1);*/
+
         setup();
 
         mImgFloatingView.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +110,7 @@ public class MainActivity extends ActionBarActivity {
             HTTPGetSubsetJson httpsubset = new HTTPGetSubsetJson(this);
             httpsubset.execute();
 
-          HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
+            HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
             httpcoll.execute();
 
 
