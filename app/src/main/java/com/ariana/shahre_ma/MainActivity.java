@@ -1,10 +1,12 @@
 package com.ariana.shahre_ma;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ContentProvider;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -13,9 +15,16 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
@@ -67,14 +76,23 @@ public class MainActivity extends ActionBarActivity {
     private static final int PROFILE_SETTING = 1;
     private AccountHeader headerResult = null;
     private Drawer result=null;
-
+    private WindowManager mWindowManager;
+    private ImageView mImgFloatingView;
+    private boolean mIsFloatingViewAttached = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //findViewsAndConfigure();
+        setup();
 
+        mImgFloatingView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            Toast.makeText(getApplicationContext(),"Clicked",Toast.LENGTH_LONG).show();
 
+            }
+        });
 
         if(net.checkInternetConnection()==false) {
             Toast.makeText(getApplication(),"شبکه اینترنت قطع می باشد",Toast.LENGTH_LONG).show();
@@ -418,6 +436,66 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    void setup(){
 
+
+        mWindowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
+        mImgFloatingView = new ImageView(this);
+        mImgFloatingView.setImageResource(R.drawable.floating_search);
+
+        final WindowManager.LayoutParams params = new WindowManager.LayoutParams(
+                WindowManager.LayoutParams.WRAP_CONTENT,
+                WindowManager.LayoutParams.WRAP_CONTENT,
+                WindowManager.LayoutParams.TYPE_CHANGED,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                PixelFormat.TRANSLUCENT);
+
+        params.gravity = Gravity.TOP | Gravity.LEFT;
+        params.height=220;
+        params.width=270;
+        params.x=100;
+        params.y=220;
+        mWindowManager.addView(mImgFloatingView, params);
+        mIsFloatingViewAttached = true;
+
+        mImgFloatingView.setOnTouchListener(new View.OnTouchListener() {
+            private int initialX;
+            private int initialY;
+            private float initialTouchX;
+            private float initialTouchY;
+            int clicked;
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        initialX = params.x;
+                        initialY = params.y;
+                        initialTouchX = event.getRawX();
+                        initialTouchY = event.getRawY();
+                        clicked=1;
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                        if (clicked == 1) {
+                            Toast.makeText(getApplicationContext(), "clicked", Toast.LENGTH_LONG).show();
+                        }else{
+                            Toast.makeText(getApplicationContext(), "not clicked", Toast.LENGTH_LONG).show();
+                        }
+                        return true;
+                    case MotionEvent.ACTION_MOVE:
+                        params.x = initialX + (int) (event.getRawX() - initialTouchX);
+                        params.y = initialY + (int) (event.getRawY() - initialTouchY);
+                        mWindowManager.updateViewLayout(mImgFloatingView, params);
+                        clicked=0;
+                        return true;
+                }
+                return false;
+            }
+        });
+
+
+        TranslateAnimation animation = new TranslateAnimation(0, 200, 0, 300);
+
+        mImgFloatingView.startAnimation(animation);
+    }
 }
 
