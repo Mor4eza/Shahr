@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.ImageDownload.ImageLoader;
 import com.ariana.shahre_ma.Jobs_List;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
@@ -33,6 +35,8 @@ public class MyListAdapter extends BaseExpandableListAdapter {
     private ArrayList<Continent> continentList;
     private ArrayList<Continent> originalList;
     private FieldClass fc=new FieldClass();
+    ImageLoader imgLoader;
+    public static ImageView headimage;
     public MyListAdapter(Context context, ArrayList<Continent> continentList) {
         this.context = context;
         this.continentList = new ArrayList<Continent>();
@@ -139,8 +143,19 @@ public class MyListAdapter extends BaseExpandableListAdapter {
             view = layoutInflater.inflate(R.layout.group_item, null);
         }
 
+
         TextView heading = (TextView) view.findViewById(R.id.laptop1);
+
+
+        headimage=(ImageView) view.findViewById(R.id.head_image);
+        imgLoader=new ImageLoader(context);
+
+        String image_url_1 = "www.shahrma.com/app/img/collection_icon/"+31+".png";
+        imgLoader.DisplayImage(image_url_1, headimage);
+
         heading.setText(continent.getName().trim());
+       // headimage.setImageDrawable();
+
         final RelativeLayout header=(RelativeLayout)view.findViewById(R.id.relative_parent);
 
         if (isExpanded) {
