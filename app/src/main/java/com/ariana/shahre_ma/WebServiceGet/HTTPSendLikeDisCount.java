@@ -30,17 +30,22 @@ public class HTTPSendLikeDisCount extends AsyncTask<String,Void,Boolean>
     Boolean like;
     Integer discountid;
     Integer memberid;
+    Integer businessid;
 
     public HTTPSendLikeDisCount(Context context){this.context=context;}
+    public void SetBusinessid(Integer businessid)
+    {
+        this.businessid=businessid;
+    }
     public void SetDiscountid(Integer discountid)
     {
         this.discountid=discountid;
     }
-
     public void SetMemberid(Integer memberid)
     {
         this.memberid=memberid;
     }
+
 
     public void SetLike(Boolean like)
     {
@@ -49,7 +54,7 @@ public class HTTPSendLikeDisCount extends AsyncTask<String,Void,Boolean>
 
     public String GetURL()
     {
-        String url="http://test.shahrma.com/api/ApiTakeLike?erjaId="+discountid+"&erjaType=0&memberId="+memberid+"&value="+like;
+        String url="http://test.shahrma.com/api/ApiTakeLike?erjaId="+discountid+"&erjaType=1&memberId="+memberid+"&value="+like;
         Log.i("URLLikeDisCount", url);
         return url;
 
@@ -97,7 +102,7 @@ public class HTTPSendLikeDisCount extends AsyncTask<String,Void,Boolean>
         Log.i("JSONlikeDisCount",mesage);
         if(aBoolean==true)
         {
-            db.Add_LikeDisCount(memberid,discountid,like);
+            db.Add_LikeDisCount(like,memberid,discountid,businessid);
             pd.dismiss();
         }
         else

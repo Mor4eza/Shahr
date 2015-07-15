@@ -52,6 +52,7 @@ public class Discount extends ActionBarActivity {
             }
         });
 
+
         HTTPGetDisCountJson httpGetDisCountJson=new HTTPGetDisCountJson(this);
         httpGetDisCountJson.seturl_DisCount(query.getMemberId());
         httpGetDisCountJson.execute();

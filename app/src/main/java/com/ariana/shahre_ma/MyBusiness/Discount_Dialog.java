@@ -1,12 +1,15 @@
 package com.ariana.shahre_ma.MyBusiness;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 
 import com.android.datetimepicker.date.DatePickerDialog;
 import com.appyvet.rangebar.RangeBar;
+import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
@@ -33,6 +37,7 @@ import java.util.List;
 public class Discount_Dialog extends Dialog {
 
     Context context;
+    DateTime dt=new DateTime();
     EditText tv_desc;
     EditText tv_date;
     EditText tv_title;
@@ -41,6 +46,8 @@ public class Discount_Dialog extends Dialog {
     FieldClass fc=new FieldClass();
     String percent="";
     Boolean SaveEdit=false;
+    Spinner Sp_City;
+    Integer countday=7;
     public Discount_Dialog(Context context) {
         super(context);
     }
@@ -63,7 +70,7 @@ public class Discount_Dialog extends Dialog {
             @Override
             public void onRangeChangeListener(RangeBar rangeBar, int i, int i1, String s, String s1) {
                 Log.i("RangeBar", s1);
-                percent=s1;
+                percent = s1;
             }
         });
 
@@ -75,47 +82,182 @@ public class Discount_Dialog extends Dialog {
 
                 SqliteTOjson sqliteTOjson = new SqliteTOjson(context);
                 String json;
-                if(SaveEdit==true)
-                {
-                    Log.i("Edit","true");
+                if (SaveEdit == true) {
+                    Log.i("Edit", "true");
                     fc.SetId_DisCount(fc.GetId_DisCount());
                     fc.SetText_DisCount(tv_title.getText().toString());
                     fc.SetImage_DisCount("");
                     fc.SetStartDate_DisCount(tv_date.getText().toString());
-                    fc.SetExpirationDate_DisCount("7/5/2015");
+                    fc.SetExpirationDate_DisCount(dt.Add(countday));
                     fc.SetDescription_DisCount(tv_desc.getText().toString());
                     fc.SetPercent_DisCount(percent);
                     fc.SetBusinessId_DisCount(fc.GetBusiness_Id());
 
+                    if (fc.GetText_DisCount().equals(""))
+                    {
+                        AlertDialog alertDialog=new AlertDialog.Builder(context).create();
+                        alertDialog.setTitle("هشدار");
+                        alertDialog.setMessage("متن تخفیف را وارد کنید");
+                        alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
 
-                    json = sqliteTOjson.getDisCountTOjson(fc.GetId_DisCount(), fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());
+                                tv_title.requestFocus();
 
-                    HTTPPostDisCountEdit httpPostDisCount = new HTTPPostDisCountEdit(getContext());
-                    httpPostDisCount.SetDisCountJson(json);
-                    httpPostDisCount.execute();
-                  }
+                            }
+                        });
 
-                  {
-                    Log.i("Save","false");
+
+                        alertDialog.show();
+                    } else if (fc.GetDescription_DisCount().equals(""))
+                    {
+                        AlertDialog alertDialog=new AlertDialog.Builder(context).create();
+                        alertDialog.setTitle("هشدار");
+                        alertDialog.setMessage("توضیحات برای تخیفیف را وارد کنید");
+                        alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                tv_title.requestFocus();
+
+                            }
+                        });
+
+
+                        alertDialog.show();
+
+                    } else if (fc.GetPercent_DisCount().length() == 0)
+                    {
+                        AlertDialog alertDialog=new AlertDialog.Builder(context).create();
+                        alertDialog.setTitle("هشدار");
+                        alertDialog.setMessage("درصد تخفیف را معیین کنید");
+                        alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                tv_title.requestFocus();
+
+                            }
+                        });
+
+
+                        alertDialog.show();
+
+                    } else
+                    {
+                        json = sqliteTOjson.getDisCountTOjson(fc.GetId_DisCount(), fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());
+
+                        HTTPPostDisCountEdit httpPostDisCount = new HTTPPostDisCountEdit(getContext());
+                        httpPostDisCount.SetDisCountJson(json);
+                        httpPostDisCount.execute();
+                    }
+
+
+                }
+
+                {
+                    Log.i("Save", "false");
                     fc.SetId_DisCount(1);
                     fc.SetText_DisCount(tv_title.getText().toString());
                     fc.SetImage_DisCount("");
-                    fc.SetStartDate_DisCount(tv_date.getText().toString());
-                    fc.SetExpirationDate_DisCount("7/5/2015");
+                    fc.SetStartDate_DisCount(dt.Now());
+                    fc.SetExpirationDate_DisCount(dt.Add(countday));
                     fc.SetDescription_DisCount(tv_desc.getText().toString());
                     fc.SetPercent_DisCount(percent);
                     fc.SetBusinessId_DisCount(fc.GetBusiness_Id());
 
+                    if (fc.GetText_DisCount().equals(""))
+                    {
+                        AlertDialog alertDialog=new AlertDialog.Builder(context).create();
+                        alertDialog.setTitle("هشدار");
+                        alertDialog.setMessage("متن تخفیف را وارد کنید");
+                        alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
 
-                    json = sqliteTOjson.getDisCountTOjson(fc.GetId_DisCount(), fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());
+                                tv_title.requestFocus();
 
-                    HTTPPostDisCount httpPostDisCount = new HTTPPostDisCount(getContext());
-                    httpPostDisCount.SetDisCountJson(json);
-                    httpPostDisCount.execute();
+                            }
+                        });
+
+
+                        alertDialog.show();
+                    } else if (fc.GetDescription_DisCount().equals(""))
+                    {
+                        AlertDialog alertDialog=new AlertDialog.Builder(context).create();
+                        alertDialog.setTitle("هشدار");
+                        alertDialog.setMessage("توضیحات برای تخیفیف را وارد کنید");
+                        alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                tv_title.requestFocus();
+
+                            }
+                        });
+
+
+                        alertDialog.show();
+
+                    } else if (fc.GetPercent_DisCount().length() == 0)
+                    {
+                        AlertDialog alertDialog=new AlertDialog.Builder(context).create();
+                        alertDialog.setTitle("هشدار");
+                        alertDialog.setMessage("درصد تخفیف را معیین کنید");
+                        alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                tv_title.requestFocus();
+
+                            }
+                        });
+
+
+                        alertDialog.show();
+
+                    } else
+                    {
+                        json = sqliteTOjson.getDisCountTOjson(fc.GetId_DisCount(), fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());
+
+                        HTTPPostDisCount httpPostDisCount = new HTTPPostDisCount(getContext());
+                        httpPostDisCount.SetDisCountJson(json);
+                        httpPostDisCount.execute();
+                    }
                 }
             }
         });
 
+        Sp_City.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+
+                switch (pos) {
+                    case 0:
+
+                        countday = 7;
+                        break;
+                    case 1:
+
+                        countday = 10;
+                        break;
+                    case 2:
+
+                        countday = 20;
+                        break;
+                    case 3:
+
+                        countday = 30;
+                        break;
+                    case 4:
+                        countday = 60;
+                        break;
+                    case 5:
+                        countday = 90;
+                        break;
+
+                }
+            }
+
+
+            public void onNothingSelected(AdapterView<?> arg0) {
+
+            }
+        });
 
     }
 
@@ -130,7 +272,7 @@ public class Discount_Dialog extends Dialog {
     }
 
     void SpinnerSetUp(){
-        Spinner Sp_City = (Spinner) findViewById(R.id.sp_expire);
+         Sp_City = (Spinner) findViewById(R.id.sp_expire);
         Sp_City.setPrompt("انتخاب شهر:");
         List<String> list = new ArrayList<String>();
         list.add("1 هفته");

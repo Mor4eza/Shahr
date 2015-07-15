@@ -260,16 +260,15 @@ public class Add_business extends ActionBarActivity {
             AlertDialog alertDialog = new AlertDialog.Builder(Add_business.this).create();
             alertDialog.setTitle("هشدار ");
             alertDialog.setMessage("آدرس را وارد کنید");
-            alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    // Write your code here to execute after dialog closed
-                    //Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
+
                     Market_address.requestFocus();
 
                 }
             });
 
-            // Showing Alert Message
+
             alertDialog.show();
 
         }

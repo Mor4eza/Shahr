@@ -66,6 +66,24 @@ public class Query {
         }
         return Result;
     }
+
+    public  Integer getDisCountId(Integer businessid)
+    {
+        Integer id=0;
+        try
+        {
+            DataBaseSqlite db=new DataBaseSqlite(context);
+            Cursor allrows=db.select_DisCountId(businessid);
+            allrows.moveToFirst();
+            id=allrows.getInt(0);
+            allrows.close();
+        }
+        catch (Exception e)
+        {
+
+        }
+        return  id;
+    }
     /**
      *
      * @param subsetname

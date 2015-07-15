@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPSendLikeDisCount;
 
@@ -50,6 +51,7 @@ public class job_details_discount extends FragmentActivity {
 
         FieldClass fc=new FieldClass();
 
+        Integer discountid=0;
         RelativeLayout like;
         RelativeLayout dislike;
         TextView tv_like;
@@ -76,17 +78,22 @@ public class job_details_discount extends FragmentActivity {
             tv_dis_end=(TextView) rootView.findViewById(R.id.tv_dis_end);
             tv_dis_desc=(TextView) rootView.findViewById(R.id.tv_dis_desc);
 
+            NetState ns=new NetState(getActivity());
             DataBaseSqlite db=new DataBaseSqlite(getActivity());
             Cursor cursor=db.select_DisCount(fc.GetBusiness_Id());
+
             cursor.moveToFirst();
+            discountid=cursor.getInt(0);
             tv_dis_percent.setText(cursor.getString(6));
             tv_dis_name.setText(cursor.getString(1));
             tv_dis_start.setText(cursor.getString(3));
             tv_dis_end.setText(cursor.getString(4));
             tv_dis_desc.setText(cursor.getString(5));
 
-            tv_like.setText(String.valueOf(cursor.getInt(6)));
-            tv_unlike.setText(String.valueOf(cursor.getInt(7)));
+            tv_like.setText(String.valueOf(cursor.getInt(8)));
+            tv_unlike.setText(String.valueOf(cursor.getInt(9)));
+
+
 
             like.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -95,12 +102,24 @@ public class job_details_discount extends FragmentActivity {
                     drawable.startTransition(500);
                     like.setEnabled(false);
 
-                    Query query=new Query(getActivity());
-                    HTTPSendLikeDisCount httpSendLikeDisCount=new HTTPSendLikeDisCount(getActivity());
-                    httpSendLikeDisCount.SetDiscountid(fc.GetBusiness_Id());
-                    httpSendLikeDisCount.SetMemberid(query.getMemberId());
-                    httpSendLikeDisCount.SetLike(true);
-                    httpSendLikeDisCount.execute();
+                    NetState ns = new NetState(getActivity()); // class state network
+                    Query query = new Query(getActivity());
+
+                    // send like To DisCount
+                    if (ns.checkInternetConnection()) {
+                        if (query.getMemberId() > 0) {
+                            HTTPSendLikeDisCount httpSendLikeDisCount = new HTTPSendLikeDisCount(getActivity());
+                            httpSendLikeDisCount.SetDiscountid(discountid);
+                            httpSendLikeDisCount.SetBusinessid(fc.GetBusiness_Id());
+                            httpSendLikeDisCount.SetMemberid(query.getMemberId());
+                            httpSendLikeDisCount.SetLike(true);
+                            httpSendLikeDisCount.execute();
+                        } else {
+
+                        }
+                    } else {
+
+                    }
                 }
             });
 
@@ -111,12 +130,24 @@ public class job_details_discount extends FragmentActivity {
                     drawable.startTransition(500);
                     dislike.setEnabled(false);
 
-                    Query query=new Query(getActivity());
-                    HTTPSendLikeDisCount httpSendLikeDisCount=new HTTPSendLikeDisCount(getActivity());
-                    httpSendLikeDisCount.SetDiscountid(fc.GetBusiness_Id());
-                    httpSendLikeDisCount.SetMemberid(query.getMemberId());
-                    httpSendLikeDisCount.SetLike(false);
-                    httpSendLikeDisCount.execute();
+                    NetState ns = new NetState(getActivity()); // class state network
+                    Query query = new Query(getActivity());
+
+                    // send Dislike To DisCount
+                    if (ns.checkInternetConnection()) {
+                        if (query.getMemberId() > 0) {
+                            HTTPSendLikeDisCount httpSendLikeDisCount = new HTTPSendLikeDisCount(getActivity());
+                            httpSendLikeDisCount.SetDiscountid(discountid);
+                            httpSendLikeDisCount.SetBusinessid(fc.GetBusiness_Id());
+                            httpSendLikeDisCount.SetMemberid(query.getMemberId());
+                            httpSendLikeDisCount.SetLike(false);
+                            httpSendLikeDisCount.execute();
+                        } else {
+
+                        }
+                    } else {
+
+                    }
                 }
             });
             return rootView;

@@ -83,6 +83,7 @@ public class  InstructionsSqlite {
     public static final String ID_LIKEDISCOUNT = "Id";
     public static final String LIKECOUNT_LIKEDISCOUNT = "Like";
     public static final String MEMBERID_LIKEDISCOUNT = "MemberId";
+    public static final String DISCOUNTID_LIKEDISCOUNT = "DisCountId";
     public static final String BUSINESSID_LIKEDISCOUNT = "BusinessId";
 
     //DisCoutn Table Columns names
@@ -225,6 +226,7 @@ public class  InstructionsSqlite {
             "Id INTEGER PRIMARY KEY AUTOINCREMENT ," +
             "Like BOOLEAN, " +
             "MemberId INTEGER," +
+            "DisCountId INTEGER," +
             "BusinessId INTEGER" +
             ");";
     // SQL statement to create fieldactivity table

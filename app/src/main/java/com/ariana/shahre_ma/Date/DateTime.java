@@ -1,6 +1,7 @@
 package com.ariana.shahre_ma.Date;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -56,7 +57,7 @@ public class DateTime
 
     public String Now()
     {
-        sdf=new SimpleDateFormat("yyyy-MM-dd");
+        sdf=new SimpleDateFormat("MM/dd/yyyy");
         currentDateandTime = sdf.format(new Date());
         return currentDateandTime.toString();
     }
@@ -68,5 +69,14 @@ public class DateTime
         return currentDateandTime.toString();
     }
 
+    public String Add(Integer day)
+    {
+        sdf=new SimpleDateFormat("MM/dd/yyyy");
+        Calendar c = Calendar.getInstance();
+        currentDateandTime = sdf.format(new Date());
+        c.add(Calendar.DATE, day);
+        String output = sdf.format(c.getTime());
+        return output.toString();
+    }
 
 }

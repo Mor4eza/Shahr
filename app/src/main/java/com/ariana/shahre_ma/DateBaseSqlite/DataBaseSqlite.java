@@ -96,7 +96,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
      * @param likecount
      *
      */
-    public void Add_LikeDisCount(Integer memberid,Integer businessid,Boolean likecount){
+    public void Add_LikeDisCount(Boolean likecount,Integer memberid,Integer discountid,Integer businessid){
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -105,6 +105,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         //values.put(instructionsSqlite.ID_LIKEDISCOUNT, id);
         values.put(instructionsSqlite.LIKECOUNT_LIKEDISCOUNT, likecount);
         values.put(instructionsSqlite.MEMBERID_LIKEDISCOUNT, memberid);
+        values.put(instructionsSqlite.DISCOUNTID_LIKEDISCOUNT, discountid);
         values.put(instructionsSqlite.BUSINESSID_LIKEDISCOUNT, businessid);
 
 
@@ -585,6 +586,13 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_DisCount , null);
     }
 
+    public Cursor select_DisCountId(Integer businessid)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT Id FROM " + instructionsSqlite.TABLE_NAME_DisCount+" WHERE BusinessId="+businessid , null);
+    }
+
     public Cursor select_DisCount(Integer businessid)
     {
 
@@ -908,6 +916,12 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     {
         SQLiteDatabase db=this.getWritableDatabase();
         db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_DisCount+" WHERE Id="+id);
+        db.close();
+    }
+    public void delete_LikeDisCount(Integer discountid,Integer businessid)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_LikeDisCount+" WHERE DisCountId="+discountid+" AND BusinessId"+businessid);
         db.close();
     }
 /*    public void delete_Notification(Integer erja)
