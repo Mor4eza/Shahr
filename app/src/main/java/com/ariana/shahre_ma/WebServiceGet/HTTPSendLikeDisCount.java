@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -49,7 +50,7 @@ public class HTTPSendLikeDisCount extends AsyncTask<String,Void,Boolean>
     public String GetURL()
     {
         String url="http://test.shahrma.com/api/ApiTakeLike?erjaId="+discountid+"&erjaType=0&memberId="+memberid+"&value="+like;
-        Log.i("URL", url);
+        Log.i("URLLikeDisCount", url);
         return url;
 
     }
@@ -93,9 +94,10 @@ public class HTTPSendLikeDisCount extends AsyncTask<String,Void,Boolean>
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
         DataBaseSqlite db=new DataBaseSqlite(context);
+        Log.i("JSONlikeDisCount",mesage);
         if(aBoolean==true)
         {
-
+            db.Add_LikeDisCount(memberid,discountid,like);
             pd.dismiss();
         }
         else

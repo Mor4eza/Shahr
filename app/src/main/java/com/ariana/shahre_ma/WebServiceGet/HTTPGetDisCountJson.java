@@ -9,6 +9,8 @@ import android.widget.Toast;
 import com.ariana.shahre_ma.Cards.Comment_Card_Adapter;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.MyBusiness.Discount;
+import com.ariana.shahre_ma.MyBusiness.discount_Adapter;
 import com.ariana.shahre_ma.job_details.Job_details_comment;
 
 import org.json.JSONArray;
@@ -62,6 +64,7 @@ public class HTTPGetDisCountJson extends AsyncTask<String,Void,Integer> {
 
         String Result="";
         Result="http://test.shahrma.com/api/apiGiveDisCount?memberid="+memberid;
+        Log.i("URLdiscount",Result);
         return  Result;
     }
 
@@ -116,18 +119,21 @@ public class HTTPGetDisCountJson extends AsyncTask<String,Void,Integer> {
      */
     @Override
     protected void onPostExecute(Integer result) {
-        if(result==12) {
+        if(result==1) {
             try {
+
 
                 DataBaseSqlite dbs = new DataBaseSqlite(context);
 
-
-                dbs.delete_Opinion();
+                //dbs.delete_Opinion();
                 for (int i = 0; i < len; i++) {
-                    dbs.Add_DisCount(Id[i], text[i], image[i], startdate[i], expirationdate[i], description[i], percent[i], businessid[i]);
+                    dbs.Add_DisCountMember(Id[i], text[i], image[i], startdate[i], expirationdate[i], description[i], percent[i], businessid[i]);
                 }
                 pd.dismiss();
-
+                Discount dis=new Discount();
+                discount_Adapter adapter = new discount_Adapter(context,dis.generateData());
+                Discount.listView.setAdapter(adapter);
+                Discount.listView.deferNotifyDataSetChanged();
             } catch (Exception e) {
                 pd.dismiss();
                 Toast.makeText(context.getApplicationContext(), "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
@@ -148,7 +154,7 @@ public class HTTPGetDisCountJson extends AsyncTask<String,Void,Integer> {
 
         try {
 
-            Log.i("JSON", JSONString);
+            Log.i("JSONdiscountMember", JSONString);
             JSONArray areas = new JSONArray(JSONString);
 
             Id=new Integer[areas.length()];
@@ -164,17 +170,14 @@ public class HTTPGetDisCountJson extends AsyncTask<String,Void,Integer> {
             for (int i = 0; i < areas.length(); i++) {
 
                 JSONObject area = areas.getJSONObject(i);
-
-
-
-
-            /*    date[i]=area.getString("Date");
-                description[i] = area.getString("Description");
-                countdislike[i]= area.getInt("DisLikeCount");
-                erja[i]=area.getInt("Erja");
                 Id[i]=area.getInt("Id");
-                countlike[i]=area.getInt("LikeCount");
-                membername[i]= area.getString("Member");*/
+                text[i]=area.getString("Text");
+                image[i]=area.getString("Image");
+                startdate[i]=area.getString("Startdate");
+                expirationdate[i]=area.getString("ExpirationDate");
+                description[i]=area.getString("Description");
+                percent[i]=area.getString("Percent");
+                businessid[i]=area.getInt("BusinessId");
 
 
             }

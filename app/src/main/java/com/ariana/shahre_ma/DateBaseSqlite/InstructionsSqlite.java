@@ -81,9 +81,8 @@ public class  InstructionsSqlite {
 
     //LikeDisCount Table Columns names
     public static final String ID_LIKEDISCOUNT = "Id";
+    public static final String LIKECOUNT_LIKEDISCOUNT = "Like";
     public static final String MEMBERID_LIKEDISCOUNT = "MemberId";
-    public static final String LIKECOUNT_LIKEDISCOUNT = "LikeCount";
-    public static final String DISLIKECOUNT_LIKEDISCOUNT = "DisLikeCount";
     public static final String BUSINESSID_LIKEDISCOUNT = "BusinessId";
 
     //DisCoutn Table Columns names
@@ -95,6 +94,8 @@ public class  InstructionsSqlite {
     public static final String DESCRIPTION_DISCOUNT= "Description";
     public static final String PERCENT_DISCOUNT = "Percent";
     public static final String BUSINESSID_DISCOUNT = "BusinessId";
+    public static final String LIKE_DISCOUNT = "Like";
+    public static final String DISLIKE_DISCOUNT = "DisLike";
 
     //DisCoutnMember Table Columns names
     public static final String ID_DISCOUNTMEMBER = "Id";
@@ -202,7 +203,9 @@ public class  InstructionsSqlite {
             "ExpirationDate TEXT ," +
             "Description TEXT ," +
             "Percent TEXT," +
-            "BusinessId INTEGER" +
+            "BusinessId INTEGER," +
+            "Like INTEGER," +
+            "DisLike INTEGER" +
             ");";
 
     //SQL statement to create DisCoutn table
@@ -219,11 +222,10 @@ public class  InstructionsSqlite {
 
     //SQL statement to create DisCoutn table
     public static final String CREATE_TABLE_LikeDisCount = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_LikeDisCount + " (" +
-            "Id INTEGER PRIMARY KEY ," +
+            "Id INTEGER PRIMARY KEY AUTOINCREMENT ," +
+            "Like BOOLEAN, " +
             "MemberId INTEGER," +
-            "BusinessId INTEGER," +
-            "LikeCount INTEGER ," +
-            "DisLikeCount INTEGER " +
+            "BusinessId INTEGER" +
             ");";
     // SQL statement to create fieldactivity table
     public static final String CREATE_TABLE_FieldActivity = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_FieldActivity + " (" +

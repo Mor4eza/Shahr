@@ -172,8 +172,9 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
                 else
                 {
                     Log.i("elsebusiness", "i>0");
-                    dbs.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i]);
+                    dbs.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i],likediscount[i],dislikediscount[i]);
                 }
+                //dbs.Add_LikeDisCount(1,166,Id[i],likediscount[i],dislikediscount[i]);
                 dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i],cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
 
             }
@@ -304,8 +305,8 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
                 discountdescription[i]=area.getString("DiscountDescription");
                 discountbusinessid[i]=area.getInt("Id");
 
-               /* likediscount[i]=area.getInt("DiscountLike");
-                dislikediscount[i]=area.getInt("DiscountDislike");*/
+               likediscount[i]=area.getInt("DiscountLike");
+                dislikediscount[i]=area.getInt("DiscountDislike");
 
 
             }

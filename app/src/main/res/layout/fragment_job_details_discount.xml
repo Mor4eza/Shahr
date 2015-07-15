@@ -30,6 +30,7 @@
         android:layout_alignLeft="@+id/imageView"
         android:layout_alignStart="@+id/imageView">
         <TextView
+            android:id="@+id/tv_dis_percent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#ffded8d9"
@@ -85,7 +86,7 @@
         android:drawableEnd="@drawable/discount_perecent"
         android:drawableRight="@drawable/discount_perecent"
         android:drawablePadding="10dp"
-        android:id="@+id/textView6"
+        android:id="@+id/tv_dis_desc"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/tv_dis_end"
         android:layout_alignParentRight="true"

@@ -13,11 +13,21 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.Settings.KeySettings;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetDisCountJson;
 
 import java.util.ArrayList;
 
 public class Discount extends ActionBarActivity {
+
+
+    FieldClass fc=new FieldClass();
+    Query query =new Query(this);
+    public static  ListView listView;
+//    KeySettings setting=new KeySettings(getApplicationContext());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +35,7 @@ public class Discount extends ActionBarActivity {
         setContentView(R.layout.activity_discount);
 
         discount_Adapter adapter = new discount_Adapter(this, generateData());
-        final ListView listView = (ListView) findViewById(R.id.listview);
+        listView = (ListView) findViewById(R.id.listview);
         listView.setAdapter(adapter);
         final int count = adapter.getCount();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -42,9 +52,13 @@ public class Discount extends ActionBarActivity {
             }
         });
 
+        HTTPGetDisCountJson httpGetDisCountJson=new HTTPGetDisCountJson(this);
+        httpGetDisCountJson.seturl_DisCount(query.getMemberId());
+        httpGetDisCountJson.execute();
+
     }
 
-    private ArrayList<discount_item> generateData(){
+    public ArrayList<discount_item> generateData(){
         ArrayList<discount_item> items = new ArrayList<discount_item>();
         DataBaseSqlite db=new DataBaseSqlite(this);
         Cursor rows=db.select_AllDisCountMember();

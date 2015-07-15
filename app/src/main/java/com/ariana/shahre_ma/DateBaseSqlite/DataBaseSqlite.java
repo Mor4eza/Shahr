@@ -90,23 +90,24 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     /**
      *
-     * @param id
+     *
      * @param memberid
      * @param businessid
      * @param likecount
-     * @param dislikecount
+     *
      */
-    public void Add_LikeDisCount(Integer id,Integer memberid,Integer businessid,Integer likecount,Integer dislikecount){
+    public void Add_LikeDisCount(Integer memberid,Integer businessid,Boolean likecount){
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(instructionsSqlite.ID_LIKEDISCOUNT, id);
+        //values.put(instructionsSqlite.ID_LIKEDISCOUNT, id);
+        values.put(instructionsSqlite.LIKECOUNT_LIKEDISCOUNT, likecount);
         values.put(instructionsSqlite.MEMBERID_LIKEDISCOUNT, memberid);
         values.put(instructionsSqlite.BUSINESSID_LIKEDISCOUNT, businessid);
-        values.put(instructionsSqlite.LIKECOUNT_LIKEDISCOUNT, likecount);
-        values.put(instructionsSqlite.DISLIKECOUNT_LIKEDISCOUNT, dislikecount );
+
+
 
 
 
@@ -131,7 +132,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
      * @param percent
      * @param businessid
      */
-    public void Add_DisCount(Integer id,String text,String image,String startdate,String expirationdate,String description,String percent,Integer businessid){
+    public void Add_DisCount(Integer id,String text,String image,String startdate,String expirationdate,String description,String percent,Integer businessid,Integer like,Integer dislike){
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -145,6 +146,8 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         values.put(instructionsSqlite.DESCRIPTION_DISCOUNT, description);
         values.put(instructionsSqlite.PERCENT_DISCOUNT, percent);
         values.put(instructionsSqlite.BUSINESSID_DISCOUNT, businessid);
+        values.put(instructionsSqlite.LIKE_DISCOUNT, like);
+        values.put(instructionsSqlite.DISLIKE_DISCOUNT, dislike);
 
 
         // 3. insert
@@ -582,6 +585,13 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_DisCount , null);
     }
 
+    public Cursor select_DisCount(Integer businessid)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_DisCount+" WHERE BusinessId="+businessid , null);
+    }
+
     public Cursor select_AllDisCountMember()
     {
 
@@ -877,6 +887,8 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_NOTIFICATION );
         db.close();
     }
+
+
 
     public void delete_BusinessId(Integer id)
     {

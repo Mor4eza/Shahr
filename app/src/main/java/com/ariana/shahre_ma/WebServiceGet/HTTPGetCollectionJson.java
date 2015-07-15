@@ -44,7 +44,7 @@ public class HTTPGetCollectionJson extends AsyncTask<String,Void, Integer> {
         Integer Id[];
         String collectionname[];
         Integer len;
-         ListView lv;
+
 
 
     /**

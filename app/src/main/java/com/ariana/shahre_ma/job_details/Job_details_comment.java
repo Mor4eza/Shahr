@@ -71,7 +71,7 @@ public class Job_details_comment extends ActionBarActivity {
             ns=new NetState(getActivity());
 
             json = new SqliteTOjson(getActivity());
-query=new Query(getActivity());
+     query=new Query(getActivity());
 
             final Button btnsend = (Button)rootView.findViewById(R.id.bnt_send);
 

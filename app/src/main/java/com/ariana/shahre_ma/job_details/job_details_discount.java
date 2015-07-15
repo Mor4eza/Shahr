@@ -1,4 +1,5 @@
 package com.ariana.shahre_ma.job_details;
+import android.database.Cursor;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,10 +11,15 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.WebServiceGet.HTTPSendLikeDisCount;
 
 
 public class job_details_discount extends FragmentActivity {
+
 
 
 
@@ -41,21 +47,46 @@ public class job_details_discount extends FragmentActivity {
      */
     public static class PlaceholderFragment extends Fragment {
 
+
+        FieldClass fc=new FieldClass();
+
         RelativeLayout like;
         RelativeLayout dislike;
         TextView tv_like;
         TextView tv_unlike;
+        TextView tv_dis_percent;
+        TextView tv_dis_name;
+        TextView tv_dis_start;
+        TextView tv_dis_end;
+        TextView tv_dis_desc;
         public PlaceholderFragment() {
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+        public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_job_details_discount, container, false);
             like=(RelativeLayout)rootView.findViewById(R.id.like_button);
             dislike=(RelativeLayout)rootView.findViewById(R.id.dislike_button);
             tv_like=(TextView) rootView.findViewById(R.id.tv_discount_like);
             tv_unlike=(TextView) rootView.findViewById(R.id.tv_discount_unlike);
+            tv_dis_percent=(TextView) rootView.findViewById(R.id.tv_dis_percent);
+            tv_dis_name=(TextView) rootView.findViewById(R.id.tv_dis_name);
+            tv_dis_start=(TextView) rootView.findViewById(R.id.tv_dis_start);
+            tv_dis_end=(TextView) rootView.findViewById(R.id.tv_dis_end);
+            tv_dis_desc=(TextView) rootView.findViewById(R.id.tv_dis_desc);
+
+            DataBaseSqlite db=new DataBaseSqlite(getActivity());
+            Cursor cursor=db.select_DisCount(fc.GetBusiness_Id());
+            cursor.moveToFirst();
+            tv_dis_percent.setText(cursor.getString(6));
+            tv_dis_name.setText(cursor.getString(1));
+            tv_dis_start.setText(cursor.getString(3));
+            tv_dis_end.setText(cursor.getString(4));
+            tv_dis_desc.setText(cursor.getString(5));
+
+            tv_like.setText(String.valueOf(cursor.getInt(6)));
+            tv_unlike.setText(String.valueOf(cursor.getInt(7)));
 
             like.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -63,6 +94,13 @@ public class job_details_discount extends FragmentActivity {
                     TransitionDrawable drawable = (TransitionDrawable) like.getBackground();
                     drawable.startTransition(500);
                     like.setEnabled(false);
+
+                    Query query=new Query(getActivity());
+                    HTTPSendLikeDisCount httpSendLikeDisCount=new HTTPSendLikeDisCount(getActivity());
+                    httpSendLikeDisCount.SetDiscountid(fc.GetBusiness_Id());
+                    httpSendLikeDisCount.SetMemberid(query.getMemberId());
+                    httpSendLikeDisCount.SetLike(true);
+                    httpSendLikeDisCount.execute();
                 }
             });
 
@@ -72,6 +110,13 @@ public class job_details_discount extends FragmentActivity {
                     TransitionDrawable drawable = (TransitionDrawable) dislike.getBackground();
                     drawable.startTransition(500);
                     dislike.setEnabled(false);
+
+                    Query query=new Query(getActivity());
+                    HTTPSendLikeDisCount httpSendLikeDisCount=new HTTPSendLikeDisCount(getActivity());
+                    httpSendLikeDisCount.SetDiscountid(fc.GetBusiness_Id());
+                    httpSendLikeDisCount.SetMemberid(query.getMemberId());
+                    httpSendLikeDisCount.SetLike(false);
+                    httpSendLikeDisCount.execute();
                 }
             });
             return rootView;
