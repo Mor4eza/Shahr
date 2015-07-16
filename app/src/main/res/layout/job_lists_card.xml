@@ -44,7 +44,7 @@
                 android:background="#ff159eff"
                 android:alpha="0.9"
                 android:textColor="#fff"
-                android:textSize="26sp"
+                android:textSize="20sp"
                 android:text="Test"
 
                 android:layout_toStartOf="@+id/img_market"

@@ -3,9 +3,9 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         config {
-            keyAlias 'morteza'
+            keyAlias 'ariana'
             keyPassword '101015'
-            storeFile file('D:/Project/Shahre_Ma/Shahrema.jks')
+            storeFile file('D:/Sign/ShahreMa.jks')
             storePassword '101015'
         }
     }
@@ -40,30 +40,51 @@ dependencies {
         transitive = true
     }
     compile files('libs/osmbonuspack_v5.0.jar')
-
     //compile 'com.android.support:appcompat-v7:22.1.1'
-
-    compile 'com.android.support:appcompat-v7:22.2.0' //appCompact
-    compile 'jp.wasabeef:recyclerview-animators:1.2.0@aar' //recycle view animation
-    compile 'com.github.orangegangsters:swipy:1.2.0@aar' //swipe to refresh
-    compile 'com.android.support:support-v4:22.2.0' // android support
-    compile 'com.neno0o.lighttextview:lib:1.1'  //Hint for views
-    compile 'com.github.shell-software:fab:1.1.1'//Floating action button
-    compile 'com.android.support:cardview-v7:22.2.0' //Card view
-    compile 'com.android.support:recyclerview-v7:22.2.0' //recycle view
-    compile 'com.github.chenupt.android:dragtoplayout:1.2.1@aar' //draggable top layout
-    compile 'com.squareup.picasso:picasso:2.5.2'  //for sliding image
-    compile 'com.nineoldandroids:library:2.4.0' //support old android
-    compile 'com.daimajia.slider:library:1.0.7@aar' //sliding image
-    compile 'org.osmdroid:osmdroid-android:4.2'//open street map
-    compile 'org.slf4j:slf4j-simple:1.6.1'  //
-    compile 'com.google.android.gms:play-services:7.5.0' //play Service
-    compile 'com.github.citux:datetimepicker:0.1.2' // date & time picker
-    compile 'com.android.support:design:22.2.0'   //adnroid design
-    compile 'com.wrapp.floatlabelededittext:library:0.0.6'  //floatable hints
-    compile 'com.github.panwrona:DownloadProgressBar:1.1'  //Download progressbar
-    compile 'com.github.quentin7b:android-location-tracker:2.2'//Location Tracker
-    compile 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3' //progress Button
-    compile 'com.androidmapsextensions:android-maps-extensions:2.2.0' //map Extension
-    compile 'com.appyvet:materialrangebar:1.0'                        //range Bar
+    compile 'com.android.support:appcompat-v7:22.2.0'
+    //appCompact
+    compile 'jp.wasabeef:recyclerview-animators:1.2.0@aar'
+    //recycle view animation
+    compile 'com.github.orangegangsters:swipy:1.2.0@aar'
+    //swipe to refresh
+    compile 'com.android.support:support-v4:22.2.0'
+    // android support
+    compile 'com.neno0o.lighttextview:lib:1.1'
+    //Hint for views
+    compile 'com.github.shell-software:fab:1.1.1'
+    //Floating action button
+    compile 'com.android.support:cardview-v7:22.2.0'
+    //Card view
+    compile 'com.android.support:recyclerview-v7:22.2.0'
+    //recycle view
+    compile 'com.github.chenupt.android:dragtoplayout:1.2.1@aar'
+    //draggable top layout
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    //for sliding image
+    compile 'com.nineoldandroids:library:2.4.0'
+    //support old android
+    compile 'com.daimajia.slider:library:1.0.7@aar'
+    //sliding image
+    compile 'org.osmdroid:osmdroid-android:4.2'
+    //open street map
+    compile 'org.slf4j:slf4j-simple:1.6.1'
+    //
+    compile 'com.google.android.gms:play-services:7.5.0'
+    //play Service
+    compile 'com.github.citux:datetimepicker:0.1.2'
+    // date & time picker
+    compile 'com.android.support:design:22.2.0'
+    //adnroid design
+    compile 'com.wrapp.floatlabelededittext:library:0.0.6'
+    //floatable hints
+    compile 'com.github.panwrona:DownloadProgressBar:1.1'
+    //Download progressbar
+    compile 'com.github.quentin7b:android-location-tracker:2.2'
+    //Location Tracker
+    compile 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
+    //progress Button
+    compile 'com.androidmapsextensions:android-maps-extensions:2.2.0'
+    //map Extension
+    compile 'com.appyvet:materialrangebar:1.0'
+    //range Bar
 }
