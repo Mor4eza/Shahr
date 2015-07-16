@@ -17,12 +17,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.ImageDownload.ImageLoader;
 import com.ariana.shahre_ma.ListExpand.Continent;
 import com.ariana.shahre_ma.ListExpand.Country;
 import com.ariana.shahre_ma.ListExpand.MyListAdapter;
@@ -43,6 +45,8 @@ import static android.graphics.Color.WHITE;
 public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
 
     Integer count = 0;
+    ImageLoader imgLoader;
+    public static ImageView headimage;
     String time="";
     String date="";
     public static SwipeRefreshLayout mSwipeRefreshLayout = null;
@@ -293,7 +297,11 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
                 do {
 
                     Id_co = allrows_Collection.getInt(0);
+                    /*headimage=(ImageView) findViewById(R.id.head_image);
+                    imgLoader=new ImageLoader(this);
 
+                    String image_url_1 = "www.shahrma.com/app/img/collection_icon/"+Id_co+".png";
+                    imgLoader.DisplayImage(image_url_1, headimage);*/
                     countryList = new ArrayList<Country>();
                     if (allrows_Subset.moveToFirst())
                     {

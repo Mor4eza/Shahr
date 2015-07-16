@@ -1,14 +1,11 @@
 package com.ariana.shahre_ma;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.ContentProvider;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -20,33 +17,24 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
-import com.ariana.shahre_ma.MyBusiness.My_Business;
 import com.ariana.shahre_ma.MyCity.My_city;
 import com.ariana.shahre_ma.MyInterest.My_Interest;
 import com.ariana.shahre_ma.MyProfile.Log_In;
 import com.ariana.shahre_ma.MyProfile.My_Profile;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetAreaJosn;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetBookMarkJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessMemberJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetFieldActivityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
-import com.mikepenz.iconics.typeface.FontAwesome;
-
 import com.mikepenz.iconics.typeface.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
@@ -60,7 +48,6 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
-
 import com.software.shell.fab.ActionButton;
 
 import github.chenupt.dragtoplayout.DragTopLayout;
@@ -85,9 +72,6 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         //findViewsAndConfigure();
 
-        /*ImageView iv_1 = (ImageView) findViewById(R.id.imageView1);
-        String image_url_1 = "";
-        imgLoader.DisplayImage(image_url_1, iv_1);*/
 
         setup();
 

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Continent
 {
     private String name;
+    private String ImageUrlColection;
     private ArrayList<Country> countryList = new ArrayList<Country>();
 
     public Continent(String name, ArrayList<Country> countryList) {
@@ -21,6 +22,15 @@ public class Continent
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getUrl() {
+        return ImageUrlColection;
+    }
+    public void setUrl(String url) {
+        this.name = url;
+    }
+
+
     public ArrayList<Country> getCountryList() {
         return countryList;
     }

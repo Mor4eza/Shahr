@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.ImageDownload.ImageLoader;
 import com.ariana.shahre_ma.MainActivity;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
@@ -41,7 +43,7 @@ public class Log_In extends ActionBarActivity {
     EditText username;
     EditText password;
     TextView error;
-
+    private ImageLoader imgLoader;
     String mesage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,12 @@ public class Log_In extends ActionBarActivity {
 
         } catch (Exception e) {
         }*/
+
+        ImageView headimage=(ImageView) findViewById(R.id.imagelogin);
+        imgLoader=new ImageLoader(this);
+
+        String image_url_1 = "https://www.taxitronic.org/emeter/img/Login-background.png";
+        imgLoader.DisplayImage(image_url_1, headimage);
     }
 
     public void register(View v) {
