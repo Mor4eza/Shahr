@@ -11,6 +11,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -19,6 +22,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -53,7 +57,7 @@ import com.software.shell.fab.ActionButton;
 import github.chenupt.dragtoplayout.DragTopLayout;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
     FragmentPagerAdapter adapterViewPager;
     SliderLayout slider;
     DragTopLayout top;
@@ -71,7 +75,6 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //findViewsAndConfigure();
-
 
         setup();
 
@@ -106,6 +109,7 @@ public class MainActivity extends ActionBarActivity {
         ViewPager vpPager = (ViewPager) findViewById(R.id.viewPager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
+        vpPager.setCurrentItem(1);
         fab();
         try {
             DataBaseSqlite db = new DataBaseSqlite(this);
@@ -182,7 +186,7 @@ public class MainActivity extends ActionBarActivity {
 
 
     public static class MyPagerAdapter extends FragmentPagerAdapter {
-        private static int NUM_ITEMS = 2;
+        private static int NUM_ITEMS = 3;
 
         public MyPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -201,11 +205,11 @@ public class MainActivity extends ActionBarActivity {
                 case 0: // Fragment # 0 - This will show FirstFragment
 
                     return Frag_main_1.newInstance(1,"new");
-                case 1: // Fragment # 0 - This will show FirstFragment different title
+                  case 1: // Fragment # 0 - This will show FirstFragment different title
                     return Frag_main_1.newInstance(2, "Page # 2");
-          /*      case 2: // Fragment # 1 - This will show SecondFragment
-                    return Frag_main_1.newInstance(3, "Page # 3");*/
-                default:
+                 case 2: // Fragment # 1 - This will show SecondFragment
+                    return Frag_main_search.newInstance(3, "Page # 3");
+                 default:
                     return null;
             }
         }
@@ -218,8 +222,8 @@ public class MainActivity extends ActionBarActivity {
                     return "مشاغل برتر";
                 case 1:
                     return "تخفیف های برتر";
-           /*     case 2:
-                return "برترین های بازار";*/
+               case 2:
+                return "جستجو";
 
             }
           return null;
@@ -259,11 +263,11 @@ public class MainActivity extends ActionBarActivity {
         //drawer
 
 
-        final IProfile profile = new ProfileDrawerItem().withName(uName).withIcon(getResources().getDrawable(R.mipmap.profile3)).withEmail("کرج");
+        final IProfile profile = new ProfileDrawerItem().withName(uName).withEmail("کرج").withTextColor(R.color.red).withIcon(getResources().getDrawable(R.mipmap.profile3));
 
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
-                .withHeaderBackground(R.mipmap.header)
+                .withHeaderBackground(R.mipmap.header2)
                 .addProfiles(profile)
                 .withSelectionListEnabledForSingleProfile(false)
                 .withHeightDp(150)
@@ -286,7 +290,8 @@ public class MainActivity extends ActionBarActivity {
         .withTranslucentStatusBar(false)
         .withHeaderDivider(true)
         .withDisplayBelowToolbar(false)
-        .withActionBarDrawerToggleAnimated(true)
+        .withActionBarDrawerToggle(true)
+                .withActionBarDrawerToggleAnimated(true)
         .withAccountHeader(headerResult)
         .withAnimateDrawerItems(true)
         .addDrawerItems(
@@ -401,6 +406,7 @@ public class MainActivity extends ActionBarActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
       //  getSupportActionBar().setIcon(R.drawable.ic_action_menu);
 
+
     }
 
 
@@ -470,9 +476,17 @@ public class MainActivity extends ActionBarActivity {
                         return true;
                     case MotionEvent.ACTION_UP:
                         if (clicked == 1) {
-                            Toast.makeText(getApplicationContext(), "clicked", Toast.LENGTH_LONG).show();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                            builder.setTitle("جستجو...");
+
+                            final EditText input = new EditText(MainActivity.this);
+                            input.setInputType(InputType.TYPE_CLASS_TEXT);
+                            builder.setView(input);
+                            builder.show();
+
+
                         }else{
-                            Toast.makeText(getApplicationContext(), "not clicked", Toast.LENGTH_LONG).show();
+
                         }
                         return true;
                     case MotionEvent.ACTION_MOVE:

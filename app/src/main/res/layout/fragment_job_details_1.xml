@@ -16,12 +16,12 @@
 
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
         android:id="@+id/market_image"
-        android:src="@drawable/pooshak1"
+        android:src="@drawable/pooshak"
         android:layout_alignParentTop="true"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
