@@ -39,7 +39,7 @@ public class BookMark extends ActionBarActivity {
 
 
     Integer BusinessID[];
-    ListView lv;
+    public static ListView lv;
     SqliteTOjson sqltojson =new SqliteTOjson(this);
     Query query=new Query(this);
     FieldClass fc = new FieldClass();
@@ -108,7 +108,7 @@ public class BookMark extends ActionBarActivity {
         }
     }
 
-    private List<String> getbookmark() {
+    public List<String> getbookmark() {
         List<String> item=new ArrayList<String>();
         DataBaseSqlite db=new DataBaseSqlite(this);
         Cursor allrows = db.select_bookmark();

@@ -273,7 +273,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
             if(query.getMemberId()>0) {
                 HTTPSendBookMarkURL httpbookmark = new HTTPSendBookMarkURL(this);
                 httpbookmark.SetBusinessid(fc.GetBusiness_Id());
-                Log.i("getBusinessId", String.valueOf(query.getBusinessId()));
+                Log.i("getBusinessId", String.valueOf(fc.GetBusiness_Id()));
                 httpbookmark.SetMemberid(query.getMemberId());
                 Log.i("getMemberId", String.valueOf(query.getMemberId()));
                 httpbookmark.execute();

@@ -4,8 +4,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.BookMark;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 
 import org.json.JSONArray;
@@ -116,7 +118,11 @@ public class HTTPGetBookMarkJson
 
                 }
                 pd.dismiss();
-
+                BookMark book=new BookMark();
+               // ArrayAdapter adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,book.getbookmark());
+               // BookMark.lv.setAdapter(adapter);
+               // BookMark.lv.deferNotifyDataSetChanged();
+                book.bookmark();
 
             } catch (Exception e) {
                 pd.dismiss();
@@ -140,7 +146,7 @@ public class HTTPGetBookMarkJson
         try {
 
 
-
+            Log.i("JSONBookmark",JSONString);
             JSONArray areas = new JSONArray(JSONString);
 
             Id=new Integer[areas.length()];
