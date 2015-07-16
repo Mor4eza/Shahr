@@ -290,7 +290,7 @@ public class Discount_Dialog extends Dialog {
 
     private  void ShowEditDisCount()
     {
-        try {
+       /* try {
             DataBaseSqlite db = new DataBaseSqlite(getContext());
             Log.i("Id-DisCount", String.valueOf(fc.GetId_DisCount()));
             Cursor rows = db.select_AllDisCountMember(fc.GetId_DisCount());
@@ -306,7 +306,7 @@ public class Discount_Dialog extends Dialog {
                 SaveEdit=true;
         }catch (Exception e){
             Log.i("Exception",e.toString());
-        }
+        }*/
 
     }
 

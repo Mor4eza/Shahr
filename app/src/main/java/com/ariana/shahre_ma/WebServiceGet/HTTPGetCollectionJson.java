@@ -104,7 +104,7 @@ public class HTTPGetCollectionJson extends AsyncTask<String,Void, Integer> {
                 }
                 pd.dismiss();
 
-               Jobs.mSwipeRefreshLayout.post(new Runnable() {
+               /*Jobs.mSwipeRefreshLayout.post(new Runnable() {
                                                   @Override
                                                   public void run() {
                                                       Jobs.mSwipeRefreshLayout.setEnabled(true);
@@ -112,17 +112,17 @@ public class HTTPGetCollectionJson extends AsyncTask<String,Void, Integer> {
 
                                                   }
                                               }
-                );
+                );*/
 
             } catch (Exception e) {
                 pd.dismiss();
-                Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
-                Log.i("Exception", e.toString());
+               /* Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
+                Log.i("Exception", e.toString());*/
             }
         }
         else
         {
-
+            pd.dismiss();
         }
     }
 

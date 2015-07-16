@@ -44,10 +44,12 @@ public class Discount extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == count - 1) {
+/*
 
                     Discount_Dialog dialog = new Discount_Dialog(Discount.this);
                     dialog.show();
                     Toast.makeText(getApplicationContext(),String.valueOf(tv_id.getText()).toString(),Toast.LENGTH_LONG).show();
+*/
 
                 } else {
                     Toast.makeText(getApplicationContext(), "فقط مجاز به ویرایش آخرین تخفیف هستید", Toast.LENGTH_LONG).show();
