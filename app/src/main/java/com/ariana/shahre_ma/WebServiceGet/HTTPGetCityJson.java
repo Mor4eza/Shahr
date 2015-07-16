@@ -92,7 +92,9 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
 
                 }
                 pd.dismiss();
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 pd.dismiss();
                 Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
             }
@@ -103,16 +105,7 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
         }
     }
 
-    /**
-     *
-     * @param file_url
-     */
-    protected void onPostExecute(String file_url) {
-        try {
 
-        } catch (Exception e) {
-        }
-    }
 
 
     /**

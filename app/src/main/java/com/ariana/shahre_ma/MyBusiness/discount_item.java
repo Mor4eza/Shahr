@@ -12,6 +12,8 @@ public class discount_item {
     private String MainTitle;
     private String StartDate;
     private Integer Id;
+
+
     public discount_item(String title, String description,String expireDate,String MainTitle,String StartDate,Integer Id) {
         super();
         this.title = title;
@@ -22,6 +24,7 @@ public class discount_item {
         this.Id=Id;
 
     }
+
 
     public String getTitle() {
         return title;
