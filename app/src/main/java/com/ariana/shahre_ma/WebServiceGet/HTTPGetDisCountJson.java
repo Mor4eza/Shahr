@@ -125,7 +125,7 @@ public class HTTPGetDisCountJson extends AsyncTask<String,Void,Integer> {
 
                 DataBaseSqlite dbs = new DataBaseSqlite(context);
 
-                //dbs.delete_Opinion();
+                dbs.delete_DisCountMember();
                 for (int i = 0; i < len; i++) {
                     dbs.Add_DisCountMember(Id[i], text[i], image[i], startdate[i], expirationdate[i], description[i], percent[i], businessid[i]);
                 }

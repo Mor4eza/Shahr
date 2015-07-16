@@ -900,6 +900,13 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     }
 
+    public void delete_DisCountMember()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_DisCountMember );
+        db.close();
+
+    }
     public void delete_LikeDisCount(Integer memberid,Integer discountid,Integer businessid)
     {
         SQLiteDatabase db=this.getWritableDatabase();
