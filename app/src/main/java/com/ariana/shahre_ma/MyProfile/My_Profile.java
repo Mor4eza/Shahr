@@ -84,7 +84,7 @@ public class My_Profile extends Activity {
     public void Log_Out(View v){
         try {
             DataBaseSqlite db = new DataBaseSqlite(this);
-            db.delete_Member();
+            db.DeleteAllDataBase();
 
 
             Intent i=new Intent(getApplicationContext(), MainActivity.class);
