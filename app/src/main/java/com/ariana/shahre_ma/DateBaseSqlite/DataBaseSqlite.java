@@ -160,6 +160,28 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.close();
 
     }
+
+    public  void Update_DisCount(Integer id,Integer businessid,Integer like,Integer dislike)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues values=new ContentValues();
+
+        values.put(instructionsSqlite.LIKE_DISCOUNT,like);
+        values.put(instructionsSqlite.DISLIKE_DISCOUNT,dislike);
+        db.update(instructionsSqlite.TABLE_NAME_DisCount,values,"  Id="+id+" AND BusinessId="+businessid,null);
+    }
+
+    /**
+     *
+     * @param id
+     * @param text
+     * @param image
+     * @param startdate
+     * @param expirationdate
+     * @param description
+     * @param percent
+     * @param businessid
+     */
     public void Add_DisCountMember(Integer id,String text,String image,String startdate,String expirationdate,String description,String percent,Integer businessid){
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -865,6 +887,13 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     }
 
+    public void delete_LikeDisCount(Integer memberid,Integer discountid,Integer businessid)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_LikeDisCount +" WHERE MemberId="+memberid+" AND DisCountId="+discountid+" AND BusinessId="+businessid);
+        db.close();
+
+    }
     /**
      *
      */
@@ -918,12 +947,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_DisCount+" WHERE Id="+id);
         db.close();
     }
-    public void delete_LikeDisCount(Integer discountid,Integer businessid)
-    {
-        SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_LikeDisCount+" WHERE DisCountId="+discountid+" AND BusinessId"+businessid);
-        db.close();
-    }
+
 /*    public void delete_Notification(Integer erja)
     {
         SQLiteDatabase db=this.getWritableDatabase();

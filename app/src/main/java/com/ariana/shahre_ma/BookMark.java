@@ -37,7 +37,8 @@ import java.util.List;
 public class BookMark extends ActionBarActivity {
 
 
-Integer BusinessID[];
+
+    Integer BusinessID[];
     ListView lv;
     SqliteTOjson sqltojson =new SqliteTOjson(this);
     Query query=new Query(this);

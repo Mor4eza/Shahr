@@ -53,10 +53,10 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        pd = new ProgressDialog(context);
+     /*   pd = new ProgressDialog(context);
         pd.setMessage("دریافت اطلاعات...");
         pd.setCancelable(false);
-        pd.show();
+        pd.show();*/
     }
     /**
      *
@@ -181,20 +181,20 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
                     db.delete_FiledActivity();
                     for (int i = 0; i < len; i++)
                         db.Add_FieldActivity(id[i], activity[i]);
-                    pd.dismiss();
+                   // pd.dismiss();
                 }
                 else
                 {
-                    pd.dismiss();
+                   /// pd.dismiss();
                 }
             }
             else
             {
-                pd.dismiss();
+               // pd.dismiss();
             }
         }
         catch (Exception e){
-            pd.dismiss();
+           // pd.dismiss();
             Log.e("ExceptionFiledActivity",e.toString());
         }
     }

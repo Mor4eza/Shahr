@@ -114,7 +114,8 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
        map();
       // route();
 
-        }else if(tab.getPosition()==0){
+        }else if(tab.getPosition()==1){
+
 
 
         }

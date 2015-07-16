@@ -53,9 +53,16 @@ public class Discount extends ActionBarActivity {
         });
 
 
-        HTTPGetDisCountJson httpGetDisCountJson=new HTTPGetDisCountJson(this);
-        httpGetDisCountJson.seturl_DisCount(query.getMemberId());
-        httpGetDisCountJson.execute();
+        try
+        {
+            // Getting DisCount Member
+            HTTPGetDisCountJson httpGetDisCountJson = new HTTPGetDisCountJson(this);
+            httpGetDisCountJson.seturl_DisCount(query.getMemberId());// get id member
+            httpGetDisCountJson.execute();// run
+        }
+        catch (Exception e){
+            Toast.makeText(getApplicationContext(), "کاربری وارد نشده", Toast.LENGTH_LONG).show();
+        }
 
     }
 

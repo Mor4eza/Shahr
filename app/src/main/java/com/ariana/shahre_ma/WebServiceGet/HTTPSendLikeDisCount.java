@@ -52,6 +52,7 @@ public class HTTPSendLikeDisCount extends AsyncTask<String,Void,Boolean>
     }
 
 
+
     public void SetLike(Boolean like)
     {
         this.like=like;
@@ -120,8 +121,14 @@ public class HTTPSendLikeDisCount extends AsyncTask<String,Void,Boolean>
         Log.i("JSONlikeDisCount",mesage);
         if(aBoolean==true)
         {
+            db.delete_LikeDisCount(memberid, discountid, businessid);
             parsJSON(mesage);
-            db.Add_LikeDisCount(like, memberid, discountid, businessid);
+
+
+                db.Update_DisCount(discountid,businessid,likecount,dislikecount);
+                db.Add_LikeDisCount(like, memberid, discountid, businessid);
+
+
             job_details_discount.PlaceholderFragment.tv_like.setText(likecount.toString());
             job_details_discount.PlaceholderFragment.tv_unlike.setText(dislikecount.toString());
             pd.dismiss();

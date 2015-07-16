@@ -340,19 +340,24 @@ public class MainActivity extends ActionBarActivity {
                        alertDialog.setMessage("اینترنت قطع می باشد");
                        alertDialog.setButton("خب", new DialogInterface.OnClickListener() {
                            public void onClick(DialogInterface dialog, int which) {
-                               // Write your code here to execute after dialog closed
-                               //  Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
 
                            }
                        });
                        alertDialog.show();
                    } else {
 
-                       HTTPGetBusinessMemberJson httpGetBusinessMemberJson = new HTTPGetBusinessMemberJson(MainActivity.this);
-                       httpGetBusinessMemberJson.SetUrl_businessMember(query.getMemberId());
-                       httpGetBusinessMemberJson.execute();
-                       /*Intent i = new Intent(getApplicationContext(), My_Business.class);
-                       startActivity(i);*/
+                       if (query.getMemberId()>0) // get member
+                       {
+                           // Getting Business Member
+                           HTTPGetBusinessMemberJson httpGetBusinessMemberJson = new HTTPGetBusinessMemberJson(MainActivity.this);
+                           httpGetBusinessMemberJson.SetUrl_businessMember(query.getMemberId());// get id member
+                           httpGetBusinessMemberJson.execute();// Run
+                       }
+                      else
+                       {
+                            Toast.makeText(getApplicationContext(), "کاربری وارد نشده", Toast.LENGTH_SHORT).show();
+
+                       }
                    }
 
                }
