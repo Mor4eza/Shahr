@@ -49,7 +49,7 @@ public class MapsActivity extends ActionBarActivity {
         setContentView(R.layout.activity_maps);
 
         KeySettings setting=new KeySettings(getApplicationContext());
-        Integer cityid=0;
+
         cityid=query.getCityId(setting.getCityName());
 
         setUpMapIfNeeded();
@@ -65,12 +65,7 @@ public class MapsActivity extends ActionBarActivity {
 
                 final View window = getLayoutInflater().inflate(
                         R.layout.jobs_info_windows, null);
-                KeySettings setting=new KeySettings(getApplicationContext());
-                Integer cityid=0;
-                cityid=query.getCityId(setting.getCityName());
-                DataBaseSqlite mydb = new DataBaseSqlite(getApplicationContext());
-                Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb(),cityid);
-                len=fc.GetCount_Business();
+
 
 
                 String title = marker.getTitle();
@@ -92,15 +87,6 @@ public class MapsActivity extends ActionBarActivity {
                 return null;
             }
         });
-
-
-
-
-
-
-
-
-        // DataBase
 
 
 
@@ -163,21 +149,6 @@ public class MapsActivity extends ActionBarActivity {
         setUpMapIfNeeded();
     }
 
-    /**
-     * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
-     * installed) and the map has not already been instantiated.. This will ensure that we only ever
-     * call {@link #setUpMap()} once when {@link #mMap} is not null.
-     * <p>
-     * If it isn't installed {@link SupportMapFragment} (and
-     * {@link com.google.android.gms.maps.MapView MapView}) will show a prompt for the user to
-     * install/update the Google Play services APK on their device.
-     * <p>
-     * A user can return to this FragmentActivity after following the prompt and correctly
-     * installing/updating/enabling the Google Play services. Since the FragmentActivity may not
-     * have been completely destroyed during this process (it is likely that it would only be
-     * stopped or paused), {@link #onCreate(Bundle)} may not be called again so we should call this
-     * method in {@link #onResume()} to guarantee that it will be called.
-     */
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
@@ -191,12 +162,6 @@ public class MapsActivity extends ActionBarActivity {
         }
     }
 
-    /**
-     * This is where we can add markers or lines, add listeners or move the camera. In this case, we
-     * just add a marker near Africa.
-     * <p>
-     * This should only be called once and when we are sure that {@link #mMap} is not null.
-     */
     private void setUpMap() {
 
         Integer l=0;
@@ -206,8 +171,10 @@ public class MapsActivity extends ActionBarActivity {
         Rate=new Double[fc.GetCount_Business()];
         len=fc.GetCount_Business();
         id=new Integer[fc.GetCount_Business()];
-
+        Log.i("GetCount_Business()", String.valueOf(fc.GetCount_Business()));
         DataBaseSqlite mydb = new DataBaseSqlite(this);
+        Log.i("GetBusiness_SubsetIdb", String.valueOf(fc.GetBusiness_SubsetIdb()));
+        Log.i("cityid", String.valueOf(cityid));
         Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb(),cityid);
        try {
 

@@ -557,7 +557,15 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE CityId="+cityid+" AND SubsetId=" +subsetID , null);
+        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId="+subsetID+" AND CityId=" +cityid , null);
+
+    }
+
+    public Cursor select_AllBusiness(Integer subsetID)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId="+subsetID, null);
 
     }
 

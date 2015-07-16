@@ -150,7 +150,7 @@ public class MyListAdapter extends BaseExpandableListAdapter {
         headimage=(ImageView) view.findViewById(R.id.head_image);
         imgLoader=new ImageLoader(context);
 
-        String image_url_1 = "www.shahrma.com/app/img/collection_icon/"+31+".png";
+        String image_url_1 = "http://www.shahrma.com/app/img/collection_icon/"+31+".png";
         imgLoader.DisplayImage(image_url_1, headimage);
 
         heading.setText(continent.getName().trim());
