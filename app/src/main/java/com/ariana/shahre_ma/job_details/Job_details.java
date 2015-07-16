@@ -46,7 +46,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
     SqliteTOjson json = new SqliteTOjson(this);
     String _json;
     SectionsPagerAdapter mSectionsPagerAdapter;
-
+    MenuItem fav;
 
 
     /**
@@ -253,7 +253,9 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
       // Inflate the menu; this adds items to the action bar if it is present.
+
       getMenuInflater().inflate(R.menu.menu_job_details, menu);
+      fav=menu.findItem(R.id.action_Fav);
       return true;
   }
 
@@ -263,6 +265,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_Fav) {
@@ -274,6 +277,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
                 httpbookmark.SetMemberid(query.getMemberId());
                 Log.i("getMemberId", String.valueOf(query.getMemberId()));
                 httpbookmark.execute();
+                fav.setIcon(R.drawable.abc_btn_rating_star_on_mtrl_alpha);
             }
             else
             {
