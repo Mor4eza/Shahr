@@ -18,17 +18,20 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     private static final String DATABASE_NAME = "DBshahrma.db";
 
     InstructionsSqlite instructionsSqlite=new InstructionsSqlite();
-
+Context context;
 
 
     public  DataBaseSqlite(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context=context;
     }
 
     public void DeleteAllDataBase()
     {
-        SQLiteDatabase db=this.getWritableDatabase();
-        db.delete(DATABASE_NAME,null,null);
+       /* SQLiteDatabase db=this.getWritableDatabase();
+        db.delete(DATABASE_NAME,null,null);*/
+        context.deleteDatabase(DATABASE_NAME);
+
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
