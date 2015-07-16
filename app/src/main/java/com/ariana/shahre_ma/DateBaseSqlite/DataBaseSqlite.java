@@ -25,6 +25,11 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    public void DeleteAllDataBase()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.delete(DATABASE_NAME,null,null);
+    }
     @Override
     public void onCreate(SQLiteDatabase db) {
 

@@ -79,7 +79,7 @@ public class HTTPGetSubsetJson extends AsyncTask<String,Void,Integer>
                     }
                 }
             } catch (Exception e) {
-                Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
             }
         }
         else

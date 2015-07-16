@@ -46,11 +46,11 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
      */
     @Override
     protected void onPreExecute() {
-        super.onPreExecute();
-        pd = new ProgressDialog(context);
+        //super.onPreExecute();
+     /*   pd = new ProgressDialog(context);
         pd.setMessage("در حال بروزرسانی...");
         pd.setCancelable(false);
-        pd.show();
+        pd.show();*/
     }
     /**
      *
@@ -77,6 +77,7 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
 
     /**
      *
+     * @param result
      */
     @Override
     protected void onPostExecute(Integer result) {
@@ -91,12 +92,12 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
                     dbs.Add_city(Id_city[i], Name_city[i], PROVINCEID_city[i]);
 
                 }
-                pd.dismiss();
-            }
+               // pd.dismiss();
+           }
             catch (Exception e)
             {
-                pd.dismiss();
-                Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
+                //pd.dismiss();
+              //  Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
             }
         }
         else
