@@ -2,6 +2,7 @@ package com.ariana.shahre_ma.WebServiceGet;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -19,6 +20,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ariana2 on 6/17/2015.
@@ -36,7 +39,7 @@ public class HTTPGetBookMarkJson
     Integer Id[];
 
     Integer len=0;
-
+    Integer BusinessId[];
 
     /**
      * Set url Member
@@ -118,12 +121,9 @@ public class HTTPGetBookMarkJson
 
                 }
                 pd.dismiss();
-                BookMark book=new BookMark();
-               // ArrayAdapter adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,book.getbookmark());
-               // BookMark.lv.setAdapter(adapter);
-               // BookMark.lv.deferNotifyDataSetChanged();
-                book.bookmark();
-
+                getbookmark1();
+                ArrayAdapter adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,getbookmark());
+                BookMark.lv.setAdapter(adapter);
             } catch (Exception e) {
                 pd.dismiss();
                 Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
@@ -134,6 +134,49 @@ public class HTTPGetBookMarkJson
         {
 
         }
+    }
+    private List<String> getbookmark() {
+        List<String> item=new ArrayList<String>();
+        DataBaseSqlite db=new DataBaseSqlite(context);
+        Cursor allrows = db.select_bookmark();
+
+
+        if(allrows.moveToFirst())
+        {
+            do
+            {
+                Cursor row = db.select_business_NameMarket(allrows.getInt(1));
+                row.moveToNext();
+                item.add(row.getString(0));
+
+
+            }while (allrows.moveToNext());
+
+        }
+        allrows.close();
+
+
+        return item;
+    }
+    public void getbookmark1() {
+
+        DataBaseSqlite db=new DataBaseSqlite(context);
+        Cursor allrows = db.select_bookmark();
+        Integer i=0;
+        BusinessId=new Integer[allrows.getCount()];
+        len=allrows.getCount();
+        if(allrows.moveToFirst())
+        {
+            do
+            {
+
+                BusinessId[i]=allrows.getInt(1);
+                i++;
+            }while (allrows.moveToNext());
+
+        }
+        allrows.close();
+
     }
 
     /**
@@ -146,7 +189,7 @@ public class HTTPGetBookMarkJson
         try {
 
 
-            Log.i("JSONBookmark",JSONString);
+
             JSONArray areas = new JSONArray(JSONString);
 
             Id=new Integer[areas.length()];

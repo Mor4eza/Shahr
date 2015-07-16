@@ -39,7 +39,7 @@ public class BookMark extends ActionBarActivity {
 
 
     Integer BusinessID[];
-    public static ListView lv;
+   public static ListView lv;
     SqliteTOjson sqltojson =new SqliteTOjson(this);
     Query query=new Query(this);
     FieldClass fc = new FieldClass();
@@ -58,6 +58,7 @@ public class BookMark extends ActionBarActivity {
         b.execute();
 
         final ListView t = (ListView)findViewById(R.id.lvbookmark);
+
         t.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
 
@@ -96,11 +97,10 @@ public class BookMark extends ActionBarActivity {
         try
         {
          getbookmark1();
+
            ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,getbookmark());
-           // ArrayAdapter adapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,getbookmark1());
             for(int i=0;i<len;i++)
             lv.setTag(BusinessId[i]);
-
             lv.setAdapter(adapter);
 
         }
@@ -108,7 +108,7 @@ public class BookMark extends ActionBarActivity {
         }
     }
 
-    public List<String> getbookmark() {
+    private List<String> getbookmark() {
         List<String> item=new ArrayList<String>();
         DataBaseSqlite db=new DataBaseSqlite(this);
         Cursor allrows = db.select_bookmark();
