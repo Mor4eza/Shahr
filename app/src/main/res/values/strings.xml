@@ -11,7 +11,7 @@
     <string name="My_Fav">نشانه گزاری شده ها</string>
     <string name="My_city">شهر من</string>
     <string name="My_Intrest">علایق من</string>
-    <string name="title_activity_jobs">Jobs</string>
+    <string name="title_activity_jobs">مشاغل</string>
     <string name="title_activity_tabbar">Tabbar</string>
     <string name="title_section1">پیشنهادات هفته</string>
     <string name="title_section2">اطراف من</string>
@@ -19,8 +19,8 @@
     <string name="title_activity_main_activity2">MainActivity2</string>
     <string name="title_activity_tabbed__main">Tabbed_Main</string>
     <string name="search">جستجو</string>
-    <string name="title_activity_jobs__list">Jobs_List</string>
-    <string name="title_activity_job_details">Job_details</string>
+    <string name="title_activity_jobs__list">لیست مشاغل</string>
+    <string name="title_activity_job_details">جزئیات مشاغل</string>
     <string name="det1">مشخصات</string>
     <string name="det2">تخفیف ها</string>
     <string name="det3">نقشه</string>
@@ -28,27 +28,27 @@
     <string name="title_activity_job_details_1">Job_details_1</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_job_details_map">Job_details_map</string>
-    <string name="title_activity_google_maps">Map</string>
+    <string name="title_activity_google_maps">نقشه</string>
     <string name="title_activity_job_details_comment">Job_details_comment</string>
     <string name="title_activity_sign__up">ثبت نام</string>
     <string name="title_activity_log__in">ورود</string>
     <string name="favorites">اضافه کردن به علاقه مندیها</string>
     <string name="title_activity_hs">hs</string>
-    <string name="title_activity_book_mark">BookMark</string>
+    <string name="title_activity_book_mark">نشانه گذاری شده ها</string>
     <string name="title_activity_maps">نقشه</string>
     <string name="Map">نقشه</string>
-    <string name="title_activity_notification">Notification</string>
+    <string name="title_activity_notification">اعلانات</string>
     <string name="title_activity_activity_notify">اعلانات</string>
     <string name="title_activity_setting">تنظیمات</string>
     <string name="title_activity_list">ListActivity</string>
     <string name="title_activity_my_city">شهرمن</string>
-    <string name="title_activity_my__profile">My_Profile</string>
-    <string name="title_activity_edit__user">Edit_User</string>
+    <string name="title_activity_my__profile">پروفایل من</string>
+    <string name="title_activity_edit__user">تغییر مشخصات</string>
     <string name="title_activity_my__business">کسب وکار من</string>
     <string name="My_business">کسب وکار من</string>
-    <string name="title_activity_add_business">Add_business</string>
+    <string name="title_activity_add_business">ویرایش و اضافه کردن کسب وکار</string>
     <string name="title_activity_my__business__map">انتخاب موقعیت</string>
-    <string name="title_activity_my__interest">My_Interest</string>
+    <string name="title_activity_my__interest">علایق من</string>
     <string name="title_activity_discount">تخفیف ها</string>
 
 </resources>

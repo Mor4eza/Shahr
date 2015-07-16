@@ -1,10 +1,14 @@
 package com.ariana.shahre_ma.MyProfile;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -24,26 +28,27 @@ import java.util.List;
 public class My_Profile extends Activity {
 
 
-    Spinner sp_city;
+
     TextView tv_user_name;
     TextView tv_user_email;
     TextView tv_user_phone;
     TextView tv_user_sex;
     TextView tv_user_age;
+    TextView tv_member_name;
     Button   btn_log_out;
     Button   btn_edit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my__profile);
         Toolbar toolbar =(Toolbar)findViewById(R.id.toolbar1);
-        toolbar.collapseActionView();
+
         init_views();
-        SpinnerSetUp();
+
 
     }
     public void init_views(){
-        sp_city=(Spinner)findViewById(R.id.spinner_city);
         tv_user_name=(TextView)findViewById(R.id.tv_user_name);
         tv_user_email=(TextView)findViewById(R.id.tv_user_email);
         tv_user_phone=(TextView)findViewById(R.id.tv_user_phone);
@@ -51,16 +56,17 @@ public class My_Profile extends Activity {
         tv_user_age=(TextView)findViewById(R.id.tv_user_age);
         btn_log_out=(Button)findViewById(R.id.log_out);
         btn_edit = (Button)findViewById(R.id.user_edit);
-
+        tv_member_name=(TextView)findViewById(R.id.tv_member_name);
         try {
 
             DataBaseSqlite db = new DataBaseSqlite(this);
             Cursor allrows = db.select_Member();
             allrows.moveToFirst();
+            tv_member_name.setText(allrows.getString(1));
             tv_user_email.setText(allrows.getString(2));
             tv_user_phone.setText(allrows.getString(3));
             tv_user_age.setText(String.valueOf(allrows.getInt(4)));
-            tv_user_name.setText(allrows.getString(1));
+            tv_user_name.setText(allrows.getString(6));
             String sex=allrows.getString(5);
                 if(sex.equals("true"))
                     tv_user_sex.setText("مرد");
@@ -81,13 +87,30 @@ public class My_Profile extends Activity {
      * @param v
      */
     public void Log_Out(View v){
+
         try {
-            DataBaseSqlite db = new DataBaseSqlite(this);
-            db.delete_Member();
+
+            new AlertDialog.Builder(this)
+                    .setMessage("آیا واقعا می خواهید از حساب کاربری خود خارج شوید...؟")
+                    .setPositiveButton("بله", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            DataBaseSqlite db = new DataBaseSqlite(My_Profile.this);
+                            db.delete_Member();
+                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(i);
+                        }
+                    })
+                    .setNegativeButton("خیر", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
 
 
-            Intent i=new Intent(getApplicationContext(), MainActivity.class);
-             startActivity(i);
+                        }
+                    })
+                    .show();
+
+
+
+
         }
         catch (SQLiteException e)
         {
@@ -97,30 +120,9 @@ public class My_Profile extends Activity {
 
     }
     public void edit(View v){
-
         Intent i=new Intent(getApplicationContext(),Edit_User.class);
         startActivity(i);
 
     }
-    void SpinnerSetUp(){
 
-        DataBaseSqlite db=new DataBaseSqlite(this);
-        Cursor allrows=db.select_AllCity();
-
-        sp_city.setPrompt("انتخاب شهر:");
-        List<String> list = new ArrayList<String>();
-        if(allrows.moveToFirst())
-        {
-            do
-            {
-                list.add(allrows.getString(1));
-
-            }while (allrows.moveToNext());
-        }
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, list);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_city.setAdapter(dataAdapter);
-
-    }
 }
