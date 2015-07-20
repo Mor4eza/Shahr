@@ -13,8 +13,10 @@ import com.android.datetimepicker.time.RadialPickerLayout;
 import com.android.datetimepicker.time.TimePickerDialog;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -43,11 +45,15 @@ public class Setting extends ActionBarActivity implements TimePickerDialog.OnTim
                     t.setOnTimeSetListener(new TimePickerDialog.OnTimeSetListener() {
                         @Override
                         public void onTimeSet(RadialPickerLayout radialPickerLayout, int i, int i1) {
+                            try {
 
-                            setting=new KeySettings(Setting.this);
+
+
+                            setting = new KeySettings(Setting.this);
                             setting.saveAMtime(String.valueOf(i)+":" +String.valueOf(i1));
 
-                            Toast.makeText(getApplicationContext(),String.valueOf(i)+":" +String.valueOf(i1),Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), String.valueOf(i) + ":" + String.valueOf(i1), Toast.LENGTH_LONG).show();
+                        }catch (Exception e){}
                         }
                     });
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by ariana2 on 6/8/2015.
@@ -35,8 +36,6 @@ Context context;
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-
-
         db.execSQL(instructionsSqlite.CREATE_TABLE_Subset);
         db.execSQL(instructionsSqlite.CREATE_TABLE_Collection);
         db.execSQL(instructionsSqlite.CREATE_TABLE_Member);
@@ -541,7 +540,7 @@ Context context;
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT* FROM " + instructionsSqlite.TABLE_NAME_BUSINESS , null);
+        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_BUSINESS , null);
 
     }
 
@@ -757,10 +756,7 @@ Context context;
         return db.rawQuery("SELECT Name FROM " + instructionsSqlite.TABLE_NAME_MEMBER, null);
     }
 
-    public Cursor select_Notification() {
-    SQLiteDatabase db=this.getReadableDatabase();
-        return  db.rawQuery("SELECT * FROM "+instructionsSqlite.TABLE_NAME_NOTIFICATION,null);
-    }
+
 
     public Cursor select_Collection()
     {
@@ -780,11 +776,14 @@ Context context;
         return  db.rawQuery("SELECT * FROM "+instructionsSqlite.TABLE_NAME_SUBSET+" WHERE SubsetName LIKE '%"+subsetName+"%'",null);
     }
 
-    public  Cursor select_AllNotificaton(Integer erja)
+    public  Cursor select_AllNotificaton()
     {
         SQLiteDatabase db=this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM "+instructionsSqlite.TABLE_NAME_NOTIFICATION,null);
+
     }
+
+
 
     public  Cursor select_NotificatonId(Integer Id)
     {
@@ -943,6 +942,7 @@ Context context;
 
     public void delete_Notification()
     {
+        Log.i("DeleteNotification", "delete Run");
         SQLiteDatabase db=this.getWritableDatabase();
         db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_NOTIFICATION );
         db.close();

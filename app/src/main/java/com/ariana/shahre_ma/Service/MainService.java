@@ -41,7 +41,7 @@ public class MainService extends Service {
     {
         // TODO Auto-generated method stub
         super.onCreate();
-        Toast.makeText(getApplicationContext(),"onCreate",Toast.LENGTH_LONG).show();
+       // Toast.makeText(getApplicationContext(),"onCreate",Toast.LENGTH_LONG).show();
         Intent myIntent = new Intent(this, MyReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this  ,  0, myIntent, 0);
 

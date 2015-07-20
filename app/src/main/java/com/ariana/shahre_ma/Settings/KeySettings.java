@@ -60,6 +60,25 @@ public class KeySettings
     }
 
     /**
+     *
+     * @param bool
+     */
+    public  void saveCacheImage(Boolean bool)
+    {
+        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
+        editor=prefernc.edit();
+        editor.putBoolean("CacheImageDownload", bool);
+        editor.apply();
+
+    }
+
+    public Boolean getCacheImage()
+    {
+        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
+        return prefernc.getBoolean("CacheImageDownload",false);
+    }
+
+    /**
      * CityName
      * @return
      */

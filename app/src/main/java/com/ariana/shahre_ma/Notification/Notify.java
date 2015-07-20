@@ -26,8 +26,8 @@ public class Notify {
 
     public static void Notificationm(Context context){
 
-        HTTPGetNotificationJson notificationJson= new HTTPGetNotificationJson(context);
-        notificationJson.execute();
+        /*HTTPGetNotificationJson notificationJson= new HTTPGetNotificationJson(context);
+        notificationJson.execute();*/
 
 
 

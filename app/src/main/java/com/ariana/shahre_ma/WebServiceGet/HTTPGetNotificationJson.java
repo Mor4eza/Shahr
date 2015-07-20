@@ -75,7 +75,7 @@ public class HTTPGetNotificationJson extends AsyncTask<String,Void,Integer> {
     protected void onPreExecute() {
         super.onPreExecute();
         DataBaseSqlite dbs = new DataBaseSqlite(context);
-        dbs.delete_Notification();
+
     }
     /**
      * @param params
@@ -176,6 +176,8 @@ public class HTTPGetNotificationJson extends AsyncTask<String,Void,Integer> {
                     }
 
 
+                     Log.i("Time",dt.Time());
+                    Log.i("GetAMtime",setting.getAMtime());
                      if(setting.getAMtime().equals(dt.Time()))
                       Notify.Notificationm(context);
                      else if(setting.getPMtime().equals(dt.Time()))

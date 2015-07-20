@@ -42,36 +42,42 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
 Integer i=0;
         mItems = new ArrayList<Notify_Card_Items>();
         DataBaseSqlite db=new DataBaseSqlite(context);
-        Cursor rowalls=db.select_Notification();
+        Cursor rowalls=db.select_AllNotificaton();
 
         if(rowalls.moveToFirst())
         {
             mItems = new ArrayList<Notify_Card_Items>();
             do
             {
-                try {
+              //  try {
                     nci = new Notify_Card_Items();
-                    Log.i("PMtime",String.valueOf(setting.getPMtime()));
-                    Log.i("Time",t.Time());
-                    Log.i("Boolean",String.valueOf(rowalls.getString(3)));
+                    Log.i("PMtime", String.valueOf(setting.getPMtime()));
+                    Log.i("Time", t.Time());
+                    Log.i("Boolean", String.valueOf(rowalls.getString(3)));
+
+
+
                       //  if(Boolean.parseBoolean(rowalls.getString(3))==false){
                         nci.setNdate(rowalls.getString(5));
                         nci.setNdetail(rowalls.getString(4));
-                        nci.setNmarket(market_Name_Business(463 + i));
+
+                     Log.i("erja", String.valueOf(rowalls.getInt(2)));
+                        nci.setNmarket(market_Name_Business(rowalls.getInt(2)));
+                        nci.setNId(rowalls.getInt(2));
                         mItems.add(nci);
                       //  }
                        // else
                        // {
-                            nci.setNdate(rowalls.getString(5));
+                         /*   nci.setNdate(rowalls.getString(5));
                             nci.setNdetail(rowalls.getString(4));
                             nci.setNmarket(market_Name_Business(463 + i));
-                            mItems.add(nci);
+                            mItems.add(nci);*/
                        // }
-                }
-                catch (Exception e)
+                //}
+               /* catch (Exception e)
                 {
                     Log.e("Exception",e.toString());
-                }
+                }*/
                 i++;
             }while (rowalls.moveToNext());
         }
@@ -142,6 +148,7 @@ Integer i=0;
             rowalls.moveToFirst();
             result=rowalls.getString(0);
             rowalls.close();
+            Log.i("NameBusiness", result);
         }
         catch (SQLException e){Log.e("SQLException",e.toString());}
         return  result;

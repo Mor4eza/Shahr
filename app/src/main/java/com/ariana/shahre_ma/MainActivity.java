@@ -116,9 +116,9 @@ public class MainActivity extends AppCompatActivity {
             Cursor allrows = db.select_Member();
             allrows.moveToNext();
          if(allrows.getString(6).equals(null)){
-            Action.show();
+            //Action.show();
          }else{
-             Action.dismiss();
+           //  Action.dismiss();
          }
 
 
@@ -267,7 +267,7 @@ public class MainActivity extends AppCompatActivity {
 
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
-                .withHeaderBackground(R.mipmap.header2)
+                .withHeaderBackground(R.mipmap.header)
                 .addProfiles(profile)
                 .withSelectionListEnabledForSingleProfile(false)
                 .withHeightDp(150)
