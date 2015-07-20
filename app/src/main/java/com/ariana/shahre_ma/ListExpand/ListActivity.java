@@ -103,7 +103,7 @@ public class ListActivity extends ActionBarActivity implements
 
 
                         } while (allrows_Subset.moveToNext());
-                        continent = new Continent(allrows_Collection.getString(1),countryList);
+                        continent = new Continent(allrows_Collection.getString(1),countryList,32);
                     }
                     continentList.add(continent);
 

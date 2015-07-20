@@ -297,11 +297,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
                 do {
 
                     Id_co = allrows_Collection.getInt(0);
-                    /*headimage=(ImageView) findViewById(R.id.head_image);
-                    imgLoader=new ImageLoader(this);
 
-                    String image_url_1 = "www.shahrma.com/app/img/collection_icon/"+Id_co+".png";
-                    imgLoader.DisplayImage(image_url_1, headimage);*/
                     countryList = new ArrayList<Country>();
                     if (allrows_Subset.moveToFirst())
                     {
@@ -321,7 +317,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
 
                         } while (allrows_Subset.moveToNext());
-                        continent = new Continent(allrows_Collection.getString(1),countryList);
+                        continent = new Continent(allrows_Collection.getString(1),countryList,Id_co);
                     }
                     continentList.add(continent);
 
