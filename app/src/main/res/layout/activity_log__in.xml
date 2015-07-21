@@ -91,4 +91,16 @@
         android:layout_below="@+id/tverror"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="رمز عبور خود را فراموش کرده اید...؟!"
+        android:id="@+id/tv_forget"
+        android:layout_below="@+id/tv_register"
+        android:layout_alignRight="@+id/tv_register"
+        android:layout_alignEnd="@+id/tv_register"
+        android:textColor="#ff3fa9ff"
+        android:onClick="forget"
+        android:layout_marginTop="30dp" />
+
 </RelativeLayout>

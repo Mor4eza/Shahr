@@ -89,7 +89,7 @@ import java.net.URLConnection;
         int versionCode = BuildConfig.VERSION_CODE;
        if  (Integer.valueOf(readLast())>versionCode){
            HTTPGetUpdateApk apk = new HTTPGetUpdateApk(context);
-           apk.execute("http://upofile.com/5zS");
+           apk.execute("http://shahrma.com/app/apk_update/app-debug.zip");
            Log.i("Downloaded",readLast());
 
        }

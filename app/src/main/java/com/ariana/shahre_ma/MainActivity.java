@@ -74,19 +74,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //findViewsAndConfigure();
-        String url= "http://upofile.com/5zT";
+        String url= "http://shahrma.com/app/apk_update/text.txt";
         HTTPGetUpdate update=new HTTPGetUpdate(this);
         update.execute(url);
 
         setup();
 
-        mImgFloatingView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Clicked", Toast.LENGTH_LONG).show();
-
-            }
-        });
 
         if (net.checkInternetConnection() == false) {
             Toast.makeText(getApplication(), "شبکه اینترنت قطع می باشد", Toast.LENGTH_LONG).show();

@@ -143,15 +143,13 @@ public class MyListAdapter extends BaseExpandableListAdapter {
         }
 
 
-        TextView heading = (TextView) view.findViewById(R.id.laptop1);
-
-
         headimage=(ImageView) view.findViewById(R.id.head_image);
         imgLoader=new ImageLoader(context);
 
         String image_url_1 = "http://www.shahrma.com/app/img/collection_icon/"+continent.getUrl()+".png";
         imgLoader.DisplayImage(image_url_1, headimage);
 
+        TextView heading = (TextView) view.findViewById(R.id.laptop1);
         heading.setText(continent.getName().trim());
        // headimage.setImageDrawable();
 
