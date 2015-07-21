@@ -31,7 +31,7 @@ import java.util.Map;
 
 
 
-public class My_city extends ActionBarActivity {
+public class My_city extends ActionBarActivity implements TotalListener{
 
     Integer count = 0;
 
@@ -71,12 +71,14 @@ public class My_city extends ActionBarActivity {
 
         expListView = (ExpandableListView) findViewById(R.id.expand_my_city);
 
-        final ExpandableListAdapter expListAdapter = new ExpandableListAdapter(
+       /* final ExpandableListAdapter expListAdapter = new ExpandableListAdapter(
                 this, groupList,laptopCollection) {
 
         };
-        expListView.setAdapter(expListAdapter);
-
+        expListView.setAdapter(expListAdapter);*/
+        ExpandListAdapter adapter = new ExpandListAdapter(this);
+        adapter.setmListener(this);
+        expListView.setAdapter(adapter);
 
         expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
@@ -147,6 +149,7 @@ public class My_city extends ActionBarActivity {
         Boolean f=true;
 
         try {
+
             SQLiteDatabase mydb = openOrCreateDatabase(fc.GetDataBaseName(), Context.MODE_PRIVATE, null);
             Cursor allrows_Collection = mydb.rawQuery("SELECT * FROM " + fc.GetTableNameCollection(), null);
             Cursor allrows_Subset = mydb.rawQuery("SELECT * FROM " + fc.GetTableNameSubset(), null);
@@ -270,5 +273,18 @@ public class My_city extends ActionBarActivity {
         ActionButton Action = (ActionButton) findViewById(R.id.download_fab);
         Action.setButtonColor(getResources().getColor(R.color.fab_material_blue_500));
         Action.setImageDrawable(getResources().getDrawable(R.drawable.download));
+    }
+
+    @Override
+    public void onTotalChanged(int sum) {
+
+    }
+
+    @Override
+    public void expandGroupEvent(int groupPosition, boolean isExpanded) {
+        if(isExpanded)
+            expListView.collapseGroup(groupPosition);
+        else
+            expListView.expandGroup(groupPosition);
     }
 }
