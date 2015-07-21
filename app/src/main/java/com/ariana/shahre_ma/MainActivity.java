@@ -35,6 +35,7 @@ import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessMemberJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetUpdate;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.mikepenz.iconics.typeface.FontAwesome;
@@ -73,7 +74,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //findViewsAndConfigure();
-       // Update("https://ssl.gstatic.com/ac/settings/landing/welcome_home_header_auth_320x100_5766b81e75f1581d9fb2983ddbdb1849.png");
+        String url= "http://upofile.com/5zT";
+        HTTPGetUpdate update=new HTTPGetUpdate(this);
+        update.execute(url);
+
         setup();
 
         mImgFloatingView.setOnClickListener(new View.OnClickListener() {
