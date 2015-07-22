@@ -1,4 +1,4 @@
-package com.ariana.shahre_ma.WebServiceGet;
+package com.ariana.shahre_ma.WebServiceSend;
 
 import android.os.AsyncTask;
 

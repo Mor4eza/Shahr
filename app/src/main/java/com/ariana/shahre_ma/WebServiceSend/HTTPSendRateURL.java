@@ -1,11 +1,9 @@
-package com.ariana.shahre_ma.WebServiceGet;
+package com.ariana.shahre_ma.WebServiceSend;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
-import com.ariana.shahre_ma.Fields.FieldClass;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -23,10 +21,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
- * Created by ariana2 on 6/17/2015.
+ * Created by ariana on 6/16/2015.
  */
-public class HTTPSendBookMarkURL extends AsyncTask<String, Void, Boolean> {
+public class HTTPSendRateURL extends AsyncTask<String, Void, Boolean> {
 
+    ProgressDialog pd;
     private String[] blogTitles;
     private static final String TAG = "Http Connection";
     private  String mesage;
@@ -35,64 +34,45 @@ public class HTTPSendBookMarkURL extends AsyncTask<String, Void, Boolean> {
     Integer businessid;
     Integer memberid;
 
+    Double rate;
     Context context;
 
-    FieldClass fc=new FieldClass();
-
-    /**
-     *
-     * @param context
-     */
-    public HTTPSendBookMarkURL(Context context)
+    public HTTPSendRateURL(Context context)
     {
         this.context=context;
     }
 
-    /**
-     *
-     * @param businessid
-     */
-    public void SetBusinessid(Integer businessid)
+
+    public void SetBusinessId(Integer opinionid)
     {
-        this.businessid=businessid;
+        this.businessid=opinionid;
     }
 
-    /**
-     *
-     * @param memberid
-     */
-    public void SetMemberid(Integer memberid)
+    public void SetMemberId(Integer memberid)
     {
         this.memberid=memberid;
     }
 
+    public void SetRate(Double rate)
+    {
+        this.rate=rate;
+    }
 
-    /**
-     *
-     * @return
-     */
     public String GetURL()
     {
-        String url="";
-        url="http://test.shahrma.com/api/ApiTakeBookmark?businessId="+businessid+"&memberId="+memberid;
-        Log.i("URLurl",url);
+        String url="http://test.shahrma.com/api/ApiTakeRate?businessId="+businessid+"&memberId="+memberid+"&rate="+rate;
         return url;
     }
 
-    /**
-     *
-     */
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-
+        pd = new ProgressDialog(context);
+        pd.setMessage("ارسال...");
+        pd.setCancelable(false);
+        pd.show();
     }
 
-    /**
-     *
-     * @param urls
-     * @return
-     */
     @Override
     protected Boolean doInBackground(String... urls) {
         try {
@@ -111,6 +91,7 @@ public class HTTPSendBookMarkURL extends AsyncTask<String, Void, Boolean> {
 
 
                 JSONObject jsono = new JSONObject(data);
+                Log.i("", String.valueOf(jsono));
 
                 return true;
             }
@@ -125,29 +106,17 @@ public class HTTPSendBookMarkURL extends AsyncTask<String, Void, Boolean> {
         return false;
     }
 
-    /**
-     *
-     * @param result
-     */
     protected void onPostExecute(Boolean result) {
-        DataBaseSqlite dbs = new DataBaseSqlite(context);
 
-        if(result==true) {
 
-                dbs.Add_bookmark(businessid, memberid);
+        if (result == true) {
+
+            pd.dismiss();
+        } else {
+            pd.dismiss();
         }
-        else {
-
-        }
-
     }
 
-    /**
-     *
-     * @param inputStream
-     * @return
-     * @throws IOException
-     */
     private String convertInputStreamToString(InputStream inputStream) throws IOException {
 
         String line = "";
@@ -155,6 +124,7 @@ public class HTTPSendBookMarkURL extends AsyncTask<String, Void, Boolean> {
         try
         {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
 
 
             while ((line = bufferedReader.readLine()) != null) {
@@ -172,10 +142,6 @@ public class HTTPSendBookMarkURL extends AsyncTask<String, Void, Boolean> {
         return result;
     }
 
-    /**
-     *
-     * @param result
-     */
     private void parseResult(String result) {
 
         try {

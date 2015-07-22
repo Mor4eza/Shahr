@@ -19,7 +19,7 @@ import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetOpinionJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPSendRateURL;
+import com.ariana.shahre_ma.WebServiceSend.HTTPSendRateURL;
 
 
 public class job_details_1 extends ActionBarActivity {
