@@ -146,8 +146,10 @@ public class MyListAdapter extends BaseExpandableListAdapter {
         headimage=(ImageView) view.findViewById(R.id.head_image);
         imgLoader=new ImageLoader(context);
 
-        String image_url_1 = "http://www.shahrma.com/app/img/collection_icon/"+continent.getUrl()+".png";
+
+       String image_url_1 = "http://www.shahrma.com/app/img/collection_icon/"+continent.getUrl()+".png";
         imgLoader.DisplayImage(image_url_1, headimage);
+
 
         TextView heading = (TextView) view.findViewById(R.id.laptop1);
         heading.setText(continent.getName().trim());
@@ -196,7 +198,7 @@ public class MyListAdapter extends BaseExpandableListAdapter {
                     }
                 }
                 if(newList.size() > 0){
-                    Continent nContinent = new Continent(continent.getName(),newList,32);
+                    Continent nContinent = new Continent(continent.getName(),newList,31);
                     continentList.add(nContinent);
                 }
             }

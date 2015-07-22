@@ -2,6 +2,7 @@ package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
@@ -70,6 +71,7 @@ public class HTTPGetSubsetJson extends AsyncTask<String,Void,Integer>
             try {
 
                 if(len>0) {
+
                     DataBaseSqlite dbs = new DataBaseSqlite(context);
                     dbs.delete_Subset();
 
@@ -95,7 +97,7 @@ public class HTTPGetSubsetJson extends AsyncTask<String,Void,Integer>
         try {
 
             JSONArray areas = new JSONArray(JSONString);
-
+            Log.i("JSONsubset",JSONString);
             Id=new Integer[areas.length()];
             subsetname=new String[areas.length()];
             collectionId=new Integer[areas.length()];

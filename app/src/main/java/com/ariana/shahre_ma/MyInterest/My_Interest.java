@@ -282,7 +282,7 @@ public class My_Interest extends ActionBarActivity implements SearchView.OnQuery
 
 
                         } while (allrows_Subset.moveToNext());
-                        continent = new Continent(allrows_Collection.getString(1), countryList,35);
+                        continent = new Continent(allrows_Collection.getString(1), countryList,Id_co);
                     }
                     continentList.add(continent);
 

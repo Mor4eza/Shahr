@@ -74,9 +74,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //findViewsAndConfigure();
-        String url= "http://shahrma.com/app/apk_update/text.txt";
+
+      /*  String url= "http://shahrma.com/app/apk_update/text.txt";
         HTTPGetUpdate update=new HTTPGetUpdate(this);
-        update.execute(url);
+        update.execute(url);*/
 
         setup();
 

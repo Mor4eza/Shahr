@@ -176,7 +176,7 @@ public class Interest_Adapter extends BaseExpandableListAdapter {
                     }
                 }
                 if(newList.size() > 0){
-                    Continent nContinent = new Continent(continent.getName(),newList,33);
+                    Continent nContinent = new Continent(continent.getName(),newList,31);
                     continentList.add(nContinent);
                 }
             }

@@ -15,25 +15,43 @@ import org.apache.http.util.EntityUtils;
 /**
  * Created by ariana on 7/21/2015.
  */
-public class HTTPSendForgetMemberURL extends AsyncTask<String,Void,Integer> {
+public class HTTPSendForgetMemberURL extends AsyncTask<String,Integer,Integer> {
 
     String url="";
+
+    Context context;
     ProgressDialog pd;
 
+    /**
+     *
+     * @param email
+     */
     public void SetEmail(String email)
     {
         url=""+email;
     }
 
+    /**
+     *
+     * @return
+     */
     private String geturl(){
         return  url;
     }
 
-    Context context;
+
+    /**
+     * Constructor
+     * @param context
+     */
     public  HTTPSendForgetMemberURL(Context context)
     {
         this.context=context;
     }
+
+    /**
+     *
+     */
     @Override
     protected void onPreExecute(){
         super.onPreExecute();
@@ -51,6 +69,12 @@ public class HTTPSendForgetMemberURL extends AsyncTask<String,Void,Integer> {
             }
         });
     }
+
+    /**
+     *
+     * @param params
+     * @return
+     */
 
     @Override
     protected Integer doInBackground(String... params) {
@@ -75,6 +99,22 @@ public class HTTPSendForgetMemberURL extends AsyncTask<String,Void,Integer> {
         return result;
     }
 
+    /**
+     *
+     * @param progress
+     */
+    @Override
+    protected void onProgressUpdate(Integer... progress) {
+        super.onProgressUpdate(progress);
+        pd.setIndeterminate(false);
+        pd.setMax(100);
+        pd.setProgress(progress[0]);
+    }
+
+    /**
+     *
+     * @param integer
+     */
     @Override
     protected void onPostExecute(Integer integer) {
         super.onPostExecute(integer);

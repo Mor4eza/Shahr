@@ -15,7 +15,8 @@ public class Continent
         super();
         this.ImageUrlColection=url;
         this.name = name;
-        this.countryList = countryList;
+       // this.countryList = countryList;
+        this.countryList=countryListk;
     }
     public String getName() {
         return name;
