@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.job_details.Job_details;
@@ -42,7 +43,7 @@ private  static Context context;
         super();
       this.context=context;
       Query query=new Query(context);
-
+      FieldDataBusiness fdb=new FieldDataBusiness();
 
         setting=new KeySettings(context);
         mItems = new ArrayList<Job_lists_card_item>();
@@ -89,10 +90,26 @@ private  static Context context;
 
 
         try {
+            mItems = new ArrayList<Job_lists_card_item>();
+            for(int i=0;i<fdb.GetMarketBusiness().length;i++)
+            {
+                nature = new Job_lists_card_item();
+                nature.setName(fdb.GetMarketBusiness()[i]);
+                nature.setDes(fdb.GetAddressBusiness()[i]);
+                nature.setThumbnail(R.drawable.pooshak);
+                nature.setRate(fdb.GetRateBusiness()[i]);
+                nature.setmId(fdb.GetIdBusiness()[i]);
 
-
+                if(allrows.getString(3).equals("")){
+                    nature.setTell(allrows.getString(4));
+                }else{
+                    nature.setTell(allrows.getString(3));
+                }
+                mItems.add(nature);
+            }
+/*
                 if (allrows.moveToFirst()) {
-                    mItems = new ArrayList<Job_lists_card_item>();
+
                     do {
 
 
@@ -111,7 +128,7 @@ private  static Context context;
                         mItems.add(nature);
 
                     } while (allrows.moveToNext());
-                }
+                }*/
         }
         catch (Exception e){}
 

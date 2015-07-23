@@ -24,6 +24,7 @@ Context context;
 
     public  DataBaseSqlite(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
         this.context=context;
     }
 
@@ -143,7 +144,7 @@ Context context;
     public void Add_DisCount(Integer id,String text,String image,String startdate,String expirationdate,String description,String percent,Integer businessid,Integer like,Integer dislike){
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
-
+        
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
         values.put(instructionsSqlite.ID_DISCOUNT, id);

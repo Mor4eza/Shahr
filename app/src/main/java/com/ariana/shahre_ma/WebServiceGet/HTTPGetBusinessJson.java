@@ -3,15 +3,13 @@ package com.ariana.shahre_ma.WebServiceGet;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.AsyncTask;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.Jobs_List;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
@@ -34,6 +32,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
     private static Context context;
     FieldClass fc=new FieldClass();
     Query query;
+    FieldDataBusiness fdb=new FieldDataBusiness();
     private  String url_Business;
     ProgressDialog pd;
 
@@ -163,36 +162,36 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
             idsubset=fc.GetSubsetId();
             dbs.delete_Business(cityid, idsubset);
 
-            for (int i = 0; i <len; i++)
-            {
-                dbs.delete_DisCount(discountid[i]);
-                if(discountid[i]==0) {
-                    Log.i("ifbusiness","0");
-                }
-                else
-                {
-                    Log.i("elsebusiness", "i>0");
-                    dbs.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i],likediscount[i],dislikediscount[i]);
-                }
-                //dbs.Add_LikeDisCount(1,166,Id[i],likediscount[i],dislikediscount[i]);
-                dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i],cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
-
-            }
-
-
             if(len==0) {
-              //  Toast.makeText(get, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
+                //  Toast.makeText(get, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
                 Log.i("Count Business : ","فروشگاه ثبت نشد");
                 pd.dismiss();
             }
+
             else {
 
 
                 fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
-                Intent i = new Intent(this.context, Jobs_List.class);
-                this.context.startActivity(i);
+                Intent intent = new Intent(this.context, Jobs_List.class);
+                this.context.startActivity(intent);
                 Log.i("Count Business : ", "دریافت ثبت شده ها");
                 pd.dismiss();
+
+                for (int i = 0; i <len; i++)
+                {
+                    dbs.delete_DisCount(discountid[i]);
+                    if(discountid[i]==0) {
+                        Log.i("ifbusiness","0");
+                    }
+                    else
+                    {
+                        Log.i("elsebusiness", "i>0");
+                        dbs.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i],likediscount[i],dislikediscount[i]);
+                    }
+                    //dbs.Add_LikeDisCount(1,166,Id[i],likediscount[i],dislikediscount[i]);
+                    dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i],cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
+
+                }
             }
 
         } catch (Exception e) {
@@ -305,11 +304,19 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
                 discountdescription[i]=area.getString("DiscountDescription");
                 discountbusinessid[i]=area.getInt("Id");
 
-               likediscount[i]=area.getInt("DiscountLike");
+                likediscount[i]=area.getInt("DiscountLike");
                 dislikediscount[i]=area.getInt("DiscountDislike");
 
 
+
+
             }
+
+            fdb.SetIdBusiness(Id);
+            fdb.SetRateBusiness(ratevalue);
+            fdb.SetAddressBusiness(address);
+            fdb.SetMarketBusiness(market);
+            fdb.SetPhoneBusiness(phone);
 
         } catch (JSONException e) {
             // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
