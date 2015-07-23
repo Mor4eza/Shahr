@@ -70,13 +70,7 @@ public class HTTPGetUpdateApk extends AsyncTask<String, String, String> {
         return null;
     }
 
-    // While Downloading Music File
-    protected void onProgressUpdate(String... progress) {
-        // Set progress percentage
-        //  prgDialog.setProgress(Integer.parseInt(progress[0]));
-    }
 
-    // Once Music File is downloaded
     @Override
     protected void onPostExecute(String file_url) {
         // Dismiss the dialog after the Music file was downloaded

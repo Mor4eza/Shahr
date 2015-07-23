@@ -35,7 +35,6 @@ import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessMemberJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetUpdate;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.mikepenz.iconics.typeface.FontAwesome;
@@ -75,16 +74,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //findViewsAndConfigure();
 
-      /*  String url= "http://shahrma.com/app/apk_update/text.txt";
-        HTTPGetUpdate update=new HTTPGetUpdate(this);
-        update.execute(url);*/
-
         setup();
 
 
         if (net.checkInternetConnection() == false) {
             Toast.makeText(getApplication(), "شبکه اینترنت قطع می باشد", Toast.LENGTH_LONG).show();
         } else {
+
+           /* String url= "http://shahrma.com/app/apk_update/text.txt";
+            HTTPGetUpdate update=new HTTPGetUpdate(this);
+            update.execute(url);*/
 
             HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
             httpcoll.execute();

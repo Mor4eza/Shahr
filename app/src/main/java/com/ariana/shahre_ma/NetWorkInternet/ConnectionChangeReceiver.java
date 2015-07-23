@@ -23,7 +23,8 @@ public class ConnectionChangeReceiver extends BroadcastReceiver
         if (isAppForground(context)) {
             if (net.checkInternetConnection()) {
                 Toast.makeText(context, "شبکه اینترنت متصل شد", Toast.LENGTH_LONG).show();
-            } else  {
+            } else
+            {
                 Toast.makeText(context, "شبکه اینترنت قطع شد", Toast.LENGTH_LONG).show();
                 /*   Intent i = new Intent(context, MainActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
