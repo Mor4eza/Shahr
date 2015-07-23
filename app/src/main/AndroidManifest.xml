@@ -110,7 +110,7 @@
         </service>
 
         <activity
-            android:name=".Setting"
+            android:name=".Settings.Setting"
             android:label="@string/title_activity_setting"
             android:parentActivityName=".MainActivity" >
             <meta-data
@@ -193,12 +193,18 @@
                 android:value="com.ariana.shahre_ma.MyBusiness.My_Business" />
         </activity>
 
-        <receiver android:name=".NetWorkInternet.ConnectionChangeReceiver"
-            android:label="NetworkConnection">
+        <receiver
+            android:name=".NetWorkInternet.ConnectionChangeReceiver"
+            android:label="NetworkConnection" >
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".Settings.UpdateActivity"
+            android:label="@string/title_activity_update" >
+        </activity>
     </application>
 
 </manifest>

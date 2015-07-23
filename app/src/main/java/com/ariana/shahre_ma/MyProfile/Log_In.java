@@ -59,8 +59,9 @@ public class Log_In extends ActionBarActivity {
         startActivity(i);
 
     }
-    public void forget(){
-
+    public void forget(View v){
+    Forget_Dialog dialog=new Forget_Dialog(this);
+        dialog.show();
 
 
     }

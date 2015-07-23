@@ -50,5 +50,6 @@
     <string name="title_activity_my__business__map">انتخاب موقعیت</string>
     <string name="title_activity_my__interest">علایق من</string>
     <string name="title_activity_discount">تخفیف ها</string>
+    <string name="title_activity_update">UpdateActivity</string>
 
 </resources>

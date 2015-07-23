@@ -31,6 +31,7 @@ import com.ariana.shahre_ma.MyInterest.My_Interest;
 import com.ariana.shahre_ma.MyProfile.Log_In;
 import com.ariana.shahre_ma.MyProfile.My_Profile;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
+import com.ariana.shahre_ma.Settings.Setting;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessMemberJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;

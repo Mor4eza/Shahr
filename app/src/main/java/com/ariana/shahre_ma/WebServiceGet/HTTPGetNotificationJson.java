@@ -1,17 +1,12 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.SQLException;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Notification.Notify;
-import com.ariana.shahre_ma.Setting;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
