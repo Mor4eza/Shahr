@@ -90,9 +90,10 @@ private  static Context context;
 
 
         try {
-            mItems = new ArrayList<Job_lists_card_item>();
+           /* mItems = new ArrayList<Job_lists_card_item>();
             for(int i=0;i<fdb.GetMarketBusiness().length;i++)
             {
+                Log.i("Market",fdb.GetMarketBusiness()[i]);
                 nature = new Job_lists_card_item();
                 nature.setName(fdb.GetMarketBusiness()[i]);
                 nature.setDes(fdb.GetAddressBusiness()[i]);
@@ -106,10 +107,10 @@ private  static Context context;
                     nature.setTell(allrows.getString(3));
                 }
                 mItems.add(nature);
-            }
-/*
-                if (allrows.moveToFirst()) {
+            }*/
 
+                if (allrows.moveToFirst()) {
+                    mItems = new ArrayList<Job_lists_card_item>();
                     do {
 
 
@@ -128,7 +129,7 @@ private  static Context context;
                         mItems.add(nature);
 
                     } while (allrows.moveToNext());
-                }*/
+                }
         }
         catch (Exception e){}
 

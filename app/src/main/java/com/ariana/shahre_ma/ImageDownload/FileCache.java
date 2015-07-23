@@ -1,6 +1,7 @@
 package com.ariana.shahre_ma.ImageDownload;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.ariana.shahre_ma.Settings.KeySettings;
 
@@ -19,12 +20,19 @@ public class FileCache {
         //Find the dir to save cached images
         KeySettings setting=new KeySettings(context);
 
+        if(setting.getCacheImage())
+        {
             if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
                 cacheDir = new File(android.os.Environment.getExternalStorageDirectory(), "myFolder/image_folder"); // point to folder be hidden
             else
                 cacheDir = context.getCacheDir();
             if (!cacheDir.exists())
                 cacheDir.mkdirs();
+        }
+        else
+        {
+            Log.i("CacheImage","Not cache image");
+        }
 
     }
 

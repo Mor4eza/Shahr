@@ -1,23 +1,26 @@
 package com.ariana.shahre_ma.Fields;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by ariana on 7/23/2015.
  */
 public class FieldDataBusiness
 {
-    private static Integer[] Id;
-    private static Double[] Rate;
-    private static String[] Phone;
-    private static String[] Address;
-    private static String[] MarketName;
+    private static List<Integer> Id=new ArrayList<>();
+    private static List<Double> Rate=new ArrayList<>();
+    private static List<String> Phone=new ArrayList<String>();
+    private static List<String> Address=new ArrayList<>();
+    private static List<String> MarketName=new ArrayList<String>();
 
 
-    public void SetIdBusiness(Integer[] id)
+    public void SetIdBusiness(List<Integer> id)
     {
         Id=id;
     }
 
-    public Integer[] GetIdBusiness()
+    public List<Integer> GetIdBusiness()
     {
         return Id;
     }
@@ -26,12 +29,12 @@ public class FieldDataBusiness
      * Get rate Business
      * @param rate
      */
-    public void SetRateBusiness(Double[] rate)
+    public void SetRateBusiness(List<Double>  rate)
     {
         Rate=rate;
     }
 
-    public Double[] GetRateBusiness()
+    public List<Double>  GetRateBusiness()
     {
         return Rate;
     }
@@ -40,12 +43,12 @@ public class FieldDataBusiness
      * Get phone business
      * @param phone
      */
-    public void SetPhoneBusiness(String[] phone)
+    public void SetPhoneBusiness(List<String> phone)
     {
         Phone=phone;
     }
 
-    public String[] GetPhoneBusiness()
+    public List<String> GetPhoneBusiness()
     {
         return Phone;
     }
@@ -55,12 +58,12 @@ public class FieldDataBusiness
      * Get address business
      * @param address
      */
-    public void SetAddressBusiness(String[] address)
+    public void SetAddressBusiness(List<String> address)
     {
         Address=address;
     }
 
-    public String[] GetAddressBusiness()
+    public List<String> GetAddressBusiness()
     {
         return Address;
     }
@@ -69,12 +72,12 @@ public class FieldDataBusiness
      * Get market name business
      * @param marketName
      */
-    public void SetMarketBusiness(String[] marketName)
+    public void SetMarketBusiness(List<String> marketName)
     {
         MarketName=marketName;
     }
 
-    public String[] GetMarketBusiness()
+    public List<String> GetMarketBusiness()
     {
         return MarketName;
     }

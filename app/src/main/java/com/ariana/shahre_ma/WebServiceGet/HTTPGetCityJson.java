@@ -3,9 +3,11 @@ package com.ariana.shahre_ma.WebServiceGet;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.Toast;
+import android.util.Log;
+import android.view.View;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Settings.UpdateActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -92,8 +94,14 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
                     dbs.Add_city(Id_city[i], Name_city[i], PROVINCEID_city[i]);
 
                 }
-               // pd.dismiss();
-           }
+                UpdateActivity.PgUpdate.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        UpdateActivity.PgUpdate.setVisibility(View.INVISIBLE);
+                    }
+                });
+
+            }
             catch (Exception e)
             {
                 //pd.dismiss();
@@ -118,6 +126,7 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
         Integer ii = 0;
         try {
 
+            Log.i("JSONcity",JSONString);
             JSONArray areas = new JSONArray(JSONString);
 
             Id_city=new Integer[areas.length()];

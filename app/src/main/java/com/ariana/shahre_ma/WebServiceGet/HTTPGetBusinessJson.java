@@ -171,11 +171,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
             else {
 
 
-                fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
-                Intent intent = new Intent(this.context, Jobs_List.class);
-                this.context.startActivity(intent);
-                Log.i("Count Business : ", "دریافت ثبت شده ها");
-                pd.dismiss();
+
 
                 for (int i = 0; i <len; i++)
                 {
@@ -192,6 +188,12 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
                     dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i],cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
 
                 }
+
+                fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
+                Intent intent = new Intent(this.context, Jobs_List.class);
+                this.context.startActivity(intent);
+                Log.i("Count Business : ", "دریافت ثبت شده ها");
+                pd.dismiss();
             }
 
         } catch (Exception e) {
@@ -309,14 +311,16 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
 
 
+               /* fdb.SetIdBusiness(Id[i]);
+                fdb.SetRateBusiness(area.getString(""));
+                fdb.SetAddressBusiness("");
+                fdb.SetMarketBusiness(market);
+                fdb.SetPhoneBusiness(phone);*/
 
             }
 
-            fdb.SetIdBusiness(Id);
-            fdb.SetRateBusiness(ratevalue);
-            fdb.SetAddressBusiness(address);
-            fdb.SetMarketBusiness(market);
-            fdb.SetPhoneBusiness(phone);
+
+
 
         } catch (JSONException e) {
             // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();

@@ -23,14 +23,20 @@ import java.util.List;
 public class Setting extends ActionBarActivity implements TimePickerDialog.OnTimeSetListener{
 
     Calendar calendar;
-    KeySettings setting;
+
     SwitchCompat SwitchCash;
+    KeySettings setting;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        setting=new KeySettings(getApplicationContext());
+
         calendar=Calendar.getInstance();
         SwitchCash=(SwitchCompat)findViewById(R.id.sw_cash);
+        SwitchCash.setChecked(setting.getCacheImage());
+
+
 
         ListView list_notify=(ListView)findViewById(R.id.notify_list);
         ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,getnotification());
@@ -50,7 +56,7 @@ public class Setting extends ActionBarActivity implements TimePickerDialog.OnTim
                             try {
 
 
-                                setting = new KeySettings(Setting.this);
+
                                 setting.saveAMtime(String.valueOf(i) + ":" + String.valueOf(i1));
 
                                 Toast.makeText(getApplicationContext(), String.valueOf(i) + ":" + String.valueOf(i1), Toast.LENGTH_LONG).show();
@@ -83,6 +89,15 @@ public class Setting extends ActionBarActivity implements TimePickerDialog.OnTim
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
+
+                if (isChecked)
+                {
+                    setting.saveCacheImage(true);
+                }
+                else
+                {
+                    setting.saveCacheImage(false);
+                }
             }
         });
 

@@ -3,16 +3,9 @@ package com.ariana.shahre_ma.WebServiceGet;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
-import com.ariana.shahre_ma.Jobs;
-import com.ariana.shahre_ma.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -136,7 +129,7 @@ public class HTTPGetCollectionJson extends AsyncTask<String,Void, Integer> {
         try {
 
             JSONArray areas = new JSONArray(JSONString);
-
+            Log.i("JSONCollection",JSONString);
             Id=new Integer[areas.length()];
             collectionname=new String[areas.length()];
             len=areas.length();

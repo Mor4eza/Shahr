@@ -67,7 +67,8 @@ public class KeySettings
     {
         prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
         editor=prefernc.edit();
-        editor.putBoolean("CacheImageDownload", bool);
+        editor.putBoolean("CacheImageDownload",true);
+        editor.putBoolean("CacheImageDownload",bool);
         editor.apply();
 
     }
