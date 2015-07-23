@@ -33,6 +33,7 @@ public class HTTPGetUpdateApk extends AsyncTask<String, String, String> {
         super.onPreExecute();
         // Shows Progress Bar Dialog and then call doInBackground method
 
+
     }
 
     // Download Music File from Internet
