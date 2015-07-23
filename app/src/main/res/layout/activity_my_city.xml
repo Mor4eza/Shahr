@@ -27,7 +27,8 @@
             android:divider="#ff2195f2"
             android:id="@+id/expand_my_city"
             android:layout_gravity="center_horizontal"
-            android:layout_below="@+id/sp_city" />
+            android:layout_below="@+id/sp_city"
+            android:layout_alignBottom="@+id/download_fab" />
     <com.software.shell.fab.ActionButton
 
         android:id="@+id/download_fab"
