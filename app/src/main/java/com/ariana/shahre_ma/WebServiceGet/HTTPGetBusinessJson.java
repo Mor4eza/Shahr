@@ -22,6 +22,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ariana2 on 6/6/2015.
@@ -35,6 +37,14 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
     FieldDataBusiness fdb=new FieldDataBusiness();
     private  String url_Business;
     ProgressDialog pd;
+
+
+    private  List<Integer> selectId=new ArrayList<>();
+    private  List<Double>  selectRate=new ArrayList<>();
+    private  List<String>  selectPhone=new ArrayList<String>();
+    private  List<String>  selectAddress=new ArrayList<>();
+    private  List<String>  selectMarketName=new ArrayList<String>();
+
 
     Integer Id[];
     String market[];
@@ -171,7 +181,11 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
             else {
 
 
-
+                fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
+                Intent intent = new Intent(this.context, Jobs_List.class);
+                this.context.startActivity(intent);
+                Log.i("Count Business : ", "دریافت ثبت شده ها");
+                pd.dismiss();
 
                 for (int i = 0; i <len; i++)
                 {
@@ -189,11 +203,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
                 }
 
-                fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
-                Intent intent = new Intent(this.context, Jobs_List.class);
-                this.context.startActivity(intent);
-                Log.i("Count Business : ", "دریافت ثبت شده ها");
-                pd.dismiss();
+
             }
 
         } catch (Exception e) {
@@ -311,15 +321,20 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
 
 
-               /* fdb.SetIdBusiness(Id[i]);
-                fdb.SetRateBusiness(area.getString(""));
-                fdb.SetAddressBusiness("");
-                fdb.SetMarketBusiness(market);
-                fdb.SetPhoneBusiness(phone);*/
+                selectId.add(area.getInt("Id"));
+                selectAddress.add(area.getString("Address"));
+                selectMarketName.add(area.getString("Market"));
+                selectPhone.add(area.getString("Phone"));
+                selectRate.add(area.getDouble("RateAverage"));
+
 
             }
 
-
+            fdb.SetIdBusiness(selectId);
+            fdb.SetRateBusiness(selectRate);
+            fdb.SetAddressBusiness(selectAddress);
+            fdb.SetMarketBusiness(selectMarketName);
+            fdb.SetPhoneBusiness(selectPhone);
 
 
         } catch (JSONException e) {

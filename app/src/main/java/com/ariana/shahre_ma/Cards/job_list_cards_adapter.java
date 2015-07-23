@@ -90,25 +90,26 @@ private  static Context context;
 
 
         try {
-           /* mItems = new ArrayList<Job_lists_card_item>();
-            for(int i=0;i<fdb.GetMarketBusiness().length;i++)
+            mItems = new ArrayList<Job_lists_card_item>();
+            for(int i=0;i<fdb.GetMarketBusiness().size();i++)
             {
-                Log.i("Market",fdb.GetMarketBusiness()[i]);
+                Log.i("sizeBusiness",String.valueOf(fdb.GetIdBusiness().size()));
+                Log.i("Market",fdb.GetMarketBusiness().get(i));
                 nature = new Job_lists_card_item();
-                nature.setName(fdb.GetMarketBusiness()[i]);
-                nature.setDes(fdb.GetAddressBusiness()[i]);
+                nature.setName(fdb.GetMarketBusiness().get(i));
+                nature.setDes(fdb.GetAddressBusiness().get(i));
                 nature.setThumbnail(R.drawable.pooshak);
-                nature.setRate(fdb.GetRateBusiness()[i]);
-                nature.setmId(fdb.GetIdBusiness()[i]);
+                nature.setRate(fdb.GetRateBusiness().get(i));
+                nature.setmId(fdb.GetIdBusiness().get(i));
 
-                if(allrows.getString(3).equals("")){
+              /*  if(allrows.getString(3).equals("")){
                     nature.setTell(allrows.getString(4));
                 }else{
                     nature.setTell(allrows.getString(3));
-                }
+                }*/
                 mItems.add(nature);
-            }*/
-
+            }
+/*
                 if (allrows.moveToFirst()) {
                     mItems = new ArrayList<Job_lists_card_item>();
                     do {
@@ -129,7 +130,7 @@ private  static Context context;
                         mItems.add(nature);
 
                     } while (allrows.moveToNext());
-                }
+                }*/
         }
         catch (Exception e){}
 

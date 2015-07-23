@@ -23,7 +23,7 @@ public class FileCache {
         if(setting.getCacheImage())
         {
             if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
-                cacheDir = new File(android.os.Environment.getExternalStorageDirectory(), "myFolder/image_folder"); // point to folder be hidden
+                cacheDir = new File(android.os.Environment.getExternalStorageDirectory(), "myFolder/image_folder");
             else
                 cacheDir = context.getCacheDir();
             if (!cacheDir.exists())
@@ -31,7 +31,11 @@ public class FileCache {
         }
         else
         {
-            Log.i("CacheImage","Not cache image");
+
+
+                cacheDir = context.getCacheDir();
+            if (!cacheDir.exists())
+                cacheDir.mkdirs();
         }
 
     }
