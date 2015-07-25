@@ -120,10 +120,12 @@ public class HTTPGetBookMarkJson
                     dbs.Add_bookmark(Id[i], MEMberID);
 
                 }
+
                 pd.dismiss();
                 getbookmark1();
                 ArrayAdapter adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,getbookmark());
                 BookMark.lv.setAdapter(adapter);
+
             } catch (Exception e) {
                 pd.dismiss();
                 Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
