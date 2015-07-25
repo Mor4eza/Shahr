@@ -7,7 +7,6 @@ import android.app.SearchableInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -38,8 +37,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
-
-import static android.graphics.Color.WHITE;
 
 
 public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
@@ -150,86 +147,11 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
             }
         });
 
-                        // setGroupIndicatorToRight();
-
-
-            /*            expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-
-                            public boolean onChildClick(ExpandableListView parent, View v,int groupPosition, int childPosition, long id) {
-
-                                Continent headerInfo = continentList.get(groupPosition);
-
-                                Country detailInfo = headerInfo.getCountryList().get(childPosition);
-
-                               // Toast.makeText(getApplicationContext(),String.valueOf(id), Toast.LENGTH_LONG).show();
-
-                                final String selected = detailInfo.getName();
-
-                                Toast.makeText(getApplicationContext(), selected, Toast.LENGTH_LONG)
-                                        .show();
-                                //query=new Query(Jobs.this,Jobs.this);
-                                fc.SetSelected_job(selected);
-
-                                count = query.getCountBusiness(query.getsubsetID(selected));
-                                fc.SetSubsetId(query.getsubsetID(selected));
-
-
-                                Toast.makeText(getApplicationContext(), query.getsubsetID(selected).toString(), Toast.LENGTH_LONG).show();
-                                if (ns.checkInternetConnection() == false) {
-                                    Intent i = new Intent(getApplicationContext(), Jobs_List.class);
-                                    startActivity(i);
-                                } else {
-                                    if (count > 0) {
-                                        fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
-                                        Intent i = new Intent(getApplicationContext(), Jobs_List.class);
-                                        startActivity(i);
-                                        Log.i("Count>", "1");
-                                    } else {
-                                        httpbusin = new HTTPGetBusinessJson(Jobs.this);
-                                        httpbusin.SetUrl_business(query.getsubsetID(selected));
-                                        httpbusin.execute();
-                                        Log.i("Count<", "0");
-                                    }
-                                }
-
-                                return true;
-                            }
-
-                        });*/
-
-       /* SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        search = (android.widget.SearchView) findViewById(R.id.search_jobs);
-        search.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        search.setIconifiedByDefault(false);
-        search.setOnQueryTextListener(this);
-        search.setOnCloseListener(this);*/
-
 
 
 
     }
 
-/*
-
-
-
-  /*  private void setGroupIndicatorToRight() {
-		*//* Get the screen width *//*
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int width = dm.widthPixels;
-
-        expListView.setIndicatorBounds(width - getDipsFromPixel(100), width
-                - getDipsFromPixel(5));
-    }*/
-
-    /*// Convert pixel to dip
-    public int getDipsFromPixel(float pixels) {
-        // Get the screen's density scale
-        final float scale = getResources().getDisplayMetrics().density;
-        // Convert the dps to pixels, based on density scale
-        return (int) (pixels * scale + 5f);
-    }*/
 
     //method to expand all groups
     private void expandAll() {

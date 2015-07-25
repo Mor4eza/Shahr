@@ -161,15 +161,19 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
     protected void onPostExecute() {
         try {
 
+            KeySettings setting=new KeySettings(context);
+            query=new Query(context);
+
             Integer count=0;
             Integer cityid=0;
             Integer idsubset=0;
           //  Toast.makeText(context,market[0], Toast.LENGTH_LONG).show();
             DataBaseSqlite dbs = new DataBaseSqlite(context);
-            KeySettings setting=new KeySettings(context);
-            query=new Query(context);
+
+
             cityid=query.getCityId(setting.getCityName());
             idsubset=fc.GetSubsetId();
+
             dbs.delete_Business(cityid, idsubset);
 
             if(len==0) {

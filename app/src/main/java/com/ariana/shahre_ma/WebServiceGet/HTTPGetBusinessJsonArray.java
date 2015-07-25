@@ -1,17 +1,13 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
-import com.ariana.shahre_ma.Jobs_List;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
@@ -69,6 +65,18 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
     Integer field7[];
     Integer ratecount[];
     Double ratevalue[];
+
+    Integer discountid[];
+    String discounttext[];
+    String discountimage[];
+    String discountstartdate[];
+    String discountexpirationdate[];
+    String discountdescription[];
+    String discountpercent[];
+    Integer discountbusinessid[];
+
+    Integer likediscount[];
+    Integer dislikediscount[];
 
     Integer len=0;
     Integer i=0;
@@ -135,47 +143,56 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
     protected void onPostExecute() {
         try {
 
+            KeySettings setting=new KeySettings(context);
+            query=new Query(context);
+
             Integer count=0;
             Integer cityid=0;
             Integer idsubset=0;
             //  Toast.makeText(context,market[0], Toast.LENGTH_LONG).show();
             DataBaseSqlite dbs = new DataBaseSqlite(context);
-            KeySettings setting=new KeySettings(context);
-            query=new Query(context);
+
+
             cityid=query.getCityId(setting.getCityName());
             idsubset=fc.GetSubsetId();
-            dbs.delete_Business(cityid,idsubset);
 
-            //  dbs.delete_Business();
-            for (int i = 0; i <len; i++)
-            {
-                Cursor rows=dbs.select_CountBusinessId(Id[i]);
-                rows.moveToFirst();
-                count=rows.getInt(0);
-                rows.close();
-                Log.i("ID", String.valueOf(Id[i]));
-                Log.i("count",String.valueOf(count));
-                if(count==0)
-                    dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i],cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
-
-            }
+            dbs.delete_Business(cityid, idsubset);
 
             if(len==0) {
                 //  Toast.makeText(get, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
-                Log.i("Count Business : ","فروشگاه ثبت نشد");
-
+                Log.i("Count Business : ", "فروشگاه ثبت نشد");
+              //  pd.dismiss();
             }
+
             else {
 
-               /* query=new Query(context);
-                fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
-                Intent i = new Intent(this.context, Jobs_List.class);
-                this.context.startActivity(i);*/
-                Log.i("Count Business : ","ثبت شد");
+
+
+                Log.i("Count Business : ", "دریافت ثبت شده ها");
+               // pd.dismiss();
+
+                for (int i = 0; i <len; i++)
+                {
+                    dbs.delete_DisCount(discountid[i]);
+                    if(discountid[i]==0) {
+                        Log.i("ifbusiness","0");
+                    }
+                    else
+                    {
+                        Log.i("elsebusiness", "i>0");
+                        dbs.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i],likediscount[i],dislikediscount[i]);
+                    }
+                    //dbs.Add_LikeDisCount(1,166,Id[i],likediscount[i],dislikediscount[i]);
+                    dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i],cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
+
+                }
+
+
             }
 
         } catch (Exception e) {
-            Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
+          //  pd.dismiss();
+            Log.e("ExceptionBusinessJson", e.toString());
         }
     }
 
@@ -188,6 +205,7 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
 
         try {
 
+            Log.i("JSONString",JSONString);
             JSONArray areas = new JSONArray(JSONString);
 
             Id=new Integer[areas.length()];
@@ -211,6 +229,7 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
             area1=new String[areas.length()];
             user=new String[areas.length()];
             userid=new Integer[areas.length()];
+
             field1=new Integer[areas.length()];
             field2=new Integer[areas.length()];
             field3=new Integer[areas.length()];
@@ -218,10 +237,25 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
             field5=new Integer[areas.length()];
             field6=new Integer[areas.length()];
             field7=new Integer[areas.length()];
+
             ratecount=new Integer[areas.length()];
             ratevalue=new Double[areas.length()];
+
+            discountid = new Integer[areas.length()];
+            discounttext = new String[areas.length()];
+            discountimage=new String[areas.length()];
+            discountstartdate=new String[areas.length()];
+            discountexpirationdate=new String[areas.length()];
+            discountdescription=new String[areas.length()];
+            discountpercent=new String[areas.length()];
+            discountbusinessid=new Integer[areas.length()];
+
+            likediscount=new Integer[areas.length()];
+            dislikediscount=new Integer[areas.length()];
+
             len=areas.length();
             for (int i = 0; i < areas.length(); i++) {
+
 
                 JSONObject area = areas.getJSONObject(i);
                 address[i]=area.getString("Address");
@@ -229,13 +263,13 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
                 areaid[i]=area.getInt("AreaId");
                 businessowner[i]=area.getString("BusinessOwner");
                 code[i]=area.getString("Code");
-                description[i]=area.getString("Description");
-                email[i]=area.getString("Email");
+                description[i] = area.getString("Description");
+                email[i] = area.getString("Email");
                 expirationdate[i]=area.getString("ExpirationDate");
                 fax[i]=area.getString("Fax");
                 field1[i]=area.getInt("Field1");
                 field2[i]=area.getInt("Field2");
-                field3[i]=area.getInt("Field3");
+                field3[i] = area.getInt("Field3");
                 field4[i]=area.getInt("Field4");
                 field5[i]=area.getInt("Field5");
                 field6[i] = area.getInt("Field6");
@@ -256,6 +290,20 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
 
                 ratecount[i]=area.getInt("RateCount");
                 ratevalue[i]=area.getDouble("RateAverage");
+
+
+                discountid[i]=area.getInt("DiscountId");
+                discounttext[i]=area.getString("DiscountText");
+                discountimage[i]=area.getString("DiscountImage");
+                discountstartdate[i]=area.getString("DiscountStartdate");
+                discountexpirationdate[i]=area.getString("DiscountExpirationDate");
+                discountpercent[i]=area.getString("DiscountPercent");
+                discountdescription[i]=area.getString("DiscountDescription");
+                discountbusinessid[i]=area.getInt("Id");
+
+                likediscount[i]=area.getInt("DiscountLike");
+                dislikediscount[i]=area.getInt("DiscountDislike");
+
             }
 
         } catch (JSONException e) {

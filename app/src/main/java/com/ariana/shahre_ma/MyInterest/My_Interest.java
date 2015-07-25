@@ -1,25 +1,20 @@
 package com.ariana.shahre_ma.MyInterest;
 
-import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.support.v7.widget.SearchView;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.DateTime;
@@ -30,22 +25,15 @@ import com.ariana.shahre_ma.ListExpand.Continent;
 import com.ariana.shahre_ma.ListExpand.Country;
 import com.ariana.shahre_ma.ListExpand.MyListAdapter;
 import com.ariana.shahre_ma.MapsActivity;
-import com.ariana.shahre_ma.MyCity.Download_dialog;
-import com.ariana.shahre_ma.MyCity.ExpandableListAdapter;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.Service.MyReceiver;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJsonArray;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetInterestJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostInterestJson;
-import com.software.shell.fab.ActionButton;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 

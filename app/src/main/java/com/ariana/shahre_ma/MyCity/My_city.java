@@ -4,17 +4,16 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -33,33 +32,36 @@ import java.util.Map;
 
 public class My_city extends ActionBarActivity implements TotalListener{
 
-    Integer count = 0;
 
-    String time="";
-    String date="";
-    public SwipeRefreshLayout mSwipeRefreshLayout = null;
+
+
+
     Query query;
     List<String> groupList;
     List<String> childList;
     Map<String, List<String>> laptopCollection;
     ExpandableListView expListView;
     int lastExpandedPosition = -1;
-    DateTime dt=new DateTime();
 
-    Integer id[];
-    Integer Collection_id[];
     Integer Id_co;
     Integer Collection_ID_subset;
 
     FieldClass fc=new FieldClass();
 
+    Spinner Sp_City ;
+    String cityname="";
+
     HTTPGetBusinessJson httpbusin;
     NetState ns;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_city);
         query=new Query(this);
+
+        Sp_City = (Spinner) findViewById(R.id.sp_city);
 
         httpbusin=new HTTPGetBusinessJson(this);
         ns=new NetState(this);
@@ -92,53 +94,19 @@ public class My_city extends ActionBarActivity implements TotalListener{
             }
         });
 
-        // setGroupIndicatorToRight();
 
-
-      /**  expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-
-            public boolean onChildClick(ExpandableListView parent, View v,
-                                        int groupPosition, int childPosition, long id) {
-                final String selected = (String) expListAdapter.getChild(
-                        groupPosition, childPosition);
-                Toast.makeText(getApplicationContext(), selected, Toast.LENGTH_LONG)
-                        .show();
-                //query=new Query(Jobs.this,Jobs.this);
-                fc.SetSelected_job(selected);
-
-                count = query.getCountBusiness(query.getsubsetID(selected));
-
-                time = query.getTime_ZamanSanj();
-                date = query.getDate_ZamanSanj();
-
-
-                Toast.makeText(getApplicationContext(), query.getsubsetID(selected).toString(), Toast.LENGTH_LONG).show();
-                if (ns.checkInternetConnection() == false) {
-
-
-                    Toast.makeText(getApplicationContext(), "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
-
-                    Intent i = new Intent(getApplicationContext(), Jobs_List.class);
-                    startActivity(i);
-
-
-                } else {
-
-                    httpbusin = new HTTPGetBusinessJson(My_city.this);
-                    httpbusin.SetUrl_business(query.getsubsetID(selected));
-                    httpbusin.execute();
-                    Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_LONG).show();
-
-                }
-
-
-                return true;
+        Sp_City.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+             cityname= Sp_City.getSelectedItem().toString();
             }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
         });
-*/
-
-
 
     }
 
@@ -222,7 +190,7 @@ public class My_city extends ActionBarActivity implements TotalListener{
         DataBaseSqlite db=new DataBaseSqlite(this);
         Cursor allrows=db.select_AllCity();
 
-        Spinner Sp_City = (Spinner) findViewById(R.id.sp_city);
+
         Sp_City.setPrompt("انتخاب شهر:");
         List<String> list = new ArrayList<String>();
         if(allrows.moveToFirst())
@@ -252,14 +220,21 @@ public class My_city extends ActionBarActivity implements TotalListener{
             Cursor cursor=db.select_SubsetId(name);
             cursor.moveToFirst();
             Result=cursor.getInt(0);
-            url[i]="http://test.shahrma.com/api/ApiGiveBusiness?subsetId="+Result+"&cityid=68";
-            listurl.add("http://test.shahrma.com/api/ApiGiveBusiness?subsetId=" + Result + "&cityid=68");
-            Log.i("", "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=" + Result + "&cityid=68");
+            url[i]="http://test.shahrma.com/api/ApiGiveBusiness?subsetId="+Result+"&cityid="+query.getCityId(cityname);
+            listurl.add("http://test.shahrma.com/api/ApiGiveBusiness?subsetId=" + Result + "&cityid="+query.getCityId(cityname));
+            Log.i("", "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=" + Result + "&cityid="+query.getCityId(cityname));
             i++;
         }
 
-        HTTPGetBusinessJsonArray business=new HTTPGetBusinessJsonArray(this);
-        business.execute(url);
+        if(cityname.equals(""))
+        {
+            Toast.makeText(getApplicationContext(),"شهر مورد نظر خود را انتخاب کنید ",Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            HTTPGetBusinessJsonArray business = new HTTPGetBusinessJsonArray(this);
+            business.execute(url);
+        }
 
 
         Toast.makeText(getApplicationContext(),"download",Toast.LENGTH_LONG).show();
