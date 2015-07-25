@@ -35,6 +35,7 @@ public class job_list_cards_adapter extends RecyclerView.Adapter<job_list_cards_
     Job_lists_card_item nature;
     FieldClass fc=new FieldClass();
     KeySettings setting;
+    Boolean search=true;
     Cursor allrows;
 private  static Context context;
 
@@ -70,27 +71,30 @@ private  static Context context;
         {
             allrows = mydb.SearchBusiness(fc.GetMarket_Business(), fc.GetBusiness_SubsetIdb());
             setting.saveSearchBusiness(false); //No Search
+            search=false;
         }
 
          if(setting.getSortBusiness().equals("rate"))
         {
             allrows = mydb.select_SortRateBusiness(fc.GetBusiness_SubsetIdb());
             setting.saveSortBusiness("0"); //No Sort
-
+            search=false;
             Log.i("rate",setting.getSortBusiness());
         }  else if(setting.getSortBusiness().equals("name"))
         {
             allrows = mydb.select_SortNameBusiness(fc.GetBusiness_SubsetIdb());
             setting.saveSortBusiness("0"); //No Sort
+            search=false;
             Log.i("name", setting.getSortBusiness());
         }  else if(setting.getSortBusiness().equals("date")) {
              allrows = mydb.select_SortDateBusiness(fc.GetBusiness_SubsetIdb());
             setting.saveSortBusiness("0"); //No Sort
+             search=false;
             Log.i("date", setting.getSortBusiness());
         }
 
        // try {
-            if(ns.checkInternetConnection())
+            if(ns.checkInternetConnection() && search)
             {
 
                 mItems = new ArrayList<Job_lists_card_item>();

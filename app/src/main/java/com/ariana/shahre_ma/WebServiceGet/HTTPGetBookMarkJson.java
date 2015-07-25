@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.BookMark;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.MyCity.ExpandableListAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -109,7 +110,7 @@ public class HTTPGetBookMarkJson
     protected void onPostExecute(Integer result) {
         //onPostExecute(result);
         if(result==1) {
-            try {
+          //  try {
 
                 //  Toast.makeText(context,market[0], Toast.LENGTH_LONG).show();
                 DataBaseSqlite dbs = new DataBaseSqlite(context);
@@ -126,11 +127,11 @@ public class HTTPGetBookMarkJson
                 ArrayAdapter adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,getbookmark());
                 BookMark.lv.setAdapter(adapter);
 
-            } catch (Exception e) {
+           /* } catch (Exception e) {
                 pd.dismiss();
                 Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
                 Log.i("Exception", e.toString());
-            }
+            }*/
         }
         else
         {
@@ -142,21 +143,23 @@ public class HTTPGetBookMarkJson
         DataBaseSqlite db=new DataBaseSqlite(context);
         Cursor allrows = db.select_bookmark();
 
+        try {
 
-        if(allrows.moveToFirst())
-        {
-            do
-            {
-                Cursor row = db.select_business_NameMarket(allrows.getInt(1));
-                row.moveToNext();
-                item.add(row.getString(0));
+            if (allrows.moveToFirst()) {
+                do {
+                    Cursor row = db.select_business_NameMarket(allrows.getInt(1));
+                    row.moveToNext();
+                    item.add(row.getString(0));
 
 
-            }while (allrows.moveToNext());
+                } while (allrows.moveToNext());
+
+            }
+            allrows.close();
+        }
+        catch (Exception e){
 
         }
-        allrows.close();
-
 
         return item;
     }
@@ -191,6 +194,7 @@ public class HTTPGetBookMarkJson
         try {
 
 
+            Log.i("JSONBookMark",JSONString);
 
             JSONArray areas = new JSONArray(JSONString);
 
