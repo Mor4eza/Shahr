@@ -46,22 +46,12 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
         setContentView(R.layout.activity_jobs__list);
             setTitle(fc.GetSelected_job());
                 setCards();
+                mRecyclerView.setAdapter(job_list_Adapter);
 
 
-       // mDrawer = MenuDrawer.attach(this, Position.RIGHT);
-
-        /*mDrawer.setContentView(R.layout.activity_jobs__list);
-        mDrawer.setMenuView(R.layout.activity_jobs);*/
 
     }
         public void img_click(View v){
-
-          /* tvDescription=(TextView) findViewById(R.id.tv_address);
-            tvMarket=(TextView) findViewById(R.id.tv_title);
-
-            fc.SetMarket_Business(tvMarket.getText().toString());
-            fc.SetAddress_Business(tvDescription.getText().toString());*/
-
             Intent i = new Intent(getApplicationContext(), Job_details.class);
             startActivity(i);
 
@@ -87,7 +77,7 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
             alphaAdapter.setDuration(400);
             mRecyclerView.setAdapter(alphaAdapter);
             job_list_Adapter.notifyItemChanged(0);
-
+            job_list_Adapter.notifyDataSetChanged();
         }
         catch (Exception e){}
     }

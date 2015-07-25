@@ -17,6 +17,7 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
+import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.job_details.Job_details;
@@ -44,7 +45,7 @@ private  static Context context;
       this.context=context;
       Query query=new Query(context);
       FieldDataBusiness fdb=new FieldDataBusiness();
-
+      NetState ns=new NetState(context);
         setting=new KeySettings(context);
         mItems = new ArrayList<Job_lists_card_item>();
 
@@ -88,51 +89,61 @@ private  static Context context;
             Log.i("date", setting.getSortBusiness());
         }
 
-
         try {
-            mItems = new ArrayList<Job_lists_card_item>();
-            for(int i=0;i<fdb.GetMarketBusiness().size();i++)
+            if(ns.checkInternetConnection()==false)
             {
-                Log.i("sizeBusiness",String.valueOf(fdb.GetIdBusiness().size()));
-                Log.i("Market",fdb.GetMarketBusiness().get(i));
-                nature = new Job_lists_card_item();
-                nature.setName(fdb.GetMarketBusiness().get(i));
-                nature.setDes(fdb.GetAddressBusiness().get(i));
-                nature.setThumbnail(R.drawable.pooshak);
-                nature.setRate(fdb.GetRateBusiness().get(i));
-                nature.setmId(fdb.GetIdBusiness().get(i));
 
-              /*  if(allrows.getString(3).equals("")){
-                    nature.setTell(allrows.getString(4));
-                }else{
-                    nature.setTell(allrows.getString(3));
-                }*/
-                mItems.add(nature);
-            }
-/*
-                if (allrows.moveToFirst()) {
                     mItems = new ArrayList<Job_lists_card_item>();
-                    do {
-
-
+                    for (int i = 0; i < fdb.GetMarketBusiness().size(); i++)
+                    {
+                        Log.i("sizeBusiness", String.valueOf(fdb.GetIdBusiness().size()));
+                        Log.i("Market", fdb.GetMarketBusiness().get(i));
                         nature = new Job_lists_card_item();
-                        nature.setName(allrows.getString(1));
-                        nature.setDes(allrows.getString(8));
+                        nature.setName(fdb.GetMarketBusiness().get(i));
+                        nature.setDes(fdb.GetAddressBusiness().get(i));
                         nature.setThumbnail(R.drawable.pooshak);
-                        nature.setRate(allrows.getDouble(29));
-                        nature.setmId(allrows.getInt(0));
+                        nature.setRate(fdb.GetRateBusiness().get(i));
+                        nature.setmId(fdb.GetIdBusiness().get(i));
 
-                        if(allrows.getString(3).equals("")){
-                            nature.setTell(allrows.getString(4));
-                        }else{
-                            nature.setTell(allrows.getString(3));
-                        }
+                          /* if(allrows.getString(3).equals("")){
+                                nature.setTell(allrows.getString(4));
+                            }else{
+                                nature.setTell(allrows.getString(3));
+                            }*/
                         mItems.add(nature);
+                        notifyDataSetChanged();
+                    }
+                }
+                else
+                {
+                    if (allrows.moveToFirst()) {
+                        mItems = new ArrayList<Job_lists_card_item>();
+                        do {
 
-                    } while (allrows.moveToNext());
-                }*/
+
+                            nature = new Job_lists_card_item();
+                            nature.setName(allrows.getString(1));
+                            nature.setDes(allrows.getString(8));
+                            nature.setThumbnail(R.drawable.pooshak);
+                            nature.setRate(allrows.getDouble(29));
+                            nature.setmId(allrows.getInt(0));
+
+                            if (allrows.getString(3).equals(""))
+                            {
+                                nature.setTell(allrows.getString(4));
+                            } else
+                            {
+                                nature.setTell(allrows.getString(3));
+                            }
+                            mItems.add(nature);
+
+                        } while (allrows.moveToNext());
+                    }
+                }
+            }
+        catch(Exception e)
+        {
         }
-        catch (Exception e){}
 
     }
 
