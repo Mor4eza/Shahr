@@ -580,7 +580,7 @@ Context context;
     public Cursor select_SortRateBusiness(Integer subsetID)
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetID+" ORDER BY "+instructionsSqlite.RATEVALUE_business +" DESC", null);
+        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetID+" ORDER BY "+instructionsSqlite.RATEVALUE_business +" ACS", null);
     }
 
     public Cursor select_SortNameBusiness(Integer subsetID)

@@ -134,9 +134,9 @@ public class HTTPGetDisCountJson extends AsyncTask<String,Void,Integer> {
                 discount_Adapter adapter = new discount_Adapter(context,dis.generateData());
                 Discount.listView.setAdapter(adapter);
                 Discount.listView.deferNotifyDataSetChanged();
-            } catch (Exception e) {
+           } catch (Exception e) {
                 pd.dismiss();
-                Toast.makeText(context.getApplicationContext(), "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
+               // Toast.makeText(context.getApplicationContext(), "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
             }
         }
         else

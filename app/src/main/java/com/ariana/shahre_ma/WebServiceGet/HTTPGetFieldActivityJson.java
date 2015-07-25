@@ -52,7 +52,7 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
      */
     @Override
     protected void onPreExecute() {
-        super.onPreExecute();
+       // super.onPreExecute();
      /*   pd = new ProgressDialog(context);
         pd.setMessage("دریافت اطلاعات...");
         pd.setCancelable(false);

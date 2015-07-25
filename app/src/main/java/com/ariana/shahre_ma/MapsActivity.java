@@ -67,13 +67,12 @@ public class MapsActivity extends ActionBarActivity {
                         R.layout.jobs_info_windows, null);
 
 
-
                 String title = marker.getTitle();
                 double rate = Double.parseDouble(marker.getSnippet());
-                Integer Id=marker.getData();
+                Integer Id = marker.getData();
                 TextView tv_title = (TextView) window.findViewById(R.id.tv_info_title);
                 RatingBar Rates = (RatingBar) window.findViewById(R.id.info_rates);
-                TextView tv_id=(TextView)window.findViewById(R.id.tv_info_id);
+                TextView tv_id = (TextView) window.findViewById(R.id.tv_info_id);
                 tv_id.setText(String.valueOf(Id));
 
                 Rates.setRating((float) rate);
@@ -92,8 +91,8 @@ public class MapsActivity extends ActionBarActivity {
 
         DataBaseSqlite mydb = new DataBaseSqlite(this);
         Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb(),cityid);
-        String lat[] = new String[fc.GetCount_Business()];
-        String Longt[] = new String[fc.GetCount_Business()];
+        String lat[] = new String[allrows.getCount()];
+        String Longt[] = new String[allrows.getCount()];
         Integer l=0;
             if (allrows.moveToFirst()) {
 
