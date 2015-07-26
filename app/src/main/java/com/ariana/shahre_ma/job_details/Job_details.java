@@ -101,7 +101,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
 
         if(query.getBookMarkId(fc.GetBusiness_Id())>0)
         {
-            fav.setIcon(R.drawable.abc_btn_rating_star_off_mtrl_alpha);
+            fav.setIcon(R.drawable.abc_btn_rating_star_on_mtrl_alpha);
         }
         else
         {
