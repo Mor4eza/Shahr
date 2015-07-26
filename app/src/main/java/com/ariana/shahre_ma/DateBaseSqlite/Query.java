@@ -230,6 +230,22 @@ public class Query {
         return Result;
     }
 
+    public Integer getBookMarkId(Integer businessid) {
+        Integer Result =0;
+
+        try {
+            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            Cursor allrows = dbs.select_bookmarkId(businessid);
+            allrows.moveToFirst();
+            Result = allrows.getInt(0);
+            allrows.close();
+        }
+        catch (Exception e)
+        {}
+
+        return Result;
+    }
+
     public Integer getOpinionId() {
         Integer Result =0;
 

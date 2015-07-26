@@ -729,6 +729,14 @@ Context context;
 
     }
 
+    public Cursor select_bookmarkId(Integer businessid)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT Id FROM " + instructionsSqlite.TABLE_NAME_Bookmark+" WHERE BusinessId="+businessid, null);
+
+    }
+
     public Cursor select_opinion_BusinessId(Integer busintessid)
     {
 
