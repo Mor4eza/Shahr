@@ -164,10 +164,10 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
             KeySettings setting=new KeySettings(context);
             query=new Query(context);
 
-            Integer count=0;
+
             Integer cityid=0;
             Integer idsubset=0;
-          //  Toast.makeText(context,market[0], Toast.LENGTH_LONG).show();
+
             DataBaseSqlite dbs = new DataBaseSqlite(context);
 
 
