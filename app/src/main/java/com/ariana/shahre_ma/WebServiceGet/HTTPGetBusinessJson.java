@@ -42,6 +42,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
     private  List<Integer> selectId=new ArrayList<>();
     private  List<Double>  selectRate=new ArrayList<>();
     private  List<String>  selectPhone=new ArrayList<String>();
+    private  List<String>  selectMobile=new ArrayList<String>();
     private  List<String>  selectAddress=new ArrayList<>();
     private  List<String>  selectMarketName=new ArrayList<String>();
 
@@ -185,7 +186,6 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
             else {
 
 
-                fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
                 Intent intent = new Intent(this.context, Jobs_List.class);
                 this.context.startActivity(intent);
                 Log.i("Count Business : ", "دریافت ثبت شده ها");
@@ -207,7 +207,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
                 }
 
-
+                fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
             }
 
         } catch (Exception e) {
@@ -329,6 +329,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
                 selectAddress.add(area.getString("Address"));
                 selectMarketName.add(area.getString("Market"));
                 selectPhone.add(area.getString("Phone"));
+                selectPhone.add(area.getString("Mobile"));
                 selectRate.add(area.getDouble("RateAverage"));
 
 

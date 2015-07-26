@@ -87,19 +87,21 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
         if(result==1) {
             try {
 
-                DataBaseSqlite dbs = new DataBaseSqlite(context);
+                if(len>0)
+                {
+                    DataBaseSqlite dbs = new DataBaseSqlite(context);
+                    dbs.delete_City();
+                    for (int i = 0; i < len; i++) {
+                        dbs.Add_city(Id_city[i], Name_city[i], PROVINCEID_city[i]);
 
-                dbs.delete_City();
-                for (int i = 0; i < len; i++) {
-                    dbs.Add_city(Id_city[i], Name_city[i], PROVINCEID_city[i]);
-
-                }
-                UpdateActivity.PgUpdate.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        UpdateActivity.PgUpdate.setVisibility(View.INVISIBLE);
                     }
-                });
+                    UpdateActivity.PgUpdate.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            UpdateActivity.PgUpdate.setVisibility(View.INVISIBLE);
+                        }
+                    });
+                }
 
             }
             catch (Exception e)
