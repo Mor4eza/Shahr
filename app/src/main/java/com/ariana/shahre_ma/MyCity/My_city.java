@@ -7,10 +7,14 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -21,6 +25,8 @@ import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJsonArray;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.software.shell.fab.ActionButton;
 
 import java.util.ArrayList;
@@ -262,5 +268,45 @@ public class My_city extends ActionBarActivity implements TotalListener{
             expListView.collapseGroup(groupPosition);
         else
             expListView.expandGroup(groupPosition);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_my_city, menu);
+
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        ViewTarget Spinner=new ViewTarget(R.id.sp_city,this);
+        //noinspection SimplifiableIfStatement
+        RelativeLayout.LayoutParams lps = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        lps.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        int margin = ((Number) (getResources().getDisplayMetrics().density * 12)).intValue();
+        lps.setMargins(margin, margin, margin, margin);
+
+        if (id == R.id.help) {
+
+        ShowcaseView  sv=new ShowcaseView.Builder(this)
+                   // .setTarget(new ActionViewTarget(this, ActionViewTarget.Type.HOME))
+                    //.setTarget(Spinner)
+                    .setContentTitle("انتخاب شهر")
+                    .setContentText("از این قسمت شهر مورد نظر خود را برای دانلود انتخاب کنید...")
+                    .setStyle(R.style.CustomShowcaseTheme)
+                    .build();
+                    sv.setButtonPosition(lps);
+            return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
     }
 }

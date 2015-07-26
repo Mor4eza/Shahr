@@ -6,14 +6,10 @@ import android.database.Cursor;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import com.ariana.shahre_ma.BookMark;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
-import com.ariana.shahre_ma.MyCity.ExpandableListAdapter;
-import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -164,7 +160,7 @@ public class HTTPGetBookMarkJson
                  Log.i("len", String.valueOf(len));
                 for (int i = 0; i < len; i++) {
                     Log.i("subsetid",String.valueOf(subsetid[i]));
-                    dbs.delete_Business(68,subsetid[i]);
+                   // dbs.delete_Business(68,subsetid[i]);
                     dbs.Add_bookmark(Id[i], MEMberID);
                     dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i],68, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
                 }
