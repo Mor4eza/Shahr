@@ -40,7 +40,7 @@ public class My_Business extends ActionBarActivity {
         httparea.execute();
 
         Log.i("BusinessID",String.valueOf(fc.GetBusiness_Id()));
-       // try {
+        try {
             DataBaseSqlite db = new DataBaseSqlite(this);
             Cursor rows = db.select_AllBusinessId(fc.GetBusiness_Id());
             rows.moveToFirst();
@@ -48,11 +48,11 @@ public class My_Business extends ActionBarActivity {
             title.setTag( String.valueOf(rows.getInt(0)));//Id
             address.setText(rows.getString(7));//Address
             rate.setRating(rows.getFloat(13));//RateValue
-       /* }
+        }
         catch(Exception e)
         {
             Log.e("SQLException",e.toString());
-        }*/
+        }
 
     }
 

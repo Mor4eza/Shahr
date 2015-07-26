@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBookMarkJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.neno0o.lighttextviewlib.LightTextView;
@@ -43,6 +44,7 @@ public class BookMark extends ActionBarActivity {
     SqliteTOjson sqltojson =new SqliteTOjson(this);
     Query query=new Query(this);
     FieldClass fc = new FieldClass();
+    NetState ns=new NetState(this);
     Integer len=0;
     Integer BusinessId[];
 
@@ -53,9 +55,17 @@ public class BookMark extends ActionBarActivity {
 
         lv=(ListView) findViewById(R.id.lvbookmark);
 
-        HTTPGetBookMarkJson b=new HTTPGetBookMarkJson(this);
-        b.SetUrl_MemberId(query.getMemberId());
-        b.execute();
+
+        bookmark();//Load data from the database in the list view
+
+
+        if(ns.checkInternetConnection())
+        {
+            //The user Getting bookmark
+            HTTPGetBookMarkJson b = new HTTPGetBookMarkJson(this);
+            b.SetUrl_MemberId(query.getMemberId());
+            b.execute();
+        }
 
         final ListView t = (ListView)findViewById(R.id.lvbookmark);
 
@@ -66,14 +76,14 @@ public class BookMark extends ActionBarActivity {
 
                 String selected = (String) lv.getItemAtPosition(position);
                 String Id = (String) lv.getTag(position);
-                Toast.makeText(getApplicationContext(),selected+"  "+Id,Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), selected + "  " + Id, Toast.LENGTH_LONG).show();
 
                 fc.SetMarket_Business(selected.toString());
 
             }
         });
 
-        bookmark();
+
 
         t.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -96,12 +106,12 @@ public class BookMark extends ActionBarActivity {
     {
         try
         {
-         getbookmark1();
-
+         //getbookmark1();
+        lv=(ListView) findViewById(R.id.lvbookmark);
            ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,getbookmark());
-            for(int i=0;i<len;i++)
-            lv.setTag(BusinessId[i]);
-            lv.setAdapter(adapter);
+           // for(int i=0;i<len;i++)
+           // lv.setTag(BusinessId[i]);
+        lv.setAdapter(adapter);
 
         }
         catch (Exception e) {
@@ -118,10 +128,11 @@ public class BookMark extends ActionBarActivity {
         {
             do
             {
+                Log.i("BusinessIdBookmark",String.valueOf(allrows.getInt(1)));
                 Cursor row = db.select_business_NameMarket(allrows.getInt(1));
                 row.moveToNext();
                 item.add(row.getString(0));
-
+                Log.i("nameBookmark", row.getString(0));
 
             }while (allrows.moveToNext());
 

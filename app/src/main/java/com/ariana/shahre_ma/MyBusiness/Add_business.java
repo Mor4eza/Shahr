@@ -119,7 +119,7 @@ public class Add_business extends ActionBarActivity {
     void Show_Business()
     {
 
-       // try {
+        try {
             DataBaseSqlite db = new DataBaseSqlite(this);
             Cursor rows = db.select_AllBusinessId(fc.GetBusiness_Id());
             rows.moveToFirst();
@@ -150,11 +150,11 @@ public class Add_business extends ActionBarActivity {
                     Market_field.setText(Market_field.getText().toString() + rows3.getString(0) + ", ");
                 }
             }*/
-      /*  }
+        }
         catch (Exception e)
         {
             Log.i("Exception",e.toString());
-        }*/
+        }
        // Market_gharar.setText(rows.getString(8));
     }
     void SpinnerSetUp(){
