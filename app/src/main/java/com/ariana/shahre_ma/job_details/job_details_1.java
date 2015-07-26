@@ -144,41 +144,38 @@ public class job_details_1 extends ActionBarActivity {
 
 
         try {
-            fc.SetBusiness_Id(allrows.getInt(0));
-            fc.SetLatitude_Business(allrows.getString(15));
-            fc.SetLongtiude_Business(allrows.getString(16));
+            fc.SetBusiness_Id(allrows.getInt(0));//Id
+            fc.SetLatitude_Business(allrows.getString(10));//Latitude
+            fc.SetLongtiude_Business(allrows.getString(11));//Longtiude
 
-            name.setText(allrows.getString(1));
-            tel.setText(allrows.getString(3));
-            web.setText(allrows.getString(6));
-            owner.setText(allrows.getString(7));
-            subset.setText( query.getsubsetName(allrows.getInt(14)));
-
-            address.setText(allrows.getString(8));
-            des.setText(allrows.getString(9));
-
-
-                Cursor rows = mydb.select_AllBusinessId(fc.GetBusiness_Id());
-                rows.moveToFirst();
+            name.setText(allrows.getString(1));//Market
+            tel.setText(allrows.getString(2));//Phone
+            web.setText(allrows.getString(5));//Email
+            owner.setText(allrows.getString(6));//BusinessOwner
+            address.setText(allrows.getString(7));//Address
+            des.setText(allrows.getString(8));//Description
+            subset.setText( query.getsubsetName(allrows.getInt(9)));//SubsetId
 
 
-                for (int i = 0; i < 7; i++) {
-                    Log.i("CounterFor", String.valueOf(rows.getInt((21) + (i))));
-                    if (rows.getInt((21) + (i)) > 0) {
 
-                        Cursor rows3 = mydb.select_FieldActivityName(rows.getInt((21) + (i)));
+
+
+
+
+               for (int i = 0; i < 7; i++) {
+                    Log.i("CounterFor", String.valueOf(allrows.getInt((12) + (i))));
+                    if (allrows.getInt((12) + (i)) > 0) {
+
+                        Cursor rows3 = mydb.select_FieldActivityName(allrows.getInt((12) + (i)));
                         rows3.moveToFirst();
 
                         zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");
                     }
                 }
 
-            /*if(row_notification.getString(5).equals(time.Now()))
-            {
-                mydb.delete_Notification(fc.GetBusiness_Id());
-            }*/
 
-        }
+
+       }
         catch (Exception e){Toast.makeText(getActivity(),e.toString(),Toast.LENGTH_LONG).show();}
 
 

@@ -119,28 +119,28 @@ public class Add_business extends ActionBarActivity {
     void Show_Business()
     {
 
-        try {
+       // try {
             DataBaseSqlite db = new DataBaseSqlite(this);
             Cursor rows = db.select_AllBusinessId(fc.GetBusiness_Id());
             rows.moveToFirst();
-            Market_name.setText(rows.getString(1));
-            Market_tell.setText(rows.getString(3));
-            Market_mobile.setText(rows.getString(4));
-            Market_fax.setText(rows.getString(5));
-            Market_email.setText(rows.getString(6));
-            Market_owner.setText(rows.getString(7));
-            Market_address.setText(rows.getString(8));
-            Market_desc.setText(rows.getString(9));
+            Market_name.setText(rows.getString(1));//Market
+            Market_tell.setText(rows.getString(2));//Phone
+            Market_mobile.setText(rows.getString(3));//Mobile
+            Market_fax.setText(rows.getString(4));//Fax
+            Market_email.setText(rows.getString(5));//Email
+            Market_owner.setText(rows.getString(6));//BusinessOwner
+            Market_address.setText(rows.getString(7));//Address
+            Market_desc.setText(rows.getString(8));//Description
 
-            Cursor rows1 = db.select_SubsetName(rows.getInt(14));
+            Cursor rows1 = db.select_SubsetName(rows.getInt(9));
             rows1.moveToFirst();
             Market_subset.setText(rows1.getString(0));
 
-            Cursor rows2 = db.select_AreaName(rows.getInt(17));
+            Cursor rows2 = db.select_AreaName(rows.getInt(14));
             rows2.moveToFirst();
             Market_zone.setText(rows2.getString(0));
 
-            for (int i = 0; i < 7; i++) {
+          /*  for (int i = 0; i < 7; i++) {
                 Log.i("CounterFor", String.valueOf(rows.getInt((21) + (i))));
                 if (rows.getInt((21) + (i)) > 0) {
 
@@ -149,12 +149,12 @@ public class Add_business extends ActionBarActivity {
 
                     Market_field.setText(Market_field.getText().toString() + rows3.getString(0) + ", ");
                 }
-            }
-        }
+            }*/
+      /*  }
         catch (Exception e)
         {
             Log.i("Exception",e.toString());
-        }
+        }*/
        // Market_gharar.setText(rows.getString(8));
     }
     void SpinnerSetUp(){
