@@ -329,7 +329,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
                 selectAddress.add(area.getString("Address"));
                 selectMarketName.add(area.getString("Market"));
                 selectPhone.add(area.getString("Phone"));
-                selectPhone.add(area.getString("Mobile"));
+                selectMobile.add(area.getString("Mobile"));
                 selectRate.add(area.getDouble("RateAverage"));
 
 
@@ -340,6 +340,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
             fdb.SetAddressBusiness(selectAddress);
             fdb.SetMarketBusiness(selectMarketName);
             fdb.SetPhoneBusiness(selectPhone);
+            fdb.SetMobileBusiness(selectMobile);
 
 
         } catch (JSONException e) {

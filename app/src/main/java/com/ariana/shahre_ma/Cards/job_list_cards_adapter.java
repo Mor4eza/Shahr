@@ -108,11 +108,13 @@ private  static Context context;
                     nature.setRate(fdb.GetRateBusiness().get(i));
                     nature.setmId(fdb.GetIdBusiness().get(i));
 
+
                            if(fdb.GetMobileBusiness().get(i).length()==0){
                                 nature.setTell(fdb.GetPhoneBusiness().get(i));
                             }else{
                                 nature.setTell(fdb.GetMobileBusiness().get(i));
                             }
+
                     mItems.add(nature);
                     notifyDataSetChanged();
                 }
@@ -131,6 +133,7 @@ private  static Context context;
                             nature.setThumbnail(R.drawable.pooshak);
                             nature.setRate(allrows.getDouble(29));
                             nature.setmId(allrows.getInt(0));
+
 
                             if (allrows.getString(3).equals(""))
                             {
