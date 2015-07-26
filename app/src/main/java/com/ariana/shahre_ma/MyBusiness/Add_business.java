@@ -136,7 +136,7 @@ public class Add_business extends ActionBarActivity {
             rows1.moveToFirst();
             Market_subset.setText(rows1.getString(0));
 
-            Cursor rows2 = db.select_AreaName(rows.getInt(14));
+            Cursor rows2 = db.select_AreaName(rows.getInt(20));
             rows2.moveToFirst();
             Market_zone.setText(rows2.getString(0));
 

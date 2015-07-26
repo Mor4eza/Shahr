@@ -10,7 +10,8 @@ public class FieldDataBusiness
 {
     private static List<Integer> Id=new ArrayList<>();
     private static List<Double> Rate=new ArrayList<>();
-    private static List<String> Phone=new ArrayList<String>();
+    private static List<String> Phone=new ArrayList<>();
+    private static List<String> Mobile=new ArrayList<String>();
     private static List<String> Address=new ArrayList<>();
     private static List<String> MarketName=new ArrayList<String>();
 
@@ -53,6 +54,19 @@ public class FieldDataBusiness
         return Phone;
     }
 
+    /**
+     *
+     * @param mobile
+     */
+    public void SetMobileBusiness(List<String> mobile)
+    {
+        Mobile=mobile;
+    }
+
+    public List<String> GetMobileBusiness()
+    {
+        return Mobile;
+    }
 
     /**
      * Get address business

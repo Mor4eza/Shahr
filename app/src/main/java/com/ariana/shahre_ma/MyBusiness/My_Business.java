@@ -47,7 +47,7 @@ public class My_Business extends ActionBarActivity {
             title.setText(rows.getString(1));//Market
             title.setTag( String.valueOf(rows.getInt(0)));//Id
             address.setText(rows.getString(7));//Address
-            rate.setRating(rows.getFloat(13));//RateValue
+            rate.setRating(rows.getFloat(19));//RateValue
         }
         catch(Exception e)
         {

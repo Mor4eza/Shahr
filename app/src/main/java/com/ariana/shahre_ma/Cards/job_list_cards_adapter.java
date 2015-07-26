@@ -100,8 +100,7 @@ private  static Context context;
                 mItems = new ArrayList<Job_lists_card_item>();
                 for (int i = 0; i < fdb.GetMarketBusiness().size(); i++)
                 {
-                    Log.i("sizeBusiness", String.valueOf(fdb.GetIdBusiness().size()));
-                    Log.i("Market", fdb.GetMarketBusiness().get(i));
+
                     nature = new Job_lists_card_item();
                     nature.setName(fdb.GetMarketBusiness().get(i));
                     nature.setDes(fdb.GetAddressBusiness().get(i));
@@ -109,11 +108,11 @@ private  static Context context;
                     nature.setRate(fdb.GetRateBusiness().get(i));
                     nature.setmId(fdb.GetIdBusiness().get(i));
 
-                          /* if(allrows.getString(3).equals("")){
-                                nature.setTell(allrows.getString(4));
+                           if(fdb.GetMobileBusiness().get(i).length()==0){
+                                nature.setTell(fdb.GetPhoneBusiness().get(i));
                             }else{
-                                nature.setTell(allrows.getString(3));
-                            }*/
+                                nature.setTell(fdb.GetMobileBusiness().get(i));
+                            }
                     mItems.add(nature);
                     notifyDataSetChanged();
                 }

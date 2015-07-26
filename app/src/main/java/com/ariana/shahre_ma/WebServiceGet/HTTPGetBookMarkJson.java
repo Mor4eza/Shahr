@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.ariana.shahre_ma.BookMark;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
@@ -153,7 +154,7 @@ public class HTTPGetBookMarkJson
     protected void onPostExecute(Integer result) {
         //onPostExecute(result);
         if(result==1) {
-          //  try {
+            try {
 
                 DataBaseSqlite dbs = new DataBaseSqlite(context);
                 dbs.delete_bookmark();
@@ -170,11 +171,11 @@ public class HTTPGetBookMarkJson
                 ArrayAdapter adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,getbookmark());
                 BookMark.lv.setAdapter(adapter);
 
-           /* } catch (Exception e) {
+            } catch (Exception e) {
                 pd.dismiss();
                 Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
                 Log.i("Exception", e.toString());
-            }*/
+            }
         }
         else
         {
