@@ -79,11 +79,6 @@ public class My_city extends ActionBarActivity implements TotalListener{
 
         expListView = (ExpandableListView) findViewById(R.id.expand_my_city);
 
-       /* final ExpandableListAdapter expListAdapter = new ExpandableListAdapter(
-                this, groupList,laptopCollection) {
-
-        };
-        expListView.setAdapter(expListAdapter);*/
         ExpandListAdapter adapter = new ExpandListAdapter(this);
         adapter.setmListener(this);
         expListView.setAdapter(adapter);

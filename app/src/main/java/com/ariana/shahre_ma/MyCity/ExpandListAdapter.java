@@ -355,7 +355,6 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
         return true;
     }
 
-
     private void LoadData()
     {
 

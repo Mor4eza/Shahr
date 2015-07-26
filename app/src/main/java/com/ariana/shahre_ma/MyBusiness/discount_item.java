@@ -1,6 +1,5 @@
 package com.ariana.shahre_ma.MyBusiness;
 
-import com.ariana.shahre_ma.MyInterest.Interest_Adapter;
 
 /**
  * Created by ariana2 on 7/12/2015.
