@@ -1,4 +1,4 @@
-package com.ariana.shahre_ma;
+package com.ariana.shahre_ma.Bookmarks;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -18,9 +18,10 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
+import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBookMarkJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
-import com.neno0o.lighttextviewlib.LightTextView;
+import com.ariana.shahre_ma.job_details.Job_details;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -40,7 +41,7 @@ public class BookMark extends ActionBarActivity {
 
 
     Integer BusinessID[];
-   public static ListView lv;
+    public static ListView lv;
     SqliteTOjson sqltojson =new SqliteTOjson(this);
     Query query=new Query(this);
     FieldClass fc = new FieldClass();
@@ -52,13 +53,11 @@ public class BookMark extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_mark);
-
         lv=(ListView) findViewById(R.id.lvbookmark);
 
-
-        bookmark();//Load data from the database in the list view
-
-
+        final BookmarkAdapter adapter = new BookmarkAdapter(this, generateData());
+        lv.setAdapter(adapter);
+       // bookmark();//Load data from the database in the list view
         if(ns.checkInternetConnection())
         {
             //The user Getting bookmark
@@ -67,34 +66,17 @@ public class BookMark extends ActionBarActivity {
             b.execute();
         }
 
-        final ListView t = (ListView)findViewById(R.id.lvbookmark);
 
-        t.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                String selected = (String) lv.getItemAtPosition(position);
-                String Id = (String) lv.getTag(position);
-                Toast.makeText(getApplicationContext(), selected + "  " + Id, Toast.LENGTH_LONG).show();
-
-                fc.SetMarket_Business(selected.toString());
-
-            }
-        });
-
-
-
-        t.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
-                String selected = (String) lv.getItemAtPosition(position);
-                //adapter.remove(selected);
-                //adapter.notifyDataSetChanged();
-                Toast.makeText(getApplicationContext(),"deleted",Toast.LENGTH_LONG).show();
-
-                return false;
+                fc.SetBusiness_Id(adapter.getItem(position).GetId());
+                Intent i=new Intent(getApplicationContext(), Job_details.class);
+                startActivity(i);
+            Toast.makeText(getApplicationContext(),adapter.getItem(position).getTitle().toString()+adapter.getItem(position).GetId(),Toast.LENGTH_LONG).show();
             }
         });
 
@@ -106,11 +88,9 @@ public class BookMark extends ActionBarActivity {
     {
         try
         {
-         //getbookmark1();
         lv=(ListView) findViewById(R.id.lvbookmark);
            ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,getbookmark());
-           // for(int i=0;i<len;i++)
-           // lv.setTag(BusinessId[i]);
+
         lv.setAdapter(adapter);
 
         }
@@ -143,26 +123,6 @@ public class BookMark extends ActionBarActivity {
         return item;
     }
 
-    private void getbookmark1() {
-
-        DataBaseSqlite db=new DataBaseSqlite(this);
-        Cursor allrows = db.select_bookmark();
-        Integer i=0;
-        BusinessId=new Integer[allrows.getCount()];
-        len=allrows.getCount();
-        if(allrows.moveToFirst())
-        {
-            do
-            {
-
-                BusinessId[i]=allrows.getInt(1);
-               i++;
-            }while (allrows.moveToNext());
-
-        }
-        allrows.close();
-
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -262,6 +222,21 @@ public class BookMark extends ActionBarActivity {
             }
         }
         catch (Exception e){}
+    }
+    public ArrayList<Bookmark_Item> generateData(){
+        ArrayList<Bookmark_Item> items = new ArrayList<Bookmark_Item>();
+
+        DataBaseSqlite db=new DataBaseSqlite(this);
+        Cursor rows=db.select_bookmark();
+        if(rows.moveToNext())
+        {
+            do {
+                items.add(new Bookmark_Item(query.getNameBusiness(rows.getInt(1)),rows.getInt(1)));
+            }while (rows.moveToNext());
+        }
+
+
+        return items;
     }
 
 }

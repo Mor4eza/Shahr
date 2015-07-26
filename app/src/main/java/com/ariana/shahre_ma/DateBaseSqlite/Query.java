@@ -181,6 +181,21 @@ public class Query {
         return Result;
     }
 
+    public String getNameBusiness(Integer businessid) {
+        String Result = "";
+
+        try {
+            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            Cursor allrows = dbs.select_business_NameMarket(businessid);
+            allrows.moveToFirst();
+            Result = allrows.getString(0);
+            allrows.close();
+        }
+        catch (Exception e)
+        {}
+
+        return Result;
+    }
 
     public String getTime_ZamanSanj() {
         String Result ="";

@@ -5,11 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import com.ariana.shahre_ma.BookMark;
+import com.ariana.shahre_ma.Bookmarks.Bookmark_Item;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 
 import org.json.JSONArray;
@@ -27,8 +27,7 @@ import java.util.List;
 /**
  * Created by ariana2 on 6/17/2015.
  */
-public class HTTPGetBookMarkJson
-        extends AsyncTask<String,Void,Integer>
+public class HTTPGetBookMarkJson extends AsyncTask<String,Void,Integer>
 {
 
     ProgressDialog pd;
@@ -42,6 +41,9 @@ public class HTTPGetBookMarkJson
     Integer len=0;
     Integer BusinessId[];
 
+
+    private List<String> selectbusiness=new ArrayList<>();
+    private List<Integer> selectId=new ArrayList<>();
 
     Integer Id[];
     String market[];
@@ -156,21 +158,21 @@ public class HTTPGetBookMarkJson
         if(result==1) {
             try {
 
+
                 DataBaseSqlite dbs = new DataBaseSqlite(context);
                 dbs.delete_bookmark();
                  Log.i("len", String.valueOf(len));
                 for (int i = 0; i < len; i++) {
-                    Log.i("subsetid",String.valueOf(subsetid[i]));
+                    Log.i("subsetid", String.valueOf(subsetid[i]));
                    // dbs.delete_Business(68,subsetid[i]);
                     dbs.Add_bookmark(Id[i], MEMberID);
-                    dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i],68, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
+                    dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], 68, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
+
+
+
                 }
-
                 pd.dismiss();
-              //  getbookmark1();
-                ArrayAdapter adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,getbookmark());
-                BookMark.lv.setAdapter(adapter);
-
+                generateData();
             } catch (Exception e) {
                 pd.dismiss();
                 Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
@@ -181,51 +183,6 @@ public class HTTPGetBookMarkJson
         {
 
         }
-    }
-    private List<String> getbookmark() {
-        List<String> item=new ArrayList<String>();
-        DataBaseSqlite db=new DataBaseSqlite(context);
-        Cursor allrows = db.select_bookmark();
-
-        try {
-
-            if (allrows.moveToFirst()) {
-                do {
-                    Cursor row = db.select_business_NameMarket(allrows.getInt(1));
-                    row.moveToNext();
-                    item.add(row.getString(0));
-
-
-                } while (allrows.moveToNext());
-
-            }
-            allrows.close();
-        }
-        catch (Exception e){
-
-        }
-
-        return item;
-    }
-    public void getbookmark1() {
-
-        DataBaseSqlite db=new DataBaseSqlite(context);
-        Cursor allrows = db.select_bookmark();
-        Integer i=0;
-        BusinessId=new Integer[allrows.getCount()];
-        len=allrows.getCount();
-        if(allrows.moveToFirst())
-        {
-            do
-            {
-
-                BusinessId[i]=allrows.getInt(1);
-                i++;
-            }while (allrows.moveToNext());
-
-        }
-        allrows.close();
-
     }
 
     /**
@@ -392,4 +349,19 @@ public class HTTPGetBookMarkJson
         return result;
     }
     ///
+    public ArrayList<Bookmark_Item> generateData(){
+        ArrayList<Bookmark_Item> items = new ArrayList<Bookmark_Item>();
+        Query query=new Query(context);
+        DataBaseSqlite db=new DataBaseSqlite(context);
+        Cursor rows=db.select_bookmark();
+        if(rows.moveToNext())
+        {
+            do {
+                items.add(new Bookmark_Item(query.getNameBusiness(rows.getInt(1)),rows.getInt(1)));
+            }while (rows.moveToNext());
+        }
+
+
+        return items;
+    }
 }
