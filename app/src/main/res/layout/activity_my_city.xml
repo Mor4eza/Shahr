@@ -13,12 +13,12 @@
         android:id="@+id/sp_city"
         android:gravity="start"
         android:paddingBottom="20dp"
+        android:spinnerMode="dialog"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:spinnerMode="dialog" />
+        android:layout_alignRight="@+id/expand_my_city"
+        android:layout_alignEnd="@+id/expand_my_city"
+        android:layout_toRightOf="@+id/download_fab"
+        android:layout_toEndOf="@+id/download_fab" />
 
         <ExpandableListView
             android:layout_width="match_parent"

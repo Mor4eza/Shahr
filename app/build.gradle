@@ -87,4 +87,7 @@ dependencies {
     //map Extension
     compile 'com.appyvet:materialrangebar:1.0'
     //range Bar
+    compile 'com.github.amlcurran.showcaseview:library:5.0.0'
+    //Show Case
 }
+
