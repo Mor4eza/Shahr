@@ -47,9 +47,8 @@ public class  InstructionsSqlite {
 
 
     //UpdateTime Table Columns names
-    public static final String FIELDNAME_UpdateTime = "FieldName";
-    public static final String SAAT_UpdateTime = "TTime";
-    public static final String TARIKH_UpdateTime = "DDate";
+    public static final String ID_Update = "Id";
+    public static final String DATE_Update = "Date";
 
     //Area Table Columns names
     public static final String ID_area = "Id";
@@ -243,11 +242,9 @@ public class  InstructionsSqlite {
             ");";
 
     // SQL statement to create ZamanSanj table
-    public static final String CREATE_TABLE_UpdateTime = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_UpdateTime + " (" +
-            "FieldName TEXT PRIMARY KEY," +
-            "TTime TEXT," +
-            "DDate TEXT" +
-
+    public static final String CREATE_TABLE_Update = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_UpdateTime + " (" +
+            "Id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "Date TEXT" +
             ");";
 
     // SQL statement to create business table

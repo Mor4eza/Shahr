@@ -189,24 +189,6 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-       /* Integer i=0;
-          // get data of database
-         DataBaseSqlite db=new DataBaseSqlite(mContext);
-         Cursor rows=db.select_Collection();
-         collection=new String[rows.getCount()];
-         id_collection=new Integer[rows.getCount()];
-
-         if(rows.moveToFirst())
-         {
-             do
-             {
-                 Log.i("Id_C",String.valueOf(rows.getInt(0)));
-                 id_collection[i]=rows.getInt(0);
-                 collection[i]=rows.getString(1);
-
-                 i++;
-             }while (rows.moveToNext());
-         }*/
 
 
         LoadData();
@@ -313,14 +295,12 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
 
                     selectedsubset.add(selected);
                     fc.SetNameSubset(selectedsubset);
-                    Toast.makeText(mContext, selectedsubset.toString(), Toast.LENGTH_LONG).show();
                     Log.i("SubsetName", selectedsubset.toString());
                 } else {
 
                     final String selected = (String) getChild(groupPosition, childPosition);
                     selectedsubset.remove(selected);
                     fc.SetNameSubset(selectedsubset);
-                    Toast.makeText(mContext, selectedsubset.toString(), Toast.LENGTH_LONG).show();
                     Log.i("SubsetName", selectedsubset.toString());
                 }
             }

@@ -18,25 +18,15 @@ public class FileCache {
 
     public FileCache(Context context){
         //Find the dir to save cached images
-        KeySettings setting=new KeySettings(context);
 
-        if(setting.getCacheImage())
-        {
             if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
                 cacheDir = new File(android.os.Environment.getExternalStorageDirectory(), "myFolder/image_folder");
             else
                 cacheDir = context.getCacheDir();
             if (!cacheDir.exists())
                 cacheDir.mkdirs();
-        }
-        else
-        {
 
 
-                cacheDir = context.getCacheDir();
-            if (!cacheDir.exists())
-                cacheDir.mkdirs();
-        }
 
     }
 
