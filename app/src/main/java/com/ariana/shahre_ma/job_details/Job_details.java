@@ -1,6 +1,5 @@
 package com.ariana.shahre_ma.job_details;
 
-import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,13 +18,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
-import com.ariana.shahre_ma.WebServiceSend.HTTPSendBookMarkURL;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
+import com.ariana.shahre_ma.WebServiceSend.HTTPSendBookMarkURL;
 
 import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.ResourceProxy;
@@ -99,14 +97,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
                             .setTabListener(this));
         }
 
-        if(query.getBookMarkId(fc.GetBusiness_Id())>0)
-        {
-            fav.setIcon(R.drawable.abc_btn_rating_star_on_mtrl_alpha);
-        }
-        else
-        {
 
-        }
 
     }
 
@@ -265,6 +256,11 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
 
       getMenuInflater().inflate(R.menu.menu_job_details, menu);
       fav=menu.findItem(R.id.action_Fav);
+
+      if(query.getBookMarkId(fc.GetBusiness_Id())>0)
+      {
+          fav.setIcon(R.drawable.abc_btn_rating_star_on_mtrl_alpha);
+      }
       return true;
   }
 

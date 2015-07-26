@@ -18,7 +18,8 @@
         android:layout_toRightOf="@+id/group_chk_box"
         android:layout_toEndOf="@+id/group_chk_box"
         android:layout_marginLeft="5dp"
-
-        android:gravity="right" />
+        android:text="test"
+        android:textSize="18dp"
+        android:gravity="center||center_horizontal" />
 
 </RelativeLayout>

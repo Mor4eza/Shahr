@@ -82,6 +82,7 @@ public class My_city extends ActionBarActivity implements TotalListener{
         adapter.setmListener(this);
         expListView.setAdapter(adapter);
 
+
         expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
             @Override

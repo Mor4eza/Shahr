@@ -110,9 +110,6 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
         for (int i = 0; i < collection_count.getCount(); i++) {
             ArrayList<String> prices = new ArrayList<>();
             for (int j = 0; j < subset_count.getCount(); j++) {
-                Log.i("id_collection",String.valueOf(id_collection[i]));
-                Log.i("idsubset",String.valueOf(id_subset[j]));
-
                 if(id_collection[i]==id_subset[j])
                 prices.add(subset[j]);
             }
@@ -213,7 +210,8 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
 
 
         LoadData();
-         holder.groupName.setText(collection[groupPosition]);
+         holder.dummyTextView.setText(collection[groupPosition]);
+
         if (selectedParentCheckBoxesState.size() <= groupPosition) {
             selectedParentCheckBoxesState.add(groupPosition, false);
         } else {
