@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 
+import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Settings.UpdateActivity;
 
@@ -31,6 +32,7 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
     String  Name_city[];
     Integer PROVINCEID_city[];
     Integer len;
+    CalendarTool ct=new CalendarTool();
 
     private static Context context;
 
@@ -86,10 +88,10 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
 //        onPostExecute(result);
         if(result==1) {
             try {
-
+                DataBaseSqlite dbs = new DataBaseSqlite(context);
                 if(len>0)
                 {
-                    DataBaseSqlite dbs = new DataBaseSqlite(context);
+
                     dbs.delete_City();
                     for (int i = 0; i < len; i++) {
                         dbs.Add_city(Id_city[i], Name_city[i], PROVINCEID_city[i]);
@@ -102,6 +104,10 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
                         }
                     });
                 }
+
+                dbs.delete_Update();
+                dbs.Add_Update(ct.getIranianDate());
+
 
             }
             catch (Exception e)

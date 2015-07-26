@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MyCity.TotalListener;
 import com.ariana.shahre_ma.R;
@@ -189,24 +190,6 @@ public class Interest_Adapter extends BaseExpandableListAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-       /* Integer i=0;
-          // get data of database
-         DataBaseSqlite db=new DataBaseSqlite(mContext);
-         Cursor rows=db.select_Collection();
-         collection=new String[rows.getCount()];
-         id_collection=new Integer[rows.getCount()];
-
-         if(rows.moveToFirst())
-         {
-             do
-             {
-                 Log.i("Id_C",String.valueOf(rows.getInt(0)));
-                 id_collection[i]=rows.getInt(0);
-                 collection[i]=rows.getString(1);
-
-                 i++;
-             }while (rows.moveToNext());
-         }*/
 
         holder.dummyTextView.setText(collection[groupPosition]);
 
@@ -297,15 +280,15 @@ public class Interest_Adapter extends BaseExpandableListAdapter {
                 selectedChildCheckBoxStates.get(groupPosition).remove(childPosition);
                 selectedChildCheckBoxStates.get(groupPosition).add(childPosition, state ? false : true);
 
+                DataBaseSqlite db=new DataBaseSqlite(mContext);
+                Query query=new Query(mContext);
                 // showTotal(groupPosition);
                 if (holder.childCheckBox.isChecked()){
-                    selectedsubset.add(selected);
-                    fc.SetNameSubset(selectedsubset);
-                    Toast.makeText(mContext, selectedsubset.toString(), Toast.LENGTH_LONG).show();
+                    db.Add_Interest(query.getsubsetID(selected),query.getMemberId());
+
                 }else{
-                    selectedsubset.remove(selected);
-                    fc.SetNameSubset(selectedsubset);
-                    Toast.makeText(mContext, selectedsubset.toString(), Toast.LENGTH_LONG).show();
+
+                    db.delete_Interest(query.getsubsetID(selected),query.getMemberId());
 
                 }
 

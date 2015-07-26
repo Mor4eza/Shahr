@@ -197,37 +197,7 @@ public class Query {
         return Result;
     }
 
-    public String getTime_ZamanSanj() {
-        String Result ="";
 
-        try {
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
-            Cursor allrows = dbs.select_UpdateTime(fc.GetTableNameUpdateTime());
-            allrows.moveToFirst();
-            Result = allrows.getString(1);
-            allrows.close();
-        }
-        catch (Exception e)
-        {}
-
-        return Result;
-    }
-
-    public String getDate_ZamanSanj() {
-        String Result ="";
-
-        try {
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
-            Cursor allrows = dbs.select_UpdateTime(fc.GetTableNameUpdateTime());
-            allrows.moveToFirst();
-            Result = allrows.getString(2);
-            allrows.close();
-        }
-        catch (Exception e)
-        {}
-
-        return Result;
-    }
 
     public Integer getMemberId() {
         Integer Result =0;

@@ -85,6 +85,8 @@ public class Setting extends ActionBarActivity implements TimePickerDialog.OnTim
             }
         });
 
+
+
         SwitchCash.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

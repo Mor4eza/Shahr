@@ -45,7 +45,7 @@ Context context;
         db.execSQL(instructionsSqlite.CREATE_TABLE_City);
         db.execSQL(instructionsSqlite.CREATE_TABLE_Bookmark);
         db.execSQL(instructionsSqlite.CREATE_TABLE_Area);
-        db.execSQL(instructionsSqlite.CREATE_TABLE_UpdateTime);
+        db.execSQL(instructionsSqlite.CREATE_TABLE_Update);
         db.execSQL(instructionsSqlite.CREATE_TABLE_Interest);
         db.execSQL(instructionsSqlite.CREATE_TABLE_Notification);
         db.execSQL(instructionsSqlite.CREATE_TABLE_FieldActivity);
@@ -447,16 +447,15 @@ Context context;
     }
 
 
-    public void Add_UpdateTime(String fieldname ,String time,String date) {
+    public void Add_Update(String date) {
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(instructionsSqlite.FIELDNAME_UpdateTime, fieldname);
-        values.put(instructionsSqlite.SAAT_UpdateTime, time);
-        values.put(instructionsSqlite.TARIKH_UpdateTime, date);
+
+        values.put(instructionsSqlite.DATE_Update, date);
 
         // 3. insert
         db.insert(instructionsSqlite.TABLE_NAME_UpdateTime, // table
@@ -753,11 +752,11 @@ Context context;
         return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_MEMBER, null);
     }
 
-    public Cursor select_UpdateTime(String fieldname)
+    public Cursor select_Update()
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " +instructionsSqlite. TABLE_NAME_UpdateTime +" WHERE FieldName='"+fieldname+"'", null);
+        return db.rawQuery("SELECT * FROM " +instructionsSqlite. TABLE_NAME_UpdateTime , null);
 
     }
 
@@ -868,6 +867,15 @@ Context context;
     {
         SQLiteDatabase db=this.getWritableDatabase();
         db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_MEMBER);
+        db.close();
+
+    }
+
+
+    public void delete_Interest(Integer subsetid,Integer memberid)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_Interest+" WHERE SubsetId="+subsetid+" AND MemberId="+memberid);
         db.close();
 
     }
@@ -991,13 +999,13 @@ Context context;
 
 
     // Deleting ZamanSanj
-    public void delete_UpdateTime(String fieldname) {
+    public void delete_Update() {
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 
         // 2. delete
-        db.execSQL("DELETE FROM  " + instructionsSqlite.TABLE_NAME_UpdateTime +" WHERE FieldName='"+fieldname+"'");
+        db.execSQL("DELETE FROM  " + instructionsSqlite.TABLE_NAME_UpdateTime);
 
 
 

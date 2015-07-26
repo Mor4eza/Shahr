@@ -3,6 +3,7 @@ package com.ariana.shahre_ma.Cards;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Environment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,6 +23,7 @@ import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.job_details.Job_details;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -148,6 +150,21 @@ private  static Context context;
                     }
 
                 }
+
+            if(setting.getCacheImage()==false)
+            {
+                //Delete image
+                File dir = new File(android.os.Environment.getExternalStorageDirectory(), "myFolder/image_folder");
+                if (dir.isDirectory()) {
+                    String[] children = dir.list();
+                    for (int i = 0; i < children.length; i++) {
+                        Log.i("NameImage", new File(dir, children[i]).getName());
+                        new File(dir, children[i]).delete();
+                    }
+                }
+
+            }
+
             /*}
        catch(Exception e)
         {
