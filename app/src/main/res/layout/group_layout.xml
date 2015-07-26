@@ -20,6 +20,6 @@
         android:layout_marginLeft="5dp"
         android:text="test"
         android:textSize="18dp"
-        android:gravity="center||center_horizontal" />
+        android:gravity="center|center_horizontal" />
 
 </RelativeLayout>
