@@ -185,7 +185,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
             else {
 
 
-                fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
+
                 Intent intent = new Intent(this.context, Jobs_List.class);
                 this.context.startActivity(intent);
                 Log.i("Count Business : ", "دریافت ثبت شده ها");
@@ -207,7 +207,8 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
                 }
 
-
+                fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
+                Log.i("GetCount_Business", String.valueOf(fc.GetCount_Business()));
             }
 
         } catch (Exception e) {

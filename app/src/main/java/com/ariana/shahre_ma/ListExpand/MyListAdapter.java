@@ -88,18 +88,13 @@ public class MyListAdapter extends BaseExpandableListAdapter {
                 }
                 else
                 {
-                   /* if (count > 0) {
-                        fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
-                        Intent i = new Intent(context, Jobs_List.class);
-                        context.startActivity(i);
-                        Log.i("Count>", "1");
-                    } else {*/
+
                         setting=new KeySettings(context);
                         httpbusin = new HTTPGetBusinessJson(context);
                         httpbusin.SetUrl_business(query.getsubsetID(country.getName()),query.getCityId(setting.getCityName()));
                         httpbusin.execute();
                         Log.i("Count<", "0");
-                    //}
+
                 }
 
             }

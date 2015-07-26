@@ -11,7 +11,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.androidmapsextensions.GoogleMap;
 import com.androidmapsextensions.Marker;
 import com.androidmapsextensions.MarkerOptions;
@@ -19,7 +18,6 @@ import com.androidmapsextensions.SupportMapFragment;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
-import com.ariana.shahre_ma.MyInterest.Interest_Adapter;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.job_details.Job_details;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -170,6 +168,7 @@ public class MapsActivity extends ActionBarActivity {
         Rate=new Double[fc.GetCount_Business()];
         len=fc.GetCount_Business();
         id=new Integer[fc.GetCount_Business()];
+
         Log.i("GetCount_Business()", String.valueOf(fc.GetCount_Business()));
         DataBaseSqlite mydb = new DataBaseSqlite(this);
         Log.i("GetBusiness_SubsetIdb", String.valueOf(fc.GetBusiness_SubsetIdb()));

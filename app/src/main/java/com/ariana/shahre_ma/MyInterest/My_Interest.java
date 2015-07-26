@@ -1,15 +1,10 @@
 package com.ariana.shahre_ma.MyInterest;
 
 import android.app.PendingIntent;
-import android.app.SearchManager;
-import android.app.SearchableInfo;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,14 +12,12 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
-import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
-import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.ListExpand.Continent;
 import com.ariana.shahre_ma.ListExpand.Country;
-import com.ariana.shahre_ma.ListExpand.MyListAdapter;
-import com.ariana.shahre_ma.MapsActivity;
+import com.ariana.shahre_ma.MyCity.ExpandListAdapter;
+import com.ariana.shahre_ma.MyCity.TotalListener;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.Service.MyReceiver;
@@ -34,34 +27,15 @@ import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostInterestJson;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
-public class My_Interest extends ActionBarActivity implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
-    Integer count = 0;
-    String time = "";
-    String date = "";
-    public static SwipeRefreshLayout mSwipeRefreshLayout = null;
+public class My_Interest extends ActionBarActivity implements TotalListener {
     Query query;
-    List<String> groupList;
-    List<String> childList;
-    Map<String, List<String>> laptopCollection;
     ExpandableListView expListView;
     int lastExpandedPosition = -1;
-    DateTime dt = new DateTime();
-
-    Integer id[];
-    Integer Collection_id[];
     Integer Id_co;
     Integer Collection_ID_subset;
-
-    FieldClass fc = new FieldClass();
-
     HTTPGetBusinessJson httpbusin;
     NetState ns;
-
-    private SearchView mSearchView;
-    private SearchView search;
     private Interest_Adapter listAdapter;
     private ExpandableListView myList;
     private ArrayList<Continent> continentList = new ArrayList<Continent>();
@@ -85,16 +59,12 @@ public class My_Interest extends ActionBarActivity implements SearchView.OnQuery
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, myIntent, 0);
 
         displayList();
-        //expandAll();
-        //  collapseAll();
-
-
         expListView = (ExpandableListView) findViewById(R.id.expand_my_interest);
 
-        final MyListAdapter expListAdapter = new MyListAdapter(getApplication(), continentList) {
+        ExpandListAdapter adapter = new ExpandListAdapter(this);
+        adapter.setmListener(this);
+        expListView.setAdapter(adapter);
 
-        };
-        //expListView.setAdapter(expListAdapter);*/
 
 
         expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
@@ -109,86 +79,7 @@ public class My_Interest extends ActionBarActivity implements SearchView.OnQuery
             }
         });
 
-        // setGroupIndicatorToRight();
-
-
-            /*            expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-
-                            public boolean onChildClick(ExpandableListView parent, View v,int groupPosition, int childPosition, long id) {
-
-                                Continent headerInfo = continentList.get(groupPosition);
-
-                                Country detailInfo = headerInfo.getCountryList().get(childPosition);
-
-                               // Toast.makeText(getApplicationContext(),String.valueOf(id), Toast.LENGTH_LONG).show();
-
-                                final String selected = detailInfo.getName();
-
-                                Toast.makeText(getApplicationContext(), selected, Toast.LENGTH_LONG)
-                                        .show();
-                                //query=new Query(Jobs.this,Jobs.this);
-                                fc.SetSelected_job(selected);
-
-                                count = query.getCountBusiness(query.getsubsetID(selected));
-                                fc.SetSubsetId(query.getsubsetID(selected));
-
-
-                                Toast.makeText(getApplicationContext(), query.getsubsetID(selected).toString(), Toast.LENGTH_LONG).show();
-                                if (ns.checkInternetConnection() == false) {
-                                    Intent i = new Intent(getApplicationContext(), Jobs_List.class);
-                                    startActivity(i);
-                                } else {
-                                    if (count > 0) {
-                                        fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
-                                        Intent i = new Intent(getApplicationContext(), Jobs_List.class);
-                                        startActivity(i);
-                                        Log.i("Count>", "1");
-                                    } else {
-                                        httpbusin = new HTTPGetBusinessJson(Jobs.this);
-                                        httpbusin.SetUrl_business(query.getsubsetID(selected));
-                                        httpbusin.execute();
-                                        Log.i("Count<", "0");
-                                    }
-                                }
-
-                                return true;
-                            }
-
-                        });*/
-
-       /* SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        search = (android.widget.SearchView) findViewById(R.id.search_jobs);
-        search.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        search.setIconifiedByDefault(false);
-        search.setOnQueryTextListener(this);
-        search.setOnCloseListener(this);*/
-
-
     }
-
-/*
-
-
-
-  /*  private void setGroupIndicatorToRight() {
-		*//* Get the screen width *//*
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int width = dm.widthPixels;
-
-        expListView.setIndicatorBounds(width - getDipsFromPixel(100), width
-                - getDipsFromPixel(5));
-    }*/
-
-    /*// Convert pixel to dip
-    public int getDipsFromPixel(float pixels) {
-        // Get the screen's density scale
-        final float scale = getResources().getDisplayMetrics().density;
-        // Convert the dps to pixels, based on density scale
-        return (int) (pixels * scale + 5f);
-    }*/
-
-    //method to expand all groups
     private void expandAll() {
         int count = listAdapter.getGroupCount();
         for (int i = 0; i < count; i++) {
@@ -219,12 +110,6 @@ public class My_Interest extends ActionBarActivity implements SearchView.OnQuery
         httpinterest.SetInterest_Json(json.getSqliteInterestTOjson());
         httpinterest.execute();
 
-    /*    Log.i("mSwipeRefreshLayout", "true");
-        if (mSwipeRefreshLayout.isRefreshing()) {
-            Log.i("mSwipeRefreshLayout", "true");
-            mSwipeRefreshLayout.setRefreshing(false);
-            Log.i("mSwipeRefreshLayout", "false");
-        }*/
 
     }
 
@@ -286,43 +171,13 @@ public class My_Interest extends ActionBarActivity implements SearchView.OnQuery
 
     }
 
-    @Override
-    public boolean onClose() {
-        Log.i("onClose", "close");
-        listAdapter.filterData("");
-        collapseAll();
-        return false;
-    }
 
-    @Override
-    public boolean onQueryTextChange(String query) {
-        Log.i("onQueryTextChange", "change");
-        listAdapter.filterData(query);
-        expandAll();
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        expandAll();
-        Log.i("onQueryTextSubmit", "submit");
-        listAdapter.filterData(query);
-        return false;
-    }
-
-    private void collapseAll() {
-        int count = listAdapter.getGroupCount();
-        for (int i = 0; i < count; i++) {
-            myList.collapseGroup(i);
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_jobs, menu);
-        mSearchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        setupSearchView();
+
 
 
         return true;
@@ -337,8 +192,7 @@ public class My_Interest extends ActionBarActivity implements SearchView.OnQuery
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_Map) {
-            Intent i = new Intent(this, MapsActivity.class);
-            startActivity(i);
+
             return true;
         }
 
@@ -346,26 +200,17 @@ public class My_Interest extends ActionBarActivity implements SearchView.OnQuery
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupSearchView() {
 
-        mSearchView.setIconifiedByDefault(true);
-        mSearchView.setQueryHint("جستجو در مشاغل");
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        if (searchManager != null) {
-            List<SearchableInfo> searchables = searchManager.getSearchablesInGlobalSearch();
+    @Override
+    public void onTotalChanged(int sum) {
 
-            // Try to use the "applications" global search provider
-            SearchableInfo info = searchManager.getSearchableInfo(getComponentName());
-            for (SearchableInfo inf : searchables) {
-                if (inf.getSuggestAuthority() != null
-                        && inf.getSuggestAuthority().startsWith("applications")) {
-                    info = inf;
-                }
-            }
-            mSearchView.setSearchableInfo(info);
-        }
+    }
 
-        mSearchView.setOnQueryTextListener(this);
-        mSearchView.setOnCloseListener(this);
+    @Override
+    public void expandGroupEvent(int groupPosition, boolean isExpanded) {
+        if(isExpanded)
+            expListView.collapseGroup(groupPosition);
+        else
+            expListView.expandGroup(groupPosition);
     }
 }
