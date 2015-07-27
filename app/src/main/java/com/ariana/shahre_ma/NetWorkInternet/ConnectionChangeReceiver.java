@@ -5,7 +5,10 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
+
+import com.ariana.shahre_ma.Service.MainService;
 
 import java.util.List;
 
@@ -18,8 +21,25 @@ public class ConnectionChangeReceiver extends BroadcastReceiver
     public void onReceive( Context context, Intent intent )
     {
         NetState net=new NetState(context);
-       /* ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService( Context.CONNECTIVITY_SERVICE );
-        NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();*/
+
+
+
+        if(net.checkInternetConnection())//Show Net State
+        {
+            //Run Service
+            Intent service1 = new Intent(context, MainService.class);
+            context.startService(service1);
+            Log.i("ServiceStart","true");
+        }
+        else
+        {
+           //Stop Service
+            Intent service1 = new Intent(context, MainService.class);
+            context.stopService(service1);
+            Log.i("ServiceStop", "true");
+        }
+
+        //Show Net state
         if (isAppForground(context)) {
             if (net.checkInternetConnection()) {
                 Toast.makeText(context, "شبکه اینترنت متصل شد", Toast.LENGTH_LONG).show();

@@ -26,6 +26,10 @@ public class Setting extends ActionBarActivity implements TimePickerDialog.OnTim
 
     SwitchCompat SwitchCash;
     KeySettings setting;
+
+    String minute="";
+    String hour="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,10 +60,20 @@ public class Setting extends ActionBarActivity implements TimePickerDialog.OnTim
                             try {
 
 
+                                //Format hour 09:00
+                                if(i<10)
+                                    hour="0"+String.valueOf(i);
+                                else
+                                    hour=String.valueOf(i);
+                                if(i1<10)//Format minute 00:09
+                                    minute="0"+String.valueOf(i1);
+                                else
+                                    minute=String.valueOf(i1);
 
-                                setting.saveAMtime(String.valueOf(i) + ":" + String.valueOf(i1));
 
-                                Toast.makeText(getApplicationContext(), String.valueOf(i) + ":" + String.valueOf(i1), Toast.LENGTH_LONG).show();
+                                setting.saveAMtime(hour + ":" +minute);
+
+                                Toast.makeText(getApplicationContext(), hour + ":" + minute, Toast.LENGTH_LONG).show();
                             } catch (Exception e) {
                             }
                         }
@@ -75,10 +89,21 @@ public class Setting extends ActionBarActivity implements TimePickerDialog.OnTim
                         @Override
                         public void onTimeSet(RadialPickerLayout radialPickerLayout, int i, int i1) {
 
-                            setting = new KeySettings(Setting.this);
-                            setting.savePMtime(String.valueOf(i) + ":" + String.valueOf(i1));
 
-                            Toast.makeText(getApplicationContext(), String.valueOf(i) + ":" + String.valueOf(i1), Toast.LENGTH_LONG).show();
+                            //Format hour 09:00
+                            if(i<10)
+                                hour="0"+String.valueOf(i);
+                            else
+                                hour=String.valueOf(i);
+                            if(i1<10)//Format minute 00:09
+                                minute="0"+String.valueOf(i1);
+                            else
+                                minute=String.valueOf(i1);
+
+
+                            setting.saveAMtime(hour + ":" + minute);
+
+                            Toast.makeText(getApplicationContext(), hour + ":" + minute, Toast.LENGTH_LONG).show();
                         }
                     });
                 }

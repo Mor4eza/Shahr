@@ -1,7 +1,5 @@
 package com.ariana.shahre_ma;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.Context;
@@ -28,13 +26,12 @@ import com.ariana.shahre_ma.ListExpand.Continent;
 import com.ariana.shahre_ma.ListExpand.Country;
 import com.ariana.shahre_ma.ListExpand.MyListAdapter;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
-import com.ariana.shahre_ma.Service.MyReceiver;
+import com.ariana.shahre_ma.Service.ShowNotificationService;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetInterestJson;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -87,7 +84,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         ns=new NetState(this);
 
 
-        Intent myIntent = new Intent(this, MyReceiver.class);
+    /*    Intent myIntent = new Intent(this, MyReceiver.class);
 
 
 
@@ -98,7 +95,11 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.add(Calendar.SECOND, 3); // first time
         long frequency= 3 * 1000; // in ms
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), frequency, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), frequency, pendingIntent);*/
+
+
+        Intent service1 = new Intent(this, ShowNotificationService.class);
+        startService(service1);
 
         displayList();
         //expandAll();

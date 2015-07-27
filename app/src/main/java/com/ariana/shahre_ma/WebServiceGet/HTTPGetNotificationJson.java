@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
-import com.ariana.shahre_ma.Notification.Notify;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
@@ -69,7 +68,7 @@ public class HTTPGetNotificationJson extends AsyncTask<String,Void,Integer> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        DataBaseSqlite dbs = new DataBaseSqlite(context);
+
 
     }
     /**
@@ -78,7 +77,7 @@ public class HTTPGetNotificationJson extends AsyncTask<String,Void,Integer> {
      */
     @Override
     protected Integer doInBackground(String... params) {
-        Integer result = 0;
+        Integer result =0;
         try {
 
 
@@ -86,10 +85,10 @@ public class HTTPGetNotificationJson extends AsyncTask<String,Void,Integer> {
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);
             result = 1;
-            // onPostExecute();
+
         } catch (Exception e) {
             result = 0;
-            // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
+
             Log.i("ExceptiondNotification", e.toString());
         }
         return result;
@@ -118,6 +117,7 @@ public class HTTPGetNotificationJson extends AsyncTask<String,Void,Integer> {
             Subset = new String[areas.length()];
             SubsetId = new Integer[areas.length()];
             len = areas.length();
+
             for (int i = 0; i < areas.length(); i++) {
                 JSONObject area = areas.getJSONObject(i);
                 Id[i] = area.getInt("Id");
@@ -150,33 +150,15 @@ public class HTTPGetNotificationJson extends AsyncTask<String,Void,Integer> {
         Log.i("result", String.valueOf(result));
         if (result == 1){
             try {
-               DataBaseSqlite dbs = new DataBaseSqlite(context);
-                dbs.delete_Notification();
+               DataBaseSqlite db = new DataBaseSqlite(context);
+                db.delete_Notification();
                 if (len > 0) {
-                    for (int i = 0; i < len; i++) {
-                     /*   try {
-                            Cursor rows = dbs.select_NotificatonId(Id[i]);
-                            rows.moveToFirst();
-                            Log.i("descriptionNotification", allrows.getString(4));
-                            NotifiId = rows.getInt(0);
-                            rows.close();
-                            Log.i("ID", String.valueOf(Id[i]));
-                            Log.i("count", String.valueOf(NotifiId));
-                        }
-                        catch (SQLException e){}
-                        if (NotifiId == 0)*/
-                          dbs.Add_Notification(Id[i], OpinionType[i], erja[i], ExecutionTime[i], Description[i], ExpirationDate[i], City[i], CityId[i], Subset[i], SubsetId[i]);
-
-
+                    for (int i = 0; i < len; i++)
+                    {
+                          db.Add_Notification(Id[i], OpinionType[i], erja[i], ExecutionTime[i], Description[i], ExpirationDate[i], City[i], CityId[i], Subset[i], SubsetId[i]);
                     }
 
 
-                     Log.i("Time",dt.Time());
-                    Log.i("GetAMtime",setting.getAMtime());
-                     if(setting.getAMtime().equals(dt.Time()))
-                      Notify.Notificationm(context);
-                     else if(setting.getPMtime().equals(dt.Time()))
-                      Notify.Notificationm(context);
                 } else {
                     Log.i("else", "else");
                 }

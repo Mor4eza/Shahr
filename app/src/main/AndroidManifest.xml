@@ -117,18 +117,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.MainActivity" />
         </activity>
-
-        <receiver
-            android:name=".Service.MyReceiver"
-            android:enabled="true"
-            android:permission="android.permission.RECEIVE_BOOT_COMPLETED" >
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </receiver>
-
         <activity
             android:name=".ListExpand.ListActivity"
             android:label="@string/title_activity_list" >
@@ -205,6 +193,12 @@
             android:name=".Settings.UpdateActivity"
             android:label="@string/title_activity_update" >
         </activity>
+
+        <service
+            android:name=".Service.ShowNotificationService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
     </application>
 
 </manifest>

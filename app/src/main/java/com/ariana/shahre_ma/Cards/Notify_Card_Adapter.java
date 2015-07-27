@@ -57,27 +57,24 @@ Integer i=0;
 
 
 
-                      //  if(Boolean.parseBoolean(rowalls.getString(3))==false){
+                        if(Boolean.parseBoolean(rowalls.getString(3))==false){
                         nci.setNdate(rowalls.getString(5));
                         nci.setNdetail(rowalls.getString(4));
 
-                     Log.i("erja", String.valueOf(rowalls.getInt(2)));
+                        Log.i("erja", String.valueOf(rowalls.getInt(2)));
                         nci.setNmarket(market_Name_Business(rowalls.getInt(2)));
                         nci.setNId(rowalls.getInt(2));
                         mItems.add(nci);
-                      //  }
-                       // else
-                       // {
-                         /*   nci.setNdate(rowalls.getString(5));
+                        }
+                        else
+                        {
+                           nci.setNdate(rowalls.getString(5));
                             nci.setNdetail(rowalls.getString(4));
-                            nci.setNmarket(market_Name_Business(463 + i));
-                            mItems.add(nci);*/
-                       // }
-                //}
-               /* catch (Exception e)
-                {
-                    Log.e("Exception",e.toString());
-                }*/
+                            nci.setNmarket(market_Name_Business(rowalls.getInt(2)));
+                            nci.setNId(rowalls.getInt(2));
+                            mItems.add(nci);
+                        }
+
                 i++;
             }while (rowalls.moveToNext());
         }
