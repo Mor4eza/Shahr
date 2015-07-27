@@ -56,13 +56,20 @@
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:text="hello"
-                android:layout_toEndOf="@+id/txt_like"
-                android:layout_toRightOf="@+id/txt_like"
+
                 android:layout_below="@+id/tv_notify_date"
-                android:layout_alignParentBottom="true" />
+                android:layout_alignParentBottom="true"
+                android:layout_alignLeft="@+id/tv_notify_market"
+                android:layout_alignStart="@+id/tv_notify_market" />
 
-
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="جدید"
+                android:id="@+id/tv_newtag"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:textColor="#ffff000a" />
 
 
         </RelativeLayout>
