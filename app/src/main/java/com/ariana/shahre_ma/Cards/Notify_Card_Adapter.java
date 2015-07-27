@@ -63,6 +63,7 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
                         nci.setNdetail(rowalls.getString(4));
                         nci.setNmarket(market_Name_Business(rowalls.getInt(2)));
                         nci.setNId(rowalls.getInt(2));
+                            nci.setNotiyId(rowalls.getInt(0));
 
                         if(query.getShowNotification(rowalls.getInt(0))>0)
                             nci.setNewTag("جدید");
@@ -70,6 +71,7 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
                             nci.setNewTag("");
 
                         mItems.add(nci);
+
                         }
                         else
                         {
@@ -77,6 +79,7 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
                             nci.setNdetail(rowalls.getString(4));
                             nci.setNmarket(market_Name_Business(rowalls.getInt(2)));
                             nci.setNId(rowalls.getInt(2));
+                            nci.setNotiyId(rowalls.getInt(0));
 
 
                             if(query.getShowNotification(rowalls.getInt(0))>0)
@@ -84,6 +87,7 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
                             else
                                 nci.setNewTag("");
                             mItems.add(nci);
+
                         }
 
                 i++;
@@ -108,6 +112,7 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
         viewHolder.tvdate.setText(nature.getNdate());
         viewHolder.tvmarket.setText(nature.getNmarket());
         viewHolder.tvdetail.setText(nature.getNdetail());
+        viewHolder.tvdetail.setTag(nature.getNotiyId());
         viewHolder.tvmarket.setTag(nature.getNId());
         viewHolder.newTag.setText(nature.getNewTag());
     }
@@ -137,6 +142,9 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
                 public void onClick(View v) {
 
                     Log.i("ON_______CLICK", tvmarket.getText().toString());
+
+                    fc.SetShowNotification(true);
+                    fc.SetShowNotificationId((Integer) tvdetail.getTag());
                     fc.SetMarket_Business(tvmarket.getText().toString());
                     fc.SetBusiness_Id((Integer)tvmarket.getTag());
                     Intent i = new Intent(context, Job_details.class);
