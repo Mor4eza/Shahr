@@ -3,7 +3,6 @@ package com.ariana.shahre_ma.Cards;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.os.Environment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,6 +21,7 @@ import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.job_details.Job_details;
+import com.neno0o.lighttextviewlib.LightTextView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -225,6 +225,7 @@ private  static Context context;
         public RatingBar rates;
         public TextView tvTell;
         public CardView cards;
+        public LightTextView newTag;
         FieldClass fc=new FieldClass();
 
         public ViewHolder(View itemView) {
@@ -238,6 +239,7 @@ private  static Context context;
             imgThumbnail.setOnClickListener(this);
             tvNature.setOnClickListener(this);
             cards.setOnClickListener(this);
+            newTag=new LightTextView(context);
           /*  tvTell.setOnClickListener(new View.OnClickListener() {
 
                 @Override

@@ -24,9 +24,7 @@ public class Activity_notify extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notify);
 
-        hint=new LightTextView(this);
-        hint.setText("جدید");
-        hint.setPosition(LightTextView.Position.LEFT_CORNER);
+
 
         mRecyclerView = (RecyclerView) findViewById(R.id.notify_recycle);
         mRecyclerView.setItemAnimator(new OvershootInRightAnimator());
@@ -36,7 +34,7 @@ public class Activity_notify extends ActionBarActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         Notify_list_Adapter = new Notify_Card_Adapter(this);
         mRecyclerView.setAdapter(Notify_list_Adapter);
-        hint.setCurrentView(mRecyclerView);
+
     }
 
     @Override

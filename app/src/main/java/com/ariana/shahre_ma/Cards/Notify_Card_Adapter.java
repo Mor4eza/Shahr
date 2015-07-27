@@ -17,6 +17,7 @@ import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.job_details.Job_details;
+import com.neno0o.lighttextviewlib.LightTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,6 +99,9 @@ Integer i=0;
         viewHolder.tvmarket.setText(nature.getNmarket());
         viewHolder.tvdetail.setText(nature.getNdetail());
         viewHolder.tvmarket.setTag(nature.getNId());
+        viewHolder.newTag.setText("جدید");
+        viewHolder.newTag.setPosition(LightTextView.Position.LEFT_CORNER);
+        viewHolder.newTag.setCurrentView(viewHolder.tvmarket);
     }
 
     @Override
@@ -111,19 +115,21 @@ Integer i=0;
         public TextView tvdate;
         public TextView tvmarket;
         public TextView tvdetail;
-
+        public LightTextView newTag;
         public ViewHolder(View itemView) {
             super(itemView);
 
             tvdate = (TextView)itemView.findViewById(R.id.tv_notify_date);
             tvmarket = (TextView)itemView.findViewById(R.id.tv_notify_market);
             tvdetail = (TextView)itemView.findViewById(R.id.tv_notify_detail);
+            newTag=new LightTextView(context);
             itemView.setOnClickListener(new View.OnClickListener(){
 
                 @Override
                 public void onClick(View v) {
 
                     Log.i("ON_______CLICK", tvmarket.getText().toString());
+                    fc.SetMarket_Business(tvmarket.getText().toString());
                     fc.SetBusiness_Id((Integer)tvmarket.getTag());
                     Intent i = new Intent(context, Job_details.class);
                     context.startActivity(i);
