@@ -83,6 +83,9 @@ public class FieldClass
     private static Integer Count_Like;
     private static Integer Count_DisLike;
 
+    private static Boolean ShowNotification=false;
+    private static Integer ShowNotificationId;
+
     private static List<String> NameSubset=new ArrayList<String>();
     // get/set
 
@@ -567,4 +570,24 @@ public class FieldClass
     {
         return  BusinessId_DisCount;
     }
+
+
+    /**
+     * Show Notification
+     * @param show
+     */
+    public void SetShowNotification(Boolean show){
+        this.ShowNotification=show;
+    }
+    public Boolean GetShowNotification(){
+        return  this.ShowNotification;
+    }
+
+    public void SetShowNotificationId(Integer id){
+        this.ShowNotificationId=id;
+    }
+    public Integer GetShowNotificationId(){
+        return  this.ShowNotificationId;
+    }
 }
+

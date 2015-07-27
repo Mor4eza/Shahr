@@ -215,6 +215,29 @@ public class Query {
         return Result;
     }
 
+    /**
+     * Geting Businessid in Table ShowNotification
+     * @return
+     */
+    public Integer getShowNotification(Integer id) {
+        Integer Result =0;
+
+        try {
+            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            Cursor allrows = dbs.select_ShowNotificationBusinessId(id);
+            allrows.moveToFirst();
+            Result = allrows.getInt(0);
+            allrows.close();
+        }
+        catch (Exception e)
+        {
+
+        }
+
+        return Result;
+    }
+
+
     public Integer getBookMarkId(Integer businessid) {
         Integer Result =0;
 

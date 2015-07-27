@@ -19,6 +19,7 @@ public class  InstructionsSqlite {
     public static final String TABLE_NAME_Like = "Like";
     public static final String TABLE_NAME_Interest = "Interest";
     public static final String TABLE_NAME_NOTIFICATION="Notification";
+    public static final String TABLE_NAME_SHOWNOTIFICATION="ShowNotification";
     public static final String TABLE_NAME_FieldActivity="FieldActivity";
     public static final String TABLE_NAME_DisCount="DisCount";
     public static final String TABLE_NAME_DisCountMember="DisCountMember";
@@ -60,6 +61,13 @@ public class  InstructionsSqlite {
     public static final String ID_bookmark = "Id";
     public static final String BUSINESSID_bookmark = "BusinessId";
     public static final String MEMBERID_bookmark = "MemberId";
+
+    //ShowNotification Table Columns names
+    public static final String ID_SHOWNOTIFICATION = "Id";
+    public static final String BUSINESSID_SHOWNOTIFICATION = "BusinessId";
+    public static final String SHOW_SHOWNOTIFICATION = "Show";
+
+
 
     //City Table Columns names
     public static final String ID_city = "Id";
@@ -344,5 +352,12 @@ public class  InstructionsSqlite {
             "Id INTEGER PRIMARY KEY AUTOINCREMENT," +
             "BusinessId INTEGER," +
             "MemberId INTEGER" +
+            ");";
+
+    // SQL statement to create ShowNotification table
+    public static final String CREATE_TABLE_ShowNotification = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_SHOWNOTIFICATION + " (" +
+            "Id INTEGER PRIMARY KEY, " +
+            "BusinessId INTEGER , " +
+            "Show BOOLEAN " +
             ");";
 }
