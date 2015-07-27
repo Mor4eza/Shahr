@@ -310,6 +310,12 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(i);
 
                         }
+                        if (position == 1) {
+
+                            Intent i = new Intent(getApplicationContext(), SplashActivity.class);
+                            startActivity(i);
+
+                        }
                         if (position == 2) {
 
                             if (net.checkInternetConnection() == false) {
@@ -349,17 +355,6 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(i);
                                 } else {
                                     Toast.makeText(getApplicationContext(), "وارد حساب خود نشده اید...!", Toast.LENGTH_LONG).show();
-
-
-                           /*Snackbar.make(MainActivity.this, "", Snackbar.LENGTH_LONG)
-                                   .setAction("بستن!", new View.OnClickListener() {
-                                       @Override
-                                       public void onClick(View v) {
-                                           //کد
-                                       }
-                                   })
-                                   .show();*/
-
 
                                 }
                             } catch (Exception e) {
@@ -419,6 +414,7 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     result.openDrawer();
                 }
+                return true;
             case R.id.notification:
                     Intent i=new Intent(getApplicationContext(), Activity_notify.class);
                 startActivity(i);

@@ -52,5 +52,6 @@
     <string name="title_activity_discount">تخفیف ها</string>
     <string name="title_activity_update">بروز رسانی</string>
     <string name="help">راهنمایی</string>
+    <string name="title_activity_splash">SplashActivity</string>
 
 </resources>
