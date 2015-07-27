@@ -531,6 +531,30 @@ Context context;
     }
 
     /**
+     *
+     * @param businessid
+     */
+    public void Add_ShowNotification(Integer id,Integer businessid,Boolean show) {
+
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put(instructionsSqlite.ID_SHOWNOTIFICATION,id);
+        values.put(instructionsSqlite.BUSINESSID_SHOWNOTIFICATION,businessid);
+        values.put(instructionsSqlite.SHOW_SHOWNOTIFICATION,show);
+
+        // 3. insert
+        db.insert(instructionsSqlite.TABLE_NAME_SHOWNOTIFICATION, // table
+                null, //nullColumnHack
+                values); // key/value
+
+        // 4. close
+        db.close();
+    }
+
+    /**
      * SelectBusiness
      * @param
      * @return
@@ -617,6 +641,12 @@ Context context;
 
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_FieldActivity , null);
+    }
+    public Cursor select_ShowNotificationBusinessId(Integer id)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT COUNT(*) FROM " + instructionsSqlite.TABLE_NAME_FieldActivity+" WHERE Id="+id , null);
     }
     public Cursor select_AllDisCount()
     {
