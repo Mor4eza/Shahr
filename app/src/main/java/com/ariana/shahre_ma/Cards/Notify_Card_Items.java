@@ -9,6 +9,12 @@ public class Notify_Card_Items {
     private String Nmarket;
     private String Ndetail;
     private Integer NId;
+    private Integer NotiyId;
+
+
+    public Integer getNotiyId(){return  NotiyId;}
+
+    public void setNotiyId(Integer notiyId){this.NotiyId=notiyId;}
 
     public Integer getNId(){return  NId;}
 
