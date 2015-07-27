@@ -9,6 +9,7 @@ public class Notify_Card_Items {
     private String Nmarket;
     private String Ndetail;
     private Integer NId;
+    private String NewTag;
 
     public Integer getNId(){return  NId;}
 
@@ -29,6 +30,15 @@ public class Notify_Card_Items {
     public void setNmarket(String market) {
         this.Nmarket = market;
     }
+
+    public String getNewTag() {
+        return NewTag;
+    }
+
+    public void setNewTag(String newTag) {
+        this.NewTag = newTag;
+    }
+
 
     public String getNdetail() {
         return Ndetail;

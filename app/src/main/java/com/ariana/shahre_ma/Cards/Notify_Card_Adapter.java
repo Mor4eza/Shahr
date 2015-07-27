@@ -13,11 +13,11 @@ import android.widget.TextView;
 
 import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.job_details.Job_details;
-import com.neno0o.lighttextviewlib.LightTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +39,8 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
         super();
         this.context=context;
         setting=new KeySettings(context);
-
-Integer i=0;
+        Query query=new Query(context);
+        Integer i=0;
         mItems = new ArrayList<Notify_Card_Items>();
         DataBaseSqlite db=new DataBaseSqlite(context);
         Cursor rowalls=db.select_AllNotificaton();
@@ -61,10 +61,14 @@ Integer i=0;
                         if(Boolean.parseBoolean(rowalls.getString(3))==false){
                         nci.setNdate(rowalls.getString(5));
                         nci.setNdetail(rowalls.getString(4));
-
-                        Log.i("erja", String.valueOf(rowalls.getInt(2)));
                         nci.setNmarket(market_Name_Business(rowalls.getInt(2)));
                         nci.setNId(rowalls.getInt(2));
+
+                        if(query.getShowNotification(rowalls.getInt(0))>0)
+                            nci.setNewTag("جدید");
+                            else
+                            nci.setNewTag("");
+
                         mItems.add(nci);
                         }
                         else
@@ -73,6 +77,12 @@ Integer i=0;
                             nci.setNdetail(rowalls.getString(4));
                             nci.setNmarket(market_Name_Business(rowalls.getInt(2)));
                             nci.setNId(rowalls.getInt(2));
+
+
+                            if(query.getShowNotification(rowalls.getInt(0))>0)
+                                nci.setNewTag("جدید");
+                            else
+                                nci.setNewTag("");
                             mItems.add(nci);
                         }
 
@@ -99,9 +109,7 @@ Integer i=0;
         viewHolder.tvmarket.setText(nature.getNmarket());
         viewHolder.tvdetail.setText(nature.getNdetail());
         viewHolder.tvmarket.setTag(nature.getNId());
-        viewHolder.newTag.setText("جدید");
-        viewHolder.newTag.setPosition(LightTextView.Position.LEFT_CORNER);
-        viewHolder.newTag.setCurrentView(viewHolder.tvmarket);
+        viewHolder.newTag.setText(nature.getNewTag());
     }
 
     @Override
@@ -115,14 +123,14 @@ Integer i=0;
         public TextView tvdate;
         public TextView tvmarket;
         public TextView tvdetail;
-        public LightTextView newTag;
+        public TextView newTag;
         public ViewHolder(View itemView) {
             super(itemView);
 
             tvdate = (TextView)itemView.findViewById(R.id.tv_notify_date);
             tvmarket = (TextView)itemView.findViewById(R.id.tv_notify_market);
             tvdetail = (TextView)itemView.findViewById(R.id.tv_notify_detail);
-            newTag=new LightTextView(context);
+            newTag = (TextView)itemView.findViewById(R.id.tv_newtag);
             itemView.setOnClickListener(new View.OnClickListener(){
 
                 @Override
