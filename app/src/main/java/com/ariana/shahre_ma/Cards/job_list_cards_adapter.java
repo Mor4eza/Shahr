@@ -3,6 +3,8 @@ package com.ariana.shahre_ma.Cards;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -136,6 +138,11 @@ private  static Context context;
                             nature.setRate(allrows.getDouble(29));
                             nature.setmId(allrows.getInt(0));
 
+                            File dir = new File(android.os.Environment.getExternalStorageDirectory(), "myFolder/image_folder/abc.png");
+                            Bitmap bitmap = BitmapFactory.decodeFile(dir.getAbsolutePath());
+
+
+                            nature.setImage(bitmap);
 
                             if (allrows.getString(3).equals(""))
                             {
@@ -188,10 +195,12 @@ private  static Context context;
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
+
         Job_lists_card_item nature = mItems.get(i);
+        viewHolder.imgThumbnail.setImageBitmap(nature.getImage());
         viewHolder.tvNature.setText(nature.getName());
         viewHolder.tvDesNature.setText(nature.getDes());
-        viewHolder.imgThumbnail.setImageResource(nature.getThumbnail());
+       // viewHolder.imgThumbnail.setImage(nature.getThumbnail());
         viewHolder.rates.setRating((float) nature.getRate());
         viewHolder.rates.setTag(nature.getmId());
         viewHolder.tvTell.setText(nature.getTell());

@@ -3,6 +3,7 @@ package com.ariana.shahre_ma;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ import com.ariana.shahre_ma.MyProfile.Log_In;
 import com.ariana.shahre_ma.MyProfile.My_Profile;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.Notification.Activity_notify;
+import com.ariana.shahre_ma.Service.TimeSetReceiver;
 import com.ariana.shahre_ma.Settings.Setting;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessMemberJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
@@ -59,6 +61,7 @@ import github.chenupt.dragtoplayout.DragTopLayout;
 
 
 public class MainActivity extends AppCompatActivity {
+
     FragmentPagerAdapter adapterViewPager;
     SliderLayout slider;
     DragTopLayout top;
@@ -71,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
     private WindowManager mWindowManager;
     private ImageView mImgFloatingView;
 
+    IntentFilter ii;
+    TimeSetReceiver tsr;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +87,10 @@ public class MainActivity extends AppCompatActivity {
        /*String url= "http://uplod.ir/tpy6oft0407u/app-debug.apk.htm";
         HTTPGetUpdate update=new HTTPGetUpdate(this);
         update.execute(url);*/
+
+        ii=new IntentFilter("android.intent.action.TIME_TICK");
+        tsr=new TimeSetReceiver();
+        registerReceiver(tsr,ii);
 
         setup();
 

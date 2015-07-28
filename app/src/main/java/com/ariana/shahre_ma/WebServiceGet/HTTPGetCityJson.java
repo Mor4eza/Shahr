@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.Settings.UpdateActivity;
 
 import org.json.JSONArray;
@@ -86,6 +87,7 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
     @Override
     protected void onPostExecute(Integer result) {
 //        onPostExecute(result);
+        KeySettings setting=new KeySettings(context);
         if(result==1) {
             try {
                 DataBaseSqlite dbs = new DataBaseSqlite(context);
@@ -97,6 +99,8 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
                         dbs.Add_city(Id_city[i], Name_city[i], PROVINCEID_city[i]);
 
                     }
+                    setting.saveCityDownload(true);
+
                     UpdateActivity.PgUpdate.post(new Runnable() {
                         @Override
                         public void run() {
@@ -105,11 +109,11 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
                     });
                 }
 
-                dbs.delete_Update();
-                dbs.Add_Update(ct.getIranianDate());
+                //dbs.delete_Update();
+               // dbs.Add_Update(ct.getIranianDate());
 
 
-            }
+           }
             catch (Exception e)
             {
                 //pd.dismiss();

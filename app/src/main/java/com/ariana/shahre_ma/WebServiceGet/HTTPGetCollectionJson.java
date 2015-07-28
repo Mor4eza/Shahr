@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -83,6 +84,7 @@ public class HTTPGetCollectionJson extends AsyncTask<String,Void, Integer> {
     protected void onPostExecute(Integer result)
     {
        // onPostExecute(result);
+        KeySettings setting=new KeySettings(context);
         Log.i("result",String.valueOf(result));
         if (result==1) {
             try {
@@ -106,6 +108,9 @@ public class HTTPGetCollectionJson extends AsyncTask<String,Void, Integer> {
                                                   }
                                               }
                 );*/
+
+
+                setting.saveCollectionDownload(true);
 
             } catch (Exception e) {
                 pd.dismiss();

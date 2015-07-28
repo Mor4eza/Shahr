@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -107,9 +108,8 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
 
                 JSONObject area = areas.getJSONObject(i);
                 id[i]=area.getInt("Id");
-                Log.i("Id",String.valueOf(id[i]));
                 activity[i]=area.getString("Activity");
-                Log.i("Activity",activity[i]);
+
 
             }
 
@@ -187,6 +187,8 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
                 {
                    /// pd.dismiss();
                 }
+                KeySettings setting=new KeySettings(context);
+                setting.saveFieldActivityDownload(true);
             }
             else
             {
