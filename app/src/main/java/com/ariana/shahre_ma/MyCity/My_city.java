@@ -285,14 +285,15 @@ public class My_city extends ActionBarActivity implements TotalListener{
         RelativeLayout.LayoutParams lps = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         lps.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        int margin = ((Number) (getResources().getDisplayMetrics().density * 12)).intValue();
+        lps.addRule(RelativeLayout.CENTER_IN_PARENT);
+        int margin = ((Number) (getResources().getDisplayMetrics().density * 55)).intValue();
         lps.setMargins(margin, margin, margin, margin);
 
         if (id == R.id.help) {
 
         ShowcaseView  sv=new ShowcaseView.Builder(this)
                    // .setTarget(new ActionViewTarget(this, ActionViewTarget.Type.HOME))
-                    //.setTarget(Spinner)
+                    .setTarget(Spinner)
                     .setContentTitle("انتخاب شهر")
                     .setContentText("از این قسمت شهر مورد نظر خود را برای دانلود انتخاب کنید...")
                     .setStyle(R.style.CustomShowcaseTheme)

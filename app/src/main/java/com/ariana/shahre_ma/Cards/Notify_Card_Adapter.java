@@ -3,7 +3,6 @@ package com.ariana.shahre_ma.Cards;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -52,23 +51,21 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
             {
               //  try {
                     nci = new Notify_Card_Items();
-                    Log.i("PMtime", String.valueOf(setting.getPMtime()));
-                    Log.i("Time", t.Time());
-                    Log.i("Boolean", String.valueOf(rowalls.getString(3)));
-
 
 
                         if(Boolean.parseBoolean(rowalls.getString(3))==false){
                         nci.setNdate(rowalls.getString(5));
                         nci.setNdetail(rowalls.getString(4));
-                        nci.setNmarket(market_Name_Business(rowalls.getInt(2)));
+                        nci.setNmarket(query.getNameBusiness(rowalls.getInt(2)));
                         nci.setNId(rowalls.getInt(2));
                             nci.setNotiyId(rowalls.getInt(0));
 
+
                         if(query.getShowNotification(rowalls.getInt(0))>0)
-                            nci.setNewTag("جدید");
-                            else
                             nci.setNewTag("");
+                            else
+                            nci.setNewTag("جدید");
+
 
                         mItems.add(nci);
 
@@ -77,15 +74,15 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
                         {
                            nci.setNdate(rowalls.getString(5));
                             nci.setNdetail(rowalls.getString(4));
-                            nci.setNmarket(market_Name_Business(rowalls.getInt(2)));
+                            nci.setNmarket(query.getNameBusiness(rowalls.getInt(2)));
                             nci.setNId(rowalls.getInt(2));
                             nci.setNotiyId(rowalls.getInt(0));
 
 
-                            if(query.getShowNotification(rowalls.getInt(0))>0)
+                          //  if(query.getShowNotification(rowalls.getInt(0))>0)
                                 nci.setNewTag("جدید");
-                            else
-                                nci.setNewTag("");
+                           /* else
+                                nci.setNewTag("");*/
                             mItems.add(nci);
 
                         }
@@ -157,19 +154,5 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
         }
     }
 
-    public String market_Name_Business(Integer id)
-    {
-        String result="";
-        try
-        {
-            DataBaseSqlite db=new DataBaseSqlite(context);
-            Cursor rowalls=db.select_business_NameMarket(id);
-            rowalls.moveToFirst();
-            result=rowalls.getString(0);
-            rowalls.close();
-            Log.i("NameBusiness", result);
-        }
-        catch (SQLException e){Log.e("SQLException",e.toString());}
-        return  result;
-    }
+
 }
