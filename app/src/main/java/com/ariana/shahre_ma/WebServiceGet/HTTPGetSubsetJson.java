@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Settings.KeySettings;
 
 
 import org.json.JSONArray;
@@ -80,6 +81,8 @@ public class HTTPGetSubsetJson extends AsyncTask<String,Void,Integer>
 
                     }
                 }
+                KeySettings setting=new KeySettings(context);
+                setting.saveSubsetDownload(true);
             } catch (Exception e) {
                 //Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
             }

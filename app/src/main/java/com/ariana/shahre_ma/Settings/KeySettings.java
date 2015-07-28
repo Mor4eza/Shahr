@@ -68,10 +68,11 @@ public class KeySettings
         prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
         editor=prefernc.edit();
         editor.putBoolean("CacheImageDownload",true);
-        editor.putBoolean("CacheImageDownload",bool);
+        editor.putBoolean("CacheImageDownload", bool);
         editor.apply();
 
     }
+
 
     public Boolean getCacheImage()
     {
@@ -86,7 +87,7 @@ public class KeySettings
     public String getCityName()
     {
         prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
-        return  prefernc.getString("CityName","");
+        return  prefernc.getString("CityName", "");
     }
 
     /**
@@ -96,7 +97,7 @@ public class KeySettings
     public String getAMtime()
     {
         prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
-        return prefernc.getString("AMtime","");
+        return prefernc.getString("AMtime", "");
     }
 
     /**
@@ -109,6 +110,74 @@ public class KeySettings
         return prefernc.getString("PMtime","");
     }
 
+    /**
+     * State Download Collection
+     * @param bool
+     */
+    public void saveCollectionDownload(Boolean bool)
+    {
+        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
+        editor=prefernc.edit();
+        editor.putBoolean("CollectionDownload",bool);
+        editor.apply();
+    }
+    public Boolean getCollectionDownload()
+    {
+        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
+        return prefernc.getBoolean("CollectionDownload", false);
+    }
+
+    /**
+     *State Download Subset
+     * @param bool
+     */
+    public void saveSubsetDownload(Boolean bool)
+    {
+        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
+        editor=prefernc.edit();
+        editor.putBoolean("SubsetDownload",bool);
+        editor.apply();
+    }
+    public Boolean getSubsetDownload()
+    {
+        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
+        return prefernc.getBoolean("SubsetDownload", false);
+    }
+
+
+    /**
+     * State Download City
+     * @param bool
+     */
+    public void saveCityDownload(Boolean bool)
+    {
+        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
+        editor=prefernc.edit();
+        editor.putBoolean("CityDownload",bool);
+        editor.apply();
+    }
+    public Boolean getCityDownload()
+    {
+        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
+        return prefernc.getBoolean("CityDownload", false);
+    }
+
+    /**
+     * State Download FieldActivity
+     * @param bool
+     */
+    public void saveFieldActivityDownload(Boolean bool)
+    {
+        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
+        editor=prefernc.edit();
+        editor.putBoolean("FieldActivityDownload",bool);
+        editor.apply();
+    }
+    public Boolean getFieldActivityDownload()
+    {
+        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
+        return prefernc.getBoolean("FieldActivityDownload", false);
+    }
     /**
      * Keep Boolean Search True/False
      * @param bool

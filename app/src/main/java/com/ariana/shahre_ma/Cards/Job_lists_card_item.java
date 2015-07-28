@@ -1,5 +1,7 @@
 package com.ariana.shahre_ma.Cards;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by ariana2 on 6/8/2015.
  */
@@ -10,10 +12,13 @@ public class Job_lists_card_item {
     private String mName;
     double rate;
     private String mtell;
+    private Bitmap Image;
     private String mAdd;
     private int mThumbnail;
     private Integer mId;
 
+    public void setImage(Bitmap image){this.Image=image;}
+    public Bitmap getImage(){return  this.Image;}
     public double getRate() {
         return rate;
     }
@@ -21,7 +26,6 @@ public class Job_lists_card_item {
     public void setRate(double rate) {
         this.rate = rate;
     }
-
 
     public String getName() {
         return mName;

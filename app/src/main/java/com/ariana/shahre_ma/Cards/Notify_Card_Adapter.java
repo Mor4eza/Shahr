@@ -50,17 +50,16 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
             do
             {
               //  try {
-                    nci = new Notify_Card_Items();
+                     nci = new Notify_Card_Items();
+
+                    nci.setNdate(rowalls.getString(5));
+                    nci.setNdetail(rowalls.getString(4));
+                    nci.setNmarket(query.getNameBusiness(rowalls.getInt(2)));
+                    nci.setNId(rowalls.getInt(2));
+                    nci.setNotiyId(rowalls.getInt(0));
 
 
-                        if(Boolean.parseBoolean(rowalls.getString(3))==false){
-                        nci.setNdate(rowalls.getString(5));
-                        nci.setNdetail(rowalls.getString(4));
-                        nci.setNmarket(query.getNameBusiness(rowalls.getInt(2)));
-                        nci.setNId(rowalls.getInt(2));
-                            nci.setNotiyId(rowalls.getInt(0));
-
-
+                            //Show tag New
                         if(query.getShowNotification(rowalls.getInt(0))>0)
                             nci.setNewTag("");
                             else
@@ -69,23 +68,7 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
 
                         mItems.add(nci);
 
-                        }
-                        else
-                        {
-                           nci.setNdate(rowalls.getString(5));
-                            nci.setNdetail(rowalls.getString(4));
-                            nci.setNmarket(query.getNameBusiness(rowalls.getInt(2)));
-                            nci.setNId(rowalls.getInt(2));
-                            nci.setNotiyId(rowalls.getInt(0));
 
-
-                          //  if(query.getShowNotification(rowalls.getInt(0))>0)
-                                nci.setNewTag("جدید");
-                           /* else
-                                nci.setNewTag("");*/
-                            mItems.add(nci);
-
-                        }
 
                 i++;
             }while (rowalls.moveToNext());

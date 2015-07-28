@@ -32,7 +32,7 @@ public class MainService extends Service {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.add(Calendar.SECOND, 5); // first time
-        long frequency=60* 1000; // in ms
+        long frequency=10* 1000; // in ms
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), frequency, pendingIntent);
     }
 
