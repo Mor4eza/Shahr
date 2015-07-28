@@ -45,7 +45,6 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
     FieldClass fc = new FieldClass();
     HTTPPostMemberJson sendPost;
     SqliteTOjson json = new SqliteTOjson(this);
-    DataBaseSqlite db = new DataBaseSqlite(this);
     String _json;
     SectionsPagerAdapter mSectionsPagerAdapter;
     MenuItem fav;
@@ -62,14 +61,13 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
         setContentView(R.layout.activity_job_details);
         setTitle(fc.GetMarket_Business());
         query=new Query(this);
-
+        DataBaseSqlite db=new DataBaseSqlite(this);
         if(fc.GetShowNotification())
         {
-            db.Add_ShowNotification(fc.GetShowNotificationId(),fc.GetBusiness_Id(),true);
-            fc.SetShowNotification(false);
+           db.Add_ShowNotification(fc.GetShowNotificationId(),fc.GetBusiness_Id(),true);
+
+            fc.SetShowNotification(true);
         }
-
-
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
