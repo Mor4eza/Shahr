@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
     private Drawer result = null;
     private WindowManager mWindowManager;
     private ImageView mImgFloatingView;
-    private boolean mIsFloatingViewAttached = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -450,18 +449,18 @@ public class MainActivity extends AppCompatActivity {
                 PixelFormat.TRANSLUCENT);
 
         params.gravity = Gravity.TOP | Gravity.LEFT;
-        params.height = 220;
-        params.width = 270;
+        params.height = 200;
+        params.width = 250;
         params.x = 100;
         params.y = 220;
         mWindowManager.addView(mImgFloatingView, params);
-        mIsFloatingViewAttached = true;
 
         mImgFloatingView.setOnTouchListener(new View.OnTouchListener() {
             private int initialX;
             private int initialY;
             private float initialTouchX;
             private float initialTouchY;
+
             int clicked;
 
             @Override
@@ -472,9 +471,13 @@ public class MainActivity extends AppCompatActivity {
                         initialY = params.y;
                         initialTouchX = event.getRawX();
                         initialTouchY = event.getRawY();
+
+
                         clicked = 1;
-                        return true;
+                        return false;
+
                     case MotionEvent.ACTION_UP:
+
                         if (clicked == 1) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                             builder.setTitle("جستجو...");
@@ -486,12 +489,12 @@ public class MainActivity extends AppCompatActivity {
 
 
                         } else {
-
+                        return false;
                         }
-                        return true;
+                        return false;
                     case MotionEvent.ACTION_MOVE:
-                        params.x = initialX + (int) (event.getRawX() - initialTouchX);
-                        params.y = initialY + (int) (event.getRawY() - initialTouchY);
+                        params.x = initialX + (int) (event.getRawX() - initialTouchX );
+                        params.y = initialY + (int) (event.getRawY() - initialTouchY );
                         mWindowManager.updateViewLayout(mImgFloatingView, params);
                         clicked = 0;
                         return true;
