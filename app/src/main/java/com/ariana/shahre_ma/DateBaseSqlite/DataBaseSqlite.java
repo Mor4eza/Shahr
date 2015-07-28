@@ -48,6 +48,7 @@ Context context;
         db.execSQL(instructionsSqlite.CREATE_TABLE_Update);
         db.execSQL(instructionsSqlite.CREATE_TABLE_Interest);
         db.execSQL(instructionsSqlite.CREATE_TABLE_Notification);
+        db.execSQL(instructionsSqlite.CREATE_TABLE_ShowNotification);
         db.execSQL(instructionsSqlite.CREATE_TABLE_FieldActivity);
         db.execSQL(instructionsSqlite.CREATE_TABLE_DisCount);
         db.execSQL(instructionsSqlite.CREATE_TABLE_LikeDisCount);
@@ -69,6 +70,7 @@ Context context;
         db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_Interest);
         db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_NOTIFICATION);
         db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_FieldActivity);
+        db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_SHOWNOTIFICATION);
         db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_DisCount);
         db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_LikeDisCount);
         db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_DisCountMember);
@@ -646,7 +648,7 @@ Context context;
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT COUNT(*) FROM " + instructionsSqlite.TABLE_NAME_FieldActivity+" WHERE Id="+id , null);
+        return db.rawQuery("SELECT COUNT(*) FROM " + instructionsSqlite.TABLE_NAME_SHOWNOTIFICATION+" WHERE Id="+id , null);
     }
     public Cursor select_AllDisCount()
     {
