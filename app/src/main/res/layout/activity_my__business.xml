@@ -85,11 +85,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btn_edit_business"
-        android:onClick="discount"
-        android:src="@drawable/discount_tag"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp" />
+        android:onClick="edit_business"
+        android:src="@drawable/ic_action_edit"
+        android:layout_marginLeft="40dp"
+        android:layout_alignTop="@+id/btn_discount"
+        android:layout_toRightOf="@+id/btn_discount"
+        android:layout_toEndOf="@+id/btn_discount"
+        android:layout_marginStart="41dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_add_business"
+        android:onClick="add_business"
+        android:src="@drawable/fab_plus_icon"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="49dp"
+        android:layout_alignTop="@+id/btn_edit_business"
+        android:layout_toRightOf="@+id/btn_edit_business"
+        android:layout_toEndOf="@+id/btn_edit_business" />
 </RelativeLayout>
