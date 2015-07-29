@@ -41,6 +41,8 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
             do {
 
                 nature = new Business_Card_Items();
+
+                nature.setId(rows.getInt(0));
                 nature.setName(rows.getString(1));
                 nature.setmAddress(rows.getString(7));
                 nature.setThumbnail(R.drawable.pooshak);
@@ -66,10 +68,12 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         Business_Card_Items nature = mItems.get(i);
         viewHolder.tvNature.setText(nature.getName());
+        viewHolder.tvNature.setTag(nature.getId());
         viewHolder.tvDesNature.setText(nature.getmAddress());
         viewHolder.imgThumbnail.setImageResource(nature.getThumbnail());
         viewHolder.Rates.setRating((float)nature.getRate());
     }
+
 
     @Override
     public int getItemCount() {

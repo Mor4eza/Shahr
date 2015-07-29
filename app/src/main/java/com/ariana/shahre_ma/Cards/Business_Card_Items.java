@@ -9,6 +9,17 @@ public class Business_Card_Items {
     private String mAddress;
     double rate;
     private int mThumbnail;
+    private Integer Id;
+
+
+    public Integer getId() {
+        return Id;
+    }
+
+    public void setId(Integer id) {
+        this.Id = id;
+    }
+
 
     public String getName() {
         return mName;

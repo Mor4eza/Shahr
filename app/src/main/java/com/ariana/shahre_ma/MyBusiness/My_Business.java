@@ -72,7 +72,7 @@ public class My_Business extends ActionBarActivity {
         mRecyclerView.setAdapter(alphaAdapter);
         job_list_Adapter.notifyItemChanged(0);
         job_list_Adapter.notifyDataSetChanged();
-        Log.i("Resume","Resume");
+        Log.i("Resume", "Resume");
     }
 
     public void add_business(View v){
@@ -87,27 +87,27 @@ public class My_Business extends ActionBarActivity {
     }
     public void Intialize()
     {
-       /* rate=(RatingBar) findViewById(R.id.my_business_rate);
+        //rate=(RatingBar) findViewById(R.id.my_business_rate);
         title=(TextView) findViewById(R.id.my_business_title);
-        address=(TextView) findViewById(R.id.my_business_address);*/
+       // address=(TextView) findViewById(R.id.my_business_address);
         discount=(FloatingActionButton)findViewById(R.id.btn_discount);
         edit=(FloatingActionButton)findViewById(R.id.btn_edit_business);
         add=(FloatingActionButton)findViewById(R.id.btn_add_business);
     }
-   public void discount(View v){
+    public void discount(View v){
 
-       Integer id=0;
-       id=Integer.parseInt((String) title.getTag());
-       if(id<=0)
-       {
-           fc.SetBusiness_Id(id);
-           Toast.makeText(getApplicationContext(),"اول کسب کار ثبت کنید",Toast.LENGTH_LONG).show();
-       }
-       else {
-           Intent i = new Intent(getApplicationContext(), Discount.class);
-           startActivity(i);
-       }
-   }
+        Integer id=0;
+        id=Integer.parseInt((String) title.getTag());
+        if(id<=0)
+        {
+            fc.SetBusiness_Id(id);
+            Toast.makeText(getApplicationContext(),"اول کسب کار ثبت کنید",Toast.LENGTH_LONG).show();
+        }
+        else {
+            Intent i = new Intent(getApplicationContext(), Discount.class);
+            startActivity(i);
+        }
+    }
 
     public void help1(){
         ViewTarget Hdiscount=new ViewTarget(R.id.btn_discount,this);
