@@ -58,6 +58,8 @@ public class BookMark extends ActionBarActivity {
         final BookmarkAdapter adapter = new BookmarkAdapter(this, generateData());
         lv.setAdapter(adapter);
        // bookmark();//Load data from the database in the list view
+
+
         if(ns.checkInternetConnection())
         {
             //The user Getting bookmark
@@ -150,6 +152,9 @@ public class BookMark extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Send data with Bluetooth
+     */
     public void shareData() {
         SqliteTOjson sqliteTOjson = new SqliteTOjson(this);
         sqliteTOjson.getSqliteBookmarkTOjson();
