@@ -1,11 +1,11 @@
 package com.ariana.shahre_ma.MyBusiness;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Cards.Business_Card_Adapter;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
@@ -24,6 +24,9 @@ import com.ariana.shahre_ma.WebServiceGet.HTTPGetFieldActivityJson;
 import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
+
+import jp.wasabeef.recyclerview.animators.OvershootInLeftAnimator;
+import jp.wasabeef.recyclerview.animators.adapters.ScaleInAnimationAdapter;
 
 public class My_Business extends ActionBarActivity {
 
@@ -35,35 +38,23 @@ public class My_Business extends ActionBarActivity {
     FloatingActionButton discount;
     FloatingActionButton edit;
     FloatingActionButton add;
-
+    RecyclerView mRecyclerView;
+    RecyclerView.LayoutManager mLayoutManager;
+    RecyclerView.Adapter job_list_Adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my__business);
 
-        Intialize();
+       Intialize();
+        setCards();
 
         HTTPGetFieldActivityJson httpfield=new HTTPGetFieldActivityJson(this);
         httpfield.execute();
 
         HTTPGetAreaJosn httparea=new HTTPGetAreaJosn(this);
         httparea.execute();
-
-        Log.i("BusinessID",String.valueOf(fc.GetBusiness_Id()));
-        try {
-            DataBaseSqlite db = new DataBaseSqlite(this);
-            Cursor rows = db.select_AllBusinessId(fc.GetBusiness_Id());
-            rows.moveToFirst();
-            title.setText(rows.getString(1));//Market
-            title.setTag( String.valueOf(rows.getInt(0)));//Id
-            address.setText(rows.getString(7));//Address
-            rate.setRating(rows.getFloat(19));//RateValue
-        }
-        catch(Exception e)
-        {
-            Log.e("SQLException",e.toString());
-        }
 
     }
 
@@ -74,9 +65,9 @@ public class My_Business extends ActionBarActivity {
     }
     public void Intialize()
     {
-        rate=(RatingBar) findViewById(R.id.my_business_rate);
+       /* rate=(RatingBar) findViewById(R.id.my_business_rate);
         title=(TextView) findViewById(R.id.my_business_title);
-        address=(TextView) findViewById(R.id.my_business_address);
+        address=(TextView) findViewById(R.id.my_business_address);*/
         discount=(FloatingActionButton)findViewById(R.id.btn_discount);
         edit=(FloatingActionButton)findViewById(R.id.btn_edit_business);
         add=(FloatingActionButton)findViewById(R.id.btn_add_business);
@@ -190,6 +181,26 @@ public class My_Business extends ActionBarActivity {
 
     }
 
+    private void setCards(){
+        try {
+
+
+            mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_business);
+            mRecyclerView.setItemAnimator(new OvershootInLeftAnimator());
+            mRecyclerView.getItemAnimator().setAddDuration(1000);
+            mRecyclerView.getItemAnimator().setChangeDuration(1000);
+            mRecyclerView.setHasFixedSize(true);
+            mLayoutManager = new LinearLayoutManager(this);
+            mRecyclerView.setLayoutManager(mLayoutManager);
+            job_list_Adapter = new Business_Card_Adapter(this);
+            ScaleInAnimationAdapter alphaAdapter = new ScaleInAnimationAdapter(job_list_Adapter);
+            alphaAdapter.setDuration(400);
+            mRecyclerView.setAdapter(alphaAdapter);
+            job_list_Adapter.notifyItemChanged(0);
+            job_list_Adapter.notifyDataSetChanged();
+        }
+        catch (Exception e){}
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
