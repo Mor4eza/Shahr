@@ -1,12 +1,18 @@
 package com.ariana.shahre_ma.job_details;
+
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -62,6 +68,9 @@ public class job_details_discount extends FragmentActivity {
         TextView tv_dis_desc;
         TransitionDrawable drawable_like;
         TransitionDrawable drawable_unlike;
+        RelativeLayout relativeLayout;
+        ImageView imageView;
+
         public PlaceholderFragment() {
         }
 
@@ -69,6 +78,8 @@ public class job_details_discount extends FragmentActivity {
         public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_job_details_discount, container, false);
+            relativeLayout=(RelativeLayout)rootView.findViewById(R.id.relativ_percent);
+            imageView=(ImageView)rootView.findViewById(R.id.img_discount);
             like=(RelativeLayout)rootView.findViewById(R.id.like_button);
             dislike=(RelativeLayout)rootView.findViewById(R.id.dislike_button);
             tv_like=(TextView) rootView.findViewById(R.id.tv_discount_like);
@@ -85,16 +96,52 @@ public class job_details_discount extends FragmentActivity {
                 Cursor cursor = db.select_DisCount(fc.GetBusiness_Id());
 
                 cursor.moveToFirst();
-                discountid = cursor.getInt(0);
-                tv_dis_percent.setText(cursor.getString(6));
-                tv_dis_name.setText(cursor.getString(1));
-                tv_dis_start.setText(cursor.getString(3));
-                tv_dis_end.setText(cursor.getString(4));
-                tv_dis_desc.setText(cursor.getString(5));
+                Log.i("IDdiscount",String.valueOf(cursor.getInt(0)));
+                if(cursor.getInt(0)==0)
+                {
+                    tv_dis_percent.setVisibility(View.INVISIBLE);
+                    tv_like.setVisibility(View.INVISIBLE);
+                    tv_unlike.setVisibility(View.INVISIBLE);
+                    tv_dis_start.setVisibility(View.INVISIBLE);
+                    tv_dis_name.setVisibility(View.INVISIBLE);
+                    tv_dis_end.setVisibility(View.INVISIBLE);
+                    tv_dis_desc.setVisibility(View.INVISIBLE);
 
-                tv_like.setText(String.valueOf(cursor.getInt(8)));
-                tv_unlike.setText(String.valueOf(cursor.getInt(9)));
-            }catch (Exception e){}
+                    like.setVisibility(View.INVISIBLE);
+                    dislike.setVisibility(View.INVISIBLE);
+
+                    relativeLayout.setVisibility(View.INVISIBLE);
+                    imageView.setVisibility(View.INVISIBLE);
+
+                }
+                else
+                {
+                    discountid = cursor.getInt(0);
+                    tv_dis_percent.setText(cursor.getString(6));
+                    tv_dis_name.setText(cursor.getString(1));
+                    tv_dis_start.setText(cursor.getString(3));
+                    tv_dis_end.setText(cursor.getString(4));
+                    tv_dis_desc.setText(cursor.getString(5));
+
+                    tv_like.setText(String.valueOf(cursor.getInt(8)));
+                    tv_unlike.setText(String.valueOf(cursor.getInt(9)));
+                }
+            }catch (Exception e)
+            {
+                tv_dis_percent.setVisibility(View.INVISIBLE);
+                tv_like.setVisibility(View.INVISIBLE);
+                tv_unlike.setVisibility(View.INVISIBLE);
+                tv_dis_start.setVisibility(View.INVISIBLE);
+                tv_dis_end.setVisibility(View.INVISIBLE);
+                tv_dis_desc.setVisibility(View.INVISIBLE);
+                like.setVisibility(View.INVISIBLE);
+                dislike.setVisibility(View.INVISIBLE);
+                relativeLayout.setVisibility(View.INVISIBLE);
+                tv_dis_name.setText("تخفیفی برای این کسب و کار ثبت نشده است.");
+                tv_dis_name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+                tv_dis_name.setTextColor(Color.GRAY);
+                tv_dis_name.setGravity(Gravity.CENTER);
+            }
 
 
             drawable_like = (TransitionDrawable) like.getBackground();

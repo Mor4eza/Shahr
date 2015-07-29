@@ -3,8 +3,6 @@ package com.ariana.shahre_ma.Cards;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -207,8 +205,8 @@ private  static Context context;
 
 
 
-        String image_url_1 = "http://www.newpaltzchamber.org/external/wcpages/wcmedia/images/business-people-around-the-world.jpg";
-        imgLoader.DisplayImage(image_url_1, viewHolder.imgThumbnail);
+       String image_url_1 = "http://reallifeglobal.com/wp-content/uploads/2014/08/business-english-world.jpg?467a33";
+       imgLoader.DisplayImage(image_url_1, viewHolder.imgThumbnail);
 
 
         viewHolder.rates.setRating((float) nature.getRate());

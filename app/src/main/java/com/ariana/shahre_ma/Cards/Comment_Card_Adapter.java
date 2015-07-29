@@ -140,6 +140,7 @@ Query query;
                         httplike.SetMemberid(query.getMemberId());
                         httplike.Setopinionid(Integer.parseInt((String) tvcomm.getTag()));
                         httplike.execute();
+                        btn_like.setImageDrawable(context.getResources().getDrawable(R.drawable.comment_liked));
                     }
                     else
                     {
@@ -148,6 +149,7 @@ Query query;
                         httplike.SetMemberid(query.getMemberId());
                         httplike.Setopinionid(Integer.parseInt((String) tvcomm.getTag()));
                         httplike.execute();
+                        btn_disslike.setImageDrawable(context.getResources().getDrawable(R.drawable.comment_disliked));
                     }
                 }
 
