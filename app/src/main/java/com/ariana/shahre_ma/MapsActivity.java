@@ -18,6 +18,7 @@ import com.androidmapsextensions.SupportMapFragment;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.job_details.Job_details;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -38,6 +39,7 @@ public class MapsActivity extends ActionBarActivity {
     Integer id[];
     FieldClass fc=new FieldClass();
     Query query=new Query(this);
+    FieldDataBusiness fdb=new FieldDataBusiness();
     Integer cityid=0;
 
 
@@ -87,20 +89,32 @@ public class MapsActivity extends ActionBarActivity {
 
 
 
-        DataBaseSqlite mydb = new DataBaseSqlite(this);
-        Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb(),cityid);
-        String lat[] = new String[allrows.getCount()];
-        String Longt[] = new String[allrows.getCount()];
-        Integer l=0;
+        String lat[] = new String[fc.GetCount_Business()];
+        String Longt[] = new String[fc.GetCount_Business()];
+
+
+        if(fdb.GetMarketBusiness().size()==0) {
+            DataBaseSqlite mydb = new DataBaseSqlite(this);
+            Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb(), cityid);
+            Integer l = 0;
             if (allrows.moveToFirst()) {
 
                 do {
-                    lat[l] =allrows.getString(15);
-                    Longt[l] =allrows.getString(16);
+                    lat[l] = allrows.getString(15);
+                    Longt[l] = allrows.getString(16);
                     l++;
 
                 } while (allrows.moveToNext());
             }
+        }
+        else {
+            for (int i = 0; i < fdb.GetMarketBusiness().size(); i++) {
+                Longt[i] = fdb.GetLongtiudeBusiness().get(i);
+                lat[i] = fdb.GetLatitudeBusiness().get(i);
+
+            }
+        }
+
 
         TrackerSettings settings =
                 new TrackerSettings()
@@ -169,39 +183,51 @@ public class MapsActivity extends ActionBarActivity {
         len=fc.GetCount_Business();
         id=new Integer[fc.GetCount_Business()];
 
-        Log.i("GetCount_Business()", String.valueOf(fc.GetCount_Business()));
-        DataBaseSqlite mydb = new DataBaseSqlite(this);
-        Log.i("GetBusiness_SubsetIdb", String.valueOf(fc.GetBusiness_SubsetIdb()));
-        Log.i("cityid", String.valueOf(cityid));
-        Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb(),cityid);
        try {
+        DataBaseSqlite mydb = new DataBaseSqlite(this);
+        Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb(),cityid);
 
 
-            if (allrows.moveToFirst()) {
 
-                do {
+            if(fdb.GetMarketBusiness().size()==0) {
+                if (allrows.moveToFirst()) {
+
+                    do {
+
                         Market[l] = allrows.getString(1);
-                        Latitude[l] = allrows.getString(15);
-                        Longtitude[l] = allrows.getString(16);
-
+                        Longtitude[l] = allrows.getString(15);
+                        Latitude[l] = allrows.getString(16);
                         Rate[l] = allrows.getDouble(29);
-                        id[l]=allrows.getInt(0);
+                        id[l] = allrows.getInt(0);
 
-                        Log.v("id", String.valueOf(Rate[l]));
 
-                    l++;
 
-                } while (allrows.moveToNext());
+                        l++;
+
+                    } while (allrows.moveToNext());
+                }
             }
+            else {
 
+                for (int i = 0; i < fdb.GetMarketBusiness().size(); i++) {
+                    id[i] = fdb.GetIdBusiness().get(i);
+                    Market[i] = fdb.GetMarketBusiness().get(i);
+                    Longtitude[i] = fdb.GetLongtiudeBusiness().get(i);
+                    Latitude[i] = fdb.GetLatitudeBusiness().get(i);
+                    Rate[i] = fdb.GetRateBusiness().get(i);
+                }
+            }
 
 
             for (int i = 0; i < len; i++) {
 
-                    Marker  marker = mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(Latitude[i]), Double.parseDouble(Longtitude[i] ))).title("\u200e"+Market[i]).snippet(String.valueOf(Rate[i])));
+                    Log.i("Longtitude",Longtitude[i]);
+                    Log.i("Latitude",Latitude[i]);
+
+                    Marker  marker = mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(Longtitude[i]), Double.parseDouble(Latitude[i] ))).title("\u200e"+Market[i]).snippet(String.valueOf(Rate[i])));
                     marker.setData(id[i]);
                     marker.showInfoWindow();
-                    Log.i("id",String.valueOf(id[i]));
+
 
 
             }

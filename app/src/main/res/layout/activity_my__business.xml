@@ -1,73 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_business"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:onClick="add_business"
-        card_view:cardCornerRadius="3dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginLeft="9dp"
-        android:layout_marginRight="9dp"
-        card_view:cardElevation="0.01dp"
-        android:layout_marginBottom="0dp"
-        android:id="@+id/view">
-        <RelativeLayout
-            android:id="@+id/top_layout"
-            android:layout_width="fill_parent"
-            android:layout_height="300dp">
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true">
 
-            <ImageView
-                android:id="@+id/my_business_image"
-                android:layout_width="fill_parent"
-                android:layout_height="250dp"
-                android:scaleType="centerCrop"
-                android:layout_marginBottom="50dp"
-                android:src="@drawable/pooshak"
-                android:clickable="true"
-                android:background="?android:selectableItemBackground"
-               />
-            <TextView
+    </android.support.v7.widget.RecyclerView>
 
-                android:id="@+id/my_business_title"
-                android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:layout_gravity="top"
-                android:gravity="center_vertical|center_horizontal"
-                android:background="#5c6f1c0b"
-                android:alpha="0.9"
-                android:textColor="#fff"
-                android:textSize="26sp"
-                android:text="Test"
-
-                android:layout_alignTop="@+id/img_market"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <RatingBar
-                android:id="@+id/my_business_rate"
-                android:layout_alignBottom="@+id/my_business_image"
-                android:layout_width="wrap_content"
-                style="?android:attr/ratingBarStyleSmall"
-                android:background="@color/blue_focused"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:gravity="right"
-                android:id="@+id/my_business_address"
-                android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:text="آدرس"
-                android:layout_alignParentBottom="true"
-                />
-
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
