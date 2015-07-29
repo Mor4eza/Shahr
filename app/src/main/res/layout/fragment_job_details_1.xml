@@ -68,17 +68,18 @@
             android:paddingTop="30dp"
             >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:id="@+id/market_tel"
-            android:layout_gravity="end"
-            android:layout_marginBottom="20dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" تلفن: "
+                android:text=""
+                android:id="@+id/market_tel"
+                android:drawableRight="@drawable/phone"
+                android:drawablePadding="10dp"
+                android:layout_gravity="end"
+                android:layout_marginBottom="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginBottom="20dp"/>
         </LinearLayout>
@@ -90,19 +91,19 @@
         android:orientation="horizontal"
         >
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/market_web"
-            android:text=""
-            android:layout_gravity="end"
-            android:layout_marginBottom="20dp"/>
+         <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/market_web"
+                android:text=""
+                android:drawableRight="@drawable/email"
+                android:drawablePadding="10dp"
+                android:layout_gravity="end"
+                android:layout_marginBottom="20dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:text=" وب سایت:  "
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
         </LinearLayout>
@@ -118,6 +119,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
+        android:drawableRight="@drawable/user"
+        android:drawablePadding="10dp"
         android:id="@+id/market_owner"
         android:layout_gravity="end"
         android:layout_marginBottom="20dp"/>
@@ -125,8 +128,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" صاحب فروشگاه:  "
-
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
 
@@ -139,11 +140,13 @@
         android:orientation="horizontal"
         >
 
-    <TextView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
             android:id="@+id/market_subset"
+            android:drawableRight="@drawable/subset"
+            android:drawablePadding="10dp"
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
 
@@ -151,7 +154,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" زیر مجموعه:  "
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
 
@@ -164,10 +166,12 @@
         android:orientation="horizontal"
         >
 
-    <TextView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/market_zamine"
+            android:drawableRight="@drawable/field_activity"
+            android:drawablePadding="10dp"
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
 
@@ -175,7 +179,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" زمینه کاری:  "
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
 
@@ -188,18 +191,19 @@
         android:orientation="horizontal"
         >
 
-    <TextView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
             android:id="@+id/market_address"
+            android:drawableRight="@drawable/address"
+            android:drawablePadding="10dp"
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" آدرس:  "
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
 
@@ -212,10 +216,12 @@
         android:orientation="horizontal"
         >
 
-    <TextView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
+            android:drawableRight="@drawable/decription"
+            android:drawablePadding="10dp"
             android:id="@+id/market_desc"
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
@@ -223,7 +229,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" توضیحات:  "
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
 
