@@ -1,17 +1,15 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.Cards.Business_Card_Adapter;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
-import com.ariana.shahre_ma.Jobs_List;
 import com.ariana.shahre_ma.MyBusiness.My_Business;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
@@ -28,7 +26,7 @@ import java.net.URL;
 /**
  * Created by ariana2 on 6/6/2015.
  */
-public class HTTPGetBusinessMemberJson extends AsyncTask<String, String, String>
+public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
 {
 
     private static Context context;
@@ -105,19 +103,20 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String, String, String>
      * @param args
      * @return
      */
-    protected String doInBackground(String... args) {
+    protected Integer doInBackground(String... args) {
+        Integer result=0;
         try {
 
             InputStream jsonStream = getStreamFromURL(GetUrl_business(), "GET");
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);
-            onPostExecute();
 
-
+            result=1;
         } catch (Exception e) {
             // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
+            result=0;
         }
-        return null;
+        return result;
 
 
     }
@@ -125,7 +124,8 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String, String, String>
     /**
      *
      */
-    protected void onPostExecute() {
+    @Override
+    protected void onPostExecute(Integer result) {
         try {
 
             Integer count=0;
@@ -137,33 +137,45 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String, String, String>
             query=new Query(context);
             cityid=query.getCityId(setting.getCityName());
             idsubset=fc.GetSubsetId();
-            dbs.delete_Business(cityid,idsubset);
+            if(len>0){
+                    dbs.delete_Business(cityid,idsubset);
 
-            //  dbs.delete_Business();
-            for (int i = 0; i <len; i++)
-            {
-                Cursor rows=dbs.select_CountBusinessId(Id[i]);
-                rows.moveToFirst();
-                count=rows.getInt(0);
-                rows.close();
-                Log.i("ID", String.valueOf(Id[i]));
-                Log.i("count",String.valueOf(count));
-                if(count==0)
-                    dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i],cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
+                    //  dbs.delete_Business();
+                    for (int i = 0; i <len; i++)
+                    {
+                        Cursor rows=dbs.select_CountBusinessId(Id[i]);
+                        rows.moveToFirst();
+                        count=rows.getInt(0);
+                        rows.close();
+                        Log.i("ID", String.valueOf(Id[i]));
+                        Log.i("count",String.valueOf(count));
+                        if(count==0)
+                            dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i],cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
 
-            }
+                    }
 
-            if(len==0) {
-                //  Toast.makeText(get, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(this.context, My_Business.class);
-                this.context.startActivity(i);
+                final My_Business business=new My_Business();
+                business.mRecyclerView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Business_Card_Adapter adapter = new Business_Card_Adapter(context);
+                        business.mRecyclerView.setAdapter(adapter);
+                        business.job_list_Adapter.notifyDataSetChanged();
+                    }
+                });
 
             }
             else {
-
-                Intent i = new Intent(this.context, My_Business.class);
-                this.context.startActivity(i);
-                Log.i("Count Business : ","دریافت ثبت شده ها");
+                final My_Business business=new My_Business();
+                business.mRecyclerView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Business_Card_Adapter adapter = new Business_Card_Adapter(context);
+                        business.mRecyclerView.setAdapter(adapter);
+                        business.job_list_Adapter.notifyDataSetChanged();
+                    }
+                });
+                        Log.i("Count Business : ","دریافت ثبت شده ها");
             }
 
         } catch (Exception e) {

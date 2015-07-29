@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,8 +20,7 @@ import com.ariana.shahre_ma.Cards.Business_Card_Adapter;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetAreaJosn;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetFieldActivityJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessMemberJson;
 import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
@@ -38,29 +38,51 @@ public class My_Business extends ActionBarActivity {
     FloatingActionButton discount;
     FloatingActionButton edit;
     FloatingActionButton add;
-    RecyclerView mRecyclerView;
+    public static RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    RecyclerView.Adapter job_list_Adapter;
+    public static RecyclerView.Adapter job_list_Adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my__business);
 
-       Intialize();
-        setCards();
+        HTTPGetBusinessMemberJson httpGetBusinessMemberJson = new HTTPGetBusinessMemberJson(My_Business.this);
+        httpGetBusinessMemberJson.SetUrl_businessMember(query.getMemberId());// get id member
+        httpGetBusinessMemberJson.execute();// Run
 
-        HTTPGetFieldActivityJson httpfield=new HTTPGetFieldActivityJson(this);
+
+         Intialize();
+         setCards();
+
+      /*  HTTPGetFieldActivityJson httpfield=new HTTPGetFieldActivityJson(this);
         httpfield.execute();
 
         HTTPGetAreaJosn httparea=new HTTPGetAreaJosn(this);
-        httparea.execute();
+        httparea.execute();*/
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        job_list_Adapter = new Business_Card_Adapter(this);
+        ScaleInAnimationAdapter alphaAdapter = new ScaleInAnimationAdapter(job_list_Adapter);
+        alphaAdapter.setDuration(400);
+        mRecyclerView.setAdapter(alphaAdapter);
+        job_list_Adapter.notifyItemChanged(0);
+        job_list_Adapter.notifyDataSetChanged();
+        Log.i("Resume","Resume");
     }
 
     public void add_business(View v){
         Intent i = new Intent(getApplicationContext(),Add_business.class);
         startActivity(i);
+
+    }
+    public void edit_business (View v){
+
+
 
     }
     public void Intialize()

@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.ariana.shahre_ma.Bookmarks.BookMark;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.MyBusiness.My_Business;
 import com.ariana.shahre_ma.MyCity.My_city;
 import com.ariana.shahre_ma.MyInterest.My_Interest;
 import com.ariana.shahre_ma.MyProfile.Log_In;
@@ -37,7 +38,6 @@ import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.Notification.Activity_notify;
 import com.ariana.shahre_ma.Service.TimeSetReceiver;
 import com.ariana.shahre_ma.Settings.Setting;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessMemberJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
@@ -343,9 +343,10 @@ public class MainActivity extends AppCompatActivity {
                                 if (query.getMemberId() > 0) // get member
                                 {
                                     // Getting Business Member
-                                    HTTPGetBusinessMemberJson httpGetBusinessMemberJson = new HTTPGetBusinessMemberJson(MainActivity.this);
-                                    httpGetBusinessMemberJson.SetUrl_businessMember(query.getMemberId());// get id member
-                                    httpGetBusinessMemberJson.execute();// Run
+                                    Intent i = new Intent(MainActivity.this, My_Business.class);
+                                    startActivity(i);
+
+
                                 } else {
                                     Toast.makeText(getApplicationContext(), "کاربری وارد نشده", Toast.LENGTH_SHORT).show();
 
