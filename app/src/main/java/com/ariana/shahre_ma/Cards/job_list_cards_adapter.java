@@ -19,6 +19,7 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
+import com.ariana.shahre_ma.ImageDownload.ImageLoader;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.Settings.KeySettings;
@@ -41,6 +42,7 @@ public class job_list_cards_adapter extends RecyclerView.Adapter<job_list_cards_
     KeySettings setting;
     Boolean search=true;
     Cursor allrows;
+    ImageLoader imgLoader;
 private  static Context context;
 
 
@@ -49,6 +51,7 @@ private  static Context context;
         super();
       this.context=context;
       Query query=new Query(context);
+        imgLoader=new ImageLoader(context);
       FieldDataBusiness fdb=new FieldDataBusiness();
       NetState ns=new NetState(context);
         setting=new KeySettings(context);
@@ -138,11 +141,10 @@ private  static Context context;
                             nature.setRate(allrows.getDouble(29));
                             nature.setmId(allrows.getInt(0));
 
-                            File dir = new File(android.os.Environment.getExternalStorageDirectory(), "myFolder/image_folder/abc.png");
-                            Bitmap bitmap = BitmapFactory.decodeFile(dir.getAbsolutePath());
 
 
-                            nature.setImage(bitmap);
+
+
 
                             if (allrows.getString(3).equals(""))
                             {
@@ -197,10 +199,18 @@ private  static Context context;
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
 
         Job_lists_card_item nature = mItems.get(i);
-        viewHolder.imgThumbnail.setImageBitmap(nature.getImage());
+
         viewHolder.tvNature.setText(nature.getName());
         viewHolder.tvDesNature.setText(nature.getDes());
-       // viewHolder.imgThumbnail.setImage(nature.getThumbnail());
+      //  viewHolder.imgThumbnail.setImageResource(nature.getThumbnail());
+
+
+
+
+        String image_url_1 = "http://www.newpaltzchamber.org/external/wcpages/wcmedia/images/business-people-around-the-world.jpg";
+        imgLoader.DisplayImage(image_url_1, viewHolder.imgThumbnail);
+
+
         viewHolder.rates.setRating((float) nature.getRate());
         viewHolder.rates.setTag(nature.getmId());
         viewHolder.tvTell.setText(nature.getTell());
