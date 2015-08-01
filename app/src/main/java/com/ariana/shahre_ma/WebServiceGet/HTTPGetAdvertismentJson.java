@@ -81,7 +81,7 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
     protected void onPostExecute(Integer result) {
 //        onPostExecute(result);
         if(result==1) {
-            try {
+           // try {
 
                 if(len>0) {
 
@@ -94,9 +94,9 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
                     }
                 }
 
-            } catch (Exception e) {
+            /*} catch (Exception e) {
                 //Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
-            }
+            }*/
         }
         else
         {

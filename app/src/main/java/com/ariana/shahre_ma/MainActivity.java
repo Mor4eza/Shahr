@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplication(), "شبکه اینترنت قطع می باشد", Toast.LENGTH_LONG).show();
         } else {
 
-            HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
+           /* HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
             httpcoll.execute();
 
             HTTPGetSubsetJson httpsubset = new HTTPGetSubsetJson(this);
@@ -120,14 +120,14 @@ public class MainActivity extends AppCompatActivity {
 
 
             HTTPGetCityJson httpcity = new HTTPGetCityJson(this);
-            httpcity.execute();
+            httpcity.execute();*/
 
-           HTTPGetAdvertismentJson httpGetAdvertismentJson=new HTTPGetAdvertismentJson(this);
+           /*  HTTPGetAdvertismentJson httpGetAdvertismentJson=new HTTPGetAdvertismentJson(this);
             httpGetAdvertismentJson.SetAdvertisment(68);
-            httpGetAdvertismentJson.execute();
+            httpGetAdvertismentJson.execute();*/
 
 
-            HTTPGetTopsBusinessJson httpGetTopsBusinessJson=new HTTPGetTopsBusinessJson(this);
+           HTTPGetTopsBusinessJson httpGetTopsBusinessJson=new HTTPGetTopsBusinessJson(this);
             httpGetTopsBusinessJson.SetTopBusiness(68);
             httpGetTopsBusinessJson.execute();
         }
@@ -176,17 +176,18 @@ public class MainActivity extends AppCompatActivity {
 
         String imag[]=new String[2];
         Integer i=0;
-        //Cursor rows=db.select_Advertisment();
+        DataBaseSqlite db=new DataBaseSqlite(this);
+        Cursor rows=db.select_Advertisment();
 
-      /*  if(rows.moveToFirst())
+        if(rows.moveToFirst())
         {
             do
             {
-                imag[i]=rows.getString(1);
-                Log.i("imag",imag[i]);
-                i++;
+                //imag[i]=rows.getString(1);
+                Log.i("imag",rows.getString(1));
+               // i++;
             }while (rows.moveToNext());
-        }*/
+        }
 
 
         final TextSliderView textSliderView = new TextSliderView(this);
