@@ -42,6 +42,8 @@ Context context;
         db.execSQL(instructionsSqlite.CREATE_TABLE_Member);
         db.execSQL(instructionsSqlite.CREATE_TABLE_Opinion);
         db.execSQL(instructionsSqlite.CREATE_TABLE_Business);
+        db.execSQL(instructionsSqlite.CREATE_TABLE_Business_Tops);
+        db.execSQL(instructionsSqlite.CREATE_TABLE_Business_DisCount);
         db.execSQL(instructionsSqlite.CREATE_TABLE_City);
         db.execSQL(instructionsSqlite.CREATE_TABLE_Bookmark);
         db.execSQL(instructionsSqlite.CREATE_TABLE_Area);
@@ -63,6 +65,8 @@ Context context;
         db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_MEMBER);
         db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_OPINION);
         db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_BUSINESS);
+        db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_BUSINESS_TOPS);
+        db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_BUSINESS_DISCOUNT);
         db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_City);
         db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_Bookmark);
         db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_Area);
@@ -336,6 +340,104 @@ Context context;
 
 
 
+    public void Add_businessDisCount(Integer id,String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid, String longitude, String latitude, Integer areaid, String area, String user,Integer cityid, Integer userid,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7,Integer ratecount,Double ratevalue) {
+
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put(instructionsSqlite.ID_business, id);
+        values.put(instructionsSqlite.MARKET_business, market);
+        values.put(instructionsSqlite.CODE_business, code);
+        values.put(instructionsSqlite.PHONE_business, phone);
+        values.put(instructionsSqlite.MOBILE_business, mobile);
+        values.put(instructionsSqlite.FAX_business, fax);
+        values.put(instructionsSqlite.EMAIL_business, email);
+        values.put(instructionsSqlite.BUSINESSOWNER_business, businessowner);
+        values.put(instructionsSqlite.ADDRESS_business, address);
+        values.put(instructionsSqlite.DESCRIPTION_business, description);
+        values.put(instructionsSqlite.STARTDATE_business, startdate);
+        values.put(instructionsSqlite.EXPIRATIONDATE_business, expirationdate);
+        values.put(instructionsSqlite.INACTIVE_business, inactive);
+        values.put(instructionsSqlite.SUBSET_business, subset);
+        values.put(instructionsSqlite.SUBSETID_business, subsetid);
+        values.put(instructionsSqlite.LONGITUDE_business, longitude);
+        values.put(instructionsSqlite.LATITUDE_business, latitude);
+        values.put(instructionsSqlite.AREAID_business, areaid);
+        values.put(instructionsSqlite.AREA_business, area);
+        values.put(instructionsSqlite.USER_business, user);
+        values.put(instructionsSqlite.CITYID_business, cityid);
+        values.put(instructionsSqlite.USERID_business, userid);
+        values.put(instructionsSqlite.FIELD1_business, field1);
+        values.put(instructionsSqlite.FIELD2_business, field2);
+        values.put(instructionsSqlite.FIELD3_business, field3);
+        values.put(instructionsSqlite.FIELD4_business, field4);
+        values.put(instructionsSqlite.FIELD5_business, field5);
+        values.put(instructionsSqlite.FIELD6_business, field6);
+        values.put(instructionsSqlite.FIELD7_business, field7);
+        values.put(instructionsSqlite.RATECOUNT_business, ratecount);
+        values.put(instructionsSqlite.RATEVALUE_business, ratevalue);
+
+
+        // 3. insert
+        db.insert(instructionsSqlite.TABLE_NAME_BUSINESS_DISCOUNT, // table
+                null, //nullColumnHack
+                values); // key/value
+
+        // 4. close
+        db.close();
+    }
+
+
+    public void Add_businessTops(Integer id,String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid, String longitude, String latitude, Integer areaid, String area, String user,Integer cityid, Integer userid,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7,Integer ratecount,Double ratevalue) {
+
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put(instructionsSqlite.ID_business, id);
+        values.put(instructionsSqlite.MARKET_business, market);
+        values.put(instructionsSqlite.CODE_business, code);
+        values.put(instructionsSqlite.PHONE_business, phone);
+        values.put(instructionsSqlite.MOBILE_business, mobile);
+        values.put(instructionsSqlite.FAX_business, fax);
+        values.put(instructionsSqlite.EMAIL_business, email);
+        values.put(instructionsSqlite.BUSINESSOWNER_business, businessowner);
+        values.put(instructionsSqlite.ADDRESS_business, address);
+        values.put(instructionsSqlite.DESCRIPTION_business, description);
+        values.put(instructionsSqlite.STARTDATE_business, startdate);
+        values.put(instructionsSqlite.EXPIRATIONDATE_business, expirationdate);
+        values.put(instructionsSqlite.INACTIVE_business, inactive);
+        values.put(instructionsSqlite.SUBSET_business, subset);
+        values.put(instructionsSqlite.SUBSETID_business, subsetid);
+        values.put(instructionsSqlite.LONGITUDE_business, longitude);
+        values.put(instructionsSqlite.LATITUDE_business, latitude);
+        values.put(instructionsSqlite.AREAID_business, areaid);
+        values.put(instructionsSqlite.AREA_business, area);
+        values.put(instructionsSqlite.USER_business, user);
+        values.put(instructionsSqlite.CITYID_business, cityid);
+        values.put(instructionsSqlite.USERID_business, userid);
+        values.put(instructionsSqlite.FIELD1_business, field1);
+        values.put(instructionsSqlite.FIELD2_business, field2);
+        values.put(instructionsSqlite.FIELD3_business, field3);
+        values.put(instructionsSqlite.FIELD4_business, field4);
+        values.put(instructionsSqlite.FIELD5_business, field5);
+        values.put(instructionsSqlite.FIELD6_business, field6);
+        values.put(instructionsSqlite.FIELD7_business, field7);
+        values.put(instructionsSqlite.RATECOUNT_business, ratecount);
+        values.put(instructionsSqlite.RATEVALUE_business, ratevalue);
+
+
+        // 3. insert
+        db.insert(instructionsSqlite.TABLE_NAME_BUSINESS_TOPS, // table
+                null, //nullColumnHack
+                values); // key/value
+
+        // 4. close
+        db.close();
+    }
 
     public void Add_business(Integer id,String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid, String longitude, String latitude, Integer areaid, String area, String user,Integer cityid, Integer userid,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7,Integer ratecount,Double ratevalue) {
 
@@ -556,6 +658,25 @@ Context context;
         db.close();
     }
 
+    public void Add_Advertisment(Integer id,String image,String link) {
+
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put(instructionsSqlite.ID_Advertisment,id);
+        values.put(instructionsSqlite.IMAGE_Advertisment,image);
+        values.put(instructionsSqlite.LINK_Advertisment,link);
+
+        // 3. insert
+        db.insert(instructionsSqlite.TABLE_NAME_Advertisment, // table
+                null, //nullColumnHack
+                values); // key/value
+
+        // 4. close
+        db.close();
+    }
     /**
      * SelectBusiness
      * @param
@@ -977,6 +1098,14 @@ Context context;
         db.close();
 
     }
+
+    public void delete_Advertisment()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_Advertisment);
+        db.close();
+
+    }
     /**
      *
      */
@@ -1012,6 +1141,18 @@ Context context;
     {
         SQLiteDatabase db=this.getWritableDatabase();
         db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_BUSINESS+" WHERE CityId="+cityid+" AND SubsetId="+subsetid);
+        db.close();
+    }
+    public void delete_BusinessTops(Integer cityid,Integer subsetid)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_BUSINESS_TOPS+" WHERE CityId="+cityid+" AND SubsetId="+subsetid);
+        db.close();
+    }
+    public void delete_BusinessDisCount(Integer cityid,Integer subsetid)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_BUSINESS_DISCOUNT+" WHERE CityId="+cityid+" AND SubsetId="+subsetid);
         db.close();
     }
 

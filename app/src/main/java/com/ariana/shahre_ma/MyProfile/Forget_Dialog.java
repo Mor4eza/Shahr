@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.WebServiceSend.HTTPSendForgetMemberURL;
 
 /**
  * Created by ariana2 on 7/23/2015.
@@ -17,8 +18,10 @@ public class Forget_Dialog extends Dialog {
 
     Button btnSend;
     EditText etEmail;
+    Context context;
     public Forget_Dialog(Context context) {
         super(context);
+        this.context=context;
     }
 
     @Override
@@ -30,6 +33,10 @@ public class Forget_Dialog extends Dialog {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                HTTPSendForgetMemberURL httpSendForgetMemberURL=new HTTPSendForgetMemberURL(context);
+                httpSendForgetMemberURL.Setusername(etEmail.getText().toString());
+                httpSendForgetMemberURL.execute();
                 Log.i("Send", etEmail.getText().toString());
             }
         });

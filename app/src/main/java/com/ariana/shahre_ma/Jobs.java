@@ -98,8 +98,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), frequency, pendingIntent);*/
 
 
-        Intent service1 = new Intent(this, ShowNotificationService.class);
-        startService(service1);
+
 
         displayList();
         //expandAll();

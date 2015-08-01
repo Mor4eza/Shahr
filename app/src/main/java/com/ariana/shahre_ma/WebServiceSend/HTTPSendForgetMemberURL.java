@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -24,11 +25,11 @@ public class HTTPSendForgetMemberURL extends AsyncTask<String,Integer,Integer> {
 
     /**
      *
-     * @param email
+     * @param username
      */
-    public void SetEmail(String email)
+    public void Setusername(String username)
     {
-        url=""+email;
+        url="http://test.shahrma.com/api/Apiforgetpassword?username="+username;
     }
 
     /**
@@ -80,6 +81,7 @@ public class HTTPSendForgetMemberURL extends AsyncTask<String,Integer,Integer> {
     protected Integer doInBackground(String... params) {
         Integer result=0;
         try{
+            Log.i("url",geturl());
             HttpGet httpGet=new HttpGet(geturl());
             HttpClient httpClient=new DefaultHttpClient();
             HttpResponse response=httpClient.execute(httpGet);
@@ -89,6 +91,7 @@ public class HTTPSendForgetMemberURL extends AsyncTask<String,Integer,Integer> {
 
                 HttpEntity entity=response.getEntity();
                 String data= EntityUtils.toString(entity);
+                Log.i("response", data);
                 result = 1;
             }
         }

@@ -39,9 +39,9 @@ public class ShowNotificationService extends Service {
 
           Log.i("Time", dt.Time());
           Log.i("GetAMtime",setting.getAMtime());
-          if(setting.getAMtime().equals(dt.Time()))
+          //if(setting.getAMtime().equals(dt.Time()))
           Notify.Notificationm(this);
-          else if(setting.getPMtime().equals(dt.Time()))
+         // else if(setting.getPMtime().equals(dt.Time()))
           Notify.Notificationm(this);
 
     }

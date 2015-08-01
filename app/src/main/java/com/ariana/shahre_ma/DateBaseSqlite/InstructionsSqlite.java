@@ -11,6 +11,8 @@ public class  InstructionsSqlite {
     public static final String TABLE_NAME_COLLECTION = "collection";
     public static final String TABLE_NAME_MEMBER = "member";
     public static final String TABLE_NAME_OPINION = "opinion";
+    public static final String TABLE_NAME_BUSINESS_TOPS = "business_Tops";
+    public static final String TABLE_NAME_BUSINESS_DISCOUNT = "business_DisCount";
     public static final String TABLE_NAME_BUSINESS = "business";
     public static final String TABLE_NAME_City   = "city";
     public static final String TABLE_NAME_Bookmark = "bookmark";
@@ -24,6 +26,7 @@ public class  InstructionsSqlite {
     public static final String TABLE_NAME_DisCount="DisCount";
     public static final String TABLE_NAME_DisCountMember="DisCountMember";
     public static final String TABLE_NAME_LikeDisCount="LikeDisCount";
+    public static final String TABLE_NAME_Advertisment="TABLE_NAME_Advertisment";
     
 
 
@@ -61,6 +64,12 @@ public class  InstructionsSqlite {
     public static final String ID_bookmark = "Id";
     public static final String BUSINESSID_bookmark = "BusinessId";
     public static final String MEMBERID_bookmark = "MemberId";
+
+    //Advertisment Table Columns names
+    public static final String ID_Advertisment= "Id";
+    public static final String IMAGE_Advertisment = "Image";
+    public static final String LINK_Advertisment = "Link";
+
 
     //ShowNotification Table Columns names
     public static final String ID_SHOWNOTIFICATION = "Id";
@@ -249,10 +258,91 @@ public class  InstructionsSqlite {
             "ProvinceId INTEGER" +
             ");";
 
+    // SQL statement to create city table
+    public static final String CREATE_TABLE_Advertisment  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_Advertisment + " (" +
+            "Id INTEGER PRIMARY KEY ," +
+            "Image TEXT," +
+            "Link TEXT" +
+            ");";
+
     // SQL statement to create ZamanSanj table
     public static final String CREATE_TABLE_Update = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_UpdateTime + " (" +
             "Id INTEGER PRIMARY KEY AUTOINCREMENT," +
             "Date TEXT" +
+            ");";
+
+
+
+    // SQL statement to create business_disCount table
+    public static final String CREATE_TABLE_Business_DisCount  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_BUSINESS_DISCOUNT + " (" +
+            " Id INTEGER PRIMARY KEY ," +
+            " Market TEXT ," +
+            " Code TEXT ," +
+            " Phone TEXT ," +
+            " Mobile TEXT ," +
+            " Fax TEXT ," +
+            " Email TEXT ," +
+            " BusinessOwner TEXT ," +
+            " Address TEXT ," +
+            " Description TEXT ," +
+            " Startdate TEXT ," +
+            " ExpirationDate TEXT ," +
+            " Inactive TEXT ," +
+            " Subset TEXT ," +
+            " SubsetId INTEGER ," +
+            " Longitude TEXT," +
+            " Latitude TEXT," +
+            " AreaId INTEGER ," +
+            " Area TEXT ," +
+            " User TEXT ," +
+            " CityId INTEGER ," +
+            " UserId INTEGER," +
+            " Field1 INTEGER," +
+            " Field2 INTEGER," +
+            " Field3 INTEGER," +
+            " Field4 INTEGER," +
+            " Field5 INTEGER," +
+            " Field6 INTEGER," +
+            " Field7 INTEGER, " +
+            " RateCount INTEGER ," +
+            " RateValue DOUBLE " +
+
+            ");";
+
+    // SQL statement to create business_tops table
+    public static final String CREATE_TABLE_Business_Tops  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_BUSINESS_TOPS + " (" +
+            " Id INTEGER PRIMARY KEY ," +
+            " Market TEXT ," +
+            " Code TEXT ," +
+            " Phone TEXT ," +
+            " Mobile TEXT ," +
+            " Fax TEXT ," +
+            " Email TEXT ," +
+            " BusinessOwner TEXT ," +
+            " Address TEXT ," +
+            " Description TEXT ," +
+            " Startdate TEXT ," +
+            " ExpirationDate TEXT ," +
+            " Inactive TEXT ," +
+            " Subset TEXT ," +
+            " SubsetId INTEGER ," +
+            " Longitude TEXT," +
+            " Latitude TEXT," +
+            " AreaId INTEGER ," +
+            " Area TEXT ," +
+            " User TEXT ," +
+            " CityId INTEGER ," +
+            " UserId INTEGER," +
+            " Field1 INTEGER," +
+            " Field2 INTEGER," +
+            " Field3 INTEGER," +
+            " Field4 INTEGER," +
+            " Field5 INTEGER," +
+            " Field6 INTEGER," +
+            " Field7 INTEGER, " +
+            " RateCount INTEGER ," +
+            " RateValue DOUBLE " +
+
             ");";
 
     // SQL statement to create business table

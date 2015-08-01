@@ -101,7 +101,7 @@ public class Setting extends ActionBarActivity implements TimePickerDialog.OnTim
                                 minute=String.valueOf(i1);
 
 
-                            setting.saveAMtime(hour + ":" + minute);
+                            setting.savePMtime(hour + ":" + minute);
 
                             Toast.makeText(getApplicationContext(), hour + ":" + minute, Toast.LENGTH_LONG).show();
                         }
