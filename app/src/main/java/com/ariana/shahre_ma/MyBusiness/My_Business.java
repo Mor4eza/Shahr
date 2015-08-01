@@ -76,12 +76,13 @@ public class My_Business extends ActionBarActivity {
     }
 
     public void add_business(View v){
-        Intent i = new Intent(getApplicationContext(),Add_business.class);
-        startActivity(i);
 
+        Intent i = new Intent(getApplicationContext(),Add_New_Business.class);
+        startActivity(i);
     }
     public void edit_business (View v){
-
+        Intent i = new Intent(getApplicationContext(),Edit_business.class);
+        startActivity(i);
 
 
     }
@@ -225,7 +226,7 @@ public class My_Business extends ActionBarActivity {
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.menu_my_city, menu);
 
 
@@ -234,11 +235,9 @@ public class My_Business extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
+
 
         if (id == R.id.help) {
 

@@ -46,12 +46,13 @@
     <string name="title_activity_edit__user">تغییر مشخصات</string>
     <string name="title_activity_my__business">کسب وکار من</string>
     <string name="My_business">کسب وکار من</string>
-    <string name="title_activity_add_business">ویرایش و اضافه کردن کسب وکار</string>
+    <string name="title_activity_add_business">ویرایش کسب وکار</string>
     <string name="title_activity_my__business__map">انتخاب موقعیت</string>
     <string name="title_activity_my__interest">علایق من</string>
     <string name="title_activity_discount">تخفیف ها</string>
     <string name="title_activity_update">بروز رسانی</string>
     <string name="help">راهنمایی</string>
     <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_add__business">اضافه کردن کسب و کار</string>
 
 </resources>

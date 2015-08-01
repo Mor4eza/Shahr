@@ -29,7 +29,7 @@ import com.ariana.shahre_ma.WebServicePost.HTTPPostBusinessJson;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Add_business extends ActionBarActivity {
+public class Edit_business extends ActionBarActivity {
     
     EditText Market_name;
     EditText Market_tell;
@@ -46,7 +46,7 @@ public class Add_business extends ActionBarActivity {
     Integer Fields_ID[]=new Integer[7];
     DateTime dt=new DateTime();
     FieldClass fc=new FieldClass();
-    Query query=new Query(Add_business.this);
+    Query query=new Query(Edit_business.this);
     NetState net=new NetState(this);
     Integer modatgh=3;
     Integer month;
@@ -56,7 +56,7 @@ public class Add_business extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_business);
+        setContentView(R.layout.activity_edit_business);
 
         Initialize_Views();
 
@@ -163,7 +163,6 @@ public class Add_business extends ActionBarActivity {
     }
     void SpinnerSetUp(){
 
-
         Market_gharar.setPrompt("مدت قرارداد");
         List<String> list = new ArrayList<String>();
         list.add("3");
@@ -209,7 +208,7 @@ public class Add_business extends ActionBarActivity {
 
 
         if(Market_name.getText().toString().trim().equals("")) {
-            AlertDialog alertDialog = new AlertDialog.Builder(Add_business.this).create();
+            AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار");
             alertDialog.setMessage("نام فروشگاه را وارد کنید");
             alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
@@ -226,7 +225,7 @@ public class Add_business extends ActionBarActivity {
         }
         else if(Market_tell.getText().length()==0)
         {
-            AlertDialog alertDialog = new AlertDialog.Builder(Add_business.this).create();
+            AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار");
             alertDialog.setMessage("شماره تلفن را وارد کنید");
             alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
@@ -243,7 +242,7 @@ public class Add_business extends ActionBarActivity {
         }
         else if(Market_owner.getText().length()==0)
         {
-            AlertDialog alertDialog = new AlertDialog.Builder(Add_business.this).create();
+            AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار");
             alertDialog.setMessage("نام مدیر فروشگاه را وارد کنید");
             alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
@@ -260,7 +259,7 @@ public class Add_business extends ActionBarActivity {
         }
         else if(Market_address.getText().length()==0)
         {
-            AlertDialog alertDialog = new AlertDialog.Builder(Add_business.this).create();
+            AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار ");
             alertDialog.setMessage("آدرس را وارد کنید");
             alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
@@ -277,7 +276,7 @@ public class Add_business extends ActionBarActivity {
         }
      /*   else if(AreaID(Market_zone.getText().toString().trim())>0)
         {
-            AlertDialog alertDialog = new AlertDialog.Builder(Add_business.this).create();
+            AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار ");
             alertDialog.setMessage("نام منطقه را صحیح وارد کنید");
             alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
@@ -295,7 +294,7 @@ public class Add_business extends ActionBarActivity {
 
        /* else if(SubsetID(Market_subset.getText().toString().trim())>0)
         {
-            AlertDialog alertDialog = new AlertDialog.Builder(Add_business.this).create();
+            AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار ");
             alertDialog.setMessage("نام زیر گروه را درست وارد کنید");
             alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
@@ -313,7 +312,7 @@ public class Add_business extends ActionBarActivity {
 
         else if(Fields_ID[0]==0 && Fields_ID[1]==0 && Fields_ID[2]==0 && Fields_ID[3]==0 && Fields_ID[4]==0 &&Fields_ID[5]==0 && Fields_ID[6]==0  )
         {
-            AlertDialog alertDialog = new AlertDialog.Builder(Add_business.this).create();
+            AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار ");
             alertDialog.setMessage("حداقل یک زمینه فعالیت وارد کنید");
             alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
@@ -330,7 +329,7 @@ public class Add_business extends ActionBarActivity {
         }
   /*      else if(Lati.equals(""))
         {
-            AlertDialog alertDialog = new AlertDialog.Builder(Add_business.this).create();
+            AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار ");
             alertDialog.setMessage("چی پی اس مقداری ندارد");
             alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
@@ -347,7 +346,7 @@ public class Add_business extends ActionBarActivity {
         }
         else if(Longti.equals(""))
         {
-            AlertDialog alertDialog = new AlertDialog.Builder(Add_business.this).create();
+            AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار ");
             alertDialog.setMessage("چی پی اس مقداری ندارد");
             alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
@@ -363,7 +362,7 @@ public class Add_business extends ActionBarActivity {
 
         else if(net.checkInternetConnection()==false)
         {
-            AlertDialog alertDialog = new AlertDialog.Builder(Add_business.this).create();
+            AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار ");
             alertDialog.setMessage("اینترنت قطع می باشد");
             alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
