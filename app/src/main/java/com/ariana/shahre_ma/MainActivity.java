@@ -163,12 +163,12 @@ public class MainActivity extends ActionBarActivity {
 
         String showWhatsNew = "showHelp";
 
-        if (!Once.beenDone(Once.THIS_APP_VERSION, showWhatsNew)) {
+      /*  if (!Once.beenDone(Once.THIS_APP_VERSION, showWhatsNew)) {
             help1();
             CityDialog cityDialog=new CityDialog(this);
             cityDialog.show();
             Once.markDone(showWhatsNew);
-        }
+        }*/
 
     }
 

@@ -42,6 +42,26 @@ public class Query {
         return Result;
     }
 
+    public Integer getAreaID(String Name)
+    {
+        Integer Result=0;
+        try {
+
+            DataBaseSqlite db=new DataBaseSqlite(context);
+            Cursor allrows = db.select_AreaId(Name);
+            allrows.moveToFirst();
+            Result = allrows.getInt(0);
+            allrows.close();
+
+        }
+
+        catch (Exception e)
+        {
+            // Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+        }
+        return  Result;
+    }
+
     /**
      *
      * @param id

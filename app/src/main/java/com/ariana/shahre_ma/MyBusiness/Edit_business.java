@@ -123,10 +123,14 @@ public class Edit_business extends ActionBarActivity {
     void Show_Business()
     {
 
-        try {
+       // try {
             DataBaseSqlite db = new DataBaseSqlite(this);
+            Log.i("id",String.valueOf(fc.GetBusiness_Id()));
             Cursor rows = db.select_AllBusinessId(fc.GetBusiness_Id());
             rows.moveToFirst();
+           /* Log.i("1", rows.getString(1));
+            Log.i("2",rows.getString(2));
+            Log.i("3",rows.getString(3));*/
             Market_name.setText(rows.getString(1));//Market
             Market_tell.setText(rows.getString(2));//Phone
             Market_mobile.setText(rows.getString(3));//Mobile
@@ -136,9 +140,8 @@ public class Edit_business extends ActionBarActivity {
             Market_address.setText(rows.getString(7));//Address
             Market_desc.setText(rows.getString(8));//Description
 
-            Cursor rows1 = db.select_SubsetName(rows.getInt(9));
-            rows1.moveToFirst();
-            Market_subset.setText(rows1.getString(0));
+
+            Market_subset.setText(query.getsubsetName(rows.getInt(9)));
 
             Cursor rows2 = db.select_AreaName(rows.getInt(20));
             rows2.moveToFirst();
@@ -154,11 +157,11 @@ public class Edit_business extends ActionBarActivity {
                     Market_field.setText(Market_field.getText().toString() + rows3.getString(0) + ", ");
                 }
             }*/
-        }
+       /* }
         catch (Exception e)
         {
             Log.i("Exception",e.toString());
-        }
+        }*/
        // Market_gharar.setText(rows.getString(8));
     }
     void SpinnerSetUp(){
@@ -381,47 +384,22 @@ public class Edit_business extends ActionBarActivity {
         else
         {
 
-               Log.i("BusinessID",String.valueOf(fc.GetBusiness_Id()));
-                if (fc.GetBusiness_Id()==0) {
-
-                str = json.getBusinessTOjsonArray(fc.GetBusiness_Id(),query.getMemberId(), Market_name.getText().toString().trim(),
-                        Market_tell.getText().toString().trim(), Market_mobile.getText().toString().trim(),
-                        Market_fax.getText().toString().trim(), Market_email.getText().toString().trim(),
-                        Market_owner.getText().toString().trim(), Market_address.getText().toString().trim(),
-                        Market_desc.getText().toString().trim(), dt.Now(), EXPDateTime(), "null"
-                        , SubsetID(Market_subset.getText().toString().trim()),
-                        fc.GetLatitude_Business(), fc.GetLongtiude_Business(), AreaID(Market_zone.getText().toString().trim()), "null", "null", Fields_ID[0], Fields_ID[1], Fields_ID[2],
-                        Fields_ID[3], Fields_ID[4], Fields_ID[5], Fields_ID[6]);
-
-
-                Log.i("JSON", str);
-                HTTPPostBusinessJson httpbusiness = new HTTPPostBusinessJson(this);
-                httpbusiness.SetBusinessJson(str);
-                httpbusiness.execute();
-                }
-            else {
-
                 str = json.getBusinessTOjson(fc.GetBusiness_Id(), Market_name.getText().toString().trim(),
                         Market_tell.getText().toString().trim(), Market_mobile.getText().toString().trim(),
                         Market_fax.getText().toString().trim(), Market_email.getText().toString().trim(),
                         Market_owner.getText().toString().trim(), Market_address.getText().toString().trim(),
                         Market_desc.getText().toString().trim(), dt.Now(), EXPDateTime(), "null"
-                        , SubsetID(Market_subset.getText().toString().trim()),
-                        fc.GetLatitude_Business(), fc.GetLongtiude_Business(), AreaID(Market_zone.getText().toString().trim()), "null", "null", Fields_ID[0], Fields_ID[1], Fields_ID[2],
+                        ,query.getsubsetID(Market_subset.getText().toString().trim()),
+                            fc.GetLatitude_Business(), fc.GetLongtiude_Business(),query.getAreaID(Market_zone.getText().toString().trim()), "null", "null", Fields_ID[0], Fields_ID[1], Fields_ID[2],
                         Fields_ID[3], Fields_ID[4], Fields_ID[5], Fields_ID[6]);
 
 
-                Log.i("JSON", str);
+                Log.i("JSONeditBusines", str);
                 HTTPPostBusinessEditJson httpbusiness = new HTTPPostBusinessEditJson(this);
                 httpbusiness.SetBusinessJson(str);
                 httpbusiness.execute();
-            }
-
-
-
-
-
-    }}
+    }
+    }
 
 
     public List<String> getId2() {
@@ -525,44 +503,8 @@ public class Edit_business extends ActionBarActivity {
         }
     }
 
-    public Integer AreaID(String Name)
-    {
-        Integer Result=0;
-        try {
 
-          DataBaseSqlite db=new DataBaseSqlite(this);
-            Cursor allrows = db.select_AreaId(Name);
-            allrows.moveToFirst();
-            Result = allrows.getInt(0);
-            allrows.close();
 
-        }
-
-        catch (Exception e)
-        {
-            // Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
-        }
-        return  Result;
-    }
-
-    public Integer SubsetID(String Name)
-    {
-        Integer Result=0;
-        try {
-
-            DataBaseSqlite db=new DataBaseSqlite(this);
-            Cursor allrows = db.select_SubsetId(Name);
-            allrows.moveToFirst();
-            Result = allrows.getInt(0);
-            allrows.close();
-        }
-
-        catch (Exception e)
-        {
-            // Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
-        }
-        return  Result;
-    }
 
 
     private String EXPDateTime()
