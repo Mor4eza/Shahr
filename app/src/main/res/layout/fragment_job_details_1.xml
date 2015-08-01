@@ -240,6 +240,24 @@
             android:layout_marginBottom="20dp"/>
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/distance"
+                android:text="در حال پیدا کردن مکان فعلی شما..."
+                android:drawablePadding="10dp"
+                android:id="@+id/market_distance"
+                android:layout_gravity="end"
+                android:layout_marginBottom="20dp"/>
+
+        </LinearLayout>
 
 
         </LinearLayout>

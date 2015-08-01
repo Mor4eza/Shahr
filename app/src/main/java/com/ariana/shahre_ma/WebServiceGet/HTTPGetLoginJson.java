@@ -1,6 +1,5 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -36,10 +35,11 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
 
     String mesage;
     Integer ID=0;
-    ProgressDialog pd;
+    //ProgressDialog pd;
     FieldClass fc=new FieldClass();
     private String[] blogTitles;
     Context context;
+
 
     /**
      *
@@ -49,16 +49,18 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
     {
         this.context=context;
 
+
     }
 
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        pd = new ProgressDialog(context);
+        /*pd = new ProgressDialog(context);
         pd.setMessage("ورود...");
         pd.setCancelable(false);
-        pd.show();
+        pd.show();*/
+
     }
 
 
@@ -162,23 +164,26 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
                     Log.i("ID", String.valueOf(ID));
                     dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
                     Intent  i=new Intent(context.getApplicationContext(), MainActivity.class);
+                    Log_In.btn.setProgress(100);
                     context.startActivity(i);
                     Log_In log = new Log_In();
                     log.finish();
-                } else {
-                    pd.dismiss();
-                    Toast.makeText(context, "کاربر ساخته نشد دوباره امتحان کنید", Toast.LENGTH_LONG).show();
+
+                } else
+                {
+                    Log_In.btn.setProgress(-1);
+                    Toast.makeText(context.getApplicationContext(), "نام کاربری  یا رمز عبور اشتباه است!!!", Toast.LENGTH_LONG).show();
                 }
-                pd.dismiss();
+
             }
             catch (Exception e){
                 Log.e("Exception SaVe", e.toString());
-                pd.dismiss();
+                //pd.dismiss();
             }
         }
         else
         {
-            pd.dismiss();
+            //pd.dismiss();
         }
 
     }

@@ -1,6 +1,7 @@
 package com.ariana.shahre_ma.job_details;
 
 import android.database.Cursor;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -22,6 +23,9 @@ import com.ariana.shahre_ma.WebServiceGet.HTTPGetOpinionJson;
 import com.ariana.shahre_ma.WebServiceSend.HTTPSendRateURL;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+
+import fr.quentinklein.slt.LocationTracker;
+import fr.quentinklein.slt.TrackerSettings;
 
 
 public class job_details_1 extends ActionBarActivity {
@@ -60,6 +64,7 @@ public class job_details_1 extends ActionBarActivity {
         TextView zamine;
         TextView address;
         TextView des;
+        TextView tv_distance;
         FieldClass fc=new FieldClass();
         NetState ns;
         RatingBar rate1;
@@ -95,9 +100,11 @@ public class job_details_1 extends ActionBarActivity {
             des=(TextView) rootView.findViewById(R.id.market_desc);
             rate1=(RatingBar) rootView.findViewById(R.id.ratingBar1);
             slider = (SliderLayout) rootView.findViewById(R.id.slider_jobs);
+            tv_distance=(TextView)rootView.findViewById(R.id.market_distance);
             display_detail();
             rates_change();
             display_Images();
+            distance();
             return rootView;
         }
 
@@ -130,7 +137,6 @@ public class job_details_1 extends ActionBarActivity {
 
          private  void display_detail() {
 
-
         DataBaseSqlite mydb = new DataBaseSqlite(getActivity());
      //   Cursor allrows = mydb.select_business_Detail(fc.GetMarket_Business(), fc.GetAddress_Business());
         Cursor allrows = mydb.select_AllBusinessId(fc.GetBusiness_Id());
@@ -138,7 +144,6 @@ public class job_details_1 extends ActionBarActivity {
         allrows.moveToNext();
        // row_notification.moveToNext();
         DateTime time=new DateTime();
-
 
         try {
             fc.SetBusiness_Id(allrows.getInt(0));//Id
@@ -151,13 +156,6 @@ public class job_details_1 extends ActionBarActivity {
             owner.setText(allrows.getString(6));//BusinessOwner
             address.setText(allrows.getString(7));//Address
             des.setText(allrows.getString(8));//Description
-            subset.setText( query.getsubsetName(allrows.getInt(9)));//SubsetId
-
-
-
-
-
-
 
                for (int i = 0; i < 7; i++) {
                     Log.i("CounterFor", String.valueOf(allrows.getInt((12) + (i))));
@@ -169,18 +167,10 @@ public class job_details_1 extends ActionBarActivity {
                         zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");
                     }
                 }
-
-
-
        }
         catch (Exception e){
             //Toast.makeText(getActivity(),e.toString(),Toast.LENGTH_LONG).show();
         }
-
-
-
-
-
 
     }
 
@@ -207,5 +197,46 @@ public class job_details_1 extends ActionBarActivity {
                  slider.setPresetTransformer(SliderLayout.Transformer.ZoomOutSlide);
                  slider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
          }
+
+        private void distance(){
+
+
+            TrackerSettings settings =
+                    new TrackerSettings()
+                            .setUseGPS(true)
+                            .setUseNetwork(true)
+                            .setTimeout(20000)
+                            .setUsePassive(true);
+
+            new LocationTracker(getActivity(), settings) {
+
+                @Override
+                public void onLocationFound(Location location) {
+                    // Do some stuff when a new GPS Location has been found
+
+                    Location locationA = new Location("point A");
+                    locationA.setLatitude(location.getLatitude());
+                    locationA.setLongitude(location.getLongitude());
+
+                    Location locationB = new Location("point B");
+                    locationB.setLatitude(fc.GetLatitude_Business());
+                    locationB.setLongitude(fc.GetLongtiude_Business());
+
+                    float distance = locationA.distanceTo(locationB) ;
+                    tv_distance.setText("فاصله تقریبی " +distance+" " +"متر");
+
+
+                    stopListen();
+                }
+
+                @Override
+                public void onTimeout() {
+                  tv_distance.setText("مکان شما شناسایی نشد...!");
+                }
+            };
+
+
+
+        }
     }
 }

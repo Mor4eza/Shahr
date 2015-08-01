@@ -18,20 +18,22 @@ import java.util.List;
  * Created by ariana2 on 7/12/2015.
  */
 public class FilterAdapter extends ArrayAdapter<FilterItems> {
-
+    private final boolean[] mCheckedState;
     private final Context context;
     private final ArrayList<FilterItems> itemsArrayList;
     public static List<String> selectedsubset=new ArrayList<String>();
+
     public FilterAdapter(Context context, ArrayList<FilterItems> itemsArrayList) {
 
         super(context, R.layout.filter_dialog_layout, itemsArrayList);
-
         this.context = context;
         this.itemsArrayList = itemsArrayList;
+        mCheckedState = new boolean[itemsArrayList.size()];
+        Log.i("Size", String.valueOf(itemsArrayList.size()));
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         // 1. Create inflater
         LayoutInflater inflater = (LayoutInflater) context
@@ -56,15 +58,18 @@ public class FilterAdapter extends ArrayAdapter<FilterItems> {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
+                    mCheckedState[position]=true;
                     selectedsubset.add(labelView.getText().toString());
                     Log.i("selectedsubset",selectedsubset.toString());
                 }
                 else{
+                    mCheckedState[position]=false;
                     selectedsubset.remove(labelView.getText().toString());
                     Log.i("selectedsubset", selectedsubset.toString());
                 }
             }
         });
+        labelView.setChecked(mCheckedState[position]);
 
         return rowView;
     }

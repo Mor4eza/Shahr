@@ -76,9 +76,10 @@ public class SplashActivity extends ActionBarActivity {
             @Override
             public void run() {
                 /* Create an Intent that will start the Menu-Activity. */
-                Intent mainIntent = new Intent(getApplicationContext(),MainActivity.class);
-              startActivity(mainIntent);
-                finish();
+                 finish();
+                 Intent mainIntent = new Intent(getApplicationContext(),MainActivity.class);
+                 startActivity(mainIntent);
+
             }
         }, 5000);
     }
@@ -110,7 +111,6 @@ public class SplashActivity extends ActionBarActivity {
                                               }
                                           });
 
-                                          Log.i("kkk", text1);
                                       } else {
                                           i = 0;
                                           text1 = "";

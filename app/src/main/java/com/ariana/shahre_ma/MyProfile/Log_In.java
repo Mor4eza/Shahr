@@ -3,9 +3,10 @@ package com.ariana.shahre_ma.MyProfile;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,6 +14,7 @@ import com.ariana.shahre_ma.ImageDownload.ImageLoader;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetLoginJson;
+import com.dd.CircularProgressButton;
 
 import java.net.URLEncoder;
 
@@ -23,6 +25,7 @@ public class Log_In extends ActionBarActivity {
     EditText username;
     EditText password;
     TextView error;
+   public static CircularProgressButton btn;
     private ImageLoader imgLoader;
     String mesage;
     @Override
@@ -33,7 +36,7 @@ public class Log_In extends ActionBarActivity {
         username = (EditText) findViewById(R.id.et_username);
         password = (EditText) findViewById(R.id.et_password);
         error = (TextView) findViewById(R.id.tverror);
-
+        btn=(CircularProgressButton)findViewById(R.id.btn_login);
         HTTPGetCityJson httpcity = new HTTPGetCityJson(this);
         httpcity.execute();
      /*   try {
@@ -46,11 +49,20 @@ public class Log_In extends ActionBarActivity {
         } catch (Exception e) {
         }*/
 
-        ImageView headimage=(ImageView) findViewById(R.id.imagelogin);
-        imgLoader=new ImageLoader(this);
+        password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 
-        String image_url_1 = "https://www.taxitronic.org/emeter/img/Login-background.png";
-        imgLoader.DisplayImage(image_url_1, headimage);
+                boolean isValidKey = event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER;
+                boolean isValidAction = actionId == EditorInfo.IME_ACTION_DONE;
+
+                if (isValidKey || isValidAction) {
+                  Click_Login(v);
+                }
+                return false;
+            }
+        });
+        
     }
 
     public void register(View v) {
@@ -68,13 +80,14 @@ public class Log_In extends ActionBarActivity {
 
     public void Click_Login(View v) {
 
-
         //Code Login
-        if (username.getText().toString() == null || password.getText().toString() == null) {
+        if (username.getText().toString().equals("") || password.getText().toString().equals("")) {
 
             error.setText("نام کاربری و رمز عبور را وارد کنید");
         } else {
             try {
+                btn.setIndeterminateProgressMode(true);
+                btn.setProgress(50);
                     String nameuser = URLEncoder.encode(username.getText().toString(), "UTF-8");
                     String passworduser = URLEncoder.encode(password.getText().toString(), "UTF-8");
                     final String url = "http://test.shahrma.com/api/ApiGiveMembersPermission?userName=" + nameuser + "&Password=" + passworduser;
@@ -85,6 +98,8 @@ public class Log_In extends ActionBarActivity {
                 Toast.makeText(getApplication(), e.toString(), Toast.LENGTH_LONG).show();
             }
         }
+
+
 
     }
 
@@ -254,4 +269,6 @@ public class Log_In extends ActionBarActivity {
         }
 
     }*/
+
+
 }

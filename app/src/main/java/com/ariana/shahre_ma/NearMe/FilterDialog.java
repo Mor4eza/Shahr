@@ -70,7 +70,7 @@ public class FilterDialog extends Dialog {
                 dismiss();
                 for(int i=0;i>FilterAdapter.selectedsubset.size();i++)
                 {
-                    Cursor rows=db.select_BusinessSearchNearMe(35.8357895, 51.0096686, 0.01, query.getsubsetID(FilterAdapter.selectedsubset.get(i)));
+                    Cursor rows=db.select_BusinessSearchNearMe(35.8357895, 51.0096686, 0.002, query.getsubsetID(FilterAdapter.selectedsubset.get(i)));
                             if(rows.moveToFirst())
                             {
                                 do

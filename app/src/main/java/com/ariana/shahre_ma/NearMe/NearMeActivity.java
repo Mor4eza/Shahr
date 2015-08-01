@@ -39,23 +39,7 @@ public class NearMeActivity extends ActionBarActivity {
         setContentView(R.layout.activity_near_me);
         setUpMapIfNeeded();
 
-      /* Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                    Uri.parse("http://maps.google.com/maps?daddr=35.688951,51.018301"));
-        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
-        startActivity(intent);*/
-        /*
 
-        Location locationA = new Location("point A");
-        locationA.setLatitude(35.687543);
-        locationA.setLongitude(51.019641);
-
-        Location locationB = new Location("point B");
-        locationB.setLatitude(35.688951);
-        locationB.setLongitude(51.018301);
-
-       float distance = locationA.distanceTo(locationB) ;
-        Log.i("distance",String.valueOf(distance)+"M");*/
-       // latitude=51.0096686&longitude=35.8357895&distance=0.01
 
     /*    try {
             Locale loc = new Locale("IR");
@@ -73,7 +57,7 @@ public class NearMeActivity extends ActionBarActivity {
         NetState ns=new NetState(this);
         if(!ns.checkInternetConnection()) {
             DataBaseSqlite db = new DataBaseSqlite(this);
-            Cursor rows = db.select_BusinessSearchNearMe(35.8357895,51.0096686,0.01);
+            Cursor rows = db.select_BusinessSearchNearMe(35.8357895,51.0096686,0.002);
             Log.i("Count",String.valueOf(rows.getCount()));
             if (rows.moveToFirst()) {
                 do {
@@ -86,7 +70,7 @@ public class NearMeActivity extends ActionBarActivity {
 
 
         HTTPSendNearMeURL nearMeURL=new HTTPSendNearMeURL(this);
-        nearMeURL.SetNearMe("35.8357895","51.0096686",0.01);
+        nearMeURL.SetNearMe("35.8357895","51.0096686",0.001);
         nearMeURL.execute();
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,new IntentFilter("near-me"));

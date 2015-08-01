@@ -205,10 +205,11 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
             public void onClick(View v) {
 //                //Callback to expansion of group item
                 Log.d("Group",holder.dummyTextView.getTag().toString());
-                if (!isExpanded)
-                    mListener.expandGroupEvent(groupPosition, isExpanded);
 
                 boolean state = selectedParentCheckBoxesState.get(groupPosition);
+                    if (!isExpanded)
+                    mListener.expandGroupEvent(groupPosition, isExpanded);
+
 
                 selectedParentCheckBoxesState.remove(groupPosition);
                 selectedParentCheckBoxesState.add(groupPosition, state ? false : true);
