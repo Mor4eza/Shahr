@@ -5,7 +5,9 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
-import com.ariana.shahre_ma.Settings.KeySettings;
+import com.ariana.shahre_ma.MainActivity;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -108,27 +110,27 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
 
             JSONArray areas = new JSONArray(JSONString);
             Log.i("JSONsubset", JSONString);
-            Id=new Integer[areas.length()];
-            image=new String[areas.length()];
-            link=new String[areas.length()];
-            len=areas.length();
+            Id = new Integer[areas.length()];
+            image = new String[areas.length()];
+            link = new String[areas.length()];
+            len = areas.length();
             for (int i = 0; i < areas.length(); i++) {
 
                 JSONObject area = areas.getJSONObject(i);
                 image[i] = area.getString("Image");
-                Id[i]=area.getInt("Id");
-                link[i]=area.getString("Link");
-
+                Id[i] = area.getInt("Id");
+                link[i] = area.getString("Link");
 
             }
+
+         //   Image_slider();
 
         } catch (JSONException e) {
             // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
         }
     }
 
-
-    /**
+        /**
      *
      * @param urlString
      * @param method
@@ -172,5 +174,33 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
 
 
         return result;
+    }
+
+    private void Image_slider() {
+
+        final TextSliderView textSliderView = new TextSliderView(context);
+        textSliderView
+                .description("چهار باغ")
+                .image("http://www.shahrma.com/app/Advertisment/"+link[0]);
+        MainActivity.slider.addSlider(textSliderView);
+
+        TextSliderView textSliderView2 = new TextSliderView(context);
+        textSliderView2
+                .description("هفت خان")
+                .image("http://www.shahrma.com/app/Advertisment/"+link[1]);
+        MainActivity.slider.addSlider(textSliderView2);
+
+
+        TextSliderView textSliderView3 = new TextSliderView(context);
+        textSliderView3
+                .description("تیراژه")
+                .image("http://www.shahrma.com/app/Advertisment/"+link[2]);
+        MainActivity.slider.addSlider(textSliderView3);
+
+
+        MainActivity.slider.setPresetTransformer(SliderLayout.Transformer.Accordion);
+        MainActivity.slider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+
+
     }
 }

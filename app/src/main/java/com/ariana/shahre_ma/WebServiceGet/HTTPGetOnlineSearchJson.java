@@ -1,6 +1,5 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -103,7 +102,7 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
 
     public void SetValueSearch(String value,Integer cityid)
     {
-        String urlsearch="http://test.shahrma.com/api/ApiSearch?search="+value+"&cityId="+cityid;
+       urlsearch="http://test.shahrma.com/api/ApiSearch?search="+value+"&cityId="+cityid;
     }
 
     private String getUrlsearch()

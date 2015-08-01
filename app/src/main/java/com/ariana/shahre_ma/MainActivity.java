@@ -38,9 +38,11 @@ import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.Notification.Activity_notify;
 import com.ariana.shahre_ma.Service.TimeSetReceiver;
 import com.ariana.shahre_ma.Settings.Setting;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetAdvertismentJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetTopsBusinessJson;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.mikepenz.iconics.typeface.FontAwesome;
@@ -63,7 +65,7 @@ import github.chenupt.dragtoplayout.DragTopLayout;
 public class MainActivity extends AppCompatActivity {
 
     FragmentPagerAdapter adapterViewPager;
-    SliderLayout slider;
+    public static SliderLayout slider;
     DragTopLayout top;
     ActionButton Action;
     NetState net = new NetState(this);
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     private Drawer result = null;
     private WindowManager mWindowManager;
     private ImageView mImgFloatingView;
-
+    DataBaseSqlite db=new DataBaseSqlite(this);
     IntentFilter ii;
     TimeSetReceiver tsr;
 
@@ -87,6 +89,12 @@ public class MainActivity extends AppCompatActivity {
        /*String url= "http://uplod.ir/tpy6oft0407u/app-debug.apk.htm";
         HTTPGetUpdate update=new HTTPGetUpdate(this);
         update.execute(url);*/
+
+        top = (DragTopLayout) findViewById(R.id.top);
+        slider = (SliderLayout) findViewById(R.id.slider);
+
+        top.setTouchMode(true);
+        top.setOverDrag(false);
 
         ii=new IntentFilter("android.intent.action.TIME_TICK");
         tsr=new TimeSetReceiver();
@@ -109,6 +117,14 @@ public class MainActivity extends AppCompatActivity {
             HTTPGetCityJson httpcity = new HTTPGetCityJson(this);
             httpcity.execute();
 
+           HTTPGetAdvertismentJson httpGetAdvertismentJson=new HTTPGetAdvertismentJson(this);
+            httpGetAdvertismentJson.SetAdvertisment(68);
+            httpGetAdvertismentJson.execute();
+
+
+            HTTPGetTopsBusinessJson httpGetTopsBusinessJson=new HTTPGetTopsBusinessJson(this);
+            httpGetTopsBusinessJson.SetTopBusiness(68);
+            httpGetTopsBusinessJson.execute();
         }
 
         ViewPager vpPager = (ViewPager) findViewById(R.id.viewPager);
@@ -152,29 +168,39 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void Image_slider() {
-        top = (DragTopLayout) findViewById(R.id.top);
 
-        top.setTouchMode(true);
-        top.setOverDrag(false);
-        slider = (SliderLayout) findViewById(R.id.slider);
+        String imag[]=new String[2];
+        Integer i=0;
+        Cursor rows=db.select_Advertisment();
+
+        if(rows.moveToFirst())
+        {
+            do
+            {
+                imag[i]=rows.getString(1);
+                Log.i("imag",imag[i]);
+                i++;
+            }while (rows.moveToNext());
+        }
+
 
         final TextSliderView textSliderView = new TextSliderView(this);
         textSliderView
                 .description("چهار باغ")
-                .image(R.drawable.charbagh);
+               .image("http://www.shahrma.com/app/Advertisment/"+imag[0]);
         slider.addSlider(textSliderView);
 
         TextSliderView textSliderView2 = new TextSliderView(this);
         textSliderView2
                 .description("هفت خان")
-                .image(R.drawable.haftkhan);
+                .image("http://www.shahrma.com/app/Advertisment/"+imag[1]);
         slider.addSlider(textSliderView2);
 
 
         TextSliderView textSliderView3 = new TextSliderView(this);
         textSliderView3
                 .description("تیراژه")
-                .image(R.drawable.rest_tirajhe);
+                .image("http://www.shahrma.com/app/Advertisment/"+imag[2]);
         slider.addSlider(textSliderView3);
 
 

@@ -1,7 +1,6 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -9,7 +8,6 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
-import com.ariana.shahre_ma.Jobs_List;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
@@ -21,8 +19,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by ariana on 7/31/2015.
@@ -37,16 +33,6 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
     Query query;
     FieldDataBusiness fdb=new FieldDataBusiness();
 
-
-
-    private List<Integer> selectId=new ArrayList<>();
-    private  List<String>  selectLongtiude=new ArrayList<>();
-    private  List<String>  selectLatitude=new ArrayList<>();
-    private  List<Double>  selectRate=new ArrayList<>();
-    private  List<String>  selectPhone=new ArrayList<String>();
-    private  List<String>  selectMobile=new ArrayList<String>();
-    private  List<String>  selectAddress=new ArrayList<>();
-    private  List<String>  selectMarketName=new ArrayList<String>();
 
 
     Integer Id[];
@@ -104,7 +90,7 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
 
     public void SetTopBusiness(Integer cityid)
     {
-        String urlsearch="=http://test.shahrma.com/api/ApiGiveTop?cityId="+cityid;
+        urltopbusiness="http://test.shahrma.com/api/ApiGiveTop?cityId="+cityid;
     }
 
     private String getTopBusiness()
@@ -129,6 +115,7 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
         }
         catch (Exception e)
         {
+            Log.e("TOpbusiness",e.toString());
             result=0;
         }
         return result;
@@ -139,7 +126,7 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
         {
             try {
 
-                Log.i("JSONString", StrinJson);
+                Log.i("JSONTopsBusiness", StrinJson);
                 JSONArray areas = new JSONArray(StrinJson);
 
                 Id=new Integer[areas.length()];
@@ -240,26 +227,8 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
 
 
 
-                    selectId.add(area.getInt("Id"));
-                    selectLatitude.add(area.getString("Latitude"));
-                    selectLongtiude.add(area.getString("Longitude"));
-                    selectAddress.add(area.getString("Address"));
-                    selectMarketName.add(area.getString("Market"));
-                    selectPhone.add(area.getString("Phone"));
-                    selectMobile.add(area.getString("Mobile"));
-                    selectRate.add(area.getDouble("RateAverage"));
-
-
                 }
 
-                fdb.SetIdBusiness(selectId);
-                fdb.SetLatitudeBusiness(selectLatitude);
-                fdb.SetLongtiudeBusiness(selectLongtiude);
-                fdb.SetRateBusiness(selectRate);
-                fdb.SetAddressBusiness(selectAddress);
-                fdb.SetMarketBusiness(selectMarketName);
-                fdb.SetPhoneBusiness(selectPhone);
-                fdb.SetMobileBusiness(selectMobile);
 
 
             } catch (JSONException e) {
@@ -334,10 +303,6 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
 
             else {
 
-
-                Intent intent = new Intent(this.context, Jobs_List.class);
-                this.context.startActivity(intent);
-                Log.i("Count Business : ", "دریافت ثبت شده ها");
 
 
                 for (int i = 0; i <len; i++)

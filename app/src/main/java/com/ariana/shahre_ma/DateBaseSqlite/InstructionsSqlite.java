@@ -26,7 +26,7 @@ public class  InstructionsSqlite {
     public static final String TABLE_NAME_DisCount="DisCount";
     public static final String TABLE_NAME_DisCountMember="DisCountMember";
     public static final String TABLE_NAME_LikeDisCount="LikeDisCount";
-    public static final String TABLE_NAME_Advertisment="TABLE_NAME_Advertisment";
+    public static final String TABLE_NAME_Advertisment="Advertisment";
     
 
 

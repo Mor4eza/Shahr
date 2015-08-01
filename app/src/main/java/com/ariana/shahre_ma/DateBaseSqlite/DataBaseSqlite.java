@@ -55,6 +55,7 @@ Context context;
         db.execSQL(instructionsSqlite.CREATE_TABLE_DisCount);
         db.execSQL(instructionsSqlite.CREATE_TABLE_LikeDisCount);
         db.execSQL(instructionsSqlite.CREATE_TABLE_DisCountMember);
+        db.execSQL(instructionsSqlite.CREATE_TABLE_Advertisment);
     }
 
     @Override
@@ -78,6 +79,7 @@ Context context;
         db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_DisCount);
         db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_LikeDisCount);
         db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_DisCountMember);
+        db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_Advertisment);
         // create fresh  tables
         this.onCreate(db);
     }
@@ -969,6 +971,11 @@ Context context;
     }
 
 
+    public  Cursor select_Advertisment()
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM "+instructionsSqlite.TABLE_NAME_Advertisment,null);
+    }
 
     public  Cursor select_AreaId(String name)
     {
