@@ -10,7 +10,6 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -191,25 +190,26 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
 
 
 
-        LoadData();
-         holder.dummyTextView.setText(collection[groupPosition]);
-
-        if (selectedParentCheckBoxesState.size() <= groupPosition) {
-            selectedParentCheckBoxesState.add(groupPosition, false);
-        } else {
-            holder.groupName.setChecked(selectedParentCheckBoxesState.get(groupPosition));
-        }
+            LoadData();
+                holder.dummyTextView.setText(collection[groupPosition]);
+                holder.dummyTextView.setTag(holder.dummyTextView.getText());
+            if (selectedParentCheckBoxesState.size() <= groupPosition) {
+                selectedParentCheckBoxesState.add(groupPosition, false);
+            } else {
+                holder.groupName.setChecked(selectedParentCheckBoxesState.get(groupPosition));
+            }
 
 
         holder.groupName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                //Callback to expansion of group item
+                Log.d("Group",holder.dummyTextView.getTag().toString());
                 if (!isExpanded)
                     mListener.expandGroupEvent(groupPosition, isExpanded);
 
                 boolean state = selectedParentCheckBoxesState.get(groupPosition);
-                Log.d("TAG", "STATE = " + state);
+
                 selectedParentCheckBoxesState.remove(groupPosition);
                 selectedParentCheckBoxesState.add(groupPosition, state ? false : true);
 

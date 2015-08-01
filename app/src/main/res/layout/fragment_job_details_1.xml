@@ -15,7 +15,15 @@
 
 
 
-    <ImageView
+    <com.daimajia.slider.library.SliderLayout
+        android:id="@+id/slider_jobs"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        />
+
+
+
+   <!-- <ImageView
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:id="@+id/market_image"
@@ -25,14 +33,14 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true" />-->
 
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/market_image"
+        android:layout_below="@+id/slider_jobs"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_gravity="right"
@@ -49,7 +57,6 @@
         <RatingBar
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-           android:paddingTop="-10dp"
             android:id="@+id/ratingBar1"
             android:layout_gravity="center"
             android:numStars="5"

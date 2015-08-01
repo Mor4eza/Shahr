@@ -11,7 +11,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,12 +31,9 @@ public class My_Business extends ActionBarActivity {
 
     FieldClass fc=new FieldClass();
     Query query=new Query(this);
-    RatingBar rate;
     TextView title;
-    TextView address;
     FloatingActionButton discount;
-    FloatingActionButton edit;
-    FloatingActionButton add;
+
     public static RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     public static RecyclerView.Adapter job_list_Adapter;
@@ -76,13 +72,11 @@ public class My_Business extends ActionBarActivity {
     }
 
     public void add_business(View v){
-        Intent i = new Intent(getApplicationContext(),Add_business.class);
-        startActivity(i);
 
+        Intent i = new Intent(getApplicationContext(),Add_New_Business.class);
+        startActivity(i);
     }
     public void edit_business (View v){
-
-
 
     }
     public void Intialize()
@@ -91,8 +85,7 @@ public class My_Business extends ActionBarActivity {
         title=(TextView) findViewById(R.id.my_business_title);
        // address=(TextView) findViewById(R.id.my_business_address);
         discount=(FloatingActionButton)findViewById(R.id.btn_discount);
-        edit=(FloatingActionButton)findViewById(R.id.btn_edit_business);
-        add=(FloatingActionButton)findViewById(R.id.btn_add_business);
+
     }
     public void discount(View v){
 
@@ -225,7 +218,7 @@ public class My_Business extends ActionBarActivity {
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.menu_my_city, menu);
 
 
@@ -234,11 +227,9 @@ public class My_Business extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
+
 
         if (id == R.id.help) {
 
