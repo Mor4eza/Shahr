@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tb="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <android.support.v7.widget.CardView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:onClick="add_business"
         card_view:cardCornerRadius="3dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="9dp"
@@ -26,11 +26,11 @@
                 android:layout_width="fill_parent"
                 android:layout_height="250dp"
                 android:scaleType="centerCrop"
-                android:layout_marginBottom="50dp"
+                android:layout_marginBottom="67dp"
                 android:src="@drawable/pooshak"
                 android:clickable="true"
                 android:background="?android:selectableItemBackground"
-                />
+                android:layout_alignParentBottom="true" />
             <TextView
 
                 android:id="@+id/my_business_title"
@@ -57,14 +57,39 @@
                 style="?android:attr/ratingBarStyleSmall"
                 android:background="@color/blue_focused"
                 android:layout_height="wrap_content" />
-            <TextView
-                android:gravity="right"
-                android:id="@+id/my_business_address"
-                android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:text="آدرس"
-                android:layout_alignParentBottom="true"
-                />
+
+            <com.github.alexkolpa.fabtoolbar.FabToolbar
+                android:id="@+id/fab_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                tb:tb_anim_duration="500"
+                tb:tb_button_gravity="start"
+                tb:tb_container_gravity="center"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/my_business_rate">
+
+                    <ImageView
+                        android:id="@+id/btn_edit_business"
+                        android:layout_width="50dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_action_edit"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        />
+                    <ImageView
+                        android:id="@+id/btn_discount"
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/discount_tag"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        />
+
+                <!-- More buttons can be added here -->
+
+            </com.github.alexkolpa.fabtoolbar.FabToolbar>
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>
