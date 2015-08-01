@@ -3,6 +3,7 @@ package com.ariana.shahre_ma.MyProfile;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -51,6 +52,8 @@ public class Edit_User extends ActionBarActivity {
     Spinner sex;
     EditText pass;
     EditText user;
+    String change_pass="";
+    String change_user="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +71,9 @@ public class Edit_User extends ActionBarActivity {
         phone.setText(allrows.getString(3));
         age.setText(String.valueOf(allrows.getInt(4)));
         pass.setText(allrows.getString(7));
+        change_pass=allrows.getString(7);
         user.setText(allrows.getString(6));
+        change_user=allrows.getString(6);
         SpinnerSetUp();
 
     }
@@ -84,6 +89,7 @@ public class Edit_User extends ActionBarActivity {
         pass = (EditText) findViewById(R.id.edit_pass);
         user=(EditText)findViewById(R.id.edit_username);
     }
+
     public void edit_member(View v){
 
 
@@ -108,8 +114,6 @@ public class Edit_User extends ActionBarActivity {
             alertDialog.setMessage("شهر خود را انتخاب کنید");
             alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    // Write your code here to execute after dialog closed
-                    //Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
                     city.requestFocus();
 
                 }
@@ -124,8 +128,6 @@ public class Edit_User extends ActionBarActivity {
             alertDialog.setMessage("نام خود را وارد کنید");
             alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    // Write your code here to execute after dialog closed
-                    //Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
                     name.requestFocus();
 
                 }
@@ -140,9 +142,7 @@ public class Edit_User extends ActionBarActivity {
             alertDialog.setMessage("نام کاربری را وارد کنید");
             alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    // Write your code here to execute after dialog closed
-                    //Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
-                 //   Ausername.requestFocus();
+
 
                 }
             });
@@ -156,9 +156,7 @@ public class Edit_User extends ActionBarActivity {
             alertDialog.setMessage("رمز را وارد کنید");
             alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    // Write your code here to execute after dialog closed
-                    //Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
-                    //Apass.requestFocus();
+
 
                 }
             });
@@ -167,20 +165,29 @@ public class Edit_User extends ActionBarActivity {
         }
         else
         {
-            _json = (json.getSqliteTOjson(Aname, Aemail, Aphone, Aage, Asex, Ausername, Apass, query.getCityId(Acity)));
-            fc.SetMember_Name(Aname);
-            fc.SetMember_Email(Aemail);
-            fc.SetMember_Mobile(Aphone);
-            fc.SetMember_Age(Aage);
-            fc.SetMember_Sex(Asex);
-            fc.SetMember_UserName(Ausername);
-            fc.SetMember_Password(Apass);
-            fc.SetMember_CityId(query.getCityId(Acity));
+            if(Apass.equals(change_pass) || Ausername.equals(change_user))
+            {
 
-            sendPost = new HTTPPostMemberEditJson(this);
-            sendPost.SetMember_Json(_json);
-            Log.i("MemberJson", _json);
-            sendPost.execute();
+                _json = (json.getSqliteTOjson(Aname, Aemail, Aphone, Aage, Asex, Ausername, Apass, query.getCityId(Acity)));
+                fc.SetMember_Name(Aname);
+                fc.SetMember_Email(Aemail);
+                fc.SetMember_Mobile(Aphone);
+                fc.SetMember_Age(Aage);
+                fc.SetMember_Sex(Asex);
+                fc.SetMember_UserName(Ausername);
+                fc.SetMember_Password(Apass);
+                fc.SetMember_CityId(query.getCityId(Acity));
+
+                sendPost = new HTTPPostMemberEditJson(this);
+                sendPost.SetMember_Json(_json);
+                Log.i("MemberJson", _json);
+                sendPost.execute();
+            }
+            else {
+
+                Old_Password old_password=new Old_Password(this);
+                old_password.show();
+            }
         }
     }
 

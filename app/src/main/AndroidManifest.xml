@@ -32,6 +32,7 @@
         <activity
             android:name=".Jobs"
             android:label="@string/title_activity_jobs"
+            android:screenOrientation="portrait" >
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -40,12 +41,14 @@
         <activity
             android:name=".Jobs_List"
             android:label="@string/title_activity_jobs__list"
+            android:screenOrientation="portrait" >
             android:parentActivityName=".Jobs" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.Jobs" />
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".job_details.Job_details"
             android:parentActivityName=".Jobs_List" >
             <meta-data
@@ -53,6 +56,7 @@
                 android:value="com.ariana.shahre_ma.Jobs_List" />
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".job_details.job_details_1"
             android:label="@string/title_activity_job_details_1" >
         </activity>
@@ -61,11 +65,13 @@
             android:label="@string/title_activity_job_details_map" >
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".job_details.Job_details_comment"
             android:label="@string/title_activity_job_details_comment"
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".MyProfile.Sign_Up"
             android:label="@string/title_activity_sign__up" >
         </activity>
@@ -78,6 +84,7 @@
                 android:value="com.ariana.shahre_ma.MainActivity" />
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".Bookmarks.BookMark"
             android:label="@string/title_activity_book_mark"
             android:parentActivityName=".MainActivity" >
@@ -94,10 +101,12 @@
             android:value="@string/google_maps_key" />
 
         <activity
+
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" >
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".Notification.Activity_notify"
             android:label="@string/title_activity_activity_notify"
             android:parentActivityName=".MainActivity" >
@@ -110,6 +119,7 @@
         </service>
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".Settings.Setting"
             android:label="@string/title_activity_setting"
             android:parentActivityName=".MainActivity" >
@@ -118,6 +128,7 @@
                 android:value="com.ariana.shahre_ma.MainActivity" />
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".ListExpand.ListActivity"
             android:label="@string/title_activity_list" >
         </activity>
@@ -130,10 +141,12 @@
                 android:value="com.ariana.shahre_ma.MainActivity" />
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".MyProfile.My_Profile"
             android:label="@string/title_activity_my__profile" >
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".MyProfile.Edit_User"
             android:label="@string/title_activity_edit__user"
             android:parentActivityName=".MyProfile.My_Profile" >
@@ -142,6 +155,7 @@
                 android:value="com.ariana.shahre_ma.MyProfile.My_Profile" />
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".MyBusiness.My_Business"
             android:label="@string/title_activity_my__business"
             android:parentActivityName=".MainActivity" >
@@ -150,6 +164,7 @@
                 android:value="com.ariana.shahre_ma.MainActivity" />
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".MyBusiness.Edit_business"
             android:label="@string/title_activity_add_business"
             android:parentActivityName=".MyBusiness.My_Business" >
@@ -165,6 +180,7 @@
                 android:value=".MyBusiness.Edit_business" />
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".MyInterest.My_Interest"
             android:label="@string/title_activity_my__interest"
             android:parentActivityName=".MainActivity" >
@@ -173,6 +189,7 @@
                 android:value="com.ariana.shahre_ma.MainActivity" />
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".MyBusiness.Discount"
             android:label="@string/title_activity_discount"
             android:parentActivityName=".MyBusiness.My_Business" >
@@ -202,21 +219,25 @@
         </activity>
 
         <service
+
             android:name=".Service.ShowNotificationService"
             android:enabled="true"
             android:exported="true" >
         </service>
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".SplashActivity"
             android:label="@string/title_activity_splash"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".MyBusiness.Add_New_Business"
             android:label="@string/title_activity_add__business" >
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".NearMe.NearMeActivity"
             android:label="@string/title_activity_near_me" >
             <meta-data

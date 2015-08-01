@@ -46,11 +46,11 @@ public class HTTPGetCollectionJson extends AsyncTask<String,Void, Integer> {
      */
         @Override
         protected void onPreExecute() {
-            super.onPreExecute();
+         /*   super.onPreExecute();
            pd = new ProgressDialog(context);
             pd.setMessage("در حال بروزرسانی...");
             pd.setCancelable(false);
-            pd.show();
+            pd.show();*/
         }
 
     /**
@@ -97,7 +97,7 @@ public class HTTPGetCollectionJson extends AsyncTask<String,Void, Integer> {
 
                     }
                 }
-                pd.dismiss();
+               // pd.dismiss();
 
                /*Jobs.mSwipeRefreshLayout.post(new Runnable() {
                                                   @Override
@@ -113,7 +113,7 @@ public class HTTPGetCollectionJson extends AsyncTask<String,Void, Integer> {
                 setting.saveCollectionDownload(true);
 
             } catch (Exception e) {
-                pd.dismiss();
+                //pd.dismiss();
                /* Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
                 Log.i("Exception", e.toString());*/
             }

@@ -100,15 +100,6 @@ public class My_Interest extends ActionBarActivity implements TotalListener {
     }
 
 
-    public void GetPostInterest(View v) {
-
-
-        HTTPGetInterestJson httpinterest = new HTTPGetInterestJson(this);
-        httpinterest.SetUrl_Interest(query.getMemberId());
-
-        httpinterest.execute();
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
