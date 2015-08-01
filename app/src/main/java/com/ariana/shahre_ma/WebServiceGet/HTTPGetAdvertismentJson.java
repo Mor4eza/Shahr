@@ -31,7 +31,7 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
     Integer Id[];
     String image[];
     String link[];
-    Integer len;
+    Integer len=0;
 
     /**
      *

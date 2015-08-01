@@ -56,5 +56,7 @@
     <string name="title_activity_add__business">اضافه کردن کسب و کار</string>
     <string name="title_activity_near_me">اطراف من</string>
     <string name="filter">فیلتر کردن</string>
+    <string name="aboutUs">درباره ما</string>
+    <string name="title_activity_about_us">درباره ما</string>
 
 </resources>
