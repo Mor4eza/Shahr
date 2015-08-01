@@ -19,20 +19,20 @@
         <RelativeLayout
             android:id="@+id/top_layout"
             android:layout_width="fill_parent"
-            android:layout_height="150dp">
+            android:layout_height="160dp">
 
             <ImageView
                 android:id="@+id/img_market"
                 android:layout_width="170dp"
-                android:layout_height="20dp"
+                android:layout_height="120dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/pooshak1"
                 android:clickable="true"
                 android:background="?android:selectableItemBackground"
                 android:onClick="img_click"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentTop="true" />
+                android:layout_alignParentTop="true"
+              />
             <TextView
 
                 android:id="@+id/tv_title"
@@ -65,7 +65,7 @@
                 android:gravity="left"
                 android:id="@+id/tv_tell"
                 android:layout_width="fill_parent"
-                android:layout_height="25dp"
+                android:layout_height="30dp"
                 android:textColor="@color/colorPrimaryDark"
                 android:text="تلفن"
                 android:autoLink="all"
@@ -80,14 +80,14 @@
                 android:gravity="right"
                 android:id="@+id/tv_address"
                 android:layout_width="fill_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:text="آدرس"
+                android:layout_marginTop="3dp"
                 android:paddingRight="7dp"
                 android:layout_alignParentBottom="true"
-                android:layout_alignRight="@+id/tv_title"
-                android:layout_alignEnd="@+id/tv_title"
-                android:layout_below="@+id/tv_tell" />
-
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/img_market" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

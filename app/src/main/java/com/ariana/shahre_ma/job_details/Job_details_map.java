@@ -84,7 +84,7 @@ public class Job_details_map extends FragmentActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                             Uri.parse("http://maps.google.com/maps?daddr="+fc.GetLatitude_Business().toString()+","+fc.GetLongtiude_Business().toString()));
-                    intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                  //  intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
                     startActivity(intent);
 
                 }
