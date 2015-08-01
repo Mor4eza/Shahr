@@ -17,6 +17,7 @@ import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MyBusiness.Discount;
 import com.ariana.shahre_ma.MyBusiness.Edit_business;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.job_details.Job_details;
 import com.github.alexkolpa.fabtoolbar.FabToolbar;
 
 import java.util.ArrayList;
@@ -135,7 +136,9 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
             imgThumbnail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    fc.SetBusiness_Id(Integer.valueOf(String.valueOf(tvNature.getTag())));
+                    Intent i=new Intent(context, Job_details.class);
+                    context.startActivity(i);
                 }
             });
 

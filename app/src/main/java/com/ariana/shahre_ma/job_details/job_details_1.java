@@ -20,6 +20,8 @@ import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetOpinionJson;
 import com.ariana.shahre_ma.WebServiceSend.HTTPSendRateURL;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
 
 
 public class job_details_1 extends ActionBarActivity {
@@ -32,14 +34,10 @@ public class job_details_1 extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_details_1);
 
-
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
-
-
-
 
         }
 
@@ -52,7 +50,7 @@ public class job_details_1 extends ActionBarActivity {
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
-
+        SliderLayout slider;
         Query query;
         TextView name;
         TextView tel;
@@ -96,14 +94,14 @@ public class job_details_1 extends ActionBarActivity {
             address=(TextView) rootView.findViewById(R.id.market_address);
             des=(TextView) rootView.findViewById(R.id.market_desc);
             rate1=(RatingBar) rootView.findViewById(R.id.ratingBar1);
-
+            slider = (SliderLayout) rootView.findViewById(R.id.slider_jobs);
             display_detail();
             rates_change();
-
+            display_Images();
             return rootView;
         }
 
-        private  void rates_change(){
+         private  void rates_change(){
 
 
             Toast.makeText(getActivity(),"this",Toast.LENGTH_LONG).show();
@@ -130,8 +128,7 @@ public class job_details_1 extends ActionBarActivity {
 
         }
 
-    private  void display_detail()
-    {
+         private  void display_detail() {
 
 
         DataBaseSqlite mydb = new DataBaseSqlite(getActivity());
@@ -184,5 +181,29 @@ public class job_details_1 extends ActionBarActivity {
 
 
     }
-}
+
+         private void  display_Images(){
+
+
+
+                 final TextSliderView textSliderView = new TextSliderView(getActivity());
+                 textSliderView
+                         .image(R.drawable.pooshak);
+                 slider.addSlider(textSliderView);
+
+                 TextSliderView textSliderView2 = new TextSliderView(getActivity());
+                 textSliderView2
+                         .image(R.drawable.pooshak);
+                 slider.addSlider(textSliderView2);
+
+                 TextSliderView textSliderView3 = new TextSliderView(getActivity());
+                 textSliderView3
+                         .image(R.drawable.pooshak);
+                 slider.addSlider(textSliderView3);
+
+
+                 slider.setPresetTransformer(SliderLayout.Transformer.ZoomOutSlide);
+                 slider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+         }
+    }
 }
