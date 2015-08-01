@@ -52,33 +52,6 @@ public class Job_details_map extends FragmentActivity {
             View rootView = inflater.inflate(R.layout.fragment_job_details_map, container, false);
             route=(ImageButton)rootView.findViewById(R.id.btn_route);
 
-/*
-            TrackerSettings settings =
-                    new TrackerSettings()
-                            .setUseGPS(true)
-                            .setUseNetwork(true)
-                            .setTimeout(20000)
-                            .setUsePassive(true);
-
-            new LocationTracker(getActivity(), settings) {
-
-                @Override
-                public void onLocationFound(final Location location) {
-                    // Do some stuff when a new GPS Location has been found
-
-                    route.setEnabled(true);
-                    stopListen();
-                }
-
-                @Override
-                public void onTimeout() {
-                  route.setEnabled(false);
-                }
-            };
-
-            */
-
-
             route.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
