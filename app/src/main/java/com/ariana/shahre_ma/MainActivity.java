@@ -1,6 +1,8 @@
 package com.ariana.shahre_ma;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -10,6 +12,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -102,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
 
         setup();
 
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
+                new IntentFilter("custom-event-name"));
 
         if (net.checkInternetConnection() == false) {
             Toast.makeText(getApplication(), "شبکه اینترنت قطع می باشد", Toast.LENGTH_LONG).show();
@@ -171,9 +176,9 @@ public class MainActivity extends AppCompatActivity {
 
         String imag[]=new String[2];
         Integer i=0;
-        Cursor rows=db.select_Advertisment();
+        //Cursor rows=db.select_Advertisment();
 
-        if(rows.moveToFirst())
+      /*  if(rows.moveToFirst())
         {
             do
             {
@@ -181,26 +186,26 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("imag",imag[i]);
                 i++;
             }while (rows.moveToNext());
-        }
+        }*/
 
 
         final TextSliderView textSliderView = new TextSliderView(this);
         textSliderView
                 .description("چهار باغ")
-               .image("http://www.shahrma.com/app/Advertisment/"+imag[0]);
+               .image("http://www.shahrma.com/app/Advertisment/");
         slider.addSlider(textSliderView);
 
         TextSliderView textSliderView2 = new TextSliderView(this);
         textSliderView2
                 .description("هفت خان")
-                .image("http://www.shahrma.com/app/Advertisment/"+imag[1]);
+                .image("http://www.shahrma.com/app/Advertisment/");
         slider.addSlider(textSliderView2);
 
 
         TextSliderView textSliderView3 = new TextSliderView(this);
         textSliderView3
                 .description("تیراژه")
-                .image("http://www.shahrma.com/app/Advertisment/"+imag[2]);
+                .image("http://www.shahrma.com/app/Advertisment/");
         slider.addSlider(textSliderView3);
 
 
@@ -546,4 +551,12 @@ public class MainActivity extends AppCompatActivity {
 
         mImgFloatingView.startAnimation(animation);
     }
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Get extra data included in the Intent
+            String message = intent.getStringExtra("message");
+            Log.d("receiver", "Got message: " + message);
+        }
+    };
 }

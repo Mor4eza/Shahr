@@ -1,7 +1,9 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
@@ -123,6 +125,11 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
 
             }
 
+            Log.d("sender", "Broadcasting message");
+            Intent intent = new Intent("custom-event-name");
+            // You can also include some extra data.
+            intent.putExtra("message", "http://www.shahrma.com/app/Advertisment/"+image[0]);
+            LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
          //   Image_slider();
 
         } catch (JSONException e) {
@@ -181,13 +188,13 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
         final TextSliderView textSliderView = new TextSliderView(context);
         textSliderView
                 .description("چهار باغ")
-                .image("http://www.shahrma.com/app/Advertisment/"+link[0]);
+                .image("http://www.shahrma.com/app/Advertisment/" + link[0]);
         MainActivity.slider.addSlider(textSliderView);
 
         TextSliderView textSliderView2 = new TextSliderView(context);
         textSliderView2
                 .description("هفت خان")
-                .image("http://www.shahrma.com/app/Advertisment/"+link[1]);
+                .image("http://www.shahrma.com/app/Advertisment/" + link[1]);
         MainActivity.slider.addSlider(textSliderView2);
 
 
