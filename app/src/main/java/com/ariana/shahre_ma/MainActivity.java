@@ -41,10 +41,6 @@ import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.Notification.Activity_notify;
 import com.ariana.shahre_ma.Service.TimeSetReceiver;
 import com.ariana.shahre_ma.Settings.Setting;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetAdvertismentJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetTopsBusinessJson;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
@@ -236,9 +232,9 @@ public class MainActivity extends AppCompatActivity {
             switch (position) {
                 case 0: // Fragment # 0 - This will show FirstFragment
 
-                    return Frag_main_1.newInstance(1, "new");
+                    return Frag_main_Top_Business.newInstance(1, "new");
                 case 1: // Fragment # 0 - This will show FirstFragment different title
-                    return Frag_main_1.newInstance(2, "Page # 2");
+                    return Frag_main_Top_discount.newInstance(2, "Page # 2");
                 case 2: // Fragment # 1 - This will show SecondFragment
                     return Frag_main_search.newInstance(3, "Page # 3");
                 default:

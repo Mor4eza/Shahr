@@ -9,12 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ariana.shahre_ma.Cards.CardAdapter;
+import com.ariana.shahre_ma.Cards.TopBusiness_Card_Adapter;
 
 /**
  * Created by ariana2 on 5/23/2015.
  */
-public class Frag_main_1 extends Fragment {
+public class Frag_main_Top_Business extends Fragment {
     // Store instance variables
     private String title;
     private int page;
@@ -23,8 +23,8 @@ public class Frag_main_1 extends Fragment {
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter mAdapter;
     // newInstance constructor for creating fragment with arguments
-    public static Frag_main_1 newInstance(int page, String title) {
-        Frag_main_1 fragmentFirst = new Frag_main_1();
+    public static Frag_main_Top_Business newInstance(int page, String title) {
+        Frag_main_Top_Business fragmentFirst = new Frag_main_Top_Business();
         Bundle args = new Bundle();
         args.putInt("someInt", page);
         args.putString("someTitle", title);
@@ -44,7 +44,7 @@ public class Frag_main_1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frag_main_1, container, false);
+        View view = inflater.inflate(R.layout.frag_main_top_business, container, false);
         TextView tvLabel = (TextView) view.findViewById(R.id.tvLabel);
         tvLabel.setText(page + " -- " + title);
 
@@ -55,7 +55,7 @@ public class Frag_main_1 extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new CardAdapter();
+        mAdapter = new TopBusiness_Card_Adapter();
         mRecyclerView.setAdapter(mAdapter);
 
         return view;

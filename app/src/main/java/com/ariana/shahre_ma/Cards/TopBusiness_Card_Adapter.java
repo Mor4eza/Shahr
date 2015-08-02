@@ -13,19 +13,19 @@ import com.ariana.shahre_ma.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
+public class TopBusiness_Card_Adapter extends RecyclerView.Adapter<TopBusiness_Card_Adapter.ViewHolder> {
 
-    List<Jobs_item> mItems;
+    List<TopBusiness_Item> mItems;
 
-    public CardAdapter() {
+    public TopBusiness_Card_Adapter() {
 
         super();
 
-        mItems = new ArrayList<Jobs_item>();
+        mItems = new ArrayList<TopBusiness_Item>();
 
 
 
-        Jobs_item nature = new Jobs_item();
+        TopBusiness_Item nature = new TopBusiness_Item();
         nature.setName("پوشاک کودکان");
         nature.setDes("یه فروشگاه خوب و عالی که هم جنساش خوبه هم قیمتاش ارزونه");
         nature.setThumbnail(R.drawable.pooshak);
@@ -35,14 +35,14 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
 
 
-        nature = new Jobs_item();
+        nature = new TopBusiness_Item();
         nature.setName("رستوران");
         nature.setDes("غذاهاش عالیه... حتما برید.");
         nature.setThumbnail(R.drawable.haftkhan);
         mItems.add(nature);
 
 
-        nature = new Jobs_item();
+        nature = new TopBusiness_Item();
         nature.setName("تیراژه");
         nature.setDes("پر از کفشای جور واجور، واسه هر سلیقه ای...");
         nature.setThumbnail(R.drawable.rest_tirajhe);
@@ -61,7 +61,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        Jobs_item nature = mItems.get(i);
+        TopBusiness_Item nature = mItems.get(i);
         viewHolder.tvNature.setText(nature.getName());
         viewHolder.tvDesNature.setText(nature.getDes());
         viewHolder.imgThumbnail.setImageResource(nature.getThumbnail());

@@ -3,7 +3,7 @@ package com.ariana.shahre_ma.Cards;
 /**
  * Created by ariana2 on 6/2/2015.
  */
-public class Jobs_item {
+public class TopBusiness_Item {
 
     private String mName;
     private String mDes;
