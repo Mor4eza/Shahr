@@ -215,6 +215,13 @@
             android:name=".MyBusiness.Add_New_Business"
             android:label="@string/title_activity_add__business" >
         </activity>
+        <activity
+            android:name=".NearMe.NearMeActivity"
+            android:label="@string/title_activity_near_me" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ariana.shahre_ma.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

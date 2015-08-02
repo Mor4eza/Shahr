@@ -37,10 +37,15 @@ import com.ariana.shahre_ma.MyCity.My_city;
 import com.ariana.shahre_ma.MyInterest.My_Interest;
 import com.ariana.shahre_ma.MyProfile.Log_In;
 import com.ariana.shahre_ma.MyProfile.My_Profile;
+import com.ariana.shahre_ma.NearMe.NearMeActivity;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.Notification.Activity_notify;
 import com.ariana.shahre_ma.Service.TimeSetReceiver;
 import com.ariana.shahre_ma.Settings.Setting;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetAdvertismentJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetTopsBusinessJson;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
@@ -108,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplication(), "شبکه اینترنت قطع می باشد", Toast.LENGTH_LONG).show();
         } else {
 
-           /* HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
+           HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
             httpcoll.execute();
 
             HTTPGetSubsetJson httpsubset = new HTTPGetSubsetJson(this);
@@ -116,11 +121,11 @@ public class MainActivity extends AppCompatActivity {
 
 
             HTTPGetCityJson httpcity = new HTTPGetCityJson(this);
-            httpcity.execute();*/
+            httpcity.execute();
 
-           /*  HTTPGetAdvertismentJson httpGetAdvertismentJson=new HTTPGetAdvertismentJson(this);
+            HTTPGetAdvertismentJson httpGetAdvertismentJson=new HTTPGetAdvertismentJson(this);
             httpGetAdvertismentJson.SetAdvertisment(68);
-            httpGetAdvertismentJson.execute();*/
+            httpGetAdvertismentJson.execute();
 
 
            HTTPGetTopsBusinessJson httpGetTopsBusinessJson=new HTTPGetTopsBusinessJson(this);
@@ -350,7 +355,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         if (position == 1) {
 
-                            Intent i = new Intent(getApplicationContext(), SplashActivity.class);
+                            Intent i = new Intent(getApplicationContext(), NearMeActivity.class);
                             startActivity(i);
 
                         }
