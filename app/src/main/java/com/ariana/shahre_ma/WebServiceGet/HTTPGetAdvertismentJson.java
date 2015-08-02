@@ -183,31 +183,5 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
         return result;
     }
 
-    private void Image_slider() {
 
-        final TextSliderView textSliderView = new TextSliderView(context);
-        textSliderView
-                .description("چهار باغ")
-                .image("http://www.shahrma.com/app/Advertisment/" + link[0]);
-        MainActivity.slider.addSlider(textSliderView);
-
-        TextSliderView textSliderView2 = new TextSliderView(context);
-        textSliderView2
-                .description("هفت خان")
-                .image("http://www.shahrma.com/app/Advertisment/" + link[1]);
-        MainActivity.slider.addSlider(textSliderView2);
-
-
-        TextSliderView textSliderView3 = new TextSliderView(context);
-        textSliderView3
-                .description("تیراژه")
-                .image("http://www.shahrma.com/app/Advertisment/"+link[2]);
-        MainActivity.slider.addSlider(textSliderView3);
-
-
-        MainActivity.slider.setPresetTransformer(SliderLayout.Transformer.Accordion);
-        MainActivity.slider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-
-
-    }
 }

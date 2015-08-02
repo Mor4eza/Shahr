@@ -559,6 +559,7 @@ public class MainActivity extends AppCompatActivity {
             // Get extra data included in the Intent
             String message = intent.getStringExtra("message");
             Log.d("receiver", "Got message: " + message);
+
         }
     };
 }
