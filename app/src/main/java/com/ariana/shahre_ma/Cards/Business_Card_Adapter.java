@@ -97,7 +97,7 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
         public ViewHolder(View itemView) {
             super(itemView);
 
-            imgThumbnail = (ImageView)itemView.findViewById(R.id.my_business_image);
+            imgThumbnail = (ImageView)itemView.findViewById(R.id.my_business_image1);
             tvNature = (TextView)itemView.findViewById(R.id.my_business_title);
             img_edit = (ImageView)itemView.findViewById(R.id.btn_edit_business);
             img_discount = (ImageView)itemView.findViewById(R.id.btn_discount);

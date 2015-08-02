@@ -21,42 +21,87 @@
             android:layout_width="fill_parent"
             android:layout_height="300dp">
 
+            <View android:id="@+id/fakeView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_centerInParent="true"/>
             <ImageView
-                android:id="@+id/my_business_image"
-                android:layout_width="fill_parent"
-                android:layout_height="250dp"
+                android:id="@+id/my_business_image1"
+                android:layout_width="wrap_content"
+                android:layout_height="115dp"
                 android:scaleType="centerCrop"
-                android:layout_marginBottom="67dp"
                 android:src="@drawable/pooshak"
                 android:clickable="true"
                 android:background="?android:selectableItemBackground"
-                android:layout_alignParentBottom="true" />
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignRight="@id/fakeView"
+                 />
+            <ImageView
+                android:id="@+id/my_business_image2"
+                android:layout_width="170dp"
+                android:layout_height="115dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/pooshak"
+                android:clickable="true"
+                android:background="?android:selectableItemBackground"
+                android:layout_alignLeft="@id/fakeView"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+            <ImageView
+                android:id="@+id/my_business_image3"
+                android:layout_width="170dp"
+                android:layout_height="115dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/pooshak"
+                android:clickable="true"
+                android:background="?android:selectableItemBackground"
+                android:layout_below="@+id/my_business_image1"
+                android:layout_toLeftOf="@+id/my_business_image2"
+                android:layout_toStartOf="@+id/my_business_image2"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <ImageView
+                android:id="@+id/my_business_image4"
+                android:layout_width="170dp"
+                android:layout_height="115dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/pooshak"
+                android:clickable="true"
+                android:background="?android:selectableItemBackground"
+                android:layout_alignTop="@+id/my_business_image3"
+                android:layout_alignLeft="@id/fakeView"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
             <TextView
 
                 android:id="@+id/my_business_title"
                 android:layout_width="fill_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:layout_gravity="top"
                 android:gravity="center_vertical|center_horizontal"
                 android:background="#5c6f1c0b"
-                android:alpha="0.9"
+                android:alpha=".9"
                 android:textColor="#fff"
                 android:textSize="26sp"
                 android:text="Test"
-
-                android:layout_alignTop="@+id/img_market"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
             <RatingBar
                 android:id="@+id/my_business_rate"
-                android:layout_alignBottom="@+id/my_business_image"
                 android:layout_width="wrap_content"
                 style="?android:attr/ratingBarStyleSmall"
                 android:background="@color/blue_focused"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/fab_toolbar"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
             <com.github.alexkolpa.fabtoolbar.FabToolbar
                 android:id="@+id/fab_toolbar"
@@ -66,9 +111,9 @@
                 tb:tb_anim_duration="500"
                 tb:tb_button_gravity="start"
                 tb:tb_container_gravity="center"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/my_business_rate">
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
 
                     <ImageView
                         android:id="@+id/btn_edit_business"
@@ -86,10 +131,24 @@
                         android:layout_marginLeft="40dp"
                         android:layout_marginRight="40dp"
                         />
+                    <ImageView
+                        android:id="@+id/btn_change"
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:src="@android:drawable/ic_menu_crop"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        />
+
 
                 <!-- More buttons can be added here -->
 
             </com.github.alexkolpa.fabtoolbar.FabToolbar>
+
+
+
+
+
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>
