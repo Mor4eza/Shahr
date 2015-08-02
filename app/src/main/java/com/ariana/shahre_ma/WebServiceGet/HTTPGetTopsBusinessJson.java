@@ -108,6 +108,7 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
         Integer result=0;
         try
         {
+            Log.i("url",getTopBusiness());
             InputStream inputStream=getStreamFromURL(getTopBusiness(),"GET");
             String json=streamToString(inputStream);
             ParsJSON(json);
@@ -122,182 +123,173 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
     }
 
 
-    void ParsJSON(String StrinJson)
-        {
-            try {
+    void ParsJSON(String JSONString) {
 
-                Log.i("JSONTopsBusiness", StrinJson);
-                JSONArray areas = new JSONArray(StrinJson);
+        try {
 
-                Id=new Integer[areas.length()];
-                market=new String[areas.length()];
-                code=new String[areas.length()];
-                phone=new String[areas.length()];
-                mobile=new String[areas.length()];
-                fax=new String[areas.length()];
-                email=new String[areas.length()];
-                businessowner=new String[areas.length()];
-                address=new String[areas.length()];
-                description=new String[areas.length()];
-                startdate=new String[areas.length()];
-                expirationdate=new String[areas.length()];
-                inactive=new String[areas.length()];
-                subset=new String[areas.length()];
-                subsetid=new Integer[areas.length()];
-                longitude=new String[areas.length()];
-                latitude=new String[areas.length()];
-                areaid=new Integer[areas.length()];
-                area1=new String[areas.length()];
-                user=new String[areas.length()];
-                userid=new Integer[areas.length()];
+            Log.i("JSONString",JSONString);
+            JSONArray areas = new JSONArray(JSONString);
 
-                field1=new Integer[areas.length()];
-                field2=new Integer[areas.length()];
-                field3=new Integer[areas.length()];
-                field4=new Integer[areas.length()];
-                field5=new Integer[areas.length()];
-                field6=new Integer[areas.length()];
-                field7=new Integer[areas.length()];
+            Id=new Integer[areas.length()];
+            market=new String[areas.length()];
+            code=new String[areas.length()];
+            phone=new String[areas.length()];
+            mobile=new String[areas.length()];
+            fax=new String[areas.length()];
+            email=new String[areas.length()];
+            businessowner=new String[areas.length()];
+            address=new String[areas.length()];
+            description=new String[areas.length()];
+            startdate=new String[areas.length()];
+            expirationdate=new String[areas.length()];
+            inactive=new String[areas.length()];
+            subset=new String[areas.length()];
+            subsetid=new Integer[areas.length()];
+            longitude=new String[areas.length()];
+            latitude=new String[areas.length()];
+            areaid=new Integer[areas.length()];
+            area1=new String[areas.length()];
+            user=new String[areas.length()];
+            userid=new Integer[areas.length()];
 
-                ratecount=new Integer[areas.length()];
-                ratevalue=new Double[areas.length()];
+            field1=new Integer[areas.length()];
+            field2=new Integer[areas.length()];
+            field3=new Integer[areas.length()];
+            field4=new Integer[areas.length()];
+            field5=new Integer[areas.length()];
+            field6=new Integer[areas.length()];
+            field7=new Integer[areas.length()];
 
-                discountid = new Integer[areas.length()];
-                discounttext = new String[areas.length()];
-                discountimage=new String[areas.length()];
-                discountstartdate=new String[areas.length()];
-                discountexpirationdate=new String[areas.length()];
-                discountdescription=new String[areas.length()];
-                discountpercent=new String[areas.length()];
-                discountbusinessid=new Integer[areas.length()];
+            ratecount=new Integer[areas.length()];
+            ratevalue=new Double[areas.length()];
 
-                likediscount=new Integer[areas.length()];
-                dislikediscount=new Integer[areas.length()];
+            discountid = new Integer[areas.length()];
+            discounttext = new String[areas.length()];
+            discountimage=new String[areas.length()];
+            discountstartdate=new String[areas.length()];
+            discountexpirationdate=new String[areas.length()];
+            discountdescription=new String[areas.length()];
+            discountpercent=new String[areas.length()];
+            discountbusinessid=new Integer[areas.length()];
 
-                len=areas.length();
-                for (int i = 0; i < areas.length(); i++) {
+            likediscount=new Integer[areas.length()];
+            dislikediscount=new Integer[areas.length()];
 
-
-                    JSONObject area = areas.getJSONObject(i);
-                    address[i]=area.getString("Address");
-                    area1[i]=area.getString("Area");
-                    areaid[i]=area.getInt("AreaId");
-                    businessowner[i]=area.getString("BusinessOwner");
-                    code[i]=area.getString("Code");
-                    description[i] = area.getString("Description");
-                    email[i] = area.getString("Email");
-                    expirationdate[i]=area.getString("ExpirationDate");
-                    fax[i]=area.getString("Fax");
-                    field1[i]=area.getInt("Field1");
-                    field2[i]=area.getInt("Field2");
-                    field3[i] = area.getInt("Field3");
-                    field4[i]=area.getInt("Field4");
-                    field5[i]=area.getInt("Field5");
-                    field6[i] = area.getInt("Field6");
-                    field7[i] = area.getInt("Field7");
-                    Id[i]=area.getInt("Id");
-                    inactive[i]=area.getString("Inactive");
-                    latitude[i]=area.getString("Latitude");
-                    longitude[i]=area.getString("Longitude");
-                    market[i]=area.getString("Market");
-                    mobile[i]=area.getString("Mobile");
-                    phone[i]=area.getString("Phone");
-                    startdate[i]=area.getString("Startdate");
-                    subset[i]=area.getString("Subset");
-                    subsetid[i]=area.getInt("SubsetId");
-                    user[i]=area.getString("User");
-                    userid[i]=area.getInt("UserId");
+            len=areas.length();
+            for (int i = 0; i < areas.length(); i++) {
 
 
-                    ratecount[i]=area.getInt("RateCount");
-                    ratevalue[i]=area.getDouble("RateAverage");
+                JSONObject area = areas.getJSONObject(i);
+                address[i]=area.getString("Address");
+                area1[i]=area.getString("Area");
+                areaid[i]=area.getInt("AreaId");
+                businessowner[i]=area.getString("BusinessOwner");
+                code[i]=area.getString("Code");
+                description[i] = area.getString("Description");
+                email[i] = area.getString("Email");
+                expirationdate[i]=area.getString("ExpirationDate");
+                fax[i]=area.getString("Fax");
+                field1[i]=area.getInt("Field1");
+                field2[i]=area.getInt("Field2");
+                field3[i] = area.getInt("Field3");
+                field4[i]=area.getInt("Field4");
+                field5[i]=area.getInt("Field5");
+                field6[i] = area.getInt("Field6");
+                field7[i] = area.getInt("Field7");
+                Id[i]=area.getInt("Id");
+                inactive[i]=area.getString("Inactive");
+                latitude[i]=area.getString("Latitude");
+                longitude[i]=area.getString("Longitude");
+                market[i]=area.getString("Market");
+                mobile[i]=area.getString("Mobile");
+                phone[i]=area.getString("Phone");
+                startdate[i]=area.getString("Startdate");
+                subset[i]=area.getString("Subset");
+                subsetid[i]=area.getInt("SubsetId");
+                user[i]=area.getString("User");
+                userid[i]=area.getInt("UserId");
 
 
-                    discountid[i]=area.getInt("DiscountId");
-                    discounttext[i]=area.getString("DiscountText");
-                    discountimage[i]=area.getString("DiscountImage");
-                    discountstartdate[i]=area.getString("DiscountStartdate");
-                    discountexpirationdate[i]=area.getString("DiscountExpirationDate");
-                    discountpercent[i]=area.getString("DiscountPercent");
-                    discountdescription[i]=area.getString("DiscountDescription");
-                    discountbusinessid[i]=area.getInt("Id");
-
-                    likediscount[i]=area.getInt("DiscountLike");
-                    dislikediscount[i]=area.getInt("DiscountDislike");
+                ratecount[i]=area.getInt("RateCount");
+                ratevalue[i]=area.getDouble("RateAverage");
 
 
+                discountid[i]=area.getInt("DiscountId");
+                discounttext[i]=area.getString("DiscountText");
+                discountimage[i]=area.getString("DiscountImage");
+                discountstartdate[i]=area.getString("DiscountStartdate");
+                discountexpirationdate[i]=area.getString("DiscountExpirationDate");
+                discountpercent[i]=area.getString("DiscountPercent");
+                discountdescription[i]=area.getString("DiscountDescription");
+                discountbusinessid[i]=area.getInt("Id");
 
-                }
+                likediscount[i]=area.getInt("DiscountLike");
+                dislikediscount[i]=area.getInt("DiscountDislike");
 
 
 
-            } catch (JSONException e) {
-                // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
-                Log.i("JSONException",e.toString());
             }
+
+
+
+
+        } catch (JSONException e) {
+            // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
+            Log.i("JSONException",e.toString());
+        }
+    }
+
+    InputStream getStreamFromURL(String urlString, String method) {
+        try {
+            URL url = new URL(urlString);
+            HttpURLConnection huc = (HttpURLConnection) url.openConnection();
+            huc.setReadTimeout(10000);
+            huc.setConnectTimeout(15000);
+            huc.setRequestMethod(method);
+            huc.setDoInput(true);
+
+            huc.connect();
+
+            return huc.getInputStream();
+        } catch (Exception e) {
+            Log.e("getStreamFromURL",e.toString());
+            return null;
         }
 
-    InputStream getStreamFromURL(String urlString,String method)
-        {
-            try
-            {
-                URL url=new URL(urlString);
-                HttpURLConnection huc=(HttpURLConnection) url.openConnection();
-                huc.setReadTimeout(10000);
-                huc.setConnectTimeout(15000);
-                huc.setRequestMethod(method);
-                huc.setDoInput(true);
+    }
 
-                return  huc.getInputStream();
+    String streamToString(InputStream is) {
+        String result = "";
+        String line = null;
+
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            while ((line = br.readLine()) != null) {
+                result = line + "\n";
             }
-            catch (Exception e)
-            {
-                return null;
-            }
+        } catch (Exception e) {
         }
 
-    String streamToString(InputStream is)
-        {
-            String result="";
-            String line="";
-            try
-            {
-                BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                while ((line = br.readLine()) != null)
-                    {
-                        result = line + "\n";
-                    }
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-            return  result;
-        }
+
+        return result;
+    }
+
+
     @Override
     protected void onPostExecute(Integer integer) {
         super.onPostExecute(integer);
-        try {
+     //   try {
 
+            DataBaseSqlite db = new DataBaseSqlite(context);
             KeySettings setting=new KeySettings(context);
             query=new Query(context);
 
-
             Integer cityid=0;
-            Integer idsubset=0;
-
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
-
-
             cityid=query.getCityId(setting.getCityName());
-            idsubset=fc.GetSubsetId();
-
-            dbs.delete_BusinessTops(cityid, idsubset);
-            dbs.delete_BusinessDisCount(cityid, idsubset);
 
             if(len==0) {
-                //  Toast.makeText(get, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
-                Log.i("Count Business : ", "فروشگاه ثبت نشد");
+
+                Log.i("Count TopsBusiness : ", "فروشگاه ثبت نشد");
 
             }
 
@@ -307,20 +299,24 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
 
                 for (int i = 0; i <len; i++)
                 {
-                    dbs.delete_DisCount(discountid[i]);
+                    db.delete_BusinessTops(Id[i]);
+                    db.delete_BusinessDisCount(Id[i]);
+                    db.delete_DisCount(discountid[i]);
+
+
                     if(discountid[i]==0) {
                         Log.i("ifbusiness","0");
                     }
                     else
                     {
                         Log.i("elsebusiness", "i>0");
-                        dbs.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i],likediscount[i],dislikediscount[i]);
+                        db.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i],likediscount[i],dislikediscount[i]);
                     }
 
                     if(i<=9)
-                        dbs.Add_businessTops(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
+                        db.Add_businessTops(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
                     else
-                        dbs.Add_businessDisCount(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
+                        db.Add_businessDisCount(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
 
 
                 }
@@ -328,10 +324,10 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
                 fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
             }
 
-        } catch (Exception e) {
+      /*  } catch (Exception e) {
 
             Log.e("ExceptionBusinessJson",e.toString());
-        }
+        }*/
 
     }
 }

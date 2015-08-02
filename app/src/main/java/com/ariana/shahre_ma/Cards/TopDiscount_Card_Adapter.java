@@ -1,5 +1,7 @@
 package com.ariana.shahre_ma.Cards;
 
+import android.content.Context;
+import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.R;
 
 import java.util.ArrayList;
@@ -19,27 +22,29 @@ import java.util.List;
 public class TopDiscount_Card_Adapter extends RecyclerView.Adapter<TopDiscount_Card_Adapter.ViewHolder> {
 
     List<TopDiscount_Item> mItems;
-
-    public TopDiscount_Card_Adapter() {
+    TopDiscount_Item nature;
+    Context context;
+    public TopDiscount_Card_Adapter(Context context) {
 
         super();
 
         mItems = new ArrayList<TopDiscount_Item>();
 
-        Log.i("ehraaaaz","ejraaa");
+        DataBaseSqlite db=new DataBaseSqlite(context);
+        Cursor rows=db.select_AllBusinessDisCount();
 
-        TopDiscount_Item nature = new TopDiscount_Item();
-        nature.setName("پوشاک کودکان");
-        nature.setDes("یه فروشگاه خوب و عالی که هم جنساش خوبه هم قیمتاش ارزونه");
-        nature.setThumbnail(R.drawable.pooshak);
-        mItems.add(nature);
+        if(rows.moveToFirst()) {
+            do {
+
+                nature = new TopDiscount_Item();
+                nature.setName(rows.getString(1));
+                nature.setDes(rows.getString(8));
+                nature.setThumbnail(R.drawable.pooshak);
+                mItems.add(nature);
+            }while (rows.moveToNext());
+        }
 
 
-        nature = new TopDiscount_Item();
-        nature.setName("تیراژه");
-        nature.setDes("پر از کفشای جور واجور، واسه هر سلیقه ای...");
-        nature.setThumbnail(R.drawable.rest_tirajhe);
-        mItems.add(nature);
 
 
     }

@@ -693,6 +693,20 @@ Context context;
 
     }
 
+    public Cursor select_AllBusinessTops()
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_BUSINESS_TOPS , null);
+
+    }
+    public Cursor select_AllBusinessDisCount()
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_BUSINESS_DISCOUNT , null);
+
+    }
     public Cursor select_CountBusiness_SubsetId(Integer subsetID)
     {
 
@@ -1150,16 +1164,16 @@ Context context;
         db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_BUSINESS+" WHERE CityId="+cityid+" AND SubsetId="+subsetid);
         db.close();
     }
-    public void delete_BusinessTops(Integer cityid,Integer subsetid)
+    public void delete_BusinessTops(Integer businessid)
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_BUSINESS_TOPS+" WHERE CityId="+cityid+" AND SubsetId="+subsetid);
+        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_BUSINESS_TOPS+" WHERE Id="+businessid);
         db.close();
     }
-    public void delete_BusinessDisCount(Integer cityid,Integer subsetid)
+    public void delete_BusinessDisCount(Integer businessid)
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_BUSINESS_DISCOUNT+" WHERE CityId="+cityid+" AND SubsetId="+subsetid);
+        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_BUSINESS_DISCOUNT+" WHERE Id="+businessid);
         db.close();
     }
 
