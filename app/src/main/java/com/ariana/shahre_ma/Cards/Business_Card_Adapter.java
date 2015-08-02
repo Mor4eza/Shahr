@@ -3,14 +3,18 @@ package com.ariana.shahre_ma.Cards;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -86,14 +90,20 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
         return mItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public ImageView imgThumbnail;
         public ImageView img_edit;
         public ImageView img_discount;
+        public ImageView img_pic;
         public TextView tvNature;
         public RatingBar Rates;
         public FabToolbar fab;
+        public Button menu1;
+        public Button menu2;
+        public Button menu3;
+        public Button menu4;
+
         public ViewHolder(View itemView) {
             super(itemView);
 
@@ -101,9 +111,22 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
             tvNature = (TextView)itemView.findViewById(R.id.my_business_title);
             img_edit = (ImageView)itemView.findViewById(R.id.btn_edit_business);
             img_discount = (ImageView)itemView.findViewById(R.id.btn_discount);
+            img_pic = (ImageView)itemView.findViewById(R.id.btn_change);
             Rates = (RatingBar)itemView.findViewById(R.id.my_business_rate);
             fab=(FabToolbar)itemView.findViewById(R.id.fab_toolbar);
+            menu1=(Button)itemView.findViewById(R.id.overflow1);
+            menu2=(Button)itemView.findViewById(R.id.overflow2);
+            menu3=(Button)itemView.findViewById(R.id.overflow3);
+            menu4=(Button)itemView.findViewById(R.id.overflow4);
+
+
             fab.setButtonIcon(context.getResources().getDrawable(R.drawable.abc_ic_menu_moreoverflow_mtrl_alpha));
+
+            menu1.setOnClickListener(this);
+            menu2.setOnClickListener(this);
+            menu3.setOnClickListener(this);
+            menu4.setOnClickListener(this);
+
             img_edit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -118,9 +141,28 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
                 @Override
                 public void onClick(View v) {
                     fab.hide();
-                    Intent i = new Intent(context,Discount.class);
+                    Intent i = new Intent(context, Discount.class);
                     context.startActivity(i);
-                    Log.i("clicked",tvNature.getText().toString());
+                    Log.i("clicked", tvNature.getText().toString());
+                }
+            });
+
+            img_pic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    fab.hide();
+                    if (menu1.getVisibility()==View.INVISIBLE){
+
+                        menu1.setVisibility(View.VISIBLE);
+                        menu2.setVisibility(View.VISIBLE);
+                        menu3.setVisibility(View.VISIBLE);
+                        menu4.setVisibility(View.VISIBLE);
+                    }else{
+                        menu1.setVisibility(View.INVISIBLE);
+                        menu2.setVisibility(View.INVISIBLE);
+                        menu3.setVisibility(View.INVISIBLE);
+                        menu4.setVisibility(View.INVISIBLE);
+                    }
                 }
             });
 
@@ -143,5 +185,25 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
             });
 
         }
+
+        @Override
+        public void onClick(final View v) {
+                v.setTag(String.valueOf(v.getId()));
+                PopupMenu popup = new PopupMenu(context, v);
+                popup.getMenuInflater().inflate(R.menu.image_popup, popup.getMenu());
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        Toast.makeText(context, "Clicked : " + item.getTitle()+v.getTag(), Toast.LENGTH_SHORT).show();
+
+                        menu1.setVisibility(View.INVISIBLE);
+                        menu2.setVisibility(View.INVISIBLE);
+                        menu3.setVisibility(View.INVISIBLE);
+                        menu4.setVisibility(View.INVISIBLE);
+                        return true;
+                    }
+                });
+                popup.show();//showing popup menu
+        }
+
     }
 }

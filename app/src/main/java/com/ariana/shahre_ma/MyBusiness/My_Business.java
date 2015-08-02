@@ -76,9 +76,6 @@ public class My_Business extends ActionBarActivity {
         Intent i = new Intent(getApplicationContext(),Add_New_Business.class);
         startActivity(i);
     }
-    public void edit_business (View v){
-
-    }
     public void Intialize()
     {
         //rate=(RatingBar) findViewById(R.id.my_business_rate);

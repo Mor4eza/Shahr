@@ -25,6 +25,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_centerInParent="true"/>
+
             <ImageView
                 android:id="@+id/my_business_image1"
                 android:layout_width="wrap_content"
@@ -76,6 +77,7 @@
                 android:layout_alignLeft="@id/fakeView"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
+
             <TextView
 
                 android:id="@+id/my_business_title"
@@ -145,7 +147,42 @@
 
             </com.github.alexkolpa.fabtoolbar.FabToolbar>
 
-
+            <Button
+                android:id="@+id/overflow1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="invisible"
+                android:layout_alignRight="@id/my_business_image1"
+                android:layout_alignEnd="@id/my_business_image1"
+                android:layout_alignBottom="@id/my_business_image1"
+                android:background="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"/>
+            <Button
+                android:id="@+id/overflow2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="invisible"
+                android:layout_alignRight="@id/my_business_image2"
+                android:layout_alignEnd="@id/my_business_image2"
+                android:layout_alignBottom="@id/my_business_image2"
+                android:background="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"/>
+            <Button
+                android:id="@+id/overflow3"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="invisible"
+                android:layout_alignRight="@id/my_business_image3"
+                android:layout_alignEnd="@id/my_business_image3"
+                android:layout_alignBottom="@id/my_business_image3"
+                android:background="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"/>
+            <Button
+                android:id="@+id/overflow4"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="invisible"
+                android:layout_alignRight="@id/my_business_image4"
+                android:layout_alignEnd="@id/my_business_image4"
+                android:layout_alignBottom="@id/my_business_image4"
+                android:background="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"/>
 
 
 

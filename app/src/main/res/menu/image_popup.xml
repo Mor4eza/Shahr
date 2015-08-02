@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/img_pop_cam"
+        android:title="دوربین"
+        android:icon="@android:drawable/ic_menu_camera"/>
+
+    <item
+        android:id="@+id/img_pop_gal"
+        android:title="گالری"
+        android:icon="@android:drawable/ic_menu_gallery"
+        />
+
+    <item
+        android:id="@+id/img_pop_del"
+        android:title="حذف"
+        android:icon="@android:drawable/ic_delete"
+        />
+
+
+</menu>  
