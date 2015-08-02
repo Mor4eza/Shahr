@@ -55,7 +55,7 @@ public class Frag_main_Top_Business extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new TopBusiness_Card_Adapter();
+        mAdapter = new TopBusiness_Card_Adapter(getActivity());
         mRecyclerView.setAdapter(mAdapter);
 
         return view;

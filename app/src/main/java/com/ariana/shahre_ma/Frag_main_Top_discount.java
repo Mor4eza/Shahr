@@ -56,7 +56,7 @@ public class Frag_main_Top_discount extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new TopDiscount_Card_Adapter();
+        mAdapter = new TopDiscount_Card_Adapter(getActivity());
         mRecyclerView.setAdapter(mAdapter);
 
         return view;

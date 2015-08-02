@@ -288,7 +288,7 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
     String streamToString(InputStream is)
         {
             String result="";
-            String line="";
+            String line=null;
 
             try
             {
