@@ -20,6 +20,7 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MyBusiness.Discount;
 import com.ariana.shahre_ma.MyBusiness.Edit_business;
+import com.ariana.shahre_ma.MyBusiness.My_Business;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.job_details.Job_details;
 import com.github.alexkolpa.fabtoolbar.FabToolbar;
@@ -103,7 +104,7 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
         public Button menu2;
         public Button menu3;
         public Button menu4;
-
+        My_Business my_business=new My_Business();
         public ViewHolder(View itemView) {
             super(itemView);
 
@@ -195,10 +196,18 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
                     public boolean onMenuItemClick(MenuItem item) {
                         Toast.makeText(context, "Clicked : " + item.getTitle()+v.getTag(), Toast.LENGTH_SHORT).show();
 
+
                         menu1.setVisibility(View.INVISIBLE);
                         menu2.setVisibility(View.INVISIBLE);
                         menu3.setVisibility(View.INVISIBLE);
                         menu4.setVisibility(View.INVISIBLE);
+
+                        if(item.getTitle().equals("دوربین"))
+                            my_business.openCamera();
+                        else if(item.getTitle().equals("گالری"))
+                            my_business.selectImageFromGallery();
+                        else if(item.getTitle().equals("حذف"))
+                            Log.i("","");
                         return true;
                     }
                 });

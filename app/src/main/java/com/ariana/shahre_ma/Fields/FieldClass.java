@@ -84,6 +84,7 @@ public class FieldClass
     private static Integer Count_DisLike;
 
     private static Boolean ShowNotification=false;
+    private static Boolean SearchOffline=false;
     private static Integer ShowNotificationId;
 
     private static List<String> NameSubset=new ArrayList<String>();
@@ -584,10 +585,18 @@ public class FieldClass
     }
 
     public void SetShowNotificationId(Integer id){
-        this.ShowNotificationId=id;
+    this.ShowNotificationId=id;
     }
     public Integer GetShowNotificationId(){
         return  this.ShowNotificationId;
+    }
+
+
+    public void SetSearchOffline(Boolean search){
+        this.SearchOffline=search;
+    }
+    public Boolean GetSearchOffline(){
+        return  this.SearchOffline;
     }
 }
 

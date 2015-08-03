@@ -693,6 +693,22 @@ Context context;
 
     }
 
+    public Cursor select_BusinessSearchNameMarket(String namemarket)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_BUSINESS +" WHERE Market like '%"+namemarket+"%'", null);
+
+    }
+
+    public Cursor select_BusinessSearchAddreass(String address)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_BUSINESS +" WHERE Address like '%"+address+"%'", null);
+
+    }
+
     public Cursor select_AllBusinessTops()
     {
 

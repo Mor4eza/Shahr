@@ -1,7 +1,11 @@
 package com.ariana.shahre_ma.MyBusiness;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +38,10 @@ public class My_Business extends ActionBarActivity {
     Query query=new Query(this);
     TextView title;
     FloatingActionButton discount;
+
+    Uri currImageURI;
+    String picturePath;
+    String ba1;
 
     public static RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
@@ -237,4 +246,57 @@ public class My_Business extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void selectImageFromGallery() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+    }
+
+
+
+    public void openCamera() {
+
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, currImageURI);
+        startActivityForResult(intent, 100);
+
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 100) {
+                // currImageURI is the global variable I’m using to hold the content:
+                currImageURI = data.getData();
+                System.out.println("Current image Path is —--->" + getRealPathFromURI(currImageURI));
+                TextView tv_path = (TextView) findViewById(R.id.textView);
+                tv_path.setText(getRealPathFromURI(currImageURI));
+
+              /*  Bitmap myBitmap = BitmapFactory.decodeFile(tv_path.getText().toString());
+                ImageView myImage = (ImageView) findViewById(R.id.imageView);
+                myImage.setImageBitmap(myBitmap);*/
+
+
+            }
+        }
+    }
+    public String getRealPathFromURI(Uri contentUri) {
+        String [] proj={MediaStore.Images.Media.DATA};
+        android.database.Cursor cursor = managedQuery( contentUri,
+                proj, // Which columns to return
+                null, // WHERE clause; which rows to return (all rows)
+                null, // WHERE clause selection arguments (none)
+                null); // Order-by clause (ascending by name)
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        picturePath = cursor.getString(column_index);
+        return cursor.getString(column_index);
+    }
+
 }

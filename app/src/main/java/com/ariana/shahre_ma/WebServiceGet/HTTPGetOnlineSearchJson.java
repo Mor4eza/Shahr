@@ -324,7 +324,7 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
             cityid=query.getCityId(setting.getCityName());
             idsubset=fc.GetSubsetId();
 
-            dbs.delete_Business(cityid, idsubset);
+
 
             if(len==0) {
                 //  Toast.makeText(get, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
@@ -342,6 +342,7 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
 
                 for (int i = 0; i <len; i++)
                 {
+                    dbs.delete_BusinessId(Id[i]);
                     dbs.delete_DisCount(discountid[i]);
                     if(discountid[i]==0) {
                         Log.i("ifbusiness","0");

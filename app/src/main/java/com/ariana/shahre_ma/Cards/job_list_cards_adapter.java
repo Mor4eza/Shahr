@@ -99,65 +99,102 @@ private  static Context context;
         }
 
        // try {
-            if(ns.checkInternetConnection() && search)
-            {
-
-                mItems = new ArrayList<Job_lists_card_item>();
-                for (int i = 0; i < fdb.GetMarketBusiness().size(); i++)
+            if(fc.GetSearchOffline())
                 {
+                    fc.SetSearchOffline(false);
+                    mItems = new ArrayList<Job_lists_card_item>();
 
-                    nature = new Job_lists_card_item();
-                    nature.setName(fdb.GetMarketBusiness().get(i));
-                    nature.setDes(fdb.GetAddressBusiness().get(i));
-                    nature.setThumbnail(R.drawable.pooshak);
-                    nature.setRate(fdb.GetRateBusiness().get(i));
-                    nature.setmId(fdb.GetIdBusiness().get(i));
+                    for (int i = 0; i < fdb.GetMarketBusiness().size(); i++)
+                    {
+
+                        nature = new Job_lists_card_item();
+                        nature.setName(fdb.GetMarketBusiness().get(i));
+                        nature.setDes(fdb.GetAddressBusiness().get(i));
+                        nature.setThumbnail(R.drawable.pooshak);
+                        nature.setRate(fdb.GetRateBusiness().get(i));
+                        nature.setmId(fdb.GetIdBusiness().get(i));
 
 
-                           if(fdb.GetMobileBusiness().get(i).length()==0){
+                        if(fdb.GetMobileBusiness().get(i).length()==0)
+                        {
+                            nature.setTell(fdb.GetPhoneBusiness().get(i));
+                        }
+                        else
+                        {
+                            nature.setTell(fdb.GetMobileBusiness().get(i));
+                        }
+
+                        mItems.add(nature);
+                        notifyDataSetChanged();
+                    }
+                }
+            else
+                {
+                    if(ns.checkInternetConnection() && search)
+                    {
+
+                        mItems = new ArrayList<Job_lists_card_item>();
+
+                        for (int i = 0; i < fdb.GetMarketBusiness().size(); i++)
+                        {
+
+                            nature = new Job_lists_card_item();
+                            nature.setName(fdb.GetMarketBusiness().get(i));
+                            nature.setDes(fdb.GetAddressBusiness().get(i));
+                            nature.setThumbnail(R.drawable.pooshak);
+                            nature.setRate(fdb.GetRateBusiness().get(i));
+                            nature.setmId(fdb.GetIdBusiness().get(i));
+
+
+                            if(fdb.GetMobileBusiness().get(i).length()==0)
+                            {
                                 nature.setTell(fdb.GetPhoneBusiness().get(i));
-                            }else{
+                            }
+                            else
+                            {
                                 nature.setTell(fdb.GetMobileBusiness().get(i));
                             }
 
-                    mItems.add(nature);
-                    notifyDataSetChanged();
-                }
-                }
-                else
-                {
-
-                    if (allrows.moveToFirst()) {
-                        mItems = new ArrayList<Job_lists_card_item>();
-                        do {
-
-
-                            nature = new Job_lists_card_item();
-                            nature.setName(allrows.getString(1));
-                            nature.setDes(allrows.getString(8));
-                            nature.setThumbnail(R.drawable.pooshak);
-                            nature.setRate(allrows.getDouble(29));
-                            nature.setmId(allrows.getInt(0));
-
-
-
-
-
-
-                            if (allrows.getString(3).equals(""))
-                            {
-                                nature.setTell(allrows.getString(4));
-                            } else
-                            {
-                                nature.setTell(allrows.getString(3));
-                            }
                             mItems.add(nature);
+                            notifyDataSetChanged();
+                        }
+                    }
+                    else
+                    {
 
-                        } while (allrows.moveToNext());
+                        if (allrows.moveToFirst())
+                        {
+                            mItems = new ArrayList<Job_lists_card_item>();
+                            do {
+
+
+                                nature = new Job_lists_card_item();
+                                nature.setName(allrows.getString(1));
+                                nature.setDes(allrows.getString(8));
+                                nature.setThumbnail(R.drawable.pooshak);
+                                nature.setRate(allrows.getDouble(29));
+                                nature.setmId(allrows.getInt(0));
+
+
+
+
+
+
+                                if (allrows.getString(3).equals(""))
+                                {
+                                    nature.setTell(allrows.getString(4));
+                                } else
+                                {
+                                    nature.setTell(allrows.getString(3));
+                                }
+                                mItems.add(nature);
+
+                            } while (allrows.moveToNext());
+                        }
+
                     }
 
                 }
-
             if(setting.getCacheImage()==false)
             {
                 //Delete image
