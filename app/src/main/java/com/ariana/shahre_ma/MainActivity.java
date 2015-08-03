@@ -184,9 +184,9 @@ public class MainActivity extends AppCompatActivity {
         {
             do
             {
-                //imag[i]=rows.getString(1);
+               // imag[i]=rows.getString(1);
                 Log.i("imag",rows.getString(1));
-               // i++;
+                i++;
             }while (rows.moveToNext());
         }
 
@@ -194,20 +194,20 @@ public class MainActivity extends AppCompatActivity {
         final TextSliderView textSliderView = new TextSliderView(this);
         textSliderView
                 .description("چهار باغ")
-               .image("http://www.shahrma.com/app/Advertisment/");
+               .image("http://www.shahrma.com/app/Advertisment/1.jpg");
         slider.addSlider(textSliderView);
 
         TextSliderView textSliderView2 = new TextSliderView(this);
         textSliderView2
                 .description("هفت خان")
-                .image("http://www.shahrma.com/app/Advertisment/");
+                .image("http://www.shahrma.com/app/Advertisment/2.jpg");
         slider.addSlider(textSliderView2);
 
 
         TextSliderView textSliderView3 = new TextSliderView(this);
         textSliderView3
                 .description("تیراژه")
-                .image("http://www.shahrma.com/app/Advertisment/");
+                .image("http://www.shahrma.com/app/Advertisment/3.jpg");
         slider.addSlider(textSliderView3);
 
 
