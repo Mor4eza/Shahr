@@ -81,6 +81,7 @@ public class Frag_main_search extends Fragment {
                 DataBaseSqlite db=new DataBaseSqlite(getActivity());
                 if(ns.checkInternetConnection())
                 {
+                    Log.i("ss","s");
                     HTTPGetOnlineSearchJson httpGetOnlineSearchJson = new HTTPGetOnlineSearchJson(getActivity());
                     httpGetOnlineSearchJson.SetValueSearch(txtWhat.getText().toString(), 68);
                     httpGetOnlineSearchJson.execute();
@@ -139,15 +140,16 @@ public class Frag_main_search extends Fragment {
                     Log.i("Count", String.valueOf(rows.getCount()));
                     Log.i("Count1", String.valueOf(rows1.getCount()));
 
+                    if(rows.getCount()>0) {
+                        fc.SetSearchOffline(true);
+                        Intent intent = new Intent(getActivity(), Jobs_List.class);
+                        getActivity().startActivity(intent);
+
+                    }
                 }
 
 
-                if(rows.getCount()>0) {
-                    fc.SetSearchOffline(true);
-                    Intent intent = new Intent(getActivity(), Jobs_List.class);
-                    getActivity().startActivity(intent);
 
-                }
 
             }
         });
