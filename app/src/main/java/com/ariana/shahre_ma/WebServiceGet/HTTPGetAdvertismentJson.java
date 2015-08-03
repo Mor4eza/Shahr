@@ -7,9 +7,6 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
-import com.ariana.shahre_ma.MainActivity;
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -90,8 +87,12 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
 
                     for (int i = 0; i < len; i++) {
                         dbs.Add_Advertisment(Id[i], image[i], link[i]);
-
                     }
+                    Log.d("sender", "Broadcasting message");
+                    Intent intent = new Intent("custom-event-name");
+                    // You can also include some extra data.
+                    intent.putExtra("message", "http://www.shahrma.com/app/Advertisment/"+image[0]);
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                 }
 
             /*} catch (Exception e) {
@@ -125,12 +126,6 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
 
             }
 
-            Log.d("sender", "Broadcasting message");
-            Intent intent = new Intent("custom-event-name");
-            // You can also include some extra data.
-            intent.putExtra("message", "http://www.shahrma.com/app/Advertisment/"+image[0]);
-            LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
-         //   Image_slider();
 
         } catch (JSONException e) {
             // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
@@ -157,6 +152,7 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
 
             return huc.getInputStream();
         } catch (Exception e) {
+            Log.i("getStreamFromURL", e.toString());
             return null;
         }
 

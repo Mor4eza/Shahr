@@ -68,7 +68,7 @@
                 android:layout_height="25dp"
                 android:textColor="@color/colorPrimaryDark"
                 android:text="تلفن"
-                android:autoLink="phone"
+                android:autoLink="all"
                 android:paddingRight="7dp"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="7dp"

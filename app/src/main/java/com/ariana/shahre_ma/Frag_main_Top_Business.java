@@ -19,9 +19,9 @@ public class Frag_main_Top_Business extends Fragment {
     private String title;
     private int page;
 
-    RecyclerView mRecyclerView;
-    RecyclerView.LayoutManager mLayoutManager;
-    RecyclerView.Adapter mAdapter;
+    public static   RecyclerView mRecyclerView;
+    public static RecyclerView.LayoutManager mLayoutManager;
+    public static RecyclerView.Adapter mAdapter;
     // newInstance constructor for creating fragment with arguments
     public static Frag_main_Top_Business newInstance(int page, String title) {
         Frag_main_Top_Business fragmentFirst = new Frag_main_Top_Business();

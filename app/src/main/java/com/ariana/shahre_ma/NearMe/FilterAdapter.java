@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
@@ -60,7 +61,7 @@ public class FilterAdapter extends BaseAdapter implements StickyListHeadersAdapt
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = inflater.inflate(R.layout.sticky_child, parent, false);
-            holder.text = (TextView) convertView.findViewById(R.id.st_child);
+            holder.text = (CheckBox) convertView.findViewById(R.id.st_child);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -113,7 +114,7 @@ public class FilterAdapter extends BaseAdapter implements StickyListHeadersAdapt
     }
 
     class ViewHolder {
-        TextView text;
+        CheckBox text;
     }
 
 }

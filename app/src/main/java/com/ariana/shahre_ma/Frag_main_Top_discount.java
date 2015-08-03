@@ -20,7 +20,7 @@ public class Frag_main_Top_discount extends Fragment {
     private String title;
     private int page;
 
-    RecyclerView mRecyclerView;
+   public static RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter mAdapter;
     // newInstance constructor for creating fragment with arguments

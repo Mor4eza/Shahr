@@ -4,10 +4,14 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.ariana.shahre_ma.Cards.TopBusiness_Card_Adapter;
+import com.ariana.shahre_ma.Cards.TopDiscount_Card_Adapter;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
+import com.ariana.shahre_ma.Frag_main_Top_Business;
+import com.ariana.shahre_ma.Frag_main_Top_discount;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
@@ -91,6 +95,7 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
     public void SetTopBusiness(Integer cityid)
     {
         urltopbusiness="http://test.shahrma.com/api/ApiGiveTop?cityId="+cityid;
+      //  urltopbusiness="http://test.shahrma.com/api/ApiGiveBusiness?subsetId=145&cityid=68";
     }
 
     private String getTopBusiness()
@@ -98,10 +103,7 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
         return urltopbusiness;
     }
 
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-    }
+
 
     @Override
     protected Integer doInBackground(String... params) {
@@ -243,8 +245,7 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
         try {
             URL url = new URL(urlString);
             HttpURLConnection huc = (HttpURLConnection) url.openConnection();
-            huc.setReadTimeout(10000);
-            huc.setConnectTimeout(15000);
+
             huc.setRequestMethod(method);
             huc.setDoInput(true);
 
@@ -255,7 +256,6 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
             Log.e("getStreamFromURL",e.toString());
             return null;
         }
-
     }
 
     String streamToString(InputStream is) {
@@ -267,9 +267,10 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
             while ((line = br.readLine()) != null) {
                 result = line + "\n";
             }
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
+            Log.e("streamToString",e.toString());
         }
-
 
         return result;
     }
@@ -277,57 +278,59 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
 
     @Override
     protected void onPostExecute(Integer integer) {
-        super.onPostExecute(integer);
-     //   try {
+                super.onPostExecute(integer);
+             //   try {
 
-            DataBaseSqlite db = new DataBaseSqlite(context);
-            KeySettings setting=new KeySettings(context);
-            query=new Query(context);
+                    DataBaseSqlite db = new DataBaseSqlite(context);
+                    KeySettings setting=new KeySettings(context);
+                    query=new Query(context);
 
-            Integer cityid=0;
-            cityid=query.getCityId(setting.getCityName());
+                    Integer cityid=0;
+                    cityid=query.getCityId(setting.getCityName());
 
-            if(len==0) {
+                    if(len==0) {
 
-                Log.i("Count TopsBusiness : ", "فروشگاه ثبت نشد");
+                        Log.i("CountTopsBusiness : ", "فروشگاه ثبت نشد");
 
-            }
-
-            else {
-
-
-
-                for (int i = 0; i <len; i++)
-                {
-                    db.delete_BusinessTops(Id[i]);
-                    db.delete_BusinessDisCount(Id[i]);
-                    db.delete_DisCount(discountid[i]);
-
-
-                    if(discountid[i]==0) {
-                        Log.i("ifbusiness","0");
-                    }
-                    else
-                    {
-                        Log.i("elsebusiness", "i>0");
-                        db.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i],likediscount[i],dislikediscount[i]);
                     }
 
-                    if(i<=9)
-                        db.Add_businessTops(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
-                    else
-                        db.Add_businessDisCount(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
+                    else {
 
 
-                }
 
-                fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
-            }
+                        for (int i = 0; i <len; i++)
+                        {
+                            db.delete_BusinessTops(Id[i]);
+                            db.delete_BusinessDisCount(Id[i]);
+                            db.delete_DisCount(discountid[i]);
 
-      /*  } catch (Exception e) {
 
-            Log.e("ExceptionBusinessJson",e.toString());
-        }*/
+                            if(discountid[i]==0) {
+                                Log.i("ifbusiness","0");
+                            }
+                            else
+                            {
+                                Log.i("elsebusiness", "i>0");
+                                db.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i],likediscount[i],dislikediscount[i]);
+                            }
+
+                            if(i<=9)
+                                db.Add_businessTops(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
+                            else
+                                db.Add_businessDisCount(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
+                        }
+
+                        fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
+                        TopBusiness_Card_Adapter mAdapter = new TopBusiness_Card_Adapter(context);
+                        Frag_main_Top_Business.mRecyclerView.setAdapter(mAdapter);
+                        TopDiscount_Card_Adapter dAdapter=new TopDiscount_Card_Adapter(context);
+                        Frag_main_Top_discount.mRecyclerView.setAdapter(dAdapter);
+                    }
+
+              /*  } catch (Exception e) {
+
+                    Log.e("ExceptionBusinessJson",e.toString());
+                }*/
 
     }
 }
