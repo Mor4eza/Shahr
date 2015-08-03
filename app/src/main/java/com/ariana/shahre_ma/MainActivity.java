@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void Image_slider() {
 
-      /*  String imag[]=new String[2];
+        String imag[]=new String[3];
         Integer i=0;
         DataBaseSqlite db=new DataBaseSqlite(this);
         Cursor rows=db.select_Advertisment();
@@ -184,30 +184,30 @@ public class MainActivity extends AppCompatActivity {
         {
             do
             {
-               // imag[i]=rows.getString(1);
-                Log.i("imag",rows.getString(1));
+                imag[i]=rows.getString(1);
+                Log.i("imag"+i,rows.getString(1));
                 i++;
             }while (rows.moveToNext());
-        }*/
+        }
 
 
         final TextSliderView textSliderView = new TextSliderView(this);
         textSliderView
                 .description("چهار باغ")
-               .image("http://www.shahrma.com/app/Advertisment/1.jpg");
+               .image("http://www.shahrma.com/app/Advertisment/"+imag[0]);
         slider.addSlider(textSliderView);
 
         TextSliderView textSliderView2 = new TextSliderView(this);
         textSliderView2
                 .description("هفت خان")
-                .image("http://www.shahrma.com/app/Advertisment/2.jpg");
+                .image("http://www.shahrma.com/app/Advertisment/"+imag[1]);
         slider.addSlider(textSliderView2);
 
 
         TextSliderView textSliderView3 = new TextSliderView(this);
         textSliderView3
                 .description("تیراژه")
-                .image("http://www.shahrma.com/app/Advertisment/3.jpg");
+                .image("http://www.shahrma.com/app/Advertisment/"+imag[2]);
         slider.addSlider(textSliderView3);
 
 
