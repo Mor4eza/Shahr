@@ -377,7 +377,6 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
         } catch (Exception e) {
             return null;
         }
-
     }
 
     /**

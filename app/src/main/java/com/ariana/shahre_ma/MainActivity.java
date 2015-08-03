@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
             httpGetTopsBusinessJson.execute();
         }
 
+
         ViewPager vpPager = (ViewPager) findViewById(R.id.viewPager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
@@ -558,8 +559,9 @@ public class MainActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             // Get extra data included in the Intent
             String message = intent.getStringExtra("message");
-            Log.d("receiver", "Got message: " + message);
 
+            Log.d("receiver", "Got message: " + message);
         }
+
     };
 }
