@@ -1,7 +1,9 @@
 package com.ariana.shahre_ma.NearMe;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -20,6 +22,23 @@ public class NearMeActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_near_me);
         setUpMapIfNeeded();
+
+      /*  Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                    Uri.parse("http://maps.google.com/maps?daddr=35.688951,51.018301"));
+        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+        startActivity(intent);*/
+
+
+        Location locationA = new Location("point A");
+        locationA.setLatitude(35.687543);
+        locationA.setLongitude(51.019641);
+
+        Location locationB = new Location("point B");
+        locationB.setLatitude(35.688951);
+        locationB.setLongitude(51.018301);
+
+       float distance = locationA.distanceTo(locationB) ;
+        Log.i("distance",String.valueOf(distance)+"M");
     }
 
     @Override
@@ -51,7 +70,6 @@ public class NearMeActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_near_me, menu);
-
 
         return true;
     }

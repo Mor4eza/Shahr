@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void Image_slider() {
 
-        String imag[]=new String[2];
+      /*  String imag[]=new String[2];
         Integer i=0;
         DataBaseSqlite db=new DataBaseSqlite(this);
         Cursor rows=db.select_Advertisment();
@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("imag",rows.getString(1));
                 i++;
             }while (rows.moveToNext());
-        }
+        }*/
 
 
         final TextSliderView textSliderView = new TextSliderView(this);
