@@ -18,7 +18,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     // Database Name
     private static final String DATABASE_NAME = "DBshahrma.db";
 
-    InstructionsSqlite instructionsSqlite=new InstructionsSqlite();
+
 Context context;
 
 
@@ -37,49 +37,49 @@ Context context;
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(instructionsSqlite.CREATE_TABLE_Subset);
-        db.execSQL(instructionsSqlite.CREATE_TABLE_Collection);
-        db.execSQL(instructionsSqlite.CREATE_TABLE_Member);
-        db.execSQL(instructionsSqlite.CREATE_TABLE_Opinion);
-        db.execSQL(instructionsSqlite.CREATE_TABLE_Business);
-        db.execSQL(instructionsSqlite.CREATE_TABLE_Business_Tops);
-        db.execSQL(instructionsSqlite.CREATE_TABLE_Business_DisCount);
-        db.execSQL(instructionsSqlite.CREATE_TABLE_City);
-        db.execSQL(instructionsSqlite.CREATE_TABLE_Bookmark);
-        db.execSQL(instructionsSqlite.CREATE_TABLE_Area);
-        db.execSQL(instructionsSqlite.CREATE_TABLE_Update);
-        db.execSQL(instructionsSqlite.CREATE_TABLE_Interest);
-        db.execSQL(instructionsSqlite.CREATE_TABLE_Notification);
-        db.execSQL(instructionsSqlite.CREATE_TABLE_ShowNotification);
-        db.execSQL(instructionsSqlite.CREATE_TABLE_FieldActivity);
-        db.execSQL(instructionsSqlite.CREATE_TABLE_DisCount);
-        db.execSQL(instructionsSqlite.CREATE_TABLE_LikeDisCount);
-        db.execSQL(instructionsSqlite.CREATE_TABLE_DisCountMember);
-        db.execSQL(instructionsSqlite.CREATE_TABLE_Advertisment);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_Subset);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_Collection);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_Member);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_Opinion);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_Business);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_Business_Tops);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_Business_DisCount);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_City);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_Bookmark);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_Area);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_Update);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_Interest);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_Notification);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_ShowNotification);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_FieldActivity);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_DisCount);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_LikeDisCount);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_DisCountMember);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_Advertisment);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older  tables if existed
-        db.execSQL("DROP TABLE IF EXISTS "+instructionsSqlite.TABLE_NAME_SUBSET);
-        db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_COLLECTION);
-        db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_MEMBER);
-        db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_OPINION);
-        db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_BUSINESS);
-        db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_BUSINESS_TOPS);
-        db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_BUSINESS_DISCOUNT);
-        db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_City);
-        db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_Bookmark);
-        db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_Area);
-        db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_UpdateTime);
-        db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_Interest);
-        db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_NOTIFICATION);
-        db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_FieldActivity);
-        db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_SHOWNOTIFICATION);
-        db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_DisCount);
-        db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_LikeDisCount);
-        db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_DisCountMember);
-        db.execSQL("DROP TABLE IF EXISTS " + instructionsSqlite.TABLE_NAME_Advertisment);
+        db.execSQL("DROP TABLE IF EXISTS "+ InstructionsSqlite.TABLE_NAME_SUBSET);
+        db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_COLLECTION);
+        db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_MEMBER);
+        db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_OPINION);
+        db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_BUSINESS);
+        db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_BUSINESS_TOPS);
+        db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_BUSINESS_DISCOUNT);
+        db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_City);
+        db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_Bookmark);
+        db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_Area);
+        db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_UpdateTime);
+        db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_Interest);
+        db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_NOTIFICATION);
+        db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_FieldActivity);
+        db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_SHOWNOTIFICATION);
+        db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_DisCount);
+        db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_LikeDisCount);
+        db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_DisCountMember);
+        db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_Advertisment);
         // create fresh  tables
         this.onCreate(db);
     }
@@ -91,12 +91,12 @@ Context context;
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(instructionsSqlite.ID_subset, id);
-        values.put(instructionsSqlite.NAME_subset, subsetname);
-        values.put(instructionsSqlite.COLLECTIONID_subset, collectionid);
+        values.put(InstructionsSqlite.ID_subset, id);
+        values.put(InstructionsSqlite.NAME_subset, subsetname);
+        values.put(InstructionsSqlite.COLLECTIONID_subset, collectionid);
 
         // 3. insert
-        db.insert(instructionsSqlite.TABLE_NAME_SUBSET, // table
+        db.insert(InstructionsSqlite.TABLE_NAME_SUBSET, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -119,17 +119,17 @@ Context context;
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
         //values.put(instructionsSqlite.ID_LIKEDISCOUNT, id);
-        values.put(instructionsSqlite.LIKECOUNT_LIKEDISCOUNT, likecount);
-        values.put(instructionsSqlite.MEMBERID_LIKEDISCOUNT, memberid);
-        values.put(instructionsSqlite.DISCOUNTID_LIKEDISCOUNT, discountid);
-        values.put(instructionsSqlite.BUSINESSID_LIKEDISCOUNT, businessid);
+        values.put(InstructionsSqlite.LIKECOUNT_LIKEDISCOUNT, likecount);
+        values.put(InstructionsSqlite.MEMBERID_LIKEDISCOUNT, memberid);
+        values.put(InstructionsSqlite.DISCOUNTID_LIKEDISCOUNT, discountid);
+        values.put(InstructionsSqlite.BUSINESSID_LIKEDISCOUNT, businessid);
 
 
 
 
 
         // 3. insert
-        db.insert(instructionsSqlite.TABLE_NAME_LikeDisCount, // table
+        db.insert(InstructionsSqlite.TABLE_NAME_LikeDisCount, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -155,20 +155,20 @@ Context context;
         
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(instructionsSqlite.ID_DISCOUNT, id);
-        values.put(instructionsSqlite.TEXT_DISCOUNT, text);
-        values.put(instructionsSqlite.IMAGE_DISCOUNT, image);
-        values.put(instructionsSqlite.STARTDATE_DISCOUNT, startdate);
-        values.put(instructionsSqlite.EXPIRATIONDATE_DISCOUNT, expirationdate);
-        values.put(instructionsSqlite.DESCRIPTION_DISCOUNT, description);
-        values.put(instructionsSqlite.PERCENT_DISCOUNT, percent);
-        values.put(instructionsSqlite.BUSINESSID_DISCOUNT, businessid);
-        values.put(instructionsSqlite.LIKE_DISCOUNT, like);
-        values.put(instructionsSqlite.DISLIKE_DISCOUNT, dislike);
+        values.put(InstructionsSqlite.ID_DISCOUNT, id);
+        values.put(InstructionsSqlite.TEXT_DISCOUNT, text);
+        values.put(InstructionsSqlite.IMAGE_DISCOUNT, image);
+        values.put(InstructionsSqlite.STARTDATE_DISCOUNT, startdate);
+        values.put(InstructionsSqlite.EXPIRATIONDATE_DISCOUNT, expirationdate);
+        values.put(InstructionsSqlite.DESCRIPTION_DISCOUNT, description);
+        values.put(InstructionsSqlite.PERCENT_DISCOUNT, percent);
+        values.put(InstructionsSqlite.BUSINESSID_DISCOUNT, businessid);
+        values.put(InstructionsSqlite.LIKE_DISCOUNT, like);
+        values.put(InstructionsSqlite.DISLIKE_DISCOUNT, dislike);
 
 
         // 3. insert
-        db.insert(instructionsSqlite.TABLE_NAME_DisCount, // table
+        db.insert(InstructionsSqlite.TABLE_NAME_DisCount, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -182,9 +182,9 @@ Context context;
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
 
-        values.put(instructionsSqlite.LIKE_DISCOUNT,like);
-        values.put(instructionsSqlite.DISLIKE_DISCOUNT,dislike);
-        db.update(instructionsSqlite.TABLE_NAME_DisCount,values,"  Id="+id+" AND BusinessId="+businessid,null);
+        values.put(InstructionsSqlite.LIKE_DISCOUNT,like);
+        values.put(InstructionsSqlite.DISLIKE_DISCOUNT,dislike);
+        db.update(InstructionsSqlite.TABLE_NAME_DisCount,values,"  Id="+id+" AND BusinessId="+businessid,null);
     }
 
     /**
@@ -205,18 +205,18 @@ Context context;
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
 
-        values.put(instructionsSqlite.ID_DISCOUNTMEMBER, id);
-        values.put(instructionsSqlite.TEXT_DISCOUNTMEMBER, text);
-        values.put(instructionsSqlite.IMAGE_DISCOUNTMEMBER, image);
-        values.put(instructionsSqlite.STARTDATE_DISCOUNTMEMBER, startdate);
-        values.put(instructionsSqlite.EXPIRATIONDATE_DISCOUNTMEMBER, expirationdate);
-        values.put(instructionsSqlite.DESCRIPTION_DISCOUNTMEMBER, description);
-        values.put(instructionsSqlite.PERCENT_DISCOUNTMEMBER, percent);
-        values.put(instructionsSqlite.BUSINESSID_DISCOUNTMEMBER, businessid);
+        values.put(InstructionsSqlite.ID_DISCOUNTMEMBER, id);
+        values.put(InstructionsSqlite.TEXT_DISCOUNTMEMBER, text);
+        values.put(InstructionsSqlite.IMAGE_DISCOUNTMEMBER, image);
+        values.put(InstructionsSqlite.STARTDATE_DISCOUNTMEMBER, startdate);
+        values.put(InstructionsSqlite.EXPIRATIONDATE_DISCOUNTMEMBER, expirationdate);
+        values.put(InstructionsSqlite.DESCRIPTION_DISCOUNTMEMBER, description);
+        values.put(InstructionsSqlite.PERCENT_DISCOUNTMEMBER, percent);
+        values.put(InstructionsSqlite.BUSINESSID_DISCOUNTMEMBER, businessid);
 
 
         // 3. insert
-        db.insert(instructionsSqlite.TABLE_NAME_DisCountMember, // table
+        db.insert(InstructionsSqlite.TABLE_NAME_DisCountMember, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -243,19 +243,19 @@ Context context;
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(instructionsSqlite.ID_Notification, id);
-        values.put(instructionsSqlite.OpinionType_Notification, OpinionType);
-        values.put(instructionsSqlite.ErJa_Notification, erja);
-        values.put(instructionsSqlite.ExecutionTime_Notification, ExecutionTime);
-        values.put(instructionsSqlite.Description_Notification, Description);
-        values.put(instructionsSqlite.ExpirationDate_Notification, ExpirationDate);
-        values.put(instructionsSqlite.City_Notification, City);
-        values.put(instructionsSqlite.CityId_Notification, CityId);
-        values.put(instructionsSqlite.Subset_Notification, Subset);
-        values.put(instructionsSqlite.SubsetId_Notification, SubsetId);
+        values.put(InstructionsSqlite.ID_Notification, id);
+        values.put(InstructionsSqlite.OpinionType_Notification, OpinionType);
+        values.put(InstructionsSqlite.ErJa_Notification, erja);
+        values.put(InstructionsSqlite.ExecutionTime_Notification, ExecutionTime);
+        values.put(InstructionsSqlite.Description_Notification, Description);
+        values.put(InstructionsSqlite.ExpirationDate_Notification, ExpirationDate);
+        values.put(InstructionsSqlite.City_Notification, City);
+        values.put(InstructionsSqlite.CityId_Notification, CityId);
+        values.put(InstructionsSqlite.Subset_Notification, Subset);
+        values.put(InstructionsSqlite.SubsetId_Notification, SubsetId);
 
         // 3. insert
-        db.insert(instructionsSqlite.TABLE_NAME_NOTIFICATION, // table
+        db.insert(InstructionsSqlite.TABLE_NAME_NOTIFICATION, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -272,11 +272,11 @@ Context context;
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(instructionsSqlite.ID_colection, id);
-        values.put(instructionsSqlite.NAME_collection, collectionname);
+        values.put(InstructionsSqlite.ID_colection, id);
+        values.put(InstructionsSqlite.NAME_collection, collectionname);
 
         // 3. insert
-        db.insert(instructionsSqlite.TABLE_NAME_COLLECTION, // table
+        db.insert(InstructionsSqlite.TABLE_NAME_COLLECTION, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -292,19 +292,19 @@ Context context;
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(instructionsSqlite.ID_member, id);
-        values.put(instructionsSqlite.NAME_member, name);
-        values.put(instructionsSqlite.EMAIL_member, email);
-        values.put(instructionsSqlite.MOBILE_member, mobile);
-        values.put(instructionsSqlite.AGE_member, age);
-        values.put(instructionsSqlite.SEX_member, sex);
-        values.put(instructionsSqlite.USERNAME_member, username);
-        values.put(instructionsSqlite.PASSWORD_member, password);
-        values.put(instructionsSqlite.CITYID_member, cityid);
+        values.put(InstructionsSqlite.ID_member, id);
+        values.put(InstructionsSqlite.NAME_member, name);
+        values.put(InstructionsSqlite.EMAIL_member, email);
+        values.put(InstructionsSqlite.MOBILE_member, mobile);
+        values.put(InstructionsSqlite.AGE_member, age);
+        values.put(InstructionsSqlite.SEX_member, sex);
+        values.put(InstructionsSqlite.USERNAME_member, username);
+        values.put(InstructionsSqlite.PASSWORD_member, password);
+        values.put(InstructionsSqlite.CITYID_member, cityid);
 
 
         // 3. insert
-        db.insert(instructionsSqlite.TABLE_NAME_MEMBER, // table
+        db.insert(InstructionsSqlite.TABLE_NAME_MEMBER, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -320,18 +320,18 @@ Context context;
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(instructionsSqlite.ID_opinion,id);
-        values.put(instructionsSqlite.DESCRIPTION_opinion,description);
-        values.put(instructionsSqlite.DATE_opinion,date);
+        values.put(InstructionsSqlite.ID_opinion,id);
+        values.put(InstructionsSqlite.DESCRIPTION_opinion,description);
+        values.put(InstructionsSqlite.DATE_opinion,date);
 
-        values.put(instructionsSqlite.ERJA_opinion, erja);
-        values.put(instructionsSqlite.COUNTLIKE_opinion, countlike);
-        values.put(instructionsSqlite.COUNTDISLIKE_opinion, countdislike);
-        values.put(instructionsSqlite.MEMBERNAME_opinion, membername);
+        values.put(InstructionsSqlite.ERJA_opinion, erja);
+        values.put(InstructionsSqlite.COUNTLIKE_opinion, countlike);
+        values.put(InstructionsSqlite.COUNTDISLIKE_opinion, countdislike);
+        values.put(InstructionsSqlite.MEMBERNAME_opinion, membername);
 
 
         // 3. insert
-        db.insert(instructionsSqlite.TABLE_NAME_OPINION, // table
+        db.insert(InstructionsSqlite.TABLE_NAME_OPINION, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -349,41 +349,41 @@ Context context;
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(instructionsSqlite.ID_business, id);
-        values.put(instructionsSqlite.MARKET_business, market);
-        values.put(instructionsSqlite.CODE_business, code);
-        values.put(instructionsSqlite.PHONE_business, phone);
-        values.put(instructionsSqlite.MOBILE_business, mobile);
-        values.put(instructionsSqlite.FAX_business, fax);
-        values.put(instructionsSqlite.EMAIL_business, email);
-        values.put(instructionsSqlite.BUSINESSOWNER_business, businessowner);
-        values.put(instructionsSqlite.ADDRESS_business, address);
-        values.put(instructionsSqlite.DESCRIPTION_business, description);
-        values.put(instructionsSqlite.STARTDATE_business, startdate);
-        values.put(instructionsSqlite.EXPIRATIONDATE_business, expirationdate);
-        values.put(instructionsSqlite.INACTIVE_business, inactive);
-        values.put(instructionsSqlite.SUBSET_business, subset);
-        values.put(instructionsSqlite.SUBSETID_business, subsetid);
-        values.put(instructionsSqlite.LONGITUDE_business, longitude);
-        values.put(instructionsSqlite.LATITUDE_business, latitude);
-        values.put(instructionsSqlite.AREAID_business, areaid);
-        values.put(instructionsSqlite.AREA_business, area);
-        values.put(instructionsSqlite.USER_business, user);
-        values.put(instructionsSqlite.CITYID_business, cityid);
-        values.put(instructionsSqlite.USERID_business, userid);
-        values.put(instructionsSqlite.FIELD1_business, field1);
-        values.put(instructionsSqlite.FIELD2_business, field2);
-        values.put(instructionsSqlite.FIELD3_business, field3);
-        values.put(instructionsSqlite.FIELD4_business, field4);
-        values.put(instructionsSqlite.FIELD5_business, field5);
-        values.put(instructionsSqlite.FIELD6_business, field6);
-        values.put(instructionsSqlite.FIELD7_business, field7);
-        values.put(instructionsSqlite.RATECOUNT_business, ratecount);
-        values.put(instructionsSqlite.RATEVALUE_business, ratevalue);
+        values.put(InstructionsSqlite.ID_business, id);
+        values.put(InstructionsSqlite.MARKET_business, market);
+        values.put(InstructionsSqlite.CODE_business, code);
+        values.put(InstructionsSqlite.PHONE_business, phone);
+        values.put(InstructionsSqlite.MOBILE_business, mobile);
+        values.put(InstructionsSqlite.FAX_business, fax);
+        values.put(InstructionsSqlite.EMAIL_business, email);
+        values.put(InstructionsSqlite.BUSINESSOWNER_business, businessowner);
+        values.put(InstructionsSqlite.ADDRESS_business, address);
+        values.put(InstructionsSqlite.DESCRIPTION_business, description);
+        values.put(InstructionsSqlite.STARTDATE_business, startdate);
+        values.put(InstructionsSqlite.EXPIRATIONDATE_business, expirationdate);
+        values.put(InstructionsSqlite.INACTIVE_business, inactive);
+        values.put(InstructionsSqlite.SUBSET_business, subset);
+        values.put(InstructionsSqlite.SUBSETID_business, subsetid);
+        values.put(InstructionsSqlite.LONGITUDE_business, longitude);
+        values.put(InstructionsSqlite.LATITUDE_business, latitude);
+        values.put(InstructionsSqlite.AREAID_business, areaid);
+        values.put(InstructionsSqlite.AREA_business, area);
+        values.put(InstructionsSqlite.USER_business, user);
+        values.put(InstructionsSqlite.CITYID_business, cityid);
+        values.put(InstructionsSqlite.USERID_business, userid);
+        values.put(InstructionsSqlite.FIELD1_business, field1);
+        values.put(InstructionsSqlite.FIELD2_business, field2);
+        values.put(InstructionsSqlite.FIELD3_business, field3);
+        values.put(InstructionsSqlite.FIELD4_business, field4);
+        values.put(InstructionsSqlite.FIELD5_business, field5);
+        values.put(InstructionsSqlite.FIELD6_business, field6);
+        values.put(InstructionsSqlite.FIELD7_business, field7);
+        values.put(InstructionsSqlite.RATECOUNT_business, ratecount);
+        values.put(InstructionsSqlite.RATEVALUE_business, ratevalue);
 
 
         // 3. insert
-        db.insert(instructionsSqlite.TABLE_NAME_BUSINESS_DISCOUNT, // table
+        db.insert(InstructionsSqlite.TABLE_NAME_BUSINESS_DISCOUNT, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -399,41 +399,41 @@ Context context;
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(instructionsSqlite.ID_business, id);
-        values.put(instructionsSqlite.MARKET_business, market);
-        values.put(instructionsSqlite.CODE_business, code);
-        values.put(instructionsSqlite.PHONE_business, phone);
-        values.put(instructionsSqlite.MOBILE_business, mobile);
-        values.put(instructionsSqlite.FAX_business, fax);
-        values.put(instructionsSqlite.EMAIL_business, email);
-        values.put(instructionsSqlite.BUSINESSOWNER_business, businessowner);
-        values.put(instructionsSqlite.ADDRESS_business, address);
-        values.put(instructionsSqlite.DESCRIPTION_business, description);
-        values.put(instructionsSqlite.STARTDATE_business, startdate);
-        values.put(instructionsSqlite.EXPIRATIONDATE_business, expirationdate);
-        values.put(instructionsSqlite.INACTIVE_business, inactive);
-        values.put(instructionsSqlite.SUBSET_business, subset);
-        values.put(instructionsSqlite.SUBSETID_business, subsetid);
-        values.put(instructionsSqlite.LONGITUDE_business, longitude);
-        values.put(instructionsSqlite.LATITUDE_business, latitude);
-        values.put(instructionsSqlite.AREAID_business, areaid);
-        values.put(instructionsSqlite.AREA_business, area);
-        values.put(instructionsSqlite.USER_business, user);
-        values.put(instructionsSqlite.CITYID_business, cityid);
-        values.put(instructionsSqlite.USERID_business, userid);
-        values.put(instructionsSqlite.FIELD1_business, field1);
-        values.put(instructionsSqlite.FIELD2_business, field2);
-        values.put(instructionsSqlite.FIELD3_business, field3);
-        values.put(instructionsSqlite.FIELD4_business, field4);
-        values.put(instructionsSqlite.FIELD5_business, field5);
-        values.put(instructionsSqlite.FIELD6_business, field6);
-        values.put(instructionsSqlite.FIELD7_business, field7);
-        values.put(instructionsSqlite.RATECOUNT_business, ratecount);
-        values.put(instructionsSqlite.RATEVALUE_business, ratevalue);
+        values.put(InstructionsSqlite.ID_business, id);
+        values.put(InstructionsSqlite.MARKET_business, market);
+        values.put(InstructionsSqlite.CODE_business, code);
+        values.put(InstructionsSqlite.PHONE_business, phone);
+        values.put(InstructionsSqlite.MOBILE_business, mobile);
+        values.put(InstructionsSqlite.FAX_business, fax);
+        values.put(InstructionsSqlite.EMAIL_business, email);
+        values.put(InstructionsSqlite.BUSINESSOWNER_business, businessowner);
+        values.put(InstructionsSqlite.ADDRESS_business, address);
+        values.put(InstructionsSqlite.DESCRIPTION_business, description);
+        values.put(InstructionsSqlite.STARTDATE_business, startdate);
+        values.put(InstructionsSqlite.EXPIRATIONDATE_business, expirationdate);
+        values.put(InstructionsSqlite.INACTIVE_business, inactive);
+        values.put(InstructionsSqlite.SUBSET_business, subset);
+        values.put(InstructionsSqlite.SUBSETID_business, subsetid);
+        values.put(InstructionsSqlite.LONGITUDE_business, longitude);
+        values.put(InstructionsSqlite.LATITUDE_business, latitude);
+        values.put(InstructionsSqlite.AREAID_business, areaid);
+        values.put(InstructionsSqlite.AREA_business, area);
+        values.put(InstructionsSqlite.USER_business, user);
+        values.put(InstructionsSqlite.CITYID_business, cityid);
+        values.put(InstructionsSqlite.USERID_business, userid);
+        values.put(InstructionsSqlite.FIELD1_business, field1);
+        values.put(InstructionsSqlite.FIELD2_business, field2);
+        values.put(InstructionsSqlite.FIELD3_business, field3);
+        values.put(InstructionsSqlite.FIELD4_business, field4);
+        values.put(InstructionsSqlite.FIELD5_business, field5);
+        values.put(InstructionsSqlite.FIELD6_business, field6);
+        values.put(InstructionsSqlite.FIELD7_business, field7);
+        values.put(InstructionsSqlite.RATECOUNT_business, ratecount);
+        values.put(InstructionsSqlite.RATEVALUE_business, ratevalue);
 
 
         // 3. insert
-        db.insert(instructionsSqlite.TABLE_NAME_BUSINESS_TOPS, // table
+        db.insert(InstructionsSqlite.TABLE_NAME_BUSINESS_TOPS, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -448,41 +448,41 @@ Context context;
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(instructionsSqlite.ID_business, id);
-        values.put(instructionsSqlite.MARKET_business, market);
-        values.put(instructionsSqlite.CODE_business, code);
-        values.put(instructionsSqlite.PHONE_business, phone);
-        values.put(instructionsSqlite.MOBILE_business, mobile);
-        values.put(instructionsSqlite.FAX_business, fax);
-        values.put(instructionsSqlite.EMAIL_business, email);
-        values.put(instructionsSqlite.BUSINESSOWNER_business, businessowner);
-        values.put(instructionsSqlite.ADDRESS_business, address);
-        values.put(instructionsSqlite.DESCRIPTION_business, description);
-        values.put(instructionsSqlite.STARTDATE_business, startdate);
-        values.put(instructionsSqlite.EXPIRATIONDATE_business, expirationdate);
-        values.put(instructionsSqlite.INACTIVE_business, inactive);
-        values.put(instructionsSqlite.SUBSET_business, subset);
-        values.put(instructionsSqlite.SUBSETID_business, subsetid);
-        values.put(instructionsSqlite.LONGITUDE_business, longitude);
-        values.put(instructionsSqlite.LATITUDE_business, latitude);
-        values.put(instructionsSqlite.AREAID_business, areaid);
-        values.put(instructionsSqlite.AREA_business, area);
-        values.put(instructionsSqlite.USER_business, user);
-        values.put(instructionsSqlite.CITYID_business, cityid);
-        values.put(instructionsSqlite.USERID_business, userid);
-        values.put(instructionsSqlite.FIELD1_business, field1);
-        values.put(instructionsSqlite.FIELD2_business, field2);
-        values.put(instructionsSqlite.FIELD3_business, field3);
-        values.put(instructionsSqlite.FIELD4_business, field4);
-        values.put(instructionsSqlite.FIELD5_business, field5);
-        values.put(instructionsSqlite.FIELD6_business, field6);
-        values.put(instructionsSqlite.FIELD7_business, field7);
-        values.put(instructionsSqlite.RATECOUNT_business, ratecount);
-        values.put(instructionsSqlite.RATEVALUE_business, ratevalue);
+        values.put(InstructionsSqlite.ID_business, id);
+        values.put(InstructionsSqlite.MARKET_business, market);
+        values.put(InstructionsSqlite.CODE_business, code);
+        values.put(InstructionsSqlite.PHONE_business, phone);
+        values.put(InstructionsSqlite.MOBILE_business, mobile);
+        values.put(InstructionsSqlite.FAX_business, fax);
+        values.put(InstructionsSqlite.EMAIL_business, email);
+        values.put(InstructionsSqlite.BUSINESSOWNER_business, businessowner);
+        values.put(InstructionsSqlite.ADDRESS_business, address);
+        values.put(InstructionsSqlite.DESCRIPTION_business, description);
+        values.put(InstructionsSqlite.STARTDATE_business, startdate);
+        values.put(InstructionsSqlite.EXPIRATIONDATE_business, expirationdate);
+        values.put(InstructionsSqlite.INACTIVE_business, inactive);
+        values.put(InstructionsSqlite.SUBSET_business, subset);
+        values.put(InstructionsSqlite.SUBSETID_business, subsetid);
+        values.put(InstructionsSqlite.LONGITUDE_business, longitude);
+        values.put(InstructionsSqlite.LATITUDE_business, latitude);
+        values.put(InstructionsSqlite.AREAID_business, areaid);
+        values.put(InstructionsSqlite.AREA_business, area);
+        values.put(InstructionsSqlite.USER_business, user);
+        values.put(InstructionsSqlite.CITYID_business, cityid);
+        values.put(InstructionsSqlite.USERID_business, userid);
+        values.put(InstructionsSqlite.FIELD1_business, field1);
+        values.put(InstructionsSqlite.FIELD2_business, field2);
+        values.put(InstructionsSqlite.FIELD3_business, field3);
+        values.put(InstructionsSqlite.FIELD4_business, field4);
+        values.put(InstructionsSqlite.FIELD5_business, field5);
+        values.put(InstructionsSqlite.FIELD6_business, field6);
+        values.put(InstructionsSqlite.FIELD7_business, field7);
+        values.put(InstructionsSqlite.RATECOUNT_business, ratecount);
+        values.put(InstructionsSqlite.RATEVALUE_business, ratevalue);
 
 
         // 3. insert
-        db.insert(instructionsSqlite.TABLE_NAME_BUSINESS, // table
+        db.insert(InstructionsSqlite.TABLE_NAME_BUSINESS, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -498,12 +498,12 @@ Context context;
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(instructionsSqlite.ID_city, id);
-        values.put(instructionsSqlite.NAME_city, name);
-        values.put(instructionsSqlite.PROVINCEID_city, provinceid);
+        values.put(InstructionsSqlite.ID_city, id);
+        values.put(InstructionsSqlite.NAME_city, name);
+        values.put(InstructionsSqlite.PROVINCEID_city, provinceid);
 
         // 3. insert
-        db.insert(instructionsSqlite.TABLE_NAME_City, // table
+        db.insert(InstructionsSqlite.TABLE_NAME_City, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -520,11 +520,11 @@ Context context;
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
 
-        values.put(instructionsSqlite.BUSINESSID_bookmark,businessid);
-        values.put(instructionsSqlite.MEMBERID_bookmark, memberid);
+        values.put(InstructionsSqlite.BUSINESSID_bookmark,businessid);
+        values.put(InstructionsSqlite.MEMBERID_bookmark, memberid);
 
         // 3. insert
-        db.insert(instructionsSqlite.TABLE_NAME_Bookmark, // table
+        db.insert(InstructionsSqlite.TABLE_NAME_Bookmark, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -539,12 +539,12 @@ Context context;
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(instructionsSqlite.ID_area, id);
-        values.put(instructionsSqlite.NAME_area, areaname);
-        values.put(instructionsSqlite.CITYID_area, cityid);
+        values.put(InstructionsSqlite.ID_area, id);
+        values.put(InstructionsSqlite.NAME_area, areaname);
+        values.put(InstructionsSqlite.CITYID_area, cityid);
 
         // 3. insert
-        db.insert(instructionsSqlite.TABLE_NAME_Area, // table
+        db.insert(InstructionsSqlite.TABLE_NAME_Area, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -561,10 +561,10 @@ Context context;
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
 
-        values.put(instructionsSqlite.DATE_Update, date);
+        values.put(InstructionsSqlite.DATE_Update, date);
 
         // 3. insert
-        db.insert(instructionsSqlite.TABLE_NAME_UpdateTime, // table
+        db.insert(InstructionsSqlite.TABLE_NAME_UpdateTime, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -580,13 +580,13 @@ Context context;
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(instructionsSqlite.ID_Like, id);
-        values.put(instructionsSqlite.LIKE_Like, like);
-        values.put(instructionsSqlite.MEMBERID_Like, memberid);
-        values.put(instructionsSqlite.OPINION_Like, opinionid);
+        values.put(InstructionsSqlite.ID_Like, id);
+        values.put(InstructionsSqlite.LIKE_Like, like);
+        values.put(InstructionsSqlite.MEMBERID_Like, memberid);
+        values.put(InstructionsSqlite.OPINION_Like, opinionid);
 
         // 3. insert
-        db.insert(instructionsSqlite.TABLE_NAME_Like, // table
+        db.insert(InstructionsSqlite.TABLE_NAME_Like, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -603,12 +603,12 @@ Context context;
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
 
-        values.put(instructionsSqlite.SUBSETID_Interest, subsetid);
-        values.put(instructionsSqlite.MEMBERID_Interest, memberid);
+        values.put(InstructionsSqlite.SUBSETID_Interest, subsetid);
+        values.put(InstructionsSqlite.MEMBERID_Interest, memberid);
 
 
         // 3. insert
-        db.insert(instructionsSqlite.TABLE_NAME_Interest, // table
+        db.insert(InstructionsSqlite.TABLE_NAME_Interest, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -623,12 +623,12 @@ Context context;
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(instructionsSqlite.ID_FIELDACTIVITY,id);
-        values.put(instructionsSqlite.ACTIVITY_FIELDACTIVITY, activity);
+        values.put(InstructionsSqlite.ID_FIELDACTIVITY,id);
+        values.put(InstructionsSqlite.ACTIVITY_FIELDACTIVITY, activity);
 
 
         // 3. insert
-        db.insert(instructionsSqlite.TABLE_NAME_FieldActivity, // table
+        db.insert(InstructionsSqlite.TABLE_NAME_FieldActivity, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -647,12 +647,12 @@ Context context;
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(instructionsSqlite.ID_SHOWNOTIFICATION,id);
-        values.put(instructionsSqlite.BUSINESSID_SHOWNOTIFICATION,businessid);
-        values.put(instructionsSqlite.SHOW_SHOWNOTIFICATION,show);
+        values.put(InstructionsSqlite.ID_SHOWNOTIFICATION,id);
+        values.put(InstructionsSqlite.BUSINESSID_SHOWNOTIFICATION,businessid);
+        values.put(InstructionsSqlite.SHOW_SHOWNOTIFICATION,show);
 
         // 3. insert
-        db.insert(instructionsSqlite.TABLE_NAME_SHOWNOTIFICATION, // table
+        db.insert(InstructionsSqlite.TABLE_NAME_SHOWNOTIFICATION, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -667,12 +667,12 @@ Context context;
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(instructionsSqlite.ID_Advertisment,id);
-        values.put(instructionsSqlite.IMAGE_Advertisment,image);
-        values.put(instructionsSqlite.LINK_Advertisment,link);
+        values.put(InstructionsSqlite.ID_Advertisment,id);
+        values.put(InstructionsSqlite.IMAGE_Advertisment,image);
+        values.put(InstructionsSqlite.LINK_Advertisment,link);
 
         // 3. insert
-        db.insert(instructionsSqlite.TABLE_NAME_Advertisment, // table
+        db.insert(InstructionsSqlite.TABLE_NAME_Advertisment, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -689,7 +689,7 @@ Context context;
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_BUSINESS , null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS, null);
 
     }
 
@@ -706,7 +706,7 @@ Context context;
         if(namemarket1.length()>0 && namemarket2.length()>0 && namemarket3.length()>0 && namemarket4.length()>0 && namemarket5.length()>0)
         {
             Log.i("search 5 word",namemarket1+","+namemarket2+","+namemarket3+","+namemarket4+","+namemarket5);
-            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
+            query = "select * from " + InstructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
                     " Market like'%" + namemarket1 +
                     "%' or Market like '%" + namemarket2 +
                     "%' or Market like '%" + namemarket3 +
@@ -722,7 +722,7 @@ Context context;
         else if(namemarket1.length()>0 && namemarket2.length()>0 && namemarket3.length()>0 && namemarket4.length()>0)
         {
             Log.i("search 4 word",namemarket1+","+namemarket2+","+namemarket3+","+namemarket4);
-            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
+            query = "select * from " + InstructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
                     " Market like'%" + namemarket1 +
                     "%' or Market like '%" + namemarket2 +
                     "%' or Market like '%" + namemarket3 +
@@ -736,7 +736,7 @@ Context context;
         else if(namemarket1.length()>0 && namemarket2.length()>0 && namemarket3.length()>0 )
         {
             Log.i("search 3 word",namemarket1+","+namemarket2+","+namemarket3);
-            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
+            query = "select * from " + InstructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
                     " Market like'%" + namemarket1 +
                     "%' or Market like '%" + namemarket2 +
                     "%' or Market like '%" + namemarket3 +
@@ -748,7 +748,7 @@ Context context;
         else if(namemarket1.length()>0 && namemarket2.length()>0  )
         {
             Log.i("search 2 word",namemarket1+","+namemarket2);
-            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
+            query = "select * from " + InstructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
                     " Market like'%" + namemarket1 +
                     "%' or Market like '%" + namemarket2 +
                     "%') or (Address like '%" + namemarket1 +
@@ -758,7 +758,7 @@ Context context;
         else if(namemarket1.length()>0)
         {
             Log.i("search 1 word",namemarket1);
-            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
+            query = "select * from " + InstructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
                     " Market like'%" + namemarket1 +
                     "%') or (Address like '%" + namemarket1 +
                     "%')";
@@ -777,7 +777,7 @@ Context context;
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_BUSINESS +" WHERE Address like '%"+address+"%'", null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS +" WHERE Address like '%"+address+"%'", null);
 
     }
 
@@ -785,21 +785,21 @@ Context context;
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_BUSINESS_TOPS , null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS_TOPS, null);
 
     }
     public Cursor select_AllBusinessDisCount()
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_BUSINESS_DISCOUNT , null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS_DISCOUNT, null);
 
     }
     public Cursor select_CountBusiness_SubsetId(Integer subsetID)
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT COUNT(*) FROM " + instructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId=" + subsetID, null);
+        return db.rawQuery("SELECT COUNT(*) FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId=" + subsetID, null);
 
     }
 
@@ -807,7 +807,7 @@ Context context;
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT COUNT(*) FROM " + instructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE Id=" + id, null);
+        return db.rawQuery("SELECT COUNT(*) FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE Id=" + id, null);
 
     }
 
@@ -815,7 +815,7 @@ Context context;
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId="+subsetID+" AND CityId=" +cityid , null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId="+subsetID+" AND CityId=" +cityid , null);
 
     }
 
@@ -823,39 +823,39 @@ Context context;
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId="+subsetID, null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId="+subsetID, null);
 
     }
 
     public Cursor select_SortRateBusiness(Integer subsetID)
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetID+" ORDER BY "+instructionsSqlite.RATEVALUE_business +" ACS", null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetID+" ORDER BY "+ InstructionsSqlite.RATEVALUE_business +" ACS", null);
     }
 
     public Cursor select_SortNameBusiness(Integer subsetID)
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetID+" ORDER BY "+instructionsSqlite.MARKET_business +" ASC", null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetID+" ORDER BY "+ InstructionsSqlite.MARKET_business +" ASC", null);
     }
 
     public Cursor select_SortDateBusiness(Integer subsetID)
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetID+" ORDER BY "+instructionsSqlite.ID_business +" DESC", null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetID+" ORDER BY "+ InstructionsSqlite.ID_business +" DESC", null);
     }
 
     public Cursor select_AllBusinessId(Integer id)
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT Id,Market,Phone,Mobile,Fax,Email,BusinessOwner,Address,Description,SubsetId,Longitude,Latitude,Field1,Field2,Field3,Field4,Field5,Field6,Field7,RateValue,AreaId  FROM " + instructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE Id=" +id, null);
+        return db.rawQuery("SELECT Id,Market,Phone,Mobile,Fax,Email,BusinessOwner,Address,Description,SubsetId,Longitude,Latitude,Field1,Field2,Field3,Field4,Field5,Field6,Field7,RateValue,AreaId  FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE Id=" +id, null);
     }
 
     public Cursor select_business_NameMarket(Integer businessID)
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT Market FROM " + instructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE Id=" +businessID , null);
+        return db.rawQuery("SELECT Market FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE Id=" +businessID , null);
 
     }
 
@@ -867,66 +867,66 @@ Context context;
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_FieldActivity , null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_FieldActivity, null);
     }
     public Cursor select_ShowNotificationBusinessId(Integer id)
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT COUNT(*) FROM " + instructionsSqlite.TABLE_NAME_SHOWNOTIFICATION+" WHERE Id="+id , null);
+        return db.rawQuery("SELECT COUNT(*) FROM " + InstructionsSqlite.TABLE_NAME_SHOWNOTIFICATION +" WHERE Id="+id , null);
     }
     public Cursor select_AllDisCount()
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_DisCount , null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_DisCount, null);
     }
 
     public Cursor select_DisCountId(Integer businessid)
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT Id FROM " + instructionsSqlite.TABLE_NAME_DisCount+" WHERE BusinessId="+businessid , null);
+        return db.rawQuery("SELECT Id FROM " + InstructionsSqlite.TABLE_NAME_DisCount +" WHERE BusinessId="+businessid , null);
     }
 
     public Cursor select_DisCount(Integer businessid)
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_DisCount+" WHERE BusinessId="+businessid , null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_DisCount +" WHERE BusinessId="+businessid , null);
     }
 
     public Cursor select_AllDisCountMember()
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_DisCountMember , null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_DisCountMember, null);
     }
 
     public Cursor select_AllDisCountMember(Integer id)
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_DisCountMember +" WHERE Id="+id , null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_DisCountMember +" WHERE Id="+id , null);
     }
 
     public Cursor select_FieldActivityId(String fieldname)
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT Id FROM " + instructionsSqlite.TABLE_NAME_FieldActivity+" WHERE Activity='"+fieldname+"'" , null);
+        return db.rawQuery("SELECT Id FROM " + InstructionsSqlite.TABLE_NAME_FieldActivity +" WHERE Activity='"+fieldname+"'" , null);
     }
 
     public Cursor select_FieldActivityName(Integer id)
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT Activity FROM " + instructionsSqlite.TABLE_NAME_FieldActivity+" WHERE Id="+id , null);
+        return db.rawQuery("SELECT Activity FROM " + InstructionsSqlite.TABLE_NAME_FieldActivity +" WHERE Id="+id , null);
     }
 
     public Cursor SearchBusiness(String nameMarket,Integer subsetId)
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetId+" AND Market LIKE '%"+nameMarket+"%'" , null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetId+" AND Market LIKE '%"+nameMarket+"%'" , null);
 
     }
     //End Select Business
@@ -938,7 +938,7 @@ Context context;
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT Id FROM " + instructionsSqlite.TABLE_NAME_SUBSET + "  WHERE SubsetName='" + subsetname+"'", null);
+        return db.rawQuery("SELECT Id FROM " + InstructionsSqlite.TABLE_NAME_SUBSET + "  WHERE SubsetName='" + subsetname+"'", null);
 
     }
 
@@ -946,7 +946,7 @@ Context context;
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT SubsetName FROM " + instructionsSqlite.TABLE_NAME_SUBSET + "  WHERE id=" +id, null);
+        return db.rawQuery("SELECT SubsetName FROM " + InstructionsSqlite.TABLE_NAME_SUBSET + "  WHERE id=" +id, null);
 
     }
 
@@ -954,7 +954,7 @@ Context context;
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT Name FROM " + instructionsSqlite.TABLE_NAME_City + "  WHERE id=" +id, null);
+        return db.rawQuery("SELECT Name FROM " + InstructionsSqlite.TABLE_NAME_City + "  WHERE id=" +id, null);
 
     }
 
@@ -962,20 +962,20 @@ Context context;
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE Market='" + market+"' AND Address='"+address+"'", null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE Market='" + market+"' AND Address='"+address+"'", null);
 
     }
 
     public  Cursor select_Interest()
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " +instructionsSqlite. TABLE_NAME_Interest, null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite. TABLE_NAME_Interest, null);
     }
     public Cursor select_opinion()
     {
 
     SQLiteDatabase db = this.getReadableDatabase();
-    return db.rawQuery("SELECT * FROM " +instructionsSqlite. TABLE_NAME_OPINION, null);
+    return db.rawQuery("SELECT * FROM " + InstructionsSqlite. TABLE_NAME_OPINION, null);
 
     }
 
@@ -983,7 +983,7 @@ Context context;
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_Bookmark, null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_Bookmark, null);
 
     }
 
@@ -991,7 +991,7 @@ Context context;
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT Id FROM " + instructionsSqlite.TABLE_NAME_Bookmark+" WHERE BusinessId="+businessid, null);
+        return db.rawQuery("SELECT Id FROM " + InstructionsSqlite.TABLE_NAME_Bookmark +" WHERE BusinessId="+businessid, null);
 
     }
 
@@ -999,28 +999,28 @@ Context context;
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_OPINION+ "  WHERE Erja="+busintessid, null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_OPINION + "  WHERE Erja="+busintessid, null);
 
     }
 
     public Cursor select_Member()
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_MEMBER, null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_MEMBER, null);
     }
 
     public Cursor select_Update()
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " +instructionsSqlite. TABLE_NAME_UpdateTime , null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite. TABLE_NAME_UpdateTime, null);
 
     }
 
     public Cursor select_Member_Name()
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT Name FROM " + instructionsSqlite.TABLE_NAME_MEMBER, null);
+        return db.rawQuery("SELECT Name FROM " + InstructionsSqlite.TABLE_NAME_MEMBER, null);
     }
 
 
@@ -1028,25 +1028,25 @@ Context context;
     public Cursor select_Collection()
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        return  db.rawQuery("SELECT * FROM "+instructionsSqlite.TABLE_NAME_COLLECTION,null);
+        return  db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_COLLECTION,null);
     }
 
     public Cursor select_Subset()
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        return  db.rawQuery("SELECT * FROM "+instructionsSqlite.TABLE_NAME_SUBSET,null);
+        return  db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_SUBSET,null);
     }
 
     public Cursor select_SearchSubset(String subsetName)
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        return  db.rawQuery("SELECT * FROM "+instructionsSqlite.TABLE_NAME_SUBSET+" WHERE SubsetName LIKE '%"+subsetName+"%'",null);
+        return  db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_SUBSET +" WHERE SubsetName LIKE '%"+subsetName+"%'",null);
     }
 
     public  Cursor select_AllNotificaton()
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM "+instructionsSqlite.TABLE_NAME_NOTIFICATION,null);
+        return db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_NOTIFICATION,null);
 
     }
 
@@ -1056,57 +1056,57 @@ Context context;
     {
 
             SQLiteDatabase db = this.getReadableDatabase();
-            return db.rawQuery("SELECT Id FROM " + instructionsSqlite.TABLE_NAME_NOTIFICATION + " WHERE Id=" + Id, null);
+            return db.rawQuery("SELECT Id FROM " + InstructionsSqlite.TABLE_NAME_NOTIFICATION + " WHERE Id=" + Id, null);
 
     }
 
     public  Cursor select_CountCollection()
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        return db.rawQuery("SELECT COUNT(*) FROM "+instructionsSqlite.TABLE_NAME_COLLECTION,null);
+        return db.rawQuery("SELECT COUNT(*) FROM "+ InstructionsSqlite.TABLE_NAME_COLLECTION,null);
     }
 
     public  Cursor select_AllArea()
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM "+instructionsSqlite.TABLE_NAME_Area,null);
+        return db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_Area,null);
     }
 
 
     public  Cursor select_Advertisment()
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM "+instructionsSqlite.TABLE_NAME_Advertisment,null);
+        return db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_Advertisment,null);
     }
 
     public  Cursor select_AreaId(String name)
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        return db.rawQuery("SELECT Id FROM "+instructionsSqlite.TABLE_NAME_Area+" WHERE AreaName='"+name+"'",null);
+        return db.rawQuery("SELECT Id FROM "+ InstructionsSqlite.TABLE_NAME_Area +" WHERE AreaName='"+name+"'",null);
     }
 
     public  Cursor select_AreaName(Integer id)
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        return db.rawQuery("SELECT AreaName FROM "+instructionsSqlite.TABLE_NAME_Area+" WHERE id="+id,null);
+        return db.rawQuery("SELECT AreaName FROM "+ InstructionsSqlite.TABLE_NAME_Area +" WHERE id="+id,null);
     }
 
     public  Cursor select_CountSubset()
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        return db.rawQuery("SELECT COUNT(*) FROM "+instructionsSqlite.TABLE_NAME_SUBSET,null);
+        return db.rawQuery("SELECT COUNT(*) FROM "+ InstructionsSqlite.TABLE_NAME_SUBSET,null);
     }
 
     public  Cursor select_AllCity()
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM "+instructionsSqlite.TABLE_NAME_City,null);
+        return db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_City,null);
     }
 
     public  Cursor select_CityId(String cityname)
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        return db.rawQuery("SELECT Id FROM "+instructionsSqlite.TABLE_NAME_City +" WHERE Name='"+cityname+"'",null);
+        return db.rawQuery("SELECT Id FROM "+ InstructionsSqlite.TABLE_NAME_City +" WHERE Name='"+cityname+"'",null);
     }
 
     // Deleting Opinion
@@ -1114,7 +1114,7 @@ Context context;
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM  " + instructionsSqlite.TABLE_NAME_OPINION);
+        db.execSQL("DELETE FROM  " + InstructionsSqlite.TABLE_NAME_OPINION);
         // 2. delete
         // db.delete(TABLE_BOOKS_MEMBER,ID," =",id);
 
@@ -1128,7 +1128,7 @@ Context context;
     public void delete_Member()
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_MEMBER);
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_MEMBER);
         db.close();
 
     }
@@ -1137,7 +1137,7 @@ Context context;
     public void delete_Interest(Integer subsetid,Integer memberid)
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_Interest+" WHERE SubsetId="+subsetid+" AND MemberId="+memberid);
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_Interest +" WHERE SubsetId="+subsetid+" AND MemberId="+memberid);
         db.close();
 
     }
@@ -1148,7 +1148,7 @@ Context context;
     public void delete_Area()
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_Area);
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_Area);
         db.close();
 
     }
@@ -1159,7 +1159,7 @@ Context context;
     public void delete_City()
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_City);
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_City);
         db.close();
 
     }
@@ -1170,7 +1170,7 @@ Context context;
     public void delete_FiledActivity()
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_FieldActivity);
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_FieldActivity);
         db.close();
 
     }
@@ -1178,7 +1178,7 @@ Context context;
     public void delete_DisCountMember(Integer id)
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_DisCountMember +" WHERE Id="+id);
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_DisCountMember +" WHERE Id="+id);
         db.close();
 
     }
@@ -1186,14 +1186,14 @@ Context context;
     public void delete_DisCountMember()
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_DisCountMember );
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_DisCountMember);
         db.close();
 
     }
     public void delete_LikeDisCount(Integer memberid,Integer discountid,Integer businessid)
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_LikeDisCount +" WHERE MemberId="+memberid+" AND DisCountId="+discountid+" AND BusinessId="+businessid);
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_LikeDisCount +" WHERE MemberId="+memberid+" AND DisCountId="+discountid+" AND BusinessId="+businessid);
         db.close();
 
     }
@@ -1203,7 +1203,7 @@ Context context;
     public void delete_Subset()
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_SUBSET);
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_SUBSET);
         db.close();
 
     }
@@ -1211,7 +1211,7 @@ Context context;
     public void delete_Advertisment()
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_Advertisment);
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_Advertisment);
         db.close();
 
     }
@@ -1221,7 +1221,7 @@ Context context;
     public void delete_Collection()
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_COLLECTION);
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_COLLECTION);
         db.close();
 
     }
@@ -1233,7 +1233,7 @@ Context context;
     {
         Log.i("DeleteNotification", "delete Run");
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_NOTIFICATION );
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_NOTIFICATION);
         db.close();
     }
 
@@ -1242,33 +1242,33 @@ Context context;
     public void delete_BusinessId(Integer id)
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_BUSINESS+" WHERE Id="+id);
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_BUSINESS +" WHERE Id="+id);
         db.close();
     }
 
     public void delete_Business(Integer cityid,Integer subsetid)
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_BUSINESS+" WHERE CityId="+cityid+" AND SubsetId="+subsetid);
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_BUSINESS +" WHERE CityId="+cityid+" AND SubsetId="+subsetid);
         db.close();
     }
     public void delete_BusinessTops(Integer businessid)
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_BUSINESS_TOPS+" WHERE Id="+businessid);
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_BUSINESS_TOPS +" WHERE Id="+businessid);
         db.close();
     }
     public void delete_BusinessDisCount(Integer businessid)
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_BUSINESS_DISCOUNT+" WHERE Id="+businessid);
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_BUSINESS_DISCOUNT +" WHERE Id="+businessid);
         db.close();
     }
 
     public void delete_DisCount(Integer id)
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ instructionsSqlite.TABLE_NAME_DisCount+" WHERE Id="+id);
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_DisCount +" WHERE Id="+id);
         db.close();
     }
 
@@ -1287,7 +1287,7 @@ Context context;
         SQLiteDatabase db = this.getWritableDatabase();
 
         // 2. delete
-        db.execSQL("DELETE FROM  " + instructionsSqlite.TABLE_NAME_UpdateTime);
+        db.execSQL("DELETE FROM  " + InstructionsSqlite.TABLE_NAME_UpdateTime);
 
 
 
@@ -1302,7 +1302,7 @@ Context context;
     {
         SQLiteDatabase db=this.getWritableDatabase();
        // delete
-        db.execSQL("DELETE FROM  " + instructionsSqlite.TABLE_NAME_BUSINESS);
+        db.execSQL("DELETE FROM  " + InstructionsSqlite.TABLE_NAME_BUSINESS);
         //close
         db.close();
     }
@@ -1310,7 +1310,7 @@ Context context;
     public  void delete_bookmark()
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE FROM "+instructionsSqlite.TABLE_NAME_Bookmark);
+        db.execSQL("DELETE FROM "+ InstructionsSqlite.TABLE_NAME_Bookmark);
         db.close();
     }
     // Updating single

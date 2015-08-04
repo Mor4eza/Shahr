@@ -224,7 +224,7 @@ public class MapsActivity extends ActionBarActivity {
                     Log.i("Longtitude",Longtitude[i]);
                     Log.i("Latitude",Latitude[i]);
 
-                    Marker  marker = mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(Longtitude[i]), Double.parseDouble(Latitude[i] ))).title("\u200e"+Market[i]).snippet(String.valueOf(Rate[i])));
+                    Marker  marker = mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(Latitude[i]), Double.parseDouble(Longtitude[i] ))).title("\u200e"+Market[i]).snippet(String.valueOf(Rate[i])));
                     marker.setData(id[i]);
                     marker.showInfoWindow();
 

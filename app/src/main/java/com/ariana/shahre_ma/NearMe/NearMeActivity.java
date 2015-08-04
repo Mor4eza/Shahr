@@ -40,7 +40,7 @@ public class NearMeActivity extends ActionBarActivity {
                     Uri.parse("http://maps.google.com/maps?daddr=35.688951,51.018301"));
         intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
         startActivity(intent);*/
-/*
+        /*
 
         Location locationA = new Location("point A");
         locationA.setLatitude(35.687543);
@@ -55,7 +55,7 @@ public class NearMeActivity extends ActionBarActivity {
        // latitude=51.0096686&longitude=35.8357895&distance=0.01
 
         HTTPSendNearMeURL nearMeURL=new HTTPSendNearMeURL(this);
-        nearMeURL.SetNearMe("35.8357895","51.0096686",0.1);
+        nearMeURL.SetNearMe("35.8357895","51.0096686",0.01);
         nearMeURL.execute();
 
 

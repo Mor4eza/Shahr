@@ -9,7 +9,6 @@ import android.util.Log;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
-import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
@@ -22,8 +21,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by ariana2 on 8/3/2015.
@@ -32,18 +29,10 @@ public class HTTPSendNearMeURL extends AsyncTask<String,Void,Integer >
 {
     Context context;
     String url_nearme="";
-    FieldDataBusiness fdb=new FieldDataBusiness();
+
     FieldClass fc=new FieldClass();
     Query query;
 
-    private List<Integer> selectId=new ArrayList<>();
-    private  List<String>  selectLongtiude=new ArrayList<>();
-    private  List<String>  selectLatitude=new ArrayList<>();
-    private  List<Double>  selectRate=new ArrayList<>();
-    private  List<String>  selectPhone=new ArrayList<String>();
-    private  List<String>  selectMobile=new ArrayList<String>();
-    private  List<String>  selectAddress=new ArrayList<>();
-    private  List<String>  selectMarketName=new ArrayList<String>();
 
 
     Integer Id[];
@@ -163,9 +152,7 @@ public class HTTPSendNearMeURL extends AsyncTask<String,Void,Integer >
 
                 } else {
 
-                    Intent intent = new Intent("near-me");
-                    intent.putExtra("received", "Markets");
-                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
 
                     for (int i = 0; i < len; i++)
                     {
@@ -181,6 +168,9 @@ public class HTTPSendNearMeURL extends AsyncTask<String,Void,Integer >
                         dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
 
                     }
+                    Intent intent = new Intent("near-me");
+                    intent.putExtra("received", "Markets");
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
                     fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
                 }
@@ -332,26 +322,12 @@ public class HTTPSendNearMeURL extends AsyncTask<String,Void,Integer >
                 dislikediscount[i] = area.getInt("DiscountDislike");
 
 
-                selectId.add(area.getInt("Id"));
-                selectLatitude.add(area.getString("Latitude"));
-                selectLongtiude.add(area.getString("Longitude"));
-                selectAddress.add(area.getString("Address"));
-                selectMarketName.add(area.getString("Market"));
-                selectPhone.add(area.getString("Phone"));
-                selectMobile.add(area.getString("Mobile"));
-                selectRate.add(area.getDouble("RateAverage"));
+
 
 
             }
 
-            fdb.SetIdBusiness(selectId);
-            fdb.SetLatitudeBusiness(selectLatitude);
-            fdb.SetLongtiudeBusiness(selectLongtiude);
-            fdb.SetRateBusiness(selectRate);
-            fdb.SetAddressBusiness(selectAddress);
-            fdb.SetMarketBusiness(selectMarketName);
-            fdb.SetPhoneBusiness(selectPhone);
-            fdb.SetMobileBusiness(selectMobile);
+
 
 
         } catch (JSONException e) {
