@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceSend.HTTPSendNearMeURL;
@@ -27,7 +29,7 @@ public class NearMeActivity extends ActionBarActivity {
     String Longtitude[];
     String Market[];
     Double Rate[];
-    Integer len;
+    Integer len=0;
     Integer id[];
 
     @Override
@@ -99,23 +101,27 @@ public class NearMeActivity extends ActionBarActivity {
 
 
     private void setUpMap() {
-        Latitude=new String[fdb.GetLatitudeBusiness().size()];
-        Longtitude=new String[fdb.GetLongtiudeBusiness().size()];
-        Market=new String[fdb.GetMarketBusiness().size()];
-        Rate=new Double[fdb.GetRateBusiness().size()];
-        len=fdb.GetLatitudeBusiness().size();
-        id=new Integer[fdb.GetIdBusiness().size()];
 
-        for (int i=0;i<fdb.GetIdBusiness().size();i++){
-            Latitude[i]=fdb.GetLatitudeBusiness().get(i);
-            Longtitude[i]=fdb.GetLongtiudeBusiness().get(i);
-            Market[i]=fdb.GetMarketBusiness().get(i);
-            //Rate[i]=fdb.GetRateBusiness();
-            //id[i]=fdb.GetIdBusiness();
-            Log.i("latitude",Latitude[i]);
-            Log.i("longitude", Longtitude[i]);
-            mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(Latitude[i]), Double.valueOf(Longtitude[i]))).title("\u200e"+Market[i]));
+        DataBaseSqlite db=new DataBaseSqlite(this);
+        Cursor rows=db.select_AllBusiness();
+
+        if(rows.moveToFirst())
+        {
+            do
+            {
+                /*Latitude[len]=rows.getString(15);
+                Longtitude[len]=rows.getString(16);
+                Market[len]=rows.getString(1);
+                //Rate[i]=fdb.GetRateBusiness();
+                //id[i]=fdb.GetIdBusiness();
+                Log.i("latitude",rows.getString(15));
+                Log.i("longitude", rows.getString(16));*/
+                mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(rows.getString(16)), Double.valueOf(rows.getString(15)))).title("\u200e" + rows.getString(1)));
+                len++;
+            }while (rows.moveToNext());
         }
+
+
 
 
 

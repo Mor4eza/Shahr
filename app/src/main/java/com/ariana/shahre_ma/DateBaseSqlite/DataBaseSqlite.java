@@ -17,7 +17,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     // Database Name
     private static final String DATABASE_NAME = "DBshahrma.db";
-
+    InstructionsSqlite instructionsSqlite=new InstructionsSqlite();
 
 Context context;
 
@@ -778,10 +778,10 @@ Context context;
                     "%')";
         }
         Log.i("namemarket[0]",namemarket1);
-        Log.i("namemarket[1]",namemarket2);
-        Log.i("namemarket[2]",namemarket3);
-        Log.i("namemarket[1]",namemarket4);
-        Log.i("namemarket[2]",namemarket5);
+        Log.i("namemarket[1]", namemarket2);
+        Log.i("namemarket[2]", namemarket3);
+        Log.i("namemarket[1]", namemarket4);
+        Log.i("namemarket[2]", namemarket5);
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(query, null);
 
@@ -858,10 +858,10 @@ Context context;
                     "%')) AND SubsetId";
         }
         Log.i("namemarket[0]",namemarket1);
-        Log.i("namemarket[1]",namemarket2);
-        Log.i("namemarket[2]",namemarket3);
-        Log.i("namemarket[1]",namemarket4);
-        Log.i("namemarket[2]",namemarket5);
+        Log.i("namemarket[1]", namemarket2);
+        Log.i("namemarket[2]", namemarket3);
+        Log.i("namemarket[1]", namemarket4);
+        Log.i("namemarket[2]", namemarket5);
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(query, null);
 
