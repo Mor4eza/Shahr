@@ -258,7 +258,6 @@ public class My_Business extends ActionBarActivity {
 
     public void openCamera() {
 
-
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, currImageURI);
         startActivityForResult(intent, 100);

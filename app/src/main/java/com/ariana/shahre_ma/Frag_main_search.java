@@ -25,15 +25,19 @@ import java.util.List;
 /**
  * Created by ariana2 on 7/16/2015.
  */
-public class Frag_main_search extends Fragment {
+public class Frag_main_search extends Fragment
+    {
     private String title;
     private int page;
     private Button btnSearch;
     private TextView txtWhat;
     private TextView txtWhere;
+    String selectedWord[]=new String[]{"","","","",""};
     FieldClass fc=new FieldClass();
     FieldDataBusiness fdb=new FieldDataBusiness();
     Cursor rows;
+        int length = 0;
+        int i=0;
 
 
     private List<Integer>  selectId=new ArrayList<>();
@@ -79,16 +83,36 @@ public class Frag_main_search extends Fragment {
             public void onClick(View v) {
                 NetState ns= new NetState(getActivity());
                 DataBaseSqlite db=new DataBaseSqlite(getActivity());
+
+                int startSelection = txtWhat.getSelectionStart();
+
+                selectedWord=new String[((txtWhat.getText().toString().split(" ").length))];
+                for(String currentWord : txtWhat.getText().toString().split(" ")) {
+
+                    length = length + currentWord.length() + 1;
+                    if (length > startSelection) {
+                        selectedWord[i] = currentWord;
+                        Log.i("words",selectedWord[i]);
+                        i++;
+                        break;
+
+                    }
+                    Log.i("length",String.valueOf(length));
+
+                }
+
+
+
                 if(ns.checkInternetConnection())
                 {
-                    Log.i("ss","s");
+
                     HTTPGetOnlineSearchJson httpGetOnlineSearchJson = new HTTPGetOnlineSearchJson(getActivity());
                     httpGetOnlineSearchJson.SetValueSearch(txtWhat.getText().toString(), 68);
                     httpGetOnlineSearchJson.execute();
                 }
                 else
                 {
-                     rows=db.select_BusinessSearchNameMarket(txtWhat.getText().toString());
+                     rows=db.select_BusinessSearch(selectedWord);
                      Cursor rows1=db.select_BusinessSearchAddreass(txtWhat.getText().toString());
                     if(rows.moveToFirst())
                     {

@@ -693,9 +693,12 @@ Context context;
 
     }
 
-    public Cursor select_BusinessSearchNameMarket(String namemarket)
+    public Cursor select_BusinessSearch(String... namemarket)
     {
 
+        Log.i("namemarket[0]",namemarket[0]);
+        Log.i("namemarket[1]",namemarket[1]);
+        Log.i("namemarket[2]",namemarket[3]);
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_BUSINESS +" WHERE Market like '%"+namemarket+"%'", null);
 
