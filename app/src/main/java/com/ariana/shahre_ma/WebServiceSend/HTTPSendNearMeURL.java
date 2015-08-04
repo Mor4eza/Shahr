@@ -1,9 +1,16 @@
 package com.ariana.shahre_ma.WebServiceSend;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
+import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,6 +33,8 @@ public class HTTPSendNearMeURL extends AsyncTask<String,Void,Integer >
     Context context;
     String url_nearme="";
     FieldDataBusiness fdb=new FieldDataBusiness();
+    FieldClass fc=new FieldClass();
+    Query query;
 
     private List<Integer> selectId=new ArrayList<>();
     private  List<String>  selectLongtiude=new ArrayList<>();
@@ -92,9 +101,9 @@ public class HTTPSendNearMeURL extends AsyncTask<String,Void,Integer >
 
     }
 
-    public void SetNearMe(String latitude,String longitude)
+    public void SetNearMe(String latitude,String longitude,double distance)
     {
-        url_nearme="http://test.shahrma.com/api/ApiGiveNearBusiness?latitude="+latitude+"&longitude="+longitude;
+        url_nearme="http://test.shahrma.com/api/ApiGiveNearBusiness?latitude="+latitude+"&longitude="+longitude+"&distance="+distance;
     }
 
     private String getNearMe()
@@ -113,6 +122,7 @@ public class HTTPSendNearMeURL extends AsyncTask<String,Void,Integer >
 
         try
         {
+            Log.i("URL",getNearMe());
             InputStream stream=getStreamFromUrl(getNearMe(),"GET");
             String Json=streamToString(stream);
             parseJSON(Json);
@@ -129,6 +139,61 @@ public class HTTPSendNearMeURL extends AsyncTask<String,Void,Integer >
     @Override
     protected void onPostExecute(Integer integer) {
         super.onPostExecute(integer);
+        if(integer==1) {
+            try {
+
+                KeySettings setting = new KeySettings(context);
+                query = new Query(context);
+
+
+                Integer cityid = 0;
+                Integer idsubset = 0;
+
+                DataBaseSqlite dbs = new DataBaseSqlite(context);
+
+
+                cityid = query.getCityId(setting.getCityName());
+                idsubset = fc.GetSubsetId();
+
+                dbs.delete_Business(cityid, idsubset);
+
+                if (len == 0) {
+                    //  Toast.makeText(get, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
+                    Log.i("Count Business : ", "فروشگاه ثبت نشد");
+
+                } else {
+
+                    Intent intent = new Intent("near-me");
+                    intent.putExtra("received", "Markets");
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
+                    for (int i = 0; i < len; i++)
+                    {
+                        dbs.delete_BusinessId(Id[i]);
+                        dbs.delete_DisCount(discountid[i]);
+                        if (discountid[i] == 0) {
+                            Log.i("ifbusiness", "0");
+                        } else {
+                            Log.i("elsebusiness", "i>0");
+                            dbs.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i], likediscount[i], dislikediscount[i]);
+                        }
+                        //dbs.Add_LikeDisCount(1,166,Id[i],likediscount[i],dislikediscount[i]);
+                        dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
+
+                    }
+
+                    fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
+                }
+
+            } catch (Exception e) {
+
+                Log.e("ExceptionBusinessJson", e.toString());
+            }
+        }
+        else
+        {
+
+        }
     }
 
     InputStream getStreamFromUrl(String url,String method) {

@@ -1,13 +1,19 @@
 package com.ariana.shahre_ma.NearMe;
 
-import android.location.Location;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.WebServiceSend.HTTPSendNearMeURL;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -16,6 +22,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class NearMeActivity extends ActionBarActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    FieldDataBusiness fdb=new FieldDataBusiness();
+    String Latitude[];
+    String Longtitude[];
+    String Market[];
+    Double Rate[];
+    Integer len;
+    Integer id[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +40,7 @@ public class NearMeActivity extends ActionBarActivity {
                     Uri.parse("http://maps.google.com/maps?daddr=35.688951,51.018301"));
         intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
         startActivity(intent);*/
-
+/*
 
         Location locationA = new Location("point A");
         locationA.setLatitude(35.687543);
@@ -38,7 +51,16 @@ public class NearMeActivity extends ActionBarActivity {
         locationB.setLongitude(51.018301);
 
        float distance = locationA.distanceTo(locationB) ;
-        Log.i("distance",String.valueOf(distance)+"M");
+        Log.i("distance",String.valueOf(distance)+"M");*/
+
+        HTTPSendNearMeURL nearMeURL=new HTTPSendNearMeURL(this);
+        nearMeURL.SetNearMe("35.830530","50.934428",0.1);
+        nearMeURL.execute();
+
+
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,new IntentFilter("near-me"));
+
     }
 
     @Override
@@ -55,14 +77,33 @@ public class NearMeActivity extends ActionBarActivity {
                     .getMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
-                setUpMap();
+               // setUpMap();
             }
         }
     }
 
 
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        Latitude=new String[fdb.GetLatitudeBusiness().size()];
+        Longtitude=new String[fdb.GetLongtiudeBusiness().size()];
+        Market=new String[fdb.GetMarketBusiness().size()];
+        Rate=new Double[fdb.GetRateBusiness().size()];
+        len=fdb.GetLatitudeBusiness().size();
+        id=new Integer[fdb.GetIdBusiness().size()];
+
+        for (int i=0;i<fdb.GetIdBusiness().size();i++){
+            Latitude[i]=fdb.GetLatitudeBusiness().get(i);
+            Longtitude[i]=fdb.GetLongtiudeBusiness().get(i);
+            Market[i]=fdb.GetMarketBusiness().get(i);
+            //Rate[i]=fdb.GetRateBusiness();
+            //id[i]=fdb.GetIdBusiness();
+            Log.i("latitude",Latitude[i]);
+            Log.i("longitude", Longtitude[i]);
+            mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(Latitude[i]), Double.valueOf(Longtitude[i]))).title("\u200e"+Market[i]));
+        }
+
+
+
     }
 
 
@@ -87,4 +128,14 @@ public class NearMeActivity extends ActionBarActivity {
         }
     }
 
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Get extra data included in the Intent
+            String message = intent.getStringExtra("message");
+            Log.i("receiver", "Got message: " + message);
+            setUpMap();
+        }
+
+    };
 }
