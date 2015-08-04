@@ -1,8 +1,11 @@
 package com.ariana.shahre_ma.Cards;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -44,7 +47,7 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
             Cursor rows = db.select_AllBusinessId(fc.GetBusiness_Id());
             mItems = new ArrayList<Business_Card_Items>();
 
-
+        nature = new Business_Card_Items();
 
         if(rows.moveToFirst())
         {
@@ -55,7 +58,7 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
                 nature.setId(rows.getInt(0));
                 nature.setName(rows.getString(1));
                 nature.setmAddress(rows.getString(7));
-                nature.setThumbnail(R.drawable.pooshak);
+                nature.setThumbnail(R.drawable.pooshak1);
                 nature.setRate(rows.getFloat(19));
                 mItems.add(nature);
 
@@ -80,7 +83,7 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
         viewHolder.tvNature.setText(nature.getName());
         viewHolder.tvNature.setTag(nature.getId());
        // viewHolder.tvDesNature.setText(nature.getmAddress());
-        viewHolder.imgThumbnail.setImageResource(nature.getThumbnail());
+        viewHolder.img1.setImageResource(nature.getThumbnail());
         viewHolder.Rates.setRating((float)nature.getRate());
     }
 
@@ -93,7 +96,10 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        public ImageView imgThumbnail;
+        public ImageView img1;
+        public ImageView img2;
+        public ImageView img3;
+        public ImageView img4;
         public ImageView img_edit;
         public ImageView img_discount;
         public ImageView img_pic;
@@ -104,11 +110,12 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
         public Button menu2;
         public Button menu3;
         public Button menu4;
+        Uri currImageURI;
         My_Business my_business=new My_Business();
         public ViewHolder(View itemView) {
             super(itemView);
 
-            imgThumbnail = (ImageView)itemView.findViewById(R.id.my_business_image1);
+            img1 = (ImageView)itemView.findViewById(R.id.my_business_image1);
             tvNature = (TextView)itemView.findViewById(R.id.my_business_title);
             img_edit = (ImageView)itemView.findViewById(R.id.btn_edit_business);
             img_discount = (ImageView)itemView.findViewById(R.id.btn_discount);
@@ -176,7 +183,7 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
 
                 }
             });
-            imgThumbnail.setOnClickListener(new View.OnClickListener() {
+            img1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     fc.SetBusiness_Id(Integer.valueOf(String.valueOf(tvNature.getTag())));
@@ -194,7 +201,7 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
                 popup.getMenuInflater().inflate(R.menu.image_popup, popup.getMenu());
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
-                        Toast.makeText(context, "Clicked : " + item.getTitle()+v.getTag(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Clicked : " + item.getTitle() + v.getTag(), Toast.LENGTH_SHORT).show();
 
 
                         menu1.setVisibility(View.INVISIBLE);
@@ -202,16 +209,32 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
                         menu3.setVisibility(View.INVISIBLE);
                         menu4.setVisibility(View.INVISIBLE);
 
-                        if(item.getTitle().equals("دوربین"))
-                            my_business.openCamera();
-                        else if(item.getTitle().equals("گالری"))
-                            my_business.selectImageFromGallery();
-                        else if(item.getTitle().equals("حذف"))
-                            Log.i("","");
+                        if (item.getTitle().equals("دوربین"))
+                            //my_business.openCamera();
+                        openCamera();
+                        else if (item.getTitle().equals("گالری"))
+                            selectImageFromGallery();
+
+                        else if (item.getTitle().equals("حذف"))
+                            Log.i("", "");
                         return true;
                     }
                 });
                 popup.show();//showing popup menu
+
+        }
+        public void openCamera() {
+
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, currImageURI);
+            ((Activity)context).startActivityForResult(intent, 100);
+
+        }
+        public void selectImageFromGallery() {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            ((Activity)context).startActivityForResult(Intent.createChooser(intent,"انتخاب کنید"), 1);
         }
 
     }

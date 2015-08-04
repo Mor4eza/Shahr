@@ -10,7 +10,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Cards.Business_Card_Adapter;
+import com.ariana.shahre_ma.Cards.Business_Card_Items;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
@@ -71,13 +71,13 @@ public class My_Business extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        job_list_Adapter = new Business_Card_Adapter(this);
+       /* job_list_Adapter = new Business_Card_Adapter(this);
         ScaleInAnimationAdapter alphaAdapter = new ScaleInAnimationAdapter(job_list_Adapter);
         alphaAdapter.setDuration(400);
         mRecyclerView.setAdapter(alphaAdapter);
         job_list_Adapter.notifyItemChanged(0);
         job_list_Adapter.notifyDataSetChanged();
-        Log.i("Resume", "Resume");
+        Log.i("Resume", "Resume");*/
     }
 
     public void add_business(View v){
@@ -166,7 +166,7 @@ public class My_Business extends ActionBarActivity {
         sv.setOnShowcaseEventListener(new OnShowcaseEventListener() {
             @Override
             public void onShowcaseViewHide(ShowcaseView showcaseView) {
-              help3();
+                help3();
             }
 
             @Override
@@ -247,22 +247,8 @@ public class My_Business extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void selectImageFromGallery() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
-    }
 
 
-
-    public void openCamera() {
-
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, currImageURI);
-        startActivityForResult(intent, 100);
-
-    }
 
 
     @Override
@@ -270,17 +256,18 @@ public class My_Business extends ActionBarActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
-            if (requestCode == 100) {
+            if (requestCode == 1 || requestCode==100) {
                 // currImageURI is the global variable I’m using to hold the content:
                 currImageURI = data.getData();
                 System.out.println("Current image Path is —--->" + getRealPathFromURI(currImageURI));
-                TextView tv_path = (TextView) findViewById(R.id.textView);
-                tv_path.setText(getRealPathFromURI(currImageURI));
+              //  /*TextView tv_path = (TextView) findViewById(R.id.textView);
+               setTitle(getRealPathFromURI(currImageURI));
 
-              /*  Bitmap myBitmap = BitmapFactory.decodeFile(tv_path.getText().toString());
-                ImageView myImage = (ImageView) findViewById(R.id.imageView);
-                myImage.setImageBitmap(myBitmap);*/
-
+                Bitmap myBitmap = BitmapFactory.decodeFile(getTitle().toString());
+                ImageView myImage = (ImageView) findViewById(R.id.my_business_image1);
+                myImage.setImageBitmap(myBitmap);
+                Business_Card_Items business_card_items=new Business_Card_Items();
+                business_card_items.setThumbnail(1);
 
             }
         }

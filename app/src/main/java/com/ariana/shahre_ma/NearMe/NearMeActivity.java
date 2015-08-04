@@ -52,9 +52,10 @@ public class NearMeActivity extends ActionBarActivity {
 
        float distance = locationA.distanceTo(locationB) ;
         Log.i("distance",String.valueOf(distance)+"M");*/
+       // latitude=51.0096686&longitude=35.8357895&distance=0.01
 
         HTTPSendNearMeURL nearMeURL=new HTTPSendNearMeURL(this);
-        nearMeURL.SetNearMe("35.830530","50.934428",0.1);
+        nearMeURL.SetNearMe("35.8357895","51.0096686",0.1);
         nearMeURL.execute();
 
 
