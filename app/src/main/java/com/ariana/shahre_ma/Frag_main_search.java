@@ -84,24 +84,31 @@ public class Frag_main_search extends Fragment
                 NetState ns= new NetState(getActivity());
                 DataBaseSqlite db=new DataBaseSqlite(getActivity());
 
+                selectedWord[0]="";
+                selectedWord[1]="";
+                selectedWord[2]="";
+                selectedWord[3]="";
+                selectedWord[4]="";
                 int startSelection = txtWhat.getSelectionStart();
 
-                selectedWord=new String[((txtWhat.getText().toString().split(" ").length))];
+
                 for(String currentWord : txtWhat.getText().toString().split(" ")) {
 
-                    length = length + currentWord.length() + 1;
-                    if (length > startSelection) {
-                        selectedWord[i] = currentWord;
-                        Log.i("words",selectedWord[i]);
-                        i++;
-                        break;
-
+                    if(i<=4)
+                    {
+                          selectedWord[i] = currentWord;
+                          i++;
                     }
                     Log.i("length",String.valueOf(length));
 
                 }
 
+                /*for(int i=0; i<selectedWord.length;i++)
+                {
+                    if(selectedWord[i].length()==0)
+                        selectedWord[i] ="";
 
+                }*/
 
                 if(ns.checkInternetConnection())
                 {
@@ -112,8 +119,8 @@ public class Frag_main_search extends Fragment
                 }
                 else
                 {
-                     rows=db.select_BusinessSearch(selectedWord);
-                     Cursor rows1=db.select_BusinessSearchAddreass(txtWhat.getText().toString());
+                     rows=db.select_BusinessSearch(selectedWord[0],selectedWord[1],selectedWord[2],selectedWord[3],selectedWord[4]);
+
                     if(rows.moveToFirst())
                     {
                         do
@@ -131,26 +138,7 @@ public class Frag_main_search extends Fragment
 
 
                     }
-                    rows.close();
 
-
-                    if(rows1.moveToFirst())
-                    {
-                        do
-                        {
-                            selectAddress.add(rows1.getString(8));
-                            selectMarketName.add(rows1.getString(1));
-                            selectPhone.add(rows1.getString(3));
-                            selectMobile.add(rows1.getString(4));
-                            selectId.add(rows1.getInt(0));
-                            selectLatitude.add(rows1.getString(16));
-                            selectLongtiude.add(rows1.getString(15));
-                            selectRate.add(rows1.getDouble(30));
-
-                        }while (rows1.moveToNext());
-
-
-                    }
 
                     fdb.SetIdBusiness(selectId);
                     fdb.SetLatitudeBusiness(selectLatitude);
@@ -162,7 +150,7 @@ public class Frag_main_search extends Fragment
                     fdb.SetMobileBusiness(selectMobile);
 
                     Log.i("Count", String.valueOf(rows.getCount()));
-                    Log.i("Count1", String.valueOf(rows1.getCount()));
+
 
                     if(rows.getCount()>0) {
                         fc.SetSearchOffline(true);

@@ -693,14 +693,83 @@ Context context;
 
     }
 
-    public Cursor select_BusinessSearch(String... namemarket)
+    public Cursor select_BusinessSearch(String namemarket1,String namemarket2,String namemarket3,String namemarket4,String namemarket5)
     {
 
-        Log.i("namemarket[0]",namemarket[0]);
-        Log.i("namemarket[1]",namemarket[1]);
-        Log.i("namemarket[2]",namemarket[3]);
+        String query="";
+        Log.i("namemarket[len]",String.valueOf(namemarket1.length()));
+        Log.i("namemarket[len]",String.valueOf(namemarket2.length()));
+        Log.i("namemarket[len]",String.valueOf(namemarket3.length()));
+        Log.i("namemarket[len]",String.valueOf(namemarket4.length()));
+        Log.i("namemarket[len]",String.valueOf(namemarket5.length()));
+
+        if(namemarket1.length()>0 && namemarket2.length()>0 && namemarket3.length()>0 && namemarket4.length()>0 && namemarket5.length()>0)
+        {
+            Log.i("search 5 word",namemarket1+","+namemarket2+","+namemarket3+","+namemarket4+","+namemarket5);
+            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
+                    " Market like'%" + namemarket1 +
+                    "%' or Market like '%" + namemarket2 +
+                    "%' or Market like '%" + namemarket3 +
+                    "%' or Market like '%" + namemarket4 +
+                    "%' or Market like '%" + namemarket5 +
+                    "%') or (Address like '%" + namemarket1 +
+                    "%' or Address like '%" + namemarket2 +
+                    "%' or Address like '%" + namemarket3 +
+                    "%' or Address like '%" + namemarket4 +
+                    "%' or Address like '%" + namemarket5 +
+                    "%')";
+        }
+        else if(namemarket1.length()>0 && namemarket2.length()>0 && namemarket3.length()>0 && namemarket4.length()>0)
+        {
+            Log.i("search 4 word",namemarket1+","+namemarket2+","+namemarket3+","+namemarket4);
+            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
+                    " Market like'%" + namemarket1 +
+                    "%' or Market like '%" + namemarket2 +
+                    "%' or Market like '%" + namemarket3 +
+                    "%' or Market like '%" + namemarket4 +
+                    "%') or (Address like '%" + namemarket1 +
+                    "%' or Address like '%" + namemarket2 +
+                    "%' or Address like '%" + namemarket3 +
+                    "%' or Address like '%" + namemarket4 +
+                    "%')";
+        }
+        else if(namemarket1.length()>0 && namemarket2.length()>0 && namemarket3.length()>0 )
+        {
+            Log.i("search 3 word",namemarket1+","+namemarket2+","+namemarket3);
+            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
+                    " Market like'%" + namemarket1 +
+                    "%' or Market like '%" + namemarket2 +
+                    "%' or Market like '%" + namemarket3 +
+                    "%') or (Address like '%" + namemarket1 +
+                    "%' or Address like '%" + namemarket2 +
+                    "%' or Address like '%" + namemarket3 +
+                    "%')";
+        }
+        else if(namemarket1.length()>0 && namemarket2.length()>0  )
+        {
+            Log.i("search 2 word",namemarket1+","+namemarket2);
+            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
+                    " Market like'%" + namemarket1 +
+                    "%' or Market like '%" + namemarket2 +
+                    "%') or (Address like '%" + namemarket1 +
+                    "%' or Address like '%" + namemarket2 +
+                    "%')";
+        }
+        else if(namemarket1.length()>0)
+        {
+            Log.i("search 1 word",namemarket1);
+            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
+                    " Market like'%" + namemarket1 +
+                    "%') or (Address like '%" + namemarket1 +
+                    "%')";
+        }
+        Log.i("namemarket[0]",namemarket1);
+        Log.i("namemarket[1]",namemarket2);
+        Log.i("namemarket[2]",namemarket3);
+        Log.i("namemarket[1]",namemarket4);
+        Log.i("namemarket[2]",namemarket5);
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + instructionsSqlite.TABLE_NAME_BUSINESS +" WHERE Market like '%"+namemarket+"%'", null);
+        return db.rawQuery(query, null);
 
     }
 
