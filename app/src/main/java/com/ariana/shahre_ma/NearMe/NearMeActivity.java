@@ -54,6 +54,20 @@ public class NearMeActivity extends ActionBarActivity {
         Log.i("distance",String.valueOf(distance)+"M");*/
        // latitude=51.0096686&longitude=35.8357895&distance=0.01
 
+    /*    try {
+            Locale loc = new Locale("IR");
+            Geocoder gcd = new Geocoder(this, Locale.getDefault());
+            List<Address> addresses = null;
+            addresses = gcd.getFromLocation(35.8357895, 51.0096686, 1);
+            if (addresses.size() > 0)
+              Log.i("Addresss",addresses.get(0).getLocality());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
+
+
         HTTPSendNearMeURL nearMeURL=new HTTPSendNearMeURL(this);
         nearMeURL.SetNearMe("35.8357895","51.0096686",0.01);
         nearMeURL.execute();
