@@ -35,9 +35,12 @@ public class Frag_main_search extends Fragment
     String selectedWord[]=new String[]{"","","","",""};
     FieldClass fc=new FieldClass();
     FieldDataBusiness fdb=new FieldDataBusiness();
-    Cursor rows;
-        int length = 0;
-        int i=0;
+    Cursor rows_Business;
+    Cursor rows_Collection;
+    Cursor rows_Subset;
+    Cursor rows_FieldActivity;
+    int length = 0;
+    int i=0;
 
 
     private List<Integer>  selectId=new ArrayList<>();
@@ -103,62 +106,143 @@ public class Frag_main_search extends Fragment
 
                 }
 
-                /*for(int i=0; i<selectedWord.length;i++)
-                {
-                    if(selectedWord[i].length()==0)
-                        selectedWord[i] ="";
 
-                }*/
+                //جستجو کامل متن در نام مشاغل و آدرس
+                    rows_Business=db.select_BusinessSearch(txtWhat.getText().toString());
+                         Log.i("BusinessgetCount",String.valueOf(rows_Business.getCount()));
+                       if(rows_Business.getCount()>0)
+                       {
+                           Log.i("Businessget","on");
+                           if(rows_Business.moveToFirst())
+                           {
+                               do
+                               {
+                                   selectAddress.add(rows_Business.getString(8));
+                                   selectMarketName.add(rows_Business.getString(1));
+                                   selectPhone.add(rows_Business.getString(3));
+                                   selectMobile.add(rows_Business.getString(4));
+                                   selectId.add(rows_Business.getInt(0));
+                                   selectLatitude.add(rows_Business.getString(16));
+                                   selectLongtiude.add(rows_Business.getString(15));
+                                   selectRate.add(rows_Business.getDouble(30));
 
-                if(ns.checkInternetConnection())
-                {
-
-                    HTTPGetOnlineSearchJson httpGetOnlineSearchJson = new HTTPGetOnlineSearchJson(getActivity());
-                    httpGetOnlineSearchJson.SetValueSearch(txtWhat.getText().toString(), 68);
-                    httpGetOnlineSearchJson.execute();
-                }
-                else
-                {
-                     rows=db.select_BusinessSearch(selectedWord[0],selectedWord[1],selectedWord[2],selectedWord[3],selectedWord[4]);
-
-                    if(rows.moveToFirst())
-                    {
-                        do
-                        {
-                            selectAddress.add(rows.getString(8));
-                            selectMarketName.add(rows.getString(1));
-                            selectPhone.add(rows.getString(3));
-                            selectMobile.add(rows.getString(4));
-                            selectId.add(rows.getInt(0));
-                            selectLatitude.add(rows.getString(16));
-                            selectLongtiude.add(rows.getString(15));
-                            selectRate.add(rows.getDouble(30));
-
-                        }while (rows.moveToNext());
+                               }while (rows_Business.moveToNext());
 
 
-                    }
+                           }
+
+                           //نمایش به کاربر
+
+                           fdb.SetIdBusiness(selectId);
+                           fdb.SetLatitudeBusiness(selectLatitude);
+                           fdb.SetLongtiudeBusiness(selectLongtiude);
+                           fdb.SetRateBusiness(selectRate);
+                           fdb.SetAddressBusiness(selectAddress);
+                           fdb.SetMarketBusiness(selectMarketName);
+                           fdb.SetPhoneBusiness(selectPhone);
+                           fdb.SetMobileBusiness(selectMobile);
+
+                           fc.SetSearchOffline(true);
+                           Intent intent = new Intent(getActivity(), Jobs_List.class);
+                           getActivity().startActivity(intent);
+                       }
+                       else
+                       {
+                           //جستجو کلمه اول در مجموعه
+                           rows_Collection=db.select_Collection(selectedWord[0]);
+                           Log.i("CollectiongetCount",String.valueOf(rows_Collection.getCount()));
+                           if(rows_Collection.getCount()>0)
+                           {
+                               Log.i("Collection","on");
+                               rows_Collection.moveToFirst();
+                               //جستجوآی دی مجوعه در زیر مجموعه
+                               rows_Subset=db.select_SubsetId(rows_Collection.getInt(0));
+                               Log.i("SubsetgetCount",String.valueOf(rows_Subset.getCount()));
+                               rows_Subset.moveToFirst();
+                               //جستجو آی دی زیر مجموعه و کلمات دیگر در مشاغل
+                               rows_Business=db.select_BusinessSearch(selectedWord[1],selectedWord[2],selectedWord[2],selectedWord[3],selectedWord[4],rows_Subset.getInt(0));
+                               if(rows_Business.moveToFirst())
+                               {
+                                   do
+                                   {
+                                       selectAddress.add(rows_Business.getString(8));
+                                       selectMarketName.add(rows_Business.getString(1));
+                                       selectPhone.add(rows_Business.getString(3));
+                                       selectMobile.add(rows_Business.getString(4));
+                                       selectId.add(rows_Business.getInt(0));
+                                       selectLatitude.add(rows_Business.getString(16));
+                                       selectLongtiude.add(rows_Business.getString(15));
+                                       selectRate.add(rows_Business.getDouble(30));
+
+                                   }while (rows_Business.moveToNext());
 
 
-                    fdb.SetIdBusiness(selectId);
-                    fdb.SetLatitudeBusiness(selectLatitude);
-                    fdb.SetLongtiudeBusiness(selectLongtiude);
-                    fdb.SetRateBusiness(selectRate);
-                    fdb.SetAddressBusiness(selectAddress);
-                    fdb.SetMarketBusiness(selectMarketName);
-                    fdb.SetPhoneBusiness(selectPhone);
-                    fdb.SetMobileBusiness(selectMobile);
+                               }
+                               //نمایش به کاربر
 
-                    Log.i("Count", String.valueOf(rows.getCount()));
+                               fdb.SetIdBusiness(selectId);
+                               fdb.SetLatitudeBusiness(selectLatitude);
+                               fdb.SetLongtiudeBusiness(selectLongtiude);
+                               fdb.SetRateBusiness(selectRate);
+                               fdb.SetAddressBusiness(selectAddress);
+                               fdb.SetMarketBusiness(selectMarketName);
+                               fdb.SetPhoneBusiness(selectPhone);
+                               fdb.SetMobileBusiness(selectMobile);
+
+                               fc.SetSearchOffline(true);
+                               Intent intent = new Intent(getActivity(), Jobs_List.class);
+                               getActivity().startActivity(intent);
+                           }
+                           else
+                           {
+                               //جستجو کلمه اول در زیرمجموعه
+                               rows_Subset=db.select_SubsetId(selectedWord[0]);
+                               Log.i("SubsetgetCount",String.valueOf(rows_Subset.getCount()));
+                               if(rows_Subset.getCount()>0)
+                               {
+                                   Log.i("Subsetget","on");
+                                   rows_Subset.moveToFirst();
+                                   //جستجو آی دی زیر مجموعه و کلمات دیگر در مشاغل
+                                   rows_Business=db.select_BusinessSearch(selectedWord[0],selectedWord[1],selectedWord[2],selectedWord[3],selectedWord[4],rows_Subset.getInt(0));
+                                   if(rows_Business.moveToFirst())
+                                   {
+                                       do
+                                       {
+                                           selectAddress.add(rows_Business.getString(8));
+                                           selectMarketName.add(rows_Business.getString(1));
+                                           selectPhone.add(rows_Business.getString(3));
+                                           selectMobile.add(rows_Business.getString(4));
+                                           selectId.add(rows_Business.getInt(0));
+                                           selectLatitude.add(rows_Business.getString(16));
+                                           selectLongtiude.add(rows_Business.getString(15));
+                                           selectRate.add(rows_Business.getDouble(30));
+
+                                       }while (rows_Business.moveToNext());
 
 
-                    if(rows.getCount()>0) {
-                        fc.SetSearchOffline(true);
-                        Intent intent = new Intent(getActivity(), Jobs_List.class);
-                        getActivity().startActivity(intent);
+                                   }
+                                   //نمایش به کاربر
 
-                    }
-                }
+                                   fdb.SetIdBusiness(selectId);
+                                   fdb.SetLatitudeBusiness(selectLatitude);
+                                   fdb.SetLongtiudeBusiness(selectLongtiude);
+                                   fdb.SetRateBusiness(selectRate);
+                                   fdb.SetAddressBusiness(selectAddress);
+                                   fdb.SetMarketBusiness(selectMarketName);
+                                   fdb.SetPhoneBusiness(selectPhone);
+                                   fdb.SetMobileBusiness(selectMobile);
+
+
+                                   fc.SetSearchOffline(true);
+                                   Intent intent = new Intent(getActivity(), Jobs_List.class);
+                                   getActivity().startActivity(intent);
+                               }
+                               else
+                               {
+
+                               }
+                           }
+                       }
 
 
 

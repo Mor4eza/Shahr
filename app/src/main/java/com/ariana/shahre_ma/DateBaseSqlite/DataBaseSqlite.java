@@ -693,6 +693,20 @@ Context context;
 
     }
 
+    public Cursor select_BusinessSearch(String namemarket)
+    {
+        String query="";
+
+            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
+                    " Market like'%" + namemarket +
+                    "%') or (Address like '%" + namemarket +
+                    "%')";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(query, null);
+
+    }
+
     public Cursor select_BusinessSearch(String namemarket1,String namemarket2,String namemarket3,String namemarket4,String namemarket5)
     {
 
@@ -762,6 +776,86 @@ Context context;
                     " Market like'%" + namemarket1 +
                     "%') or (Address like '%" + namemarket1 +
                     "%')";
+        }
+        Log.i("namemarket[0]",namemarket1);
+        Log.i("namemarket[1]",namemarket2);
+        Log.i("namemarket[2]",namemarket3);
+        Log.i("namemarket[1]",namemarket4);
+        Log.i("namemarket[2]",namemarket5);
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(query, null);
+
+    }
+
+    public Cursor select_BusinessSearch(String namemarket1,String namemarket2,String namemarket3,String namemarket4,String namemarket5,Integer SubsetId)
+    {
+
+        String query="";
+        Log.i("namemarket[len]",String.valueOf(namemarket1.length()));
+        Log.i("namemarket[len]",String.valueOf(namemarket2.length()));
+        Log.i("namemarket[len]",String.valueOf(namemarket3.length()));
+        Log.i("namemarket[len]",String.valueOf(namemarket4.length()));
+        Log.i("namemarket[len]",String.valueOf(namemarket5.length()));
+
+        if(namemarket1.length()>0 && namemarket2.length()>0 && namemarket3.length()>0 && namemarket4.length()>0 && namemarket5.length()>0)
+        {
+            Log.i("search 5 word",namemarket1+","+namemarket2+","+namemarket3+","+namemarket4+","+namemarket5);
+            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where((" +
+                    " Market like'%" + namemarket1 +
+                    "%' or Market like '%" + namemarket2 +
+                    "%' or Market like '%" + namemarket3 +
+                    "%' or Market like '%" + namemarket4 +
+                    "%' or Market like '%" + namemarket5 +
+                    "%') or (Address like '%" + namemarket1 +
+                    "%' or Address like '%" + namemarket2 +
+                    "%' or Address like '%" + namemarket3 +
+                    "%' or Address like '%" + namemarket4 +
+                    "%' or Address like '%" + namemarket5 +
+                    "%')) AND SubsetId";
+        }
+        else if(namemarket1.length()>0 && namemarket2.length()>0 && namemarket3.length()>0 && namemarket4.length()>0)
+        {
+            Log.i("search 4 word",namemarket1+","+namemarket2+","+namemarket3+","+namemarket4);
+            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where((" +
+                    " Market like'%" + namemarket1 +
+                    "%' or Market like '%" + namemarket2 +
+                    "%' or Market like '%" + namemarket3 +
+                    "%' or Market like '%" + namemarket4 +
+                    "%') or (Address like '%" + namemarket1 +
+                    "%' or Address like '%" + namemarket2 +
+                    "%' or Address like '%" + namemarket3 +
+                    "%' or Address like '%" + namemarket4 +
+                    "%')) AND SubsetId";
+        }
+        else if(namemarket1.length()>0 && namemarket2.length()>0 && namemarket3.length()>0 )
+        {
+            Log.i("search 3 word",namemarket1+","+namemarket2+","+namemarket3);
+            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where((" +
+                    " Market like'%" + namemarket1 +
+                    "%' or Market like '%" + namemarket2 +
+                    "%' or Market like '%" + namemarket3 +
+                    "%') or (Address like '%" + namemarket1 +
+                    "%' or Address like '%" + namemarket2 +
+                    "%' or Address like '%" + namemarket3 +
+                    "%')) AND SubsetId";
+        }
+        else if(namemarket1.length()>0 && namemarket2.length()>0  )
+        {
+            Log.i("search 2 word",namemarket1+","+namemarket2);
+            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where((" +
+                    " Market like'%" + namemarket1 +
+                    "%' or Market like '%" + namemarket2 +
+                    "%') or (Address like '%" + namemarket1 +
+                    "%' or Address like '%" + namemarket2 +
+                    "%')) AND SubsetId";
+        }
+        else if(namemarket1.length()>0)
+        {
+            Log.i("search 1 word",namemarket1);
+            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where((" +
+                    " Market like'%" + namemarket1 +
+                    "%') or (Address like '%" + namemarket1 +
+                    "%')) AND SubsetId";
         }
         Log.i("namemarket[0]",namemarket1);
         Log.i("namemarket[1]",namemarket2);
@@ -942,6 +1036,14 @@ Context context;
 
     }
 
+    public Cursor select_SubsetId(Integer CollectionId)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT Id FROM " + instructionsSqlite.TABLE_NAME_SUBSET + "  WHERE CollectionId=" +CollectionId, null);
+
+    }
+
     public Cursor select_SubsetName(Integer id)
     {
 
@@ -1030,6 +1132,13 @@ Context context;
         SQLiteDatabase db=this.getReadableDatabase();
         return  db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_COLLECTION,null);
     }
+
+    public Cursor select_Collection(String collectionname)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return  db.rawQuery("SELECT Id FROM "+instructionsSqlite.TABLE_NAME_COLLECTION+" WHERE CollectionName like '%"+collectionname+"%'",null);
+    }
+
 
     public Cursor select_Subset()
     {
