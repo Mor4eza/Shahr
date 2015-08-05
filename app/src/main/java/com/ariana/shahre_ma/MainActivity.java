@@ -144,9 +144,9 @@ public class MainActivity extends AppCompatActivity {
             Cursor allrows = db.select_Member();
             allrows.moveToNext();
             if (allrows.getString(6).equals(null)) {
-                //Action.show();
+                Action.show();
             } else {
-                //  Action.dismiss();
+                  Action.dismiss();
             }
 
 

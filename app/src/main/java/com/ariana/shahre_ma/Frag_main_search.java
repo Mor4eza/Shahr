@@ -8,14 +8,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
+import com.ariana.shahre_ma.MyBusiness.Edit_business;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetOnlineSearchJson;
@@ -33,7 +37,7 @@ public class Frag_main_search extends Fragment
     private int page;
     private Button btnSearch;
     private TextView txtWhat;
-    private TextView txtWhere;
+    private AutoCompleteTextView txtWhere;
 
     FieldClass fc=new FieldClass();
     FieldDataBusiness fdb=new FieldDataBusiness();
@@ -41,8 +45,9 @@ public class Frag_main_search extends Fragment
     Cursor rows_Collection;
     Cursor rows_Subset;
     Cursor rows_FieldActivity;
+
     int length = 0;
-    int i=0;
+
 
 
     private List<Integer>  selectId=new ArrayList<>();
@@ -70,6 +75,8 @@ public class Frag_main_search extends Fragment
         super.onCreate(savedInstanceState);
         page = getArguments().getInt("someInt", 0);
         title = getArguments().getString("someTitle");
+
+
     }
 
     // Inflate the view for the fragment based on layout XML
@@ -81,16 +88,16 @@ public class Frag_main_search extends Fragment
         tvLabel.setText(page + " -- " + title);
         btnSearch=(Button)view.findViewById(R.id.btn_search);
         txtWhat=(EditText)view.findViewById(R.id.et_search_what);
-        txtWhere=(EditText)view.findViewById(R.id.et_search_where);
-
+        txtWhere=(AutoCompleteTextView)view.findViewById(R.id.et_search_where);
+        GetNameActivity();
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NetState ns = new NetState(getActivity());
                 DataBaseSqlite db = new DataBaseSqlite(getActivity());
-                Query query=new Query(getActivity());
-                KeySettings setting=new KeySettings(getActivity());
-
+                Query query = new Query(getActivity());
+                KeySettings setting = new KeySettings(getActivity());
+                int i = 0;
                 String selectedWord[] = new String[]{"", "", "", "", ""};
                 selectedWord[0] = "";
                 selectedWord[1] = "";
@@ -105,12 +112,10 @@ public class Frag_main_search extends Fragment
                     try {
                         String textwhat = URLEncoder.encode(txtWhat.getText().toString().trim(), "UTF-8");
                         HTTPGetOnlineSearchJson httpGetOnlineSearchJson = new HTTPGetOnlineSearchJson(getActivity());
-                        httpGetOnlineSearchJson.SetValueSearch(textwhat, query.getCityId(setting.getCityName()));
+                        httpGetOnlineSearchJson.SetValueSearch(textwhat, query.getCityId(txtWhere.getText().toString()));
                         httpGetOnlineSearchJson.execute();
-                    }
-                    catch (Exception e)
-                    {
-                        Log.e("search",e.toString());
+                    } catch (Exception e) {
+                        Log.e("search", e.toString());
                     }
 
                 } else {
@@ -125,8 +130,8 @@ public class Frag_main_search extends Fragment
                     }
 
 
-                            //جستجو کامل متن در نام مشاغل و آدرس
-                    rows_Business = db.select_BusinessSearch(txtWhat.getText().toString());
+                    //جستجو کامل متن در نام مشاغل و آدرس
+                    rows_Business = db.select_BusinessSearch(selectedWord[0], selectedWord[1], selectedWord[2], selectedWord[3], selectedWord[4]);
                     Log.i("BusinessgetCount", String.valueOf(rows_Business.getCount()));
                     if (rows_Business.getCount() > 0) {
                         Log.i("Businessget", "on");
@@ -254,4 +259,37 @@ public class Frag_main_search extends Fragment
 
         return view;
     }
+
+        public List<String> getId2() {
+
+            DataBaseSqlite db=new DataBaseSqlite(getActivity());
+            List<String> studentList = new ArrayList<String>();
+            Cursor allrows=db.select_AllCity();
+            if (allrows.moveToFirst()) {
+                do {
+
+                    studentList.add(allrows.getString(1));
+                    Log.i("FieldActivity", String.valueOf(allrows.getInt(0)) + " : " + allrows.getString(1));
+
+
+                } while (allrows.moveToNext());
+            }
+
+            return studentList;
+        }
+
+        public void GetNameActivity()
+        {
+            try {
+
+                ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, getId2());
+                txtWhere.setAdapter(adapter);
+                txtWhere.setThreshold(1);
+              //  txtWhere.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+            }
+            catch (Exception e)
+            {
+                Log.e("ExceptionSQL",e.toString());
+            }
+        }
 }
