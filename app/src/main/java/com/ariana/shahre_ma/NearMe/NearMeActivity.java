@@ -109,13 +109,6 @@ public class NearMeActivity extends ActionBarActivity {
         {
             do
             {
-                /*Latitude[len]=rows.getString(15);
-                Longtitude[len]=rows.getString(16);
-                Market[len]=rows.getString(1);
-                //Rate[i]=fdb.GetRateBusiness();
-                //id[i]=fdb.GetIdBusiness();
-                Log.i("latitude",rows.getString(15));
-                Log.i("longitude", rows.getString(16));*/
                 mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(rows.getString(16)), Double.valueOf(rows.getString(15)))).title("\u200e" + rows.getString(1)));
                 len++;
             }while (rows.moveToNext());

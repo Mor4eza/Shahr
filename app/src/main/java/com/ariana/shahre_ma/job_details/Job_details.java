@@ -222,10 +222,10 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
         map.setMultiTouchControls(true);
 
         map.getController().setZoom(15);
-        map.getController().animateTo(new GeoPoint(Double.parseDouble(fc.GetLatitude_Business()),Double.parseDouble(fc.GetLongtiude_Business())));
+        map.getController().animateTo(new GeoPoint((fc.GetLatitude_Business()),(fc.GetLongtiude_Business())));
 
         ArrayList<OverlayItem> overlays = new ArrayList<OverlayItem>();
-        overlays.add(new OverlayItem("اندیشه", "داده پردازان آریانا", new GeoPoint(Double.parseDouble(fc.GetLatitude_Business()),Double.parseDouble(fc.GetLongtiude_Business()))));
+        overlays.add(new OverlayItem("اندیشه", "داده پردازان آریانا", new GeoPoint((fc.GetLatitude_Business()),(fc.GetLongtiude_Business()))));
         Drawable marker=this.getResources().getDrawable(R.drawable.marker);
 
         resourceProxy = new DefaultResourceProxyImpl(getApplicationContext());

@@ -40,8 +40,8 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
 
     private  List<Integer> selectId=new ArrayList<>();
-    private  List<String>  selectLongtiude=new ArrayList<>();
-    private  List<String>  selectLatitude=new ArrayList<>();
+    private  List<Double>  selectLongtiude=new ArrayList<>();
+    private  List<Double>  selectLatitude=new ArrayList<>();
     private  List<Double>  selectRate=new ArrayList<>();
     private  List<String>  selectPhone=new ArrayList<String>();
     private  List<String>  selectMobile=new ArrayList<String>();
@@ -64,8 +64,8 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
     String inactive[];
     String subset[];
     Integer subsetid[];
-    String longitude[];
-    String latitude[];
+    Double longitude[];
+    Double latitude[];
     Integer areaid[];
     String area1[];
     String user[];
@@ -244,8 +244,8 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
             inactive=new String[areas.length()];
             subset=new String[areas.length()];
             subsetid=new Integer[areas.length()];
-            longitude=new String[areas.length()];
-            latitude=new String[areas.length()];
+            longitude=new Double[areas.length()];
+            latitude=new Double[areas.length()];
             areaid=new Integer[areas.length()];
             area1=new String[areas.length()];
             user=new String[areas.length()];
@@ -297,8 +297,8 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
                 field7[i] = area.getInt("Field7");
                 Id[i]=area.getInt("Id");
                 inactive[i]=area.getString("Inactive");
-                latitude[i]=area.getString("Latitude");
-                longitude[i]=area.getString("Longitude");
+                latitude[i]=Double.valueOf(area.getString("Latitude"));
+                longitude[i]=Double.valueOf(area.getString("Longitude"));
                 market[i]=area.getString("Market");
                 mobile[i]=area.getString("Mobile");
                 phone[i]=area.getString("Phone");
@@ -328,8 +328,8 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
 
                 selectId.add(area.getInt("Id"));
-                selectLatitude.add(area.getString("Latitude"));
-                selectLongtiude.add(area.getString("Longitude"));
+                selectLatitude.add(Double.valueOf(area.getString("Latitude")));
+                selectLongtiude.add(Double.valueOf(area.getString("Longitude")));
                 selectAddress.add(area.getString("Address"));
                 selectMarketName.add(area.getString("Market"));
                 selectPhone.add(area.getString("Phone"));

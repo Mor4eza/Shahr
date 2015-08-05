@@ -45,8 +45,8 @@ public class Frag_main_search extends Fragment
 
 
     private List<Integer>  selectId=new ArrayList<>();
-    private  List<String>  selectLongtiude=new ArrayList<>();
-    private  List<String>  selectLatitude=new ArrayList<>();
+    private  List<Double>  selectLongtiude=new ArrayList<>();
+    private  List<Double>  selectLatitude=new ArrayList<>();
     private  List<Double>  selectRate=new ArrayList<>();
     private  List<String>  selectPhone=new ArrayList<String>();
     private  List<String>  selectMobile=new ArrayList<String>();
@@ -129,8 +129,8 @@ public class Frag_main_search extends Fragment
                                 selectPhone.add(rows_Business.getString(3));
                                 selectMobile.add(rows_Business.getString(4));
                                 selectId.add(rows_Business.getInt(0));
-                                selectLatitude.add(rows_Business.getString(16));
-                                selectLongtiude.add(rows_Business.getString(15));
+                                selectLatitude.add(rows_Business.getDouble(16));
+                                selectLongtiude.add(rows_Business.getDouble(15));
                                 selectRate.add(rows_Business.getDouble(30));
 
                             } while (rows_Business.moveToNext());
@@ -172,8 +172,8 @@ public class Frag_main_search extends Fragment
                                     selectPhone.add(rows_Business.getString(3));
                                     selectMobile.add(rows_Business.getString(4));
                                     selectId.add(rows_Business.getInt(0));
-                                    selectLatitude.add(rows_Business.getString(16));
-                                    selectLongtiude.add(rows_Business.getString(15));
+                                    selectLatitude.add(rows_Business.getDouble(16));
+                                    selectLongtiude.add(rows_Business.getDouble(15));
                                     selectRate.add(rows_Business.getDouble(30));
 
                                 } while (rows_Business.moveToNext());
@@ -210,8 +210,8 @@ public class Frag_main_search extends Fragment
                                         selectPhone.add(rows_Business.getString(3));
                                         selectMobile.add(rows_Business.getString(4));
                                         selectId.add(rows_Business.getInt(0));
-                                        selectLatitude.add(rows_Business.getString(16));
-                                        selectLongtiude.add(rows_Business.getString(15));
+                                        selectLatitude.add(rows_Business.getDouble(16));
+                                        selectLongtiude.add(rows_Business.getDouble(15));
                                         selectRate.add(rows_Business.getDouble(30));
 
                                     } while (rows_Business.moveToNext());

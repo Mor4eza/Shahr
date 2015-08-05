@@ -76,8 +76,8 @@ public class FieldClass
     private static String Address_Business;
 
 
-    private static String Latitude_Business;
-    private static String Longtiude_Business;
+    private static Double Latitude_Business;
+    private static Double Longtiude_Business;
 
 
     private static Integer Count_Like;
@@ -409,20 +409,20 @@ public class FieldClass
 
    // get and set latitude/longtiude
 
-    public String  GetLatitude_Business()
+    public Double  GetLatitude_Business()
     {
         return Latitude_Business;
     }
-    public String  GetLongtiude_Business()
+    public Double  GetLongtiude_Business()
     {
         return  Longtiude_Business;
     }
 
-    public void  SetLatitude_Business(String latitude)
+    public void  SetLatitude_Business(Double latitude)
     {
         Latitude_Business=latitude;
     }
-    public void  SetLongtiude_Business(String longtiude)
+    public void  SetLongtiude_Business(Double longtiude)
     {
         Longtiude_Business=longtiude;
     }
