@@ -1235,7 +1235,7 @@ Context context;
     public  Cursor select_AllCity()
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_City,null);
+        return db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_City + " ORDER BY Name",null);
     }
 
     public  Cursor select_CityId(String cityname)

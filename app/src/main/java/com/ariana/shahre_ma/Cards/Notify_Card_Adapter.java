@@ -14,6 +14,7 @@ import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.MyInterest.My_Interest;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.job_details.Job_details;
@@ -41,6 +42,19 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
         Query query=new Query(context);
         Integer i=0;
         mItems = new ArrayList<Notify_Card_Items>();
+
+
+
+        //خالی بودن اعلانات
+        nci = new Notify_Card_Items();
+        nci.setNdate("");
+        nci.setNdetail("اعلاناتی برای نمایش وجود ندارد برای ارسال اعلانات به شما علاقه مندی های خود را ثبت کنید");
+        nci.setNmarket("");
+        nci.setNId(0);
+        nci.setNotiyId(0);
+        nci.setNewTag("ثبت علاقه مندی ها");
+        mItems.add(nci);
+
         DataBaseSqlite db=new DataBaseSqlite(context);
         Cursor rowalls=db.select_AllNotificaton();
 
@@ -123,19 +137,28 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
 
                     Log.i("ON_______CLICK", tvmarket.getText().toString());
 
-                    fc.SetShowNotification(true);
-                    fc.SetShowNotificationId((Integer) tvdetail.getTag());
-                    fc.SetMarket_Business(tvmarket.getText().toString());
-                    fc.SetBusiness_Id((Integer)tvmarket.getTag());
-                    Intent i = new Intent(context, Job_details.class);
-                    context.startActivity(i);
-
+                    if((Integer)tvmarket.getTag()==0)
+                    {
+                        Intent intent=new Intent(context, My_Interest.class);
+                        context.startActivity(intent);
+                    }
+                    else {
+                        fc.SetShowNotification(true);
+                        fc.SetShowNotificationId((Integer) tvdetail.getTag());
+                        fc.SetMarket_Business(tvmarket.getText().toString());
+                        fc.SetBusiness_Id((Integer) tvmarket.getTag());
+                        Intent i = new Intent(context, Job_details.class);
+                        context.startActivity(i);
+                    }
 
                 }
             });
 
+
+
         }
     }
+
 
 
 }
