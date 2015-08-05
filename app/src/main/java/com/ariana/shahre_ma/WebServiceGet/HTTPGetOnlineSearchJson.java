@@ -1,9 +1,11 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
@@ -29,6 +31,7 @@ import java.util.List;
  */
 public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
 {
+    ProgressDialog pd;
     String urlsearch="";
     Context context;
     FieldClass fc=new FieldClass();
@@ -113,6 +116,10 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        pd = new ProgressDialog(context);
+        pd.setMessage("درحال دریافت نتایج جستجو...");
+        pd.setCancelable(false);
+        pd.show();
     }
 
     @Override
@@ -331,6 +338,8 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
             if(len==0) {
                 //  Toast.makeText(get, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
                 Log.i("Count Business : ", "فروشگاه ثبت نشد");
+                pd.dismiss();
+                Toast.makeText(context,"نتیجه ای یافت نشد",Toast.LENGTH_LONG).show();
 
             }
 
@@ -340,7 +349,7 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
                 Intent intent = new Intent(this.context, Jobs_List.class);
                 this.context.startActivity(intent);
                 Log.i("Count Business : ", "دریافت ثبت شده ها");
-
+                pd.dismiss();
 
                 for (int i = 0; i <len; i++)
                 {
