@@ -173,7 +173,9 @@ public class job_details_1 extends ActionBarActivity {
 
 
        }
-        catch (Exception e){Toast.makeText(getActivity(),e.toString(),Toast.LENGTH_LONG).show();}
+        catch (Exception e){
+            //Toast.makeText(getActivity(),e.toString(),Toast.LENGTH_LONG).show();
+        }
 
 
 

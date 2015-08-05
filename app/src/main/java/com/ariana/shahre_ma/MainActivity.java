@@ -165,6 +165,8 @@ public class MainActivity extends ActionBarActivity {
 
         if (!Once.beenDone(Once.THIS_APP_VERSION, showWhatsNew)) {
             help1();
+            CityDialog cityDialog=new CityDialog(this);
+            cityDialog.show();
             Once.markDone(showWhatsNew);
         }
 
