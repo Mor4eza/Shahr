@@ -693,6 +693,19 @@ Context context;
 
     }
 
+    public Cursor select_BusinessSearch(Double latitude,Double logntitude,Double near)
+    {
+        String query="";
+
+        query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
+                "Latitude+ " +near+">"+latitude+
+                ")AND(Longitude- "+near+"<"+logntitude+")";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(query, null);
+
+    }
+
     public Cursor select_BusinessSearch(String namemarket)
     {
         String query="";
