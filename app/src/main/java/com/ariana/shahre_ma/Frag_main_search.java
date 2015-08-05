@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
@@ -107,13 +108,19 @@ public class Frag_main_search extends Fragment
 
                 int startSelection = txtWhat.getSelectionStart();
 
-
+                Integer cityid=query.getCityId(txtWhere.getText().toString());
                 if (ns.checkInternetConnection()) {
                     try {
-                        String textwhat = URLEncoder.encode(txtWhat.getText().toString().trim(), "UTF-8");
-                        HTTPGetOnlineSearchJson httpGetOnlineSearchJson = new HTTPGetOnlineSearchJson(getActivity());
-                        httpGetOnlineSearchJson.SetValueSearch(textwhat, query.getCityId(txtWhere.getText().toString()));
-                        httpGetOnlineSearchJson.execute();
+                        if(cityid>0) {
+                            String textwhat = URLEncoder.encode(txtWhat.getText().toString().trim(), "UTF-8");
+                            HTTPGetOnlineSearchJson httpGetOnlineSearchJson = new HTTPGetOnlineSearchJson(getActivity());
+                            httpGetOnlineSearchJson.SetValueSearch(textwhat,cityid);
+                            httpGetOnlineSearchJson.execute();
+                        }
+                        else
+                        {
+                            Toast.makeText(getActivity(),"",Toast.LENGTH_LONG).show();
+                        }
                     } catch (Exception e) {
                         Log.e("search", e.toString());
                     }
