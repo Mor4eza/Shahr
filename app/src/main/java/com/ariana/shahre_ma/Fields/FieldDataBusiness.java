@@ -126,4 +126,17 @@ public class FieldDataBusiness
     {
         return MarketName;
     }
+
+    public void ClearAll()
+    {
+         Id.clear();
+        Longtiude.clear();
+        Latitude.clear();
+        Rate.clear();
+        Phone.clear();
+        Mobile.clear();
+        Address.clear();
+        MarketName.clear();
+
+    }
 }

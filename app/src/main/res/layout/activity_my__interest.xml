@@ -8,7 +8,7 @@
 
     <ExpandableListView
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="match_parent"
         android:dividerHeight="0.9dp"
         android:divider="#ff2195f2"
         android:id="@+id/expand_my_interest"

@@ -328,7 +328,7 @@ public class MainActivity extends AppCompatActivity {
                 .withAnimateDrawerItems(true)
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName(R.string.Works).withIcon(FontAwesome.Icon.faw_money),
-                        new PrimaryDrawerItem().withName(R.string.Off).withIcon(FontAwesome.Icon.faw_coffee),
+                        new PrimaryDrawerItem().withName(R.string.Near).withIcon(FontAwesome.Icon.faw_map_marker),
                         new PrimaryDrawerItem().withName(R.string.My_business).withIcon(FontAwesome.Icon.faw_briefcase),
                         new DividerDrawerItem(),
                         //  new SectionDrawerItem().withName(""),
