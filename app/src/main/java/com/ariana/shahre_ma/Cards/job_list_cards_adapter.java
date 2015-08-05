@@ -126,6 +126,8 @@ private  static Context context;
 
                         mItems.add(nature);
                         notifyDataSetChanged();
+
+                        fdb.ClearAll();
                     }
                 }
             else
