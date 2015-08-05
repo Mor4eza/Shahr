@@ -282,6 +282,7 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
             }
             catch (Exception e)
             {
+                Log.e("getStreamFromURL",e.toString());
                 return null;
             }
         }
@@ -301,7 +302,7 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
             }
             catch (Exception e)
             {
-
+                Log.e("streamToString",e.toString());
             }
             return  result;
         }
