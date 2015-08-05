@@ -693,7 +693,20 @@ Context context;
 
     }
 
-    public Cursor select_BusinessSearch(Double latitude,Double logntitude,Double near)
+    public Cursor select_BusinessSearchNearMe(Double latitude,Double logntitude,Double near,Integer Subsetid)
+    {
+        String query="";
+
+        query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
+                "Latitude+ " +near+">="+latitude+" AND Latitude-"+near+"<="+latitude+
+                ")AND(Longitude+ "+near+">="+logntitude+" AND Longitude-"+near+"<="+logntitude+") AND SubsetId="+Subsetid;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(query, null);
+
+    }
+
+    public Cursor select_BusinessSearchNearMe(Double latitude,Double logntitude,Double near)
     {
         String query="";
 
@@ -1061,7 +1074,7 @@ Context context;
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT SubsetName FROM " + InstructionsSqlite.TABLE_NAME_SUBSET + "  WHERE id=" +id, null);
+        return db.rawQuery("SELECT SubsetName FROM " + InstructionsSqlite.TABLE_NAME_SUBSET + "  WHERE Id=" +id, null);
 
     }
 

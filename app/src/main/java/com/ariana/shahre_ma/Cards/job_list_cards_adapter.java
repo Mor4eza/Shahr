@@ -97,7 +97,7 @@ private  static Context context;
              search=false;
             Log.i("date", setting.getSortBusiness());
         }
-
+        //fdb.ClearAll();
        // try {
             if(fc.GetSearchOffline())
                 {
@@ -127,7 +127,7 @@ private  static Context context;
                         mItems.add(nature);
                         notifyDataSetChanged();
 
-                        fdb.ClearAll();
+
                     }
                 }
             else

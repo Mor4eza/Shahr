@@ -14,6 +14,7 @@ public class FieldDataBusiness
     private static List<Double> Rate=new ArrayList<>();
     private static List<String> Phone=new ArrayList<>();
     private static List<String> Mobile=new ArrayList<String>();
+    private static List<Integer> SubsetId=new ArrayList<>();
     private static List<String> Address=new ArrayList<>();
     private static List<String> MarketName=new ArrayList<String>();
 
@@ -27,6 +28,17 @@ public class FieldDataBusiness
     {
         return Id;
     }
+
+    public void SetSubsetId(List<Integer> subsetId)
+    {
+        SubsetId=subsetId;
+    }
+
+    public List<Integer> GetSubsetId()
+    {
+        return SubsetId;
+    }
+
 
     /**
      * Get rate Business

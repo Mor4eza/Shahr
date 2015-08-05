@@ -73,7 +73,7 @@ public class NearMeActivity extends ActionBarActivity {
         NetState ns=new NetState(this);
         if(!ns.checkInternetConnection()) {
             DataBaseSqlite db = new DataBaseSqlite(this);
-            Cursor rows = db.select_BusinessSearch(35.8357895,51.0096686,0.01);
+            Cursor rows = db.select_BusinessSearchNearMe(35.8357895,51.0096686,0.01);
             Log.i("Count",String.valueOf(rows.getCount()));
             if (rows.moveToFirst()) {
                 do {
@@ -118,8 +118,8 @@ public class NearMeActivity extends ActionBarActivity {
 
 
             DataBaseSqlite db = new DataBaseSqlite(this);
-            Cursor rows = db.select_BusinessSearch(35.8357895,51.0096686,0.01);
-
+            Cursor rows = db.select_BusinessSearchNearMe(35.8357895,51.0096686,0.01);
+            Log.i("Count",String.valueOf(rows.getCount()));
             if (rows.moveToFirst()) {
                 do {
                     mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(rows.getString(16)), Double.valueOf(rows.getString(15)))).title("\u200e" + rows.getString(1)));

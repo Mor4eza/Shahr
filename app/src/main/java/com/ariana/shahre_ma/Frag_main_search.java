@@ -131,7 +131,7 @@ public class Frag_main_search extends Fragment
 
 
                     //جستجو کامل متن در نام مشاغل و آدرس
-                    rows_Business = db.select_BusinessSearch(selectedWord[0], selectedWord[1], selectedWord[2], selectedWord[3], selectedWord[4]);
+                    rows_Business = db.select_BusinessSearch(txtWhat.getText().toString());
                     Log.i("BusinessgetCount", String.valueOf(rows_Business.getCount()));
                     if (rows_Business.getCount() > 0) {
                         Log.i("Businessget", "on");
