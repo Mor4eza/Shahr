@@ -290,8 +290,8 @@ public class  InstructionsSqlite {
             " Inactive TEXT ," +
             " Subset TEXT ," +
             " SubsetId INTEGER ," +
-            " Longitude REAL," +
             " Latitude REAL," +
+            " Longitude REAL," +
             " AreaId INTEGER ," +
             " Area TEXT ," +
             " User TEXT ," +
@@ -326,8 +326,8 @@ public class  InstructionsSqlite {
             " Inactive TEXT ," +
             " Subset TEXT ," +
             " SubsetId INTEGER ," +
-            " Longitude TEXT," +
-            " Latitude TEXT," +
+            " Latitude REAL," +
+            " Longitude REAL," +
             " AreaId INTEGER ," +
             " Area TEXT ," +
             " User TEXT ," +
@@ -362,8 +362,8 @@ public class  InstructionsSqlite {
             " Inactive TEXT ," +
             " Subset TEXT ," +
             " SubsetId INTEGER ," +
-            " Longitude TEXT," +
-            " Latitude TEXT," +
+            " Latitude REAL," +
+            " Longitude REAL," +
             " AreaId INTEGER ," +
             " Area TEXT ," +
             " User TEXT ," +

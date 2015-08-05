@@ -39,7 +39,7 @@ public class NearMeActivity extends ActionBarActivity {
         setContentView(R.layout.activity_near_me);
         setUpMapIfNeeded();
 
-      /*  Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+      /* Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                     Uri.parse("http://maps.google.com/maps?daddr=35.688951,51.018301"));
         intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
         startActivity(intent);*/
@@ -70,12 +70,24 @@ public class NearMeActivity extends ActionBarActivity {
         }*/
 
 
+        NetState ns=new NetState(this);
+        if(!ns.checkInternetConnection()) {
+            DataBaseSqlite db = new DataBaseSqlite(this);
+            Cursor rows = db.select_BusinessSearch(35.8357895,51.0096686,0.01);
+            Log.i("Count",String.valueOf(rows.getCount()));
+            if (rows.moveToFirst()) {
+                do {
+                    mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(rows.getString(16)), Double.valueOf(rows.getString(15)))).title("\u200e" + rows.getString(1)));
+                    len++;
+                } while (rows.moveToNext());
+            }
+        }
+
+
 
         HTTPSendNearMeURL nearMeURL=new HTTPSendNearMeURL(this);
         nearMeURL.SetNearMe("35.8357895","51.0096686",0.01);
         nearMeURL.execute();
-
-
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,new IntentFilter("near-me"));
 
@@ -103,23 +115,9 @@ public class NearMeActivity extends ActionBarActivity {
 
     private void setUpMap() {
 
-        NetState ns=new NetState(this);
-        if(ns.checkInternetConnection()) {
             DataBaseSqlite db = new DataBaseSqlite(this);
             Cursor rows = db.select_AllBusiness();
-
-            if (rows.moveToFirst()) {
-                do {
-                    mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(rows.getString(16)), Double.valueOf(rows.getString(15)))).title("\u200e" + rows.getString(1)));
-                    len++;
-                } while (rows.moveToNext());
-            }
-        }
-        else
-        {
-            DataBaseSqlite db = new DataBaseSqlite(this);
-            Cursor rows = db.select_BusinessSearch(35.8357895,51.0096686,0.01);
-
+             Log.i("Count",String.valueOf(rows.getCount()));
             if (rows.moveToFirst()) {
                 do {
                     mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(rows.getString(16)), Double.valueOf(rows.getString(15)))).title("\u200e" + rows.getString(1)));
@@ -131,7 +129,6 @@ public class NearMeActivity extends ActionBarActivity {
 
 
 
-    }
 
 
     @Override

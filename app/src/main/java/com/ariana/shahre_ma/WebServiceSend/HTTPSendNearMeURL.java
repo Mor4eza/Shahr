@@ -293,6 +293,10 @@ public class HTTPSendNearMeURL extends AsyncTask<String,Void,Integer >
                 field7[i] = area.getInt("Field7");
                 Id[i] = area.getInt("Id");
                 inactive[i] = area.getString("Inactive");
+
+                Log.i("latitude",area.getString("Latitude"));
+                Log.i("longitude",area.getString("Longitude"));
+
                 latitude[i] = Double.valueOf(area.getString("Latitude"));
                 longitude[i] = Double.valueOf(area.getString("Longitude"));
                 market[i] = area.getString("Market");

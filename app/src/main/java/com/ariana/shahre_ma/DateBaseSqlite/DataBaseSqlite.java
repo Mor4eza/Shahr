@@ -698,8 +698,8 @@ Context context;
         String query="";
 
         query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
-                "Latitude+ " +near+">"+latitude+
-                ")AND(Longitude- "+near+"<"+logntitude+")";
+                "Latitude+ " +near+"<"+latitude+" AND Latitude-"+near+">"+latitude+
+                ")AND(Longitude+ "+near+"<"+logntitude+" AND Longitude-"+near+">"+logntitude+")";
 
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(query, null);
