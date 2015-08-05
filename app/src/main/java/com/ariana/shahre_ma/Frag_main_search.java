@@ -40,7 +40,7 @@ public class Frag_main_search extends Fragment
     Cursor rows_Subset;
     Cursor rows_FieldActivity;
     int length = 0;
-    int i=0;
+
 
 
     private List<Integer>  selectId=new ArrayList<>();
@@ -87,6 +87,7 @@ public class Frag_main_search extends Fragment
                 NetState ns= new NetState(getActivity());
                 DataBaseSqlite db=new DataBaseSqlite(getActivity());
 
+                int i=0;
                 selectedWord[0]="";
                 selectedWord[1]="";
                 selectedWord[2]="";
@@ -203,7 +204,7 @@ public class Frag_main_search extends Fragment
                                    Log.i("Subsetget","on");
                                    rows_Subset.moveToFirst();
                                    //جستجو آی دی زیر مجموعه و کلمات دیگر در مشاغل
-                                   rows_Business=db.select_BusinessSearch(selectedWord[0],selectedWord[1],selectedWord[2],selectedWord[3],selectedWord[4],rows_Subset.getInt(0));
+                                   rows_Business=db.select_BusinessSearch(selectedWord[1],selectedWord[1],selectedWord[2],selectedWord[3],selectedWord[4],rows_Subset.getInt(0));
                                    if(rows_Business.moveToFirst())
                                    {
                                        do

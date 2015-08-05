@@ -18,6 +18,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     // Database Name
     private static final String DATABASE_NAME = "DBshahrma.db";
 
+    InstructionsSqlite instructionsSqlite=new InstructionsSqlite();
 
 Context context;
 
