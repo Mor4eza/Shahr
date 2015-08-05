@@ -20,6 +20,7 @@ import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetOnlineSearchJson;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,9 +102,16 @@ public class Frag_main_search extends Fragment
 
 
                 if (ns.checkInternetConnection()) {
-                    HTTPGetOnlineSearchJson httpGetOnlineSearchJson=new HTTPGetOnlineSearchJson(getActivity());
-                    httpGetOnlineSearchJson.SetValueSearch(txtWhat.getText().toString(),query.getCityId(setting.getCityName()));
-                    httpGetOnlineSearchJson.execute();
+                    try {
+                        String textwhat = URLEncoder.encode(txtWhat.getText().toString().trim(), "UTF-8");
+                        HTTPGetOnlineSearchJson httpGetOnlineSearchJson = new HTTPGetOnlineSearchJson(getActivity());
+                        httpGetOnlineSearchJson.SetValueSearch(textwhat, query.getCityId(setting.getCityName()));
+                        httpGetOnlineSearchJson.execute();
+                    }
+                    catch (Exception e)
+                    {
+                        Log.e("search",e.toString());
+                    }
 
                 } else {
                     for (String currentWord : txtWhat.getText().toString().split(" ")) {
