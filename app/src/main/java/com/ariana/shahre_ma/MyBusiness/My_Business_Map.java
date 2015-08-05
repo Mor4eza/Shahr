@@ -1,7 +1,6 @@
 package com.ariana.shahre_ma.MyBusiness;
 
 import android.location.Location;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.Toast;
@@ -63,8 +62,8 @@ FieldClass fc=new FieldClass();
                 Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(latLng.latitude,latLng.longitude)).title("\u200e" + "اینجا"));
 
                 marker.showInfoWindow();
-                fc.SetLatitude_Business(String.valueOf(latLng.latitude));
-                fc.SetLongtiude_Business(String.valueOf(latLng.longitude));
+                fc.SetLatitude_Business((latLng.latitude));
+                fc.SetLongtiude_Business((latLng.longitude));
             }
         });
 

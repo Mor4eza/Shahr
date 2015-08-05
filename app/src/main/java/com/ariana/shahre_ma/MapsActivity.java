@@ -31,8 +31,8 @@ public class MapsActivity extends ActionBarActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
-    String Latitude[];
-    String Longtitude[];
+    Double Latitude[];
+    Double Longtitude[];
     String Market[];
     Double Rate[];
     Integer len;
@@ -89,8 +89,8 @@ public class MapsActivity extends ActionBarActivity {
 
 
 
-        String lat[] = new String[fc.GetCount_Business()];
-        String Longt[] = new String[fc.GetCount_Business()];
+        Double lat[] = new Double[fc.GetCount_Business()];
+        Double Longt[] = new Double[fc.GetCount_Business()];
 
 
         if(fdb.GetMarketBusiness().size()==0) {
@@ -100,8 +100,8 @@ public class MapsActivity extends ActionBarActivity {
             if (allrows.moveToFirst()) {
 
                 do {
-                    lat[l] = allrows.getString(15);
-                    Longt[l] = allrows.getString(16);
+                    lat[l] = allrows.getDouble(15);
+                    Longt[l] = allrows.getDouble(16);
                     l++;
 
                 } while (allrows.moveToNext());
@@ -139,7 +139,7 @@ public class MapsActivity extends ActionBarActivity {
         };
 
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(lat[0]), Double.parseDouble(Longt[0])), 12.0f), 2000, null);
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng((lat[0]), (Longt[0])), 12.0f), 2000, null);
 
          mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
@@ -176,8 +176,8 @@ public class MapsActivity extends ActionBarActivity {
     private void setUpMap() {
 
         Integer l=0;
-        Latitude=new String[fc.GetCount_Business()];
-        Longtitude=new String[fc.GetCount_Business()];
+        Latitude=new Double[fc.GetCount_Business()];
+        Longtitude=new Double[fc.GetCount_Business()];
         Market=new String[fc.GetCount_Business()];
         Rate=new Double[fc.GetCount_Business()];
         len=fc.GetCount_Business();
@@ -195,8 +195,8 @@ public class MapsActivity extends ActionBarActivity {
                     do {
 
                         Market[l] = allrows.getString(1);
-                        Longtitude[l] = allrows.getString(15);
-                        Latitude[l] = allrows.getString(16);
+                        Longtitude[l] = allrows.getDouble(15);
+                        Latitude[l] = allrows.getDouble(16);
                         Rate[l] = allrows.getDouble(29);
                         id[l] = allrows.getInt(0);
 
@@ -221,10 +221,9 @@ public class MapsActivity extends ActionBarActivity {
 
             for (int i = 0; i < len; i++) {
 
-                    Log.i("Longtitude",Longtitude[i]);
-                    Log.i("Latitude",Latitude[i]);
 
-                    Marker  marker = mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(Latitude[i]), Double.parseDouble(Longtitude[i] ))).title("\u200e"+Market[i]).snippet(String.valueOf(Rate[i])));
+
+                    Marker  marker = mMap.addMarker(new MarkerOptions().position(new LatLng((Latitude[i]),(Longtitude[i] ))).title("\u200e"+Market[i]).snippet(String.valueOf(Rate[i])));
                     marker.setData(id[i]);
                     marker.showInfoWindow();
 

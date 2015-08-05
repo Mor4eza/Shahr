@@ -290,8 +290,8 @@ public class  InstructionsSqlite {
             " Inactive TEXT ," +
             " Subset TEXT ," +
             " SubsetId INTEGER ," +
-            " Longitude TEXT," +
-            " Latitude TEXT," +
+            " Longitude REAL," +
+            " Latitude REAL," +
             " AreaId INTEGER ," +
             " Area TEXT ," +
             " User TEXT ," +

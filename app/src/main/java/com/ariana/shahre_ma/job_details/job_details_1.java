@@ -142,8 +142,8 @@ public class job_details_1 extends ActionBarActivity {
 
         try {
             fc.SetBusiness_Id(allrows.getInt(0));//Id
-            fc.SetLatitude_Business(allrows.getString(10));//Latitude
-            fc.SetLongtiude_Business(allrows.getString(11));//Longtiude
+            fc.SetLatitude_Business(allrows.getDouble(10));//Latitude
+            fc.SetLongtiude_Business(allrows.getDouble(11));//Longtiude
 
             name.setText(allrows.getString(1));//Market
             tel.setText(allrows.getString(2));//Phone

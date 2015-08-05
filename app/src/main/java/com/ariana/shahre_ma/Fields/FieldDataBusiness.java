@@ -9,8 +9,8 @@ import java.util.List;
 public class FieldDataBusiness
 {
     private static List<Integer> Id=new ArrayList<>();
-    private static List<String> Longtiude=new ArrayList<>();
-    private static List<String> Latitude=new ArrayList<>();
+    private static List<Double> Longtiude=new ArrayList<>();
+    private static List<Double> Latitude=new ArrayList<>();
     private static List<Double> Rate=new ArrayList<>();
     private static List<String> Phone=new ArrayList<>();
     private static List<String> Mobile=new ArrayList<String>();
@@ -46,12 +46,12 @@ public class FieldDataBusiness
      *
      * @param longtiude
      */
-    public void SetLongtiudeBusiness(List<String>  longtiude)
+    public void SetLongtiudeBusiness(List<Double>  longtiude)
     {
         Longtiude=longtiude;
     }
 
-    public List<String>  GetLongtiudeBusiness()
+    public List<Double>  GetLongtiudeBusiness()
     {
         return Longtiude;
     }
@@ -60,12 +60,12 @@ public class FieldDataBusiness
      *
      * @param latitude
      */
-    public void SetLatitudeBusiness(List<String>  latitude)
+    public void SetLatitudeBusiness(List<Double>  latitude)
     {
         Latitude=latitude;
     }
 
-    public List<String>  GetLatitudeBusiness()
+    public List<Double>  GetLatitudeBusiness()
     {
         return Latitude;
     }

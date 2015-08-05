@@ -342,7 +342,7 @@ Context context;
 
 
 
-    public void Add_businessDisCount(Integer id,String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid, String longitude, String latitude, Integer areaid, String area, String user,Integer cityid, Integer userid,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7,Integer ratecount,Double ratevalue) {
+    public void Add_businessDisCount(Integer id,String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid,Double latitude,Double longitude, Integer areaid, String area, String user,Integer cityid, Integer userid,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7,Integer ratecount,Double ratevalue) {
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -392,7 +392,7 @@ Context context;
     }
 
 
-    public void Add_businessTops(Integer id,String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid, String longitude, String latitude, Integer areaid, String area, String user,Integer cityid, Integer userid,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7,Integer ratecount,Double ratevalue) {
+    public void Add_businessTops(Integer id,String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid, Double latitude,Double longitude, Integer areaid, String area, String user,Integer cityid, Integer userid,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7,Integer ratecount,Double ratevalue) {
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -441,7 +441,7 @@ Context context;
         db.close();
     }
 
-    public void Add_business(Integer id,String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid, String longitude, String latitude, Integer areaid, String area, String user,Integer cityid, Integer userid,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7,Integer ratecount,Double ratevalue) {
+    public void Add_business(Integer id,String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid, Double latitude,Double longitude, Integer areaid, String area, String user,Integer cityid, Integer userid,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7,Integer ratecount,Double ratevalue) {
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -811,7 +811,7 @@ Context context;
                     "%' or Address like '%" + namemarket3 +
                     "%' or Address like '%" + namemarket4 +
                     "%' or Address like '%" + namemarket5 +
-                    "%')) AND SubsetId";
+                    "%')) AND SubsetId="+SubsetId;
         }
         else if(namemarket1.length()>0 && namemarket2.length()>0 && namemarket3.length()>0 && namemarket4.length()>0)
         {
@@ -825,7 +825,7 @@ Context context;
                     "%' or Address like '%" + namemarket2 +
                     "%' or Address like '%" + namemarket3 +
                     "%' or Address like '%" + namemarket4 +
-                    "%')) AND SubsetId";
+                    "%')) AND SubsetId="+SubsetId;
         }
         else if(namemarket1.length()>0 && namemarket2.length()>0 && namemarket3.length()>0 )
         {
@@ -837,7 +837,7 @@ Context context;
                     "%') or (Address like '%" + namemarket1 +
                     "%' or Address like '%" + namemarket2 +
                     "%' or Address like '%" + namemarket3 +
-                    "%')) AND SubsetId";
+                    "%')) AND SubsetId="+SubsetId;
         }
         else if(namemarket1.length()>0 && namemarket2.length()>0  )
         {
@@ -847,7 +847,7 @@ Context context;
                     "%' or Market like '%" + namemarket2 +
                     "%') or (Address like '%" + namemarket1 +
                     "%' or Address like '%" + namemarket2 +
-                    "%')) AND SubsetId";
+                    "%')) AND SubsetId="+SubsetId;
         }
         else if(namemarket1.length()>0)
         {
@@ -855,7 +855,7 @@ Context context;
             query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where((" +
                     " Market like'%" + namemarket1 +
                     "%') or (Address like '%" + namemarket1 +
-                    "%')) AND SubsetId";
+                    "%')) AND SubsetId="+SubsetId;
         }
         Log.i("namemarket[0]",namemarket1);
         Log.i("namemarket[1]", namemarket2);
