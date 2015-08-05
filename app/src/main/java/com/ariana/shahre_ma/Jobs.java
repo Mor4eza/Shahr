@@ -3,7 +3,6 @@ package com.ariana.shahre_ma;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,8 +12,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.DateTime;
@@ -26,14 +27,18 @@ import com.ariana.shahre_ma.ListExpand.Continent;
 import com.ariana.shahre_ma.ListExpand.Country;
 import com.ariana.shahre_ma.ListExpand.MyListAdapter;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
-import com.ariana.shahre_ma.Service.ShowNotificationService;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetInterestJson;
+import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import jonathanfinerty.once.Once;
 
 
 public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
@@ -77,12 +82,10 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jobs);
         query=new Query(this);
-
         setTitle("لیست مشاغل");
 
         httpbusin=new HTTPGetBusinessJson(this);
         ns=new NetState(this);
-
 
     /*    Intent myIntent = new Intent(this, MyReceiver.class);
 
@@ -103,7 +106,6 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         displayList();
         //expandAll();
       //  collapseAll();
-
 
 
         //Initialize swipe to refresh view
@@ -149,7 +151,12 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
 
 
+        String showWhatsNew = "showHelpJobs";
 
+        if (!Once.beenDone(Once.THIS_APP_VERSION, showWhatsNew)) {
+            help1();
+            Once.markDone(showWhatsNew);
+        }
     }
 
 
@@ -333,6 +340,100 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
         mSearchView.setOnQueryTextListener(this);
         mSearchView.setOnCloseListener(this);
+    }
+    public void help1(){
+        ViewTarget Hdiscount=new ViewTarget(R.id.laptop_list,this);
+        RelativeLayout.LayoutParams lps = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        lps.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        lps.addRule(RelativeLayout.CENTER_IN_PARENT);
+        int margin = ((Number) (getResources().getDisplayMetrics().density * 80)).intValue();
+        lps.setMargins(margin, margin, 10, margin);
+
+        ShowcaseView sv= new ShowcaseView.Builder(this)
+                .setTarget(Hdiscount)
+                .setContentTitle("مشاغل")
+                .setContentText("از این قسمت میتوانید دسته بندی کسب و کار را مشاهده کنید")
+                .hideOnTouchOutside()
+                .setStyle(R.style.CustomShowcaseTheme)
+                .build();
+
+        sv.setButtonText("بعدی");
+        sv.setButtonPosition(lps);
+        sv.setOnShowcaseEventListener(new OnShowcaseEventListener() {
+            @Override
+            public void onShowcaseViewHide(ShowcaseView showcaseView) {
+                help2();
+            }
+
+            @Override
+            public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+
+            }
+
+            @Override
+            public void onShowcaseViewShow(ShowcaseView showcaseView) {
+
+            }
+        });
+    }
+    public void help2(){
+        ViewTarget Hdiscount=new ViewTarget(R.id.select_city,this);
+
+        RelativeLayout.LayoutParams lps = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        lps.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        lps.addRule(RelativeLayout.CENTER_IN_PARENT);
+        int margin = ((Number) (getResources().getDisplayMetrics().density * 80)).intValue();
+        lps.setMargins(margin, margin, 10, margin);
+
+        ShowcaseView sv=new ShowcaseView.Builder(this)
+                //.setTarget(new ActionViewTarget(this, ActionViewTarget.Type.HOME))
+                .setTarget(Hdiscount)
+                .setContentTitle("تغیر شهر")
+                .setContentText("برای تغیر شهر فعلی و مشاهده کسب و کار های شهرهای دیگر از این گزینه استفاده کنید")
+                .setStyle(R.style.CustomShowcaseTheme)
+                .build();
+        sv.setButtonText("بعدی");
+        sv.setButtonPosition(lps);
+        sv.setOnShowcaseEventListener(new OnShowcaseEventListener() {
+            @Override
+            public void onShowcaseViewHide(ShowcaseView showcaseView) {
+                help3();
+            }
+
+            @Override
+            public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+
+            }
+
+            @Override
+            public void onShowcaseViewShow(ShowcaseView showcaseView) {
+
+            }
+        });
+    }
+    public void help3(){
+        ViewTarget Hdiscount=new ViewTarget(R.id.action_search,this);
+
+        RelativeLayout.LayoutParams lps = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        lps.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        lps.addRule(RelativeLayout.CENTER_IN_PARENT);
+        int margin = ((Number) (getResources().getDisplayMetrics().density * 80)).intValue();
+        lps.setMargins(margin, margin, 10, margin);
+
+        ShowcaseView sv=new ShowcaseView.Builder(this)
+                // .setTarget(new ActionViewTarget(this, ActionViewTarget.Type.HOME))
+                .setTarget( new ViewTarget( ((ViewGroup)findViewById(R.id.action_bar)).getChildAt(2) ) )
+              //  .setTarget(Hdiscount)
+                .setContentTitle("فیلتر کردن لیست")
+                .setContentText("برای فیلتر کردن لیست مشاغل از این گزینه استفاده کنید")
+                .setStyle(R.style.CustomShowcaseTheme)
+                .build();
+        sv.setButtonText("خب");
+        sv.setButtonPosition(lps);
+
     }
 
 }

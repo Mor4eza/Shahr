@@ -9,7 +9,8 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:id="@+id/filter_list"
-      android:layout_above="@+id/btn_filter">
+      android:layout_above="@+id/btn_filter"
+      android:divider="@color/colorPrimary">
 
   </ListView>
     <Button

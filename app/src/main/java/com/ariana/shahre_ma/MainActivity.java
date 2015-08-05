@@ -14,7 +14,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
@@ -22,11 +22,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Bookmarks.BookMark;
@@ -49,6 +51,9 @@ import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetTopsBusinessJson;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.mikepenz.iconics.typeface.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
@@ -64,9 +69,10 @@ import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.software.shell.fab.ActionButton;
 
 import github.chenupt.dragtoplayout.DragTopLayout;
+import jonathanfinerty.once.Once;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ActionBarActivity {
 
     FragmentPagerAdapter adapterViewPager;
     public static SliderLayout slider;
@@ -102,10 +108,9 @@ public class MainActivity extends AppCompatActivity {
 
         ii=new IntentFilter("android.intent.action.TIME_TICK");
         tsr=new TimeSetReceiver();
-        registerReceiver(tsr,ii);
+        registerReceiver(tsr, ii);
 
         setup();
-
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
                 new IntentFilter("custom-event-name"));
 
@@ -156,6 +161,13 @@ public class MainActivity extends AppCompatActivity {
         Image_slider();
         navigation();
 
+        String showWhatsNew = "showHelp";
+
+        if (!Once.beenDone(Once.THIS_APP_VERSION, showWhatsNew)) {
+            help1();
+            Once.markDone(showWhatsNew);
+        }
+
     }
 
     public void fab_click(View v) {
@@ -195,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
         final TextSliderView textSliderView = new TextSliderView(this);
         textSliderView
                 .description("چهار باغ")
-               .image("http://www.shahrma.com/app/Advertisment/"+imag[0]);
+               .image("http://www.shahrma.com/app/Advertisment/" + imag[0]);
         slider.addSlider(textSliderView);
 
         TextSliderView textSliderView2 = new TextSliderView(this);
@@ -208,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
         TextSliderView textSliderView3 = new TextSliderView(this);
         textSliderView3
                 .description("تیراژه")
-                .image("http://www.shahrma.com/app/Advertisment/"+imag[2]);
+                .image("http://www.shahrma.com/app/Advertisment/" + imag[2]);
         slider.addSlider(textSliderView3);
 
 
@@ -564,4 +576,99 @@ public class MainActivity extends AppCompatActivity {
         }
 
     };
+
+
+    public void help1(){
+
+        RelativeLayout.LayoutParams lps = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        lps.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        lps.addRule(RelativeLayout.CENTER_IN_PARENT);
+        int margin = ((Number) (getResources().getDisplayMetrics().density * 80)).intValue();
+        lps.setMargins(margin, margin, 10, margin);
+
+        ShowcaseView sv=new ShowcaseView.Builder(this)
+               // .setTarget(new ActionViewTarget(this, ActionViewTarget.Type.HOME))
+                .setTarget( new ViewTarget( ((ViewGroup)findViewById(R.id.action_bar)).getChildAt(0) ) )
+               // .setTarget(Hdiscount)
+                .setContentTitle("به شهرما خوش آمدید")
+                .setContentText("برای استفاده از امکانت برنامه از این منو استفاده کنید")
+                .setStyle(R.style.CustomShowcaseTheme)
+                .build();
+        sv.setButtonText("بعدی");
+        sv.setButtonPosition(lps);
+        sv.setOnShowcaseEventListener(new OnShowcaseEventListener() {
+            @Override
+            public void onShowcaseViewHide(ShowcaseView showcaseView) {
+                help2();
+            }
+
+            @Override
+            public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+
+            }
+
+            @Override
+            public void onShowcaseViewShow(ShowcaseView showcaseView) {
+
+            }
+        });
+    }
+    public void help2(){
+        ViewTarget Hdiscount=new ViewTarget(R.id.notification,this);
+
+        RelativeLayout.LayoutParams lps = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        lps.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        lps.addRule(RelativeLayout.CENTER_IN_PARENT);
+        int margin = ((Number) (getResources().getDisplayMetrics().density * 80)).intValue();
+        lps.setMargins(margin, margin, 10, margin);
+
+        ShowcaseView sv=new ShowcaseView.Builder(this)
+                //.setTarget(new ActionViewTarget(this, ActionViewTarget.Type.HOME))
+                .setTarget(Hdiscount)
+                .setContentTitle("اعلانات")
+                .setContentText("برای نمایش آخرین اعلانات از این دکمه استفاده کنید")
+                .setStyle(R.style.CustomShowcaseTheme)
+                .build();
+        sv.setButtonText("بعدی");
+        sv.setButtonPosition(lps);
+        sv.setOnShowcaseEventListener(new OnShowcaseEventListener() {
+            @Override
+            public void onShowcaseViewHide(ShowcaseView showcaseView) {
+                help3();
+            }
+
+            @Override
+            public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+
+            }
+
+            @Override
+            public void onShowcaseViewShow(ShowcaseView showcaseView) {
+
+            }
+        });
+    }
+    public void help3(){
+        ViewTarget Hdiscount=new ViewTarget(R.id.action_button,this);
+
+        RelativeLayout.LayoutParams lps = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        lps.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        lps.addRule(RelativeLayout.CENTER_IN_PARENT);
+        int margin = ((Number) (getResources().getDisplayMetrics().density * 80)).intValue();
+        lps.setMargins(margin, margin, 10, margin);
+
+        ShowcaseView sv=new ShowcaseView.Builder(this)
+                // .setTarget(new ActionViewTarget(this, ActionViewTarget.Type.HOME))
+                .setTarget(Hdiscount)
+                .setContentTitle("ورود کاربر")
+                .setContentText("برای وارد شدن به برنامه یا ثبت نام از این دکمه استفاده کنید")
+                .setStyle(R.style.CustomShowcaseTheme)
+                .build();
+        sv.setButtonText("خب");
+        sv.setButtonPosition(lps);
+
+    }
 }

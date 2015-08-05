@@ -12,7 +12,9 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,9 +22,13 @@ import com.ariana.shahre_ma.Cards.job_list_cards_adapter;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.job_details.Job_details;
+import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 import java.util.List;
 
+import jonathanfinerty.once.Once;
 import jp.wasabeef.recyclerview.animators.OvershootInLeftAnimator;
 import jp.wasabeef.recyclerview.animators.adapters.ScaleInAnimationAdapter;
 
@@ -48,8 +54,12 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
                 setCards();
                 mRecyclerView.setAdapter(job_list_Adapter);
 
+        String showWhatsNew = "showHelpJobsList";
 
-
+        if (!Once.beenDone(Once.THIS_APP_VERSION, showWhatsNew)) {
+            help1();
+            Once.markDone(showWhatsNew);
+        }
     }
         public void img_click(View v){
             Intent i = new Intent(getApplicationContext(), Job_details.class);
@@ -233,5 +243,99 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
             setCardsforsearch();
         }
         return false;
+    }
+    public void help1(){
+        ViewTarget Hdiscount=new ViewTarget(R.id.recycler_view_Jobs,this);
+        RelativeLayout.LayoutParams lps = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        lps.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        lps.addRule(RelativeLayout.CENTER_IN_PARENT);
+        int margin = ((Number) (getResources().getDisplayMetrics().density * 80)).intValue();
+        lps.setMargins(margin, margin, 10, margin);
+
+        ShowcaseView sv= new ShowcaseView.Builder(this)
+                .setTarget(Hdiscount)
+                .setContentTitle("لیست کسب و کارها")
+                .setContentText("")
+                .hideOnTouchOutside()
+                .setStyle(R.style.CustomShowcaseTheme)
+                .build();
+
+        sv.setButtonText("بعدی");
+        sv.setButtonPosition(lps);
+        sv.setOnShowcaseEventListener(new OnShowcaseEventListener() {
+            @Override
+            public void onShowcaseViewHide(ShowcaseView showcaseView) {
+                help2();
+            }
+
+            @Override
+            public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+
+            }
+
+            @Override
+            public void onShowcaseViewShow(ShowcaseView showcaseView) {
+
+            }
+        });
+    }
+    public void help2(){
+        ViewTarget Hdiscount=new ViewTarget(R.id.action_Map,this);
+
+        RelativeLayout.LayoutParams lps = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        lps.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        lps.addRule(RelativeLayout.CENTER_IN_PARENT);
+        int margin = ((Number) (getResources().getDisplayMetrics().density * 80)).intValue();
+        lps.setMargins(margin, margin, 10, margin);
+
+        ShowcaseView sv=new ShowcaseView.Builder(this)
+                //.setTarget(new ActionViewTarget(this, ActionViewTarget.Type.HOME))
+                .setTarget(Hdiscount)
+                .setContentTitle("نقشه")
+                .setContentText("نمایی از تمامی کسب و کارهای این گروه بر روی نقشه")
+                .setStyle(R.style.CustomShowcaseTheme)
+                .build();
+        sv.setButtonText("بعدی");
+        sv.setButtonPosition(lps);
+        sv.setOnShowcaseEventListener(new OnShowcaseEventListener() {
+            @Override
+            public void onShowcaseViewHide(ShowcaseView showcaseView) {
+                help3();
+            }
+
+            @Override
+            public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+
+            }
+
+            @Override
+            public void onShowcaseViewShow(ShowcaseView showcaseView) {
+
+            }
+        });
+    }
+    public void help3(){
+        ViewTarget Hdiscount=new ViewTarget(R.id.sort,this);
+
+        RelativeLayout.LayoutParams lps = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        lps.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        lps.addRule(RelativeLayout.CENTER_IN_PARENT);
+        int margin = ((Number) (getResources().getDisplayMetrics().density * 80)).intValue();
+        lps.setMargins(margin, margin, 10, margin);
+
+        ShowcaseView sv=new ShowcaseView.Builder(this)
+                // .setTarget(new ActionViewTarget(this, ActionViewTarget.Type.HOME))
+                .setTarget( new ViewTarget( ((ViewGroup)findViewById(R.id.action_bar)).getChildAt(2) ) )
+                        //  .setTarget(Hdiscount)
+                .setContentTitle("مرتب سازی")
+                .setContentText("با استفاده از این گزینه میتوانید کسب و کارها را مرتب کنید")
+                .setStyle(R.style.CustomShowcaseTheme)
+                .build();
+        sv.setButtonText("خب");
+        sv.setButtonPosition(lps);
+
     }
 }

@@ -91,6 +91,6 @@ dependencies {
     compile 'com.appyvet:materialrangebar:1.0'
     compile 'com.github.amlcurran.showcaseview:library:5.0.0'
     compile 'com.github.alexkolpa:floating-action-button-toolbar:0.5.1'
-    compile 'se.emilsjolander:stickylistheaders:2.7.0' //Header List View
+    compile 'com.jonathanfinerty.once:once:0.3.2'
 }
 

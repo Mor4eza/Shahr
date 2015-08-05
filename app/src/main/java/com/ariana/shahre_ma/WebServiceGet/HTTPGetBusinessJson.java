@@ -179,6 +179,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
             dbs.delete_Business(cityid, idsubset);
 
+            Log.i("count",String.valueOf(len));
             if(len==0) {
                 //  Toast.makeText(get, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
                 Log.i("Count Business : ","فروشگاه ثبت نشد");

@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.RelativeLayout;
 
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.ListExpand.Continent;
@@ -21,8 +23,12 @@ import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetInterestJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostInterestJson;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 import java.util.ArrayList;
+
+import jonathanfinerty.once.Once;
 
 public class My_Interest extends ActionBarActivity implements TotalListener {
     Query query;
@@ -72,14 +78,19 @@ public class My_Interest extends ActionBarActivity implements TotalListener {
                 lastExpandedPosition = groupPosition;
             }
         });
+        String showWhatsNew = "showHelpInterest";
 
+        if (!Once.beenDone(Once.THIS_APP_VERSION, showWhatsNew)) {
+            help3();
+            Once.markDone(showWhatsNew);
+        }
     }
 
 
 
     public void SendPostInterest(View v) {
        SqliteTOjson json=new SqliteTOjson(this);
-        Log.i("",json.getSqliteInterestTOjson());
+        Log.i("", json.getSqliteInterestTOjson());
 
         HTTPPostInterestJson httpinterest=new HTTPPostInterestJson(this);
         httpinterest.SetInterest_Json(json.getSqliteInterestTOjson());
@@ -137,5 +148,29 @@ public class My_Interest extends ActionBarActivity implements TotalListener {
             expListView.collapseGroup(groupPosition);
         else
             expListView.expandGroup(groupPosition);
+    }
+
+
+
+    public void help3(){
+        ViewTarget Hdiscount=new ViewTarget(R.id.expand_my_interest,this);
+
+        RelativeLayout.LayoutParams lps = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        lps.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        lps.addRule(RelativeLayout.CENTER_IN_PARENT);
+        int margin = ((Number) (getResources().getDisplayMetrics().density * 80)).intValue();
+        lps.setMargins(margin, margin, 10, margin);
+
+        ShowcaseView sv= new ShowcaseView.Builder(this)
+                .setTarget(Hdiscount)
+                .setContentTitle("علایق من")
+                .setContentText("از این قسمت شما میتوانید زیر مجموعه ای را به علایق خودتان اضافه کنید تا اعلاناتی را دریافت کنید که نیاز دارید.")
+                .hideOnTouchOutside()
+                .setStyle(R.style.CustomShowcaseTheme)
+                .build();
+        sv.setButtonText("خب");
+        sv.setButtonPosition(lps);
+
     }
 }
