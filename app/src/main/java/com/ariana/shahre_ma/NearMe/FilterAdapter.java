@@ -1,120 +1,71 @@
 package com.ariana.shahre_ma.NearMe;
 
 import android.content.Context;
-import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.TextView;
+import android.widget.CompoundButton;
 
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.R;
 
-import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by ariana2 on 8/2/2015.
+ * Created by ariana2 on 7/12/2015.
  */
-public class FilterAdapter extends BaseAdapter implements StickyListHeadersAdapter {
-    private String[] countries;
-    private LayoutInflater inflater;
-    Context context;
-    Integer i=0;
-    public FilterAdapter(Context context) {
-        this.context=context;
-        inflater = LayoutInflater.from(context);
+public class FilterAdapter extends ArrayAdapter<FilterItems> {
 
-        DataBaseSqlite db=new DataBaseSqlite(context);
-        Cursor rows=db.select_Subset();
-        countries=new String[rows.getCount()];
-        if(rows.moveToFirst())
-        {
-            do{
-                countries[i] =rows.getString(1) ;
-                i++;
-            }while (rows.moveToNext());
-        }
+    private final Context context;
+    private final ArrayList<FilterItems> itemsArrayList;
+    public static List<String> selectedsubset=new ArrayList<String>();
+    public FilterAdapter(Context context, ArrayList<FilterItems> itemsArrayList) {
 
-    }
+        super(context, R.layout.filter_dialog_layout, itemsArrayList);
 
-    @Override
-    public int getCount() {
-        return countries.length;
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return countries[position];
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
+        this.context = context;
+        this.itemsArrayList = itemsArrayList;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
 
-        if (convertView == null) {
-            holder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.sticky_child, parent, false);
-            holder.text = (CheckBox) convertView.findViewById(R.id.st_child);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
+        // 1. Create inflater
+        LayoutInflater inflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        holder.text.setText(countries[position]);
+        // 2. Get rowView from inflater
+        View rowView = inflater.inflate(R.layout.sticky_child, parent, false);
 
-        return convertView;
+        // 3. Get the two text view from the rowView
+        final CheckBox labelView = (CheckBox) rowView.findViewById(R.id.st_child);
+
+       // TextView Tv_id =  (TextView) rowView.findViewById(R.id.tv_dis_id);
+
+        // 4. Set the text for textView
+        labelView.setText(itemsArrayList.get(position).getTitle());
+
+       // Tv_id.setText(String.valueOf(itemsArrayList.get(position).GetId()));
+        // 5. retrn rowView
+
+
+        labelView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    selectedsubset.add(labelView.getText().toString());
+                    Log.i("selectedsubset",selectedsubset.toString());
+                }
+                else{
+                    selectedsubset.remove(labelView.getText().toString());
+                    Log.i("selectedsubset", selectedsubset.toString());
+                }
+            }
+        });
+
+        return rowView;
     }
-
-    @Override
-    public View getHeaderView(int position, View convertView, ViewGroup parent) {
-        HeaderViewHolder holder;
-        if (convertView == null) {
-            holder = new HeaderViewHolder();
-            convertView = inflater.inflate(R.layout.sticky_header, parent, false);
-            holder.text = (TextView) convertView.findViewById(R.id.st_head);
-            convertView.setTag(holder);
-        } else {
-            holder = (HeaderViewHolder) convertView.getTag();
-        }
-        //set header text as first char in name
-
-        String headerText = "" + countries[position].subSequence(0, 1).charAt(0);
-
-        DataBaseSqlite db=new DataBaseSqlite(context);
-        Cursor rows=db.select_Collection();
-
-     /*   if(rows.moveToFirst())
-        {
-            do
-            {
-                holder.text.setText(rows.getString(1));
-
-            }while (rows.moveToNext());
-        }*/
-
-        holder.text.setText(headerText);
-        return convertView;
-    }
-
-    @Override
-    public long getHeaderId(int position) {
-        //return the first character of the country as ID because this is what headers are based upon
-        return countries[position].subSequence(0, 1).charAt(0);
-    }
-
-    class HeaderViewHolder {
-        TextView text;
-    }
-
-    class ViewHolder {
-        CheckBox text;
-    }
-
 }
