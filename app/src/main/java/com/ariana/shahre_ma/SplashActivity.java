@@ -110,7 +110,7 @@ public class SplashActivity extends ActionBarActivity {
                                               }
                                           });
 
-                                          Log.i("kkk", text1);
+                                         // Log.i("kkk", text1);
                                       } else {
                                           i = 0;
                                           text1 = "";

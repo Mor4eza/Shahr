@@ -144,7 +144,7 @@
             android:layout_height="wrap_content" >
 
 
-            <MultiAutoCompleteTextView
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="زمینه فعالیت"
@@ -207,8 +207,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="ثبت"
-            android:onClick="save_business"
             android:background="@color/material_blue"
+            android:onClick="add_business"
             />
     </LinearLayout>
 </ScrollView>

@@ -24,7 +24,9 @@ import com.ariana.shahre_ma.Cards.Business_Card_Items;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetAreaJosn;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessMemberJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetFieldActivityJson;
 import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
@@ -60,11 +62,11 @@ public class My_Business extends ActionBarActivity {
          Intialize();
          setCards();
 
-      /*  HTTPGetFieldActivityJson httpfield=new HTTPGetFieldActivityJson(this);
+        HTTPGetFieldActivityJson httpfield=new HTTPGetFieldActivityJson(this);
         httpfield.execute();
 
         HTTPGetAreaJosn httparea=new HTTPGetAreaJosn(this);
-        httparea.execute();*/
+        httparea.execute();
 
     }
 

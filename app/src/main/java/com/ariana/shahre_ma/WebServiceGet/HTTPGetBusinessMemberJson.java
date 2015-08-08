@@ -126,7 +126,7 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
      */
     @Override
     protected void onPostExecute(Integer result) {
-        try {
+        //try {
 
             Integer count=0;
             Integer cityid=0;
@@ -148,7 +148,10 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
                         count=rows.getInt(0);
                         rows.close();
                         Log.i("ID", String.valueOf(Id[i]));
-                        Log.i("count",String.valueOf(count));
+                        Log.i("count", String.valueOf(count));
+
+
+
                         if(count==0)
                             dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i],cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
 
@@ -177,10 +180,10 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
                 });
                         Log.i("Count Business : ","دریافت ثبت شده ها");
             }
-
+/*
         } catch (Exception e) {
             Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
-        }
+        }*/
     }
 
     /**
@@ -225,9 +228,50 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
             ratecount=new Integer[areas.length()];
             ratevalue=new Double[areas.length()];
             len=areas.length();
+            Log.i("len",String.valueOf(areas.length()));
             for (int i = 0; i < areas.length(); i++) {
-
+                Log.i("for","1");
                 JSONObject area = areas.getJSONObject(i);
+                Log.i("for+1", "0");
+                Id[i]=area.getInt("Id");
+                Log.i("BusinessOwner1",area.getString("BusinessOwner"));
+                inactive[i]=area.getString("Inactive");
+                Log.i("BusinessOwner2",area.getString("BusinessOwner"));
+
+                if(area.getString("Latitude").equals(null))
+                {
+                    latitude[i] = 0.0;
+                    longitude[i] = 0.0;
+                }
+                else
+                {
+                    latitude[i] = Double.valueOf(area.getString("Latitude"));
+                    longitude[i] = Double.valueOf(area.getString("Longitude"));
+                }
+
+
+
+                market[i]=area.getString("Market");
+                mobile[i]=area.getString("Mobile");
+                phone[i]=area.getString("Phone");
+                startdate[i]=area.getString("Startdate");
+                subset[i]=area.getString("Subset");
+                subsetid[i]=area.getInt("SubsetId");
+                user[i]=area.getString("User");
+                userid[i]=area.getInt("UserId");
+
+
+                ratecount[i]=area.getInt("RateCount");
+                ratevalue[i]=area.getDouble("RateAverage");
+
+                Log.i("Market", area.getString("Market"));
+                Log.i("Mobile",area.getString("Mobile"));
+                Log.i("Phone", area.getString("Phone"));
+                Log.i("SubsetId",String.valueOf(area.getInt("SubsetId")));
+                Log.i("SubsetId",area.getString("Address"));
+
+
+
                 address[i]=area.getString("Address");
                 area1[i]=area.getString("Area");
                 areaid[i]=area.getInt("AreaId");
@@ -244,25 +288,10 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
                 field5[i]=area.getInt("Field5");
                 field6[i] = area.getInt("Field6");
                 field7[i] = area.getInt("Field7");
-
+                Log.i("BusinessOwner",area.getString("BusinessOwner"));
                 fc.SetBusiness_Id(area.getInt("Id"));
 
-                Id[i]=area.getInt("Id");
-                inactive[i]=area.getString("Inactive");
-                latitude[i]=Double.valueOf(area.getString("Latitude"));
-                longitude[i]=Double.valueOf(area.getString("Longitude"));
-                market[i]=area.getString("Market");
-                mobile[i]=area.getString("Mobile");
-                phone[i]=area.getString("Phone");
-                startdate[i]=area.getString("Startdate");
-                subset[i]=area.getString("Subset");
-                subsetid[i]=area.getInt("SubsetId");
-                user[i]=area.getString("User");
-                userid[i]=area.getInt("UserId");
 
-
-                ratecount[i]=area.getInt("RateCount");
-                ratevalue[i]=area.getDouble("RateAverage");
             }
 
         } catch (JSONException e) {
