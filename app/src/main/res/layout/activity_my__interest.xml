@@ -15,24 +15,18 @@
         android:layout_gravity="center_horizontal"
         android:layout_below="@+id/sp_city" />
 
-    <Button
+
+
+    <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ارسال"
-        android:id="@+id/button4"
+        android:id="@+id/btn_add_business"
+        android:onClick="SendPostInterest"
+        android:src="@drawable/share"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="SendPostInterest" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="دریافت"
-        android:id="@+id/button5"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="GetPostInterest" />
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

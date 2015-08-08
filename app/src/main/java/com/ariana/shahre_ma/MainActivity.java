@@ -69,7 +69,6 @@ import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.software.shell.fab.ActionButton;
 
 import github.chenupt.dragtoplayout.DragTopLayout;
-import jonathanfinerty.once.Once;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -182,7 +181,7 @@ public class MainActivity extends ActionBarActivity {
 
         Action = (ActionButton) findViewById(R.id.action_button);
         Action.setButtonColor(getResources().getColor(R.color.fab_material_blue_500));
-        Action.setImageDrawable(getResources().getDrawable(R.drawable.fab_plus_icon));
+        Action.setImageDrawable(getResources().getDrawable(R.drawable.user));
 
 
     }
@@ -209,13 +208,13 @@ public class MainActivity extends ActionBarActivity {
         final TextSliderView textSliderView = new TextSliderView(this);
         textSliderView
                 .description("چهار باغ")
-               .image("http://www.shahrma.com/app/Advertisment/" + imag[0]);
+                .image("http://www.shahrma.com/app/Advertisment/" + imag[0]);
         slider.addSlider(textSliderView);
 
         TextSliderView textSliderView2 = new TextSliderView(this);
         textSliderView2
                 .description("هفت خان")
-                .image("http://www.shahrma.com/app/Advertisment/"+imag[1]);
+                .image("http://www.shahrma.com/app/Advertisment/" + imag[1]);
         slider.addSlider(textSliderView2);
 
 
@@ -352,13 +351,14 @@ public class MainActivity extends ActionBarActivity {
                         new SecondaryDrawerItem().withName(R.string.My_Intrest).withIcon(FontAwesome.Icon.faw_heart),
                         new DividerDrawerItem(),
                         new SecondaryDrawerItem().withName(R.string.action_settings).withIcon(FontAwesome.Icon.faw_gears),
+                        new SecondaryDrawerItem().withName(R.string.aboutUs).withIcon(FontAwesome.Icon.faw_info_circle),
                         new DividerDrawerItem()
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
                         if (drawerItem instanceof Nameable) {
-                            Toast.makeText(MainActivity.this, MainActivity.this.getString(((Nameable) drawerItem).getNameRes()), Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(MainActivity.this, MainActivity.this.getString(((Nameable) drawerItem).getNameRes()), Toast.LENGTH_SHORT).show();
 
 
                         }
@@ -430,13 +430,22 @@ public class MainActivity extends ActionBarActivity {
                             startActivity(i);
                         }
                         if (position == 7) {
-
-                            Intent i = new Intent(getApplicationContext(), My_Interest.class);
-                            startActivity(i);
+                            if (query.getMemberId() > 0) // get member
+                            {
+                                Intent i = new Intent(getApplicationContext(), My_Interest.class);
+                                startActivity(i);
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(), "وارد حساب خود شوید", Toast.LENGTH_SHORT).show();
+                            }
                         }
                         if (position == 9) {
 
                             Intent i = new Intent(getApplicationContext(), Setting.class);
+                            startActivity(i);
+                        }
+                        if (position==10){
+                            Intent i = new Intent(getApplicationContext(), AboutUs.class);
                             startActivity(i);
                         }
                         return false;
