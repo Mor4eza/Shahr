@@ -46,11 +46,11 @@ public class HTTPGetAreaJosn extends AsyncTask<String,Void,Integer>
      */
     @Override
     protected void onPreExecute() {
-        super.onPreExecute();
+    /*    super.onPreExecute();
         pd = new ProgressDialog(context);
         pd.setMessage("در حال بروزرسانی...");
         pd.setCancelable(false);
-        pd.show();
+        pd.show();*/
     }
         protected Integer  doInBackground(String... args) {
             Integer result=0;
@@ -88,12 +88,12 @@ public class HTTPGetAreaJosn extends AsyncTask<String,Void,Integer>
                             db.Add_area(Id_area[i], Name_Area[i], CityId_area[i]);
                         }
 
-                        pd.dismiss();
+                       // pd.dismiss();
                     } catch (Exception e) {
-                        pd.dismiss();
+                       // pd.dismiss();
                     }
                 } else {
-                    pd.dismiss();
+                   // pd.dismiss();
                     //pToast.makeText(getApplicationContext(),"همگام سازی انجام نشد دوباره امتحان کنید",Toast.LENGTH_LONG).show();
                 }
             }

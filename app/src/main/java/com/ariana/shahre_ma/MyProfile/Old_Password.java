@@ -2,11 +2,13 @@ package com.ariana.shahre_ma.MyProfile;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.R;
 
 /**
@@ -17,6 +19,7 @@ public class Old_Password extends Dialog {
     Button btnPass;
     EditText etPass;
     Context context;
+    String old_pass="";
     public Old_Password(Context context) {
         super(context);
         this.context=context;
@@ -33,6 +36,16 @@ public class Old_Password extends Dialog {
 
             @Override
             public void onClick(View v) {
+
+                DataBaseSqlite db=new DataBaseSqlite(context);
+                Cursor allrows=db.select_Member();
+                allrows.moveToFirst();
+                old_pass=allrows.getString(7);
+
+                if(etPass.getText().equals(old_pass))
+                {
+
+                }
 
             }
         });

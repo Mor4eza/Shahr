@@ -10,8 +10,10 @@ import android.widget.TextView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetAreaJosn;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetFieldActivityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 
 public class UpdateActivity extends ActionBarActivity {
@@ -50,6 +52,12 @@ public class UpdateActivity extends ActionBarActivity {
 
                 HTTPGetCityJson httpGetCityJson = new HTTPGetCityJson(UpdateActivity.this);
                 httpGetCityJson.execute();
+
+                HTTPGetAreaJosn httpGetAreaJosn=new HTTPGetAreaJosn(UpdateActivity.this);
+                httpGetAreaJosn.execute();
+
+                HTTPGetFieldActivityJson httpGetFieldActivityJson=new HTTPGetFieldActivityJson(UpdateActivity.this);
+                httpGetFieldActivityJson.execute();
             }
         });
     }

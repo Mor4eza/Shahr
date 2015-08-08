@@ -39,6 +39,7 @@ public class Log_In extends ActionBarActivity {
         btn=(CircularProgressButton)findViewById(R.id.btn_login);
         HTTPGetCityJson httpcity = new HTTPGetCityJson(this);
         httpcity.execute();
+
      /*   try {
             DataBaseSqlite db = new DataBaseSqlite(this);
             Cursor allrows = db.select_Member();
