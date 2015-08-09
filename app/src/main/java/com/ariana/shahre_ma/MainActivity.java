@@ -344,6 +344,7 @@ public class MainActivity extends ActionBarActivity {
                 .withTranslucentStatusBar(false)
                 .withHeaderDivider(true)
                 .withToolbar(toolbar)
+                .withShowDrawerOnFirstLaunch(true)
                 .withDisplayBelowToolbar(false)
                 .withActionBarDrawerToggle(true)
                 .withActionBarDrawerToggleAnimated(true)
