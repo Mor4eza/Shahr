@@ -138,6 +138,7 @@ public class NearMeActivity extends ActionBarActivity {
                 do {
                     Marker marker=   mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(rows.getString(15)), Double.valueOf(rows.getString(16)))).title("\u200e" + rows.getString(1)).snippet(String.valueOf(rows.getDouble(30))));
                     marker.setData(rows.getInt(0));
+                    marker.animatePosition(new LatLng(Double.valueOf(rows.getString(15)), Double.valueOf(rows.getString(16))));
                     len++;
                 } while (rows.moveToNext());
             }

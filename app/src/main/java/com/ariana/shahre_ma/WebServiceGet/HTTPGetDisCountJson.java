@@ -4,14 +4,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.ariana.shahre_ma.Cards.Comment_Card_Adapter;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MyBusiness.Discount;
 import com.ariana.shahre_ma.MyBusiness.discount_Adapter;
-import com.ariana.shahre_ma.job_details.Job_details_comment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -133,7 +130,7 @@ public class HTTPGetDisCountJson extends AsyncTask<String,Void,Integer> {
                 Discount dis=new Discount();
                 discount_Adapter adapter = new discount_Adapter(context,dis.generateData());
                 Discount.listView.setAdapter(adapter);
-                Discount.listView.deferNotifyDataSetChanged();
+                adapter.notifyDataSetChanged();
            } catch (Exception e) {
                 pd.dismiss();
                // Toast.makeText(context.getApplicationContext(), "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
