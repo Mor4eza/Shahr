@@ -70,7 +70,7 @@ public class FilterDialog extends Dialog {
                 dismiss();
                 for(int i=0;i>FilterAdapter.selectedsubset.size();i++)
                 {
-                    Cursor rows=db.select_BusinessSearchNearMe(35.8357895, 51.0096686, 0.002, query.getsubsetID(FilterAdapter.selectedsubset.get(i)));
+                    Cursor rows=db.select_BusinessSearchNearMe(35.8357895, 51.0096686, 0.001, query.getsubsetID(FilterAdapter.selectedsubset.get(i)));
                             if(rows.moveToFirst())
                             {
                                 do
@@ -106,11 +106,32 @@ public class FilterDialog extends Dialog {
     public ArrayList<FilterItems> generateData(){
         Query query=new Query(getContext());
         java.util.ArrayList<FilterItems> items = new ArrayList<FilterItems>();
+        List<Integer> subsetId = new ArrayList<>();
 
         for (int i = 0; i < fdb.GetMarketBusiness().size(); i++) {
-            items.add(new FilterItems(query.getsubsetName(fdb.GetSubsetId().get(i)),fdb.GetSubsetId().get(i)));
+
+            Log.i("for1",String.valueOf(fdb.GetSubsetId().get(i)));
+                subsetId.add(fdb.GetSubsetId().get(i));
+
         }
 
+
+        for (int i = 0; i < subsetId.size(); i++)
+            for(int j = i+1; j <subsetId.size(); j++)
+            {
+                if(subsetId.get(i)==subsetId.get(j))
+                {
+
+                  subsetId.remove(i);
+                }
+            }
+
+
+        for (int i = 0; i < subsetId.size(); i++) {
+
+            Log.i("for2",String.valueOf(subsetId.get(i)));
+            items.add(new FilterItems(query.getsubsetName(subsetId.get(i)),subsetId.get(i)));
+        }
 
         return items;
     }
