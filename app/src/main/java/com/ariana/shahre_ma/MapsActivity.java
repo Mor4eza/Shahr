@@ -58,7 +58,6 @@ public class MapsActivity extends ActionBarActivity {
 
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
-
             @Override
             public View getInfoWindow(Marker marker) {
 
@@ -141,17 +140,17 @@ public class MapsActivity extends ActionBarActivity {
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng((lat[0]), (Longt[0])), 12.0f), 2000, null);
 
          mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-            @Override
-            public void onInfoWindowClick(Marker marker) {
+        @Override
+        public void onInfoWindowClick(Marker marker) {
 
-                fc.SetMarket_Business(marker.getTitle().toString());
-                fc.SetBusiness_Id((Integer) marker.getData());
-                Toast.makeText(getApplicationContext(), marker.getTitle(), Toast.LENGTH_LONG).show();
-                Intent i=new Intent(getApplicationContext(), Job_details.class);
-                startActivity(i);
-            }
-         });
-    }
+            fc.SetMarket_Business(marker.getTitle().toString());
+            fc.SetBusiness_Id((Integer) marker.getData());
+            Toast.makeText(getApplicationContext(), marker.getTitle(), Toast.LENGTH_LONG).show();
+            Intent i=new Intent(getApplicationContext(), Job_details.class);
+            startActivity(i);
+        }
+    });
+}
 
     @Override
     protected void onResume() {

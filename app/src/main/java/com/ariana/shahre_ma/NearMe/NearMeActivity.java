@@ -18,18 +18,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidmapsextensions.GoogleMap;
+import com.androidmapsextensions.Marker;
+import com.androidmapsextensions.MarkerOptions;
+
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceSend.HTTPSendNearMeURL;
+import com.ariana.shahre_ma.job_details.Job_details;
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import fr.quentinklein.slt.LocationTracker;
 import fr.quentinklein.slt.TrackerSettings;
@@ -38,6 +43,7 @@ public class NearMeActivity extends ActionBarActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     FieldDataBusiness fdb=new FieldDataBusiness();
+    FieldClass fc=new FieldClass();
     String Latitude[];
     String Longtitude[];
     String Market[];
@@ -59,6 +65,49 @@ public class NearMeActivity extends ActionBarActivity {
         map_progress=(ProgressBar)findViewById(R.id.map_progress);
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("near-me"));
 
+
+        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+
+            @Override
+            public View getInfoWindow(Marker marker) {
+
+                final View window = getLayoutInflater().inflate(
+                        R.layout.jobs_info_windows, null);
+
+
+                String title = marker.getTitle();
+                double rate = Double.parseDouble(marker.getSnippet());
+                Integer Id = marker.getData();
+                TextView tv_title = (TextView) window.findViewById(R.id.tv_info_title);
+                RatingBar Rates = (RatingBar) window.findViewById(R.id.info_rates);
+                TextView tv_id = (TextView) window.findViewById(R.id.tv_info_id);
+                tv_id.setText(String.valueOf(Id));
+
+                Rates.setRating((float) rate);
+                tv_title.setText(title);
+                return window;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+
+                return null;
+            }
+        });
+
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+
+                fc.SetMarket_Business(marker.getTitle().toString());
+                fc.SetBusiness_Id((Integer) marker.getData());
+                Toast.makeText(getApplicationContext(), marker.getTitle(), Toast.LENGTH_LONG).show();
+                Intent i = new Intent(getApplicationContext(), Job_details.class);
+                startActivity(i);
+            }
+        });
+
     }
 
     @Override
@@ -71,8 +120,8 @@ public class NearMeActivity extends ActionBarActivity {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
             // Try to obtain the map from the SupportMapFragment.
-            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
-                    .getMap();
+            mMap = ((com.androidmapsextensions.SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+                    .getExtendedMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
                // setUpMap();
@@ -87,7 +136,8 @@ public class NearMeActivity extends ActionBarActivity {
             Log.i("Count", String.valueOf(rows.getCount()));
             if (rows.moveToFirst()) {
                 do {
-                    mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(rows.getString(15)), Double.valueOf(rows.getString(16)))).title("\u200e" + rows.getString(1)));
+                    Marker marker=   mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(rows.getString(15)), Double.valueOf(rows.getString(16)))).title("\u200e" + rows.getString(1)).snippet(String.valueOf(rows.getDouble(30))));
+                    marker.setData(rows.getInt(0));
                     len++;
                 } while (rows.moveToNext());
             }

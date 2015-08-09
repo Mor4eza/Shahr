@@ -971,7 +971,7 @@ Context context;
     public Cursor select_AllBusinessId(Integer id)
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT Id,Market,Phone,Mobile,Fax,Email,BusinessOwner,Address,Description,SubsetId,Longitude,Latitude,Field1,Field2,Field3,Field4,Field5,Field6,Field7,RateValue,AreaId  FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE Id=" +id, null);
+        return db.rawQuery("SELECT Id,Market,Phone,Mobile,Fax,Email,BusinessOwner,Address,Description,SubsetId,Latitude,Longitude,Field1,Field2,Field3,Field4,Field5,Field6,Field7,RateValue,AreaId  FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE Id=" +id, null);
     }
 
     public Cursor select_business_NameMarket(Integer businessID)
