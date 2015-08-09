@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,7 +41,7 @@ public class My_Business extends ActionBarActivity {
     Query query=new Query(this);
     TextView title;
     FloatingActionButton discount;
-
+    public static ProgressBar pg;
     Uri currImageURI;
     String picturePath;
     String ba1;
@@ -53,7 +54,7 @@ public class My_Business extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my__business);
-
+        pg=(ProgressBar)findViewById(R.id.pb_business);
         HTTPGetBusinessMemberJson httpGetBusinessMemberJson = new HTTPGetBusinessMemberJson(My_Business.this);
         httpGetBusinessMemberJson.SetUrl_businessMember(query.getMemberId());// get id member
         httpGetBusinessMemberJson.execute();// Run

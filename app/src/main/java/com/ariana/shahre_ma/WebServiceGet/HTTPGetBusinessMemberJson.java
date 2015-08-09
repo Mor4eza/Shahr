@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
 
 import com.ariana.shahre_ma.Cards.Business_Card_Adapter;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
@@ -24,7 +24,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by ariana2 on 6/6/2015.
+ * Created by ariana2 on 6/6/2015...
  */
 public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
 {
@@ -164,6 +164,7 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
                         Business_Card_Adapter adapter = new Business_Card_Adapter(context);
                         business.mRecyclerView.setAdapter(adapter);
                         business.job_list_Adapter.notifyDataSetChanged();
+                        business.pg.setVisibility(View.INVISIBLE);
                     }
                 });
 
@@ -176,6 +177,7 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
                         Business_Card_Adapter adapter = new Business_Card_Adapter(context);
                         business.mRecyclerView.setAdapter(adapter);
                         business.job_list_Adapter.notifyDataSetChanged();
+                        business.pg.setVisibility(View.INVISIBLE);
                     }
                 });
                         Log.i("Count Business : ","دریافت ثبت شده ها");
