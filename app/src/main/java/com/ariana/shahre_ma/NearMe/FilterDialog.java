@@ -50,7 +50,7 @@ public class FilterDialog extends Dialog {
         listView = (ListView) findViewById(R.id.filter_list);
         filter=(Button)findViewById(R.id.btn_filter);
         listView.setAdapter(adapter);
-
+        FilterAdapter.selectedsubset.clear();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
