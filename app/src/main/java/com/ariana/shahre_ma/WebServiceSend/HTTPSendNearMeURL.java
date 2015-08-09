@@ -177,7 +177,7 @@ public class HTTPSendNearMeURL extends AsyncTask<String,Void,Integer >
                             dbs.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i], likediscount[i], dislikediscount[i]);
                         }
                         //dbs.Add_LikeDisCount(1,166,Id[i],likediscount[i],dislikediscount[i]);
-                        dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
+                        dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i],latitude[i], longitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
 
                     }
                     Intent intent = new Intent("near-me");
@@ -309,8 +309,7 @@ public class HTTPSendNearMeURL extends AsyncTask<String,Void,Integer >
                 Log.i("latitude",area.getString("Latitude"));
                 Log.i("longitude",area.getString("Longitude"));
 
-                latitude[i] = Double.valueOf(area.getString("Latitude"));
-                longitude[i] = Double.valueOf(area.getString("Longitude"));
+
                 market[i] = area.getString("Market");
                 mobile[i] = area.getString("Mobile");
                 phone[i] = area.getString("Phone");
@@ -336,7 +335,8 @@ public class HTTPSendNearMeURL extends AsyncTask<String,Void,Integer >
 
                 likediscount[i] = area.getInt("DiscountLike");
                 dislikediscount[i] = area.getInt("DiscountDislike");
-
+                latitude[i] = Double.valueOf(area.getString("Latitude"));
+                longitude[i] = Double.valueOf(area.getString("Longitude"));
 
                 selectsubsetId.add(area.getInt("SubsetId"));
                 selectId.add(area.getInt("Id"));

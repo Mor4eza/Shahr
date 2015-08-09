@@ -364,8 +364,9 @@ Context context;
         values.put(InstructionsSqlite.INACTIVE_business, inactive);
         values.put(InstructionsSqlite.SUBSET_business, subset);
         values.put(InstructionsSqlite.SUBSETID_business, subsetid);
-        values.put(InstructionsSqlite.LONGITUDE_business, longitude);
         values.put(InstructionsSqlite.LATITUDE_business, latitude);
+        values.put(InstructionsSqlite.LONGITUDE_business, longitude);
+
         values.put(InstructionsSqlite.AREAID_business, areaid);
         values.put(InstructionsSqlite.AREA_business, area);
         values.put(InstructionsSqlite.USER_business, user);
@@ -414,8 +415,9 @@ Context context;
         values.put(InstructionsSqlite.INACTIVE_business, inactive);
         values.put(InstructionsSqlite.SUBSET_business, subset);
         values.put(InstructionsSqlite.SUBSETID_business, subsetid);
-        values.put(InstructionsSqlite.LONGITUDE_business, longitude);
         values.put(InstructionsSqlite.LATITUDE_business, latitude);
+        values.put(InstructionsSqlite.LONGITUDE_business, longitude);
+
         values.put(InstructionsSqlite.AREAID_business, areaid);
         values.put(InstructionsSqlite.AREA_business, area);
         values.put(InstructionsSqlite.USER_business, user);
@@ -463,8 +465,9 @@ Context context;
         values.put(InstructionsSqlite.INACTIVE_business, inactive);
         values.put(InstructionsSqlite.SUBSET_business, subset);
         values.put(InstructionsSqlite.SUBSETID_business, subsetid);
-        values.put(InstructionsSqlite.LONGITUDE_business, longitude);
         values.put(InstructionsSqlite.LATITUDE_business, latitude);
+        values.put(InstructionsSqlite.LONGITUDE_business, longitude);
+
         values.put(InstructionsSqlite.AREAID_business, areaid);
         values.put(InstructionsSqlite.AREA_business, area);
         values.put(InstructionsSqlite.USER_business, user);
