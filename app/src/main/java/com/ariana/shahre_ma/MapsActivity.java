@@ -47,7 +47,6 @@ public class MapsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
         KeySettings setting=new KeySettings(getApplicationContext());
 
         cityid=query.getCityId(setting.getCityName());
@@ -93,7 +92,7 @@ public class MapsActivity extends ActionBarActivity {
         Double Longt[] = new Double[fc.GetCount_Business()];
 
 
-        if(fdb.GetMarketBusiness().size()==0) {
+       if(fdb.GetMarketBusiness().size()==0) {
             DataBaseSqlite mydb = new DataBaseSqlite(this);
             Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb(), cityid);
             Integer l = 0;

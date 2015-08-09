@@ -4,11 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:background="#ff2195f2"
+        >
+
+    </android.support.v7.widget.Toolbar>
 
     <github.chenupt.dragtoplayout.DragTopLayout
         android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
     >
 
         <!--top view-->

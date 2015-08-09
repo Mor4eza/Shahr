@@ -5,6 +5,14 @@
       <!-- Customize your theme here -->
     </style>
 
+
+
+    <style name="MainTheme" parent="MaterialDrawerBaseBaseTheme.Light.DarkToolbar">
+        <item name="android:textColorPrimary">#ffffffff</item>
+    </style>
+
+
+
     <style name="CustomShowcaseTheme" parent="ShowcaseView.Light">
         <item name="sv_backgroundColor">#df3994cf</item>
         <item name="sv_showcaseColor">#ff159eff</item>

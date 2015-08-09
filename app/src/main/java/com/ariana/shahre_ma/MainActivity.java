@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
@@ -43,6 +44,7 @@ import com.ariana.shahre_ma.NearMe.NearMeActivity;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.Notification.Activity_notify;
 import com.ariana.shahre_ma.Service.TimeSetReceiver;
+import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.Settings.Setting;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetAdvertismentJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
@@ -87,7 +89,7 @@ public class MainActivity extends ActionBarActivity {
     DataBaseSqlite db=new DataBaseSqlite(this);
     IntentFilter ii;
     TimeSetReceiver tsr;
-
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +100,13 @@ public class MainActivity extends ActionBarActivity {
        /*String url= "http://uplod.ir/tpy6oft0407u/app-debug.apk.htm";
         HTTPGetUpdate update=new HTTPGetUpdate(this);
         update.execute(url);*/
+
+
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+
 
         top = (DragTopLayout) findViewById(R.id.top);
         slider = (SliderLayout) findViewById(R.id.slider);
@@ -294,7 +303,7 @@ public class MainActivity extends ActionBarActivity {
 
      }*/
     public void navigation() {
-
+        KeySettings settings=new KeySettings(this);
         String uName = "شهرما";
         try {
             DataBaseSqlite dbs = new DataBaseSqlite(this);
@@ -308,7 +317,7 @@ public class MainActivity extends ActionBarActivity {
         //drawer
 
 
-        final IProfile profile = new ProfileDrawerItem().withName(uName).withEmail("کرج").withTextColor(R.color.red).withIcon(getResources().getDrawable(R.mipmap.profile3));
+        final IProfile profile = new ProfileDrawerItem().withName(uName).withEmail(settings.getCityName()).withTextColor(R.color.red).withIcon(getResources().getDrawable(R.mipmap.profile3));
 
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
@@ -334,9 +343,10 @@ public class MainActivity extends ActionBarActivity {
                 .withActivity(this)
                 .withTranslucentStatusBar(false)
                 .withHeaderDivider(true)
+                .withToolbar(toolbar)
                 .withDisplayBelowToolbar(false)
-                .withActionBarDrawerToggle(false)
-                .withActionBarDrawerToggleAnimated(false)
+                .withActionBarDrawerToggle(true)
+                .withActionBarDrawerToggleAnimated(true)
                 .withAccountHeader(headerResult)
                 .withAnimateDrawerItems(true)
                 .addDrawerItems(
@@ -451,10 +461,10 @@ public class MainActivity extends ActionBarActivity {
                         return false;
                     }
                 }).build();
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+       /* getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_menu);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
         //  getSupportActionBar().setIcon(R.drawable.ic_action_menu);
 
 
