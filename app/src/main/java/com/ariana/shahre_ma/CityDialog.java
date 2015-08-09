@@ -2,8 +2,10 @@ package com.ariana.shahre_ma;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -50,6 +52,9 @@ public class CityDialog extends Dialog {
                 Log.i("Spinner", Sp_City.getSelectedItem().toString());
                 settings.saveCityName(Sp_City.getSelectedItem().toString());
 
+                Intent intent = new Intent("City");
+                intent.putExtra("received", "Cities");
+                LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
                 dismiss();
             }
         });

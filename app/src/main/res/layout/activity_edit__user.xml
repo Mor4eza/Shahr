@@ -27,7 +27,6 @@
             android:height="40dp"
             android:layout_marginTop="15dp"
             android:drawableLeft="@drawable/user_name"
-
             android:inputType="textPersonName" />
 
 
@@ -39,7 +38,7 @@
             android:layout_marginTop="15dp"
             android:height="40dp"
             android:drawableLeft="@drawable/email"
-            android:inputType="textPersonName" />
+            android:inputType="textEmailAddress" />
 
 
         <AutoCompleteTextView
@@ -62,7 +61,7 @@
             android:layout_marginTop="15dp"
             android:height="40dp"
             android:drawableLeft="@drawable/phone"
-            android:inputType="number" />
+            android:inputType="number|phone" />
 
 
         <EditText
@@ -82,7 +81,6 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="نام کاربری"
-            android:inputType="number"
             android:id="@+id/edit_username"
             android:layout_marginTop="15dp"
             android:height="50dp"
@@ -112,7 +110,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="ثبت نام"
+            android:text="ثبت"
             android:id="@+id/btn_edit"
             android:background="@color/fab_material_light_blue_500"
             android:layout_marginTop="15dp"

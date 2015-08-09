@@ -2,9 +2,13 @@ package com.ariana.shahre_ma;
 
 import android.app.SearchManager;
 import android.app.SearchableInfo;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
@@ -27,6 +31,7 @@ import com.ariana.shahre_ma.ListExpand.Continent;
 import com.ariana.shahre_ma.ListExpand.Country;
 import com.ariana.shahre_ma.ListExpand.MyListAdapter;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
+import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetInterestJson;
@@ -73,7 +78,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
     private ExpandableListView myList;
     private ArrayList<Continent> continentList = new ArrayList<Continent>();
     ArrayList<Country> countryList;
-
+    KeySettings setting=new KeySettings(this);
     Continent continent;
     Country country;
 
@@ -82,7 +87,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jobs);
         query=new Query(this);
-        setTitle("لیست مشاغل");
+        setTitle(" مشاغل " + setting.getCityName());
 
         httpbusin=new HTTPGetBusinessJson(this);
         ns=new NetState(this);
@@ -101,7 +106,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), frequency, pendingIntent);*/
 
 
-
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,new IntentFilter("City"));
 
         displayList();
         //expandAll();
@@ -436,4 +441,11 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
     }
 
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            setTitle(" مشاغل " + setting.getCityName());
+        }
+
+    };
 }
