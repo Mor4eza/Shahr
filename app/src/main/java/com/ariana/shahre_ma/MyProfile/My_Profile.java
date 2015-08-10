@@ -8,18 +8,13 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.MainActivity;
 import com.ariana.shahre_ma.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class My_Profile extends Activity {
 
@@ -85,14 +80,13 @@ public class My_Profile extends Activity {
         try {
             DataBaseSqlite db = new DataBaseSqlite(this);
             db.DeleteAllDataBase();
-
-
             Intent i=new Intent(getApplicationContext(), MainActivity.class);
-             startActivity(i);
+            startActivity(i);
+            finish();
         }
         catch (SQLiteException e)
         {
-            Log.i("ExceptionSQL",e.toString());
+            Log.i("ExceptionSQL", e.toString());
 
         }
 
@@ -103,5 +97,14 @@ public class My_Profile extends Activity {
         startActivity(i);
 
     }
+    @Override
+    public void onBackPressed() {
+        //handle the back press :D close the drawer first and if the drawer is closed close the activity
+            super.onBackPressed();
+        Intent i=new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(i);
+
+        }
+
 
 }

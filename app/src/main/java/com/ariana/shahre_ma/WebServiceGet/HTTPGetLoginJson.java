@@ -1,14 +1,13 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
-import com.ariana.shahre_ma.MainActivity;
 import com.ariana.shahre_ma.MyProfile.Log_In;
 
 import org.apache.http.HttpEntity;
@@ -163,12 +162,10 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
                 if (ID >= 0) {
                     Log.i("ID", String.valueOf(ID));
                     dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
-                    Intent  i=new Intent(context.getApplicationContext(), MainActivity.class);
+                  //  Intent  i=new Intent(context.getApplicationContext(), MainActivity.class);
                     Log_In.btn.setProgress(100);
-                    context.startActivity(i);
-                    Log_In log = new Log_In();
-                    log.finish();
-
+                   // context.startActivity(i);
+                    ((Activity)context).finish();
                 } else
                 {
                     Log_In.btn.setProgress(-1);

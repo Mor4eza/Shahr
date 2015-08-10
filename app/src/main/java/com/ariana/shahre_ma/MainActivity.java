@@ -92,6 +92,24 @@ public class MainActivity extends ActionBarActivity {
     Toolbar toolbar;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        navigation();
+        try {
+            DataBaseSqlite db = new DataBaseSqlite(this);
+            Cursor allrows = db.select_Member();
+            allrows.moveToNext();
+            if (allrows.getString(6).equals(null)) {
+                Action.setVisibility(View.VISIBLE);
+            } else {
+                Action.setVisibility(View.INVISIBLE);
+            }
+
+        } catch (Exception e) {
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -104,7 +122,7 @@ public class MainActivity extends ActionBarActivity {
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        fab();
 
 
 
@@ -151,23 +169,10 @@ public class MainActivity extends ActionBarActivity {
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
         vpPager.setCurrentItem(1);
-        fab();
-        try {
-            DataBaseSqlite db = new DataBaseSqlite(this);
-            Cursor allrows = db.select_Member();
-            allrows.moveToNext();
-            if (allrows.getString(6).equals(null)) {
-                Action.show();
-            } else {
-                  Action.dismiss();
-            }
 
-
-        } catch (Exception e) {
-        }
 
         Image_slider();
-        navigation();
+
 
         String showWhatsNew = "showHelp";
 
@@ -286,22 +291,6 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-
-    /* private void findViewsAndConfigure() {
-         ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
-         viewPager.setOffscreenPageLimit(4);
-
-         ArrayList<TestFragment> fragments = new ArrayList<TestFragment>();
-         //fragments.add(new job_details_1());
-         fragments.add(TestFragment.newInstance("پیشنهادات هفته", "#ffffff"));
-         fragments.add(TestFragment.newInstance("اطراف من", "#ffffff"));
-         fragments.add(TestFragment.newInstance("تخفیف ها", "#ffffff"));
-
-
-
-         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), fragments));
-
-     }*/
     public void navigation() {
         KeySettings settings=new KeySettings(this);
         String uName = "شهرما";
@@ -424,6 +413,7 @@ public class MainActivity extends ActionBarActivity {
                                 if (cursor.getInt(0) > 0) {
                                     Intent i = new Intent(getApplicationContext(), My_Profile.class);
                                     startActivity(i);
+                                    finish();
                                 } else {
                                     Toast.makeText(getApplicationContext(), "وارد حساب خود نشده اید...!", Toast.LENGTH_LONG).show();
 
