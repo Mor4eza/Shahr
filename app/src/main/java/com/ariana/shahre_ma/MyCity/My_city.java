@@ -228,21 +228,22 @@ public class My_city extends ActionBarActivity implements TotalListener{
             i++;
         }
 
-        if(cityname.equals(""))
+        if(cityname.equals("") || listurl.size()==0)
         {
-            Toast.makeText(getApplicationContext(),"شهر مورد نظر خود را انتخاب کنید ",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"لطفا زیرمجموعه ای را انتخاب کنید",Toast.LENGTH_LONG).show();
         }
         else
         {
             HTTPGetBusinessJsonArray business = new HTTPGetBusinessJsonArray(this);
             business.execute(url);
+            Download_dialog dialog=new Download_dialog(this);
+            dialog.show();
         }
 
 
         Toast.makeText(getApplicationContext(),"download",Toast.LENGTH_LONG).show();
 
-      Download_dialog dialog=new Download_dialog(this);
-        dialog.show();
+
 
     }
 
