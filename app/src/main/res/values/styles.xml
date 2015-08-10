@@ -1,17 +1,19 @@
 <resources>
     <!-- Base application theme. -->
-
    <style name="AppTheme" parent="MaterialDrawerTheme.Light.DarkToolbar.ActionBar">
       <!-- Customize your theme here -->
+       <item name="material_drawer_primary_icon">@color/material_drawer_icons</item>
+    </style>
+    <!-- Main Activity Theme. -->
+    <style name="MainTheme" parent="MaterialDrawerTheme.Light.DarkToolbar">
+        <item name="android:actionBarStyle">@style/MainActionbar</item>
+        <item name="material_drawer_primary_icon">@color/material_drawer_icons</item>
+        
     </style>
 
-
-
-    <style name="MainTheme" parent="MaterialDrawerBaseBaseTheme.Light.DarkToolbar">
-        <item name="android:textColorPrimary">#ffffffff</item>
+    <style name="MainActionbar">
+        <item name="android:textColor">#ffffffff</item>
     </style>
-
-
 
     <style name="CustomShowcaseTheme" parent="ShowcaseView.Light">
         <item name="sv_backgroundColor">#df3994cf</item>
