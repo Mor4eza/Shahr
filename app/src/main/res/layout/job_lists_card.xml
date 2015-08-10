@@ -66,15 +66,18 @@
                 android:id="@+id/tv_tell"
                 android:layout_width="fill_parent"
                 android:layout_height="30dp"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="#ff00b3ff"
                 android:text="تلفن"
-                android:autoLink="all"
                 android:paddingRight="7dp"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="7dp"
                 android:layout_alignRight="@+id/tv_title"
                 android:layout_alignEnd="@+id/tv_title"
-                android:layout_below="@+id/rates" />
+                android:layout_below="@+id/rates"
+                android:textIsSelectable="false"
+                android:focusableInTouchMode="false"
+                android:focusable="true"
+                android:autoText="false" />
 
             <TextView
                 android:gravity="right"

@@ -3,6 +3,8 @@ package com.ariana.shahre_ma.Cards;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Paint;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -240,7 +242,11 @@ private  static Context context;
         viewHolder.tvNature.setText(nature.getName());
         viewHolder.tvDesNature.setText(nature.getDes());
       //  viewHolder.imgThumbnail.setImageResource(nature.getThumbnail());
+        Log.i("tell",nature.getTell());
+        if (nature.getTell().equals("1")){
+            viewHolder.tvTell.setText("");
 
+        }
 
 
 
@@ -250,7 +256,12 @@ private  static Context context;
 
         viewHolder.rates.setRating((float) nature.getRate());
         viewHolder.rates.setTag(nature.getmId());
-        viewHolder.tvTell.setText(nature.getTell());
+        if ( viewHolder.tvTell.getText().toString().equals("1")){
+            viewHolder.tvTell.setText("");
+        }else {
+            viewHolder.tvTell.setText(nature.getTell());
+            viewHolder.tvTell.setPaintFlags(viewHolder.tvTell.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+            }
     }
 
     @Override
@@ -296,16 +307,16 @@ private  static Context context;
             tvNature.setOnClickListener(this);
             cards.setOnClickListener(this);
             newTag=new LightTextView(context);
-          /*  tvTell.setOnClickListener(new View.OnClickListener() {
+
+            tvTell.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(Intent.ACTION_DIAL);
-                    intent.setData(Uri.parse(tvTell.getText().toString()));
+                    Intent intent = new Intent(Intent.ACTION_DIAL,Uri.parse("tel:" + tvTell.getText().toString()));
                     context.startActivity(intent);
                 }
             });
-*/
+
         }
 
 

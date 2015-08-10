@@ -185,8 +185,6 @@ public class My_city extends ActionBarActivity implements TotalListener{
     }
 
 
-
-
     void SpinnerSetUp(){
 
         DataBaseSqlite db=new DataBaseSqlite(this);
