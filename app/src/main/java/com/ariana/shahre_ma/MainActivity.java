@@ -118,7 +118,7 @@ public class MainActivity extends ActionBarActivity {
         tsr=new TimeSetReceiver();
         registerReceiver(tsr, ii);
 
-        setup();
+        //setup();
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
                 new IntentFilter("custom-event-name"));
 
@@ -171,7 +171,7 @@ public class MainActivity extends ActionBarActivity {
 
         String showWhatsNew = "showHelp";
 
-      /*  if (!Once.beenDone(Once.THIS_APP_VERSION, showWhatsNew)) {
+      /*  if (!Once.beenDone(Once.THIS_APP_INSTALL, showWhatsNew)) {
             help1();
             CityDialog cityDialog=new CityDialog(this);
             cityDialog.show();
@@ -317,12 +317,13 @@ public class MainActivity extends ActionBarActivity {
         //drawer
 
 
-        final IProfile profile = new ProfileDrawerItem().withName(uName).withEmail(settings.getCityName()).withTextColor(R.color.red).withIcon(getResources().getDrawable(R.mipmap.profile3));
+        final IProfile profile = new ProfileDrawerItem().withName(uName).withEmail(settings.getCityName()).withIcon(getResources().getDrawable(R.mipmap.profile3));
 
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withHeaderBackground(R.mipmap.header)
                 .addProfiles(profile)
+                .withProfileImagesVisible(false)
                 .withSelectionListEnabledForSingleProfile(false)
                 .withHeightDp(150)
                 .withTranslucentStatusBar(true)

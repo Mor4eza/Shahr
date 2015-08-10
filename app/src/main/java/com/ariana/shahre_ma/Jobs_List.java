@@ -50,13 +50,11 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jobs__list);
-            setTitle(fc.GetSelected_job());
-                setCards();
-                mRecyclerView.setAdapter(job_list_Adapter);
+        setTitle(fc.GetSelected_job());
+        setCards();
 
         String showWhatsNew = "showHelpJobsList";
-
-        if (!Once.beenDone(Once.THIS_APP_VERSION, showWhatsNew)) {
+        if (!Once.beenDone(Once.THIS_APP_INSTALL, showWhatsNew)) {
             help1();
             Once.markDone(showWhatsNew);
         }
@@ -166,20 +164,20 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
     private void setupSearchView() {
 
         mSearchView.setIconifiedByDefault(true);
-
+        mSearchView.setQueryHint("جستجو");
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         if (searchManager != null) {
             List<SearchableInfo> searchables = searchManager.getSearchablesInGlobalSearch();
 
             // Try to use the "applications" global search provider
-            SearchableInfo info = searchManager.getSearchableInfo(getComponentName());
+            /*SearchableInfo info = searchManager.getSearchableInfo(getComponentName());
             for (SearchableInfo inf : searchables) {
                 if (inf.getSuggestAuthority() != null
                         && inf.getSuggestAuthority().startsWith("applications")) {
                     info = inf;
                 }
             }
-            mSearchView.setSearchableInfo(info);
+            mSearchView.setSearchableInfo(info);*/
         }
 
         mSearchView.setOnQueryTextListener(this);

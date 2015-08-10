@@ -158,7 +158,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
         String showWhatsNew = "showHelpJobs";
 
-        if (!Once.beenDone(Once.THIS_APP_VERSION, showWhatsNew)) {
+        if (!Once.beenDone(Once.THIS_APP_INSTALL, showWhatsNew)) {
             help1();
             Once.markDone(showWhatsNew);
         }
