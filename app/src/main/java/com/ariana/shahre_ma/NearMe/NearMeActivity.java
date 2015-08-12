@@ -64,7 +64,7 @@ public class NearMeActivity extends ActionBarActivity {
         mMap.getUiSettings().setZoomControlsEnabled(true);
         map_progress=(ProgressBar)findViewById(R.id.map_progress);
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("near-me"));
-
+        LocalBroadcastManager.getInstance(this).registerReceiver(filters, new IntentFilter("filtered"));
 
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
@@ -129,6 +129,16 @@ public class NearMeActivity extends ActionBarActivity {
         }
     }
 
+    public void filtered(){
+        mMap.clear();
+        for(int i=0;i<fdb.GetMarketBusiness().size();i++)
+        {
+            Marker marker=   mMap.addMarker(new MarkerOptions().position(new LatLng(fdb.GetLatitudeBusiness().get(i), fdb.GetLongtiudeBusiness().get(i))).title("\u200e" + fdb.GetMarketBusiness().get(i)).snippet(String.valueOf(fdb.GetRateBusiness().get(i))));
+            marker.setData(fdb.GetIdBusiness().get(i));
+           // marker.animatePosition(new LatLng(Double.valueOf(rows.getString(15)), Double.valueOf(rows.getString(16))));
+        }
+
+    }
 
     private void setUpMap() {
             DataBaseSqlite db = new DataBaseSqlite(this);
@@ -178,6 +188,16 @@ public class NearMeActivity extends ActionBarActivity {
             Log.i("receiver", "Got message: " + message);
             setUpMap();
             map_progress.setVisibility(View.INVISIBLE);
+        }
+
+    };
+    private BroadcastReceiver filters = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Get extra data included in the Intent
+            String message = intent.getStringExtra("message");
+            Log.i("receiver", "Got message: " + message);
+           filtered();
         }
 
     };

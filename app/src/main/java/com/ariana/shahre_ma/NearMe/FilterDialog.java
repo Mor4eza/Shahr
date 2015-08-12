@@ -2,8 +2,10 @@ package com.ariana.shahre_ma.NearMe;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -65,26 +67,25 @@ public class FilterDialog extends Dialog {
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DataBaseSqlite db=new DataBaseSqlite(getContext());
-                Query query=new Query(getContext());
-                dismiss();
-                for(int i=0;i>FilterAdapter.selectedsubset.size();i++)
-                {
-                    Cursor rows=db.select_BusinessSearchNearMe(35.8357895, 51.0096686, 0.001, query.getsubsetID(FilterAdapter.selectedsubset.get(i)));
-                            if(rows.moveToFirst())
-                            {
-                                do
-                                {
-                                    selectAddress.add(rows.getString(8));
-                                    selectMarketName.add(rows.getString(1));
-                                    selectPhone.add(rows.getString(3));
-                                    selectMobile.add(rows.getString(4));
-                                    selectId.add(rows.getInt(0));
-                                    selectLatitude.add(rows.getDouble(15));
-                                    selectLongtiude.add(rows.getDouble(16));
-                                    selectRate.add(rows.getDouble(30));
-                                }while (rows.moveToNext());
-                            }
+                DataBaseSqlite db = new DataBaseSqlite(getContext());
+                Query query = new Query(getContext());
+                Log.i("Filter", "start");
+                Log.i("Filter", String.valueOf(FilterAdapter.selectedsubset.size()));
+                for (int i = 0; i < FilterAdapter.selectedsubset.size(); i++) {
+                    Cursor rows = db.select_BusinessSearchNearMe(35.8357895, 51.0096686, 0.001, query.getsubsetID(FilterAdapter.selectedsubset.get(i)));
+                    if (rows.moveToFirst()) {
+                        do {
+                            Log.i("Filter", rows.getString(1));
+                            selectAddress.add(rows.getString(8));
+                            selectMarketName.add(rows.getString(1));
+                            selectPhone.add(rows.getString(3));
+                            selectMobile.add(rows.getString(4));
+                            selectId.add(rows.getInt(0));
+                            selectLatitude.add(rows.getDouble(15));
+                            selectLongtiude.add(rows.getDouble(16));
+                            selectRate.add(rows.getDouble(30));
+                        } while (rows.moveToNext());
+                    }
                 }
 
                 fdb.SetIdBusiness(selectId);
@@ -96,9 +97,14 @@ public class FilterDialog extends Dialog {
                 fdb.SetPhoneBusiness(selectPhone);
                 fdb.SetMobileBusiness(selectMobile);
 
-                Toast.makeText(getContext(),FilterAdapter.selectedsubset.toString(),Toast.LENGTH_LONG).show();
+                Intent intent = new Intent("filtered");
+                intent.putExtra("received", "filters");
+                LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
 
+                Toast.makeText(getContext(), FilterAdapter.selectedsubset.toString(), Toast.LENGTH_LONG).show();
+                dismiss();
             }
+
         });
 
     }
