@@ -242,6 +242,9 @@ private  static Context context;
         viewHolder.tvNature.setText(nature.getName());
         viewHolder.tvDesNature.setText(nature.getDes());
       //  viewHolder.imgThumbnail.setImageResource(nature.getThumbnail());
+        /**Todo write if statement
+         *
+         * */
         Log.i("tell",nature.getTell());
         if (nature.getTell().equals("1")){
             viewHolder.tvTell.setText("");
