@@ -2,9 +2,8 @@ package com.ariana.shahre_ma.WebServiceGet;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
-import android.widget.Toast;
+import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
@@ -116,7 +115,7 @@ public class HTTPGetAreaJosn extends AsyncTask<String,Void,Integer>
 
             Integer ii = 0;
             try {
-
+                Log.i("jsonArea", JSONString);
                 JSONArray areas = new JSONArray(JSONString);
 
                 Id_area=new Integer[areas.length()];

@@ -86,6 +86,7 @@ public class MainActivity extends ActionBarActivity {
     private Drawer result = null;
     private WindowManager mWindowManager;
     private ImageView mImgFloatingView;
+    KeySettings setting=new KeySettings(this);
     IntentFilter ii;
     TimeSetReceiver tsr;
     Toolbar toolbar;
@@ -98,9 +99,12 @@ public class MainActivity extends ActionBarActivity {
             DataBaseSqlite db = new DataBaseSqlite(this);
             Cursor allrows = db.select_Member();
             allrows.moveToNext();
-            if (allrows.getString(6).equals(null)) {
+            if (allrows.getString(6).equals(null))
+            {
                 Action.setVisibility(View.VISIBLE);
-            } else {
+            }
+            else
+            {
                 Action.setVisibility(View.INVISIBLE);
             }
 
@@ -114,9 +118,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         //findViewsAndConfigure();
          db=new DataBaseSqlite(this);
-       /*String url= "http://uplod.ir/tpy6oft0407u/app-debug.apk.htm";
-        HTTPGetUpdate update=new HTTPGetUpdate(this);
-        update.execute(url);*/
+
 
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
@@ -142,7 +144,10 @@ public class MainActivity extends ActionBarActivity {
         if (net.checkInternetConnection() == false) {
             Toast.makeText(getApplication(), "شبکه اینترنت قطع می باشد", Toast.LENGTH_LONG).show();
         } else {
-
+          /*  String url= "http://uplod.ir/tpy6oft0407u/app-debug.apk.htm";
+            HTTPGetUpdate update=new HTTPGetUpdate(this);
+            update.execute(url);
+            */
            HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
             httpcoll.execute();
 
@@ -154,12 +159,12 @@ public class MainActivity extends ActionBarActivity {
             httpcity.execute();
 
             HTTPGetAdvertismentJson httpGetAdvertismentJson=new HTTPGetAdvertismentJson(this);
-            httpGetAdvertismentJson.SetAdvertisment(68);
+            httpGetAdvertismentJson.SetAdvertisment(query.getCityId(setting.getCityName()));
             httpGetAdvertismentJson.execute();
 
 
            HTTPGetTopsBusinessJson httpGetTopsBusinessJson=new HTTPGetTopsBusinessJson(this);
-            httpGetTopsBusinessJson.SetTopBusiness(68);
+            httpGetTopsBusinessJson.SetTopBusiness(query.getCityId(setting.getCityName()));
             httpGetTopsBusinessJson.execute();
         }
 

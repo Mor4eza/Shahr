@@ -39,20 +39,6 @@ public class HTTPGetCollectionJson extends AsyncTask<String,Void, Integer> {
         String collectionname[];
         Integer len;
 
-
-
-    /**
-     *
-     */
-        @Override
-        protected void onPreExecute() {
-         /*   super.onPreExecute();
-           pd = new ProgressDialog(context);
-            pd.setMessage("در حال بروزرسانی...");
-            pd.setCancelable(false);
-            pd.show();*/
-        }
-
     /**
      *
      * @param args
@@ -97,7 +83,7 @@ public class HTTPGetCollectionJson extends AsyncTask<String,Void, Integer> {
 
                     }
                 }
-               // pd.dismiss();
+
 
                /*Jobs.mSwipeRefreshLayout.post(new Runnable() {
                                                   @Override
@@ -115,8 +101,6 @@ public class HTTPGetCollectionJson extends AsyncTask<String,Void, Integer> {
                     httpGetSubsetJson.execute();
                 }
 
-
-               // setting.saveCollectionDownload(true);
 
             } catch (Exception e) {
 

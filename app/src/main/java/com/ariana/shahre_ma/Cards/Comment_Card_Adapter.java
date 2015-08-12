@@ -40,6 +40,7 @@ Query query;
             Comment_Card_items nature = new Comment_Card_items();
             nature.setmUser("");
             nature.setmDate("");
+            nature.settag(0);
             nature.setmComm("  بدون نظر "  + "\n" +"اولین نظر را شما بفرستید");
             mItems.add(nature);
 
@@ -125,15 +126,21 @@ Query query;
 
             btn_like.setOnClickListener(this);
             btn_disslike.setOnClickListener(this);
+
+
         }
+
 
 
         @Override
         public void onClick(View v) {
 
 
-                if(query.getMemberId()>0) {
-                    if(v==btn_like) {
+            if ((Integer.parseInt((String) tvcomm.getTag()) != 0)) {
+                Log.i("query", String.valueOf(query.getMemberId()));
+                if (query.getMemberId() > 0) {
+                    if (v == btn_like)
+                    {
                         int Likes = 0;
                         HTTPSendLikeURL httplike = new HTTPSendLikeURL(context);
                         httplike.SetLike(true);
@@ -144,7 +151,7 @@ Query query;
                     }
                     else
                     {
-                        HTTPSendLikeURL httplike=new HTTPSendLikeURL(context);
+                        HTTPSendLikeURL httplike = new HTTPSendLikeURL(context);
                         httplike.SetLike(false);
                         httplike.SetMemberid(query.getMemberId());
                         httplike.Setopinionid(Integer.parseInt((String) tvcomm.getTag()));
@@ -152,17 +159,14 @@ Query query;
                         btn_disslike.setImageDrawable(context.getResources().getDrawable(R.drawable.comment_disliked));
                     }
                 }
+                else
+                {
 
-
-
-
-            else
-            {
-
-                Toast.makeText(context.getApplicationContext(), "کاربری وارد نشده است", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context.getApplicationContext(), "کاربری وارد نشده است", Toast.LENGTH_LONG).show();
+                }
             }
-
         }
+
 
 
     }

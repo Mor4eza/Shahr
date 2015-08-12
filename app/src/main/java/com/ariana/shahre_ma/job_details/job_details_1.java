@@ -215,19 +215,24 @@ public class job_details_1 extends ActionBarActivity {
                 public void onLocationFound(Location location) {
                     // Do some stuff when a new GPS Location has been found
 
-                    Location locationA = new Location("point A");
-                    locationA.setLatitude(location.getLatitude());
-                    locationA.setLongitude(location.getLongitude());
+                    try {
+                        Location locationA = new Location("point A");
+                        locationA.setLatitude(location.getLatitude());
+                        locationA.setLongitude(location.getLongitude());
 
-                    Location locationB = new Location("point B");
-                    locationB.setLatitude(fc.GetLatitude_Business());
-                    locationB.setLongitude(fc.GetLongtiude_Business());
+                        Location locationB = new Location("point B");
+                        locationB.setLatitude(fc.GetLatitude_Business());
+                        locationB.setLongitude(fc.GetLongtiude_Business());
 
-                    float distance = locationA.distanceTo(locationB) ;
-                    tv_distance.setText("فاصله تقریبی " +distance+" " +"متر");
+                        float distance = locationA.distanceTo(locationB) ;
+                        tv_distance.setText("فاصله تقریبی " +distance+" " +"متر");
 
 
-                    stopListen();
+                        stopListen();
+                    }catch (Exception e){
+
+                    }
+
                 }
 
                 @Override

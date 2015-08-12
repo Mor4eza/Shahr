@@ -4,15 +4,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 
+import com.ariana.shahre_ma.Date.CalendarTool;
+import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Settings.KeySettings;
+import com.ariana.shahre_ma.Settings.UpdateActivity;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +21,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLDecoder;
 
 /**
  * Created by ariana on 7/1/2015.
@@ -36,6 +34,8 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
     String activity[];
     Context context;
     Integer len;
+    DateTime dt=new DateTime();
+    CalendarTool ct=new CalendarTool();
 
     String mesage="";
 
@@ -53,11 +53,7 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
      */
     @Override
     protected void onPreExecute() {
-       // super.onPreExecute();
-     /*   pd = new ProgressDialog(context);
-        pd.setMessage("دریافت اطلاعات...");
-        pd.setCancelable(false);
-        pd.show();*/
+
     }
     /**
      *
@@ -98,8 +94,10 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
     void parseJSON(String JSONString) {
 
         Integer ii = 0;
+
         try {
 
+            Log.i("jsonFieldActivity",JSONString);
             KeySettings setting=new KeySettings(context);
             JSONArray areas = new JSONArray(JSONString);
             id=new Integer[areas.length()];
@@ -111,6 +109,12 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
                 id[i]=area.getInt("Id");
                 activity[i]=area.getString("Activity");
 
+                UpdateActivity.PgUpdate.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        UpdateActivity.PgUpdate.setVisibility(View.INVISIBLE);
+                    }
+                });
 
                 //end All update
                 setting.setUpdateAll(false);
@@ -119,7 +123,7 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
 
         } catch (JSONException e) {
             Log.e("JSONException",e.toString());
-            // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
+
         }
     }
 
@@ -179,28 +183,32 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
             Log.e("Integer",String.valueOf(o));
             if (o == 1)
             {
+                DataBaseSqlite db = new DataBaseSqlite(context);
                 if (len > 0)
                 {
-                    DataBaseSqlite db = new DataBaseSqlite(context);
+
+                    db.delete_Update();
                     db.delete_FiledActivity();
                     for (int i = 0; i < len; i++)
                         db.Add_FieldActivity(id[i], activity[i]);
-                   // pd.dismiss();
+
+                    db.Add_Update(ct.getIranianDate());
                 }
+
                 else
                 {
-                   /// pd.dismiss();
+
                 }
                 KeySettings setting=new KeySettings(context);
                 //setting.saveFieldActivityDownload(true);
             }
             else
             {
-               // pd.dismiss();
+
             }
         }
         catch (Exception e){
-           // pd.dismiss();
+
             Log.e("ExceptionFiledActivity",e.toString());
         }
     }

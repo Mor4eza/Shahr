@@ -3,11 +3,9 @@ package com.ariana.shahre_ma.WebServiceGet;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Settings.KeySettings;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -81,8 +79,6 @@ public class HTTPGetSubsetJson extends AsyncTask<String,Void,Integer>
 
                     }
                 }
-
-               // setting.saveSubsetDownload(true);
 
                 if(setting.getAllUpdate()) {
                     HTTPGetCityJson httpGetCityJson = new HTTPGetCityJson(context);
