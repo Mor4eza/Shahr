@@ -21,9 +21,11 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.MyBusiness.Discount;
 import com.ariana.shahre_ma.MyBusiness.Edit_business;
 import com.ariana.shahre_ma.MyBusiness.My_Business;
+import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.job_details.Job_details;
 import com.github.alexkolpa.fabtoolbar.FabToolbar;
@@ -37,35 +39,55 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
     FieldClass fc=new FieldClass();
     private  static Context context;
     Business_Card_Items nature;
-
+    NetState net;
+    FieldDataBusiness fdb=new FieldDataBusiness();
 
     public Business_Card_Adapter(Context context) {
         super();
         this.context=context;
 
+        net=new NetState(context);
             DataBaseSqlite db = new DataBaseSqlite(context);
-            Cursor rows = db.select_AllBusinessId(fc.GetBusiness_Id());
+
             mItems = new ArrayList<Business_Card_Items>();
 
         nature = new Business_Card_Items();
 
-        if(rows.moveToFirst())
+        if(net.checkInternetConnection())
         {
-            do {
+            for (int i = 0; i < fdb.GetMarketBusiness().size(); i++)
+            {
 
                 nature = new Business_Card_Items();
 
-                nature.setId(rows.getInt(0));
-                nature.setName(rows.getString(1));
-                nature.setmAddress(rows.getString(7));
+                nature.setId(fdb.GetIdBusiness().get(i));
+                nature.setName(fdb.GetMarketBusiness().get(i));
+                nature.setmAddress(fdb.GetAddressBusiness().get(i));
                 nature.setThumbnail(R.drawable.pooshak1);
-                nature.setRate(rows.getFloat(19));
+                nature.setRate(fdb.GetRateBusiness().get(i));
                 mItems.add(nature);
 
-            }while (rows.moveToNext());
+            }
         }
+        else
+        {
 
+            Cursor rows = db.select_AllBusinessId(fc.GetBusiness_Id());
+            if (rows.moveToFirst()) {
+                do {
 
+                    nature = new Business_Card_Items();
+                    nature.setId(rows.getInt(0));
+                    nature.setName(rows.getString(1));
+                    nature.setmAddress(rows.getString(7));
+                    nature.setThumbnail(R.drawable.pooshak1);
+                    nature.setRate(rows.getFloat(19));
+                    mItems.add(nature);
+
+                } while (rows.moveToNext());
+            }
+
+        }
 
     }
 
@@ -139,6 +161,8 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
                 @Override
                 public void onClick(View v) {
                     fab.hide();
+                    Log.i("Idbusiness",String.valueOf(tvNature.getTag()));
+                    fc.SetBusiness_Id(Integer.valueOf(String.valueOf(tvNature.getTag())));
                     Intent i = new Intent(context, Edit_business.class);
                     context.startActivity(i);
                     Log.i("clicked", tvNature.getText().toString());

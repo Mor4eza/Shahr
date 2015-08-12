@@ -171,6 +171,7 @@ public class MapsActivity extends ActionBarActivity {
         }
     }
 
+
     private void setUpMap() {
 
         Integer l=0;

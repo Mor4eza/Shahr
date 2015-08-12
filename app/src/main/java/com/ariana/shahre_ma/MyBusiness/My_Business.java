@@ -55,6 +55,10 @@ public class My_Business extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my__business);
         pg=(ProgressBar)findViewById(R.id.pb_business);
+
+
+
+
         HTTPGetBusinessMemberJson httpGetBusinessMemberJson = new HTTPGetBusinessMemberJson(My_Business.this);
         httpGetBusinessMemberJson.SetUrl_businessMember(query.getMemberId());// get id member
         httpGetBusinessMemberJson.execute();// Run
@@ -63,11 +67,11 @@ public class My_Business extends ActionBarActivity {
          Intialize();
          setCards();
 
-        HTTPGetFieldActivityJson httpfield=new HTTPGetFieldActivityJson(this);
+       /* HTTPGetFieldActivityJson httpfield=new HTTPGetFieldActivityJson(this);
         httpfield.execute();
 
         HTTPGetAreaJosn httparea=new HTTPGetAreaJosn(this);
-        httparea.execute();
+        httparea.execute();*/
 
     }
 

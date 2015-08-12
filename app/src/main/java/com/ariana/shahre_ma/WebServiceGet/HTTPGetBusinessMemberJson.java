@@ -10,6 +10,7 @@ import com.ariana.shahre_ma.Cards.Business_Card_Adapter;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.MyBusiness.My_Business;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
@@ -22,6 +23,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ariana2 on 6/6/2015...
@@ -33,6 +36,9 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
     FieldClass fc=new FieldClass();
     Query query;
     private  String url_Business;
+    FieldDataBusiness fdb=new FieldDataBusiness();
+
+
 
     Integer Id[];
     String market[];
@@ -68,6 +74,15 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
     Integer len=0;
     Integer i=0;
 
+
+    private List<Integer> selectId=new ArrayList<>();
+    private  List<Double>  selectLongtiude=new ArrayList<>();
+    private  List<Double>  selectLatitude=new ArrayList<>();
+    private  List<Double>  selectRate=new ArrayList<>();
+    private  List<String>  selectPhone=new ArrayList<String>();
+    private  List<String>  selectMobile=new ArrayList<String>();
+    private  List<String>  selectAddress=new ArrayList<>();
+    private  List<String>  selectMarketName=new ArrayList<String>();
 
     /**
      *
@@ -275,7 +290,26 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
                 longitude[i] = Double.valueOf(area.getString("Longitude"));
 
 
+                selectId.add(area.getInt("Id"));
+                selectLatitude.add(Double.valueOf(area.getString("Latitude")));
+                selectLongtiude.add(Double.valueOf(area.getString("Longitude")));
+                selectAddress.add(area.getString("Address"));
+                selectMarketName.add(area.getString("Market"));
+                selectPhone.add(area.getString("Phone"));
+                selectMobile.add(area.getString("Mobile"));
+                selectRate.add(area.getDouble("RateAverage"));
+
+
             }
+
+            fdb.SetIdBusiness(selectId);
+            fdb.SetLatitudeBusiness(selectLatitude);
+            fdb.SetLongtiudeBusiness(selectLongtiude);
+            fdb.SetRateBusiness(selectRate);
+            fdb.SetAddressBusiness(selectAddress);
+            fdb.SetMarketBusiness(selectMarketName);
+            fdb.SetPhoneBusiness(selectPhone);
+            fdb.SetMobileBusiness(selectMobile);
 
         } catch (JSONException e) {
             // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();

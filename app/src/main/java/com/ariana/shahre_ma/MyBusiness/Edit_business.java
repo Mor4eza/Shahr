@@ -147,16 +147,16 @@ public class Edit_business extends ActionBarActivity {
             rows2.moveToFirst();
             Market_zone.setText(rows2.getString(0));
 
-          /*  for (int i = 0; i < 7; i++) {
-                Log.i("CounterFor", String.valueOf(rows.getInt((21) + (i))));
-                if (rows.getInt((21) + (i)) > 0) {
+           for (int i = 0; i < 7; i++) {
+                Log.i("CounterFor", String.valueOf(rows.getInt((12) + (i))));
+                if (rows.getInt((12) + (i)) > 0) {
 
-                    Cursor rows3 = db.select_FieldActivityName(rows.getInt((21) + (i)));
+                    Cursor rows3 = db.select_FieldActivityName(rows.getInt((12) + (i)));
                     rows3.moveToFirst();
 
                     Market_field.setText(Market_field.getText().toString() + rows3.getString(0) + ", ");
                 }
-            }*/
+            }
        /* }
         catch (Exception e)
         {
@@ -370,9 +370,7 @@ public class Edit_business extends ActionBarActivity {
             alertDialog.setMessage("اینترنت قطع می باشد");
             alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    // Write your code here to execute after dialog closed
-                    // Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
-                   // Market_field.requestFocus();
+
                 }
             });
 
@@ -390,7 +388,9 @@ public class Edit_business extends ActionBarActivity {
                         Market_owner.getText().toString().trim(), Market_address.getText().toString().trim(),
                         Market_desc.getText().toString().trim(), dt.Now(), EXPDateTime(), "null"
                         ,query.getsubsetID(Market_subset.getText().toString().trim()),
-                            fc.GetLatitude_Business(), fc.GetLongtiude_Business(),query.getAreaID(Market_zone.getText().toString().trim()), "null", "null", Fields_ID[0], Fields_ID[1], Fields_ID[2],
+                            fc.GetLatitude_Business(), fc.GetLongtiude_Business(),
+                        query.getAreaID(Market_zone.getText().toString().trim()),
+                        "null", "null", Fields_ID[0], Fields_ID[1], Fields_ID[2],
                         Fields_ID[3], Fields_ID[4], Fields_ID[5], Fields_ID[6]);
 
 
