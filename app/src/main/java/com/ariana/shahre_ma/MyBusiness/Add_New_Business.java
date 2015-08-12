@@ -11,8 +11,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.MultiAutoCompleteTextView;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.DateTime;
@@ -22,8 +20,8 @@ import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
-import com.ariana.shahre_ma.WebServicePost.HTTPPostBusinessEditJson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostBusinessJson;
+import com.dd.CircularProgressButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +55,7 @@ public class Add_New_Business extends ActionBarActivity {
     String str="";
     DataBaseSqlite db=new DataBaseSqlite(this);
     SqliteTOjson json=new SqliteTOjson(this);
-
+    public static CircularProgressButton save_edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -267,8 +265,11 @@ public class Add_New_Business extends ActionBarActivity {
 
         else
         {
+            save_edit.setIndeterminateProgressMode(true);
+            save_edit.setProgress(50);
 
-                str = json.getBusinessTOjsonArray(fc.GetBusiness_Id(),query.getMemberId(), Market_name.getText().toString().trim(),
+
+            str = json.getBusinessTOjsonArray(fc.GetBusiness_Id(),query.getMemberId(), Market_name.getText().toString().trim(),
                         Market_tell.getText().toString().trim(), Market_mobile.getText().toString().trim(),
                         Market_fax.getText().toString().trim(), Market_email.getText().toString().trim(),
                         Market_owner.getText().toString().trim(), Market_address.getText().toString().trim(),
