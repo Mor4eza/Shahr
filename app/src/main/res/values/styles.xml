@@ -2,13 +2,16 @@
     <!-- Base application theme. -->
    <style name="AppTheme" parent="MaterialDrawerTheme.Light.DarkToolbar.ActionBar">
       <!-- Customize your theme here -->
+
+
        <item name="material_drawer_primary_icon">@color/material_drawer_icons</item>
     </style>
+
+
     <!-- Main Activity Theme. -->
     <style name="MainTheme" parent="MaterialDrawerTheme.Light.DarkToolbar">
         <item name="android:actionBarStyle">@style/MainActionbar</item>
         <item name="material_drawer_primary_icon">@color/material_drawer_icons</item>
-        
     </style>
 
     <style name="MainActionbar">
@@ -25,7 +28,7 @@
         <item name="sv_titleTextAppearance">@style/CustomTitle2</item>
     </style>
 
-        <style name="CustomTitle2" parent="TextAppearance.ShowcaseView.Title">
+    <style name="CustomTitle2" parent="TextAppearance.ShowcaseView.Title">
         <item name="android:textColor">#ff660300</item>
     </style>
 
