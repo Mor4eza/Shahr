@@ -86,11 +86,10 @@ public class MainActivity extends ActionBarActivity {
     private Drawer result = null;
     private WindowManager mWindowManager;
     private ImageView mImgFloatingView;
-    DataBaseSqlite db=new DataBaseSqlite(this);
     IntentFilter ii;
     TimeSetReceiver tsr;
     Toolbar toolbar;
-
+    DataBaseSqlite db;
     @Override
     protected void onResume() {
         super.onResume();
@@ -114,7 +113,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //findViewsAndConfigure();
-
+         db=new DataBaseSqlite(this);
        /*String url= "http://uplod.ir/tpy6oft0407u/app-debug.apk.htm";
         HTTPGetUpdate update=new HTTPGetUpdate(this);
         update.execute(url);*/
@@ -205,7 +204,7 @@ public class MainActivity extends ActionBarActivity {
 
         String imag[]=new String[3];
         Integer i=0;
-        DataBaseSqlite db=new DataBaseSqlite(this);
+
         Cursor rows=db.select_Advertisment();
 
         if(rows.moveToFirst())
