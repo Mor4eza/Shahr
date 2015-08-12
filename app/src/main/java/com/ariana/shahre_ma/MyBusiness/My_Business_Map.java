@@ -3,6 +3,8 @@ package com.ariana.shahre_ma.MyBusiness;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -20,12 +22,15 @@ import fr.quentinklein.slt.TrackerSettings;
 public class My_Business_Map extends ActionBarActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-FieldClass fc=new FieldClass();
+    FieldClass fc=new FieldClass();
+    Double selecteLat=0.0;
+    Double selecteLong=0.0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_business_map);
         setUpMapIfNeeded();
+        mMap.clear();
         mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setMapToolbarEnabled(false);
         mMap.getUiSettings().setZoomControlsEnabled(true);
@@ -46,7 +51,8 @@ FieldClass fc=new FieldClass();
                 Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title("\u200e" + "اینجا"));
                 marker.setDraggable(true);
                 stopListen();
-
+                selecteLat=location.getLatitude();
+                selecteLong=location.getLongitude();
             }
 
             @Override
@@ -58,12 +64,13 @@ FieldClass fc=new FieldClass();
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
             public void onMapLongClick(LatLng latLng) {
-                Toast.makeText(getApplicationContext(),"اینجا",Toast.LENGTH_LONG).show();
+                mMap.clear();
                 Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(latLng.latitude,latLng.longitude)).title("\u200e" + "اینجا"));
-
                 marker.showInfoWindow();
-                fc.SetLatitude_Business((latLng.latitude));
-                fc.SetLongtiude_Business((latLng.longitude));
+                selecteLat=latLng.latitude;
+                selecteLong=latLng.longitude;
+                Log.i("lat", String.valueOf(latLng.latitude));
+                Log.i("long",String.valueOf(latLng.longitude));
             }
         });
 
@@ -86,6 +93,17 @@ FieldClass fc=new FieldClass();
             if (mMap != null) {
 
             }
+        }
+    }
+
+    public void save_position(View view) {
+        if (selecteLat !=0.0 && selecteLong !=0.0) {
+            fc.SetLatitude_Business(selecteLat);
+            fc.SetLongtiude_Business(selecteLong);
+            finish();
+        }
+        else{
+            Toast.makeText(getApplicationContext(),"موقعیتی را انتخاب کنید",Toast.LENGTH_LONG).show();
         }
     }
 
