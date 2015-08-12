@@ -6,10 +6,12 @@ import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,7 +22,7 @@ public class SplashActivity extends ActionBarActivity {
     KeySettings setting=new KeySettings(this);
     NetState net=new NetState(this);
 
-    String text="....";
+    String text="...";
     String text1="";
     TextView thread;
     Integer i=0;
@@ -31,40 +33,28 @@ public class SplashActivity extends ActionBarActivity {
         thread=(TextView ) findViewById(R.id.dots3);
         IntializeSetting();
 
+        Log.i("Update", setting.getAllUpdate().toString());
 
-       /* if (net.checkInternetConnection() == false)
+        if (net.checkInternetConnection() == false)
         {
             Toast.makeText(getApplication(), "شبکه اینترنت قطع می باشد", Toast.LENGTH_LONG).show();
         }
 
-        else if(setting.getCollectionDownload()==false)
+
+        else if(setting.getAllUpdate()==false)
         {
-            HTTPGetCollectionJson httpGetCollectionJson=new HTTPGetCollectionJson(this);
+            Log.i("Update", "true");
+            HTTPGetCollectionJson httpGetCollectionJson = new HTTPGetCollectionJson(this);
             httpGetCollectionJson.execute();
-        }
-        else if(setting.getSubsetDownload()==false)
-        {
-            HTTPGetSubsetJson httpGetSubsetJson=new HTTPGetSubsetJson(this);
-            httpGetSubsetJson.execute();
 
-        }
-        else if(setting.getFieldActivityDownload()==false)
-        {
-            HTTPGetFieldActivityJson httpGetFieldActivityJson=new HTTPGetFieldActivityJson(this);
-            httpGetFieldActivityJson.execute();
-
-        }
-        else if(setting.getCityDownload()==false)
-        {*/
             HTTPGetCityJson httpGetCityJson=new HTTPGetCityJson(this);
             httpGetCityJson.execute();
-
-        /*}
+        }
         else
         {
             Intent i=new Intent(this,MainActivity.class);
             startActivity(i);
-        }*/
+        }
 
 
         Dots();
@@ -78,7 +68,7 @@ public class SplashActivity extends ActionBarActivity {
                  startActivity(mainIntent);
 
             }
-        }, 5000);
+        }, 7000);
     }
 
 
@@ -87,7 +77,7 @@ public class SplashActivity extends ActionBarActivity {
 
     public void Dots(){
 
-        text="....";
+        text="...";
 
         //Declare the timer
         Timer t = new Timer();
@@ -96,7 +86,7 @@ public class SplashActivity extends ActionBarActivity {
                                   @Override
                                   public void run() {
 
-                                      if (i <= 3) {
+                                      if (i <= 2) {
                                           text1 += text.substring(i, i + 1);
 
 

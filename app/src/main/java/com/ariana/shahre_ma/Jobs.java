@@ -92,6 +92,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         httpbusin=new HTTPGetBusinessJson(this);
         ns=new NetState(this);
 
+
     /*    Intent myIntent = new Intent(this, MyReceiver.class);
 
 

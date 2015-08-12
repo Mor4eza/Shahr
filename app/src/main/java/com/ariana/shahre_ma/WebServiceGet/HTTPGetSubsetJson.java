@@ -79,10 +79,9 @@ public class HTTPGetSubsetJson extends AsyncTask<String,Void,Integer>
 
                     }
                 }
-
                 if(setting.getAllUpdate()) {
-                    HTTPGetCityJson httpGetCityJson = new HTTPGetCityJson(context);
-                    httpGetCityJson.execute();
+                    HTTPGetAreaJosn httpGetAreaJosn = new HTTPGetAreaJosn(context);
+                    httpGetAreaJosn.execute();
                 }
 
             } catch (Exception e) {

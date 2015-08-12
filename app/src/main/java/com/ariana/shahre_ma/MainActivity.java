@@ -71,6 +71,7 @@ import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.software.shell.fab.ActionButton;
 
 import github.chenupt.dragtoplayout.DragTopLayout;
+import jonathanfinerty.once.Once;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -143,12 +144,15 @@ public class MainActivity extends ActionBarActivity {
 
         if (net.checkInternetConnection() == false) {
             Toast.makeText(getApplication(), "شبکه اینترنت قطع می باشد", Toast.LENGTH_LONG).show();
-        } else {
+        }
+        else
+        {
           /*  String url= "http://uplod.ir/tpy6oft0407u/app-debug.apk.htm";
             HTTPGetUpdate update=new HTTPGetUpdate(this);
             update.execute(url);
             */
-           HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
+
+            HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
             httpcoll.execute();
 
             HTTPGetSubsetJson httpsubset = new HTTPGetSubsetJson(this);
@@ -180,12 +184,12 @@ public class MainActivity extends ActionBarActivity {
 
         String showWhatsNew = "showHelp";
 
-      /*  if (!Once.beenDone(Once.THIS_APP_INSTALL, showWhatsNew)) {
-            help1();
+        if (!Once.beenDone(Once.THIS_APP_INSTALL, showWhatsNew)) {
+            //help1();
             CityDialog cityDialog=new CityDialog(this);
             cityDialog.show();
             Once.markDone(showWhatsNew);
-        }*/
+        }
 
     }
 
@@ -596,7 +600,7 @@ public class MainActivity extends ActionBarActivity {
 
 
     public void help1(){
-
+        ViewTarget Hdiscount=new ViewTarget(R.id.toolbar,this);
         RelativeLayout.LayoutParams lps = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         lps.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
@@ -605,8 +609,8 @@ public class MainActivity extends ActionBarActivity {
         lps.setMargins(margin, margin, 10, margin);
 
         ShowcaseView sv=new ShowcaseView.Builder(this)
-               // .setTarget(new ActionViewTarget(this, ActionViewTarget.Type.HOME))
-                .setTarget( new ViewTarget( ((ViewGroup)findViewById(R.id.action_bar)).getChildAt(0) ) )
+               // .setTarget(new ActionViewTarget(this, toolbar.get))
+               // .setTarget( new ViewTarget( ((ViewGroup)findViewById(R.id.action_bar)).getChildAt(0) ) )
                // .setTarget(Hdiscount)
                 .setContentTitle("به شهرما خوش آمدید")
                 .setContentText("برای استفاده از امکانت برنامه از این منو استفاده کنید")

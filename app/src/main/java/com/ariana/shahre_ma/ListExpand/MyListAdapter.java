@@ -137,25 +137,32 @@ public class MyListAdapter extends BaseExpandableListAdapter {
             view = layoutInflater.inflate(R.layout.group_item, null);
         }
 
-
-        headimage=(ImageView) view.findViewById(R.id.head_image);
-        imgLoader=new ImageLoader(context);
+        try {
 
 
-       String image_url_1 = "http://www.shahrma.com/app/img/collection_icon/"+continent.getUrl()+".png";
-        imgLoader.DisplayImage(image_url_1, headimage);
+            headimage = (ImageView) view.findViewById(R.id.head_image);
+            imgLoader = new ImageLoader(context);
 
 
-        TextView heading = (TextView) view.findViewById(R.id.laptop1);
-        heading.setText(continent.getName().trim());
-       // headimage.setImageDrawable();
+            String image_url_1 = "http://www.shahrma.com/app/img/collection_icon/" + continent.getUrl() + ".png";
+            imgLoader.DisplayImage(image_url_1, headimage);
 
-        final RelativeLayout header=(RelativeLayout)view.findViewById(R.id.relative_parent);
 
-        if (isExpanded) {
-            view.setBackgroundColor(context.getResources().getColor(R.color.blue_focused));
-        } else {
-            view.setBackgroundColor(context.getResources().getColor(R.color.white));
+            TextView heading = (TextView) view.findViewById(R.id.laptop1);
+            heading.setText(continent.getName().trim());
+            // headimage.setImageDrawable();
+
+            final RelativeLayout header = (RelativeLayout) view.findViewById(R.id.relative_parent);
+
+            if (isExpanded) {
+                view.setBackgroundColor(context.getResources().getColor(R.color.blue_focused));
+            } else {
+                view.setBackgroundColor(context.getResources().getColor(R.color.white));
+            }
+        }
+        catch (Exception e)
+        {
+
         }
         return view;
     }
