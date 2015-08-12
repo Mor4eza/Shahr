@@ -156,6 +156,7 @@ public class job_details_1 extends ActionBarActivity {
             owner.setText(allrows.getString(6));//BusinessOwner
             address.setText(allrows.getString(7));//Address
             des.setText(allrows.getString(8));//Description
+            subset.setText(query.getsubsetName(allrows.getInt(9)));//Subset
 
                for (int i = 0; i < 7; i++) {
                     Log.i("CounterFor", String.valueOf(allrows.getInt((12) + (i))));

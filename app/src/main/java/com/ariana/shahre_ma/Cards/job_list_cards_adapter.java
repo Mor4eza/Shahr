@@ -95,12 +95,12 @@ private  static Context context;
             Log.i("name", setting.getSortBusiness());
         }  else if(setting.getSortBusiness().equals("date")) {
              allrows = mydb.select_SortDateBusiness(fc.GetBusiness_SubsetIdb());
-            setting.saveSortBusiness("0"); //No Sort
+             setting.saveSortBusiness("0"); //No Sort
              search=false;
             Log.i("date", setting.getSortBusiness());
         }
         //fdb.ClearAll();
-       // try {
+        try {
             if(fc.GetSearchOffline())
                 {
                     fc.SetSearchOffline(false);
@@ -113,6 +113,7 @@ private  static Context context;
                         nature.setName(fdb.GetMarketBusiness().get(i));
                         nature.setDes(fdb.GetAddressBusiness().get(i));
                         nature.setThumbnail(R.drawable.pooshak);
+
                         nature.setRate(fdb.GetRateBusiness().get(i));
                         nature.setmId(fdb.GetIdBusiness().get(i));
 
@@ -120,6 +121,10 @@ private  static Context context;
                         if(fdb.GetMobileBusiness().get(i).length()==0)
                         {
                             nature.setTell(fdb.GetPhoneBusiness().get(i));
+                        }
+                        else if(fdb.GetPhoneBusiness().get(i).equals("1"))
+                        {
+                            nature.setTell("");
                         }
                         else
                         {
@@ -152,7 +157,13 @@ private  static Context context;
 
                             if(fdb.GetMobileBusiness().get(i).length()==0)
                             {
+                                //nature.setTell(fdb.GetPhoneBusiness().get(i).substring(0,fdb.GetPhoneBusiness().get(i).indexOf("-")));
                                 nature.setTell(fdb.GetPhoneBusiness().get(i));
+
+                            }
+                            else if(fdb.GetPhoneBusiness().get(i).equals("1"))
+                            {
+                                nature.setTell("");
                             }
                             else
                             {
@@ -176,7 +187,8 @@ private  static Context context;
                                 nature.setName(allrows.getString(1));
                                 nature.setDes(allrows.getString(8));
                                 nature.setThumbnail(R.drawable.pooshak);
-                                nature.setRate(allrows.getDouble(29));
+                                Log.i("Rate",String.valueOf(allrows.getDouble(30)));
+                                nature.setRate(allrows.getDouble(30));
                                 nature.setmId(allrows.getInt(0));
 
 
@@ -184,12 +196,20 @@ private  static Context context;
 
 
 
-                                if (allrows.getString(3).equals(""))
+                                if (allrows.getString(3).equals(""))//value phone null
                                 {
                                     nature.setTell(allrows.getString(4));
-                                } else
+                                }
+                                else if(allrows.getString(3).equals("1"))//value phone 1
                                 {
+                                    nature.setTell("");
+                                }
+                                else
+                                {
+                                    //nature.setTell(allrows.getString(3).substring(0,allrows.getString(3).indexOf("-")));
                                     nature.setTell(allrows.getString(3));
+
+
                                 }
                                 mItems.add(nature);
 
@@ -213,10 +233,10 @@ private  static Context context;
 
             }
 
-            /*}
+            }
        catch(Exception e)
         {
-        }*/
+        }
 
     }
 
@@ -242,16 +262,6 @@ private  static Context context;
         viewHolder.tvNature.setText(nature.getName());
         viewHolder.tvDesNature.setText(nature.getDes());
       //  viewHolder.imgThumbnail.setImageResource(nature.getThumbnail());
-        /**Todo write if statement
-         *
-         * */
-        Log.i("tell",nature.getTell());
-        if (nature.getTell().equals("1")){
-            viewHolder.tvTell.setText("");
-
-        }
-
-
 
        String image_url_1 = "http://reallifeglobal.com/wp-content/uploads/2014/08/business-english-world.jpg?467a33";
        imgLoader.DisplayImage(image_url_1, viewHolder.imgThumbnail);

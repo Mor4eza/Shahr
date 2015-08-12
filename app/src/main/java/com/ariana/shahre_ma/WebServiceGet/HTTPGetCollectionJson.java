@@ -109,13 +109,17 @@ public class HTTPGetCollectionJson extends AsyncTask<String,Void, Integer> {
                                               }
                 );*/
 
+                if(setting.getAllUpdate())
+                {
+                    HTTPGetSubsetJson httpGetSubsetJson = new HTTPGetSubsetJson(context);
+                    httpGetSubsetJson.execute();
+                }
 
-                setting.saveCollectionDownload(true);
+
+               // setting.saveCollectionDownload(true);
 
             } catch (Exception e) {
-                //pd.dismiss();
-               /* Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
-                Log.i("Exception", e.toString());*/
+
             }
         }
         else

@@ -44,20 +44,10 @@ public class UpdateActivity extends ActionBarActivity {
             public void onClick(View v) {
                 PgUpdate.setVisibility(View.VISIBLE);
 
+                KeySettings setting=new KeySettings(UpdateActivity.this);
+                setting.setUpdateAll(true);
                 HTTPGetCollectionJson httpGetCollectionJson = new HTTPGetCollectionJson(UpdateActivity.this);
                 httpGetCollectionJson.execute();
-
-                HTTPGetSubsetJson httpGetSubsetJson = new HTTPGetSubsetJson(UpdateActivity.this);
-                httpGetSubsetJson.execute();
-
-                HTTPGetCityJson httpGetCityJson = new HTTPGetCityJson(UpdateActivity.this);
-                httpGetCityJson.execute();
-
-                HTTPGetAreaJosn httpGetAreaJosn=new HTTPGetAreaJosn(UpdateActivity.this);
-                httpGetAreaJosn.execute();
-
-                HTTPGetFieldActivityJson httpGetFieldActivityJson=new HTTPGetFieldActivityJson(UpdateActivity.this);
-                httpGetFieldActivityJson.execute();
             }
         });
     }

@@ -102,7 +102,7 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
                         dbs.Add_city(Id_city[i], Name_city[i], PROVINCEID_city[i]);
 
                     }
-                    setting.saveCityDownload(true);
+                    //setting.saveCityDownload(true);
 
                     UpdateActivity.PgUpdate.post(new Runnable() {
                         @Override
@@ -111,10 +111,14 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
                         }
                     });
 
-                    HTTPGetInterestJson httpinterest = new HTTPGetInterestJson(context);
+                  /*  HTTPGetInterestJson httpinterest = new HTTPGetInterestJson(context);
                     httpinterest.SetUrl_Interest(query.getMemberId());
+                    httpinterest.execute();*/
 
-                    httpinterest.execute();
+                    if(setting.getAllUpdate()) {
+                        HTTPGetAreaJosn httpGetAreaJosn = new HTTPGetAreaJosn(context);
+                        httpGetAreaJosn.execute();
+                    }
 
                 }
 

@@ -70,7 +70,7 @@ public class HTTPGetSubsetJson extends AsyncTask<String,Void,Integer>
 //        onPostExecute(result);
         if(result==1) {
             try {
-
+                KeySettings setting=new KeySettings(context);
                 if(len>0) {
 
                     DataBaseSqlite dbs = new DataBaseSqlite(context);
@@ -81,8 +81,14 @@ public class HTTPGetSubsetJson extends AsyncTask<String,Void,Integer>
 
                     }
                 }
-                KeySettings setting=new KeySettings(context);
-                setting.saveSubsetDownload(true);
+
+               // setting.saveSubsetDownload(true);
+
+                if(setting.getAllUpdate()) {
+                    HTTPGetCityJson httpGetCityJson = new HTTPGetCityJson(context);
+                    httpGetCityJson.execute();
+                }
+
             } catch (Exception e) {
                 //Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
             }

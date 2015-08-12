@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,6 +36,7 @@ public class HTTPGetAreaJosn extends AsyncTask<String,Void,Integer>
     Integer len_Area=0;
     ProgressDialog pd;
     private String url1_get_Area = "http://test.shahrma.com/api/apigivearea";
+
 
     public HTTPGetAreaJosn(Context context)
     {
@@ -80,21 +82,31 @@ public class HTTPGetAreaJosn extends AsyncTask<String,Void,Integer>
           //  onPostExecute(result);
             if(result==1)
             {
-                if (len_Area > 0) {
-                    try {
+                KeySettings setting=new KeySettings(context);
+
+                if (len_Area > 0)
+                {
+                    try
+                    {
                         DataBaseSqlite db = new DataBaseSqlite(context);
                         db.delete_Area();
-                        for (int i = 0; i < len_Area; i++) {
+                        for (int i = 0; i < len_Area; i++)
+                        {
                             db.Add_area(Id_area[i], Name_Area[i], CityId_area[i]);
                         }
 
-                       // pd.dismiss();
-                    } catch (Exception e) {
-                       // pd.dismiss();
+                        if(setting.getAllUpdate()) {
+                            HTTPGetFieldActivityJson httpGetFieldActivityJson = new HTTPGetFieldActivityJson(context);
+                            httpGetFieldActivityJson.execute();
+                        }
+                    } catch (Exception e)
+                    {
+
                     }
-                } else {
-                   // pd.dismiss();
-                    //pToast.makeText(getApplicationContext(),"همگام سازی انجام نشد دوباره امتحان کنید",Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+
                 }
             }
         }

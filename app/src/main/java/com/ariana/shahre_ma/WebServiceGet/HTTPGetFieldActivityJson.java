@@ -100,6 +100,7 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
         Integer ii = 0;
         try {
 
+            KeySettings setting=new KeySettings(context);
             JSONArray areas = new JSONArray(JSONString);
             id=new Integer[areas.length()];
             activity=new String[areas.length()];
@@ -110,6 +111,9 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
                 id[i]=area.getInt("Id");
                 activity[i]=area.getString("Activity");
 
+
+                //end All update
+                setting.setUpdateAll(false);
 
             }
 
@@ -188,7 +192,7 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
                    /// pd.dismiss();
                 }
                 KeySettings setting=new KeySettings(context);
-                setting.saveFieldActivityDownload(true);
+                //setting.saveFieldActivityDownload(true);
             }
             else
             {

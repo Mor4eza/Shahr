@@ -29,11 +29,8 @@ public class SplashActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         thread=(TextView ) findViewById(R.id.dots3);
+        IntializeSetting();
 
-        Log.i("collection",String.valueOf(setting.getCollectionDownload()));
-        Log.i("subset",String.valueOf(setting.getSubsetDownload()));
-        Log.i("fieldactivity",String.valueOf(setting.getFieldActivityDownload()));
-        Log.i("city",String.valueOf(setting.getCityDownload()));
 
        /* if (net.checkInternetConnection() == false)
         {
@@ -125,6 +122,28 @@ public class SplashActivity extends ActionBarActivity {
                 0,
 
                 300);
+    }
+
+
+    private  void IntializeSetting()
+    {
+
+
+        //Intializetion Field to keysetting
+        if(setting.getinitialization())
+        {
+
+        }
+        else
+        {
+            setting.saveAMtime("09:00");
+            setting.savePMtime("16:00");
+            setting.saveSearchBusiness(false);
+            setting.saveCityName("");
+            setting.saveCacheImage(true);
+            setting.setinitialization(true);
+
+        }
     }
 
 }
