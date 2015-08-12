@@ -1,13 +1,13 @@
 package com.ariana.shahre_ma.WebServicePost;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
-import com.ariana.shahre_ma.MainActivity;
+import com.ariana.shahre_ma.MyBusiness.Edit_business;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -19,8 +19,6 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
-
-import java.lang.reflect.Field;
 
 /**
  * Created by ariana on 7/1/2015.
@@ -64,10 +62,6 @@ public class HTTPPostBusinessJson extends AsyncTask<String,Long,Integer>
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        pd = new ProgressDialog(context);
-        pd.setMessage("ثبت...");
-        pd.setCancelable(false);
-        pd.show();
     }
     /**
      *
@@ -113,13 +107,18 @@ public class HTTPPostBusinessJson extends AsyncTask<String,Long,Integer>
         super.onPostExecute(integer);
         if(integer==1)
         {
-            pd.dismiss();
-            Intent i = new Intent(this.context, MainActivity.class);
-            this.context.startActivity(i);
+
+            ((Activity)context).finish();
+
+            Edit_business.save_edit.setProgress(100);
         }
         else
         {
-            pd.dismiss();
+            Edit_business.save_edit.setProgress(-1);
         }
+
+
     }
+
 }
+

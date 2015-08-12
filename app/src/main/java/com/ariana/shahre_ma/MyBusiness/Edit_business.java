@@ -24,7 +24,7 @@ import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostBusinessEditJson;
-import com.ariana.shahre_ma.WebServicePost.HTTPPostBusinessJson;
+import com.dd.CircularProgressButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +52,7 @@ public class Edit_business extends ActionBarActivity {
     Integer month;
     String date;
     Integer year;
-    
+    public static CircularProgressButton save_edit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,6 +116,7 @@ public class Edit_business extends ActionBarActivity {
        Market_zone =(AutoCompleteTextView)findViewById(R.id.ac_area);
        Market_field =(MultiAutoCompleteTextView)findViewById(R.id.ac_field);
        Market_gharar=(Spinner)findViewById(R.id.spinner_gh);
+       save_edit = (CircularProgressButton)findViewById(R.id.btn_save_edit);
        SpinnerSetUp();
        
    }
@@ -381,6 +382,8 @@ public class Edit_business extends ActionBarActivity {
 
         else
         {
+            save_edit.setIndeterminateProgressMode(true);
+            save_edit.setProgress(50);
 
                 str = json.getBusinessTOjson(fc.GetBusiness_Id(), Market_name.getText().toString().trim(),
                         Market_tell.getText().toString().trim(), Market_mobile.getText().toString().trim(),

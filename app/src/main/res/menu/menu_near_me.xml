@@ -4,6 +4,7 @@
     tools:context="com.ariana.shahre_ma.MyBusiness.Edit_business">
 
     <item android:id="@+id/action_filter"
+        android:icon="@drawable/ic_action_filter"
         android:title="@string/filter"
         android:orderInCategory="100"
         app:showAsAction="always" />

@@ -210,6 +210,7 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
             img1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    fc.SetMarket_Business(tvNature.getText().toString());
                     fc.SetBusiness_Id(Integer.valueOf(String.valueOf(tvNature.getTag())));
                     Intent i=new Intent(context, Job_details.class);
                     context.startActivity(i);

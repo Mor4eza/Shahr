@@ -1,15 +1,13 @@
 package com.ariana.shahre_ma.WebServicePost;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
-import com.ariana.shahre_ma.MainActivity;
-import com.ariana.shahre_ma.MyProfile.Log_In;
+import com.ariana.shahre_ma.MyBusiness.Edit_business;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -109,12 +107,13 @@ public class HTTPPostBusinessEditJson extends AsyncTask<String,Long,Integer>
 
             db.delete_BusinessId(fc.GetBusiness_Id());
 
-            Intent i = new Intent(this.context, MainActivity.class);
-            this.context.startActivity(i);
+            ((Activity)context).finish();
+
+            Edit_business.save_edit.setProgress(100);
         }
         else
         {
-
+            Edit_business.save_edit.setProgress(-1);
         }
     }
 }

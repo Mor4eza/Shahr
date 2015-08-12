@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
@@ -20,9 +19,6 @@ import com.ariana.shahre_ma.R;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by ABHISHEK on 5/12/2015.
- */
 public class Interest_Adapter extends BaseExpandableListAdapter {
 
     private ArrayList<ArrayList<String>> mGroupList = new ArrayList<>();
@@ -61,7 +57,7 @@ public class Interest_Adapter extends BaseExpandableListAdapter {
 
     /**
      * Constructor
-     * @param context
+     * @param context=context
      */
     public Interest_Adapter(Context context) {
         mContext = context;
@@ -272,6 +268,7 @@ public class Interest_Adapter extends BaseExpandableListAdapter {
             holder.childCheckBox.setChecked(selectedChildCheckBoxStates.get(groupPosition).get(childPosition));
         }
         final String selected = (String) getChild(groupPosition, childPosition);
+
         holder.childCheckBox.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -294,6 +291,7 @@ public class Interest_Adapter extends BaseExpandableListAdapter {
 
             }
         });
+
         return convertView;
     }
 
