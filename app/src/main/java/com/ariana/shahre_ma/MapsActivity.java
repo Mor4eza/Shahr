@@ -222,7 +222,7 @@ public class MapsActivity extends ActionBarActivity {
 
 
 
-                    Marker  marker = mMap.addMarker(new MarkerOptions().position(new LatLng((Latitude[i]),(Longtitude[i] ))).title("\u200e"+Market[i]).snippet(String.valueOf(Rate[i])));
+                    Marker  marker = mMap.addMarker(new MarkerOptions().position(new LatLng((Longtitude[i]),(Latitude[i] ))).title("\u200e"+Market[i]).snippet(String.valueOf(Rate[i])));
                     marker.setData(id[i]);
                     marker.showInfoWindow();
 

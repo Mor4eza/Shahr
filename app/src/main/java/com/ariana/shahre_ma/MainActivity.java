@@ -203,7 +203,7 @@ public class MainActivity extends ActionBarActivity {
 
         Action = (ActionButton) findViewById(R.id.action_button);
         Action.setButtonColor(getResources().getColor(R.color.fab_material_blue_500));
-        Action.setImageDrawable(getResources().getDrawable(R.drawable.user));
+        Action.setImageDrawable(getResources().getDrawable(R.drawable.fab_plus_icon));
 
 
     }
