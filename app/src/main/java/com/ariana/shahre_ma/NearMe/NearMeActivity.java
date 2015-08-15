@@ -44,14 +44,11 @@ public class NearMeActivity extends ActionBarActivity {
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     FieldDataBusiness fdb=new FieldDataBusiness();
     FieldClass fc=new FieldClass();
-    String Latitude[];
-    String Longtitude[];
-    String Market[];
-    Double Rate[];
     Integer len=0;
     ProgressBar map_progress;
     LocationManager locationManager;
-    Integer id[];
+    Double curLat=0.0;
+    Double curLong=0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +139,7 @@ public class NearMeActivity extends ActionBarActivity {
 
     private void setUpMap() {
             DataBaseSqlite db = new DataBaseSqlite(this);
-            Cursor rows = db.select_BusinessSearchNearMe(35.8357895,51.0096686,0.01);
+            Cursor rows = db.select_BusinessSearchNearMe(curLat,curLong,0.01);
             Log.i("Count", String.valueOf(rows.getCount()));
             if (rows.moveToFirst()) {
                 do {
@@ -256,7 +253,7 @@ public class NearMeActivity extends ActionBarActivity {
                     NetState ns=new NetState(getApplicationContext());
                     if(!ns.checkInternetConnection()) {
                         DataBaseSqlite db = new DataBaseSqlite(getApplicationContext());
-                        Cursor rows = db.select_BusinessSearchNearMe(35.8357895,51.0096686,0.002);
+                        Cursor rows = db.select_BusinessSearchNearMe(location.getLatitude(),location.getLongitude(),0.002);
                         Log.i("Count",String.valueOf(rows.getCount()));
                         if (rows.moveToFirst()) {
                             do {
@@ -269,8 +266,10 @@ public class NearMeActivity extends ActionBarActivity {
                     }else {
 
                         HTTPSendNearMeURL nearMeURL = new HTTPSendNearMeURL(getApplicationContext());
-                        nearMeURL.SetNearMe("35.8357895", "51.0096686", 0.001);
+                        nearMeURL.SetNearMe(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()), 0.002);
                         nearMeURL.execute();
+                        curLat=location.getLatitude();
+                        curLong=location.getLongitude();
                     }
 
                     stopListen();
@@ -279,6 +278,8 @@ public class NearMeActivity extends ActionBarActivity {
                 @Override
                 public void onTimeout() {
                     Toast.makeText(getApplicationContext(), "مکان شما شناسایی نشد...!", Toast.LENGTH_LONG).show();
+                    curLat=0.0;
+                    curLong=0.0;
                 }
             };
 

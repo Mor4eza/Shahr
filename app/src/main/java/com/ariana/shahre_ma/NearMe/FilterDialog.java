@@ -48,7 +48,7 @@ public class FilterDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.filter_dialog_layout);
-        setTitle("برای اعمال فیلتر،گزینه های موردنظر را انتخاب کنید");
+        setTitle("فیلتر کردن");
         FilterAdapter adapter = new FilterAdapter(getContext(), generateData());
         listView = (ListView) findViewById(R.id.filter_list);
         filter=(Button)findViewById(R.id.btn_filter);

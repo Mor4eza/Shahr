@@ -225,8 +225,13 @@ public class job_details_1 extends ActionBarActivity {
                         locationB.setLongitude(fc.GetLongtiude_Business());
 
                         float distance = locationA.distanceTo(locationB) ;
-                        tv_distance.setText("فاصله تقریبی " +distance+" " +"متر");
-
+                        distance=Math.round(distance);
+                        if (distance<1000) {
+                            tv_distance.setText("فاصله تقریبی " + distance + " " + "متر");
+                        }else{
+                            distance=distance/1000;
+                            tv_distance.setText("فاصله تقریبی " + distance + " " + "کیلومتر");
+                        }
 
                         stopListen();
                     }catch (Exception e){

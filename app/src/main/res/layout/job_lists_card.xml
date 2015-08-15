@@ -39,9 +39,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="top"
-                android:layout_marginRight="7dp"
+                android:layout_marginRight="1dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:background="#ff159eff"
+                android:background="@color/primary_dark"
                 android:alpha="0.9"
                 android:textColor="#fff"
                 android:textSize="20sp"
@@ -74,10 +74,10 @@
                 android:layout_alignRight="@+id/tv_title"
                 android:layout_alignEnd="@+id/tv_title"
                 android:layout_below="@+id/rates"
-                android:textIsSelectable="false"
+                android:textIsSelectable="true"
                 android:focusableInTouchMode="false"
                 android:focusable="true"
-                android:autoText="false" />
+               />
 
             <TextView
                 android:gravity="right"

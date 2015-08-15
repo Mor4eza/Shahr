@@ -58,14 +58,6 @@ private  static Context context;
         mItems = new ArrayList<Job_lists_card_item>();
 
 
-            Job_lists_card_item nature = new Job_lists_card_item();
-            nature.setName("بدون اطلاعات");
-            nature.setDes("");
-            nature.setThumbnail(R.drawable.pooshak);
-            nature.setRate(2.5);
-
-            mItems.add(nature);
-
         DataBaseSqlite mydb = new DataBaseSqlite(context);
         Integer cityid=0;
         cityid=query.getCityId(setting.getCityName());

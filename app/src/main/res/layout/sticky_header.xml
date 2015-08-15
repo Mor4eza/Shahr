@@ -1,8 +1,0 @@
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/st_head"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#ffae166f"
-    android:layout_gravity="center_vertical"
-    android:paddingBottom="20dp"
-    android:paddingTop="20dp"/>
