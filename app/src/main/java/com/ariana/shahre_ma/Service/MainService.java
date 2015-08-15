@@ -8,6 +8,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetInterestJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetNotificationJson;
 
 import java.util.Calendar;
@@ -43,9 +44,20 @@ public class MainService extends Service {
         super.onStart(intent, startId);
 
         Log.i("Service", "onStart");
-        noti=new HTTPGetNotificationJson(this);
-        noti.SetUrl_MemberId(query.getMemberId());
-        noti.execute();
+
+        try {
+            noti = new HTTPGetNotificationJson(this);
+            noti.SetUrl_MemberId(query.getMemberId());
+            noti.execute();
+
+            HTTPGetInterestJson httpGetInterestJson = new HTTPGetInterestJson(this);
+            httpGetInterestJson.SetUrl_Interest(query.getMemberId());
+            httpGetInterestJson.execute();
+        }
+        catch (Exception e)
+        {
+
+        }
     }
 
     @Override
