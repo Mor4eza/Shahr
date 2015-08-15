@@ -175,6 +175,7 @@ public class HTTPGetBookMarkJson extends AsyncTask<String,Void,Integer>
                 generateData();
                 final BookmarkAdapter adapter = new BookmarkAdapter(context, generateData());
                 BookMark.lv.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             } catch (Exception e) {
                 pd.dismiss();
                 Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();

@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -48,6 +47,7 @@ public class BookMark extends ActionBarActivity {
     NetState ns=new NetState(this);
     Integer len=0;
     Integer BusinessId[];
+    public static BookmarkAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +55,8 @@ public class BookMark extends ActionBarActivity {
         setContentView(R.layout.activity_book_mark);
         lv=(ListView) findViewById(R.id.lvbookmark);
 
-        final BookmarkAdapter adapter = new BookmarkAdapter(this, generateData());
+         adapter = new BookmarkAdapter(this, generateData());
         lv.setAdapter(adapter);
-       // bookmark();//Load data from the database in the list view
 
 
         if(ns.checkInternetConnection())
@@ -83,21 +82,6 @@ public class BookMark extends ActionBarActivity {
 
     }
 
-
-
-    public void bookmark()
-    {
-        try
-        {
-        lv=(ListView) findViewById(R.id.lvbookmark);
-           ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,getbookmark());
-
-        lv.setAdapter(adapter);
-
-        }
-        catch (Exception e) {
-        }
-    }
 
     private List<String> getbookmark() {
         List<String> item=new ArrayList<String>();

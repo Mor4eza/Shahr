@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -39,19 +40,26 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter job_list_Adapter;
-
+    TextView tv_null;
+    ImageView img_null;
     KeySettings setting = new KeySettings(this);
     FieldClass fc=new FieldClass();
 
-
-    TextView tvMarket;
-    TextView tvDescription;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jobs__list);
         setTitle(fc.GetSelected_job());
+        img_null=(ImageView)findViewById(R.id.img_null);
+        tv_null=(TextView)findViewById(R.id.tv_null);
+
         setCards();
+
+        if(job_list_Adapter.getItemCount()!=0){
+            img_null.setVisibility(View.INVISIBLE);
+            tv_null.setVisibility(View.INVISIBLE);
+        }
+
 
         String showWhatsNew = "showHelpJobsList";
         if (!Once.beenDone(Once.THIS_APP_INSTALL, showWhatsNew)) {
@@ -100,6 +108,15 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
             job_list_Adapter = new job_list_cards_adapter(this);
             mRecyclerView.setAdapter(job_list_Adapter);
 
+            if(job_list_Adapter.getItemCount()==0){
+                img_null.setVisibility(View.VISIBLE);
+                tv_null.setVisibility(View.VISIBLE);
+            }else {
+                img_null.setVisibility(View.INVISIBLE);
+                tv_null.setVisibility(View.INVISIBLE);
+
+            }
+
         }
         catch (Exception e){}
     }
@@ -109,8 +126,11 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
         getMenuInflater().inflate(R.menu.menu_main, menu);
         mSearchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         setupSearchView();
-
-        return true;
+        if(job_list_Adapter.getItemCount()==0){
+            return  false;
+        }else {
+            return true;
+        }
     }
 
     @Override
@@ -169,15 +189,6 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
         if (searchManager != null) {
             List<SearchableInfo> searchables = searchManager.getSearchablesInGlobalSearch();
 
-            // Try to use the "applications" global search provider
-            /*SearchableInfo info = searchManager.getSearchableInfo(getComponentName());
-            for (SearchableInfo inf : searchables) {
-                if (inf.getSuggestAuthority() != null
-                        && inf.getSuggestAuthority().startsWith("applications")) {
-                    info = inf;
-                }
-            }
-            mSearchView.setSearchableInfo(info);*/
         }
 
         mSearchView.setOnQueryTextListener(this);

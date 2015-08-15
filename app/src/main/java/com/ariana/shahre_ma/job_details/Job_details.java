@@ -215,25 +215,27 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
 
 
    public void map(){
-        ResourceProxy resourceProxy;
-        MapView map = (MapView) findViewById(R.id.map);
-        map.setTileSource(TileSourceFactory.MAPNIK);
-        map.setBuiltInZoomControls(true);
-        map.setMultiTouchControls(true);
+       try {
+           ResourceProxy resourceProxy;
+           MapView map = (MapView) findViewById(R.id.map);
+           map.setTileSource(TileSourceFactory.DEFAULT_TILE_SOURCE);
+           map.setMultiTouchControls(true);
 
-        map.getController().setZoom(15);
-        map.getController().animateTo(new GeoPoint((fc.GetLatitude_Business()),(fc.GetLongtiude_Business())));
+           map.getController().setZoom(15);
+           map.getController().animateTo(new GeoPoint((fc.GetLatitude_Business()), (fc.GetLongtiude_Business())));
 
-        ArrayList<OverlayItem> overlays = new ArrayList<OverlayItem>();
-        overlays.add(new OverlayItem("اندیشه", "داده پردازان آریانا", new GeoPoint((fc.GetLatitude_Business()),(fc.GetLongtiude_Business()))));
-        Drawable marker=this.getResources().getDrawable(R.drawable.marker);
+           ArrayList<OverlayItem> overlays = new ArrayList<OverlayItem>();
+           overlays.add(new OverlayItem("", "", new GeoPoint((fc.GetLatitude_Business()), (fc.GetLongtiude_Business()))));
+           Drawable marker = this.getResources().getDrawable(R.drawable.marker);
 
-        resourceProxy = new DefaultResourceProxyImpl(getApplicationContext());
-        ItemizedIconOverlay myLocationOverlay;
-        myLocationOverlay = new ItemizedIconOverlay<OverlayItem>(overlays,marker,null, resourceProxy);
-        map.getOverlays().add(myLocationOverlay);
+           resourceProxy = new DefaultResourceProxyImpl(getApplicationContext());
+           ItemizedIconOverlay myLocationOverlay;
+           myLocationOverlay = new ItemizedIconOverlay<OverlayItem>(overlays, marker, null, resourceProxy);
+           map.getOverlays().add(myLocationOverlay);
+       }
+       catch (Exception e){
 
-
+       }
 
 
     }

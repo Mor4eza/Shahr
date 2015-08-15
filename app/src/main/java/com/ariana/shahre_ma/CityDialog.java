@@ -38,13 +38,13 @@ public class CityDialog extends Dialog {
         setContentView(R.layout.city_dialog_popup);
         super.onCreate(savedInstanceState);
         settings=new KeySettings(getContext());
-
-        String compareValue =settings.getCityName().toString();
+        setTitle("شهر مورد نظر خود را انتخاب کنید:");
+        String compareValue = settings.getCityName();
         sp();
         int spinnerPosition = dataAdapter.getPosition(compareValue);
         Sp_City.setSelection(spinnerPosition);
 
-
+        setCanceledOnTouchOutside(false);
         btnchange = (Button)findViewById(R.id.btn_selected_city);
         btnchange.setOnClickListener(new View.OnClickListener() {
             @Override

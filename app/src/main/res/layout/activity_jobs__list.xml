@@ -11,4 +11,23 @@
 
     </android.support.v7.widget.RecyclerView>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="اطلاعاتی موجود نیست..."
+        android:id="@+id/tv_null"
+        android:gravity="center_vertical|center_horizontal"
+        android:textSize="25sp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/img_null"
+        android:layout_marginBottom="37dp"
+        android:src="@android:drawable/ic_menu_info_details"
+        android:layout_above="@+id/tv_null"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
