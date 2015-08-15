@@ -54,6 +54,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
     HTTPGetBusinessJson httpbusin;
     NetState ns;
 
+    Boolean refresh_display=true;
     private SearchView mSearchView;
     private MyListAdapter listAdapter;
     private ExpandableListView myList;
@@ -86,14 +87,14 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
             PgUpdate.setVisibility(View.VISIBLE);
 
-            Log.i("getCollection","1");
+            Log.i("getCollection", "1");
             HTTPGetCollectionJson httpGetCollectionJson=new HTTPGetCollectionJson(this);
             httpGetCollectionJson.execute();
 
             HTTPGetSubsetJson httpGetSubsetJson=new HTTPGetSubsetJson(this);
             httpGetSubsetJson.execute();
         }else{
-            Log.i("getCollection","2");
+            Log.i("getCollection", "2");
             displayList();
         }
 
@@ -354,6 +355,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
             }
         });
     }
+
     public void help3(){
         ViewTarget Hdiscount=new ViewTarget(R.id.action_search,this);
 
@@ -391,14 +393,16 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         public void onReceive(Context context, Intent intent)
         {
             Log.i("getCollection","4");
-            if (setting.getCollection() && setting.getSubset())
+            Log.i("Collection",setting.getCollection().toString());
+            Log.i("Subset",setting.getSubset().toString());
+            Log.i("refresh_display",refresh_display.toString());
+            if (setting.getCollection() && setting.getSubset() && refresh_display)
             {
+                refresh_display=false;
                 Log.i("getCollection","3");
                 displayList();
                 PgUpdate.setVisibility(View.INVISIBLE);
             }
         }
     };
-
-
 }

@@ -115,7 +115,7 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
         try {
 
             JSONArray areas = new JSONArray(JSONString);
-            Log.i("JSONsubset", JSONString);
+            Log.i("JSONsAdvertisment", JSONString);
             Id = new Integer[areas.length()];
             image = new String[areas.length()];
             link = new String[areas.length()];

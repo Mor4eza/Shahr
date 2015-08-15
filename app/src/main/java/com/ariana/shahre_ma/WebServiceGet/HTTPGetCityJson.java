@@ -36,7 +36,6 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
 
     private static Context context;
 
-
     /**
      *
      * @param c
@@ -45,17 +44,7 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
         context = c;
     }
 
-    /**
-     *
-     */
-    @Override
-    protected void onPreExecute() {
-        //super.onPreExecute();
-     /*   pd = new ProgressDialog(context);
-        pd.setMessage("در حال بروزرسانی...");
-        pd.setCancelable(false);
-        pd.show();*/
-    }
+
     /**
      *
      * @param args
@@ -101,9 +90,7 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
 
                     }
 
-                  /*  HTTPGetInterestJson httpinterest = new HTTPGetInterestJson(context);
-                    httpinterest.SetUrl_Interest(query.getMemberId());
-                    httpinterest.execute();*/
+
 
                     if(setting.getAllUpdate()) {
                         HTTPGetAreaJosn httpGetAreaJosn = new HTTPGetAreaJosn(context);
@@ -111,22 +98,15 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
                     }
 
                 }
-
-
-                //dbs.delete_Update();
-               // dbs.Add_Update(ct.getIranianDate());
-
-
            }
             catch (Exception e)
             {
-                //pd.dismiss();
-              //  Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
+
             }
         }
         else
         {
-          //  pd.dismiss();
+
         }
     }
 
