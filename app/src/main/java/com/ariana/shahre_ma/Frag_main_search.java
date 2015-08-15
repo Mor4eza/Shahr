@@ -5,14 +5,15 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +21,6 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
-import com.ariana.shahre_ma.MyBusiness.Edit_business;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetOnlineSearchJson;
@@ -87,9 +87,30 @@ public class Frag_main_search extends Fragment
         View view = inflater.inflate(R.layout.frag_main_search, container, false);
         TextView tvLabel = (TextView) view.findViewById(R.id.tvLabel);
         tvLabel.setText(page + " -- " + title);
+
+
         btnSearch=(Button)view.findViewById(R.id.btn_search);
         txtWhat=(EditText)view.findViewById(R.id.et_search_what);
         txtWhere=(AutoCompleteTextView)view.findViewById(R.id.et_search_where);
+
+        txtWhat.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+                boolean isValidKey = event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER;
+                boolean isValidAction = actionId == EditorInfo.IME_ACTION_DONE;
+
+                if (isValidKey || isValidAction) {
+                   btnSearch.performClick();
+                }
+                return false;
+            }
+        });
+
+
+
+
+
         GetNameActivity();
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
