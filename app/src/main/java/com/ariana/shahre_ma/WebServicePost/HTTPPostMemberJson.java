@@ -1,7 +1,9 @@
 package com.ariana.shahre_ma.WebServicePost;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -28,7 +30,7 @@ import java.io.InputStreamReader;
 /**
  * Created by ariana2 on 6/5/2015.
  */
-public class HTTPPostMemberJson extends AsyncTask<String, Long, Object> {
+public class HTTPPostMemberJson extends AsyncTask<String, Long,Integer> {
 
 private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMembers";
 
@@ -36,7 +38,7 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
     // variable get json
     private static String data_json;
     // variable response
-    private  static String response_message;
+    private  static Integer response_message;
     FieldClass fc=new FieldClass();
     private ProgressDialog dialog;
 
@@ -55,14 +57,8 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
         return data_json;
     }
 
-
-    // Set response
-    private void  SetResponse(String json_member)
-    {
-        response_message=json_member;
-    }
     // Get response
-    public String GetResponse()
+    public Integer GetResponse()
     {
         return response_message;
     }
@@ -82,13 +78,15 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
     protected void onPreExecute() {
         super.onPreExecute();
         pd = new ProgressDialog(context);
-        pd.setMessage("در حال بروزرسانی...");
+        pd.setMessage("در حال ثبت کاربر...");
         pd.setCancelable(false);
         pd.show();
     }
 
     @Override
-    protected String doInBackground(String... params) {
+    protected Integer doInBackground(String... params)
+    {
+        Integer result=0;
         try {
 
             //onPostExecute_start();
@@ -113,43 +111,96 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
             InputStream webs = entity.getContent();
             try {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(webs, "UTF-8"), 8);
-                response_message = (reader.readLine());
+                response_message = Integer.parseInt(reader.readLine());
                 webs.close();
-            } catch (Exception e) {
+                result=1;
+            } catch (Exception e)
+            {
+                result=0;
                 Log.e("Error in conversion: ", e.toString());
             }
-
-            //SetResponse(json_String);
-            onPostExecute();
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
+            result=0;
             e.printStackTrace();
            // Toast.makeText(, e.toString(), Toast.LENGTH_LONG).show();
         }
         String s="1";
-        return s;
+        return result;
     }
 
-    protected void onPostExecute() {
-            /* Download complete. Lets update UI */
+    @Override
+    protected void onPostExecute(Integer result) {
 
-         Log.i("onPostExecute","onPostExecute");
-        DataBaseSqlite dbs = new DataBaseSqlite(context);
-                Integer ID = Integer.parseInt(GetResponse());
+        try {
+            if(result==1)
+            {
+                DataBaseSqlite dbs = new DataBaseSqlite(context);
+                Integer ID = GetResponse();
                 if (ID >= 0) {
-                    Log.i("fc.GetMember_Name()",fc.GetMember_Name());
+                    Log.i("fc.GetMember_Name()", fc.GetMember_Name());
                     dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
                     pd.dismiss();
-                    Intent i = new Intent(this.context, MainActivity.class);
-                    this.context.startActivity(i);
-                   // Toast.makeText(context, "کاربر ثبت شد!", Toast.LENGTH_LONG).show();
+
+
+                    AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                    alertDialog.setTitle("پیام ");
+                    alertDialog.setMessage("کاربر ساخته شد");
+                    alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent i = new Intent(context, MainActivity.class);
+                            context.startActivity(i);
+                        }
+                    });
+
+                    alertDialog.show();
+
                 }
                 else
                 {
                     pd.dismiss();
-                  //  Toast.makeText(context, "کاربر ساخته نشد دوباره امتحان کنید", Toast.LENGTH_LONG).show();
+                    AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                    alertDialog.setTitle("هشدار ");
+                    alertDialog.setMessage("نام کاربری و رمز تکراری است");
+                    alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    alertDialog.show();
+
                 }
+            }
+            else
+            {
+                pd.dismiss();
+                AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                alertDialog.setTitle("هشدار ");
+                alertDialog.setMessage("دوباره امتحان کنید");
+                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
 
+                    }
+                });
+                alertDialog.show();
+            }
 
+        }
+        catch (Exception e)
+        {
+            pd.dismiss();
+            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+            alertDialog.setTitle("هشدار ");
+            alertDialog.setMessage("خطا هنگام ثبت رخ داده دوباره امتحان کنید");
+            alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            alertDialog.show();
+
+        }
 
 
 

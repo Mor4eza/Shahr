@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.Settings.KeySettings;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetAreaJosn;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 
@@ -21,7 +22,7 @@ public class SplashActivity extends ActionBarActivity {
 
     KeySettings setting=new KeySettings(this);
     NetState net=new NetState(this);
-
+    Timer t;
     String text="...";
     String text1="";
     TextView thread;
@@ -44,8 +45,9 @@ public class SplashActivity extends ActionBarActivity {
         else if(setting.getAllUpdate()==false)
         {
             Log.i("Update", "true");
-            HTTPGetCollectionJson httpGetCollectionJson = new HTTPGetCollectionJson(this);
-            httpGetCollectionJson.execute();
+
+            HTTPGetAreaJosn httpGetAreaJosn =new HTTPGetAreaJosn(this);
+            httpGetAreaJosn.execute();
 
             HTTPGetCityJson httpGetCityJson=new HTTPGetCityJson(this);
             httpGetCityJson.execute();
@@ -72,22 +74,28 @@ public class SplashActivity extends ActionBarActivity {
     }
 
 
-
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        t.cancel();
+    }
 
     public void Dots(){
 
         text="...";
 
         //Declare the timer
-        Timer t = new Timer();
+         t = new Timer();
         t.scheduleAtFixedRate(new TimerTask() {
 
                                   @Override
                                   public void run() {
 
-                                      if (i <= 2) {
-                                          text1 += text.substring(i, i + 1);
+                                      if (i <= 2)
+                                      {
+
+                                          Log.i("i",String.valueOf(i));
+                                          text1 += text.substring(0,i);
 
 
                                           runOnUiThread(new Runnable() {
@@ -95,6 +103,7 @@ public class SplashActivity extends ActionBarActivity {
                                               public void run() {
                                                   setTitle(text1);
                                                   thread.setText(text1);
+                                                  i++;
                                               }
                                           });
 
@@ -103,15 +112,13 @@ public class SplashActivity extends ActionBarActivity {
                                           text1 = "";
 
                                       }
-                                      i++;
+
 
                                   }
 
                               },
 
-                0,
-
-                300);
+                0,500);
     }
 
 

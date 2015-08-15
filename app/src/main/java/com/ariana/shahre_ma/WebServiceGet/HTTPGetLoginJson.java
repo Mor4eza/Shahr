@@ -1,7 +1,9 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -47,24 +49,9 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
     public HTTPGetLoginJson(Context context)
     {
         this.context=context;
-
-
     }
-
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-        /*pd = new ProgressDialog(context);
-        pd.setMessage("ورود...");
-        pd.setCancelable(false);
-        pd.show();*/
-
-    }
-
 
     /**
-     *
      * @param params
      * @return
      */
@@ -75,49 +62,31 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
         try {
                 /* create Apache HttpClient */
             HttpClient httpclient = new DefaultHttpClient();
-
-                /* HttpGet Method */
-
-            // String paramString = URLEncodedUtils.format(params, "utf-8");
             String sss = URLDecoder.decode(params[0], "UTF-8");
 
             HttpGet httpGet = new HttpGet(params[0]);
-
-                /* optional request header */
             httpGet.setHeader("Content-Type", "application/json");
-
-                /* optional request header */
             httpGet.setHeader("Accept", "application/json");
                 /* Make http request call */
             HttpResponse httpResponse = httpclient.execute(httpGet);
-
-            //mesage=httpResponse.getStatusLine().toString();
 
             HttpEntity entity = httpResponse.getEntity();
             InputStream webs = entity.getContent();
             try {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(webs, "UTF-8"), 8);
                 mesage =reader.readLine();
-               // Toast.makeText(context,mesage, Toast.LENGTH_LONG).show();
                 webs.close();
             } catch (Exception e) {
              Log.e("Exception",e.toString());
             }
             int statusCode = httpResponse.getStatusLine().getStatusCode();
-
-                /* 200 represents HTTP OK */
             if (statusCode == 200) {
-
-                    /* receive response as inputStream */
-              /* inputStream = httpResponse.getEntity().getContent();
-
-                String response = convertInputStreamToString(inputStream);
-
-                parseResult(response);*/
 
                 result = 1; // Successful
 
-            } else {
+            }
+            else
+            {
                 result = 0; //"Failed to fetch data!";
             }
 
@@ -135,19 +104,17 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
      */
     protected void onPostExecute(Integer result) {
 
-
-        DataBaseSqlite dbs = new DataBaseSqlite(context);
-
         super.onPostExecute(result);
-
+        Log.i("resultLogin", String.valueOf(result));
         if(result==1)
         {
-
+            DataBaseSqlite dbs = new DataBaseSqlite(context);
             try {
-                Log.i("mesage",mesage);
+                Log.i("JsonLoginMember",mesage);
+                try
+                {
                 JSONObject area = new JSONObject(mesage);
 
-                try{
                 ID = area.getInt("Id");
                 fc.SetMember_Name(area.getString("Name"));
                 fc.SetMember_Email(area.getString("Email"));
@@ -159,88 +126,63 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
                 fc.SetMember_CityId(area.getInt("CityId"));}
                 catch (Exception e){}
 
-                if (ID >= 0) {
+
+                if (ID > 0)
+                {
                     Log.i("ID", String.valueOf(ID));
                     dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
-                  //  Intent  i=new Intent(context.getApplicationContext(), MainActivity.class);
+
                     Log_In.btn.setProgress(100);
-                   // context.startActivity(i);
                     ((Activity)context).finish();
+
                 } else
                 {
-                    Log_In.btn.setProgress(-1);
-                    Toast.makeText(context.getApplicationContext(), "نام کاربری  یا رمز عبور اشتباه است!!!", Toast.LENGTH_LONG).show();
+                    Log_In.btn.setProgress(0);
+                    AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                    alertDialog.setTitle("خطا");
+                    alertDialog.setMessage("رمز و نام کاربری اشتباه است");
+                    alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    alertDialog.show();
+
                 }
 
             }
-            catch (Exception e){
-                Log.e("Exception SaVe", e.toString());
-                //pd.dismiss();
+            catch (Exception e)
+            {
+                Log_In.btn.setProgress(0);
+                Log.e("ExceptionLogin", e.toString());
+                AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                alertDialog.setTitle("خطا");
+                alertDialog.setMessage("دوباره امتحان کنید");
+                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog.show();
+
             }
         }
         else
         {
-            //pd.dismiss();
+            Log_In.btn.setProgress(0);
+            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+            alertDialog.setTitle("خطا");
+            alertDialog.setMessage("رمز و نام کاربری اشتباه است");
+            alertDialog.setButton("باشه", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int which)
+                {
+
+                }
+            });
+            alertDialog.show();
         }
 
     }
 
-    /**
-     *
-     * @param inputStream
-     * @return
-     * @throws IOException
-     */
-    private String convertInputStreamToString(InputStream inputStream) throws IOException {
-
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-
-        String line = "";
-        String result = "";
-
-        while ((line = bufferedReader.readLine()) != null) {
-            result += line;
-        }
-
-            /* Close Stream */
-        if (null != inputStream) {
-            inputStream.close();
-        }
-
-        return result;
-    }
-
-    /**
-     *
-     * @param result
-     */
-    private void parseResult(String result) {
-
-        try {
-            JSONObject response = new JSONObject(result);
-
-            JSONArray posts = response.optJSONArray("posts");
-
-            blogTitles = new String[posts.length()];
-
-            for (int i = 0; i < posts.length(); i++) {
-                JSONObject post = posts.optJSONObject(i);
-                String title = post.optString("title");
-
-                blogTitles[i] = title;
-            }
-
-        } catch (JSONException e) {
-           // e.printStackTrace();
-        }
-    }
-
-    /**
-     *
-     * @return
-     */
-    public  String get_Message_Login()
-    {
-        return mesage;
-    }
 }

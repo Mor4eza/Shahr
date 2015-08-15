@@ -1,7 +1,9 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
@@ -79,6 +81,11 @@ public class HTTPGetSubsetJson extends AsyncTask<String,Void,Integer>
 
                     }
                 }
+
+                setting.saveCollection(true);
+                Intent intent = new Intent("Collection");
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
                 if(setting.getAllUpdate()) {
                     HTTPGetAreaJosn httpGetAreaJosn = new HTTPGetAreaJosn(context);
                     httpGetAreaJosn.execute();

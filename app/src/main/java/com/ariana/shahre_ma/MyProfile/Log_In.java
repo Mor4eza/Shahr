@@ -37,18 +37,7 @@ public class Log_In extends ActionBarActivity {
         password = (EditText) findViewById(R.id.et_password);
         error = (TextView) findViewById(R.id.tverror);
         btn=(CircularProgressButton)findViewById(R.id.btn_login);
-        HTTPGetCityJson httpcity = new HTTPGetCityJson(this);
-        httpcity.execute();
 
-     /*   try {
-            DataBaseSqlite db = new DataBaseSqlite(this);
-            Cursor allrows = db.select_Member();
-            allrows.moveToNext();
-            username.setText(allrows.getString(6));
-            password.setText(allrows.getString(7));
-
-        } catch (Exception e) {
-        }*/
 
         password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

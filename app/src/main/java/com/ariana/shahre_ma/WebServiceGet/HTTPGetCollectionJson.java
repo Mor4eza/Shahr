@@ -2,7 +2,9 @@ package com.ariana.shahre_ma.WebServiceGet;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
@@ -84,16 +86,9 @@ public class HTTPGetCollectionJson extends AsyncTask<String,Void, Integer> {
                     }
                 }
 
-
-               /*Jobs.mSwipeRefreshLayout.post(new Runnable() {
-                                                  @Override
-                                                  public void run() {
-                                                      Jobs.mSwipeRefreshLayout.setEnabled(true);
-                                                      Jobs.mSwipeRefreshLayout.setRefreshing(false);
-
-                                                  }
-                                              }
-                );*/
+                setting.saveCollection(true);
+                Intent intent = new Intent("Collection");
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
                 if(setting.getAllUpdate())
                 {
@@ -108,7 +103,7 @@ public class HTTPGetCollectionJson extends AsyncTask<String,Void, Integer> {
         }
         else
         {
-            pd.dismiss();
+            //pd.dismiss();
         }
     }
 

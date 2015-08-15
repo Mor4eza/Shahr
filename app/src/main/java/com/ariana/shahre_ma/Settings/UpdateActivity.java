@@ -39,6 +39,8 @@ public class UpdateActivity extends ActionBarActivity {
         BtnUpdate=(Button)findViewById(R.id.btn_update_all);
         PgUpdate=(ProgressBar)findViewById(R.id.progressBar_update);
         PgUpdate.setVisibility(View.INVISIBLE);
+
+
         BtnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,6 +48,8 @@ public class UpdateActivity extends ActionBarActivity {
 
                 KeySettings setting=new KeySettings(UpdateActivity.this);
                 setting.setUpdateAll(true);
+
+
                 HTTPGetCollectionJson httpGetCollectionJson = new HTTPGetCollectionJson(UpdateActivity.this);
                 httpGetCollectionJson.execute();
             }

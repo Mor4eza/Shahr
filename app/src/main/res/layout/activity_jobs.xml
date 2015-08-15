@@ -22,24 +22,24 @@
         android:iconifiedByDefault="false" />-->
 
 
+    <ExpandableListView
+        android:id="@+id/laptop_list"
+        android:divider="#A4C739"
+        android:dividerHeight="0.9dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawSelectorOnTop="false"
+
+        >
+
+    </ExpandableListView>
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
-
-    <ExpandableListView
-        android:id="@+id/laptop_list"
-        android:divider="#A4C739"
-        android:dividerHeight="0.9dp"
-        android:layout_width="match_parent"
-        android:layout_height="430dp"
-        android:drawSelectorOnTop="false"
-
-        >
-
-    </ExpandableListView>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,6 +59,21 @@
             android:layout_alignTop="@+id/button2"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar_update"
+            android:max="100"
+            android:progress="0"
+            android:indeterminate="false"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="61dp"
+            android:layout_alignRight="@+id/tv_last_update"
+            android:layout_alignEnd="@+id/tv_last_update" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 

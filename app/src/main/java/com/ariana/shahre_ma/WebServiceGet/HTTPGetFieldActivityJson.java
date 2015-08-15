@@ -98,7 +98,7 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
         try {
 
             Log.i("jsonFieldActivity",JSONString);
-            KeySettings setting=new KeySettings(context);
+
             JSONArray areas = new JSONArray(JSONString);
             id=new Integer[areas.length()];
             activity=new String[areas.length()];
@@ -108,16 +108,6 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
                 JSONObject area = areas.getJSONObject(i);
                 id[i]=area.getInt("Id");
                 activity[i]=area.getString("Activity");
-
-                UpdateActivity.PgUpdate.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        UpdateActivity.PgUpdate.setVisibility(View.INVISIBLE);
-                    }
-                });
-
-                //end All update
-                setting.setUpdateAll(false);
 
             }
 
@@ -180,6 +170,7 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
     protected void onPostExecute(Integer o) {
       //  super.onPostExecute(o);
         try {
+            KeySettings setting=new KeySettings(context);
             Log.e("Integer",String.valueOf(o));
             if (o == 1)
             {
@@ -193,21 +184,33 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
                         db.Add_FieldActivity(id[i], activity[i]);
 
                     db.Add_Update(ct.getIranianDate());
+
+
+                    UpdateActivity.PgUpdate.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            UpdateActivity.PgUpdate.setVisibility(View.INVISIBLE);
+                        }
+                    });
+
+                    //end All update
+                    setting.setUpdateAll(false);
+
                 }
 
                 else
                 {
 
                 }
-                KeySettings setting=new KeySettings(context);
-                //setting.saveFieldActivityDownload(true);
+
             }
             else
             {
 
             }
         }
-        catch (Exception e){
+        catch (Exception e)
+        {
 
             Log.e("ExceptionFiledActivity",e.toString());
         }

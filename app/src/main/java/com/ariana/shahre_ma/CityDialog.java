@@ -49,13 +49,20 @@ public class CityDialog extends Dialog {
         btnchange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("Spinner", Sp_City.getSelectedItem().toString());
-                settings.saveCityName(Sp_City.getSelectedItem().toString());
 
-                Intent intent = new Intent("City");
-                intent.putExtra("received", "Cities");
-                LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
-                dismiss();
+                try {
+                    Log.i("Spinner", Sp_City.getSelectedItem().toString());
+                    settings.saveCityName(Sp_City.getSelectedItem().toString());
+
+                    Intent intent = new Intent("City");
+                    intent.putExtra("received", "Cities");
+                    LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
+                    dismiss();
+                }
+                catch (Exception e)
+                {
+
+                }
             }
         });
 

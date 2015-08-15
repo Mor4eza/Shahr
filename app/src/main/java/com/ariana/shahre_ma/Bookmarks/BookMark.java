@@ -93,9 +93,9 @@ public class BookMark extends ActionBarActivity {
            ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,getbookmark());
 
         lv.setAdapter(adapter);
-
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
         }
     }
 

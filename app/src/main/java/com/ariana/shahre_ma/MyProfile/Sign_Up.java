@@ -25,6 +25,7 @@ import com.ariana.shahre_ma.ImageDownload.ImageLoader;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
+import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberEditJson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
 
 import java.util.ArrayList;
@@ -91,11 +92,11 @@ Query query=new Query(this);
                 switch (pos) {
                     case 0:
 
-                        _sex = true;
+                        _sex = false;
                         break;
                     case 1:
 
-                        _sex = false;
+                        _sex = true;
                         break;
 
                 }

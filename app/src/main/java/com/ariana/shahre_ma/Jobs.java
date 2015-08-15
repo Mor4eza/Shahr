@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -33,14 +34,16 @@ import com.ariana.shahre_ma.ListExpand.MyListAdapter;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
+
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetInterestJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import jonathanfinerty.once.Once;
@@ -48,32 +51,21 @@ import jonathanfinerty.once.Once;
 
 public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
 
-    Integer count = 0;
-    ImageLoader imgLoader;
+
     public static ImageView headimage;
-    String time="";
-    String date="";
+
     public static SwipeRefreshLayout mSwipeRefreshLayout = null;
     Query query;
-    List<String> groupList;
-    List<String> childList;
-    Map<String, List<String>> laptopCollection;
     ExpandableListView expListView;
     int lastExpandedPosition = -1;
-    DateTime dt=new DateTime();
-
     Integer id[];
-    Integer Collection_id[];
     Integer Id_co;
     Integer Collection_ID_subset;
-
     FieldClass fc=new FieldClass();
-
     HTTPGetBusinessJson httpbusin;
     NetState ns;
 
     private SearchView mSearchView;
-    private SearchView search;
     private MyListAdapter listAdapter;
     private ExpandableListView myList;
     private ArrayList<Continent> continentList = new ArrayList<Continent>();
@@ -81,7 +73,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
     KeySettings setting=new KeySettings(this);
     Continent continent;
     Country country;
-
+    public static ProgressBar PgUpdate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,48 +81,31 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         query=new Query(this);
         setTitle(" مشاغل " + setting.getCityName());
 
+        KeySettings setting=new KeySettings(this);
         httpbusin=new HTTPGetBusinessJson(this);
         ns=new NetState(this);
 
-
-    /*    Intent myIntent = new Intent(this, MyReceiver.class);
-
-
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this  ,  0, myIntent, 0);
-
-        AlarmManager alarmManager = (AlarmManager)this.getSystemService(this.ALARM_SERVICE);
-        final Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.add(Calendar.SECOND, 3); // first time
-        long frequency= 3 * 1000; // in ms
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), frequency, pendingIntent);*/
-
+        PgUpdate=(ProgressBar)findViewById(R.id.progressBar_update);
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,new IntentFilter("City"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mCollectionReceiver, new IntentFilter("Collection"));
 
+
+        if(setting.getCollection() !=false)
+        {
+
+            PgUpdate.setVisibility(View.INVISIBLE);
+            PgUpdate.setVisibility(View.VISIBLE);
+
+            Log.i("getCollection","1");
+            HTTPGetCollectionJson httpGetCollectionJson=new HTTPGetCollectionJson(this);
+            httpGetCollectionJson.execute();
+
+            HTTPGetSubsetJson httpGetSubsetJson=new HTTPGetSubsetJson(this);
+            httpGetSubsetJson.execute();
+        }
         displayList();
-        //expandAll();
-      //  collapseAll();
 
-
-        //Initialize swipe to refresh view
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
-        mSwipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
-
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mSwipeRefreshLayout.setEnabled(false);
-                HTTPGetCollectionJson http = new HTTPGetCollectionJson(Jobs.this);
-                http.execute();
-
-
-            }
-        });
 
 
 
@@ -188,35 +163,6 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         myList.setAdapter(listAdapter);
 
     }
-
-    public void SendPostInterest()
-    {
-       /* SqliteTOjson json=new SqliteTOjson(this);
-        Toast.makeText(getApplicationContext(),json.getSqliteInterestTOjson(),Toast.LENGTH_LONG).show();
-        HTTPPostInterestJson httpinterest=new HTTPPostInterestJson(this);
-        httpinterest.SetInterest_Json(json.getSqliteInterestTOjson());
-        httpinterest.execute();*/
-
-        Log.i("mSwipeRefreshLayout", "true");
-        if(mSwipeRefreshLayout.isRefreshing()) {
-            Log.i("mSwipeRefreshLayout","true");
-            mSwipeRefreshLayout.setRefreshing(false);
-            Log.i("mSwipeRefreshLayout", "false");
-        }
-
-    }
-
-
-    public void GetPostInterest(View v)
-    {
-
-
-
-        HTTPGetInterestJson httpinterest=new HTTPGetInterestJson(this);
-
-        httpinterest.execute();
-    }
-
 
 
     private void loadSomeData() {
@@ -444,9 +390,21 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
-        public void onReceive(Context context, Intent intent) {
+        public void onReceive(Context context, Intent intent)
+        {
             setTitle(" مشاغل " + setting.getCityName());
         }
 
     };
+
+    private BroadcastReceiver mCollectionReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+
+            displayList();
+        }
+    };
+
+
 }

@@ -99,7 +99,7 @@ private  static Context context;
              search=false;
             Log.i("date", setting.getSortBusiness());
         }
-        //fdb.ClearAll();
+
         try {
             if(fc.GetSearchOffline())
                 {
@@ -219,6 +219,7 @@ private  static Context context;
                     }
 
                 }
+            fdb.ClearAll();
             if(setting.getCacheImage()==false)
             {
                 //Delete image

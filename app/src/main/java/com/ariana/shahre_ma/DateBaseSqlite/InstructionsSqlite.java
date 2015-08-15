@@ -69,6 +69,7 @@ public class  InstructionsSqlite {
     public static final String ID_Advertisment= "Id";
     public static final String IMAGE_Advertisment = "Image";
     public static final String LINK_Advertisment = "Link";
+    public static final String TYPE_Advertisment = "Type";
 
 
     //ShowNotification Table Columns names
@@ -225,7 +226,7 @@ public class  InstructionsSqlite {
             "DisLike INTEGER" +
             ");";
 
-    //SQL statement to create DisCoutn table
+    //SQL statement to create DisCoutnMember table
     public static final String CREATE_TABLE_DisCountMember = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_DisCountMember + " (" +
             "Id INTEGER PRIMARY KEY  ," +
             "Text TEXT," +
@@ -237,7 +238,7 @@ public class  InstructionsSqlite {
             "BusinessId INTEGER" +
             ");";
 
-    //SQL statement to create DisCoutn table
+    //SQL statement to create LikeDisCoutn table
     public static final String CREATE_TABLE_LikeDisCount = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_LikeDisCount + " (" +
             "Id INTEGER PRIMARY KEY AUTOINCREMENT ," +
             "Like BOOLEAN, " +
@@ -258,11 +259,12 @@ public class  InstructionsSqlite {
             "ProvinceId INTEGER" +
             ");";
 
-    // SQL statement to create city table
+    // SQL statement to create Advertisment table
     public static final String CREATE_TABLE_Advertisment  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_Advertisment + " (" +
             "Id INTEGER PRIMARY KEY ," +
             "Image TEXT," +
-            "Link TEXT" +
+            "Link TEXT," +
+            "Type INTEGER" +
             ");";
 
     // SQL statement to create ZamanSanj table
@@ -416,7 +418,7 @@ public class  InstructionsSqlite {
             " Email TEXT ," +
             " Mobile TEXT ," +
             " Age INTEGER ," +
-            " Sex Boolean ," +
+            " Sex BOOLEAN ," +
             " UserName TEXT ," +
             " Password TEXT ," +
             " CityId INTEGER " +

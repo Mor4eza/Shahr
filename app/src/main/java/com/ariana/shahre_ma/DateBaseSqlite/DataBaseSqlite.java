@@ -663,7 +663,7 @@ Context context;
         db.close();
     }
 
-    public void Add_Advertisment(Integer id,String image,String link) {
+    public void Add_Advertisment(Integer id,String image,String link,Integer type) {
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -673,6 +673,7 @@ Context context;
         values.put(InstructionsSqlite.ID_Advertisment,id);
         values.put(InstructionsSqlite.IMAGE_Advertisment,image);
         values.put(InstructionsSqlite.LINK_Advertisment,link);
+        values.put(InstructionsSqlite.TYPE_Advertisment,type);
 
         // 3. insert
         db.insert(InstructionsSqlite.TABLE_NAME_Advertisment, // table

@@ -57,8 +57,8 @@ public class My_Profile extends Activity {
             tv_user_age.setText(String.valueOf(allrows.getInt(4)));
             tv_user_name.setText(allrows.getString(6));
 
-            String sex=allrows.getString(5);
-                if(sex.equals("true"))
+            Integer sex=allrows.getInt(5);
+                if(sex==1)
                     tv_user_sex.setText("مرد");
                 else
                     tv_user_sex.setText("زن");

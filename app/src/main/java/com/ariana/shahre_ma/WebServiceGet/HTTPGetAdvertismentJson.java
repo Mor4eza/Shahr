@@ -31,6 +31,7 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
     Integer Id[];
     String image[];
     String link[];
+    Integer type[];
     Integer len=0;
 
     /**
@@ -65,13 +66,13 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);
             result=1;
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             result=0;
             // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
         }
         return result;
-
-
     }
 
     @Override
@@ -80,23 +81,25 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
         if(result==1) {
            try {
 
-                if(len>0) {
+                if(len>0)
+                {
 
                     DataBaseSqlite dbs = new DataBaseSqlite(context);
                     dbs.delete_Advertisment();
 
-                    for (int i = 0; i < len; i++) {
-                        dbs.Add_Advertisment(Id[i], image[i], link[i]);
+                    for (int i = 0; i < len; i++)
+                    {
+                        dbs.Add_Advertisment(Id[i], image[i], link[i],type[i]);
                     }
-                    Log.d("sender", "Broadcasting message");
+
                     Intent intent = new Intent("custom-event-name");
-                    // You can also include some extra data.
                     intent.putExtra("message", "http://www.shahrma.com/app/Advertisment/"+image[0]);
                     LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                 }
 
-            } catch (Exception e) {
-                //Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
+            } catch (Exception e)
+           {
+                Log.e("ExceptonAdvertisment",e.toString());
             }
         }
         else
@@ -116,6 +119,7 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
             Id = new Integer[areas.length()];
             image = new String[areas.length()];
             link = new String[areas.length()];
+            type=new Integer[areas.length()];
             len = areas.length();
             for (int i = 0; i < areas.length(); i++) {
 
@@ -123,11 +127,12 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
                 image[i] = area.getString("Image");
                 Id[i] = area.getInt("Id");
                 link[i] = area.getString("Link");
+                type[i]=area.getInt("Type");
 
             }
 
-
-        } catch (JSONException e) {
+        } catch (JSONException e)
+        {
             // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
         }
     }
@@ -167,12 +172,15 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
         String result = "";
         String line = null;
 
-        try {
+        try
+        {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             while ((line = br.readLine()) != null) {
                 result = line + "\n";
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
         }
 
 

@@ -37,7 +37,7 @@ public class Frag_main_search extends Fragment
     private String title;
     private int page;
     private Button btnSearch;
-    private TextView txtWhat;
+    private AutoCompleteTextView txtWhat;
     private AutoCompleteTextView txtWhere;
 
     FieldClass fc=new FieldClass();
@@ -88,9 +88,10 @@ public class Frag_main_search extends Fragment
         TextView tvLabel = (TextView) view.findViewById(R.id.tvLabel);
         tvLabel.setText(page + " -- " + title);
         btnSearch=(Button)view.findViewById(R.id.btn_search);
-        txtWhat=(EditText)view.findViewById(R.id.et_search_what);
+        txtWhat=(AutoCompleteTextView)view.findViewById(R.id.et_search_what);
         txtWhere=(AutoCompleteTextView)view.findViewById(R.id.et_search_where);
         GetNameActivity();
+        GetNameSubset();
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,18 +109,16 @@ public class Frag_main_search extends Fragment
 
                 int startSelection = txtWhat.getSelectionStart();
 
-                Integer cityid=query.getCityId(txtWhere.getText().toString());
+                Integer cityid = query.getCityId(txtWhere.getText().toString());
                 if (ns.checkInternetConnection()) {
                     try {
-                        if(cityid>0) {
+                        if (cityid > 0) {
                             String textwhat = URLEncoder.encode(txtWhat.getText().toString().trim(), "UTF-8");
                             HTTPGetOnlineSearchJson httpGetOnlineSearchJson = new HTTPGetOnlineSearchJson(getActivity());
-                            httpGetOnlineSearchJson.SetValueSearch(textwhat,cityid);
+                            httpGetOnlineSearchJson.SetValueSearch(textwhat, cityid);
                             httpGetOnlineSearchJson.execute();
-                        }
-                        else
-                        {
-                            Toast.makeText(getActivity(),"",Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getActivity(), "", Toast.LENGTH_LONG).show();
                         }
                     } catch (Exception e) {
                         Log.e("search", e.toString());
@@ -299,4 +298,35 @@ public class Frag_main_search extends Fragment
                 Log.e("ExceptionSQL",e.toString());
             }
         }
+
+        public List<String> getId3() {
+            DataBaseSqlite db=new DataBaseSqlite(getActivity());
+            List<String> studentList = new ArrayList<String>();
+            Cursor allrows=db.select_Subset();
+            if (allrows.moveToFirst()) {
+                do {
+
+                    studentList.add(allrows.getString(1));
+
+                } while (allrows.moveToNext());
+            }
+
+            return studentList;
+        }
+
+        public void GetNameSubset()
+        {
+            try {
+
+                ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, getId3());
+                txtWhat.setAdapter(adapter);
+                txtWhat.setThreshold(1);
+                //  txtWhere.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+            }
+            catch (Exception e)
+            {
+                Log.e("ExceptionSQL",e.toString());
+            }
+        }
+
 }
