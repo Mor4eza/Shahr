@@ -142,7 +142,7 @@ public class MyListAdapter extends BaseExpandableListAdapter {
 
 
             headimage = (ImageView) view.findViewById(R.id.head_image);
-            imgLoader = new ImageLoader(context);
+         /*   imgLoader = new ImageLoader(context);*/
 
 
             Picasso.with(context).load("http://www.shahrma.com/app/img/collection_icon/" + continent.getUrl() + ".png").into(headimage);

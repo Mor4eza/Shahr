@@ -23,7 +23,7 @@ public class SplashActivity extends ActionBarActivity {
     KeySettings setting=new KeySettings(this);
     NetState net=new NetState(this);
     Timer t;
-    String text="...";
+    String text="....";
     String text1="";
     TextView thread;
     Integer i=0;
@@ -40,7 +40,6 @@ public class SplashActivity extends ActionBarActivity {
         {
             Toast.makeText(getApplication(), "شبکه اینترنت قطع می باشد", Toast.LENGTH_LONG).show();
         }
-
 
         else if(setting.getAllUpdate()==false)
         {
@@ -95,7 +94,7 @@ public class SplashActivity extends ActionBarActivity {
                                       {
 
                                           Log.i("i",String.valueOf(i));
-                                          text1 += text.substring(0,i);
+                                          text1 += text.substring(i,i+1);
 
 
                                           runOnUiThread(new Runnable() {
@@ -103,7 +102,6 @@ public class SplashActivity extends ActionBarActivity {
                                               public void run() {
                                                   setTitle(text1);
                                                   thread.setText(text1);
-                                                  i++;
                                               }
                                           });
 
@@ -112,7 +110,7 @@ public class SplashActivity extends ActionBarActivity {
                                           text1 = "";
 
                                       }
-
+                                      i++;
 
                                   }
 

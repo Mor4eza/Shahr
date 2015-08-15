@@ -174,15 +174,16 @@ public class MapsActivity extends ActionBarActivity {
 
     private void setUpMap() {
 
-        Integer l=0;
-        Latitude=new Double[fc.GetCount_Business()];
-        Longtitude=new Double[fc.GetCount_Business()];
-        Market=new String[fc.GetCount_Business()];
-        Rate=new Double[fc.GetCount_Business()];
-        len=fc.GetCount_Business();
-        id=new Integer[fc.GetCount_Business()];
-
        try {
+
+           Integer l=0;
+           Latitude=new Double[fc.GetCount_Business()];
+           Longtitude=new Double[fc.GetCount_Business()];
+           Market=new String[fc.GetCount_Business()];
+           Rate=new Double[fc.GetCount_Business()];
+           len=fc.GetCount_Business();
+           id=new Integer[fc.GetCount_Business()];
+
         DataBaseSqlite mydb = new DataBaseSqlite(this);
         Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb(),cityid);
 

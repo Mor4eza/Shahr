@@ -88,7 +88,8 @@ public class HTTPGetInterestJson  extends AsyncTask<String,Void, Integer>
 
 
         onPostExecute(result);
-        if (result == 1) {
+        if (result == 1)
+        {
 
             try {
 
@@ -103,7 +104,6 @@ public class HTTPGetInterestJson  extends AsyncTask<String,Void, Integer>
             }
             catch (Exception e)
             {
-                // Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
                 Log.e("ExceptionInterest", e.toString());
             }
         }
