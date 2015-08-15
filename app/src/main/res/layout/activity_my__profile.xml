@@ -177,7 +177,7 @@
                 android:layout_height="fill_parent"
 
                 android:text="ویرایش"
-                android:background="@color/fab_material_light_blue_500"
+                android:background="@color/primary"
                 android:id="@+id/user_edit"
                 android:layout_gravity="center_horizontal"
                 android:onClick="edit" />

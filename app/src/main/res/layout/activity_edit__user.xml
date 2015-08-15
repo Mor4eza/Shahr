@@ -112,7 +112,7 @@
             android:layout_gravity="center"
             android:text="ثبت"
             android:id="@+id/btn_edit"
-            android:background="@color/fab_material_light_blue_500"
+            android:background="@color/primary"
             android:layout_marginTop="15dp"
             android:height="40dp"
 

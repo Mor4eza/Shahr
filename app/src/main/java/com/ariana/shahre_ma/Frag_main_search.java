@@ -13,7 +13,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -139,7 +138,7 @@ public class Frag_main_search extends Fragment
                             httpGetOnlineSearchJson.SetValueSearch(textwhat, cityid);
                             httpGetOnlineSearchJson.execute();
                         } else {
-                            Toast.makeText(getActivity(), "", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "در کجا؟!", Toast.LENGTH_LONG).show();
                         }
                     } catch (Exception e) {
                         Log.e("search", e.toString());

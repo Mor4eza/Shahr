@@ -1,10 +1,14 @@
 package com.ariana.shahre_ma.MyProfile;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +35,8 @@ public class My_Profile extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my__profile);
+        LocalBroadcastManager.getInstance(this).registerReceiver(mCollectionReceiver, new IntentFilter("MyProfile"));
+
         Toolbar toolbar =(Toolbar)findViewById(R.id.toolbar1);
         toolbar.collapseActionView();
         init_views();
@@ -79,7 +85,8 @@ public class My_Profile extends Activity {
     public void Log_Out(View v){
         try {
             DataBaseSqlite db = new DataBaseSqlite(this);
-            db.DeleteAllDataBase();
+            db.delete_bookmark();
+            db.delete_Member();
             Intent i=new Intent(getApplicationContext(), MainActivity.class);
             startActivity(i);
             finish();
@@ -106,5 +113,11 @@ public class My_Profile extends Activity {
 
         }
 
-
+    private BroadcastReceiver mCollectionReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+            init_views();
+        }
+    };
 }

@@ -1,18 +1,15 @@
 package com.ariana.shahre_ma.MyProfile;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -23,7 +20,6 @@ import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberEditJson;
-import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +54,8 @@ public class Edit_User extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit__user);
+
+
             Intialize();
 
         DataBaseSqlite db=new DataBaseSqlite(this);
@@ -75,6 +73,30 @@ public class Edit_User extends ActionBarActivity {
         user.setText(allrows.getString(6));
         change_user=allrows.getString(6);
         SpinnerSetUp();
+
+
+        sex.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+
+                switch (pos) {
+                    case 0:
+
+                        Asex = false;
+                        break;
+                    case 1:
+
+                        Asex = true;
+                        break;
+
+                }
+            }
+
+
+            public void onNothingSelected(AdapterView<?> arg0) {
+
+            }
+        });
 
     }
 
@@ -98,10 +120,6 @@ public class Edit_User extends ActionBarActivity {
         Acity = city.getText().toString();
         Aphone = phone.getText().toString();
         Aage = Integer.parseInt(age.getText().toString());
-        if(sex.equals("مرد"))
-        Asex = true;
-            else
-        Asex = false;
         Ausername = user.getText().toString();
         Apass = pass.getText().toString();
 
@@ -229,13 +247,14 @@ public class Edit_User extends ActionBarActivity {
 
         sex.setPrompt("جنسیت:");
         List<String> list = new ArrayList<String>();
-       list.add("مرد");
         list.add("زن");
+        list.add("مرد");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sex.setAdapter(dataAdapter);
 
     }
+
 
 }
