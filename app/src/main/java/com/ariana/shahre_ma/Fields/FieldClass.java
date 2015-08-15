@@ -87,6 +87,8 @@ public class FieldClass
     private static Boolean SearchOffline=false;
     private static Integer ShowNotificationId;
 
+    private static Double curLatitude=0.0;
+    private static Double curLongitude=0.0;
     private static List<String> NameSubset=new ArrayList<String>();
     // get/set
 
@@ -444,11 +446,11 @@ public class FieldClass
      */
     public void  SetSubsetId(Integer Idsubset)
     {
-        this.SubsetId=Idsubset;
+        SubsetId=Idsubset;
     }
     public Integer  GetSubsetId()
     {
-        return this.SubsetId;
+        return SubsetId;
     }
 
     /**
@@ -578,25 +580,42 @@ public class FieldClass
      * @param show
      */
     public void SetShowNotification(Boolean show){
-        this.ShowNotification=show;
+        ShowNotification=show;
     }
     public Boolean GetShowNotification(){
-        return  this.ShowNotification;
+        return  ShowNotification;
     }
 
     public void SetShowNotificationId(Integer id){
-    this.ShowNotificationId=id;
+    ShowNotificationId=id;
     }
     public Integer GetShowNotificationId(){
-        return  this.ShowNotificationId;
+        return  ShowNotificationId;
     }
 
 
     public void SetSearchOffline(Boolean search){
-        this.SearchOffline=search;
+        SearchOffline=search;
     }
     public Boolean GetSearchOffline(){
-        return  this.SearchOffline;
+        return  SearchOffline;
     }
+
+
+    public void SetcurLatitude(Double lat){
+        curLatitude=lat;
+    }
+    public Double GetcurLatitude(){
+        return  curLatitude;
+    }
+
+    public void SetcurLongtitude(Double longt){
+        curLongitude=longt;
+    }
+    public Double GetcurLongitude(){
+        return curLongitude;
+    }
+
+
 }
 

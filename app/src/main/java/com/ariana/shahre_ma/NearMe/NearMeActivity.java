@@ -256,20 +256,22 @@ public class NearMeActivity extends ActionBarActivity {
                         Cursor rows = db.select_BusinessSearchNearMe(location.getLatitude(),location.getLongitude(),0.002);
                         Log.i("Count",String.valueOf(rows.getCount()));
                         if (rows.moveToFirst()) {
-                            do {
-                                mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(rows.getString(15)), Double.valueOf(rows.getString(16)))).title("\u200e" + rows.getString(1)));
-                                len++;
-                            } while (rows.moveToNext());
+                        do {
+                            mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(rows.getString(15)), Double.valueOf(rows.getString(16)))).title("\u200e" + rows.getString(1)));
+                            len++;
+                        } while (rows.moveToNext());
 
-                        }
-                        map_progress.setVisibility(View.INVISIBLE);
-                    }else {
+                    }
+                    map_progress.setVisibility(View.INVISIBLE);
+                }else {
 
-                        HTTPSendNearMeURL nearMeURL = new HTTPSendNearMeURL(getApplicationContext());
-                        nearMeURL.SetNearMe(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()), 0.002);
-                        nearMeURL.execute();
+                    HTTPSendNearMeURL nearMeURL = new HTTPSendNearMeURL(getApplicationContext());
+                    nearMeURL.SetNearMe(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()), 0.002);
+                    nearMeURL.execute();
                         curLat=location.getLatitude();
                         curLong=location.getLongitude();
+                        fc.SetcurLatitude(location.getLatitude());
+                        fc.SetcurLongtitude(location.getLongitude());
                     }
 
                     stopListen();

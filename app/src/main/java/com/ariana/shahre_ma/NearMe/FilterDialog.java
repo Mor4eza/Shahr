@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.R;
 
@@ -29,6 +30,7 @@ public class FilterDialog extends Dialog {
     ListView listView;
     FieldDataBusiness fdb=new FieldDataBusiness();
     Button filter;
+    FieldClass fc=new FieldClass();
     public FilterDialog(Context context) {
         super(context);
     }
@@ -73,7 +75,7 @@ public class FilterDialog extends Dialog {
                 Log.i("Filter", "start");
                 Log.i("Filter", String.valueOf(FilterAdapter.selectedsubset.size()));
                 for (int i = 0; i < FilterAdapter.selectedsubset.size(); i++) {
-                    Cursor rows = db.select_BusinessSearchNearMe(35.8357895, 51.0096686, 0.001, query.getsubsetID(FilterAdapter.selectedsubset.get(i)));
+                    Cursor rows = db.select_BusinessSearchNearMe(fc.GetcurLatitude(), fc.GetcurLongitude(), 0.001, query.getsubsetID(FilterAdapter.selectedsubset.get(i)));
                     if (rows.moveToFirst()) {
                         do {
                             Log.i("Filter", rows.getString(1));
