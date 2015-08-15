@@ -100,7 +100,9 @@ public class HTTPGetInterestJson  extends AsyncTask<String,Void, Integer>
                     Log.i("onPostExecuteInterest", "strt1");
                 }
                 pd.dismiss();
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 // Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
                 Log.e("ExceptionInterest", e.toString());
             }
