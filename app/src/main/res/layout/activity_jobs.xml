@@ -1,4 +1,4 @@
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -10,18 +10,6 @@
     android:layout_gravity="right">
 
 
-
-   <!-- <SearchView
-        android:id="@+id/search_jobs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:iconifiedByDefault="false" />-->
-
-
     <ExpandableListView
         android:id="@+id/laptop_list"
         android:divider="#A4C739"
@@ -29,52 +17,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawSelectorOnTop="false"
-
         >
 
     </ExpandableListView>
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:visibility="invisible"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar_update"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ارسال علاقه مندی ها"
-            android:id="@+id/button2"
-            android:onClick="SendPostInterest"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="دریافت علاقه مندی ها"
-            android:id="@+id/button3"
-            android:onClick="GetPostInterest"
-            android:layout_alignTop="@+id/button2"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
-        <ProgressBar
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/progressBar_update"
-            android:max="100"
-            android:progress="0"
-            android:indeterminate="false"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="61dp"
-            android:layout_alignRight="@+id/tv_last_update"
-            android:layout_alignEnd="@+id/tv_last_update" />
-
-    </android.support.v4.widget.SwipeRefreshLayout>
-
-</LinearLayout>
+</RelativeLayout>

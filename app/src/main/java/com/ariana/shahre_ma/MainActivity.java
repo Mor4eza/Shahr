@@ -48,8 +48,6 @@ import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.Settings.Setting;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetAdvertismentJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetTopsBusinessJson;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
@@ -152,12 +150,14 @@ public class MainActivity extends ActionBarActivity {
             update.execute(url);
             */
 
-            HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
+
+          /*  HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
             httpcoll.execute();
 
             HTTPGetSubsetJson httpsubset = new HTTPGetSubsetJson(this);
             httpsubset.execute();
 
+*/
 
             HTTPGetCityJson httpcity = new HTTPGetCityJson(this);
             httpcity.execute();

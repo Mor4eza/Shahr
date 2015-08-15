@@ -9,7 +9,6 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
@@ -18,23 +17,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
-import com.ariana.shahre_ma.ImageDownload.ImageLoader;
 import com.ariana.shahre_ma.ListExpand.Continent;
 import com.ariana.shahre_ma.ListExpand.Country;
 import com.ariana.shahre_ma.ListExpand.MyListAdapter;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
-
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
@@ -43,8 +38,6 @@ import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 import jonathanfinerty.once.Once;
 
@@ -52,11 +45,7 @@ import jonathanfinerty.once.Once;
 public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
 
 
-    public static ImageView headimage;
-
-    public static SwipeRefreshLayout mSwipeRefreshLayout = null;
     Query query;
-    ExpandableListView expListView;
     int lastExpandedPosition = -1;
     Integer id[];
     Integer Id_co;
@@ -91,10 +80,10 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         LocalBroadcastManager.getInstance(this).registerReceiver(mCollectionReceiver, new IntentFilter("Collection"));
 
 
-        if(setting.getCollection() !=false)
+        if(!setting.getCollection())
         {
 
-            PgUpdate.setVisibility(View.INVISIBLE);
+
             PgUpdate.setVisibility(View.VISIBLE);
 
             Log.i("getCollection","1");
@@ -103,34 +92,34 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
             HTTPGetSubsetJson httpGetSubsetJson=new HTTPGetSubsetJson(this);
             httpGetSubsetJson.execute();
+        }else{
+            Log.i("getCollection","2");
+            displayList();
         }
-        displayList();
 
 
 
 
-       expListView = (ExpandableListView) findViewById(R.id.laptop_list);
-
-      final MyListAdapter expListAdapter = new MyListAdapter(getApplication(),continentList) {
-
-        };
-        //expListView.setAdapter(expListAdapter);*/
-
-        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-
-            @Override
-            public void onGroupExpand(int groupPosition) {
+        try {
 
 
-                if (lastExpandedPosition != -1
-                        && groupPosition != lastExpandedPosition) {
-                    expListView.collapseGroup(lastExpandedPosition);
+            myList.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+
+                @Override
+                public void onGroupExpand(int groupPosition) {
+
+
+                    if (lastExpandedPosition != -1
+                            && groupPosition != lastExpandedPosition) {
+                        myList.collapseGroup(lastExpandedPosition);
+                    }
+                    lastExpandedPosition = groupPosition;
                 }
-                lastExpandedPosition = groupPosition;
-            }
-        });
+            });
 
+        }catch (Exception e){
 
+        }
 
         String showWhatsNew = "showHelpJobs";
 
@@ -378,7 +367,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         ShowcaseView sv=new ShowcaseView.Builder(this)
                 // .setTarget(new ActionViewTarget(this, ActionViewTarget.Type.HOME))
                 .setTarget( new ViewTarget( ((ViewGroup)findViewById(R.id.action_bar)).getChildAt(2) ) )
-              //  .setTarget(Hdiscount)
+                        //  .setTarget(Hdiscount)
                 .setContentTitle("فیلتر کردن لیست")
                 .setContentText("برای فیلتر کردن لیست مشاغل از این گزینه استفاده کنید")
                 .setStyle(R.style.CustomShowcaseTheme)
@@ -401,8 +390,13 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         @Override
         public void onReceive(Context context, Intent intent)
         {
-
-            displayList();
+            Log.i("getCollection","4");
+            if (setting.getCollection() && setting.getSubset())
+            {
+                Log.i("getCollection","3");
+                displayList();
+                PgUpdate.setVisibility(View.INVISIBLE);
+            }
         }
     };
 

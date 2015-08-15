@@ -20,6 +20,7 @@ import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -144,9 +145,11 @@ public class MyListAdapter extends BaseExpandableListAdapter {
             imgLoader = new ImageLoader(context);
 
 
-            String image_url_1 = "http://www.shahrma.com/app/img/collection_icon/" + continent.getUrl() + ".png";
-            imgLoader.DisplayImage(image_url_1, headimage);
+            Picasso.with(context).load("http://www.shahrma.com/app/img/collection_icon/" + continent.getUrl() + ".png").into(headimage);
 
+             /*   String image_url_1 = "http://www.shahrma.com/app/img/collection_icon/" + continent.getUrl() + ".png";
+                imgLoader.DisplayImage(image_url_1, headimage);
+              */
 
             TextView heading = (TextView) view.findViewById(R.id.laptop1);
             heading.setText(continent.getName().trim());

@@ -82,7 +82,8 @@ public class HTTPGetSubsetJson extends AsyncTask<String,Void,Integer>
                     }
                 }
 
-                setting.saveCollection(true);
+
+                setting.saveSubset(true);
                 Intent intent = new Intent("Collection");
                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 

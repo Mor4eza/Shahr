@@ -204,4 +204,19 @@ public class KeySettings
         return prefernc.getBoolean("collection", false);
     }
 
+    public void saveSubset(Boolean update)
+    {
+        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting", Context.MODE_PRIVATE);
+        editor=prefernc.edit();
+        editor.putBoolean("Subset", update);
+        editor.apply();
+    }
+
+
+    public Boolean getSubset()
+    {
+        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
+        return prefernc.getBoolean("Subset", false);
+    }
+
 }
