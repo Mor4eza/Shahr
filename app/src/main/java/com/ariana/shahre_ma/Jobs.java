@@ -79,8 +79,6 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,new IntentFilter("City"));
         LocalBroadcastManager.getInstance(this).registerReceiver(mCollectionReceiver, new IntentFilter("Collection"));
-
-
         if(!setting.getCollection())
         {
 

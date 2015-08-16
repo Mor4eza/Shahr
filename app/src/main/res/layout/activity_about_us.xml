@@ -12,7 +12,7 @@
         android:text="پیشنهاد به دیگران"
         android:id="@+id/btn_suggest"
         android:onClick="share"
-        android:layout_alignBottom="@+id/textView11"
+        android:layout_alignBottom="@+id/tv_version"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -53,9 +53,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="نسخه 1"
-        android:id="@+id/textView11"
-        android:autoText="true"
+        android:id="@+id/tv_version"
+        android:autoText="false"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
