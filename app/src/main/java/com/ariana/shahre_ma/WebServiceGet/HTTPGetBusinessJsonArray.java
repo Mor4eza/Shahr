@@ -49,6 +49,7 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
     String expirationdate[];
     String inactive[];
     String subset[];
+    String src[];
     Integer subsetid[];
     Double longitude[];
     Double latitude[];
@@ -183,7 +184,7 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
                         dbs.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i],likediscount[i],dislikediscount[i]);
                     }
                     //dbs.Add_LikeDisCount(1,166,Id[i],likediscount[i],dislikediscount[i]);
-                    dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i],latitude[i], longitude[i], areaid[i], area1[i], user[i],cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
+                    dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i],latitude[i], longitude[i], areaid[i], area1[i], user[i],cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i],src[i]);
 
                 }
 
@@ -222,6 +223,7 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
             expirationdate=new String[areas.length()];
             inactive=new String[areas.length()];
             subset=new String[areas.length()];
+            src=new String[areas.length()];
             subsetid=new Integer[areas.length()];
             longitude=new Double[areas.length()];
             latitude=new Double[areas.length()];
@@ -286,7 +288,7 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
                 subsetid[i]=area.getInt("SubsetId");
                 user[i]=area.getString("User");
                 userid[i]=area.getInt("UserId");
-
+                src[i]=area.getString("Src");
 
                 ratecount[i]=area.getInt("RateCount");
                 ratevalue[i]=area.getDouble("RateAverage");

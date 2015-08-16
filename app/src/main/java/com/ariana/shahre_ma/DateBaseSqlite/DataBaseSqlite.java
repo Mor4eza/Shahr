@@ -342,7 +342,7 @@ Context context;
 
 
 
-    public void Add_businessDisCount(Integer id,String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid,Double latitude,Double longitude, Integer areaid, String area, String user,Integer cityid, Integer userid,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7,Integer ratecount,Double ratevalue) {
+    public void Add_businessDisCount(Integer id,String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid,Double latitude,Double longitude, Integer areaid, String area, String user,Integer cityid, Integer userid,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7,Integer ratecount,Double ratevalue,String src) {
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -366,7 +366,7 @@ Context context;
         values.put(InstructionsSqlite.SUBSETID_business, subsetid);
         values.put(InstructionsSqlite.LATITUDE_business, latitude);
         values.put(InstructionsSqlite.LONGITUDE_business, longitude);
-
+        values.put(InstructionsSqlite.SRC_business, src);
         values.put(InstructionsSqlite.AREAID_business, areaid);
         values.put(InstructionsSqlite.AREA_business, area);
         values.put(InstructionsSqlite.USER_business, user);
@@ -393,7 +393,7 @@ Context context;
     }
 
 
-    public void Add_businessTops(Integer id,String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid, Double latitude,Double longitude, Integer areaid, String area, String user,Integer cityid, Integer userid,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7,Integer ratecount,Double ratevalue) {
+    public void Add_businessTops(Integer id,String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid, Double latitude,Double longitude, Integer areaid, String area, String user,Integer cityid, Integer userid,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7,Integer ratecount,Double ratevalue,String src) {
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -417,7 +417,7 @@ Context context;
         values.put(InstructionsSqlite.SUBSETID_business, subsetid);
         values.put(InstructionsSqlite.LATITUDE_business, latitude);
         values.put(InstructionsSqlite.LONGITUDE_business, longitude);
-
+        values.put(InstructionsSqlite.SRC_business, src);
         values.put(InstructionsSqlite.AREAID_business, areaid);
         values.put(InstructionsSqlite.AREA_business, area);
         values.put(InstructionsSqlite.USER_business, user);
@@ -443,7 +443,7 @@ Context context;
         db.close();
     }
 
-    public void Add_business(Integer id,String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid, Double latitude,Double longitude, Integer areaid, String area, String user,Integer cityid, Integer userid,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7,Integer ratecount,Double ratevalue) {
+    public void Add_business(Integer id,String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid, Double latitude,Double longitude, Integer areaid, String area, String user,Integer cityid, Integer userid,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7,Integer ratecount,Double ratevalue,String src) {
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -467,7 +467,7 @@ Context context;
         values.put(InstructionsSqlite.SUBSETID_business, subsetid);
         values.put(InstructionsSqlite.LATITUDE_business, latitude);
         values.put(InstructionsSqlite.LONGITUDE_business, longitude);
-
+        values.put(InstructionsSqlite.SRC_business, src);
         values.put(InstructionsSqlite.AREAID_business, areaid);
         values.put(InstructionsSqlite.AREA_business, area);
         values.put(InstructionsSqlite.USER_business, user);
@@ -1376,7 +1376,13 @@ Context context;
         db.close();
     }
 
-
+    public void delete_Notification(Integer id)
+    {
+        Log.i("DeleteNotification", "delete Run id");
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_NOTIFICATION+" WHERE Id="+id);
+        db.close();
+    }
 
     public void delete_BusinessId(Integer id)
     {

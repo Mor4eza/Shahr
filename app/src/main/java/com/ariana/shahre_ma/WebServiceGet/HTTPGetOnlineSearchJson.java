@@ -45,6 +45,7 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
     private  List<Double>  selectLatitude=new ArrayList<>();
     private  List<Double>  selectRate=new ArrayList<>();
     private  List<String>  selectPhone=new ArrayList<String>();
+    private  List<String>  selectSrc=new ArrayList<String>();
     private  List<String>  selectMobile=new ArrayList<String>();
     private  List<String>  selectAddress=new ArrayList<>();
     private  List<String>  selectMarketName=new ArrayList<String>();
@@ -64,6 +65,7 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
     String expirationdate[];
     String inactive[];
     String subset[];
+    String src[];
     Integer subsetid[];
     Double longitude[];
     Double latitude[];
@@ -162,6 +164,7 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
                 expirationdate=new String[areas.length()];
                 inactive=new String[areas.length()];
                 subset=new String[areas.length()];
+                src=new String[areas.length()];
                 subsetid=new Integer[areas.length()];
                 longitude=new Double[areas.length()];
                 latitude=new Double[areas.length()];
@@ -226,7 +229,7 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
                     subsetid[i]=area.getInt("SubsetId");
                     user[i]=area.getString("User");
                     userid[i]=area.getInt("UserId");
-
+                    src[i]=area.getString("Src");
 
                     ratecount[i]=area.getInt("RateCount");
                     ratevalue[i]=area.getDouble("RateAverage");
@@ -251,6 +254,7 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
                     selectLongtiude.add(Double.valueOf(area.getString("Longitude")));
                     selectAddress.add(area.getString("Address"));
                     selectMarketName.add(area.getString("Market"));
+                    selectSrc.add(area.getString("Src"));
                     selectPhone.add(area.getString("Phone"));
                     selectMobile.add(area.getString("Mobile"));
                     selectRate.add(area.getDouble("RateAverage"));
@@ -263,6 +267,7 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
                 fdb.SetLongtiudeBusiness(selectLongtiude);
                 fdb.SetRateBusiness(selectRate);
                 fdb.SetAddressBusiness(selectAddress);
+                fdb.SetSrc(selectSrc);
                 fdb.SetMarketBusiness(selectMarketName);
                 fdb.SetPhoneBusiness(selectPhone);
                 fdb.SetMobileBusiness(selectMobile);
@@ -364,7 +369,7 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
                         dbs.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i],likediscount[i],dislikediscount[i]);
                     }
                     //dbs.Add_LikeDisCount(1,166,Id[i],likediscount[i],dislikediscount[i]);
-                    dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i],cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
+                    dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i],cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i],src[i]);
 
                 }
 

@@ -175,6 +175,7 @@ public class  InstructionsSqlite {
     public static final String SUBSETID_business = "SubsetId";
     public static final String LONGITUDE_business = "Longitude";
     public static final String LATITUDE_business = "Latitude";
+    public static final String SRC_business = "Src";
     public static final String AREAID_business = "AreaId";
     public static final String AREA_business = "Area";
     public static final String USER_business = "User";
@@ -307,7 +308,8 @@ public class  InstructionsSqlite {
             " Field6 INTEGER," +
             " Field7 INTEGER, " +
             " RateCount INTEGER ," +
-            " RateValue DOUBLE " +
+            " RateValue DOUBLE ," +
+            " Src TEXT " +
 
             ");";
 
@@ -343,7 +345,8 @@ public class  InstructionsSqlite {
             " Field6 INTEGER," +
             " Field7 INTEGER, " +
             " RateCount INTEGER ," +
-            " RateValue DOUBLE " +
+            " RateValue DOUBLE ," +
+            " Src TEXT " +
 
             ");";
 
@@ -379,7 +382,8 @@ public class  InstructionsSqlite {
             " Field6 INTEGER," +
             " Field7 INTEGER, " +
             " RateCount INTEGER ," +
-            " RateValue DOUBLE " +
+            " RateValue DOUBLE ," +
+            " Src TEXT " +
 
             ");";
 

@@ -56,7 +56,7 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
 
         setCards();
 
-        if(job_list_Adapter.getItemCount()!=0){
+       if(job_list_Adapter.getItemCount()!=0){
             img_null.setVisibility(View.INVISIBLE);
             tv_null.setVisibility(View.INVISIBLE);
         }
@@ -126,12 +126,12 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         mSearchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        setupSearchView();
-        if(job_list_Adapter.getItemCount()==0){
+        setupSearchView();if(job_list_Adapter.getItemCount()==0){
             return  false;
         }else {
             return true;
         }
+
     }
 
     @Override

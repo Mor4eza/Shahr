@@ -19,7 +19,6 @@ public class TimeSetReceiver  extends BroadcastReceiver
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d("TimeSetReceiver", "111");
         KeySettings setting=new KeySettings(context);
 
         Log.d("AM",setting.getAMtime() );
@@ -27,18 +26,16 @@ public class TimeSetReceiver  extends BroadcastReceiver
 
         if(dt.Time().equals(setting.getAMtime()) )
         {
-            Log.d("Start","OK");
             Intent service1 = new Intent(context, ShowNotificationService.class);
             context.startService(service1);
         }
-            else if(setting.getPMtime().equals(dt.Time()))
+        else if(setting.getPMtime().equals(dt.Time()))
         {
             Intent service1 = new Intent(context, ShowNotificationService.class);
             context.startService(service1);
         }
 
-       /* Log.d("timesetting",setting.getAMtime() +"  ,  "+setting.getPMtime());
-        Log.d("timedt", dt.Time());*/
+
 
 
     }

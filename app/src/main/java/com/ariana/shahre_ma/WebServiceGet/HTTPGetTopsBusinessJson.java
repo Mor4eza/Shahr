@@ -59,6 +59,7 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
     Integer areaid[];
     String area1[];
     String user[];
+    String src[];
     Integer userid[];
     Integer field1[];
     Integer field2[];
@@ -146,6 +147,7 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
             expirationdate=new String[areas.length()];
             inactive=new String[areas.length()];
             subset=new String[areas.length()];
+            src=new String[areas.length()];
             subsetid=new Integer[areas.length()];
             longitude=new Double[areas.length()];
             latitude=new Double[areas.length()];
@@ -210,7 +212,7 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
                 subsetid[i]=area.getInt("SubsetId");
                 user[i]=area.getString("User");
                 userid[i]=area.getInt("UserId");
-
+                src[i]=area.getString("Src");
 
                 ratecount[i]=area.getInt("RateCount");
                 ratevalue[i]=area.getDouble("RateAverage");
@@ -315,9 +317,9 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
                             }
 
                             if(i<=9)
-                                db.Add_businessTops(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
+                                db.Add_businessTops(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i],src[i]);
                             else
-                                db.Add_businessDisCount(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i]);
+                                db.Add_businessDisCount(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i],src[i]);
                         }
 
                         fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));

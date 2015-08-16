@@ -12,6 +12,7 @@ public class FieldDataBusiness
     private static List<Double> Longtiude=new ArrayList<>();
     private static List<Double> Latitude=new ArrayList<>();
     private static List<Double> Rate=new ArrayList<>();
+    private static List<String> Src=new ArrayList<>();
     private static List<String> Phone=new ArrayList<>();
     private static List<String> Mobile=new ArrayList<String>();
     private static List<Integer> SubsetId=new ArrayList<>();
@@ -138,6 +139,18 @@ public class FieldDataBusiness
     {
         return MarketName;
     }
+
+
+    public void SetSrc(List<String> src)
+    {
+        Src=src;
+    }
+
+    public List<String> GetSrcs()
+    {
+        return Src;
+    }
+
 
     public void ClearAll()
     {

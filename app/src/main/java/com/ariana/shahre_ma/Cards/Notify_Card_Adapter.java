@@ -63,32 +63,59 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
             mItems = new ArrayList<Notify_Card_Items>();
             do
             {
-              //  try {
-                     nci = new Notify_Card_Items();
 
-                    nci.setNdate(rowalls.getString(5));
-                    nci.setNdetail(rowalls.getString(4));
-                    nci.setNmarket(query.getNameBusiness(rowalls.getInt(2)));
-                    nci.setNId(rowalls.getInt(2));
-                    nci.setNotiyId(rowalls.getInt(0));
+                if(fc.GetNotificationGooMorning())
+                {
+                    Log.i("ShowNotifi","if");
+
+                    if(rowalls.getInt(3)==1) {
+                        nci = new Notify_Card_Items();
+                        nci.setNdate(rowalls.getString(5));
+                        nci.setNdetail(rowalls.getString(4));
+                        nci.setNmarket(query.getNameBusiness(rowalls.getInt(2)));
+                        nci.setNId(rowalls.getInt(2));
+                        nci.setNotiyId(rowalls.getInt(0));
 
 
-                            //Show tag New
-                        if(query.getShowNotification(rowalls.getInt(0))>0)
+                        //Show tag New
+                        if (query.getShowNotification(rowalls.getInt(0)) > 0)
                             nci.setNewTag("");
-                            else
+                        else
+                            nci.setNewTag("جدید");
+                    }
+
+                    mItems.add(nci);
+                }
+                else
+                {
+                    Log.i("ShowNotifi","else");
+                    if(rowalls.getInt(3)==0)
+                    {
+                        Log.i("ShowNotifi","elseto");
+                        nci = new Notify_Card_Items();
+                        nci.setNdate(rowalls.getString(5));
+                        nci.setNdetail(rowalls.getString(4));
+                        nci.setNmarket(query.getNameBusiness(rowalls.getInt(2)));
+                        nci.setNId(rowalls.getInt(2));
+                        nci.setNotiyId(rowalls.getInt(0));
+
+
+                        //Show tag New
+                        if (query.getShowNotification(rowalls.getInt(0)) > 0)
+                            nci.setNewTag("");
+                        else
                             nci.setNewTag("جدید");
 
-
-                        mItems.add(nci);
-
+                    }
+                    mItems.add(nci);
+                }
 
 
                 i++;
             }while (rowalls.moveToNext());
         }
 
-
+       fc.SetNotificationGooMorning(false);
 
     }
 

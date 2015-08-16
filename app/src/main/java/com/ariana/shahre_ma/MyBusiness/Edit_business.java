@@ -344,7 +344,8 @@ public class Edit_business extends ActionBarActivity {
             alertDialog.setTitle("هشدار ");
             alertDialog.setMessage("موقیعت خود را انتخاب کنید");
             alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
+                public void onClick(DialogInterface dialog, int which)
+                {
 
                 }
             });

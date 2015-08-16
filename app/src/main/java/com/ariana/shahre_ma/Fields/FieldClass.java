@@ -89,6 +89,10 @@ public class FieldClass
 
     private static Double curLatitude=0.0;
     private static Double curLongitude=0.0;
+
+    private static Boolean Notification_GoodMorning=false;
+
+
     private static List<String> NameSubset=new ArrayList<String>();
     // get/set
 
@@ -614,6 +618,14 @@ public class FieldClass
     }
     public Double GetcurLongitude(){
         return curLongitude;
+    }
+
+
+    public void SetNotificationGooMorning(Boolean goomorning){
+        Notification_GoodMorning=goomorning;
+    }
+    public Boolean GetNotificationGooMorning(){
+        return Notification_GoodMorning;
     }
 
 
