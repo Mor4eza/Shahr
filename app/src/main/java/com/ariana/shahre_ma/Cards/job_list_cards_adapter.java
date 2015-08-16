@@ -47,7 +47,6 @@ public class job_list_cards_adapter extends RecyclerView.Adapter<job_list_cards_
     ImageLoader imgLoader;
 private  static Context context;
 
-
     public  job_list_cards_adapter(Context context)
     {
         super();
