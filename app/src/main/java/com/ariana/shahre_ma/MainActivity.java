@@ -190,6 +190,7 @@ public class MainActivity extends ActionBarActivity {
             Once.markDone(showWhatsNew);
         }
 
+
     }
 
     public void fab_click(View v) {
@@ -227,20 +228,20 @@ public class MainActivity extends ActionBarActivity {
 
         final TextSliderView textSliderView = new TextSliderView(this);
         textSliderView
-                .description("چهار باغ")
+                .description("")
                 .image("http://www.shahrma.com/app/Advertisment/" + imag[0]);
         slider.addSlider(textSliderView);
 
         TextSliderView textSliderView2 = new TextSliderView(this);
         textSliderView2
-                .description("هفت خان")
+                .description("")
                 .image("http://www.shahrma.com/app/Advertisment/" + imag[1]);
         slider.addSlider(textSliderView2);
 
 
         TextSliderView textSliderView3 = new TextSliderView(this);
         textSliderView3
-                .description("تیراژه")
+                .description("")
                 .image("http://www.shahrma.com/app/Advertisment/" + imag[2]);
         slider.addSlider(textSliderView3);
 
@@ -339,6 +340,7 @@ public class MainActivity extends ActionBarActivity {
                 .withActivity(this)
                 .withTranslucentStatusBar(false)
                 .withHeaderDivider(true)
+                .withDrawerWidthDp(260)
                 .withToolbar(toolbar)
                 .withShowDrawerOnFirstLaunch(true)
                 .withDisplayBelowToolbar(false)

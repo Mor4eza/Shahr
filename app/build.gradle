@@ -15,14 +15,16 @@ android {
         applicationId "com.ariana.shahre_ma"
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 3
-        versionName "1.1"
+        versionCode 4
+        versionName '1.0.1'
         signingConfig signingConfigs.config
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFile 'C:/Users/ariana2/AppData/Local/Android/sdk/tools/proguard/proguard-android-optimize.txt'
+            zipAlignEnabled true
         }
     }
     productFlavors {
@@ -41,32 +43,56 @@ dependencies {
     }
     compile files('libs/osmbonuspack_v5.0.jar')
     //compile 'com.android.support:appcompat-v7:22.1.1'
-    //appCompact
-    //recycle view animation
-    //swipe to refresh
-    // android support
-    //Hint for views
-    //Floating action button
-    //Card view
-    //recycle view
-    //draggable top layout
-    //for sliding image
-    //support old android
-    //sliding image
-    //open street map
-    //
-    //play Service
-    // date & time picker
-    //adnroid design
-    //floatable hints
-    //Download progressbar
-    //Location Tracker
-    //progress Button
-    //map Extension
-    //range Bar
-    //Show Case
-    //FAB ToolBar
 
+    //appCompact
+
+    //recycle view animation
+
+    //swipe to refresh
+
+    // android support
+
+    //Hint for views
+
+    //Floating action button
+
+    //Card view
+
+    //recycle view
+
+    //draggable top layout
+
+    //for sliding image
+
+    //support old android
+
+    //sliding image
+
+    //open street map
+
+    //
+
+    //play Service
+
+    // date & time picker
+
+    //adnroid design
+
+    //floatable hints
+
+    //Download progressbar
+
+    //Location Tracker
+
+    //progress Button
+
+    //map Extension
+
+    //range Bar
+
+    //Show Case
+
+    //FAB ToolBar
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'jp.wasabeef:recyclerview-animators:1.2.0@aar'
     compile 'com.github.orangegangsters:swipy:1.2.0@aar'
@@ -81,7 +107,7 @@ dependencies {
     compile 'com.daimajia.slider:library:1.0.7@aar'
     compile 'org.osmdroid:osmdroid-android:4.2'
     compile 'org.slf4j:slf4j-simple:1.6.1'
-   // compile 'com.google.android.gms:play-services:7.5.0'
+    // compile 'com.google.android.gms:play-services:7.5.0'
     compile 'com.google.android.gms:play-services-maps:7.5.0'
     compile 'com.github.citux:datetimepicker:0.1.2'
     compile 'com.android.support:design:22.2.0'
