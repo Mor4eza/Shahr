@@ -66,6 +66,7 @@ dependencies {
     //range Bar
     //Show Case
     //FAB ToolBar
+
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'jp.wasabeef:recyclerview-animators:1.2.0@aar'
     compile 'com.github.orangegangsters:swipy:1.2.0@aar'
@@ -93,5 +94,6 @@ dependencies {
     compile 'com.github.amlcurran.showcaseview:library:5.0.0'
     compile 'com.github.alexkolpa:floating-action-button-toolbar:0.5.1'
     compile 'com.jonathanfinerty.once:once:0.3.2'
+    compile 'com.nhaarman.supertooltips:library:3.0.0'
 }
 

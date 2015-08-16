@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -22,6 +23,9 @@ import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostBusinessJson;
 import com.dd.CircularProgressButton;
+import com.nhaarman.supertooltips.ToolTip;
+import com.nhaarman.supertooltips.ToolTipRelativeLayout;
+import com.nhaarman.supertooltips.ToolTipView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +45,7 @@ public class Add_New_Business extends ActionBarActivity {
     AutoCompleteTextView Market_zone;
     EditText Market_field;
 
+    private ToolTipView myToolTipView;
     Integer Fields_ID[]=new Integer[7];
     DateTime dt=new DateTime();
     FieldClass fc=new FieldClass();
@@ -51,7 +56,7 @@ public class Add_New_Business extends ActionBarActivity {
     Integer month;
     String date;
     Integer year;
-
+    ToolTipRelativeLayout toolTipRelativeLayout;
     String str="";
     DataBaseSqlite db=new DataBaseSqlite(this);
     SqliteTOjson json=new SqliteTOjson(this);
@@ -63,10 +68,30 @@ public class Add_New_Business extends ActionBarActivity {
         setContentView(R.layout.activity_add_new_business);
 
         Initialize_Views();
-
-
         GetAreaName();
         GetSubSet();
+
+        toolTipRelativeLayout = (ToolTipRelativeLayout) findViewById(R.id.tooltipRelativeLayout);
+
+
+
+        Market_field.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    ToolTip toolTip = new ToolTip()
+                            .withText("زمینه کاری کسب و کار خودرا وارد کنید")
+                            .withColor(getResources().getColor(R.color.accent_material_light))
+                            .withShadow()
+                            .withTextColor(Color.WHITE)
+                            .withAnimationType(ToolTip.AnimationType.FROM_MASTER_VIEW);
+                    myToolTipView = toolTipRelativeLayout.showToolTipForView(toolTip, Market_field);
+                }else {
+                    myToolTipView.remove();
+                }
+            }
+        });
+
     }
 
 
@@ -381,4 +406,6 @@ public class Add_New_Business extends ActionBarActivity {
         startActivity(i);
 
     }
+
+
 }

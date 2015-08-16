@@ -6,16 +6,57 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.ariana.shahre_ma.AboutUs">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="پیشنهاد به دیگران"
         android:id="@+id/btn_suggest"
         android:onClick="share"
-        android:layout_alignParentBottom="true"
+        android:layout_alignBottom="@+id/tv_version"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="شهرما"
+        android:id="@+id/textView8"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="www.shahrma.com"
+        android:id="@+id/textView9"
+        android:layout_marginTop="73dp"
+        android:gravity="center"
+        android:linksClickable="true"
+        android:autoLink="web"
+        android:layout_below="@+id/textView8"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="info@sharhma.com"
+        android:id="@+id/textView10"
+        android:layout_marginTop="70dp"
+        android:gravity="center"
+        android:layout_below="@+id/textView9"
+        android:layout_centerHorizontal="true"
+        android:autoLink="email" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_version"
+        android:autoText="false"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
