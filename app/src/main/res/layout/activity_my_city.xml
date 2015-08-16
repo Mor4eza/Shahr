@@ -11,14 +11,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/sp_city"
-        android:gravity="start"
+        android:gravity="center"
         android:paddingBottom="20dp"
         android:spinnerMode="dialog"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/expand_my_city"
-        android:layout_alignEnd="@+id/expand_my_city"
-        android:layout_toRightOf="@+id/download_fab"
-        android:layout_toEndOf="@+id/download_fab" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
         <ExpandableListView
             android:layout_width="match_parent"
@@ -40,12 +38,13 @@
         android:layout_marginRight="@dimen/fab_margin"
         android:layout_marginBottom="@dimen/fab_margin"
         android:onClick="download"
+
         fab:shadow_color="#757575"
         fab:shadow_radius="1.0dp"
         fab:shadow_xOffset="0.5dp"
         fab:shadow_yOffset="1.0dp"
-
-        fab:button_colorRipple="@color/fab_material_black"
+        fab:button_color="@color/accent"
+        fab:button_colorRipple="@color/primary"
         fab:rippleEffect_enabled="true"
         />
 

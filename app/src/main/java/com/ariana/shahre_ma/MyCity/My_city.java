@@ -247,7 +247,6 @@ public class My_city extends ActionBarActivity implements TotalListener{
 
     public void fab () {
         ActionButton Action = (ActionButton) findViewById(R.id.download_fab);
-        Action.setButtonColor(getResources().getColor(R.color.fab_material_blue_500));
         Action.setImageDrawable(getResources().getDrawable(R.drawable.download));
     }
 

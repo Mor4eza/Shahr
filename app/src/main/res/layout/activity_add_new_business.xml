@@ -14,6 +14,7 @@
         android:layout_height="fill_parent"
         android:orientation="vertical">
 
+
         <com.wrapp.floatlabelededittext.FloatLabeledEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,6 +43,7 @@
                 android:singleLine="true"
                 android:inputType="number" />
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
         <com.wrapp.floatlabelededittext.FloatLabeledEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -140,11 +142,15 @@
                 android:inputType="textPersonName" />
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
+
+        <com.nhaarman.supertooltips.ToolTipRelativeLayout
+            android:id="@+id/tooltipRelativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
         <com.wrapp.floatlabelededittext.FloatLabeledEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-
-
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -199,7 +205,7 @@
             android:text=" انتخاب موقعیت "
             android:onClick="select_map"
             android:layout_marginTop="20dp"
-            android:background="@color/material_blue"
+            android:background="@color/primary"
             />
 
         <com.dd.CircularProgressButton
@@ -216,4 +222,7 @@
             app:cpb_textIdle="ثبت "
             android:onClick="add_business" />
     </LinearLayout>
+
+
+
 </ScrollView>

@@ -115,7 +115,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //findViewsAndConfigure();
          db=new DataBaseSqlite(this);
 
 
@@ -202,7 +201,6 @@ public class MainActivity extends ActionBarActivity {
 
 
         Action = (ActionButton) findViewById(R.id.action_button);
-        Action.setButtonColor(getResources().getColor(R.color.fab_material_blue_500));
         Action.setImageDrawable(getResources().getDrawable(R.drawable.fab_plus_icon));
 
 
