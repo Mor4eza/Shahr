@@ -195,6 +195,8 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
 
                     //end All update
                     setting.setUpdateAll(false);
+                    //Get FieldActivity
+                    setting.saveFieldActivity(true);
 
                 }
 

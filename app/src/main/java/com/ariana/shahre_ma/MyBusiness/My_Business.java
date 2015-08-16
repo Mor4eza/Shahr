@@ -25,6 +25,7 @@ import com.ariana.shahre_ma.Cards.Business_Card_Items;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetAreaJosn;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessMemberJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetFieldActivityJson;
@@ -39,6 +40,7 @@ public class My_Business extends ActionBarActivity {
 
     FieldClass fc=new FieldClass();
     Query query=new Query(this);
+    KeySettings setting=new KeySettings(this);
     TextView title;
     FloatingActionButton discount;
     public static ProgressBar pg;
@@ -67,11 +69,17 @@ public class My_Business extends ActionBarActivity {
          Intialize();
          setCards();
 
-       /* HTTPGetFieldActivityJson httpfield=new HTTPGetFieldActivityJson(this);
-        httpfield.execute();
 
-        HTTPGetAreaJosn httparea=new HTTPGetAreaJosn(this);
-        httparea.execute();*/
+        if(!setting.getFieldActivity())
+        {
+            HTTPGetFieldActivityJson httpGetFieldActivityJson = new HTTPGetFieldActivityJson(this);
+            httpGetFieldActivityJson.execute();
+        }
+        else  if(!setting.getArea())
+        {
+            HTTPGetAreaJosn httparea = new HTTPGetAreaJosn(this);
+            httparea.execute();
+        }
 
     }
 

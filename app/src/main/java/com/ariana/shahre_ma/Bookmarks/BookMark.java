@@ -61,10 +61,14 @@ public class BookMark extends ActionBarActivity {
 
         if(ns.checkInternetConnection())
         {
-            //The user Getting bookmark
-            HTTPGetBookMarkJson b = new HTTPGetBookMarkJson(this);
-            b.SetUrl_MemberId(query.getMemberId());
-            b.execute();
+                //The user Getting bookmark
+                HTTPGetBookMarkJson b = new HTTPGetBookMarkJson(this);
+                b.SetUrl_MemberId(query.getMemberId());
+                b.execute();
+        }
+        else
+        {
+           Toast.makeText(getApplicationContext(),"شبکه اینترنت قطع می باشد",Toast.LENGTH_LONG).show();
         }
 
 

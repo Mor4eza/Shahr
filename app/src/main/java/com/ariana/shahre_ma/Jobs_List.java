@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -236,11 +237,12 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
     public boolean onQueryTextChange(String newText)
     {
 
-        //Online Type change
+         //Online Type change
         // Search Online To Business Parameters SubsetID and NameMarket
 
         if(newText.equals("")) // Text Empty Select Business All
         {
+            Log.i("textserch", "null");
             setting.saveSearchBusiness(false);
             setCardsforsearch();
         }

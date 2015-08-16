@@ -111,7 +111,6 @@ public class job_details_1 extends ActionBarActivity {
          private  void rates_change(){
 
 
-            Toast.makeText(getActivity(),"this",Toast.LENGTH_LONG).show();
             rate1.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
                 @Override
                 public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {

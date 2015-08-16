@@ -405,13 +405,14 @@ public class MainActivity extends ActionBarActivity {
 
 
                                 } else {
-                                    Toast.makeText(getApplicationContext(), "کاربری وارد نشده", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "وارد حساب خود نشده اید...!", Toast.LENGTH_SHORT).show();
 
                                 }
                             }
 
                         }
-                        if (position == 4) {
+                        if (position == 4)
+                        {
 
                             try {
                                 DataBaseSqlite db = new DataBaseSqlite(MainActivity.this);
@@ -431,8 +432,24 @@ public class MainActivity extends ActionBarActivity {
                             }
                         }
                         if (position == 5) {
-                            Intent i = new Intent(getApplicationContext(), BookMark.class);
-                            startActivity(i);
+
+                            try {
+                                DataBaseSqlite db = new DataBaseSqlite(MainActivity.this);
+                                Cursor cursor = db.select_Member();
+                                cursor.moveToFirst();
+                                Log.i("memberID", String.valueOf(cursor.getInt(0)));
+                                if (cursor.getInt(0) > 0) {
+                                    Intent i = new Intent(getApplicationContext(), BookMark.class);
+                                    startActivity(i);
+                                    finish();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "وارد حساب خود نشده اید...!", Toast.LENGTH_LONG).show();
+
+                                }
+                            } catch (Exception e) {
+                                Toast.makeText(getApplicationContext(), "وارد حساب خود نشده اید...!", Toast.LENGTH_LONG).show();
+                            }
+
                         }
                         if (position == 6) {
 

@@ -94,6 +94,11 @@ public class HTTPGetAreaJosn extends AsyncTask<String,Void,Integer>
                             db.Add_area(Id_area[i], Name_Area[i], CityId_area[i]);
                         }
 
+
+                        //Get Area
+                        setting.saveArea(true);
+
+
                         if(setting.getAllUpdate()) {
                             HTTPGetFieldActivityJson httpGetFieldActivityJson = new HTTPGetFieldActivityJson(context);
                             httpGetFieldActivityJson.execute();

@@ -219,4 +219,35 @@ public class KeySettings
         return prefernc.getBoolean("Subset", false);
     }
 
+    public void saveFieldActivity(Boolean update)
+    {
+        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting", Context.MODE_PRIVATE);
+        editor=prefernc.edit();
+        editor.putBoolean("FieldActivity", update);
+        editor.apply();
+    }
+
+
+    public Boolean getFieldActivity()
+    {
+        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
+        return prefernc.getBoolean("FieldActivity", false);
+    }
+
+
+    public void saveArea(Boolean update)
+    {
+        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting", Context.MODE_PRIVATE);
+        editor=prefernc.edit();
+        editor.putBoolean("Area", update);
+        editor.apply();
+    }
+
+
+    public Boolean getArea()
+    {
+        prefernc=context.getSharedPreferences("com.ariana.shahrema.setting",Context.MODE_PRIVATE);
+        return prefernc.getBoolean("Area", false);
+    }
+
 }

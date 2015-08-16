@@ -65,6 +65,7 @@ private  static Context context;
         if(setting.getSearchBusiness()==false)
         {
              allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb(),cityid);
+             search=false;
         }
         else
         {
