@@ -210,12 +210,11 @@ public class Edit_business extends ActionBarActivity {
 
         }
 
-
         if(Market_name.getText().toString().trim().equals("")) {
             AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار");
             alertDialog.setMessage("نام فروشگاه را وارد کنید");
-            alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     // Write your code here to execute after dialog closed
                     // Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
@@ -232,10 +231,8 @@ public class Edit_business extends ActionBarActivity {
             AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار");
             alertDialog.setMessage("شماره تلفن را وارد کنید");
-            alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    // Write your code here to execute after dialog closed
-                    // Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
                     Market_tell.requestFocus();
                 }
             });
@@ -249,10 +246,8 @@ public class Edit_business extends ActionBarActivity {
             AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار");
             alertDialog.setMessage("نام مدیر فروشگاه را وارد کنید");
-            alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    // Write your code here to execute after dialog closed
-                    //  Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
                     Market_owner.requestFocus();
                 }
             });
@@ -278,15 +273,14 @@ public class Edit_business extends ActionBarActivity {
             alertDialog.show();
 
         }
-     /*   else if(AreaID(Market_zone.getText().toString().trim())>0)
+        else if(query.getAreaID(Market_zone.getText().toString().trim())>0)
         {
             AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار ");
-            alertDialog.setMessage("نام منطقه را صحیح وارد کنید");
-            alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            alertDialog.setMessage("منطقه خود را انتخاب کنید");
+            alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    // Write your code here to execute after dialog closed
-                    //Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
+
                     Market_zone.requestFocus();
                 }
             });
@@ -294,17 +288,15 @@ public class Edit_business extends ActionBarActivity {
             // Showing Alert Message
             alertDialog.show();
 
-        }*/
+        }
 
-       /* else if(SubsetID(Market_subset.getText().toString().trim())>0)
+        else if(query.getsubsetID(Market_subset.getText().toString().trim())<0)
         {
             AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار ");
-            alertDialog.setMessage("نام زیر گروه را درست وارد کنید");
-            alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            alertDialog.setMessage("زیر گروه را انتخاب کنید");
+            alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    // Write your code here to execute after dialog closed
-                    // Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
                     Market_subset.requestFocus();
                 }
             });
@@ -312,13 +304,13 @@ public class Edit_business extends ActionBarActivity {
             // Showing Alert Message
             alertDialog.show();
 
-        }*/
+        }
 
-        else if(Fields_ID[0]==0 && Fields_ID[1]==0 && Fields_ID[2]==0 && Fields_ID[3]==0 && Fields_ID[4]==0 &&Fields_ID[5]==0 && Fields_ID[6]==0  )
+        else if(Market_field.length()==0)
         {
             AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار ");
-            alertDialog.setMessage("حداقل یک زمینه فعالیت وارد کنید");
+            alertDialog.setMessage("زمینه فعالیت خود را وارد کنید");
             alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     // Write your code here to execute after dialog closed
@@ -331,16 +323,14 @@ public class Edit_business extends ActionBarActivity {
             alertDialog.show();
 
         }
-  /*      else if(Lati.equals(""))
+        else if(fc.GetLatitude_Business().equals(""))
         {
             AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار ");
             alertDialog.setMessage("چی پی اس مقداری ندارد");
-            alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    // Write your code here to execute after dialog closed
-                    // Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
-                    multiautoField.requestFocus();
+
                 }
             });
 
@@ -348,28 +338,26 @@ public class Edit_business extends ActionBarActivity {
             alertDialog.show();
 
         }
-        else if(Longti.equals(""))
+        else if(fc.GetLongtiude_Business().equals(""))
         {
             AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار ");
-            alertDialog.setMessage("چی پی اس مقداری ندارد");
-            alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            alertDialog.setMessage("موقیعت خود را انتخاب کنید");
+            alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    // Write your code here to execute after dialog closed
-                    // Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
-                    multiautoField.requestFocus();
+
                 }
             });
 
             // Showing Alert Message
-            alertDialog.show();*/
-
+            alertDialog.show();
+        }
         else if(net.checkInternetConnection()==false)
         {
             AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار ");
             alertDialog.setMessage("اینترنت قطع می باشد");
-            alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
+            alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
 
                 }
@@ -401,7 +389,7 @@ public class Edit_business extends ActionBarActivity {
                 HTTPPostBusinessEditJson httpbusiness = new HTTPPostBusinessEditJson(this);
                 httpbusiness.SetBusinessJson(str);
                 httpbusiness.execute();
-    }
+        }
     }
 
 
