@@ -25,7 +25,6 @@ import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.job_details.Job_details;
 import com.neno0o.lighttextviewlib.LightTextView;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -43,7 +42,6 @@ public class job_list_cards_adapter extends RecyclerView.Adapter<job_list_cards_
     KeySettings setting;
     Boolean search=true;
     Cursor allrows;
-    String image_url_1="";
     ImageLoader imgLoader;
 private  static Context context;
 
@@ -64,35 +62,36 @@ private  static Context context;
         Integer cityid=0;
         cityid=query.getCityId(setting.getCityName());
 
+        if(setting.getSearchBusiness()==false)
+        {
+             allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb(),cityid);
+             //search=false;
+        }
+        else
+        {
+            allrows = mydb.SearchBusiness(fc.GetMarket_Business(), fc.GetBusiness_SubsetIdb());
+            setting.saveSearchBusiness(false); //No Search
+            search=false;
+        }
 
-            if (setting.getSearchBusiness() == false) {
-                allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb(), cityid);
-                search = false;
-            } else {
-                allrows = mydb.SearchBusiness(fc.GetMarket_Business(), fc.GetBusiness_SubsetIdb());
-                setting.saveSearchBusiness(false); //No Search
-                search = false;
-            }
-
-            if (setting.getSortBusiness().equals("rate")) {
-                allrows = mydb.select_SortRateBusiness(fc.GetBusiness_SubsetIdb());
-                setting.saveSortBusiness("0"); //No Sort
-                search = false;
-                Log.i("rate", setting.getSortBusiness());
-            } else if (setting.getSortBusiness().equals("name")) {
-                allrows = mydb.select_SortNameBusiness(fc.GetBusiness_SubsetIdb());
-                setting.saveSortBusiness("0"); //No Sort
-                search = false;
-                Log.i("name", setting.getSortBusiness());
-            } else if (setting.getSortBusiness().equals("date")) {
-                allrows = mydb.select_SortDateBusiness(fc.GetBusiness_SubsetIdb());
-                setting.saveSortBusiness("0"); //No Sort
-                search = false;
-                Log.i("date", setting.getSortBusiness());
-            }
-
-
-
+         if(setting.getSortBusiness().equals("rate"))
+        {
+            allrows = mydb.select_SortRateBusiness(fc.GetBusiness_SubsetIdb());
+            setting.saveSortBusiness("0"); //No Sort
+            search=false;
+            Log.i("rate",setting.getSortBusiness());
+        }  else if(setting.getSortBusiness().equals("name"))
+        {
+            allrows = mydb.select_SortNameBusiness(fc.GetBusiness_SubsetIdb());
+            setting.saveSortBusiness("0"); //No Sort
+            search=false;
+            Log.i("name", setting.getSortBusiness());
+        }  else if(setting.getSortBusiness().equals("date")) {
+             allrows = mydb.select_SortDateBusiness(fc.GetBusiness_SubsetIdb());
+             setting.saveSortBusiness("0"); //No Sort
+             search=false;
+            Log.i("date", setting.getSortBusiness());
+        }
 
         try {
             if(fc.GetSearchOffline())
@@ -110,7 +109,6 @@ private  static Context context;
 
                         nature.setRate(fdb.GetRateBusiness().get(i));
                         nature.setmId(fdb.GetIdBusiness().get(i));
-                        nature.setNameImage(fdb.GetSrcs().get(i));
 
 
                         if(fdb.GetMobileBusiness().get(i).length()==0)
@@ -148,7 +146,7 @@ private  static Context context;
                             nature.setThumbnail(R.drawable.pooshak);
                             nature.setRate(fdb.GetRateBusiness().get(i));
                             nature.setmId(fdb.GetIdBusiness().get(i));
-                            nature.setNameImage(fdb.GetSrcs().get(i));
+
 
                             if(fdb.GetMobileBusiness().get(i).length()==0)
                             {
@@ -182,10 +180,10 @@ private  static Context context;
                                 nature.setName(allrows.getString(1));
                                 nature.setDes(allrows.getString(8));
                                 nature.setThumbnail(R.drawable.pooshak);
-                                Log.i("Rate", String.valueOf(allrows.getDouble(30)));
+                                Log.i("Rate",String.valueOf(allrows.getDouble(30)));
                                 nature.setRate(allrows.getDouble(30));
                                 nature.setmId(allrows.getInt(0));
-                                nature.setNameImage(allrows.getString(31));
+
 
 
 
@@ -229,7 +227,7 @@ private  static Context context;
 
             }
 
-        }
+            }
        catch(Exception e)
         {
         }
@@ -251,45 +249,26 @@ private  static Context context;
 
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int i)
-    {
-        try {
-            Job_lists_card_item nature = mItems.get(i);
+    public void onBindViewHolder(ViewHolder viewHolder, int i) {
 
-            viewHolder.tvNature.setText(nature.getName());
-            viewHolder.tvDesNature.setText(nature.getDes());
+        Job_lists_card_item nature = mItems.get(i);
 
-            //  viewHolder.imgThumbnail.setImageResource(nature.getThumbnail());
+        viewHolder.tvNature.setText(nature.getName());
+        viewHolder.tvDesNature.setText(nature.getDes());
+      //  viewHolder.imgThumbnail.setImageResource(nature.getThumbnail());
 
-
-            Log.i("imagename", nature.getNameImage());
-            if (nature.getNameImage().equals("null"))
-                image_url_1 = "http://www.youtodesign.com/uploads/allimg/1503/3735.jpg";
-            else
-                image_url_1 = "http://www.shahrma.com/image/business/" + nature.getNameImage();
-
-            Log.i("src", image_url_1);
-            // imgLoader.DisplayImage(image_url_1, viewHolder.imgThumbnail);
-
-            Picasso.with(context).load(image_url_1).into(viewHolder.imgThumbnail);
+       String image_url_1 = "http://reallifeglobal.com/wp-content/uploads/2014/08/business-english-world.jpg?467a33";
+       imgLoader.DisplayImage(image_url_1, viewHolder.imgThumbnail);
 
 
-            viewHolder.rates.setRating((float) nature.getRate());
-            viewHolder.rates.setTag(nature.getmId());
-            if (viewHolder.tvTell.getText().toString().equals("1"))
-            {
-                viewHolder.tvTell.setText("");
+        viewHolder.rates.setRating((float) nature.getRate());
+        viewHolder.rates.setTag(nature.getmId());
+        if ( viewHolder.tvTell.getText().toString().equals("1")){
+            viewHolder.tvTell.setText("");
+        }else {
+            viewHolder.tvTell.setText(nature.getTell());
+            viewHolder.tvTell.setPaintFlags(viewHolder.tvTell.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
             }
-            else
-            {
-                viewHolder.tvTell.setText(nature.getTell());
-                viewHolder.tvTell.setPaintFlags(viewHolder.tvTell.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-            }
-        }
-        catch (Exception e)
-        {
-
-        }
     }
 
     @Override
