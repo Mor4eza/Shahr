@@ -18,7 +18,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -149,37 +148,102 @@ public class job_details_1 extends ActionBarActivity {
          private  void display_detail() {
 
         DataBaseSqlite mydb = new DataBaseSqlite(getActivity());
-     //   Cursor allrows = mydb.select_business_Detail(fc.GetMarket_Business(), fc.GetAddress_Business());
-        Cursor allrows = mydb.select_AllBusinessId(fc.GetBusiness_Id());
-    //    Cursor row_notification=mydb.select_AllNotificaton(fc.GetBusiness_Id());
-        allrows.moveToNext();
-       // row_notification.moveToNext();
-        DateTime time=new DateTime();
+             try {
+             if(fc.GetBusinessTops())
+             {
 
-        try {
-            fc.SetBusiness_Id(allrows.getInt(0));//Id
-            fc.SetLatitude_Business(allrows.getDouble(10));//Latitude
-            fc.SetLongtiude_Business(allrows.getDouble(11));//Longtiude
-            Log.i("Latitude", String.valueOf(allrows.getDouble(10)));
-            Log.i("Longitude", String.valueOf(allrows.getDouble(11)));
-            name.setText(allrows.getString(1));//Market
-            tel.setText(allrows.getString(2));//Phone
-            web.setText(allrows.getString(5));//Email
-            owner.setText(allrows.getString(6));//BusinessOwner
-            address.setText(allrows.getString(7));//Address
-            des.setText(allrows.getString(8));//Description
-            subset.setText(query.getsubsetName(allrows.getInt(9)));//Subset
+                 Cursor allrows = mydb.select_AllBusinessTops(fc.GetBusiness_Id());
+                 allrows.moveToNext();
 
-               for (int i = 0; i < 7; i++) {
-                    Log.i("CounterFor", String.valueOf(allrows.getInt((12) + (i))));
-                    if (allrows.getInt((12) + (i)) > 0) {
+                 fc.SetBusiness_Id(allrows.getInt(0));//Id
+                 fc.SetLatitude_Business(allrows.getDouble(16));//Latitude
+                 fc.SetLongtiude_Business(allrows.getDouble(17));//Longtiude
+                 Log.i("Latitude", String.valueOf(allrows.getDouble(16)));
+                 Log.i("Longitude", String.valueOf(allrows.getDouble(17)));
+                 name.setText(allrows.getString(1));//Market
+                 tel.setText(allrows.getString(3));//Phone
+                 web.setText(allrows.getString(6));//Email
+                 owner.setText(allrows.getString(7));//BusinessOwner
+                 address.setText(allrows.getString(8));//Address
+                 des.setText(allrows.getString(9));//Description
+                 subset.setText(query.getsubsetName(allrows.getInt(14)));//Subset
 
-                        Cursor rows3 = mydb.select_FieldActivityName(allrows.getInt((12) + (i)));
-                        rows3.moveToFirst();
+                 for (int i = 0; i < 7; i++) {
+                     Log.i("CounterFor", String.valueOf(allrows.getInt((22) + (i))));
+                     if (allrows.getInt((22) + (i)) > 0) {
 
-                        zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");
-                    }
-                }
+                         Cursor rows3 = mydb.select_FieldActivityName(allrows.getInt((22) + (i)));
+                         rows3.moveToFirst();
+
+                         zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");
+                     }
+                 }
+
+
+             }
+             else if(fc.GetBusinessDisCountTops())
+             {
+                 Cursor allrows = mydb.select_AllBusinessDisCount(fc.GetBusiness_Id());
+                 allrows.moveToNext();
+
+                 fc.SetBusiness_Id(allrows.getInt(0));//Id
+                 fc.SetLatitude_Business(allrows.getDouble(16));//Latitude
+                 fc.SetLongtiude_Business(allrows.getDouble(17));//Longtiude
+                 Log.i("Latitude", String.valueOf(allrows.getDouble(16)));
+                 Log.i("Longitude", String.valueOf(allrows.getDouble(17)));
+                 name.setText(allrows.getString(1));//Market
+                 tel.setText(allrows.getString(3));//Phone
+                 web.setText(allrows.getString(6));//Email
+                 owner.setText(allrows.getString(7));//BusinessOwner
+                 address.setText(allrows.getString(8));//Address
+                 des.setText(allrows.getString(9));//Description
+                 subset.setText(query.getsubsetName(allrows.getInt(14)));//Subset
+
+                 for (int i = 0; i < 7; i++) {
+                     Log.i("CounterFor", String.valueOf(allrows.getInt((22) + (i))));
+                     if (allrows.getInt((22) + (i)) > 0) {
+
+                         Cursor rows3 = mydb.select_FieldActivityName(allrows.getInt((22) + (i)));
+                         rows3.moveToFirst();
+
+                         zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");
+                     }
+                 }
+
+             }
+             else
+             {
+
+                 Cursor allrows = mydb.select_AllBusinessId(fc.GetBusiness_Id());
+                 allrows.moveToNext();
+
+                 fc.SetBusiness_Id(allrows.getInt(0));//Id
+                 fc.SetLatitude_Business(allrows.getDouble(10));//Latitude
+                 fc.SetLongtiude_Business(allrows.getDouble(11));//Longtiude
+                 Log.i("Latitude", String.valueOf(allrows.getDouble(10)));
+                 Log.i("Longitude", String.valueOf(allrows.getDouble(11)));
+                 name.setText(allrows.getString(1));//Market
+                 tel.setText(allrows.getString(2));//Phone
+                 web.setText(allrows.getString(5));//Email
+                 owner.setText(allrows.getString(6));//BusinessOwner
+                 address.setText(allrows.getString(7));//Address
+                 des.setText(allrows.getString(8));//Description
+                 subset.setText(query.getsubsetName(allrows.getInt(9)));//Subset
+
+                 for (int i = 0; i < 7; i++) {
+                     Log.i("CounterFor", String.valueOf(allrows.getInt((12) + (i))));
+                     if (allrows.getInt((12) + (i)) > 0) {
+
+                         Cursor rows3 = mydb.select_FieldActivityName(allrows.getInt((12) + (i)));
+                         rows3.moveToFirst();
+
+                         zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");
+                     }
+                 }
+
+
+
+             }
        }
         catch (Exception e){
             //Toast.makeText(getActivity(),e.toString(),Toast.LENGTH_LONG).show();
@@ -191,6 +255,7 @@ public class job_details_1 extends ActionBarActivity {
              try {
                  DataBaseSqlite db = new DataBaseSqlite(getActivity());
                  Cursor rows = db.select_BusinessImage(fc.GetBusiness_Id());
+
                  if (rows.getCount() > 0) {
 
                      if (rows.moveToFirst()) {

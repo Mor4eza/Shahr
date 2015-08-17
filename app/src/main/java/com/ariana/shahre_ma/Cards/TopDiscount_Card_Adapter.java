@@ -31,7 +31,7 @@ public class TopDiscount_Card_Adapter extends RecyclerView.Adapter<TopDiscount_C
     public TopDiscount_Card_Adapter(Context context) {
 
         super();
-
+        this.context=context;
         fc=new FieldClass();
         mItems = new ArrayList<TopDiscount_Item>();
 
@@ -98,7 +98,8 @@ public class TopDiscount_Card_Adapter extends RecyclerView.Adapter<TopDiscount_C
                     Log.i("ON_______CLICK", tvNature.getText().toString());
                     fc.SetMarket_Business(tvNature.getText().toString());
                     fc.SetBusiness_Id(Integer.valueOf(String.valueOf(tvDesNature.getTag())));
-                    Intent i=new Intent(context, Job_details.class);
+                    fc.SetBusinessDisCountTops(true);
+                    Intent i =new Intent(context,Job_details.class);
                     context.startActivity(i);
 
 

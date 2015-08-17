@@ -213,7 +213,7 @@ private  static Context context;
                     }
 
                 }
-            fdb.ClearAll();
+
             if(setting.getCacheImage()==false)
             {
                 //Delete image

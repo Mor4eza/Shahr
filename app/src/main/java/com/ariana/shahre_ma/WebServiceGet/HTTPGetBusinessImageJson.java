@@ -88,7 +88,7 @@ public class HTTPGetBusinessImageJson extends AsyncTask<String,Void,Integer>
 
                     for (int i = 0; i < len; i++)
                     {
-                        dbs.delete_BusinessImage(businessId[i]);
+                        dbs.delete_BusinessImage(Id[i]);
                         dbs.Add_BusinessImage(Id[i], businessId[i],src[i]);
 
                     }
@@ -98,7 +98,8 @@ public class HTTPGetBusinessImageJson extends AsyncTask<String,Void,Integer>
                 }
 
 
-            } catch (Exception e) {
+            } catch (Exception e)
+            {
                 //Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
             }
         }

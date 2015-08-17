@@ -282,8 +282,10 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
 
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_Fav) {
 
+
+
+        if (id == R.id.action_Fav) {
             if(query.getMemberId()>0) {
                 HTTPSendBookMarkURL httpbookmark = new HTTPSendBookMarkURL(this);
                 httpbookmark.SetBusinessid(fc.GetBusiness_Id());
@@ -298,8 +300,10 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
                 Toast.makeText(getApplicationContext(),"کاربری وارد نشده است",Toast.LENGTH_LONG).show();
             }
 
-            Toast.makeText(getApplication(),String.valueOf(query.getMemberId()),Toast.LENGTH_LONG).show();
             return true;
+        }else if(id==android.R.id.home){
+            fc.SetBusinessDisCountTops(false);
+            fc.SetBusinessTops(false);
         }
 
         return super.onOptionsItemSelected(item);
@@ -308,10 +312,14 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
     @Override
     public void onBackPressed() {
         //handle the back press :D close the drawer first and if the drawer is closed close the activity
-            this.finish();
-            super.onBackPressed();
+
+        super.onBackPressed();
+        fc.SetBusinessDisCountTops(false);
+        fc.SetBusinessTops(false);
+        this.finish();
 
     }
+
 
 
 

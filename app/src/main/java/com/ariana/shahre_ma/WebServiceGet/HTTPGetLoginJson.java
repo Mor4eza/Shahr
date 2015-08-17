@@ -4,12 +4,13 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.MainActivity;
 import com.ariana.shahre_ma.MyProfile.Log_In;
 
 import org.apache.http.HttpEntity;
@@ -17,12 +18,9 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URLDecoder;
@@ -133,7 +131,9 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
                     dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
 
                     Log_In.btn.setProgress(100);
-                    ((Activity)context).finish();
+                    Intent i =new Intent(context, MainActivity.class);
+                    context.startActivity(i);
+                    ((Activity) context).finish();
 
                 } else
                 {

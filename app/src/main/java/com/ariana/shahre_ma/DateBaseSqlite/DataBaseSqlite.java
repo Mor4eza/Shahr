@@ -934,6 +934,15 @@ Context context;
         return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS_TOPS, null);
 
     }
+
+    public Cursor select_AllBusinessTops(Integer businessid)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS_TOPS+" WHERE Id="+businessid, null);
+
+    }
+
     public Cursor select_AllBusinessDisCount()
     {
 
@@ -941,6 +950,16 @@ Context context;
         return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS_DISCOUNT, null);
 
     }
+
+    public Cursor select_AllBusinessDisCount(Integer businessid)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS_DISCOUNT+" WHERE Id="+businessid, null);
+
+    }
+
+
     public Cursor select_CountBusiness_SubsetId(Integer subsetID)
     {
 
@@ -994,7 +1013,7 @@ Context context;
     public Cursor select_AllBusinessId(Integer id)
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT Id,Market,Phone,Mobile,Fax,Email,BusinessOwner,Address,Description,SubsetId,Latitude,Longitude,Field1,Field2,Field3,Field4,Field5,Field6,Field7,RateValue,AreaId  FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE Id=" +id, null);
+        return db.rawQuery("SELECT Id,Market,Phone,Mobile,Fax,Email,BusinessOwner,Address,Description,SubsetId,Latitude,Longitude,Field1,Field2,Field3,Field4,Field5,Field6,Field7,RateValue,AreaId,Src  FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE Id=" +id, null);
     }
 
     public Cursor select_business_NameMarket(Integer businessID)
@@ -1383,10 +1402,10 @@ Context context;
     }
 
 
-    public void delete_BusinessImage(Integer businessid)
+    public void delete_BusinessImage(Integer Id)
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_BUSINESS_IMAGE+" WHERE BusinessId="+businessid);
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_BUSINESS_IMAGE+" WHERE Id="+Id);
         db.close();
     }
 

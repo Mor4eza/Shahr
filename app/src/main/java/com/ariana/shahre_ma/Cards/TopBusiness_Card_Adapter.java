@@ -26,9 +26,8 @@ public class TopBusiness_Card_Adapter extends RecyclerView.Adapter<TopBusiness_C
     FieldClass fc=new FieldClass();
     Context context;
     public TopBusiness_Card_Adapter(Context context) {
-
         super();
-
+        this.context=context;
         mItems = new ArrayList<TopBusiness_Item>();
 
 
@@ -96,9 +95,10 @@ public class TopBusiness_Card_Adapter extends RecyclerView.Adapter<TopBusiness_C
                 @Override
                 public void onClick(View v) {
 
-                    Log.i("ON_______CLICK",tvNature.getText().toString());
+                    Log.i("ON_______CLICK",tvDesNature.getTag().toString());
                     fc.SetMarket_Business(tvNature.getText().toString());
                     fc.SetBusiness_Id(Integer.valueOf(String.valueOf(tvDesNature.getTag())));
+                    fc.SetBusinessTops(true);
                     Intent i=new Intent(context, Job_details.class);
                     context.startActivity(i);
 

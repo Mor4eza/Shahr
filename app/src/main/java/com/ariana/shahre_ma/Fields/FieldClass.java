@@ -92,7 +92,8 @@ public class FieldClass
 
     private static Boolean Notification_GoodMorning=false;
 
-
+    private static Boolean BusinessTops=false;
+    private static Boolean BusinessDiscountTops=false;
     private static List<String> NameSubset=new ArrayList<String>();
     // get/set
 
@@ -628,6 +629,20 @@ public class FieldClass
         return Notification_GoodMorning;
     }
 
+
+    public void SetBusinessTops(Boolean businessTops){
+        BusinessTops=businessTops;
+    }
+    public Boolean GetBusinessTops(){
+        return BusinessTops;
+    }
+
+    public void SetBusinessDisCountTops(Boolean businessTopsdiscount){
+        BusinessDiscountTops=businessTopsdiscount;
+    }
+    public Boolean GetBusinessDisCountTops(){
+        return BusinessDiscountTops;
+    }
 
 }
 

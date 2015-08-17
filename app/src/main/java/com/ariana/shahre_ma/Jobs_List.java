@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.Cards.job_list_cards_adapter;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.job_details.Job_details;
 import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
@@ -174,6 +175,10 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
                     return false;
                 }
             });
+        }else if(id==android.R.id.home){
+            FieldDataBusiness fdb=new FieldDataBusiness();
+            fdb.ClearAll();
+
         }
 
 
@@ -347,4 +352,13 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
         sv.setButtonPosition(lps);
 
     }
+    @Override
+    public void onBackPressed() {
+        //handle the back press :D close the drawer first and if the drawer is closed close the activity
+        super.onBackPressed();
+        FieldDataBusiness fdb=new FieldDataBusiness();
+        fdb.ClearAll();
+
+    }
+
 }
