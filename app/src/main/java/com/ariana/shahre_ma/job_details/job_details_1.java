@@ -187,22 +187,30 @@ public class job_details_1 extends ActionBarActivity {
 
     }
 
-         private void  display_Images(){
-             DataBaseSqlite db = new DataBaseSqlite(getActivity());
-             Cursor rows=db.select_BusinessImage(fc.GetBusiness_Id());
-             if(rows.moveToFirst())
-             {
-                 do
-                 {
+         private void  display_Images() {
+             try {
+                 DataBaseSqlite db = new DataBaseSqlite(getActivity());
+                 Cursor rows = db.select_BusinessImage(fc.GetBusiness_Id());
+                 if (rows.getCount() > 0) {
+
+                     if (rows.moveToFirst()) {
+                         do {
+                             final TextSliderView textSliderView = new TextSliderView(getActivity());
+                             textSliderView.image("http://www.shahrma.com/image/business/" + rows.getString(2));
+                             slider.addSlider(textSliderView);
+
+                         } while (rows.moveToNext());
+                     }
+                 }else{
                      final TextSliderView textSliderView = new TextSliderView(getActivity());
-                     textSliderView.image("http://www.shahrma.com/image/business/"+rows.getString(2));
+                     textSliderView.image(R.drawable.img_not_found);
                      slider.addSlider(textSliderView);
-
-                 }while (rows.moveToNext());
-             }
-
+                 }
+                 slider.stopAutoCycle();
                  slider.setPresetTransformer(SliderLayout.Transformer.ZoomOutSlide);
                  slider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+             }
+             catch (Exception e){}
 
          }
 

@@ -45,7 +45,7 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
     ImageView img_null;
     KeySettings setting = new KeySettings(this);
     FieldClass fc=new FieldClass();
-
+    TextView tv_count;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,12 +53,13 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
         setTitle(fc.GetSelected_job());
         img_null=(ImageView)findViewById(R.id.img_null);
         tv_null=(TextView)findViewById(R.id.tv_null);
-
+        tv_count=(TextView)findViewById(R.id.tv_count);
         setCards();
 
        if(job_list_Adapter.getItemCount()!=0){
             img_null.setVisibility(View.INVISIBLE);
             tv_null.setVisibility(View.INVISIBLE);
+           tv_count.setText(job_list_Adapter.getItemCount()+" "+"مورد");
         }
 
 
@@ -73,9 +74,6 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
             startActivity(i);
 
         }
-
-
-
 
 
     private void setCards(){

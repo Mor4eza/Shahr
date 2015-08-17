@@ -27,8 +27,6 @@ import com.ariana.shahre_ma.job_details.Job_details;
 import com.neno0o.lighttextviewlib.LightTextView;
 import com.squareup.picasso.Picasso;
 
-import org.osmdroid.bonuspack.location.PicasaPOIProvider;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -108,7 +106,7 @@ private  static Context context;
                         nature = new Job_lists_card_item();
                         nature.setName(fdb.GetMarketBusiness().get(i));
                         nature.setDes(fdb.GetAddressBusiness().get(i));
-                        nature.setThumbnail(R.drawable.pooshak);
+                        nature.setThumbnail(R.drawable.img_not_found);
 
                         nature.setRate(fdb.GetRateBusiness().get(i));
                         nature.setmId(fdb.GetIdBusiness().get(i));
@@ -146,7 +144,7 @@ private  static Context context;
                             nature = new Job_lists_card_item();
                             nature.setName(fdb.GetMarketBusiness().get(i));
                             nature.setDes(fdb.GetAddressBusiness().get(i));
-                            nature.setThumbnail(R.drawable.pooshak);
+                            nature.setThumbnail(R.drawable.img_not_found);
                             nature.setRate(fdb.GetRateBusiness().get(i));
                             nature.setmId(fdb.GetIdBusiness().get(i));
                             nature.setNameImage(fdb.GetSrc().get(i));
@@ -183,7 +181,7 @@ private  static Context context;
                                 nature = new Job_lists_card_item();
                                 nature.setName(allrows.getString(1));
                                 nature.setDes(allrows.getString(8));
-                                nature.setThumbnail(R.drawable.pooshak);
+                                nature.setThumbnail(R.drawable.img_not_found);
                                 Log.i("Rate", String.valueOf(allrows.getDouble(30)));
                                 nature.setRate(allrows.getDouble(30));
                                 nature.setmId(allrows.getInt(0));
@@ -215,7 +213,7 @@ private  static Context context;
                     }
 
                 }
-          //  fdb.ClearAll();
+            fdb.ClearAll();
             if(setting.getCacheImage()==false)
             {
                 //Delete image
@@ -259,10 +257,12 @@ private  static Context context;
             viewHolder.tvNature.setText(nature.getName());
             viewHolder.tvDesNature.setText(nature.getDes());
 
-
-            image_url_1 = "http://www.shahrma.com/image/business/" + nature.getNameImage();
-            Picasso.with(context).load(image_url_1).into(viewHolder.imgThumbnail);
-
+            if(nature.getNameImage().equals("null")) {
+                nature.setThumbnail(R.drawable.img_not_found);
+            }else{
+                image_url_1 = "http://www.shahrma.com/image/business/" + nature.getNameImage();
+                Picasso.with(context).load(image_url_1).into(viewHolder.imgThumbnail);
+            }
             viewHolder.rates.setRating((float) nature.getRate());
             viewHolder.rates.setTag(nature.getmId());
             if (viewHolder.tvTell.getText().toString().equals("1")) {
