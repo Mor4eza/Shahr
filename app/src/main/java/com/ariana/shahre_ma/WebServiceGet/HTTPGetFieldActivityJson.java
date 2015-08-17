@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -209,6 +210,7 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
 
                     Intent mainIntent = new Intent(context.getApplicationContext(),MainActivity.class);
                     context.startActivity(mainIntent);
+                    ((Activity)context).finish();
 
                 }
                 else

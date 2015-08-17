@@ -77,10 +77,17 @@ public class BookMark extends ActionBarActivity {
             @Override
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                fc.SetMarket_Business(adapter.getItem(position).getTitle().toString());
-                fc.SetBusiness_Id(adapter.getItem(position).GetId());
-                Intent i=new Intent(getApplicationContext(), Job_details.class);
-                startActivity(i);
+                try {
+                    fc.SetMarket_Business(adapter.getItem(position).getTitle().toString());
+                    fc.SetBusiness_Id(adapter.getItem(position).GetId());
+                    Intent i = new Intent(getApplicationContext(), Job_details.class);
+                    startActivity(i);
+                }
+                catch (Exception e)
+                {
+
+
+                }
             }
         });
 

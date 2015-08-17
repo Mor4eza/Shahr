@@ -7,19 +7,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.Settings.KeySettings;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetAreaJosn;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -120,28 +115,28 @@ public class SplashActivity extends ActionBarActivity {
          t = new Timer();
         t.scheduleAtFixedRate(new TimerTask() {
 
+                      @Override
+                      public void run() {
+
+                          if (i <= 2)
+                          {
+                              text1 += text.substring(0,i+1);
+                              runOnUiThread(new Runnable() {
                                   @Override
                                   public void run() {
-
-                                      if (i <= 2)
-                                      {
-                                          text1 += text.substring(0,i+1);
-                                          runOnUiThread(new Runnable() {
-                                              @Override
-                                              public void run() {
-                                                  setTitle(text1);
-                                                  thread.setText(text1);
-                                              }
-                                          });
-
-                                      } else {
-                                          i = 0;
-                                          text1 = "";
-
-                                      }
-                                      i++;
-
+                                      setTitle(text1);
+                                      thread.setText(text1);
                                   }
+                              });
+
+                          } else {
+                              i = 0;
+                              text1 = "";
+
+                          }
+                          i++;
+
+                      }
 
                               },
 
