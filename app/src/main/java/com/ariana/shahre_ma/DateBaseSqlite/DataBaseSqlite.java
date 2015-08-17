@@ -185,8 +185,8 @@ Context context;
         ContentValues values=new ContentValues();
 
         values.put(InstructionsSqlite.LIKE_DISCOUNT,like);
-        values.put(InstructionsSqlite.DISLIKE_DISCOUNT,dislike);
-        db.update(InstructionsSqlite.TABLE_NAME_DisCount,values,"  Id="+id+" AND BusinessId="+businessid,null);
+        values.put(InstructionsSqlite.DISLIKE_DISCOUNT, dislike);
+        db.update(InstructionsSqlite.TABLE_NAME_DisCount, values, "  Id=" + id + " AND BusinessId=" + businessid, null);
     }
 
     /**
@@ -1231,6 +1231,12 @@ Context context;
     {
         SQLiteDatabase db=this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_Area,null);
+    }
+
+    public  Cursor select_BusinessImage(Integer businessid)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_BUSINESS_IMAGE+" WHERE BusinessId="+businessid,null);
     }
 
 

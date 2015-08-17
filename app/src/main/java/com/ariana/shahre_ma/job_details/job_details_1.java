@@ -176,24 +176,19 @@ public class job_details_1 extends ActionBarActivity {
     }
 
          private void  display_Images(){
+             DataBaseSqlite db = new DataBaseSqlite(getActivity());
+             Cursor rows=db.select_BusinessImage(fc.GetBusiness_Id());
+             if(rows.moveToFirst())
+             {
+                 do
+                 {
+                     final TextSliderView textSliderView = new TextSliderView(getActivity());
+                     textSliderView
+                             .image(R.drawable.pooshak);
+                     slider.addSlider(textSliderView);
 
-
-                 final TextSliderView textSliderView = new TextSliderView(getActivity());
-                 textSliderView
-                         .image(R.drawable.pooshak);
-
-                 slider.addSlider(textSliderView);
-
-                 TextSliderView textSliderView2 = new TextSliderView(getActivity());
-                 textSliderView2
-                         .image(R.drawable.pooshak);
-                 slider.addSlider(textSliderView2);
-
-                 TextSliderView textSliderView3 = new TextSliderView(getActivity());
-                 textSliderView3
-                         .image(R.drawable.pooshak);
-                 slider.addSlider(textSliderView3);
-
+                 }while (rows.moveToNext());
+             }
 
                  slider.setPresetTransformer(SliderLayout.Transformer.ZoomOutSlide);
                  slider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);

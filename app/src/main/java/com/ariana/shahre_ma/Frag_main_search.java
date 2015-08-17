@@ -126,7 +126,7 @@ public class Frag_main_search extends Fragment
                 selectedWord[2] = "";
                 selectedWord[3] = "";
                 selectedWord[4] = "";
-
+                fc.SetSelected_job(txtWhat.getText().toString());
                 int startSelection = txtWhat.getSelectionStart();
 
                 Integer cityid = query.getCityId(txtWhere.getText().toString());
