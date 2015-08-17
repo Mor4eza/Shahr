@@ -44,6 +44,7 @@ Context context;
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Business);
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Business_Tops);
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Business_DisCount);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_BusinessImage);
         db.execSQL(InstructionsSqlite.CREATE_TABLE_City);
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Bookmark);
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Area);
@@ -80,6 +81,7 @@ Context context;
         db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_LikeDisCount);
         db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_DisCountMember);
         db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_Advertisment);
+        db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_BUSINESS_IMAGE);
         // create fresh  tables
         this.onCreate(db);
     }
@@ -486,6 +488,26 @@ Context context;
 
         // 3. insert
         db.insert(InstructionsSqlite.TABLE_NAME_BUSINESS, // table
+                null, //nullColumnHack
+                values); // key/value
+
+        // 4. close
+        db.close();
+    }
+
+    public void Add_BusinessImage(Integer id, Integer businessid, String src) {
+
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put(InstructionsSqlite.ID_BusinessImage, id);
+        values.put(InstructionsSqlite.BUSINESSID_BusinessImage, businessid);
+        values.put(InstructionsSqlite.SRC_BusinessImage, src);
+
+        // 3. insert
+        db.insert(InstructionsSqlite.TABLE_NAME_BUSINESS_IMAGE, // table
                 null, //nullColumnHack
                 values); // key/value
 
@@ -1346,6 +1368,22 @@ Context context;
         db.close();
 
     }
+
+    public void delete_BusinessImage()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_BUSINESS_IMAGE);
+        db.close();
+    }
+
+
+    public void delete_BusinessImage(Integer businessid)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_BUSINESS_IMAGE+" WHERE BusinessId="+businessid);
+        db.close();
+    }
+
 
     public void delete_Advertisment()
     {

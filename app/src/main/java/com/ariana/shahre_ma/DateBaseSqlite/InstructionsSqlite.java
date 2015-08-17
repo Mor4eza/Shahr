@@ -13,6 +13,7 @@ public class  InstructionsSqlite {
     public static final String TABLE_NAME_OPINION = "opinion";
     public static final String TABLE_NAME_BUSINESS_TOPS = "business_Tops";
     public static final String TABLE_NAME_BUSINESS_DISCOUNT = "business_DisCount";
+    public static final String TABLE_NAME_BUSINESS_IMAGE = "BusinessImage";
     public static final String TABLE_NAME_BUSINESS = "business";
     public static final String TABLE_NAME_City   = "city";
     public static final String TABLE_NAME_Bookmark = "bookmark";
@@ -70,6 +71,11 @@ public class  InstructionsSqlite {
     public static final String IMAGE_Advertisment = "Image";
     public static final String LINK_Advertisment = "Link";
     public static final String TYPE_Advertisment = "Type";
+
+    //Advertisment Table Columns names
+    public static final String ID_BusinessImage= "Id";
+    public static final String BUSINESSID_BusinessImage = "BusinessId";
+    public static final String SRC_BusinessImage = "Src";
 
 
     //ShowNotification Table Columns names
@@ -198,6 +204,15 @@ public class  InstructionsSqlite {
             "AreaName TEXT," +
             "CityId INTEGER" +
             ");";
+
+
+    // SQL statement to create area table
+    public static final String CREATE_TABLE_BusinessImage = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_BUSINESS_IMAGE + " (" +
+            "Id INTEGER PRIMARY KEY ," +
+            "BusinessId INTEGER," +
+            "Src TEXT" +
+            ");";
+
 
     //SQL statement to create notification table
     public static final String CREATE_TABLE_Notification = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_NOTIFICATION + " (" +
