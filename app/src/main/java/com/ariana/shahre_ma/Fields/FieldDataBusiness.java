@@ -146,7 +146,7 @@ public class FieldDataBusiness
         Src=src;
     }
 
-    public List<String> GetSrcs()
+    public List<String> GetSrc()
     {
         return Src;
     }
