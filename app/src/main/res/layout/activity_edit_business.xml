@@ -201,7 +201,7 @@
             android:text=" انتخاب موقعیت "
             android:onClick="select_map"
             android:layout_marginTop="20dp"
-            android:background="@color/material_blue"
+            android:background="@color/primary"
             />
 
         <com.dd.CircularProgressButton

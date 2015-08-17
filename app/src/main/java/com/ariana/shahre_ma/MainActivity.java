@@ -441,7 +441,6 @@ public class MainActivity extends ActionBarActivity {
                                 if (cursor.getInt(0) > 0) {
                                     Intent i = new Intent(getApplicationContext(), BookMark.class);
                                     startActivity(i);
-                                    finish();
                                 } else {
                                     Toast.makeText(getApplicationContext(), "وارد حساب خود نشده اید...!", Toast.LENGTH_LONG).show();
 
