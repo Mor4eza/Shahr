@@ -92,6 +92,9 @@ public class HTTPGetBusinessImageJson extends AsyncTask<String,Void,Integer>
                         dbs.Add_BusinessImage(Id[i], businessId[i],src[i]);
 
                     }
+
+                    Intent intent = new Intent("BusinessImage");
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                 }
 
 

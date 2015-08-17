@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -83,23 +84,22 @@ public class SplashActivity extends ActionBarActivity {
 
         else
         {
-            Intent i=new Intent(this,MainActivity.class);
-            startActivity(i);
+            new Handler().postDelayed(new Runnable(){
+                @Override
+                public void run() {
+
+                    finish();
+                    Intent mainIntent = new Intent(getApplicationContext(),MainActivity.class);
+                    startActivity(mainIntent);
+
+                }
+            }, 3000);
         }
 
 
         Dots();
 
-    /*    new Handler().postDelayed(new Runnable(){
-            @Override
-            public void run() {
-                *//* Create an Intent that will start the Menu-Activity. *//*
-                 finish();
-                 Intent mainIntent = new Intent(getApplicationContext(),MainActivity.class);
-                 startActivity(mainIntent);
 
-            }
-        }, 7000);*/
     }
 
 

@@ -1,9 +1,14 @@
 package com.ariana.shahre_ma.job_details;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +24,7 @@ import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessImageJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetOpinionJson;
 import com.ariana.shahre_ma.WebServiceSend.HTTPSendRateURL;
 import com.daimajia.slider.library.SliderLayout;
@@ -77,6 +83,7 @@ public class job_details_1 extends ActionBarActivity {
             View rootView = inflater.inflate(R.layout.fragment_job_details_1, container, false);
             query=new Query(getActivity());
             ns=new NetState(getActivity());
+            LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mBusinessImageReceiver, new IntentFilter("BusinessImage"));
 
             if(ns.checkInternetConnection()==false) {
 
@@ -88,6 +95,11 @@ public class job_details_1 extends ActionBarActivity {
                 HTTPGetOpinionJson httponion = new HTTPGetOpinionJson(getActivity());
                 httponion.seturl_opinion(fc.GetBusiness_Id());
                 httponion.execute();
+
+
+                HTTPGetBusinessImageJson httpGetBusinessImageJson=new HTTPGetBusinessImageJson(getActivity());
+                httpGetBusinessImageJson.SetBusinessId(fc.GetBusiness_Id());
+                httpGetBusinessImageJson.execute();
             }
 
             name=(TextView) rootView.findViewById(R.id.market_name);
@@ -149,7 +161,7 @@ public class job_details_1 extends ActionBarActivity {
             fc.SetLatitude_Business(allrows.getDouble(10));//Latitude
             fc.SetLongtiude_Business(allrows.getDouble(11));//Longtiude
             Log.i("Latitude", String.valueOf(allrows.getDouble(10)));
-            Log.i("Longitude",String.valueOf(allrows.getDouble(11)));
+            Log.i("Longitude", String.valueOf(allrows.getDouble(11)));
             name.setText(allrows.getString(1));//Market
             tel.setText(allrows.getString(2));//Phone
             web.setText(allrows.getString(5));//Email
@@ -183,8 +195,7 @@ public class job_details_1 extends ActionBarActivity {
                  do
                  {
                      final TextSliderView textSliderView = new TextSliderView(getActivity());
-                     textSliderView
-                             .image(R.drawable.pooshak);
+                     textSliderView.image("http://www.shahrma.com/image/business/"+rows.getString(2));
                      slider.addSlider(textSliderView);
 
                  }while (rows.moveToNext());
@@ -245,5 +256,13 @@ public class job_details_1 extends ActionBarActivity {
 
 
         }
+
+        private BroadcastReceiver mBusinessImageReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent)
+            {
+             display_Images();
+            }
+        };
     }
 }
