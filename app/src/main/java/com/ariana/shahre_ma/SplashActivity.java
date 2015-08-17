@@ -46,18 +46,6 @@ public class SplashActivity extends ActionBarActivity {
 
             if(net.checkInternetConnection())
             {
-                AlertDialog alertDialog=new AlertDialog.Builder(SplashActivity.this).create();
-                alertDialog.setTitle("پیام");
-                alertDialog.setMessage("برای اینکه اولین بار وارد برنامه شدید ممکن است برای اولین بار دریافت اطلاعات کمی طولانی شود ");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-
-                    }
-                });
-
-                // Showing Alert Message
-                alertDialog.show();
 
                 HTTPGetCityJson httpGetCityJson = new HTTPGetCityJson(SplashActivity.this);
                 httpGetCityJson.execute();
