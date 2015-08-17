@@ -2,7 +2,9 @@ package com.ariana.shahre_ma.WebServiceGet;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
@@ -74,39 +76,65 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
      */
     @Override
     protected void onPostExecute(Integer result) {
-//        onPostExecute(result);
-
         Query query=new Query(context);
         KeySettings setting=new KeySettings(context);
-        if(result==1) {
-            try {
-                DataBaseSqlite dbs = new DataBaseSqlite(context);
-                if(len>0)
-                {
+        try {
 
-                    dbs.delete_City();
-                    for (int i = 0; i < len; i++) {
-                        dbs.Add_city(Id_city[i], Name_city[i], PROVINCEID_city[i]);
+            Log.i("onpostCity","onpostCity");
+            if(result==1)
+            {
+                    DataBaseSqlite dbs = new DataBaseSqlite(context);
+                    if (len > 0)
+                    {
+
+                        dbs.delete_City();
+                        for (int i = 0; i < len; i++)
+                        {
+                            dbs.Add_city(Id_city[i], Name_city[i], PROVINCEID_city[i]);
+
+                        }
+
+
+                        if (setting.getAllUpdate())
+                        {
+                            Log.i("getCity","len>0");
+                            HTTPGetAreaJosn httpGetAreaJosn = new HTTPGetAreaJosn(context);
+                            httpGetAreaJosn.execute();
+
+                        }
 
                     }
-
-
-
-                    if(setting.getAllUpdate()) {
-                        HTTPGetAreaJosn httpGetAreaJosn = new HTTPGetAreaJosn(context);
-                        httpGetAreaJosn.execute();
+                  else
+                    {
+                        if (setting.getAllUpdate())
+                        {
+                            Log.i("getCity","len<0");
+                            Intent intent = new Intent("GetCity");
+                            LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                        }
                     }
+
 
                 }
-           }
-            catch (Exception e)
-            {
+                else
+                {
 
-            }
+                    if (setting.getAllUpdate())
+                    {
+                        Log.i("getCity","else");
+                        Intent intent = new Intent("GetCity");
+                        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                    }
+                }
         }
-        else
+        catch (Exception e)
         {
-
+            if (setting.getAllUpdate())
+            {
+                Log.i("getCity","exception");
+                Intent intent = new Intent("GetCity");
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+            }
         }
     }
 

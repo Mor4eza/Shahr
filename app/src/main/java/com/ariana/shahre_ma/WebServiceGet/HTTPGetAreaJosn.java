@@ -2,7 +2,9 @@ package com.ariana.shahre_ma.WebServiceGet;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
@@ -42,17 +44,7 @@ public class HTTPGetAreaJosn extends AsyncTask<String,Void,Integer>
         this.context=context;
         query=new Query(context);
     }
-    /**
-     *
-     */
-    @Override
-    protected void onPreExecute() {
-    /*    super.onPreExecute();
-        pd = new ProgressDialog(context);
-        pd.setMessage("در حال بروزرسانی...");
-        pd.setCancelable(false);
-        pd.show();*/
-    }
+
         protected Integer  doInBackground(String... args) {
             Integer result=0;
             try {
@@ -78,16 +70,15 @@ public class HTTPGetAreaJosn extends AsyncTask<String,Void,Integer>
         @Override
         protected void onPostExecute(Integer result) {
 
-          //  onPostExecute(result);
-            if(result==1)
+            KeySettings setting=new KeySettings(context);
+            DataBaseSqlite db = new DataBaseSqlite(context);
+            try
             {
-                KeySettings setting=new KeySettings(context);
-
+                if(result==1)
+                {
                 if (len_Area > 0)
                 {
-                    try
-                    {
-                        DataBaseSqlite db = new DataBaseSqlite(context);
+
                         db.delete_Area();
                         for (int i = 0; i < len_Area; i++)
                         {
@@ -99,18 +90,36 @@ public class HTTPGetAreaJosn extends AsyncTask<String,Void,Integer>
                         setting.saveArea(true);
 
 
-                        if(setting.getAllUpdate()) {
-                            HTTPGetFieldActivityJson httpGetFieldActivityJson = new HTTPGetFieldActivityJson(context);
-                            httpGetFieldActivityJson.execute();
+                        if(setting.getAllUpdate())
+                        {
+                                HTTPGetFieldActivityJson httpGetFieldActivityJson = new HTTPGetFieldActivityJson(context);
+                                httpGetFieldActivityJson.execute();
                         }
-                    } catch (Exception e)
+                    }
+                    else
                     {
-
+                        if (setting.getAllUpdate())
+                        {
+                            Intent intent = new Intent("GetCity");
+                            LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                        }
                     }
                 }
                 else
                 {
-
+                    if (setting.getAllUpdate())
+                    {
+                        Intent intent = new Intent("GetCity");
+                        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                if (setting.getAllUpdate())
+                {
+                    Intent intent = new Intent("GetCity");
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                 }
             }
         }

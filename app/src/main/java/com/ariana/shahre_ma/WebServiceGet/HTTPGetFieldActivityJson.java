@@ -2,13 +2,16 @@ package com.ariana.shahre_ma.WebServiceGet;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.MainActivity;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.Settings.UpdateActivity;
 
@@ -168,13 +171,16 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
      */
     @Override
     protected void onPostExecute(Integer o) {
-      //  super.onPostExecute(o);
-        try {
-            KeySettings setting=new KeySettings(context);
+
+        KeySettings setting=new KeySettings(context);
+        DataBaseSqlite db = new DataBaseSqlite(context);
+
+        try
+        {
             Log.e("Integer",String.valueOf(o));
             if (o == 1)
             {
-                DataBaseSqlite db = new DataBaseSqlite(context);
+
                 if (len > 0)
                 {
 
@@ -186,34 +192,46 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
                     db.Add_Update(ct.getIranianDate());
 
 
-                    UpdateActivity.PgUpdate.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            UpdateActivity.PgUpdate.setVisibility(View.INVISIBLE);
-                        }
-                    });
-
+                    try
+                    {
+                        UpdateActivity.PgUpdate.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                UpdateActivity.PgUpdate.setVisibility(View.INVISIBLE);
+                            }
+                        });
+                    }
+                    catch (Exception e){}
                     //end All update
                     setting.setUpdateAll(false);
                     //Get FieldActivity
                     setting.saveFieldActivity(true);
 
-                }
+                    Intent mainIntent = new Intent(context.getApplicationContext(),MainActivity.class);
+                    context.startActivity(mainIntent);
 
+                }
                 else
                 {
-
+                    if (setting.getAllUpdate())
+                    {
+                        Intent intent = new Intent("GetCity");
+                        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                    }
                 }
 
             }
             else
             {
-
+                if (setting.getAllUpdate())
+                {
+                    Intent intent = new Intent("GetCity");
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                }
             }
         }
         catch (Exception e)
         {
-
             Log.e("ExceptionFiledActivity",e.toString());
         }
     }
