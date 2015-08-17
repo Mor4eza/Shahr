@@ -89,7 +89,7 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
         Integer result=0;
         try {
 
-            //onPostExecute_start();
+            Log.i("JsonMember",GetMember_json());
             JSONObject json = new JSONObject(GetMember_json()); //your array;
             HttpClient httpClient = new DefaultHttpClient();
             HttpContext httpContext = new BasicHttpContext();
@@ -112,6 +112,7 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
             try {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(webs, "UTF-8"), 8);
                 response_message = Integer.parseInt(reader.readLine());
+                Log.i("respones",String.valueOf(response_message));
                 webs.close();
                 result=1;
             } catch (Exception e)
@@ -138,7 +139,8 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
             {
                 DataBaseSqlite dbs = new DataBaseSqlite(context);
                 Integer ID = GetResponse();
-                if (ID >= 0) {
+                Log.i("respones1",String.valueOf(ID));
+                if (ID >0) {
                     Log.i("fc.GetMember_Name()", fc.GetMember_Name());
                     dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
                     pd.dismiss();
@@ -155,6 +157,7 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
                     });
 
                     alertDialog.show();
+
 
                 }
                 else

@@ -108,7 +108,7 @@ public class SplashActivity extends ActionBarActivity {
 
                           if (i <= 2)
                           {
-                              text1 += text.substring(0,i+1);
+                              text1 = text.substring(0,i+1);
                               runOnUiThread(new Runnable() {
                                   @Override
                                   public void run() {

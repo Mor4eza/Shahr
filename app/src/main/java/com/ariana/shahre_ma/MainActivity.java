@@ -149,15 +149,6 @@ public class MainActivity extends ActionBarActivity {
             update.execute(url);
             */
 
-
-          /*  HTTPGetCollectionJson httpcoll = new HTTPGetCollectionJson(this);
-            httpcoll.execute();
-
-            HTTPGetSubsetJson httpsubset = new HTTPGetSubsetJson(this);
-            httpsubset.execute();
-
-*/
-
             HTTPGetCityJson httpcity = new HTTPGetCityJson(this);
             httpcity.execute();
 
@@ -385,7 +376,8 @@ public class MainActivity extends ActionBarActivity {
                         }
                         if (position == 2) {
 
-                            if (net.checkInternetConnection() == false) {
+                            if (net.checkInternetConnection() == false)
+                            {
                                 AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
                                 alertDialog.setTitle("هشدار");
                                 alertDialog.setMessage("اینترنت قطع می باشد");
@@ -395,7 +387,9 @@ public class MainActivity extends ActionBarActivity {
                                     }
                                 });
                                 alertDialog.show();
-                            } else {
+                            }
+                            else
+                            {
 
                                 if (query.getMemberId() > 0) // get member
                                 {

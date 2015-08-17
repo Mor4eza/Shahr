@@ -210,6 +210,8 @@ public class Edit_business extends ActionBarActivity {
 
         }
 
+
+
         if(Market_name.getText().toString().trim().equals("")) {
             AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار");
@@ -273,7 +275,7 @@ public class Edit_business extends ActionBarActivity {
             alertDialog.show();
 
         }
-        else if(query.getAreaID(Market_zone.getText().toString().trim())>0)
+        else if(query.getAreaID(Market_zone.getText().toString().trim())<0)
         {
             AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار ");

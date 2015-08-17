@@ -230,7 +230,9 @@ public class Query {
             allrows.close();
         }
         catch (Exception e)
-        {}
+        {
+
+        }
 
         return Result;
     }
