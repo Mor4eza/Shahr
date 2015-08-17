@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.WebServicePost;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -11,7 +12,6 @@ import android.util.Log;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MainActivity;
-import com.ariana.shahre_ma.MyProfile.Log_In;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -151,8 +151,11 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
                     alertDialog.setMessage("کاربر ساخته شد");
                     alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
+
                             Intent i = new Intent(context, MainActivity.class);
                             context.startActivity(i);
+                            ((Activity)context).finish();
+
                         }
                     });
 
@@ -165,7 +168,7 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
                     pd.dismiss();
                     AlertDialog alertDialog = new AlertDialog.Builder(context).create();
                     alertDialog.setTitle("هشدار ");
-                    alertDialog.setMessage("نام کاربری و رمز تکراری است");
+                    alertDialog.setMessage("این نام کاربری وجود دارد");
                     alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
 
