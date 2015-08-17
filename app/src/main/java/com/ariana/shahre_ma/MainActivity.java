@@ -186,7 +186,9 @@ public class MainActivity extends ActionBarActivity {
 
     public void fab_click(View v) {
         Intent i = new Intent(getApplicationContext(), Log_In.class);
+       //i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(i);
+        finish();
     }
 
     public void fab() {

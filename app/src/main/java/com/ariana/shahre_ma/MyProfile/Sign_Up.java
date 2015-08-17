@@ -1,19 +1,16 @@
 package com.ariana.shahre_ma.MyProfile;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -23,9 +20,7 @@ import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.ImageDownload.ImageLoader;
 import com.ariana.shahre_ma.R;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
-import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberEditJson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
 
 import java.util.ArrayList;
@@ -254,46 +249,11 @@ Query query=new Query(this);
         }
     }
 
-
-    public  void fahmidan(View v)
-    {
-
-       // Toast.makeText(getApplication(),fc.GetMember_Email(), Toast.LENGTH_LONG).show();
-      DataBaseSqlite db=new DataBaseSqlite(this);
-        Cursor allrows=db.select_AllNotificaton();
-
-        try {
-            if ( allrows.moveToFirst()) {
-                do {
-                   // Toast.makeText(getApplication(), String.valueOf(allrows.getString(0)), Toast.LENGTH_LONG).show();
-                    Log.i("Business ID", String.valueOf(allrows.getInt(2)));
-                }while (allrows.moveToNext());
-            }
-            allrows.close();
-        }
-        catch (Exception e){ Toast.makeText(getApplication(),e.toString(), Toast.LENGTH_LONG).show();}
-
-
-/*       DataBaseSqlite db=new DataBaseSqlite(this);
-
-        db.delete_BusinessId(1606);*/
-
-     /*   SqliteTOjson json=new SqliteTOjson(this);
-      //  json.getSqliteInterestTOjson();
-      email.setText(json.getSqliteInterestTOjson());*/
-
-       /* KeySettings sett=new KeySettings(this);
-        Toast.makeText(getApplication(),sett.getPMtime(), Toast.LENGTH_LONG).show();*/
-
-    /*    String links[]=new String[]{
-                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=14&cityid=68",
-                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=16&cityid=68",
-                "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=24&cityid=68"
-        };
-
-        HTTPGetBusinessJson getbusiness=new HTTPGetBusinessJson(this);
-        getbusiness.execute(links);*/
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i=new Intent(getApplicationContext(), Log_In.class);
+        startActivity(i);
 
     }
 }
