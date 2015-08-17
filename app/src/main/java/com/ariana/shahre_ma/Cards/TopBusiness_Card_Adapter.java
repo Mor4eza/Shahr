@@ -1,6 +1,7 @@
 package com.ariana.shahre_ma.Cards;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.job_details.Job_details;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,7 @@ public class TopBusiness_Card_Adapter extends RecyclerView.Adapter<TopBusiness_C
 
     List<TopBusiness_Item> mItems;
     TopBusiness_Item  nature;
+    FieldClass fc=new FieldClass();
     Context context;
     public TopBusiness_Card_Adapter(Context context) {
 
@@ -41,6 +45,7 @@ public class TopBusiness_Card_Adapter extends RecyclerView.Adapter<TopBusiness_C
                 nature = new TopBusiness_Item();
                 nature.setName(rows.getString(1));
                 nature.setDes(rows.getString(8));
+                nature.setId(rows.getInt(0));
                 nature.setThumbnail(R.drawable.pooshak);
                 mItems.add(nature);
             }while (rows.moveToNext());
@@ -64,6 +69,7 @@ public class TopBusiness_Card_Adapter extends RecyclerView.Adapter<TopBusiness_C
         TopBusiness_Item nature = mItems.get(i);
         viewHolder.tvNature.setText(nature.getName());
         viewHolder.tvDesNature.setText(nature.getDes());
+        viewHolder.tvDesNature.setTag(nature.getId());
         viewHolder.imgThumbnail.setImageResource(nature.getThumbnail());
     }
 
@@ -91,7 +97,10 @@ public class TopBusiness_Card_Adapter extends RecyclerView.Adapter<TopBusiness_C
                 public void onClick(View v) {
 
                     Log.i("ON_______CLICK",tvNature.getText().toString());
-
+                    fc.SetMarket_Business(tvNature.getText().toString());
+                    fc.SetBusiness_Id(Integer.valueOf(String.valueOf(tvDesNature.getTag())));
+                    Intent i=new Intent(context, Job_details.class);
+                    context.startActivity(i);
 
                 }
             });

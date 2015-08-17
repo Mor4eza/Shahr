@@ -325,7 +325,7 @@ public class Edit_business extends ActionBarActivity {
             alertDialog.show();
 
         }
-        else if(fc.GetLatitude_Business().equals(""))
+        else if(fc.GetLatitude_Business()<=0)
         {
             AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار ");
@@ -340,7 +340,7 @@ public class Edit_business extends ActionBarActivity {
             alertDialog.show();
 
         }
-        else if(fc.GetLongtiude_Business().equals(""))
+        else if(fc.GetLongtiude_Business()<=0)
         {
             AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار ");

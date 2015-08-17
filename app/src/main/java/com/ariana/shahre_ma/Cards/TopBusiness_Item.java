@@ -7,8 +7,18 @@ public class TopBusiness_Item {
 
     private String mName;
     private String mDes;
+    private Integer mId;
     private int mThumbnail;
 
+    public void setId(Integer id)
+    {
+        this.mId=id;
+    }
+
+    public Integer getId()
+    {
+        return mId;
+    }
     public String getName() {
         return mName;
     }
