@@ -56,8 +56,8 @@ public class ShowNotificationService extends Service {
 
           Log.i("Time", dt.Time());
           Log.i("GetAMtime",setting.getAMtime());
-          Log.i("subTIMe",dt.Time().substring(0, 1));
-        if(Integer.parseInt(dt.Time().substring(0, 1))<=11 && Integer.parseInt(dt.Time().substring(0, 1))>=06)
+          Log.i("subTIMe",dt.Time().substring(0, 2));
+        if(Integer.parseInt(dt.Time().substring(0, 2))<=11 && Integer.parseInt(dt.Time().substring(0, 2))>=06)
             fc.SetNotificationGooMorning(true);
 
         if(rows.getCount()>0)
