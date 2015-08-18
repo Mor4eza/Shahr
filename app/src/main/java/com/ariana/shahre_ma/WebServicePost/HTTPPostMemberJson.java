@@ -34,14 +34,10 @@ public class HTTPPostMemberJson extends AsyncTask<String, Long,Integer> {
 
 private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMembers";
 
-    private ProgressDialog mProgressDialog;
-    // variable get json
-    private static String data_json;
-    // variable response
-    private  static Integer response_message;
+    private static String data_json;// variable get json
+    private  static Integer response_message;// variable response
     FieldClass fc=new FieldClass();
     private ProgressDialog dialog;
-
     ProgressDialog pd;
     // get/set
 
@@ -64,7 +60,7 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
     }
 
     private static Context context;
-    public
+
 
     HTTPPostMemberJson(Context c) {
         context = c;
