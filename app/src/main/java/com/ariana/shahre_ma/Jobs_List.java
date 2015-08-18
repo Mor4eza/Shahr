@@ -125,9 +125,13 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         mSearchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        setupSearchView();if(job_list_Adapter.getItemCount()==0){
+        setupSearchView();
+        if(job_list_Adapter.getItemCount()==0 || fc.GetSearchOffline())
+        {
             return  false;
-        }else {
+        }
+        else
+        {
             return true;
         }
 
@@ -135,9 +139,7 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
         View btnsort=findViewById(R.id.sort);
         //noinspection SimplifiableIfStatement
@@ -178,6 +180,7 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
         }else if(id==android.R.id.home){
             FieldDataBusiness fdb=new FieldDataBusiness();
             fdb.ClearAll();
+            fc.SetSearchOffline(false);
 
         }
 
@@ -358,6 +361,7 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
         super.onBackPressed();
         FieldDataBusiness fdb=new FieldDataBusiness();
         fdb.ClearAll();
+        fc.SetSearchOffline(false);
 
     }
 

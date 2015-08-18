@@ -97,7 +97,7 @@ private  static Context context;
         try {
             if(fc.GetSearchOffline())
                 {
-                    fc.SetSearchOffline(false);
+
                     mItems = new ArrayList<Job_lists_card_item>();
 
                     for (int i = 0; i < fdb.GetMarketBusiness().size(); i++)

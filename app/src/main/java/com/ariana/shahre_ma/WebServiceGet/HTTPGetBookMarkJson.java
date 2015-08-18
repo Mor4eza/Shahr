@@ -167,9 +167,11 @@ public class HTTPGetBookMarkJson extends AsyncTask<String,Void,Integer>
                  Log.i("len", String.valueOf(len));
                 for (int i = 0; i < len; i++) {
                     Log.i("subsetid", String.valueOf(subsetid[i]));
-                   // dbs.delete_Business(68,subsetid[i]);
-                    dbs.Add_bookmark(Id[i], MEMberID);
-                    dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], longitude[i], latitude[i], areaid[i], area1[i], user[i], 68, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i],src[i]);
+                   try {
+                       dbs.Add_bookmark(Id[i], MEMberID);
+                       dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], latitude[i], longitude[i], areaid[i], area1[i], user[i], 68, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i], src[i]);
+                   }
+                   catch (Exception e){}
 
                 }
                 pd.dismiss();

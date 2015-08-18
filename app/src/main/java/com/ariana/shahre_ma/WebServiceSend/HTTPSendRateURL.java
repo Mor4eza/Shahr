@@ -117,49 +117,5 @@ public class HTTPSendRateURL extends AsyncTask<String, Void, Boolean> {
         }
     }
 
-    private String convertInputStreamToString(InputStream inputStream) throws IOException {
 
-        String line = "";
-        String result = "";
-        try
-        {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-
-
-
-            while ((line = bufferedReader.readLine()) != null) {
-                result += line;
-            }
-
-            /* Close Stream */
-            if (null != inputStream) {
-                inputStream.close();
-            }
-
-
-        }
-        catch (Exception e){}
-        return result;
-    }
-
-    private void parseResult(String result) {
-
-        try {
-            JSONObject response = new JSONObject(result);
-
-            JSONArray posts = response.optJSONArray("posts");
-
-            blogTitles = new String[posts.length()];
-
-            for (int i = 0; i < posts.length(); i++) {
-                JSONObject post = posts.optJSONObject(i);
-                String title = post.optString("title");
-
-                blogTitles[i] = title;
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
 }
