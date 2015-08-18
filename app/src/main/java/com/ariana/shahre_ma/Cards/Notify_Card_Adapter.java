@@ -66,7 +66,7 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
 
                 if(fc.GetNotificationGooMorning())
                 {
-                    Log.i("ShowNotifi","if");
+                    Log.i("ShowNotifi", "if");
 
                     if(rowalls.getInt(3)==1) {
                         nci = new Notify_Card_Items();
@@ -82,13 +82,15 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
                             nci.setNewTag("");
                         else
                             nci.setNewTag("جدید");
+
+                        mItems.add(nci);
                     }
 
-                    mItems.add(nci);
+
                 }
                 else
                 {
-                    Log.i("ShowNotifi","else");
+                    Log.i("ShowNotifi", String.valueOf(rowalls.getInt(3)));
                     if(rowalls.getInt(3)==0)
                     {
                         Log.i("ShowNotifi","elseto");
@@ -105,9 +107,9 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
                             nci.setNewTag("");
                         else
                             nci.setNewTag("جدید");
+                        mItems.add(nci);
 
                     }
-                    mItems.add(nci);
                 }
 
 

@@ -39,53 +39,51 @@ public class SplashActivity extends ActionBarActivity {
         IntializeSetting();
         LocalBroadcastManager.getInstance(this).registerReceiver(mCityReceiver, new IntentFilter("GetCity"));
 
+        try {
 
+                if (setting.getAllUpdate()) {
 
-         if(setting.getAllUpdate())
-        {
+                    if (net.checkInternetConnection()) {
 
-            if(net.checkInternetConnection())
-            {
+                        HTTPGetCityJson httpGetCityJson = new HTTPGetCityJson(SplashActivity.this);
+                        httpGetCityJson.execute();
 
-                HTTPGetCityJson httpGetCityJson = new HTTPGetCityJson(SplashActivity.this);
-                httpGetCityJson.execute();
+                    } else {
+                        AlertDialog alertDialog = new AlertDialog.Builder(SplashActivity.this).create();
+                        alertDialog.setTitle("اینترنت قطع می باشد");
+                        alertDialog.setCancelable(false);
+                        alertDialog.setMessage("برای اولین باز ورود به برنامه اینترنت مورد نیاز است . اینترنت خود را روشن کنید و بر روی ادامه کلیک کنید .");
+                        alertDialog.setButton("ادامه", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Log.i("Broad", "restart1");
+                                Restart();
+                            }
+                        });
 
-            }
-            else
-            {
-                AlertDialog alertDialog=new AlertDialog.Builder(SplashActivity.this).create();
-                alertDialog.setTitle("اینترنت قطع می باشد");
-                alertDialog.setCancelable(false);
-                alertDialog.setMessage("برای اولین باز ورود به برنامه اینترنت مورد نیاز است . اینترنت خود را روشن کنید و بر روی ادامه کلیک کنید .");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        Log.i("Broad","restart1");
-                        Restart();
+                        alertDialog.setButton2("خروج", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        });
+                        // Showing Alert Message
+                        alertDialog.show();
                     }
-                });
+                } else {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
 
-                // Showing Alert Message
-                alertDialog.show();
+                            finish();
+                            Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(mainIntent);
+
+                        }
+                }, 3000);
             }
-        }
-
-        else
-        {
-            new Handler().postDelayed(new Runnable(){
-                @Override
-                public void run() {
-
-                    finish();
-                    Intent mainIntent = new Intent(getApplicationContext(),MainActivity.class);
-                    startActivity(mainIntent);
-
-                }
-            }, 3000);
-        }
 
 
-        Dots();
+            Dots();
+        }catch (Exception e){}
 
 
     }
@@ -99,36 +97,37 @@ public class SplashActivity extends ActionBarActivity {
 
     public void Dots(){
 
-        //Declare the timer
-         t = new Timer();
-        t.scheduleAtFixedRate(new TimerTask() {
+        try {
+            t = new Timer();
+            t.scheduleAtFixedRate(new TimerTask() {
 
-                      @Override
-                      public void run() {
+                                      @Override
+                                      public void run() {
 
-                          if (i <= 2)
-                          {
-                              text1 = text.substring(0,i+1);
-                              runOnUiThread(new Runnable() {
-                                  @Override
-                                  public void run() {
-                                      setTitle(text1);
-                                      thread.setText(text1);
-                                  }
-                              });
+                                          if (i <= 2) {
+                                              text1 = text.substring(0, i + 1);
+                                              runOnUiThread(new Runnable() {
+                                                  @Override
+                                                  public void run() {
+                                                      setTitle(text1);
+                                                      thread.setText(text1);
+                                                  }
+                                              });
 
-                          } else {
-                              i = 0;
-                              text1 = "";
+                                          } else {
+                                              i = 0;
+                                              text1 = "";
 
-                          }
-                          i++;
+                                          }
+                                          i++;
 
-                      }
+                                      }
 
-                              },
+                                  },
 
-                0,500);
+                    0, 500);
+        }
+        catch (Exception e){}
     }
 
 
@@ -166,39 +165,49 @@ public class SplashActivity extends ActionBarActivity {
 
     public void Restart()
     {
-        if(net.checkInternetConnection())
-        {
-            AlertDialog alertDialog=new AlertDialog.Builder(SplashActivity.this).create();
-            alertDialog.setTitle("پیام");
-            alertDialog.setMessage("اطلاعات دریافت نشد");
-            alertDialog.setButton("تلاش مجدد", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which)
-                {
-                    HTTPGetCityJson httpGetCityJson=new HTTPGetCityJson(SplashActivity.this);
-                    httpGetCityJson.execute();
-                }
-            });
+        try {
+            if (net.checkInternetConnection()) {
+                AlertDialog alertDialog = new AlertDialog.Builder(SplashActivity.this).create();
+                alertDialog.setTitle("هشدار");
+                alertDialog.setMessage("اطلاعات دریافت نشد");
+                alertDialog.setButton("تلاش مجدد", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        HTTPGetCityJson httpGetCityJson = new HTTPGetCityJson(SplashActivity.this);
+                        httpGetCityJson.execute();
+                    }
+                });
 
-            // Showing Alert Message
-            alertDialog.show();
-        }
-        else
-        {
-            AlertDialog alertDialog=new AlertDialog.Builder(SplashActivity.this).create();
-            alertDialog.setTitle("اینترنت قطع می باشد");
-            //alertDialog.setCancelable(false);
-            alertDialog.setMessage("برای اولین باز ورود به برنامه اینترنت مورد نیاز است . اینترنت خود را روشن کنید و بر روی ادامه کلیک کنید .");
-            alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which)
-                {
-                    Log.i("Broad","restart");
-                    Restart();
-                }
-            });
+                alertDialog.setButton2("خروج", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
 
-            // Showing Alert Message
-            alertDialog.show();
+
+                // Showing Alert Message
+                alertDialog.show();
+            } else {
+                AlertDialog alertDialog = new AlertDialog.Builder(SplashActivity.this).create();
+                alertDialog.setTitle("اینترنت قطع می باشد");
+                //alertDialog.setCancelable(false);
+                alertDialog.setMessage("برای اولین بار ورود به برنامه اینترنت مورد نیاز است . اینترنت خود را روشن کنید و بر روی ادامه کلیک کنید .");
+                alertDialog.setButton("ادامه", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.i("Broad", "restart");
+                        Restart();
+                    }
+                });
+                alertDialog.setButton2("خروج", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+
+                // Showing Alert Message
+                alertDialog.show();
+            }
         }
+        catch (Exception e){}
 
     }
 
