@@ -55,16 +55,15 @@ public class BookMark extends ActionBarActivity {
         setContentView(R.layout.activity_book_mark);
         lv=(ListView) findViewById(R.id.lvbookmark);
 
-         adapter = new BookmarkAdapter(this, generateData());
+        adapter = new BookmarkAdapter(this, generateData());
         lv.setAdapter(adapter);
-
 
         if(ns.checkInternetConnection())
         {
-                //The user Getting bookmark
-                HTTPGetBookMarkJson b = new HTTPGetBookMarkJson(this);
-                b.SetUrl_MemberId(query.getMemberId());
-                b.execute();
+            //The user Getting bookmark
+            HTTPGetBookMarkJson b = new HTTPGetBookMarkJson(this);
+            b.SetUrl_MemberId(query.getMemberId());
+            b.execute();
         }
         else
         {
