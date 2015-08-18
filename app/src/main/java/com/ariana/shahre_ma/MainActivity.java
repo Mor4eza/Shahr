@@ -306,7 +306,7 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-        final IProfile profile = new ProfileDrawerItem().withName(uName).withEmail(settings.getCityName()).withIcon(getResources().getDrawable(R.mipmap.profile3));
+        final IProfile profile = new ProfileDrawerItem().withName(uName).withEmail(settings.getCityName());
 
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
