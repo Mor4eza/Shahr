@@ -301,9 +301,9 @@ public class MainActivity extends ActionBarActivity {
             uName = allrows.getString(0);
             allrows.close();
         } catch (Exception e) {
-            //Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
+
         }
-        //drawer
+
 
 
         final IProfile profile = new ProfileDrawerItem().withName(uName).withEmail(settings.getCityName()).withIcon(getResources().getDrawable(R.mipmap.profile3));
@@ -360,8 +360,6 @@ public class MainActivity extends ActionBarActivity {
                     @Override
                     public boolean onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
                         if (drawerItem instanceof Nameable) {
-                          //  Toast.makeText(MainActivity.this, MainActivity.this.getString(((Nameable) drawerItem).getNameRes()), Toast.LENGTH_SHORT).show();
-
 
                         }
                         if (position == 0) {
@@ -473,11 +471,6 @@ public class MainActivity extends ActionBarActivity {
                         return false;
                     }
                 }).build();
-       /* getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_menu);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
-        //  getSupportActionBar().setIcon(R.drawable.ic_action_menu);
 
 
     }
@@ -621,9 +614,7 @@ public class MainActivity extends ActionBarActivity {
         lps.setMargins(margin, margin, 10, margin);
 
         ShowcaseView sv=new ShowcaseView.Builder(this)
-               // .setTarget(new ActionViewTarget(this, toolbar.get))
-               // .setTarget( new ViewTarget( ((ViewGroup)findViewById(R.id.action_bar)).getChildAt(0) ) )
-               // .setTarget(Hdiscount)
+
                 .setContentTitle("به شهرما خوش آمدید")
                 .setContentText("برای استفاده از امکانت برنامه از این منو استفاده کنید")
                 .setStyle(R.style.CustomShowcaseTheme)
