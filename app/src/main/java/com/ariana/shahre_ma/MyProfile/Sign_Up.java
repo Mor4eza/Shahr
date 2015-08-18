@@ -53,8 +53,8 @@ Query query=new Query(this);
 
     String Aname, Aemail, Acity, Aphone, Ausername, Apass;
     Boolean Asex;
-    Integer Aage;
-    String _json;
+    Integer Aage=0;
+    String _json="";
 
 
     private ImageLoader imgLoader;
@@ -127,7 +127,7 @@ Query query=new Query(this);
                 AlertDialog alertDialog = new AlertDialog.Builder(Sign_Up.this).create();
                 alertDialog.setTitle("هشدار ");
                 alertDialog.setMessage("شهر خود را انتخاب کنید");
-                alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
+                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
                         city.requestFocus();
@@ -142,7 +142,7 @@ Query query=new Query(this);
                 AlertDialog alertDialog = new AlertDialog.Builder(Sign_Up.this).create();
                 alertDialog.setTitle("هشدار ");
                 alertDialog.setMessage("نام خود را وارد کنید");
-                alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
+                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
                         name.requestFocus();
@@ -157,7 +157,7 @@ Query query=new Query(this);
                 AlertDialog alertDialog = new AlertDialog.Builder(Sign_Up.this).create();
                 alertDialog.setTitle("هشدار ");
                 alertDialog.setMessage("نام کاربری را وارد کنید");
-                alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
+                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
 
@@ -171,7 +171,21 @@ Query query=new Query(this);
                 AlertDialog alertDialog = new AlertDialog.Builder(Sign_Up.this).create();
                 alertDialog.setTitle("هشدار ");
                 alertDialog.setMessage("رمز را وارد کنید");
-                alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
+                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                    }
+                });
+
+                alertDialog.show();
+            }
+            else if(Aage==0 || Aage.equals(null))
+            {
+                AlertDialog alertDialog = new AlertDialog.Builder(Sign_Up.this).create();
+                alertDialog.setTitle("هشدار ");
+                alertDialog.setMessage("سن خود را وارد کنید");
+                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
 
