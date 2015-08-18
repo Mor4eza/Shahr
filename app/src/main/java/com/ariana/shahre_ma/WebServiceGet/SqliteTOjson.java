@@ -17,6 +17,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.DatagramPacket;
 
 /**
  * Created by ariana2 on 6/5/2015.
@@ -315,6 +316,39 @@ public class SqliteTOjson {
 
         return Sqlite_Json;
     }
+
+    // convert Member to json
+    public String ProductTOjson(Integer memberid,String name, String property, Double price, Double latitude, Double longtiude, Boolean adaptive, String description,String image,String phone,String mobile,String address,String email,Integer subsetid, Integer areaid) {
+        String field_Json = "";
+        try {
+            Query query=new Query(context);
+            // JSONobject get key/value convert to json
+            JSONObject rowObject = new JSONObject();
+            rowObject.put("MemberId",memberid);
+            rowObject.put("Name", name);
+            rowObject.put("Property", property);
+            rowObject.put("Price", price);
+            rowObject.put("Latitude", latitude);
+            rowObject.put("Longtiude", longtiude);
+            rowObject.put("Adaptive", adaptive);
+            rowObject.put("Description", description);
+            rowObject.put("Image", image);
+            rowObject.put("Phone", phone);
+            rowObject.put("Mobile", mobile);
+            rowObject.put("Address", address);
+            rowObject.put("Email", email);
+            rowObject.put("SubsetId", subsetid);
+            rowObject.put("AreaId", areaid);
+
+            field_Json = rowObject.toString();
+
+        } catch (Exception e) {
+            Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
+        }
+        return field_Json;
+
+    }
+
 
     private void writeToFile(String Json) {
         File root = android.os.Environment.getExternalStorageDirectory();
