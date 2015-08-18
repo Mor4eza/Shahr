@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ariana.shahre_ma.ImageDownload.ImageLoader;
 import com.ariana.shahre_ma.MainActivity;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetLoginJson;
@@ -26,8 +25,7 @@ public class Log_In extends ActionBarActivity {
     EditText username;
     EditText password;
     TextView error;
-   public static CircularProgressButton btn;
-    private ImageLoader imgLoader;
+    public static CircularProgressButton btn;
     String mesage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
