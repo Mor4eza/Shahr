@@ -26,6 +26,21 @@ public class FieldDataBase
     List<Integer> SubsetId_Product =new ArrayList<>();
     List<Integer> AreaId_Product =new ArrayList<>();
 
+    //Fields of the Subset
+    List<Integer> Id_Subset =new ArrayList<>();
+    List<String>  Name_Subset =new ArrayList<>();
+    List<Integer> CollectionId_Subset =new ArrayList<>();
+
+    //Fields of the Collection
+    List<Integer> Id_Collection =new ArrayList<>();
+    List<String>  Name_Collection =new ArrayList<>();
+
+
+
+
+
+
+
 
 
     //Fields set the table Product
@@ -44,7 +59,7 @@ public class FieldDataBase
     public void setEmail_Product(List<String> email){this.Email_Product=email;}
     public void setSubsetId_Product(List<Integer> subsetid){this.SubsetId_Product=subsetid;}
     public void setAreaId_Product(List<Integer> areaid){this.AreaId_Product=areaid;}
-    //Fields get the table Product
+    //Fields set the table Product
     public List<String> getName_Product(){return this.Name_Product;}
     public List<String> getProperty_Product(){return this.Property_Product;}
     public List<Double> getprice_Product(){return this.Price_Product;}
@@ -60,6 +75,28 @@ public class FieldDataBase
     public List<Integer> getSubsetId_Product(){return this.SubsetId_Product;}
     public List<Integer> getAreaId_Product(){return this.AreaId_Product;}
     public List<Integer> getMemberId_Product(){return this.MemberId_Product;}
+
+
+
+
+    //Fields set the table Subset
+    public void setSubsetId_Subset(List<Integer> id){this.Id_Subset=id;}
+    public void setName_Subset(List<String> name){this.Name_Subset=name;}
+    public void setCollectionId_Subset(List<Integer> collectionid){this.CollectionId_Subset=collectionid;}
+    //Fields get the table Subset
+    public List<Integer> getId_Subset(){return this.Id_Subset;}
+    public List<String> getName_Subset(){return this.Name_Subset;}
+    public List<Integer> getCollectionId_Subset(){return this.CollectionId_Subset;}
+
+
+
+
+    //Fields set the table Collection
+    public void setId_Collection(List<Integer> id){this.Id_Collection=id;}
+    public void setName_Collection(List<String> name){this.Name_Collection=name;}
+    //Fields get the table Collection
+    public List<Integer> getId_Collection(){return this.Id_Collection;}
+    public List<String> getName_Collection(){return this.Name_Collection;}
 
 
 
