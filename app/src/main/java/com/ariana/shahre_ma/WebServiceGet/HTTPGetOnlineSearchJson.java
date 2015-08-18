@@ -350,7 +350,7 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
 
             else {
 
-
+                fc.SetSearchOnline(true);
                 Intent intent = new Intent(this.context, Jobs_List.class);
                 this.context.startActivity(intent);
                 Log.i("Count Business : ", "دریافت ثبت شده ها");

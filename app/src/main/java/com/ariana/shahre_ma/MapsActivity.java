@@ -195,8 +195,8 @@ public class MapsActivity extends ActionBarActivity {
                     do {
 
                         Market[l] = allrows.getString(1);
-                        Longtitude[l] = allrows.getDouble(15);
-                        Latitude[l] = allrows.getDouble(16);
+                        Longtitude[l] = allrows.getDouble(16);
+                        Latitude[l] = allrows.getDouble(15);
                         Rate[l] = allrows.getDouble(29);
                         id[l] = allrows.getInt(0);
 

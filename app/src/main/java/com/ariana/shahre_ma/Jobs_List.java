@@ -126,7 +126,7 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
         getMenuInflater().inflate(R.menu.menu_main, menu);
         mSearchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         setupSearchView();
-        if(job_list_Adapter.getItemCount()==0 || fc.GetSearchOffline())
+        if(job_list_Adapter.getItemCount()==0 || fc.GetSearchOffline() || fc.GetSearchOnline())
         {
             return  false;
         }
@@ -181,7 +181,7 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
             FieldDataBusiness fdb=new FieldDataBusiness();
             fdb.ClearAll();
             fc.SetSearchOffline(false);
-
+            fc.SetSearchOnline(false);
         }
 
 
@@ -258,6 +258,7 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
             setting.saveSearchBusiness(true);
             fc.SetMarket_Business(newText);
             setCardsforsearch();
+
         }
         return false;
     }
@@ -362,6 +363,7 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
         FieldDataBusiness fdb=new FieldDataBusiness();
         fdb.ClearAll();
         fc.SetSearchOffline(false);
+        fc.SetSearchOnline(false);
 
     }
 
