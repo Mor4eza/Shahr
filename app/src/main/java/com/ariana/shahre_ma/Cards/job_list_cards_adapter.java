@@ -19,7 +19,6 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
-import com.ariana.shahre_ma.ImageDownload.ImageLoader;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.Settings.KeySettings;
@@ -43,7 +42,6 @@ public class job_list_cards_adapter extends RecyclerView.Adapter<job_list_cards_
     KeySettings setting;
     Boolean search=true;
     Cursor allrows;
-    ImageLoader imgLoader;
     String image_url_1;
 private  static Context context;
 
@@ -52,7 +50,6 @@ private  static Context context;
         super();
         this.context=context;
         Query query=new Query(context);
-        imgLoader=new ImageLoader(context);
         FieldDataBusiness fdb=new FieldDataBusiness();
         NetState ns=new NetState(context);
         setting=new KeySettings(context);

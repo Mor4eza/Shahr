@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
-import com.ariana.shahre_ma.ImageDownload.ImageLoader;
 import com.ariana.shahre_ma.Jobs_List;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
@@ -35,7 +34,6 @@ public class MyListAdapter extends BaseExpandableListAdapter {
     private ArrayList<Continent> continentList;
     private ArrayList<Continent> originalList;
     private FieldClass fc=new FieldClass();
-    ImageLoader imgLoader;
     public static ImageView headimage;
     public MyListAdapter(Context context, ArrayList<Continent> continentList) {
         this.context = context;
@@ -146,10 +144,6 @@ public class MyListAdapter extends BaseExpandableListAdapter {
 
 
             Picasso.with(context).load("http://www.shahrma.com/app/img/collection_icon/" + continent.getUrl() + ".png").into(headimage);
-
-             /*   String image_url_1 = "http://www.shahrma.com/app/img/collection_icon/" + continent.getUrl() + ".png";
-                imgLoader.DisplayImage(image_url_1, headimage);
-              */
 
             TextView heading = (TextView) view.findViewById(R.id.laptop1);
             heading.setText(continent.getName().trim());

@@ -18,7 +18,6 @@ import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
-import com.ariana.shahre_ma.ImageDownload.ImageLoader;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
@@ -53,11 +52,8 @@ Query query=new Query(this);
 
     String Aname, Aemail, Acity, Aphone, Ausername, Apass;
     Boolean Asex;
-    Integer Aage=0;
-    String _json="";
-
-
-    private ImageLoader imgLoader;
+    Integer Aage;
+    String _json;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,7 +123,7 @@ Query query=new Query(this);
                 AlertDialog alertDialog = new AlertDialog.Builder(Sign_Up.this).create();
                 alertDialog.setTitle("هشدار ");
                 alertDialog.setMessage("شهر خود را انتخاب کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
                         city.requestFocus();
@@ -142,7 +138,7 @@ Query query=new Query(this);
                 AlertDialog alertDialog = new AlertDialog.Builder(Sign_Up.this).create();
                 alertDialog.setTitle("هشدار ");
                 alertDialog.setMessage("نام خود را وارد کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
                         name.requestFocus();
@@ -157,7 +153,7 @@ Query query=new Query(this);
                 AlertDialog alertDialog = new AlertDialog.Builder(Sign_Up.this).create();
                 alertDialog.setTitle("هشدار ");
                 alertDialog.setMessage("نام کاربری را وارد کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
 
@@ -171,21 +167,7 @@ Query query=new Query(this);
                 AlertDialog alertDialog = new AlertDialog.Builder(Sign_Up.this).create();
                 alertDialog.setTitle("هشدار ");
                 alertDialog.setMessage("رمز را وارد کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-
-                    }
-                });
-
-                alertDialog.show();
-            }
-            else if(Aage==0 || Aage.equals(null))
-            {
-                AlertDialog alertDialog = new AlertDialog.Builder(Sign_Up.this).create();
-                alertDialog.setTitle("هشدار ");
-                alertDialog.setMessage("سن خود را وارد کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
 

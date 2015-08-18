@@ -156,10 +156,10 @@ public class job_details_1 extends ActionBarActivity {
                  allrows.moveToNext();
 
                  fc.SetBusiness_Id(allrows.getInt(0));//Id
-                 fc.SetLatitude_Business(allrows.getDouble(16));//Latitude
-                 fc.SetLongtiude_Business(allrows.getDouble(17));//Longtiude
-                 Log.i("Latitude", String.valueOf(allrows.getDouble(16)));
-                 Log.i("Longitude", String.valueOf(allrows.getDouble(17)));
+                 fc.SetLatitude_Business(allrows.getDouble(15));//Latitude
+                 fc.SetLongtiude_Business(allrows.getDouble(16));//Longtiude
+                 Log.i("Latitude", String.valueOf(allrows.getDouble(15)));
+                 Log.i("Longitude", String.valueOf(allrows.getDouble(16)));
                  name.setText(allrows.getString(1));//Market
                  tel.setText(allrows.getString(3));//Phone
                  web.setText(allrows.getString(6));//Email
@@ -187,10 +187,10 @@ public class job_details_1 extends ActionBarActivity {
                  allrows.moveToNext();
 
                  fc.SetBusiness_Id(allrows.getInt(0));//Id
-                 fc.SetLatitude_Business(allrows.getDouble(16));//Latitude
-                 fc.SetLongtiude_Business(allrows.getDouble(17));//Longtiude
-                 Log.i("Latitude", String.valueOf(allrows.getDouble(16)));
-                 Log.i("Longitude", String.valueOf(allrows.getDouble(17)));
+                 fc.SetLatitude_Business(allrows.getDouble(15));//Latitude
+                 fc.SetLongtiude_Business(allrows.getDouble(16));//Longtiude
+                 Log.i("Latitude", String.valueOf(allrows.getDouble(15)));
+                 Log.i("Longitude", String.valueOf(allrows.getDouble(16)));
                  name.setText(allrows.getString(1));//Market
                  tel.setText(allrows.getString(3));//Phone
                  web.setText(allrows.getString(6));//Email
