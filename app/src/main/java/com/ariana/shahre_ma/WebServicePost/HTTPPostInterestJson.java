@@ -1,12 +1,15 @@
 package com.ariana.shahre_ma.WebServicePost;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetOpinionJson;
 
@@ -28,7 +31,7 @@ import java.io.InputStreamReader;
 /**
  * Created by ariana on 6/16/2015.
  */
-public class HTTPPostInterestJson     extends AsyncTask<String, Long, Object>
+public class HTTPPostInterestJson     extends AsyncTask<String, Long, Integer>
     {
         private static  final  String url_Interest="http://test.shahrma.com/api/ApiTakeInterest";
 
@@ -39,8 +42,9 @@ public class HTTPPostInterestJson     extends AsyncTask<String, Long, Object>
         private  static String response_message;
         private static Context context;
 
-       /* FieldClass fc=new FieldClass();
-        private ProgressDialog dialog;*/
+        FieldClass fc=new FieldClass();
+
+        private ProgressDialog pd;
 
         // get/set
 
@@ -75,21 +79,21 @@ public class HTTPPostInterestJson     extends AsyncTask<String, Long, Object>
     }
 
 
-    protected void onPostExecute(String file_url) {
-        try {
 
-           /* this.dialog.setMessage("صبر کنید ...");
-            this.dialog.show();*/
-
-        } catch (Exception e) {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd = new ProgressDialog(context);
+            pd.setMessage("در حال ثبت...");
+            pd.setCancelable(false);
+            pd.show();
         }
-    }
-
     @Override
-    protected String doInBackground(String... params) {
+    protected Integer doInBackground(String... params) {
+        Integer result=0;
         try {
 
-            //onPostExecute();
+
             Log.e("JSON: ",GetInterest_json());
            // JSONObject json = new JSONObject(GetInterest_json()); //your array;
             JSONArray json = new JSONArray(GetInterest_json()); //your array;
@@ -107,40 +111,65 @@ public class HTTPPostInterestJson     extends AsyncTask<String, Long, Object>
             HttpResponse httpresponse = httpClient.execute(httpPost, httpContext); //execute your request and parse response
 
 
-            //  String json_String = EntityUtils.toString(entity); //if response in JSON format
-
             HttpEntity entity = httpresponse.getEntity();
             InputStream webs = entity.getContent();
             try {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(webs, "UTF-8"), 8);
                 response_message = (reader.readLine());
                 webs.close();
-            } catch (Exception e) {
+                result=1;
+                pd.dismiss();
+
+                AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                alertDialog.setTitle("پیام");
+                alertDialog.setMessage("ثبت شد .");
+                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog.show();
+
+            } catch (Exception e)
+            {
+                pd.dismiss();
+                result=0;
+
+                AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                alertDialog.setTitle("خطا");
+                alertDialog.setMessage("ثبت نشد دوباره امتحان کنید");
+                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog.show();
                 Log.e("Error in conversion: ", e.toString());
             }
 
-            //SetResponse(json_String);
-            onPostExecute();
-        } catch (Exception e) {
+
+        } catch (Exception e)
+        {
+            pd.dismiss();
+            result=0;
+
+            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+            alertDialog.setTitle("خطا");
+            alertDialog.setMessage("ثبت نشد دوباره امتحان کنید");
+            alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            alertDialog.show();
+
             e.printStackTrace();
             Log.e("Error in Exception: ", e.toString());
             // Toast.makeText(, e.toString(), Toast.LENGTH_LONG).show();
         }
-        String s="1";
-        return s;
+
+        return result;
     }
 
-    protected void onPostExecute() {
-            /* Download complete. Lets update UI */
 
-        /*DataBaseSqlite dbs = new DataBaseSqlite(context);
-        Integer ID = Integer.parseInt(GetResponse());
-        if (ID >= 0) {
-            dbs.Add_Interest(1, fc.GetBusiness_SubsetIdb(),1) ;
-                //  dialog.dismiss();
-            }
-*/
-
-
-    }
 }

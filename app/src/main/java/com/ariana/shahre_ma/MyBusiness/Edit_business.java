@@ -129,9 +129,7 @@ public class Edit_business extends ActionBarActivity {
             Log.i("id",String.valueOf(fc.GetBusiness_Id()));
             Cursor rows = db.select_AllBusinessId(fc.GetBusiness_Id());
             rows.moveToFirst();
-           /* Log.i("1", rows.getString(1));
-            Log.i("2",rows.getString(2));
-            Log.i("3",rows.getString(3));*/
+
             Market_name.setText(rows.getString(1));//Market
             Market_tell.setText(rows.getString(2));//Phone
             Market_mobile.setText(rows.getString(3));//Mobile
@@ -270,8 +268,6 @@ public class Edit_business extends ActionBarActivity {
 
                 }
             });
-
-
             alertDialog.show();
 
         }

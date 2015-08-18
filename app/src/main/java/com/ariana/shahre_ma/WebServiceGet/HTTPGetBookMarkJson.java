@@ -34,19 +34,9 @@ public class HTTPGetBookMarkJson extends AsyncTask<String,Void,Integer>
 
     ProgressDialog pd;
     private static Context context;//context
-    FieldClass fc=new FieldClass();
     private static   String bookmark;// business api url
-
     private    Integer MEMberID; // member id
-
-
     Integer len=0;
-    Integer BusinessId[];
-
-
-    private List<String> selectbusiness=new ArrayList<>();
-    private List<Integer> selectId=new ArrayList<>();
-
     Integer Id[];
     String market[];
     String code[];

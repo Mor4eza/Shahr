@@ -159,7 +159,8 @@ public class HTTPGetNotificationJson extends AsyncTask<String,Void,Integer> {
                     }
 
 
-                } else {
+                } else
+                {
                     Log.i("else", "else");
                 }
 

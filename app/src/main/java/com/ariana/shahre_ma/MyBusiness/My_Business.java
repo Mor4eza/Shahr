@@ -86,13 +86,6 @@ public class My_Business extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
-       /* job_list_Adapter = new Business_Card_Adapter(this);
-        ScaleInAnimationAdapter alphaAdapter = new ScaleInAnimationAdapter(job_list_Adapter);
-        alphaAdapter.setDuration(400);
-        mRecyclerView.setAdapter(alphaAdapter);
-        job_list_Adapter.notifyItemChanged(0);
-        job_list_Adapter.notifyDataSetChanged();
-        Log.i("Resume", "Resume");*/
     }
 
     public void add_business(View v){

@@ -61,7 +61,7 @@ public class HTTPPostDisCount extends AsyncTask<String,Void,Integer> {
     protected void onPreExecute() {
         super.onPreExecute();
         pd = new ProgressDialog(context);
-        pd.setMessage("Saveing...");
+        pd.setMessage("در حال ثبت...");
         pd.setCancelable(false);
         pd.show();
     }
