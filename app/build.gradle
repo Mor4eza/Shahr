@@ -108,7 +108,6 @@ dependencies {
     compile 'org.osmdroid:osmdroid-android:4.2'
     compile 'org.slf4j:slf4j-simple:1.6.1'
     compile 'com.google.android.gms:play-services:6.5.87'
-    //compile 'com.google.android.gms:play-services-maps:5.0.89'
     compile 'com.github.citux:datetimepicker:0.1.2'
     compile 'com.android.support:design:22.2.0'
     compile 'com.wrapp.floatlabelededittext:library:0.0.6'

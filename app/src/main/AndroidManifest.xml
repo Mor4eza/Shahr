@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.ariana.shahre_ma">
+    package="com.ariana.shahre_ma" >
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -16,10 +16,9 @@
 
     <uses-feature
         android:glEsVersion="0x00020000"
-        android:required="true"/>
+        android:required="true" />
 
     <application
-
         android:name=".ShahreMa"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -28,9 +27,8 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/MainTheme"
-            android:screenOrientation="portrait" >
-
+            android:screenOrientation="portrait"
+            android:theme="@style/MainTheme" >
         </activity>
         <activity
             android:name=".Jobs"
@@ -51,32 +49,32 @@
                 android:value="com.ariana.shahre_ma.Jobs" />
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name=".job_details.Job_details"
-            android:parentActivityName=".Jobs_List" >
+            android:parentActivityName=".Jobs_List"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.Jobs_List" />
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name=".job_details.job_details_1"
-            android:label="@string/title_activity_job_details_1" >
+            android:label="@string/title_activity_job_details_1"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".job_details.Job_details_map"
             android:label="@string/title_activity_job_details_map" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name=".job_details.Job_details_comment"
             android:label="@string/title_activity_job_details_comment"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name=".MyProfile.Sign_Up"
-            android:label="@string/title_activity_sign__up" >
+            android:label="@string/title_activity_sign__up"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".MyProfile.Log_In"
@@ -87,10 +85,10 @@
                 android:value="com.ariana.shahre_ma.MainActivity" />
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name=".Bookmarks.BookMark"
             android:label="@string/title_activity_book_mark"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.MainActivity" />
@@ -104,16 +102,15 @@
             android:value="@string/google_maps_key" />
 
         <activity
-
             android:name=".MapsActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_maps" >
+            android:label="@string/title_activity_maps"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name=".Notification.Activity_notify"
             android:label="@string/title_activity_activity_notify"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.MainActivity" />
@@ -123,56 +120,56 @@
         </service>
 
         <activity
-            android:screenOrientation="portrait"
             android:name=".Settings.Setting"
             android:label="@string/title_activity_setting"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.MainActivity" />
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name=".ListExpand.ListActivity"
-            android:label="@string/title_activity_list" >
+            android:label="@string/title_activity_list"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name=".MyCity.My_city"
             android:label="@string/title_activity_my_city"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.MainActivity" />
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name=".MyProfile.My_Profile"
-            android:label="@string/title_activity_my__profile" >
+            android:label="@string/title_activity_my__profile"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name=".MyProfile.Edit_User"
             android:label="@string/title_activity_edit__user"
-            android:parentActivityName=".MyProfile.My_Profile" >
+            android:parentActivityName=".MyProfile.My_Profile"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.MyProfile.My_Profile" />
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name=".MyBusiness.My_Business"
             android:label="@string/title_activity_my__business"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.MainActivity" />
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name=".MyBusiness.Edit_business"
             android:label="@string/title_activity_add_business"
-            android:parentActivityName=".MyBusiness.My_Business" >
+            android:parentActivityName=".MyBusiness.My_Business"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.MyBusiness.My_Business" />
@@ -185,19 +182,19 @@
                 android:value=".MyBusiness.Edit_business" />
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name=".MyInterest.My_Interest"
             android:label="@string/title_activity_my__interest"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.MainActivity" />
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name=".MyBusiness.Discount"
             android:label="@string/title_activity_discount"
-            android:parentActivityName=".MyBusiness.My_Business" >
+            android:parentActivityName=".MyBusiness.My_Business"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.MyBusiness.My_Business" />
@@ -220,38 +217,36 @@
 
         <activity
             android:name=".Settings.UpdateActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_update" >
+            android:label="@string/title_activity_update"
+            android:screenOrientation="portrait" >
         </activity>
 
         <service
-
             android:name=".Service.ShowNotificationService"
             android:enabled="true"
             android:exported="true" >
         </service>
 
         <activity
-            android:screenOrientation="portrait"
             android:name=".SplashActivity"
             android:label="@string/title_activity_splash"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name=".MyBusiness.Add_New_Business"
-            android:label="@string/title_activity_add__business" >
+            android:label="@string/title_activity_add__business"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name=".NearMe.NearMeActivity"
-            android:label="@string/title_activity_near_me" >
+            android:label="@string/title_activity_near_me"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.MainActivity" />
@@ -259,7 +254,15 @@
         <activity
             android:name=".AboutUs"
             android:label="@string/title_activity_about_us"
-            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ariana.shahre_ma.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Bazarche.Bazarche"
+            android:label="@string/title_activity_bazarche"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

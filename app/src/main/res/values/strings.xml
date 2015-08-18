@@ -58,5 +58,6 @@
     <string name="filter">فیلتر کردن</string>
     <string name="aboutUs">درباره ما</string>
     <string name="title_activity_about_us">درباره ما</string>
+    <string name="title_activity_bazarche">بازارچه</string>
 
 </resources>

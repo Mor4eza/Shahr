@@ -8,20 +8,17 @@ import android.util.Log;
 
 import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Notification.Notify;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
 public class ShowNotificationService extends Service {
 
-    Query query=new Query(this);
     KeySettings setting=new KeySettings(this);
     DataBaseSqlite db=new DataBaseSqlite(this);
     DateTime dt=new DateTime();
     FieldClass fc=new FieldClass();
-    Integer clock=6;
-    Integer clock1=11;
+
 
     public ShowNotificationService()
     {
@@ -66,8 +63,7 @@ public class ShowNotificationService extends Service {
         if(rows.getCount()>0)
         {
             Notify.Notificationm(this);
-            // else if(setting.getPMtime().equals(dt.Time()))
-            Notify.Notificationm(this);
+
         }
 
     }
