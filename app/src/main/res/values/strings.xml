@@ -61,5 +61,6 @@
     <string name="title_activity_bazarche">بازارچه</string>
     <string name="title_activity_add_product">add_product</string>
     <string name="title_activity_my_products">My_products</string>
+    <string name="title_activity_edit__product">Edit_Product</string>
 
 </resources>
