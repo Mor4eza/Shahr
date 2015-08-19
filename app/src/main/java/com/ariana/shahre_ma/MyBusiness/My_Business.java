@@ -247,7 +247,7 @@ public class My_Business extends ActionBarActivity {
 
         if (id == R.id.help) {
 
-        help1();
+        help3();
             return true;
         }
 
