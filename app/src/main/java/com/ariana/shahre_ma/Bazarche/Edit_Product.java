@@ -2,9 +2,11 @@ package com.ariana.shahre_ma.Bazarche;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 
 import com.ariana.shahre_ma.R;
 
@@ -20,11 +22,23 @@ public class Edit_Product extends ActionBarActivity {
     AutoCompleteTextView tv_product_subset;
     AutoCompleteTextView tv_product_city;
     AutoCompleteTextView tv_product_area;
+    RadioGroup radioGroup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit__product);
         initViews();
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.tavafoq) {
+                    Log.i("cheked", "tavafoq");
+                } else {
+                    Log.i("cheked", "maqtoo");
+                }
+            }
+        });
 
     }
 
@@ -45,6 +59,7 @@ public class Edit_Product extends ActionBarActivity {
         tv_product_subset=(AutoCompleteTextView)findViewById(R.id.edit_ac_product_subset);
         tv_product_city=(AutoCompleteTextView)findViewById(R.id.edit_ac_product_city);
         tv_product_area=(AutoCompleteTextView)findViewById(R.id.edit_ac_product_area);
+        radioGroup=(RadioGroup)findViewById(R.id.radio_price);
     }
 
 

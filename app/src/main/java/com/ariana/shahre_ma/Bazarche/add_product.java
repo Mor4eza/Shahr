@@ -1,7 +1,6 @@
 package com.ariana.shahre_ma.Bazarche;
 
 import android.app.AlertDialog;
-import android.app.DownloadManager;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -11,9 +10,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.MultiAutoCompleteTextView;
+import android.widget.RadioGroup;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
@@ -40,7 +38,7 @@ public class add_product extends ActionBarActivity {
     AutoCompleteTextView tv_product_city;
     AutoCompleteTextView tv_product_area;
     CheckBox cb_adaptive_product;
-
+    RadioGroup radioGroup;
     String json="";
     String name="";
     Double price=0.0;
@@ -69,20 +67,35 @@ public class add_product extends ActionBarActivity {
 
 
         //CheckBox Adaptive
-        cb_adaptive_product.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+      /*  cb_adaptive_product.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        tv_product_price.setEnabled(false);
+                        tv_product_price.setText("");
+                        adaptive = true;
+                    } else {
+                        tv_product_price.setEnabled(true);
+                        tv_product_price.setText("");
+                        adaptive = false;
+                    }
+                }
+        });*/
+
+        //Radio Group
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    tv_product_price.setEnabled(false);
-                    tv_product_price.setText("");
-                    adaptive=true;
-                }else{
-                    tv_product_price.setEnabled(true);
-                    tv_product_price.setText("");
-                    adaptive=false;
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(checkedId == R.id.tavafoq) {
+                    Log.i("cheked","tavafoq");
+                }else {
+                    Log.i("cheked","maqtoo");
                 }
             }
         });
+
+
 
         //AutoCompelete city
         tv_product_city.setOnClickListener(new View.OnClickListener() {
@@ -206,8 +219,8 @@ public class add_product extends ActionBarActivity {
         tv_product_subset=(AutoCompleteTextView)findViewById(R.id.ac_product_subset);
         tv_product_city=(AutoCompleteTextView)findViewById(R.id.ac_product_city);
         tv_product_area=(AutoCompleteTextView)findViewById(R.id.ac_product_area);
-        cb_adaptive_product=(CheckBox)findViewById(R.id.chk_tavafoq);
-
+       // cb_adaptive_product=(CheckBox)findViewById(R.id.chk_tavafoq);
+        radioGroup=(RadioGroup)findViewById(R.id.radio_price);
 
 
     }
