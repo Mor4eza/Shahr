@@ -27,7 +27,7 @@ import java.util.List;
  */
 public class HTTPGetSubsetProductJson   extends AsyncTask<String,Void,Integer>
 {
-    private static final String url_subsetproduct="";
+    private static final String url_subsetproduct="http://test.shahrma.com/api/apigiveProductsubset";
 
     FieldDataBase fieldDataBase=new FieldDataBase();
     List<Integer> selectId =new ArrayList<>();

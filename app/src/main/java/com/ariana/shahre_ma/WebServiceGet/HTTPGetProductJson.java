@@ -29,7 +29,7 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
     {
         private static Context context;
         FieldDataBase fdb=new FieldDataBase();
-        private static final String url_product="";
+        private String url_product="";
 
         List<Integer> selectMemberId =new ArrayList<>();
         List<String>  selectName =new ArrayList<>();
@@ -48,6 +48,15 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
         List<Integer> selectAreaId =new ArrayList<>();
 
 
+        public  void setUrl_product(Integer cityid,Integer pagesize,Integer page,Integer subsetid,Integer sort)
+        {
+            url_product="http://test.shahrma.com/api/ApiGiveProduct&page="+page+"&pageSize="+pagesize+"&cityId="+cityid+"&subsetId="+subsetid+"&sort="+sort;
+        }
+
+        private String getUrl_product()
+        {
+            return  url_product;
+        }
         Integer len;
 
         /**
@@ -68,7 +77,7 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
             try {
 
 
-                InputStream jsonStream = getStreamFromURL(url_product, "GET");
+                InputStream jsonStream = getStreamFromURL(getUrl_product(), "GET");
                 String jsonString = streamToString(jsonStream);
                 parseJSON(jsonString);
                 result=1;

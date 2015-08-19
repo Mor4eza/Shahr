@@ -36,7 +36,7 @@ public class HTTPGetCollectionProductJson extends AsyncTask<String,Void, Integer
 
 
     }
-    private static final String url_collectionproduct="";
+    private static final String url_collectionproduct="http://test.shahrma.com/api/apigiveProductCollection";
 
     FieldDataBase fieldDataBase=new FieldDataBase();
     List<Integer> selectId =new ArrayList<>();

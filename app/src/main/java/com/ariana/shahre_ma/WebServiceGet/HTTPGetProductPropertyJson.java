@@ -25,7 +25,7 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
 {
     private static Context context;
     FieldDataBase fdb=new FieldDataBase();
-    private static final String url_productproperty="";
+    private static String url_productproperty="http://test.shahrma.com/api/ApiGiveProduct?Id=";
 
     List<Integer> selectMemberId =new ArrayList<>();
     List<String>  selectName =new ArrayList<>();
@@ -54,6 +54,16 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
         context = c;
     }
 
+
+    public void setProductId(Integer productId)
+    {
+        url_productproperty=url_productproperty+productId;
+    }
+
+    private String getUrl_productproperty()
+    {
+        return url_productproperty;
+    }
     /**
      *
      * @param args
@@ -64,7 +74,7 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
         try {
 
 
-            InputStream jsonStream = getStreamFromURL(url_productproperty, "GET");
+            InputStream jsonStream = getStreamFromURL(getUrl_productproperty(), "GET");
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);
             result=1;

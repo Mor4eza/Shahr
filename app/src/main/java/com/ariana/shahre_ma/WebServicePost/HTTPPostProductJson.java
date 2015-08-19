@@ -32,7 +32,7 @@ import java.io.InputStreamReader;
 public class HTTPPostProductJson extends AsyncTask<String ,Long,Integer>
 {
 
-    private static  final  String url_product="";
+    private static  final  String url_product="http://test.shahrma.com/api/ApiTakeProduct";
 
     private static String data_json;// variable get json
     private  static Integer response_message;// variable response
