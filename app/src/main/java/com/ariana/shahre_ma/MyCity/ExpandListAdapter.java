@@ -315,21 +315,7 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
      *
      * @param groupPosition : group position of list
      */
-/*    private void showTotal(int groupPosition) {
-        //Below code is to get the sum of checked prices
-        int sum = 0;
-        for (int j = 0; j < selectedChildCheckBoxStates.size(); j++) {
-            Log.d("TAG", "J = " + j);
-            for (int i = 0; i < selectedChildCheckBoxStates.get(groupPosition).size(); i++) {
-                Log.d("TAG", "I = " + i);
 
-                if (selectedChildCheckBoxStates.get(j).get(i)) {
-                  //  sum += Integer.parseInt(mGroupList.get(j).get(i));
-                }
-            }
-        }
-        mListener.onTotalChanged(sum);
-    }*/
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
