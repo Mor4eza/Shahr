@@ -23,18 +23,13 @@ public class Interest_Adapter extends BaseExpandableListAdapter {
 
     private ArrayList<ArrayList<String>> mGroupList = new ArrayList<>();
 
-    /*
-     *  Raw Data
-     */
-
 
     String[] subset ;
     String[] collection ;
 
     Integer[] id_collection;
     Integer[] id_subset;
-    FieldClass fc=new FieldClass();
-    private List<String> selectedsubset=new ArrayList<String>();
+
     Context mContext;
     ViewHolder holder;
     ArrayList<ArrayList<Boolean>> selectedChildCheckBoxStates = new ArrayList<>();

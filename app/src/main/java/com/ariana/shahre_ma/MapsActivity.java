@@ -199,9 +199,6 @@ public class MapsActivity extends ActionBarActivity {
                         Latitude[l] = allrows.getDouble(15);
                         Rate[l] = allrows.getDouble(29);
                         id[l] = allrows.getInt(0);
-
-
-
                         l++;
 
                     } while (allrows.moveToNext());

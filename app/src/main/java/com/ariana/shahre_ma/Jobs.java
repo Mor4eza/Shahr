@@ -50,7 +50,6 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
     Integer id[];
     Integer Id_co;
     Integer Collection_ID_subset;
-    FieldClass fc=new FieldClass();
     HTTPGetBusinessJson httpbusin;
     NetState ns;
 
@@ -166,36 +165,22 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
                 do {
 
                     Id_co = allrows_Collection.getInt(0);
-
                     countryList = new ArrayList<Country>();
                     if (allrows_Subset.moveToFirst())
                     {
                         do {
-
                             Collection_ID_subset = allrows_Subset.getInt(2);
-
-
                             if (Collection_ID_subset == Id_co)
                             {
-                                // childList.add(allrows_Subset.getString(1));
                                 country = new Country(allrows_Subset.getString(1));
                                 countryList.add(country);
-
-
                             }
-
-
                         } while (allrows_Subset.moveToNext());
                         continent = new Continent(allrows_Collection.getString(1),countryList,Id_co);
                     }
                     continentList.add(continent);
-
-                    //   laptopCollection.put(laptop,childList);
-
                 } while (allrows_Collection.moveToNext());
             }
-
-
         }
         catch (Exception e){ Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG).show();}
 
