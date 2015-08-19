@@ -225,8 +225,34 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
                 fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
             }
 
-        } catch (Exception e) {
+       } catch (Exception e)
+        {
             pd.dismiss();
+
+            if(len==0)
+            {
+                AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                alertDialog.setTitle("هشدار");
+                alertDialog.setMessage("مشاغلی برای این شهر و این زیرمجموعه پیدا نشد!!!");
+                alertDialog.setButton("خب", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog.show();
+            }
+            else
+            {
+                AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                alertDialog.setTitle("هشدار");
+                alertDialog.setMessage("دوباره امتحان کنید");
+                alertDialog.setButton("خب", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog.show();
+            }
             Log.e("ExceptionBusinessJson",e.toString());
         }
     }

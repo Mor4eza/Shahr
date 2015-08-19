@@ -23,7 +23,7 @@ import java.util.List;
 public class Comment_Card_Adapter extends RecyclerView.Adapter<Comment_Card_Adapter.ViewHolder> {
 
     List<Comment_Card_items> mItems;
-   FieldClass fc=new FieldClass();
+
 Query query;
     private  static Context context;
 

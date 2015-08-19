@@ -92,9 +92,14 @@ public class MainActivity extends ActionBarActivity {
     TimeSetReceiver tsr;
     Toolbar toolbar;
     DataBaseSqlite db;
+
+
+
     @Override
     protected void onResume() {
         super.onResume();
+
+
         navigation();
         try {
             DataBaseSqlite db = new DataBaseSqlite(this);
@@ -138,8 +143,7 @@ public class MainActivity extends ActionBarActivity {
         registerReceiver(tsr, ii);
 
         //setup();
-        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
-                new IntentFilter("custom-event-name"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,new IntentFilter("custom-event-name"));
 
         if (net.checkInternetConnection() == false) {
             Toast.makeText(getApplication(), "شبکه اینترنت قطع می باشد", Toast.LENGTH_LONG).show();
@@ -620,7 +624,8 @@ public class MainActivity extends ActionBarActivity {
         public void onReceive(Context context, Intent intent) {
             // Get extra data included in the Intent
             String message = intent.getStringExtra("message");
-
+            slider.removeAllSliders();
+            Image_slider();
             Log.d("receiver", "Got message: " + message);
         }
 
