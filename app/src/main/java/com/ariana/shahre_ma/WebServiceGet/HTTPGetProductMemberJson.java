@@ -92,8 +92,6 @@ public class HTTPGetProductMemberJson extends AsyncTask<String,Void,Integer>
 
     @Override
     protected void onPostExecute(Integer result) {
-        //        onPostExecute(result);
-
         try
         {
             if(result==1)
@@ -115,8 +113,6 @@ public class HTTPGetProductMemberJson extends AsyncTask<String,Void,Integer>
 
 
     void parseJSON(String JSONString) {
-
-        Integer ii = 0;
         try {
 
             JSONArray areas = new JSONArray(JSONString);
@@ -163,7 +159,6 @@ public class HTTPGetProductMemberJson extends AsyncTask<String,Void,Integer>
             fdb.setAreaId_Product(selectAreaId);
 
         } catch (JSONException e) {
-            // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
         }
     }
 

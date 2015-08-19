@@ -83,7 +83,7 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
                 result=1;
             } catch (Exception e) {
                 result=0;
-                // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
+
             }
             return result;
 
@@ -92,8 +92,6 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
 
         @Override
         protected void onPostExecute(Integer result) {
-    //        onPostExecute(result);
-
             try
             {
                 if(result==1)
@@ -105,7 +103,7 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
 
                 }
             } catch (Exception e) {
-                //Toast.makeText(context, "?? ?????? ???? ????? ???", Toast.LENGTH_LONG).show();
+
             }
         }
 
@@ -157,7 +155,7 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
                 fdb.setAreaId_Product(selectAreaId);
 
             } catch (JSONException e) {
-                // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
+
             }
         }
 

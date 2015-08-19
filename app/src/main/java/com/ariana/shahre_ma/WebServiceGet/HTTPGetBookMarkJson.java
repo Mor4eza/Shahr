@@ -125,8 +125,6 @@ public class HTTPGetBookMarkJson extends AsyncTask<String,Void,Integer>
     protected Integer doInBackground(String... args) {
         Integer result=0;
         try {
-
-
             InputStream jsonStream = getStreamFromURL(GetUrl_Bookmark(), "GET");
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);
@@ -134,7 +132,6 @@ public class HTTPGetBookMarkJson extends AsyncTask<String,Void,Integer>
 
         } catch (Exception e) {
              result=0;
-            // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
             Log.i("Exception",e.toString());
         }
         return result;
@@ -147,7 +144,6 @@ public class HTTPGetBookMarkJson extends AsyncTask<String,Void,Integer>
      */
     @Override
     protected void onPostExecute(Integer result) {
-        //onPostExecute(result);
         if(result==1) {
             try {
 
@@ -155,9 +151,12 @@ public class HTTPGetBookMarkJson extends AsyncTask<String,Void,Integer>
                 DataBaseSqlite dbs = new DataBaseSqlite(context);
                 dbs.delete_bookmark();
                  Log.i("len", String.valueOf(len));
-                for (int i = 0; i < len; i++) {
+                for (int i = 0; i < len; i++)
+                {
                     Log.i("subsetid", String.valueOf(subsetid[i]));
-                   try {
+                    dbs.delete_BusinessId(Id[i]);
+                   try
+                   {
                        dbs.Add_bookmark(Id[i], MEMberID);
                        dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], latitude[i], longitude[i], areaid[i], area1[i], user[i], 68, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i], src[i]);
                    }
@@ -295,7 +294,6 @@ public class HTTPGetBookMarkJson extends AsyncTask<String,Void,Integer>
             }
 
         } catch (JSONException e) {
-            // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
             Log.i("JSONException",e.toString());
         }
     }

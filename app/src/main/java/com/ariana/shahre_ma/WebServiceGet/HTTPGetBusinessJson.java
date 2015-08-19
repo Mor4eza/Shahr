@@ -151,10 +151,8 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
                 String jsonString = streamToString(jsonStream);
                 parseJSON(jsonString);
                 onPostExecute();
-
-
         } catch (Exception e) {
-            // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
+
         }
         return null;
 
@@ -184,7 +182,6 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
             Log.i("count",String.valueOf(len));
             if(len==0) {
-                //  Toast.makeText(get, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
                 Log.i("Count Business : ","فروشگاه ثبت نشد");
                 pd.dismiss();
             }
@@ -208,7 +205,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
                         Log.i("elsebusiness", "i>0");
                         dbs.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i],likediscount[i],dislikediscount[i]);
                     }
-                    //dbs.Add_LikeDisCount(1,166,Id[i],likediscount[i],dislikediscount[i]);
+
                     dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i],latitude[i], longitude[i], areaid[i], area1[i], user[i],cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i],src[i]);
 
                 }
@@ -358,7 +355,6 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
 
         } catch (JSONException e) {
-            // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
             Log.i("JSONException",e.toString());
         }
     }

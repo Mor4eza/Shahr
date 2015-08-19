@@ -31,7 +31,7 @@ public class HTTPGetInterestJson  extends AsyncTask<String,Void, Integer>
     }
     private static  String url_Interest;
 
-    Jobs job=new Jobs();
+
     Integer subsetid[];
     Integer memberid[];
     Integer len;
@@ -64,15 +64,12 @@ public class HTTPGetInterestJson  extends AsyncTask<String,Void, Integer>
     protected Integer doInBackground(String... args) {
         Integer result=0;
         try {
-
-
             InputStream jsonStream = getStreamFromURL(getUrl_Interest(), "GET");
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);
             result=1;
         } catch (Exception e) {
             result=0;
-            // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
         }
         return result;
 
@@ -94,8 +91,6 @@ public class HTTPGetInterestJson  extends AsyncTask<String,Void, Integer>
             try {
 
                 DataBaseSqlite dbs = new DataBaseSqlite(context);
-
-                // job.mSwipeRefreshLayout.setRefreshing(false);
                 for (int i = 0; i < len; i++) {
                     dbs.Add_Interest(subsetid[i], memberid[i]);
                     Log.i("onPostExecuteInterest", "strt1");
@@ -118,13 +113,10 @@ public class HTTPGetInterestJson  extends AsyncTask<String,Void, Integer>
      * @param JSONString
      */
     void parseJSON(String JSONString) {
-
         Log.i("JsonInterest",JSONString);
-        Integer ii = 0;
         try {
 
             JSONArray areas = new JSONArray(JSONString);
-
 
             subsetid=new Integer[areas.length()];
             memberid=new Integer[areas.length()];
@@ -135,12 +127,10 @@ public class HTTPGetInterestJson  extends AsyncTask<String,Void, Integer>
 
                 subsetid[i]=area.getInt("SubsetId");
                 memberid[i]=area.getInt("MemberId");
-
-
             }
 
         } catch (JSONException e) {
-            // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
+
         }
     }
 

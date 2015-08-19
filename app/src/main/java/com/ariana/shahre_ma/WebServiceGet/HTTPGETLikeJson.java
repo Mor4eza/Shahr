@@ -61,14 +61,12 @@ public class HTTPGETLikeJson  extends AsyncTask<String, String, String>
      */
     protected String doInBackground(String... args) {
         try {
-
-
             InputStream jsonStream = getStreamFromURL(url_Like, "GET");
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);
             onPostExecute();
         } catch (Exception e) {
-            // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
+
         }
         return null;
 
@@ -82,8 +80,6 @@ public class HTTPGETLikeJson  extends AsyncTask<String, String, String>
         try {
 
             DataBaseSqlite dbs = new DataBaseSqlite(context);
-
-
             for (int i = 0; i <len; i++)
             {
                 dbs.Add_Like(Id[i],like[i], memberid[i], opinionid[i]);
@@ -124,7 +120,7 @@ public class HTTPGETLikeJson  extends AsyncTask<String, String, String>
             }
 
         } catch (JSONException e) {
-            // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
+
         }
     }
 

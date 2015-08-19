@@ -38,10 +38,9 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
     String activity[];
     Context context;
     Integer len;
-    DateTime dt=new DateTime();
     CalendarTool ct=new CalendarTool();
 
-    String mesage="";
+
 
     /**
      *
@@ -68,15 +67,12 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
     protected Integer doInBackground(String... params) {
         Integer result=0;
         try {
-
-
             InputStream jsonStream = getStreamFromURL(url1_get_FieldActivity, "GET");
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);
-
             result=1;
         } catch (Exception e) {
-            // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
+
             result=0;
         }
         return result;
@@ -96,9 +92,6 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
      * @param JSONString
      */
     void parseJSON(String JSONString) {
-
-        Integer ii = 0;
-
         try {
 
             Log.i("jsonFieldActivity",JSONString);

@@ -60,7 +60,7 @@ public class HTTPGetSubsetProductJson   extends AsyncTask<String,Void,Integer>
                 result=1;
             } catch (Exception e) {
                 result=0;
-                // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
+
             }
             return result;
 
@@ -69,7 +69,6 @@ public class HTTPGetSubsetProductJson   extends AsyncTask<String,Void,Integer>
 
         @Override
         protected void onPostExecute(Integer result) {
-//        onPostExecute(result);
             try {
                 if(result==1) {
 
@@ -82,14 +81,12 @@ public class HTTPGetSubsetProductJson   extends AsyncTask<String,Void,Integer>
 
                 }
             } catch (Exception e) {
-                //Toast.makeText(context, "?? ?????? ???? ????? ???", Toast.LENGTH_LONG).show();
+
             }
         }
 
 
         void parseJSON(String JSONString) {
-
-            Integer ii = 0;
             try {
 
                 JSONArray areas = new JSONArray(JSONString);
@@ -103,15 +100,11 @@ public class HTTPGetSubsetProductJson   extends AsyncTask<String,Void,Integer>
                     selectId.add(area.getInt("Id"));
                     selectName.add(area.getString("Name"));
                     selectCollectionId.add(area.getInt("CollectionId"));
-
-
                 }
-
                 fieldDataBase.setId_Subset(selectId);
                 fieldDataBase.setName_Subset(selectName);
                 fieldDataBase.setCollectionId_Subset(selectCollectionId);
             } catch (JSONException e) {
-                // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
             }
         }
 

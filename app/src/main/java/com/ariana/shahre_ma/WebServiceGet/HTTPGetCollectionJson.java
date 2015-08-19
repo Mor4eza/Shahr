@@ -26,15 +26,8 @@ import java.net.URL;
 public class HTTPGetCollectionJson extends AsyncTask<String,Void, Integer> {
 
         ProgressDialog pd;
-
-
-        private static Context context;
-
-        public HTTPGetCollectionJson(Context c) {
-        context = c;
-
-
-    }
+       private static Context context;
+        public HTTPGetCollectionJson(Context c) {context = c;}
         private static final String url_collection="http://test.shahrma.com/api/apigivecollection";
 
         Integer Id[];
@@ -58,7 +51,6 @@ public class HTTPGetCollectionJson extends AsyncTask<String,Void, Integer> {
             result=1;
         } catch (Exception e) {
             result=0;
-            // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
         }
         return result;
 
@@ -71,7 +63,6 @@ public class HTTPGetCollectionJson extends AsyncTask<String,Void, Integer> {
     @Override
     protected void onPostExecute(Integer result)
     {
-       // onPostExecute(result);
         KeySettings setting=new KeySettings(context);
         Log.i("result",String.valueOf(result));
         if (result==1) {
@@ -103,7 +94,6 @@ public class HTTPGetCollectionJson extends AsyncTask<String,Void, Integer> {
         }
         else
         {
-            //pd.dismiss();
         }
     }
 
@@ -112,8 +102,6 @@ public class HTTPGetCollectionJson extends AsyncTask<String,Void, Integer> {
      * @param JSONString
      */
     void parseJSON(String JSONString) {
-
-        Integer ii = 0;
         try {
 
             JSONArray areas = new JSONArray(JSONString);

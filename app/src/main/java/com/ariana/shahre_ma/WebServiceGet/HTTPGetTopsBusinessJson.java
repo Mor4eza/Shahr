@@ -96,7 +96,6 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
     public void SetTopBusiness(Integer cityid)
     {
         urltopbusiness="http://test.shahrma.com/api/ApiGiveTop?cityId="+cityid;
-      //  urltopbusiness="http://test.shahrma.com/api/ApiGiveBusiness?subsetId=145&cityid=68";
     }
 
     private String getTopBusiness()
@@ -238,7 +237,6 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
 
 
         } catch (JSONException e) {
-            // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
             Log.i("JSONException",e.toString());
         }
     }

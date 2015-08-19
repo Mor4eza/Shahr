@@ -41,7 +41,7 @@ public class HTTPGetDisCountJson extends AsyncTask<String,Void,Integer> {
     Integer memberid;
     ProgressDialog pd;
 
-    FieldClass fc=new FieldClass();
+
 
     /**
      *
@@ -103,7 +103,7 @@ public class HTTPGetDisCountJson extends AsyncTask<String,Void,Integer> {
 
         } catch (Exception e) {
             result=0;
-            // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
+
         }
         return result;
 
@@ -133,7 +133,7 @@ public class HTTPGetDisCountJson extends AsyncTask<String,Void,Integer> {
                 adapter.notifyDataSetChanged();
            } catch (Exception e) {
                 pd.dismiss();
-               // Toast.makeText(context.getApplicationContext(), "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
+
             }
         }
         else
@@ -147,10 +147,7 @@ public class HTTPGetDisCountJson extends AsyncTask<String,Void,Integer> {
      * @param JSONString
      */
     void parseJSON(String JSONString) {
-
-
         try {
-
             Log.i("JSONdiscountMember", JSONString);
             JSONArray areas = new JSONArray(JSONString);
 
@@ -180,7 +177,7 @@ public class HTTPGetDisCountJson extends AsyncTask<String,Void,Integer> {
             }
 
         } catch (JSONException e) {
-            // Toast.makeText(activity,e.toString(), Toast.LENGTH_LONG).show();
+
             Log.i("JSONException",e.toString());
         }
     }

@@ -32,12 +32,13 @@ import java.util.List;
 public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
 {
 
-    private static Context context;
+    FieldDataBusiness fdb=new FieldDataBusiness();
     FieldClass fc=new FieldClass();
     Query query;
-    private  String url_Business;
-    FieldDataBusiness fdb=new FieldDataBusiness();
 
+
+    private static Context context;
+    private  String url_Business;
 
 
     Integer Id[];
@@ -92,10 +93,8 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
      */
     public   void SetUrl_businessMember(Integer member)
     {
-
         url_Business="http://test.shahrma.com/api/ApiGiveMemberBusiness?memberId="+member;
         Log.i("url_Business",url_Business);
-
     }
 
     /**
@@ -130,7 +129,6 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
 
             result=1;
         } catch (Exception e) {
-            // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
             result=0;
         }
         return result;
@@ -143,12 +141,12 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
      */
     @Override
     protected void onPostExecute(Integer result) {
-        //try {
+        try {
 
             Integer count=0;
             Integer cityid=0;
             Integer idsubset=0;
-            //  Toast.makeText(context,market[0], Toast.LENGTH_LONG).show();
+
             DataBaseSqlite dbs = new DataBaseSqlite(context);
             KeySettings setting=new KeySettings(context);
             query=new Query(context);
@@ -157,7 +155,6 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
             if(len>0){
                     dbs.delete_Business(cityid,idsubset);
 
-                    //  dbs.delete_Business();
                     for (int i = 0; i <len; i++)
                     {
                         Cursor rows=dbs.select_CountBusinessId(Id[i]);
@@ -199,10 +196,10 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
                 });
                         Log.i("Count Business : ","دریافت ثبت شده ها");
             }
-/*
+
         } catch (Exception e) {
-            Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
-        }*/
+
+        }
     }
 
     /**

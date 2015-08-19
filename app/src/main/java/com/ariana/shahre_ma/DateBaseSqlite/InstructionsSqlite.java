@@ -28,6 +28,7 @@ public class  InstructionsSqlite {
     public static final String TABLE_NAME_DisCountMember="DisCountMember";
     public static final String TABLE_NAME_LikeDisCount="LikeDisCount";
     public static final String TABLE_NAME_Advertisment="Advertisment";
+    public static final String TABLE_NAME_ProductMember="ProductMember";
     
 
 
@@ -44,6 +45,26 @@ public class  InstructionsSqlite {
     public static final String CityId_Notification="CityId";
     public static final String Subset_Notification="Subset";
     public static final String SubsetId_Notification="SubsetId";
+
+
+    //ProductMember Table Columns names
+    public static final String ID_ProductMember="Id";
+    public static final String MEMBERID__ProductMember="MemberId";
+    public static final String NAME_ProductMember="Name";
+    public static final String PROPERTY_ProductMember="Property";
+    public static final String PRICE_ProductMember="Price";
+    public static final String LATITUDE_ProductMember="Latutude";
+    public static final String ADAPTIVE_ProductMember="Adaptive";
+    public static final String DESCRIPTION_ProductMember="Description";
+    public static final String IMAGE_ProductMember="Image";
+    public static final String PHONE_ProductMember="Phone";
+    public static final String MOBILE_ProductMembe="Adaptive";
+    public static final String ADDRESS_ProductMembe="Description";
+    public static final String EMAIL_ProductMembe="Image";
+    public static final String SUBSETID_ProductMembe="Phone";
+    public static final String AREAID_ProductMembe="Phone";
+    public static final String CITYID_ProductMembe="Phone";
+
 
 
     //FieldActivity Table Columns names
@@ -291,6 +312,29 @@ public class  InstructionsSqlite {
 
 
 
+    // SQL statement to create ProductMember table
+    public static final String CREATE_TABLE_ProductMember  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_ProductMember + " (" +
+            " Id INTEGER PRIMARY KEY ," +
+            " MemberId INTEGER ," +
+            " Name TEXT ," +
+            " Property TEXT ," +
+            " Price TEXT ," +
+            " Latitude TEXT ," +
+            " Longtiude TEXT ," +
+            " Adaptive Boolean ," +
+            " Description TEXT ," +
+            " Image TEXT ," +
+            " Phone TEXT ," +
+            " Mobile TEXT ," +
+            " Address TEXT ," +
+            " Email TEXT ," +
+            " SubsetId INTEGER ," +
+            " AreaId INTEGER," +
+            " CityId INTEGER" +
+            ");";
+
+
+
     // SQL statement to create business_disCount table
     public static final String CREATE_TABLE_Business_DisCount  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_BUSINESS_DISCOUNT + " (" +
             " Id INTEGER PRIMARY KEY ," +
@@ -325,7 +369,6 @@ public class  InstructionsSqlite {
             " RateCount INTEGER ," +
             " RateValue DOUBLE ," +
             " Src TEXT " +
-
             ");";
 
     // SQL statement to create business_tops table

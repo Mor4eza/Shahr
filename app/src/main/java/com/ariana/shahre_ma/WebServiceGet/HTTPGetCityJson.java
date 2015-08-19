@@ -34,7 +34,6 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
     String  Name_city[];
     Integer PROVINCEID_city[];
     Integer len;
-    CalendarTool ct=new CalendarTool();
 
     private static Context context;
 
@@ -63,7 +62,6 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
             result=1;
         } catch (Exception e) {
             result=0;
-            // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
         }
         return result;
 
@@ -76,7 +74,6 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
      */
     @Override
     protected void onPostExecute(Integer result) {
-        Query query=new Query(context);
         KeySettings setting=new KeySettings(context);
         try {
 
@@ -146,8 +143,6 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
      * @param JSONString
      */
     void parseJSON(String JSONString) {
-
-        Integer ii = 0;
         try {
 
             Log.i("JSONcity",JSONString);
@@ -167,7 +162,7 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
             }
 
         } catch (JSONException e) {
-           // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
+
         }
     }
 
