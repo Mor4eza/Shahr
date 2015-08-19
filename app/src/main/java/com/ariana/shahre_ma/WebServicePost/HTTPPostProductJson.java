@@ -56,7 +56,7 @@ public class HTTPPostProductJson extends AsyncTask<String ,Long,Integer>
     private static Context context;
 
 
-    HTTPPostProductJson(Context context) {
+    public HTTPPostProductJson(Context context) {
         this.context = context;
     }
 
