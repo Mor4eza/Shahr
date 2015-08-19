@@ -38,8 +38,6 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
     Query query;
     FieldDataBusiness fdb=new FieldDataBusiness();
 
-
-
     private List<Integer> selectId=new ArrayList<>();
     private  List<Double>  selectLongtiude=new ArrayList<>();
     private  List<Double>  selectLatitude=new ArrayList<>();
@@ -49,7 +47,6 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
     private  List<String>  selectMobile=new ArrayList<String>();
     private  List<String>  selectAddress=new ArrayList<>();
     private  List<String>  selectMarketName=new ArrayList<String>();
-
 
     Integer Id[];
     String market[];
@@ -274,7 +271,6 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
 
 
             } catch (JSONException e) {
-                // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
                 Log.i("JSONException",e.toString());
             }
         }
@@ -368,7 +364,6 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
                         Log.i("elsebusiness", "i>0");
                         dbs.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i],likediscount[i],dislikediscount[i]);
                     }
-                    //dbs.Add_LikeDisCount(1,166,Id[i],likediscount[i],dislikediscount[i]);
                     dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i],latitude[i], longitude[i], areaid[i], area1[i], user[i],cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i],src[i]);
 
                 }

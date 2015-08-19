@@ -70,7 +70,6 @@ public class HTTPGetLikeDisCount extends AsyncTask<String, String, String>
             parseJSON(jsonString);
             onPostExecute();
         } catch (Exception e) {
-            // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
         }
         return null;
 
@@ -82,18 +81,9 @@ public class HTTPGetLikeDisCount extends AsyncTask<String, String, String>
      */
     protected void onPostExecute() {
         try {
-
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
-
-
-            for (int i = 0; i <len; i++)
-            {
-                //dbs.Add_Like(Id[i],like[i], memberid[i], opinionid[i]);
-
-            }
             pd.dismiss();
         } catch (Exception e) {
-            Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
+            pd.dismiss();
         }
     }
 
@@ -103,8 +93,6 @@ public class HTTPGetLikeDisCount extends AsyncTask<String, String, String>
      * @param JSONString
      */
     void parseJSON(String JSONString) {
-
-        Integer ii = 0;
         try {
 
             JSONArray areas = new JSONArray(JSONString);
@@ -119,17 +107,10 @@ public class HTTPGetLikeDisCount extends AsyncTask<String, String, String>
             for (int i = 0; i < areas.length(); i++) {
 
                 JSONObject area = areas.getJSONObject(i);
-
-                /*Id[i]=area.getInt("Id");
-                like[i]=area.getBoolean("Id");
-                opinionid[i]=area.getInt("Id");
-                memberid[i]=area.getInt("Id");*/
-
-
             }
 
         } catch (JSONException e) {
-            // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
+
         }
     }
 

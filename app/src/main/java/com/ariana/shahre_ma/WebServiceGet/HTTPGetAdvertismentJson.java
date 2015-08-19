@@ -70,14 +70,13 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
         catch (Exception e)
         {
             result=0;
-            // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
+
         }
         return result;
     }
 
     @Override
     protected void onPostExecute(Integer result) {
-//        onPostExecute(result);
         if(result==1) {
            try {
 
@@ -110,8 +109,6 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
 
 
     void parseJSON(String JSONString) {
-
-        Integer ii = 0;
         try {
 
             JSONArray areas = new JSONArray(JSONString);
@@ -133,7 +130,7 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
 
         } catch (JSONException e)
         {
-            // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
+           ;
         }
     }
 

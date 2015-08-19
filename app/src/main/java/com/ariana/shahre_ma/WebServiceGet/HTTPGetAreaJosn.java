@@ -78,7 +78,6 @@ public class HTTPGetAreaJosn extends AsyncTask<String,Void,Integer>
                 {
                 if (len_Area > 0)
                 {
-
                         db.delete_Area();
                         for (int i = 0; i < len_Area; i++)
                         {
@@ -86,7 +85,6 @@ public class HTTPGetAreaJosn extends AsyncTask<String,Void,Integer>
                         }
 
 
-                        //Get Area
                         setting.saveArea(true);
 
 
@@ -126,8 +124,6 @@ public class HTTPGetAreaJosn extends AsyncTask<String,Void,Integer>
 
 
         void parseJSON(String JSONString) {
-
-            Integer ii = 0;
             try {
                 Log.i("jsonArea", JSONString);
                 JSONArray areas = new JSONArray(JSONString);

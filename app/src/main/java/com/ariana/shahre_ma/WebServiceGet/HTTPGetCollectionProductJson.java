@@ -58,7 +58,7 @@ public class HTTPGetCollectionProductJson extends AsyncTask<String,Void, Integer
             result=1;
         } catch (Exception e) {
             result=0;
-            // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
+           ;
         }
         return result;
 
@@ -80,7 +80,7 @@ public class HTTPGetCollectionProductJson extends AsyncTask<String,Void, Integer
             }
             else
             {
-                //pd.dismiss();
+
             }
         } catch (Exception e) {}
 
@@ -92,8 +92,6 @@ public class HTTPGetCollectionProductJson extends AsyncTask<String,Void, Integer
      * @param JSONString
      */
     void parseJSON(String JSONString) {
-
-        Integer ii = 0;
         try {
 
             JSONArray areas = new JSONArray(JSONString);
@@ -112,7 +110,7 @@ public class HTTPGetCollectionProductJson extends AsyncTask<String,Void, Integer
 
 
         } catch (JSONException e) {
-            // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
+
         }
     }
 

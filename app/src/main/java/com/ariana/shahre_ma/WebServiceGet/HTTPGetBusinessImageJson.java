@@ -68,7 +68,6 @@ public class HTTPGetBusinessImageJson extends AsyncTask<String,Void,Integer>
             result=1;
         } catch (Exception e) {
             result=0;
-            // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
         }
         return result;
 
@@ -77,7 +76,6 @@ public class HTTPGetBusinessImageJson extends AsyncTask<String,Void,Integer>
 
     @Override
     protected void onPostExecute(Integer result) {
-//        onPostExecute(result);
         if(result==1) {
             try {
                 KeySettings setting=new KeySettings(context);
@@ -100,7 +98,6 @@ public class HTTPGetBusinessImageJson extends AsyncTask<String,Void,Integer>
 
             } catch (Exception e)
             {
-                //Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
             }
         }
         else
@@ -111,8 +108,6 @@ public class HTTPGetBusinessImageJson extends AsyncTask<String,Void,Integer>
 
 
     void parseJSON(String JSONString) {
-
-        Integer ii = 0;
         try {
 
             JSONArray areas = new JSONArray(JSONString);
@@ -132,7 +127,6 @@ public class HTTPGetBusinessImageJson extends AsyncTask<String,Void,Integer>
             }
 
         } catch (JSONException e) {
-            // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
         }
     }
 

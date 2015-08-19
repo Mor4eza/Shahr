@@ -27,7 +27,6 @@ public class HTTPGetNotificationJson extends AsyncTask<String,Void,Integer> {
     private static Context context;
     private static String url_Notification;
     private Integer MEMberID;
-    DateTime dt=new DateTime();
     KeySettings setting;
     Integer Id[];
     Integer OpinionType[];
@@ -40,7 +39,6 @@ public class HTTPGetNotificationJson extends AsyncTask<String,Void,Integer> {
     String Subset[];
     Integer SubsetId[];
     Integer len = 0;
-    private Integer NotifiId = 0;
 
     /**
      * @param memberid
@@ -98,8 +96,6 @@ public class HTTPGetNotificationJson extends AsyncTask<String,Void,Integer> {
      * @param JSONString
      */
     void parseJSON(String JSONString) {
-
-
         try {
 
             Log.i("JsonNotification", JSONString);
@@ -134,7 +130,6 @@ public class HTTPGetNotificationJson extends AsyncTask<String,Void,Integer> {
             }
 
         } catch (JSONException e) {
-            // Toast.makeText(getApplicationContext()," parse Json", Toast.LENGTH_LONG).show();
             Log.i("JSONException", e.toString());
         }
     }

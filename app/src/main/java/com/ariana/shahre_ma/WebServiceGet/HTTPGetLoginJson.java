@@ -34,7 +34,6 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
 
     String mesage;
     Integer ID=0;
-    //ProgressDialog pd;
     FieldClass fc=new FieldClass();
     private String[] blogTitles;
     Context context;

@@ -40,9 +40,9 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
 
     Integer len;
     Integer BusintessId;
-ProgressDialog pd;
+    ProgressDialog pd;
 
-    FieldClass fc=new FieldClass();
+
 
     /**
      *
@@ -74,17 +74,6 @@ ProgressDialog pd;
 
     }
 
-    /**
-     *
-     */
-    @Override
-    protected void onPreExecute() {
-  /*      super.onPreExecute();
-        pd = new ProgressDialog(context);
-        pd.setMessage("در حال بروزرسانی...");
-        pd.setCancelable(false);
-        pd.show();*/
-    }
 
     /**
      *
@@ -100,7 +89,7 @@ ProgressDialog pd;
             parseJSON(jsonString);
             onPostExecute();
         } catch (Exception e) {
-            // Toast.makeText(getApplicationContext(),"do in background", Toast.LENGTH_LONG).show();
+
         }
         return null;
 
@@ -121,7 +110,7 @@ ProgressDialog pd;
             {
                 dbs.Add_opinion(Id[i], description[i], date[i], erja[i], countlike[i], countdislike[i], membername[i]);
             }
-            //pd.dismiss();
+
 
             final Job_details_comment.PlaceholderFragment fragment=new Job_details_comment.PlaceholderFragment();
             fragment.mRecyclerView.post(new Runnable() {
@@ -137,11 +126,6 @@ ProgressDialog pd;
                 }
             });
 
-
-
-
-
-
         } catch (Exception e) {
             Toast.makeText(context.getApplicationContext(), "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
         }
@@ -152,10 +136,7 @@ ProgressDialog pd;
      * @param JSONString
      */
     void parseJSON(String JSONString) {
-
-
         try {
-
             Log.i("JSON",JSONString);
             JSONArray areas = new JSONArray(JSONString);
 
@@ -171,10 +152,6 @@ ProgressDialog pd;
             for (int i = 0; i < areas.length(); i++) {
 
                 JSONObject area = areas.getJSONObject(i);
-
-
-
-
                 date[i]=area.getString("Date");
                 description[i] = area.getString("Description");
                 countdislike[i]= area.getInt("DisLikeCount");
@@ -182,8 +159,6 @@ ProgressDialog pd;
                 Id[i]=area.getInt("Id");
                 countlike[i]=area.getInt("LikeCount");
                 membername[i]= area.getString("Member");
-
-
             }
 
         } catch (JSONException e) {
