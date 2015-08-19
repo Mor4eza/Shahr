@@ -18,7 +18,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.Fields.FieldDataBase;
 import com.ariana.shahre_ma.R;
 import com.github.alexkolpa.fabtoolbar.FabToolbar;
 
@@ -31,6 +33,8 @@ public class My_Product_Adapter extends RecyclerView.Adapter<My_Product_Adapter.
     FieldClass fc=new FieldClass();
     private  static Context context;
     My_Product_Items nature;
+    FieldDataBase fieldDataBase=new FieldDataBase();
+    Query query=new Query(context);
 
     public My_Product_Adapter(Context context) {
         super();
@@ -40,14 +44,24 @@ public class My_Product_Adapter extends RecyclerView.Adapter<My_Product_Adapter.
 
         nature = new My_Product_Items();
 
-                nature = new My_Product_Items();
+               /* nature = new My_Product_Items();
 
                 nature.setId(1);
                 nature.setName("تست");
                 nature.setmPrice("10000");
                 nature.setThumbnail(R.drawable.pooshak1);
-                mItems.add(nature);
+                mItems.add(nature);*/
 
+        for(int i=0;i<fieldDataBase.getName_Product().size();i++)
+        {
+            nature = new My_Product_Items();
+
+            nature.setId(fieldDataBase.getId_Product().get(i));
+            nature.setName(fieldDataBase.getName_Product().get(i));
+            nature.setmPrice(fieldDataBase.getprice_Product().get(i));
+            nature.setThumbnail(R.drawable.pooshak1);
+            mItems.add(nature);
+        }
 
 
 

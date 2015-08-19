@@ -1,13 +1,20 @@
 package com.ariana.shahre_ma.Bazarche;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetProductMemberJson;
 
 import jp.wasabeef.recyclerview.animators.OvershootInLeftAnimator;
 import jp.wasabeef.recyclerview.animators.adapters.ScaleInAnimationAdapter;
@@ -18,13 +25,20 @@ public class My_products extends ActionBarActivity {
     public static RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     public static RecyclerView.Adapter Product_Adapter;
+    Query query=new Query(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_products);
 
-        setCards();
+        LocalBroadcastManager.getInstance(this).registerReceiver(mProductMemberReciver, new IntentFilter("ProductMember"));
+
+        HTTPGetProductMemberJson httpGetProductMemberJson=new HTTPGetProductMemberJson(this);
+        httpGetProductMemberJson.setMemberId(query.getMemberId());
+        httpGetProductMemberJson.execute();
+
+
     }
 
    public void add_product(View v){
@@ -54,4 +68,13 @@ public class My_products extends ActionBarActivity {
         }
         catch (Exception e){}
     }
+
+    private BroadcastReceiver mProductMemberReciver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+            setCards();
+        }
+    };
+
 }

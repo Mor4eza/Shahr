@@ -1,7 +1,9 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.ariana.shahre_ma.Fields.FieldDataBase;
@@ -25,8 +27,9 @@ public class HTTPGetProductMemberJson extends AsyncTask<String,Void,Integer>
 {
     private static Context context;
     FieldDataBase fdb=new FieldDataBase();
-    private static final String url_productmember="";
+    private  String url_productmember="";
 
+    List<Integer> selectId =new ArrayList<>();
     List<Integer> selectMemberId =new ArrayList<>();
     List<String>  selectName =new ArrayList<>();
     List<String>  selectProperty =new ArrayList<>();
@@ -46,6 +49,16 @@ public class HTTPGetProductMemberJson extends AsyncTask<String,Void,Integer>
 
     Integer len;
 
+
+    public void  setMemberId(Integer memberId)
+    {
+        url_productmember=url_productmember+memberId;
+    }
+
+    private  String getMemberId()
+    {
+        return url_productmember;
+    }
     /**
      *
      * @param c
@@ -64,7 +77,7 @@ public class HTTPGetProductMemberJson extends AsyncTask<String,Void,Integer>
         try {
 
 
-            InputStream jsonStream = getStreamFromURL(url_productmember, "GET");
+            InputStream jsonStream = getStreamFromURL(getMemberId(), "GET");
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);
             result=1;
@@ -85,14 +98,18 @@ public class HTTPGetProductMemberJson extends AsyncTask<String,Void,Integer>
         {
             if(result==1)
             {
-
+              if(len>0)
+              {
+                  Intent intent = new Intent("ProductMember");
+                  LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+              }
             }
             else
             {
 
             }
         } catch (Exception e) {
-            //Toast.makeText(context, "?? ?????? ???? ????? ???", Toast.LENGTH_LONG).show();
+
         }
     }
 
@@ -109,6 +126,7 @@ public class HTTPGetProductMemberJson extends AsyncTask<String,Void,Integer>
 
                 JSONObject area = areas.getJSONObject(i);
 
+                selectId.add(area.getInt("Id"));
                 selectMemberId.add(area.getInt("MemberId"));
                 selectName.add(area.getString("Name"));
                 selectProperty.add(area.getString("Property"));
@@ -127,6 +145,7 @@ public class HTTPGetProductMemberJson extends AsyncTask<String,Void,Integer>
 
             }
 
+            fdb.setMemberId_Product(selectId);
             fdb.setMemberId_Product(selectMemberId);
             fdb.setName_Product(selectName);
             fdb.setProperty_Product(selectProperty);
