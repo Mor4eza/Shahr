@@ -46,9 +46,6 @@ public class add_product extends ActionBarActivity {
         tv_product_address=(EditText)findViewById(R.id.add_product_address);
         tv_product_subset=(AutoCompleteTextView)findViewById(R.id.ac_product_subset);
         tv_product_city=(AutoCompleteTextView)findViewById(R.id.ac_product_city);
-
-
-
     }
 
 

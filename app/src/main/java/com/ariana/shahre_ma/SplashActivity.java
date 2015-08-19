@@ -52,7 +52,7 @@ public class SplashActivity extends ActionBarActivity {
                         AlertDialog alertDialog = new AlertDialog.Builder(SplashActivity.this).create();
                         alertDialog.setTitle("اینترنت قطع می باشد");
                         alertDialog.setCancelable(false);
-                        alertDialog.setMessage("برای اولین باز ورود به برنامه اینترنت مورد نیاز است . اینترنت خود را روشن کنید و بر روی ادامه کلیک کنید .");
+                        alertDialog.setMessage("برای اولین بار ورود به برنامه اینترنت مورد نیاز است . اینترنت خود را روشن کنید و بر روی ادامه کلیک کنید .");
                         alertDialog.setButton("ادامه", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 Log.i("Broad", "restart1");
