@@ -121,7 +121,8 @@ public class My_Product_Adapter extends RecyclerView.Adapter<My_Product_Adapter.
                 @Override
                 public void onClick(View v) {
                     fab.hide();
-
+                    Intent i = new Intent(context,Edit_Product.class);
+                    context.startActivity(i);
                     Log.i("clicked", tvNature.getText().toString());
                 }
             });

@@ -31,7 +31,7 @@ public class add_product extends ActionBarActivity {
 
     }
 
-    public void product_save(View view) {
+    public void product_edit(View view) {
 
 
     }
@@ -47,7 +47,7 @@ public class add_product extends ActionBarActivity {
         tv_product_address=(EditText)findViewById(R.id.add_product_address);
         tv_product_subset=(AutoCompleteTextView)findViewById(R.id.ac_product_subset);
         tv_product_city=(AutoCompleteTextView)findViewById(R.id.ac_product_city);
-        tv_product_city=(AutoCompleteTextView)findViewById(R.id.ac_product_area);
+        tv_product_area=(AutoCompleteTextView)findViewById(R.id.ac_product_area);
     }
 
 
