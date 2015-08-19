@@ -3,18 +3,27 @@ package com.ariana.shahre_ma.Bazarche;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.MultiAutoCompleteTextView;
 
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostProductJson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class add_product extends ActionBarActivity {
 
@@ -42,9 +51,10 @@ public class add_product extends ActionBarActivity {
     String address="";
     Integer subsetid=0;
     Integer cityid=0;
+    Integer areaid=0;
     Double latitude;
     Double longtiude;
-    Boolean adaptive;
+    Boolean adaptive=false;
 
 
     SqliteTOjson sqliteTOjson=new SqliteTOjson(this);
@@ -55,6 +65,25 @@ public class add_product extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
         initViews();
+
+
+        //CheckBox Adaptive
+        cb_adaptive_product.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    tv_product_price.setEnabled(false);
+                    tv_product_price.setText("");
+                    adaptive=true;
+                }else{
+                    tv_product_price.setEnabled(true);
+                    tv_product_price.setText("");
+                    adaptive=false;
+                }
+            }
+        });
+
+        //AutoCompelete city
 
     }
 
@@ -74,6 +103,7 @@ public class add_product extends ActionBarActivity {
            cityid= query.getCityId(tv_product_city.getText().toString());
 
 
+
           if(net.checkInternetConnection())
           {
                   json=sqliteTOjson.ProductTOjson(query.getMemberId(),name,property,price,latitude,longtiude,adaptive,descripction,tell,mobile,address,email,subsetid,cityid);
@@ -84,9 +114,9 @@ public class add_product extends ActionBarActivity {
           else
           {
               AlertDialog alertDialog = new AlertDialog.Builder(add_product.this).create();
-              alertDialog.setTitle("???????");
-              alertDialog.setMessage("??????? ??? ?? ????");
-              alertDialog.setButton("????", new DialogInterface.OnClickListener() {
+              alertDialog.setTitle("اینترنت");
+              alertDialog.setMessage("اینترنت قطع می باشد .");
+              alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                   public void onClick(DialogInterface dialog, int which) {
 
 
@@ -113,7 +143,7 @@ public class add_product extends ActionBarActivity {
         tv_product_address=(EditText)findViewById(R.id.add_product_address);
         tv_product_subset=(AutoCompleteTextView)findViewById(R.id.ac_product_subset);
         tv_product_city=(AutoCompleteTextView)findViewById(R.id.ac_product_city);
-        adaptive_product=(CheckBox)findViewById(R.id.ac_product_city);
+        cb_adaptive_product=(CheckBox)findViewById(R.id.chk_tavafoq);
 
 
 
@@ -121,7 +151,70 @@ public class add_product extends ActionBarActivity {
 
 
     public void select_map(View view) {
-
-
     }
+
+
+    public void GetNameArea(String namecity)
+    {
+        try {
+
+            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, getId(query.getCityId(namecity)));
+            Market_field.setAdapter(adapter);
+            Market_field.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+        }
+        catch (Exception e)
+        {
+            Log.e("ExceptionSQL", e.toString());
+        }
+    }
+    public List<String> getId(Integer cityid) {
+
+        DataBaseSqlite db=new DataBaseSqlite(this);
+        List<String> studentList = new ArrayList<String>();
+        Cursor allrows  = db.select_Area(cityid);
+        if (allrows.moveToFirst()) {
+            do {
+
+                studentList.add(allrows.getString(1));
+
+
+            } while (allrows.moveToNext());
+        }
+
+        return studentList;
+    }
+
+
+
+    public void GetNameCity()
+    {
+        try {
+
+            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, getId2());
+            Market_field.setAdapter(adapter);
+            Market_field.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+        }
+        catch (Exception e)
+        {
+            Log.e("ExceptionSQL", e.toString());
+        }
+    }
+    public List<String> getId2() {
+
+        DataBaseSqlite db=new DataBaseSqlite(this);
+        List<String> studentList = new ArrayList<String>();
+        Cursor allrows  = db.select_AllCity();
+        if (allrows.moveToFirst()) {
+            do {
+
+                studentList.add(allrows.getString(1));
+
+
+            } while (allrows.moveToNext());
+        }
+
+        return studentList;
+    }
+
+
 }

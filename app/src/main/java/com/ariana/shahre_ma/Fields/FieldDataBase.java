@@ -80,7 +80,7 @@ public class FieldDataBase
 
 
     //Fields set the table Subset
-    public void setSubsetId_Subset(List<Integer> id){this.Id_Subset=id;}
+    public void setId_Subset(List<Integer> id){this.Id_Subset=id;}
     public void setName_Subset(List<String> name){this.Name_Subset=name;}
     public void setCollectionId_Subset(List<Integer> collectionid){this.CollectionId_Subset=collectionid;}
     //Fields get the table Subset

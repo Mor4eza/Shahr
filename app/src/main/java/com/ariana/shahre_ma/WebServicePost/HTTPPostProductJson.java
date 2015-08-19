@@ -65,7 +65,7 @@ public class HTTPPostProductJson extends AsyncTask<String ,Long,Integer>
     protected void onPreExecute() {
         super.onPreExecute();
         pd = new ProgressDialog(context);
-        pd.setMessage("?? ??? ???...");
+        pd.setMessage("در حال ثبت ...");
         pd.setCancelable(false);
         pd.show();;
     }
@@ -118,9 +118,9 @@ public class HTTPPostProductJson extends AsyncTask<String ,Long,Integer>
             {
                     pd.dismiss();
                     AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-                    alertDialog.setTitle("????");
-                    alertDialog.setMessage("??? ?? .");
-                    alertDialog.setButton("????", new DialogInterface.OnClickListener() {
+                    alertDialog.setTitle("پیغام");
+                    alertDialog.setMessage("ثبت شد .");
+                    alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
 
                         }
@@ -133,9 +133,9 @@ public class HTTPPostProductJson extends AsyncTask<String ,Long,Integer>
             {
                 pd.dismiss();
                 AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-                alertDialog.setTitle("????? ");
-                alertDialog.setMessage("??? ??? ?????? ?????? ????");
-                alertDialog.setButton("????", new DialogInterface.OnClickListener() {
+                alertDialog.setTitle("هشدار");
+                alertDialog.setMessage("ارسال نشد دوباره امتحان کنید");
+                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
@@ -149,9 +149,9 @@ public class HTTPPostProductJson extends AsyncTask<String ,Long,Integer>
         {
             pd.dismiss();
             AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-            alertDialog.setTitle("???");
-            alertDialog.setMessage("??? ????? ??? ?? ???? ?????? ?????? ????");
-            alertDialog.setButton("????", new DialogInterface.OnClickListener() {
+            alertDialog.setTitle("خطا");
+            alertDialog.setMessage(" .خطا ثبت نشد دوباره امتحان کنید");
+            alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
 
                 }

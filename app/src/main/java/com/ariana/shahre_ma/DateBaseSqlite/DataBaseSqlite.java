@@ -1252,6 +1252,13 @@ Context context;
         return db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_Area,null);
     }
 
+    public  Cursor select_Area(Integer cityid)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_Area+" WHERE CityId="+cityid,null);
+    }
+
+
     public  Cursor select_BusinessImage(Integer businessid)
     {
         SQLiteDatabase db=this.getReadableDatabase();
