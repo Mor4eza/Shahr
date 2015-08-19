@@ -8,7 +8,7 @@
     <string name="Off">تخفیف ها</string>
     <string name="Near">اطراف من</string>
     <string name="My_Account">حساب من</string>
-    <string name="My_Fav">نشانه گزاری شده ها</string>
+    <string name="My_Fav">نشانه گذاری شده ها</string>
     <string name="My_city">شهر من</string>
     <string name="My_Intrest">علایق من</string>
     <string name="title_activity_jobs">مشاغل</string>
@@ -59,5 +59,7 @@
     <string name="aboutUs">درباره ما</string>
     <string name="title_activity_about_us">درباره ما</string>
     <string name="title_activity_bazarche">بازارچه</string>
+    <string name="title_activity_add_product">add_product</string>
+    <string name="title_activity_my_products">My_products</string>
 
 </resources>

@@ -78,9 +78,9 @@
         </activity>
         <activity
             android:name=".MyProfile.Log_In"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_log__in"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.MainActivity" />
@@ -218,7 +218,6 @@
 
         <activity
             android:name=".Settings.UpdateActivity"
-
             android:label="@string/title_activity_update"
             android:screenOrientation="portrait" >
         </activity>
@@ -242,7 +241,6 @@
         </activity>
         <activity
             android:name=".MyBusiness.Add_New_Business"
-
             android:label="@string/title_activity_add__business"
             android:screenOrientation="portrait" >
         </activity>
@@ -257,10 +255,8 @@
         <activity
             android:name=".AboutUs"
             android:label="@string/title_activity_about_us"
-
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.MainActivity" />
@@ -272,6 +268,22 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Bazarche.add_product"
+            android:label="@string/title_activity_add_product"
+            android:parentActivityName=".Bazarche.Bazarche" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ariana.shahre_ma.Bazarche.Bazarche" />
+        </activity>
+        <activity
+            android:name=".Bazarche.My_products"
+            android:label="@string/title_activity_my_products"
+            android:parentActivityName=".Bazarche.Bazarche" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ariana.shahre_ma.Bazarche.Bazarche" />
         </activity>
     </application>
 

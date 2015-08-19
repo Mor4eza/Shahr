@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.Bazarche;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -16,12 +17,11 @@ public class Bazarche extends ActionBarActivity {
         setContentView(R.layout.activity_bazarche);
     }
 
+    public void products(View view) {
 
-    public void add_product(View view) {
-
-
+        Intent i = new Intent(getApplicationContext(),My_products.class);
+        startActivity(i);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -44,5 +44,6 @@ public class Bazarche extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
 }
