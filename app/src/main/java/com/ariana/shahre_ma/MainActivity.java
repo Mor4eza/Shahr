@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
@@ -54,8 +55,6 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.mikepenz.iconics.typeface.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
@@ -369,15 +368,16 @@ public class MainActivity extends ActionBarActivity {
                         }
                         if (position == 1) {
 
+                            try {
+                                int v = getPackageManager().getPackageInfo("com.google.android.gms", 0).versionCode;
+                                Log.i("Vesion",String.valueOf(v));
 
-                            int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
 
                             // Showing status
-                            if(status== ConnectionResult.SUCCESS) {
+                            if (v >=6587000) {
                                 Intent i = new Intent(getApplicationContext(), NearMeActivity.class);
                                 startActivity(i);
-                            }else{
-                                int requestCode = 10;
+                            } else {
                                 AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
                                 alertDialog.setTitle("هشدار");
                                 alertDialog.setMessage("نسخه Google Play Service  شما قدیمی می باشد. لطفا بروز رسانی کنید");
@@ -388,6 +388,10 @@ public class MainActivity extends ActionBarActivity {
                                 });
                                 alertDialog.show();
                             }
+
+                        } catch (PackageManager.NameNotFoundException e) {
+                            e.printStackTrace();
+                        }
 
                         }
 
@@ -400,8 +404,7 @@ public class MainActivity extends ActionBarActivity {
 
                         if (position == 3) {
 
-                            if (net.checkInternetConnection() == false)
-                            {
+                            if (net.checkInternetConnection() == false) {
                                 AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
                                 alertDialog.setTitle("هشدار");
                                 alertDialog.setMessage("اینترنت قطع می باشد");
@@ -411,9 +414,7 @@ public class MainActivity extends ActionBarActivity {
                                     }
                                 });
                                 alertDialog.show();
-                            }
-                            else
-                            {
+                            } else {
 
                                 if (query.getMemberId() > 0) // get member
                                 {
@@ -429,8 +430,7 @@ public class MainActivity extends ActionBarActivity {
                             }
 
                         }
-                        if (position == 4)
-                        {
+                        if (position == 4) {
 
                             try {
                                 DataBaseSqlite db = new DataBaseSqlite(MainActivity.this);
@@ -449,7 +449,7 @@ public class MainActivity extends ActionBarActivity {
                                 Toast.makeText(getApplicationContext(), "وارد حساب خود نشده اید...!", Toast.LENGTH_LONG).show();
                             }
                         }
-                        if (position ==5) {
+                        if (position == 5) {
 
                             try {
                                 DataBaseSqlite db = new DataBaseSqlite(MainActivity.this);
@@ -477,8 +477,7 @@ public class MainActivity extends ActionBarActivity {
                             {
                                 Intent i = new Intent(getApplicationContext(), My_Interest.class);
                                 startActivity(i);
-                            }
-                            else{
+                            } else {
                                 Toast.makeText(getApplicationContext(), "وارد حساب خود شوید", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -487,7 +486,7 @@ public class MainActivity extends ActionBarActivity {
                             Intent i = new Intent(getApplicationContext(), Setting.class);
                             startActivity(i);
                         }
-                        if (position==10){
+                        if (position == 10) {
                             Intent i = new Intent(getApplicationContext(), AboutUs.class);
                             startActivity(i);
                         }

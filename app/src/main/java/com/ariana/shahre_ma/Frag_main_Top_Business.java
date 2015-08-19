@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ariana.shahre_ma.Cards.TopBusiness_Card_Adapter;
@@ -18,7 +19,7 @@ public class Frag_main_Top_Business extends Fragment {
     // Store instance variables
     private String title;
     private int page;
-
+    public static ProgressBar pb;
     public static   RecyclerView mRecyclerView;
     public static RecyclerView.LayoutManager mLayoutManager;
     public static RecyclerView.Adapter mAdapter;
@@ -48,7 +49,7 @@ public class Frag_main_Top_Business extends Fragment {
         TextView tvLabel = (TextView) view.findViewById(R.id.tvLabel);
         tvLabel.setText(page + " -- " + title);
 
-
+        pb=(ProgressBar)view.findViewById(R.id.pb_topBusiness);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
 

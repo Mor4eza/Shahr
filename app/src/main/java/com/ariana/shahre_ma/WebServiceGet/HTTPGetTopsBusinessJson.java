@@ -3,6 +3,7 @@ package com.ariana.shahre_ma.WebServiceGet;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 
 import com.ariana.shahre_ma.Cards.TopBusiness_Card_Adapter;
 import com.ariana.shahre_ma.Cards.TopDiscount_Card_Adapter;
@@ -326,6 +327,20 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
                         Frag_main_Top_Business.mRecyclerView.setAdapter(mAdapter);
                         TopDiscount_Card_Adapter dAdapter=new TopDiscount_Card_Adapter(context);
                         Frag_main_Top_discount.mRecyclerView.setAdapter(dAdapter);
+                        Frag_main_Top_Business.pb.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Frag_main_Top_Business.pb.setVisibility(View.INVISIBLE);
+                            }
+                        });
+
+                        Frag_main_Top_discount.pb.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Frag_main_Top_discount.pb.setVisibility(View.INVISIBLE);
+                            }
+                        });
+
                   }
 
                 } catch (Exception e) {

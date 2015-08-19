@@ -37,7 +37,6 @@
         android:hint="دنبال چی هستی...؟ (رستوران،آموزشگاه و...)"
         android:layout_below="@+id/et_search_where"
         android:layout_marginTop="35dp"
-        android:singleLine="true"
         android:completionThreshold="1"
         android:layout_alignRight="@+id/et_search_where"
         android:layout_alignEnd="@+id/et_search_where"
