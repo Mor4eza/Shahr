@@ -279,7 +279,7 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
     @Override
     protected void onPostExecute(Integer integer) {
                 super.onPostExecute(integer);
-             //   try {
+                try {
 
                     DataBaseSqlite db = new DataBaseSqlite(context);
                     KeySettings setting=new KeySettings(context);
@@ -297,11 +297,11 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
                     else {
 
 
+                        db.delete_BusinessTops();
+                        db.delete_BusinessDisCount();
 
                         for (int i = 0; i <len; i++)
                         {
-                            db.delete_BusinessTops(Id[i]);
-                            db.delete_BusinessDisCount(Id[i]);
                             db.delete_DisCount(discountid[i]);
 
 
@@ -326,12 +326,12 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
                         Frag_main_Top_Business.mRecyclerView.setAdapter(mAdapter);
                         TopDiscount_Card_Adapter dAdapter=new TopDiscount_Card_Adapter(context);
                         Frag_main_Top_discount.mRecyclerView.setAdapter(dAdapter);
-                    }
+                  }
 
-              /*  } catch (Exception e) {
+                } catch (Exception e) {
 
                     Log.e("ExceptionBusinessJson",e.toString());
-                }*/
+                }
 
     }
 }

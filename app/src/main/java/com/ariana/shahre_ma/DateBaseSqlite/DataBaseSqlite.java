@@ -1467,16 +1467,16 @@ Context context;
         db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_BUSINESS +" WHERE CityId="+cityid+" AND SubsetId="+subsetid);
         db.close();
     }
-    public void delete_BusinessTops(Integer businessid)
+    public void delete_BusinessTops()
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_BUSINESS_TOPS +" WHERE Id="+businessid);
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_BUSINESS_TOPS );
         db.close();
     }
-    public void delete_BusinessDisCount(Integer businessid)
+    public void delete_BusinessDisCount()
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_BUSINESS_DISCOUNT +" WHERE Id="+businessid);
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_BUSINESS_DISCOUNT );
         db.close();
     }
 

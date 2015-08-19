@@ -149,6 +149,7 @@ public class SplashActivity extends ActionBarActivity {
             setting.saveCacheImage(true);
             setting.setinitialization(true);
             setting.setUpdateAll(true);
+            setting.saveCityName("تهران");
 
         }
     }

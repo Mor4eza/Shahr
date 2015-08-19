@@ -1,6 +1,8 @@
 package com.ariana.shahre_ma.MyCity;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -210,38 +212,49 @@ public class My_city extends ActionBarActivity implements TotalListener{
 
     public void download(View v){
         // download multiple Business
-       Integer Result = 0;
-        Integer i=0;
-        DataBaseSqlite db=new DataBaseSqlite(this);
-        List<String> listurl=new ArrayList<String>();
-        String url[]=new String[fc.GetNameSubset().size()];
-        for(String name:fc.GetNameSubset()){
+        try{
 
-            Cursor cursor=db.select_SubsetId(name);
-            cursor.moveToFirst();
-            Result=cursor.getInt(0);
-            url[i]="http://test.shahrma.com/api/ApiGiveBusiness?subsetId="+Result+"&cityid="+query.getCityId(cityname);
-            listurl.add("http://test.shahrma.com/api/ApiGiveBusiness?subsetId=" + Result + "&cityid="+query.getCityId(cityname));
-            Log.i("", "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=" + Result + "&cityid="+query.getCityId(cityname));
-            i++;
+            if(ns.checkInternetConnection()) {
+                Integer Result = 0;
+                Integer i = 0;
+                DataBaseSqlite db = new DataBaseSqlite(this);
+                List<String> listurl = new ArrayList<String>();
+                String url[] = new String[fc.GetNameSubset().size()];
+                for (String name : fc.GetNameSubset()) {
+
+                    Cursor cursor = db.select_SubsetId(name);
+                    cursor.moveToFirst();
+                    Result = cursor.getInt(0);
+                    url[i] = "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=" + Result + "&cityid=" + query.getCityId(cityname);
+                    listurl.add("http://test.shahrma.com/api/ApiGiveBusiness?subsetId=" + Result + "&cityid=" + query.getCityId(cityname));
+                    Log.i("", "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=" + Result + "&cityid=" + query.getCityId(cityname));
+                    i++;
+                }
+
+                if (cityname.equals("") || listurl.size() == 0) {
+                    Toast.makeText(getApplicationContext(), "لطفا زیرمجموعه ای را انتخاب کنید", Toast.LENGTH_LONG).show();
+                } else {
+                    HTTPGetBusinessJsonArray business = new HTTPGetBusinessJsonArray(this);
+                    business.execute(url);
+                    Download_dialog dialog = new Download_dialog(this);
+                    dialog.show();
+                }
+            }else{
+
+                AlertDialog alertDialog = new AlertDialog.Builder(My_city.this).create();
+                alertDialog.setTitle("هشدار");
+                alertDialog.setMessage("اینترنت قطع می باشد");
+                alertDialog.setButton("خب", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog.show();
+            }
+
+        }catch (Exception e){
+
         }
-
-        if(cityname.equals("") || listurl.size()==0)
-        {
-            Toast.makeText(getApplicationContext(),"لطفا زیرمجموعه ای را انتخاب کنید",Toast.LENGTH_LONG).show();
-        }
-        else
-        {
-            HTTPGetBusinessJsonArray business = new HTTPGetBusinessJsonArray(this);
-            business.execute(url);
-            Download_dialog dialog=new Download_dialog(this);
-            dialog.show();
-        }
-
-
-        Toast.makeText(getApplicationContext(),"download",Toast.LENGTH_LONG).show();
-
-
 
     }
 

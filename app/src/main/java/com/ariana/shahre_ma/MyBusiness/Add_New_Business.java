@@ -23,6 +23,8 @@ import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostBusinessJson;
 import com.dd.CircularProgressButton;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.nhaarman.supertooltips.ToolTip;
 import com.nhaarman.supertooltips.ToolTipRelativeLayout;
 import com.nhaarman.supertooltips.ToolTipView;
@@ -402,10 +404,28 @@ public class Add_New_Business extends ActionBarActivity {
     }
 
     public void select_map(View view) {
-        Intent i = new Intent(getBaseContext(),My_Business_Map.class);
-        startActivity(i);
+        try {
+            int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
+            // Showing status
+            if (status == ConnectionResult.SUCCESS) {
+                Intent i = new Intent(getBaseContext(), My_Business_Map.class);
+                startActivity(i);
+            } else {
+                int requestCode = 10;
+                AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+                alertDialog.setTitle("هشدار");
+                alertDialog.setMessage("نسخه Google Play Service  شما قدیمی می باشد. لطفا بروز رسانی کنید");
+                alertDialog.setButton("خب", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
 
+                    }
+                });
+                alertDialog.show();
+            }
+
+        } catch (Exception e) {
+
+        }
     }
-
 
 }

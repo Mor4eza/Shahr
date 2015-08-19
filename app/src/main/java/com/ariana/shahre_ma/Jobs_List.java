@@ -1,8 +1,10 @@
 package com.ariana.shahre_ma;
 
+import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -28,6 +30,8 @@ import com.ariana.shahre_ma.job_details.Job_details;
 import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import java.util.List;
 
@@ -139,13 +143,29 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
+        int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
         int id = item.getItemId();
         View btnsort=findViewById(R.id.sort);
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_Map) {
-           Intent i = new Intent(this,MapsActivity.class);
-           startActivity(i);
+
+
+            if(status== ConnectionResult.SUCCESS) {
+                Intent i = new Intent(this,MapsActivity.class);
+                startActivity(i);
+            }else{
+                int requestCode = 10;
+                AlertDialog alertDialog = new AlertDialog.Builder(Jobs_List.this).create();
+                alertDialog.setTitle("هشدار");
+                alertDialog.setMessage("نسخه Google Play Service  شما قدیمی می باشد. لطفا بروز رسانی کنید");
+                alertDialog.setButton("خب", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog.show();
+            }
+
             return true;
 
         }else if(id== R.id.sort){

@@ -171,32 +171,6 @@
                 android:inputType="textPersonName" />
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="20dp"
-            >
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:text=""
-                android:id="@+id/spinner_gh"
-                android:layout_weight="0.50"
-                android:layout_marginLeft="40px"
-                android:paddingTop="20px"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="مدت قرارداد"
-                android:id="@+id/text2825"
-                android:paddingLeft="80px"
-                android:paddingTop="20dp"/>
-        </LinearLayout>
 
         <Button
             android:id="@+id/select_map"

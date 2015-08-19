@@ -25,6 +25,8 @@ import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostBusinessEditJson;
 import com.dd.CircularProgressButton;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +44,6 @@ public class Edit_business extends ActionBarActivity {
     AutoCompleteTextView Market_subset;
     AutoCompleteTextView Market_zone;
     MultiAutoCompleteTextView Market_field;
-    Spinner Market_gharar;
     Integer Fields_ID[]=new Integer[7];
     DateTime dt=new DateTime();
     FieldClass fc=new FieldClass();
@@ -115,9 +116,7 @@ public class Edit_business extends ActionBarActivity {
        Market_subset =(AutoCompleteTextView)findViewById(R.id.ac_subset);
        Market_zone =(AutoCompleteTextView)findViewById(R.id.ac_area);
        Market_field =(MultiAutoCompleteTextView)findViewById(R.id.ac_field);
-       Market_gharar=(Spinner)findViewById(R.id.spinner_gh);
        save_edit = (CircularProgressButton)findViewById(R.id.btn_save_edit);
-       SpinnerSetUp();
        
    }
 
@@ -162,18 +161,6 @@ public class Edit_business extends ActionBarActivity {
             Log.i("Exception",e.toString());
         }
        // Market_gharar.setText(rows.getString(8));
-    }
-    void SpinnerSetUp(){
-
-        Market_gharar.setPrompt("مدت قرارداد");
-        List<String> list = new ArrayList<String>();
-        list.add("3");
-        list.add("6");
-        list.add("9");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Market_gharar.setAdapter(dataAdapter);
-
     }
     public void save_edit(View v){
 
@@ -520,10 +507,29 @@ public class Edit_business extends ActionBarActivity {
         return  date;
 
     }
-    public void select_map(View v ){
+    public void select_map(View v ) {
 
-        Intent i = new Intent(getBaseContext(),My_Business_Map.class);
-        startActivity(i);
+        try {
+            int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
+            // Showing status
+            if (status == ConnectionResult.SUCCESS) {
+                Intent i = new Intent(getBaseContext(), My_Business_Map.class);
+                startActivity(i);
+            } else {
+                int requestCode = 10;
+                AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+                alertDialog.setTitle("هشدار");
+                alertDialog.setMessage("نسخه Google Play Service  شما قدیمی می باشد. لطفا بروز رسانی کنید");
+                alertDialog.setButton("خب", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
 
+                    }
+                });
+                alertDialog.show();
+            }
+
+        } catch (Exception e) {
+
+        }
     }
 }
