@@ -21,6 +21,7 @@ public class add_product extends ActionBarActivity {
     EditText tv_product_address;
     AutoCompleteTextView tv_product_subset;
     AutoCompleteTextView tv_product_city;
+    AutoCompleteTextView tv_product_area;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class add_product extends ActionBarActivity {
         tv_product_address=(EditText)findViewById(R.id.add_product_address);
         tv_product_subset=(AutoCompleteTextView)findViewById(R.id.ac_product_subset);
         tv_product_city=(AutoCompleteTextView)findViewById(R.id.ac_product_city);
+        tv_product_city=(AutoCompleteTextView)findViewById(R.id.ac_product_area);
     }
 
 
