@@ -107,7 +107,7 @@
                 android:layout_alignParentEnd="true" />
 
             <com.github.alexkolpa.fabtoolbar.FabToolbar
-                android:id="@+id/fab_toolbar"
+                android:id="@+id/product_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
@@ -127,15 +127,7 @@
                     android:layout_marginRight="40dp"
                     />
                 <ImageView
-                    android:id="@+id/btn_discount"
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/discount_tag"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    />
-                <ImageView
-                    android:id="@+id/btn_change"
+                    android:id="@+id/btn_change_image"
                     android:layout_width="50dp"
                     android:layout_height="40dp"
                     android:src="@android:drawable/ic_menu_crop"
@@ -149,7 +141,7 @@
             </com.github.alexkolpa.fabtoolbar.FabToolbar>
 
             <Button
-                android:id="@+id/overflow1"
+                android:id="@+id/p_overflow1"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:visibility="invisible"
@@ -158,7 +150,7 @@
                 android:layout_alignBottom="@id/my_product_image1"
                 android:background="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"/>
             <Button
-                android:id="@+id/overflow2"
+                android:id="@+id/p_overflow2"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:visibility="invisible"
@@ -167,7 +159,7 @@
                 android:layout_alignBottom="@id/my_product_image2"
                 android:background="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"/>
             <Button
-                android:id="@+id/overflow3"
+                android:id="@+id/p_overflow3"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:visibility="invisible"
@@ -176,7 +168,7 @@
                 android:layout_alignBottom="@id/my_product_image3"
                 android:background="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"/>
             <Button
-                android:id="@+id/overflow4"
+                android:id="@+id/p_overflow4"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:visibility="invisible"
