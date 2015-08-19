@@ -186,7 +186,7 @@ public class Add_New_Business extends ActionBarActivity {
             alertDialog.show();
 
         }
-        else if(query.getAreaID(Market_zone.getText().toString().trim())>0)
+        else if(query.getAreaID(Market_zone.getText().toString().trim())<0)
         {
             AlertDialog alertDialog = new AlertDialog.Builder(Add_New_Business.this).create();
             alertDialog.setTitle("هشدار ");

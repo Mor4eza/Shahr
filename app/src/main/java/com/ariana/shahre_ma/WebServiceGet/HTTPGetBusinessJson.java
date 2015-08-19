@@ -1,7 +1,9 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -182,8 +184,18 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
 
             Log.i("count",String.valueOf(len));
             if(len==0) {
-                Log.i("Count Business : ","فروشگاه ثبت نشد");
                 pd.dismiss();
+
+                AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                alertDialog.setTitle("هشدار");
+                alertDialog.setMessage("مشاغلی برای این شهر و این زیرمجموعه پیدا نشد!!!");
+                alertDialog.setButton("خب", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog.show();
+
             }
 
             else {

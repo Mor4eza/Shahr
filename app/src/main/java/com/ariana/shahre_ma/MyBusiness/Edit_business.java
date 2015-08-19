@@ -8,12 +8,10 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.DateTime;
@@ -66,40 +64,6 @@ public class Edit_business extends ActionBarActivity {
         GetNameActivity();
         Show_Business();
 
-        Spinner spn1 = (Spinner) findViewById(R.id.spinner_gh);
-        spn1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-
-                switch (pos) {
-                    case 0:
-                        // Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_LONG).show();
-                        modatgh = 3;
-                        EXPDateTime();
-                        break;
-                    case 1:
-                        //Toast.makeText(getApplicationContext(), "6", Toast.LENGTH_LONG).show();
-                        modatgh = 6;
-                        EXPDateTime();
-                        break;
-                    case 2:
-                        //Toast.makeText(getApplicationContext(), "9", Toast.LENGTH_LONG).show();
-                        modatgh = 9;
-                        EXPDateTime();
-                        break;
-                    case 3:
-                        // Toast.makeText(getApplicationContext(), "12", Toast.LENGTH_LONG).show();
-                        modatgh = 12;
-                        EXPDateTime();
-                        break;
-                }
-            }
-
-
-            public void onNothingSelected(AdapterView<?> arg0) {
-
-            }
-        });
 
     }
     
