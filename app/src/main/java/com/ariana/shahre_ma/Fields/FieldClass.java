@@ -55,33 +55,33 @@ public class FieldClass
 
 
     //Field BookMark table
-    private static Integer Id_Bookmark;
-    private static Integer Businessid_Bookmark;
-    private static Integer Memberid_Bookmark;
+    private static Integer Id_Bookmark=0;
+    private static Integer Businessid_Bookmark=0;
+    private static Integer Memberid_Bookmark=0;
 
     // Field  Opinion table
-    private static String Description;
-    private static String Date;
-    private static String MemberName;
-    private static Integer Erja;
-    private static Integer CountLike;
-    private static Integer CountDisLike;
+    private static String Description="";
+    private static String Date="";
+    private static String MemberName="";
+    private static Integer Erja=0;
+    private static Integer CountLike=0;
+    private static Integer CountDisLike=0;
 
-    private static String  selected_job;
-    private static Integer Count_Business;
-    private static Integer Business_SubsetId;
-    private static Integer SubsetId;
+    private static String  selected_job="";
+    private static Integer Count_Business=0;
+    private static Integer Business_SubsetId=0;
+    private static Integer SubsetId=0;
     private static Integer Business_Id=0;
-    private static String Market_Business;
-    private static String Address_Business;
+    private static String Market_Business="";
+    private static String Address_Business="";
 
 
-    private static Double Latitude_Business;
-    private static Double Longtiude_Business;
+    private static Double Latitude_Business=0.0;
+    private static Double Longtiude_Business=0.0;
 
 
-    private static Integer Count_Like;
-    private static Integer Count_DisLike;
+    private static Integer Count_Like=0;
+    private static Integer Count_DisLike=0;
 
     private static Boolean ShowNotification=false;
     private static Boolean SearchOffline=false;

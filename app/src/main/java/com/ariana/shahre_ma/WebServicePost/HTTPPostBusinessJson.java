@@ -7,7 +7,7 @@ import android.os.AsyncTask;
 
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
-import com.ariana.shahre_ma.MyBusiness.Edit_business;
+import com.ariana.shahre_ma.MyBusiness.Add_New_Business;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -110,11 +110,11 @@ public class HTTPPostBusinessJson extends AsyncTask<String,Long,Integer>
 
             ((Activity)context).finish();
 
-            Edit_business.save_edit.setProgress(100);
+            Add_New_Business.save_edit.setProgress(100);
         }
         else
         {
-            Edit_business.save_edit.setProgress(-1);
+            Add_New_Business.save_edit.setProgress(-1);
         }
 
 
