@@ -17,7 +17,6 @@ import java.util.Calendar;
  * Created by ariana on 6/23/2015.
  */
 public class MainService extends Service {
-    AlarmManager alarmManager;
     HTTPGetNotificationJson noti;
     Query query=new Query(this);
     @Override

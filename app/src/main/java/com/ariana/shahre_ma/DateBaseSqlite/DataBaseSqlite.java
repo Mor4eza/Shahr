@@ -1244,6 +1244,13 @@ Context context;
         return  db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_COLLECTION,null);
     }
 
+    public Cursor select_Collection_Product()
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return  db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_COLLECTION_PRODUCT,null);
+    }
+
+
     public Cursor select_Collection(String collectionname)
     {
         SQLiteDatabase db=this.getReadableDatabase();
