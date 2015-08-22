@@ -11,6 +11,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:id="@+id/details_parent"
     tools:context="com.z3_soft.shahre_ma.job_details.job_details_1$PlaceholderFragment">
 
 
@@ -22,20 +23,6 @@
         />
 
 
-
-   <!-- <ImageView
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:id="@+id/market_image"
-        android:src="@drawable/pooshak"
-        android:layout_alignParentTop="true"
-        android:scaleType="fitXY"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />-->
-
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
@@ -44,7 +31,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_gravity="right"
-        android:id="@+id/linearLayout">
+        android:id="@+id/parent_jobs">
 
         <TextView
             android:layout_width="wrap_content"
@@ -84,11 +71,7 @@
                 android:drawablePadding="10dp"
                 android:layout_gravity="end"
                 android:layout_marginBottom="20dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginBottom="20dp"/>
+
         </LinearLayout>
 
     <LinearLayout
@@ -108,11 +91,6 @@
                 android:layout_gravity="end"
                 android:layout_marginBottom="20dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginBottom="20dp"/>
         </LinearLayout>
 
     <LinearLayout
@@ -132,11 +110,6 @@
         android:layout_gravity="end"
         android:layout_marginBottom="20dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginBottom="20dp"/>
 
         </LinearLayout>
 
@@ -158,12 +131,6 @@
             android:layout_marginBottom="20dp"/>
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginBottom="20dp"/>
-
         </LinearLayout>
 
     <LinearLayout
@@ -179,13 +146,6 @@
             android:id="@+id/market_zamine"
             android:drawableRight="@drawable/field_activity"
             android:drawablePadding="10dp"
-            android:layout_gravity="end"
-            android:layout_marginBottom="20dp"/>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
 
@@ -208,12 +168,6 @@
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginBottom="20dp"/>
-
         </LinearLayout>
 
     <LinearLayout
@@ -230,12 +184,6 @@
             android:drawableRight="@drawable/decription"
             android:drawablePadding="10dp"
             android:id="@+id/market_desc"
-            android:layout_gravity="end"
-            android:layout_marginBottom="20dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginBottom="20dp"/>
 

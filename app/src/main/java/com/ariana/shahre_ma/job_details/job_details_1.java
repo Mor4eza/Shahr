@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -73,6 +74,7 @@ public class job_details_1 extends ActionBarActivity {
         FieldClass fc=new FieldClass();
         NetState ns;
         RatingBar rate1;
+        LinearLayout parent;
         public PlaceholderFragment() {
         }
 
@@ -112,6 +114,7 @@ public class job_details_1 extends ActionBarActivity {
             rate1=(RatingBar) rootView.findViewById(R.id.ratingBar1);
             slider = (SliderLayout) rootView.findViewById(R.id.slider_jobs);
             tv_distance=(TextView)rootView.findViewById(R.id.market_distance);
+            parent=(LinearLayout)rootView.findViewById(R.id.parent_jobs);
             display_detail();
             rates_change();
             display_Images();
@@ -165,15 +168,17 @@ public class job_details_1 extends ActionBarActivity {
 
 
                  //check email
-                 if(allrows.getString(6).equals("null") || allrows.getString(6).equals(null) || allrows.getString(6).equals(""))
+                 if(allrows.getString(6).equals("null") || allrows.getString(6).equals(null) || allrows.getString(6).equals("")) {
                      web.setText("");//Email
-                 else
+                     parent.removeView((View) web.getParent());
+                 }else
                      web.setText(allrows.getString(6));//Email
 
                  //check businessOwner
-                 if(allrows.getString(7).equals("") || allrows.getString(7).equals("نن"))
+                 if(allrows.getString(7).equals("") || allrows.getString(7).equals("نن")) {
                      owner.setText("");//BusinessOwner
-                 else
+                     parent.removeView((View) owner.getParent());
+                 }else
                      owner.setText(allrows.getString(7));//BusinessOwner
 
 
@@ -181,8 +186,10 @@ public class job_details_1 extends ActionBarActivity {
 
 
                  //check description
-                 if(allrows.getString(9).equals("") || allrows.getString(9).equals("null") || allrows.getString(9).equals(null))
+                 if(allrows.getString(9).equals("") || allrows.getString(9).equals("null") || allrows.getString(9).equals(null)) {
                      des.setText("");//Description
+                     parent.removeView((View) des.getParent());
+                 }
                  else
                      des.setText(allrows.getString(9));//Description
 
@@ -217,15 +224,17 @@ public class job_details_1 extends ActionBarActivity {
 
 
                  //check email
-                 if(allrows.getString(6).equals("null") || allrows.getString(6).equals(null) || allrows.getString(6).equals(""))
+                 if(allrows.getString(6).equals("null") || allrows.getString(6).equals(null) || allrows.getString(6).equals("")){
                      web.setText("");//Email
-                 else
+                     parent.removeView((View) web.getParent());
+                 } else
                      web.setText(allrows.getString(6));//Email
 
                  //check businessOwner
-                 if(allrows.getString(7).equals("") || allrows.getString(7).equals("نن"))
+                 if(allrows.getString(7).equals("") || allrows.getString(7).equals("نن")) {
                      owner.setText("");//BusinessOwner
-                 else
+                     parent.removeView((View) owner.getParent());
+                 }else
                      owner.setText(allrows.getString(7));//BusinessOwner
 
 
@@ -233,9 +242,10 @@ public class job_details_1 extends ActionBarActivity {
 
 
                  //check description
-                 if(allrows.getString(9).equals("") || allrows.getString(9).equals("null") || allrows.getString(9).equals(null))
+                 if(allrows.getString(9).equals("") || allrows.getString(9).equals("null") || allrows.getString(9).equals(null)){
                      des.setText("");//Description
-                 else
+                     parent.removeView((View) des.getParent());
+                 }else
                      des.setText(allrows.getString(9));//Description
 
 
@@ -269,15 +279,17 @@ public class job_details_1 extends ActionBarActivity {
                  tel.setText(allrows.getString(2));//Phone
 
                  //check email
-                 if(allrows.getString(5).equals("null") || allrows.getString(5).equals(null) || allrows.getString(5).equals(""))
+                 if(allrows.getString(5).equals("null") || allrows.getString(5).equals(null) || allrows.getString(5).equals("")){
                      web.setText("");//Email
-                 else
+                     parent.removeView((View) web.getParent());
+                 } else
                      web.setText(allrows.getString(5));//Email
 
                  //check businessOwner
-                 if(allrows.getString(6).equals("") || allrows.getString(6).equals("نن"))
+                 if(allrows.getString(6).equals("") || allrows.getString(6).equals("نن")) {
                      owner.setText("");//BusinessOwner
-                 else
+                     parent.removeView((View) owner.getParent());
+                 }else
                      owner.setText(allrows.getString(6));//BusinessOwner
 
 
@@ -285,9 +297,10 @@ public class job_details_1 extends ActionBarActivity {
 
 
                  //check description
-                 if(allrows.getString(8).equals("") || allrows.getString(8).equals("null") || allrows.getString(8).equals(null))
+                 if(allrows.getString(8).equals("") || allrows.getString(8).equals("null") || allrows.getString(8).equals(null)) {
                      des.setText("");//Description
-                 else
+                     parent.removeView((View) des.getParent());
+                 }else
                      des.setText(allrows.getString(8));//Description
 
                  subset.setText(query.getsubsetName(allrows.getInt(9)));//Subset
@@ -374,7 +387,6 @@ public class job_details_1 extends ActionBarActivity {
                             distance=distance/1000;
                             tv_distance.setText("فاصله تقریبی " + distance + " " + "کیلومتر");
                         }
-
                         stopListen();
                     }catch (Exception e){
 
