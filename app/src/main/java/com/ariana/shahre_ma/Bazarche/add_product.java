@@ -57,7 +57,7 @@ public class add_product extends ActionBarActivity {
     Integer areaid=0;
     Double latitude=0.0;
     Double longtiude=0.0;
-    Boolean adaptive=false;
+    Boolean adaptive=true;
 
 
     SqliteTOjson sqliteTOjson=new SqliteTOjson(this);
@@ -82,10 +82,9 @@ public class add_product extends ActionBarActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.tavafoq) {
-                    adaptive = true;
-                    Log.i("cheked", "tavafoq");
-                } else {
                     adaptive = false;
+                } else {
+                    adaptive = true;
                 }
             }
         });
