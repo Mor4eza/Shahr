@@ -162,10 +162,31 @@ public class job_details_1 extends ActionBarActivity {
                  Log.i("Longitude", String.valueOf(allrows.getDouble(16)));
                  name.setText(allrows.getString(1));//Market
                  tel.setText(allrows.getString(3));//Phone
-                 web.setText(allrows.getString(6));//Email
-                 owner.setText(allrows.getString(7));//BusinessOwner
+
+
+                 //check email
+                 if(allrows.getString(6).equals("null") || allrows.getString(6).equals(null) || allrows.getString(6).equals(""))
+                     web.setText("");//Email
+                 else
+                     web.setText(allrows.getString(6));//Email
+
+                 //check businessOwner
+                 if(allrows.getString(7).equals("") || allrows.getString(7).equals("نن"))
+                     owner.setText("");//BusinessOwner
+                 else
+                     owner.setText(allrows.getString(7));//BusinessOwner
+
+
                  address.setText(allrows.getString(8));//Address
-                 des.setText(allrows.getString(9));//Description
+
+
+                 //check description
+                 if(allrows.getString(9).equals("") || allrows.getString(9).equals("null") || allrows.getString(9).equals(null))
+                     des.setText("");//Description
+                 else
+                     des.setText(allrows.getString(9));//Description
+
+
                  subset.setText(query.getsubsetName(allrows.getInt(14)));//Subset
 
                  for (int i = 0; i < 7; i++) {
@@ -193,10 +214,32 @@ public class job_details_1 extends ActionBarActivity {
                  Log.i("Longitude", String.valueOf(allrows.getDouble(16)));
                  name.setText(allrows.getString(1));//Market
                  tel.setText(allrows.getString(3));//Phone
-                 web.setText(allrows.getString(6));//Email
-                 owner.setText(allrows.getString(7));//BusinessOwner
+
+
+                 //check email
+                 if(allrows.getString(6).equals("null") || allrows.getString(6).equals(null) || allrows.getString(6).equals(""))
+                     web.setText("");//Email
+                 else
+                     web.setText(allrows.getString(6));//Email
+
+                 //check businessOwner
+                 if(allrows.getString(7).equals("") || allrows.getString(7).equals("نن"))
+                     owner.setText("");//BusinessOwner
+                 else
+                     owner.setText(allrows.getString(7));//BusinessOwner
+
+
                  address.setText(allrows.getString(8));//Address
-                 des.setText(allrows.getString(9));//Description
+
+
+                 //check description
+                 if(allrows.getString(9).equals("") || allrows.getString(9).equals("null") || allrows.getString(9).equals(null))
+                     des.setText("");//Description
+                 else
+                     des.setText(allrows.getString(9));//Description
+
+
+
                  subset.setText(query.getsubsetName(allrows.getInt(14)));//Subset
 
                  for (int i = 0; i < 7; i++) {
@@ -224,10 +267,29 @@ public class job_details_1 extends ActionBarActivity {
                  Log.i("Longitude", String.valueOf(allrows.getDouble(11)));
                  name.setText(allrows.getString(1));//Market
                  tel.setText(allrows.getString(2));//Phone
-                 web.setText(allrows.getString(5));//Email
-                 owner.setText(allrows.getString(6));//BusinessOwner
+
+                 //check email
+                 if(allrows.getString(5).equals("null") || allrows.getString(5).equals(null) || allrows.getString(5).equals(""))
+                     web.setText("");//Email
+                 else
+                     web.setText(allrows.getString(5));//Email
+
+                 //check businessOwner
+                 if(allrows.getString(6).equals("") || allrows.getString(6).equals("نن"))
+                     owner.setText("");//BusinessOwner
+                 else
+                     owner.setText(allrows.getString(6));//BusinessOwner
+
+
                  address.setText(allrows.getString(7));//Address
-                 des.setText(allrows.getString(8));//Description
+
+
+                 //check description
+                 if(allrows.getString(8).equals("") || allrows.getString(8).equals("null") || allrows.getString(8).equals(null))
+                     des.setText("");//Description
+                 else
+                     des.setText(allrows.getString(8));//Description
+
                  subset.setText(query.getsubsetName(allrows.getInt(9)));//Subset
 
                  for (int i = 0; i < 7; i++) {

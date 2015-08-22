@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * Created by ariana2 on 6/6/2015.
  */
-public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
+public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
 {
 
     private static Context context;
@@ -146,83 +146,101 @@ public class HTTPGetBusinessJson extends AsyncTask<String, String, String>
      * @param args
      * @return
      */
-    protected String doInBackground(String... args) {
+    protected Integer doInBackground(String... args) {
+        Integer result=0;
         try {
 
                 InputStream jsonStream = getStreamFromURL(GetUrl_business(), "GET");
                 String jsonString = streamToString(jsonStream);
                 parseJSON(jsonString);
-                onPostExecute();
+            result=1;
         } catch (Exception e) {
-
+            result=0;
         }
-        return null;
+        return result;
 
 
     }
 
     /**
      *
+     * @param result
      */
-    protected void onPostExecute() {
+    @Override
+    protected void onPostExecute(Integer result) {
         try {
 
-            KeySettings setting=new KeySettings(context);
-            query=new Query(context);
+            if(result==1) {
+                KeySettings setting = new KeySettings(context);
+                query = new Query(context);
 
 
-            Integer cityid=0;
-            Integer idsubset=0;
+                Integer cityid = 0;
+                Integer idsubset = 0;
 
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+                DataBaseSqlite dbs = new DataBaseSqlite(context);
 
 
-            cityid=query.getCityId(setting.getCityName());
-            idsubset=fc.GetSubsetId();
+                cityid = query.getCityId(setting.getCityName());
+                idsubset = fc.GetSubsetId();
 
-            dbs.delete_Business(cityid, idsubset);
+                dbs.delete_Business(cityid, idsubset);
 
-            Log.i("count",String.valueOf(len));
-            if(len==0) {
-                pd.dismiss();
+                Log.i("count", String.valueOf(len));
+                if (len == 0) {
+                    pd.dismiss();
 
-                AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-                alertDialog.setTitle("هشدار");
-                alertDialog.setMessage("مشاغلی برای این شهر و این زیرمجموعه پیدا نشد!!!");
-                alertDialog.setButton("خب", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+                    AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                    alertDialog.setTitle("هشدار");
+                    alertDialog.setMessage("مشاغلی برای این شهر و این زیرمجموعه پیدا نشد!!!");
+                    alertDialog.setButton("خب", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    alertDialog.show();
+
+                } else {
+
+
+                    Intent intent = new Intent(this.context, Jobs_List.class);
+                    this.context.startActivity(intent);
+                    Log.i("Count Business : ", "دریافت ثبت شده ها");
+
+
+                    for (int i = 0; i < len; i++) {
+                        dbs.delete_DisCount(discountid[i]);
+                        if (discountid[i] == 0) {
+                            Log.i("ifbusiness", "0");
+                        } else {
+                            Log.i("elsebusiness", "i>0");
+                            dbs.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i], likediscount[i], dislikediscount[i]);
+                        }
+
+                        dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], latitude[i], longitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i], src[i]);
 
                     }
-                });
-                alertDialog.show();
 
+                    fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
+                    pd.dismiss();
+                }
             }
+            else
+            {
+                if (len == 0) {
+                    pd.dismiss();
 
-            else {
+                    AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                    alertDialog.setTitle("هشدار");
+                    alertDialog.setMessage("مشاغلی برای این شهر و این زیرمجموعه پیدا نشد!!!");
+                    alertDialog.setButton("خب", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
 
-
-                Intent intent = new Intent(this.context, Jobs_List.class);
-                this.context.startActivity(intent);
-                Log.i("Count Business : ", "دریافت ثبت شده ها");
-                pd.dismiss();
-
-                for (int i = 0; i <len; i++)
-                {
-                    dbs.delete_DisCount(discountid[i]);
-                    if(discountid[i]==0) {
-                        Log.i("ifbusiness","0");
-                    }
-                    else
-                    {
-                        Log.i("elsebusiness", "i>0");
-                        dbs.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i],likediscount[i],dislikediscount[i]);
-                    }
-
-                    dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i],latitude[i], longitude[i], areaid[i], area1[i], user[i],cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i],src[i]);
+                        }
+                    });
+                    alertDialog.show();
 
                 }
-
-                fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
             }
 
        } catch (Exception e)

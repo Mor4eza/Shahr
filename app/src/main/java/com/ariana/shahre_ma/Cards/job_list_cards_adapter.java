@@ -90,11 +90,11 @@ private  static Context context;
              search=false;
             Log.i("date", setting.getSortBusiness());
         }
-
+        Log.i("job_list_cards_adapter","strat");
         try {
             if(fc.GetSearchOffline())
                 {
-
+                    Log.i("SearchOffline","strat");
                     mItems = new ArrayList<Job_lists_card_item>();
 
                     for (int i = 0; i < fdb.GetMarketBusiness().size(); i++)
@@ -109,7 +109,8 @@ private  static Context context;
                         nature.setmId(fdb.GetIdBusiness().get(i));
                         nature.setNameImage(fdb.GetSrc().get(i));
 
-                        if(fdb.GetMobileBusiness().get(i).length()==0)
+
+                        if(fdb.GetMobileBusiness().get(i).length()==0 || fdb.GetMobileBusiness().get(i).equals("") || fdb.GetMobileBusiness().get(i).equals(null) || fdb.GetMobileBusiness().get(i).equals("null"))
                         {
                             nature.setTell(fdb.GetPhoneBusiness().get(i));
                         }
@@ -132,7 +133,7 @@ private  static Context context;
                 {
                     if(ns.checkInternetConnection() && search)
                     {
-
+                        Log.i("checkInternetConnection","strat");
                         mItems = new ArrayList<Job_lists_card_item>();
 
                         for (int i = 0; i < fdb.GetMarketBusiness().size(); i++)
@@ -147,11 +148,9 @@ private  static Context context;
                             nature.setNameImage(fdb.GetSrc().get(i));
 
 
-                            if(fdb.GetMobileBusiness().get(i).length()==0)
+                            if(fdb.GetMobileBusiness().get(i).length()==0 || fdb.GetMobileBusiness().get(i).equals("") || fdb.GetMobileBusiness().get(i).equals(null) || fdb.GetMobileBusiness().get(i).equals("null"))
                             {
-                                //nature.setTell(fdb.GetPhoneBusiness().get(i).substring(0,fdb.GetPhoneBusiness().get(i).indexOf("-")));
                                 nature.setTell(fdb.GetPhoneBusiness().get(i));
-
                             }
                             else if(fdb.GetPhoneBusiness().get(i).equals("1"))
                             {
@@ -169,6 +168,7 @@ private  static Context context;
                     else
                     {
 
+                        Log.i("else","strat");
                         if (allrows.moveToFirst())
                         {
                             mItems = new ArrayList<Job_lists_card_item>();
@@ -187,7 +187,7 @@ private  static Context context;
 
 
 
-                                if (allrows.getString(3).equals(""))//value phone null
+                                if (allrows.getString(3).equals("") || allrows.getString(3).equals("null"))//value phone null
                                 {
                                     nature.setTell(allrows.getString(4));
                                 }
