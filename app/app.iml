@@ -83,7 +83,6 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.chenupt.android/dragtoplayout/1.2.1/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.citux/datetimepicker/0.1.2/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.dmytrodanylyk.circular-progress-button/library/1.1.3/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.johnkil.android-robototextview/robototextview/2.4.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.orangegangsters/swipy/1.2.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.ozodrukh/CircularReveal/1.0.5/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.panwrona/DownloadProgressBar/1.1/jars" />
@@ -96,7 +95,6 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.3.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.mikepenz/iconics/1.2.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.mikepenz/materialdrawer/3.0.9/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.neno0o.lighttextview/lib/1.1/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.nhaarman.supertooltips/library/3.0.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.wrapp.floatlabelededittext/library/0.0.6/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/jp.wasabeef/recyclerview-animators/1.2.0/jars" />
@@ -140,10 +138,8 @@
     <orderEntry type="library" exported="" name="DownloadProgressBar-1.1" level="project" />
     <orderEntry type="library" exported="" name="swipy-1.2.0" level="project" />
     <orderEntry type="library" exported="" name="library-2.4.0" level="project" />
-    <orderEntry type="library" exported="" name="lib-1.1" level="project" />
     <orderEntry type="library" exported="" name="slf4j-api-1.6.1" level="project" />
     <orderEntry type="library" exported="" name="iconics-1.2.0" level="project" />
-    <orderEntry type="library" exported="" name="robototextview-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.2.0" level="project" />
     <orderEntry type="library" exported="" name="dragtoplayout-1.2.1" level="project" />
     <orderEntry type="library" exported="" name="android-location-tracker-2.2" level="project" />

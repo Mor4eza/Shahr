@@ -23,7 +23,6 @@ import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.job_details.Job_details;
-import com.neno0o.lighttextviewlib.LightTextView;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -303,7 +302,6 @@ private  static Context context;
         public RatingBar rates;
         public TextView tvTell;
         public CardView cards;
-        public LightTextView newTag;
         FieldClass fc=new FieldClass();
 
         public ViewHolder(View itemView) {
@@ -317,8 +315,6 @@ private  static Context context;
             imgThumbnail.setOnClickListener(this);
             tvNature.setOnClickListener(this);
             cards.setOnClickListener(this);
-            newTag=new LightTextView(context);
-
             tvTell.setOnClickListener(new View.OnClickListener() {
 
                 @Override

@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 
 import com.ariana.shahre_ma.Cards.Notify_Card_Adapter;
 import com.ariana.shahre_ma.R;
-import com.neno0o.lighttextviewlib.LightTextView;
 
 import jp.wasabeef.recyclerview.animators.OvershootInRightAnimator;
 
@@ -16,7 +15,6 @@ public class Activity_notify extends ActionBarActivity {
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter Notify_list_Adapter;
-    LightTextView hint;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

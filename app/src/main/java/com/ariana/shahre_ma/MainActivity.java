@@ -375,8 +375,6 @@ public class MainActivity extends ActionBarActivity {
                             try {
                                 int v = getPackageManager().getPackageInfo("com.google.android.gms", 0).versionCode;
                                 Log.i("Vesion",String.valueOf(v));
-
-
                             // Showing status
                             if (v >=6587000) {
                                 Intent i = new Intent(getApplicationContext(), NearMeActivity.class);
@@ -428,7 +426,23 @@ public class MainActivity extends ActionBarActivity {
 
 
                                 } else {
-                                    Toast.makeText(getApplicationContext(), "وارد حساب خود نشده اید...!", Toast.LENGTH_SHORT).show();
+                                    AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                                    alertDialog.setTitle("وارد شوید");
+                                    alertDialog.setMessage("وارد حساب کاربری خود شوید و از تمامی امکانات برنامه استفاده کنید.");
+                                    alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Intent i = new Intent(getApplicationContext(), Log_In.class);
+                                            startActivity(i);
+                                            finish();
+                                        }
+                                    });
+
+                                    alertDialog.setButton2("بعدا", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                        }
+                                    });
+                                    alertDialog.show();
 
                                 }
                             }
@@ -464,11 +478,45 @@ public class MainActivity extends ActionBarActivity {
                                     Intent i = new Intent(getApplicationContext(), BookMark.class);
                                     startActivity(i);
                                 } else {
-                                    Toast.makeText(getApplicationContext(), "وارد حساب خود نشده اید...!", Toast.LENGTH_LONG).show();
+                                    AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                                    alertDialog.setTitle("وارد شوید");
+                                    alertDialog.setMessage("وارد حساب کاربری خود شوید و از تمامی امکانات برنامه استفاده کنید.");
+                                    alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Intent i = new Intent(getApplicationContext(), Log_In.class);
+                                            startActivity(i);
+                                            finish();
+                                        }
+                                    });
+
+                                    alertDialog.setButton2("بعدا", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                        }
+                                    });
+
+                                    // Showing Alert Message
+                                    alertDialog.show();
 
                                 }
                             } catch (Exception e) {
-                                Toast.makeText(getApplicationContext(), "وارد حساب خود نشده اید...!", Toast.LENGTH_LONG).show();
+                                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                                alertDialog.setTitle("وارد شوید");
+                                alertDialog.setMessage("وارد حساب کاربری خود شوید و از تمامی امکانات برنامه استفاده کنید.");
+                                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent i = new Intent(getApplicationContext(), Log_In.class);
+                                        startActivity(i);
+                                        finish();
+                                    }
+                                });
+
+                                alertDialog.setButton2("بعدا", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                });
+                                alertDialog.show();
                             }
 
                         }
@@ -482,7 +530,23 @@ public class MainActivity extends ActionBarActivity {
                                 Intent i = new Intent(getApplicationContext(), My_Interest.class);
                                 startActivity(i);
                             } else {
-                                Toast.makeText(getApplicationContext(), "وارد حساب خود شوید", Toast.LENGTH_SHORT).show();
+                                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                                alertDialog.setTitle("وارد شوید");
+                                alertDialog.setMessage("وارد حساب کاربری خود شوید و از تمامی امکانات برنامه استفاده کنید.");
+                                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent i = new Intent(getApplicationContext(), Log_In.class);
+                                        startActivity(i);
+                                        finish();
+                                    }
+                                });
+
+                                alertDialog.setButton2("بعدا", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                });
+                                alertDialog.show();
                             }
                         }
                         if (position == 9) {
