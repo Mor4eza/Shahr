@@ -5,16 +5,20 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.method.CharacterPickerDialog;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
+import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.Fields.FieldDataBase;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
@@ -51,59 +55,53 @@ public class add_product extends ActionBarActivity {
     Integer subsetid=0;
     Integer cityid=0;
     Integer areaid=0;
-    Double latitude;
-    Double longtiude;
+    Double latitude=0.0;
+    Double longtiude=0.0;
     Boolean adaptive=false;
 
 
     SqliteTOjson sqliteTOjson=new SqliteTOjson(this);
     Query query=new Query(this);
     NetState net=new NetState(this);
+    FieldDataBase fieldDataBase=new FieldDataBase();
+    DateTime dt=new DateTime();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
         initViews();
 
-
-        //CheckBox Adaptive
-      /*  cb_adaptive_product.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        tv_product_price.setEnabled(false);
-                        tv_product_price.setText("");
-                        adaptive = true;
-                    } else {
-                        tv_product_price.setEnabled(true);
-                        tv_product_price.setText("");
-                        adaptive = false;
-                    }
-                }
-        });*/
+        GetNameCity();
+        GetNameSubset();
 
         //Radio Group
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(checkedId == R.id.tavafoq) {
-                    Log.i("cheked","tavafoq");
-                }else {
-                    Log.i("cheked","maqtoo");
+                if (checkedId == R.id.tavafoq) {
+                    adaptive = true;
+                    Log.i("cheked", "tavafoq");
+                } else {
+                    adaptive = false;
                 }
             }
         });
 
 
 
-        //AutoCompelete city
-        tv_product_city.setOnClickListener(new View.OnClickListener() {
+        tv_product_city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i("onItemClick", tv_product_city.getText().toString());
                 GetNameArea(tv_product_city.getText().toString());
             }
         });
+
+
+
     }
 
     public void product_save(View view)
@@ -118,15 +116,16 @@ public class add_product extends ActionBarActivity {
            descripction=tv_product_desc.getText().toString();
            property=tv_product_property.getText().toString();
            address=tv_product_address.getText().toString();
-           subsetid=query.getsubsetID(tv_product_subset.getText().toString());
+           subsetid=query.getsubsetProductID(tv_product_subset.getText().toString());
            areaid= query.getAreaID(tv_product_area.getText().toString());
-
+           Log.i("areaid",String.valueOf(query.getAreaID(tv_product_area.getText().toString())));
+           Log.i("areaname",String.valueOf(tv_product_area.getText().toString()));
 
 
 
           if(net.checkInternetConnection())
           {
-              if(name.equals(""))
+             /* if(name.equals(""))
               {
                   AlertDialog alertDialog = new AlertDialog.Builder(add_product.this).create();
                   alertDialog.setTitle("هشدار");
@@ -177,14 +176,14 @@ public class add_product extends ActionBarActivity {
                       }
                   });
                   alertDialog.show();
-              }
-              else
-              {
-                  json = sqliteTOjson.ProductTOjson(query.getMemberId(), name, property, price, latitude, longtiude, adaptive, descripction, tell, mobile, address, email, subsetid, cityid);
+              }*/
+             /* else
+              {*/
+                  json = sqliteTOjson.ProductTOjson(query.getMemberId(), name,dt.Now(), property, price, latitude, longtiude, adaptive, descripction, tell, mobile, address, email, subsetid, areaid);
                   HTTPPostProductJson httpPostProductJson = new HTTPPostProductJson(this);
                   httpPostProductJson.SetProduct_Json(json);
                   httpPostProductJson.execute();
-              }
+             // }
           }
           else
           {
@@ -243,6 +242,8 @@ public class add_product extends ActionBarActivity {
             Log.e("ExceptionSQL", e.toString());
         }
     }
+
+
     public List<String> getId(Integer cityid) {
 
         DataBaseSqlite db=new DataBaseSqlite(this);
@@ -251,6 +252,7 @@ public class add_product extends ActionBarActivity {
         if (allrows.moveToFirst()) {
             do {
 
+                Log.i("area",allrows.getString(1));
                 studentList.add(allrows.getString(1));
 
 
@@ -282,8 +284,42 @@ public class add_product extends ActionBarActivity {
         if (allrows.moveToFirst()) {
             do {
 
+                Log.i("city",allrows.getString(1));
                 studentList.add(allrows.getString(1));
 
+
+            } while (allrows.moveToNext());
+        }
+
+        return studentList;
+    }
+
+
+
+    public void GetNameSubset()
+    {
+        try {
+
+            Log.i("subsetProduct",String.valueOf(fieldDataBase.getName_Subset().size()));
+            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,getId3());
+            tv_product_subset.setAdapter(adapter);
+        }
+        catch (Exception e)
+        {
+            Log.e("ExceptionSQL", e.toString());
+        }
+    }
+
+
+    public List<String> getId3() {
+
+        DataBaseSqlite db=new DataBaseSqlite(this);
+        List<String> studentList = new ArrayList<String>();
+        Cursor allrows  = db.select_Subset_Product();
+        if (allrows.moveToFirst()) {
+            do {
+
+                studentList.add(allrows.getString(1));
 
             } while (allrows.moveToNext());
         }

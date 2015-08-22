@@ -10,31 +10,31 @@ public class FieldDataBase
 {
 
     //Fields of the product
-    List<Integer> Id_Product =new ArrayList<>();
-    List<Integer> MemberId_Product =new ArrayList<>();
-    List<String> Name_Product =new ArrayList<>();
-    List<String> Property_Product =new ArrayList<>();
-    List<Double>  Price_Product =new ArrayList<>();
-    List<Double>  Latitude_Product =new ArrayList<>();
-    List<Double>  Longtiude_Product =new ArrayList<>();
-    List<Boolean> Adaptive_Product =new ArrayList<>();
-    List<String> Description_Product =new ArrayList<>();
-    List<String> Image_Product =new ArrayList<>();
-    List<String> Phone__Product =new ArrayList<>();
-    List<String> Mobile_Product =new ArrayList<>();
-    List<String> Address_Product =new ArrayList<>();
-    List<String> Email_Product =new ArrayList<>();
-    List<Integer> SubsetId_Product =new ArrayList<>();
-    List<Integer> AreaId_Product =new ArrayList<>();
+    static List<Integer> Id_Product =new ArrayList<>();
+    static List<Integer> MemberId_Product =new ArrayList<>();
+    static List<String> Name_Product =new ArrayList<>();
+    static List<String> Property_Product =new ArrayList<>();
+    static List<Double>  Price_Product =new ArrayList<>();
+    static List<Double>  Latitude_Product =new ArrayList<>();
+    static List<Double>  Longtiude_Product =new ArrayList<>();
+    static List<Boolean> Adaptive_Product =new ArrayList<>();
+    static List<String> Description_Product =new ArrayList<>();
+    static List<String> Image_Product =new ArrayList<>();
+    static List<String> Phone__Product =new ArrayList<>();
+    static List<String> Mobile_Product =new ArrayList<>();
+    static List<String> Address_Product =new ArrayList<>();
+    static List<String> Email_Product =new ArrayList<>();
+    static List<Integer> SubsetId_Product =new ArrayList<>();
+    static List<Integer> AreaId_Product =new ArrayList<>();
 
     //Fields of the Subset
-    List<Integer> Id_Subset =new ArrayList<>();
-    List<String>  Name_Subset =new ArrayList<>();
-    List<Integer> CollectionId_Subset =new ArrayList<>();
+    static List<Integer> Id_Subset =new ArrayList<>();
+    static List<String>  Name_Subset =new ArrayList<>();
+    static List<Integer> CollectionId_Subset =new ArrayList<>();
 
     //Fields of the Collection
-    List<Integer> Id_Collection =new ArrayList<>();
-    List<String>  Name_Collection =new ArrayList<>();
+    static List<Integer> Id_Collection =new ArrayList<>();
+    static List<String>  Name_Collection =new ArrayList<>();
 
 
 

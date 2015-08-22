@@ -318,7 +318,7 @@ public class SqliteTOjson {
     }
 
     // convert Member to json
-    public String ProductTOjson(Integer memberid,String name, String property, Double price, Double latitude, Double longtiude, Boolean adaptive, String description,String phone,String mobile,String address,String email,Integer subsetid, Integer areaid) {
+    public String ProductTOjson(Integer memberid,String datetime,String name, String property, Double price, Double latitude, Double longtiude, Boolean adaptive, String description,String phone,String mobile,String address,String email,Integer subsetid, Integer areaid) {
         String field_Json = "";
         try {
             Query query=new Query(context);
@@ -326,6 +326,7 @@ public class SqliteTOjson {
             JSONObject rowObject = new JSONObject();
             rowObject.put("MemberId",memberid);
             rowObject.put("Name", name);
+            rowObject.put("DateTime", datetime);
             rowObject.put("Property", property);
             rowObject.put("Price", price);
             rowObject.put("Latitude", latitude);

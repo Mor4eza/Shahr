@@ -29,7 +29,7 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
     {
         private static Context context;
         FieldDataBase fdb=new FieldDataBase();
-        private String url_product="";
+        private String url_product="http://test.shahrma.com/api/ApiGiveListProduct";
 
         List<Integer> selectMemberId =new ArrayList<>();
         List<String>  selectName =new ArrayList<>();
@@ -50,7 +50,7 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
 
         public  void setUrl_product(Integer cityid,Integer pagesize,Integer page,Integer subsetid,Integer sort)
         {
-            url_product="http://test.shahrma.com/api/ApiGiveProduct&page="+page+"&pageSize="+pagesize+"&cityId="+cityid+"&subsetId="+subsetid+"&sort="+sort;
+            url_product="http://test.shahrma.com/api/ApiGiveProductList&page="+page+"&pageSize="+pagesize+"&cityId="+cityid+"&subsetId="+subsetid+"&sort="+sort;
         }
 
         private String getUrl_product()

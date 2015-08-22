@@ -346,7 +346,7 @@ public class MainActivity extends ActionBarActivity {
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName(R.string.Works).withIcon(FontAwesome.Icon.faw_money),
                         new PrimaryDrawerItem().withName(R.string.Near).withIcon(FontAwesome.Icon.faw_map_marker),
-                        //new PrimaryDrawerItem().withName(R.string.title_activity_bazarche).withIcon(FontAwesome.Icon.faw_shopping_cart),
+                        new PrimaryDrawerItem().withName(R.string.title_activity_bazarche).withIcon(FontAwesome.Icon.faw_shopping_cart),
                         new DividerDrawerItem(),
                         new SecondaryDrawerItem().withName(R.string.My_business).withIcon(FontAwesome.Icon.faw_briefcase),
                         new SecondaryDrawerItem().withName(R.string.My_Account).withIcon(FontAwesome.Icon.faw_user),
@@ -404,7 +404,7 @@ public class MainActivity extends ActionBarActivity {
 
                         }
 
-                        if (position == 3) {
+                        if (position == 4) {
 
                             if (net.checkInternetConnection() == false) {
                                 AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
@@ -448,7 +448,7 @@ public class MainActivity extends ActionBarActivity {
                             }
 
                         }
-                        if (position == 4) {
+                        if (position == 5) {
 
                             try {
                                 DataBaseSqlite db = new DataBaseSqlite(MainActivity.this);
@@ -467,7 +467,7 @@ public class MainActivity extends ActionBarActivity {
                                 Toast.makeText(getApplicationContext(), "وارد حساب خود نشده اید...!", Toast.LENGTH_LONG).show();
                             }
                         }
-                        if (position == 5) {
+                        if (position ==6) {
 
                             try {
                                 DataBaseSqlite db = new DataBaseSqlite(MainActivity.this);
@@ -520,11 +520,11 @@ public class MainActivity extends ActionBarActivity {
                             }
 
                         }
-                        if (position == 6) {
+                        if (position == 7) {
                             Intent i = new Intent(getApplicationContext(), My_city.class);
                             startActivity(i);
                         }
-                        if (position == 7) {
+                        if (position == 8) {
                             if (query.getMemberId() > 0) // get member
                             {
                                 Intent i = new Intent(getApplicationContext(), My_Interest.class);
@@ -549,12 +549,12 @@ public class MainActivity extends ActionBarActivity {
                                 alertDialog.show();
                             }
                         }
-                        if (position == 9) {
+                        if (position == 10) {
 
                             Intent i = new Intent(getApplicationContext(), Setting.class);
                             startActivity(i);
                         }
-                        if (position == 10) {
+                        if (position == 11) {
                             Intent i = new Intent(getApplicationContext(), AboutUs.class);
                             startActivity(i);
                         }

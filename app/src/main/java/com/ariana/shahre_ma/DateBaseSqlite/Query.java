@@ -129,6 +129,27 @@ public class Query {
         return Result;
     }
 
+    public Integer getsubsetProductID(String subsetname) {
+
+        Integer Result = 0;
+
+        try {
+            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            Cursor allrows = dbs.select_SubsetProductId(subsetname);
+            allrows.moveToFirst();
+            Result = allrows.getInt(0);
+            allrows.close();
+
+
+            fc.SetBusiness_SubsetId(Result);
+        }
+        catch (Exception e) {
+            // Toast.makeText(activity, e.toString(), Toast.LENGTH_LONG).show();
+        }
+        return Result;
+    }
+
+
     public Integer getCityId(String cityName) {
 
         Integer Result = 0;

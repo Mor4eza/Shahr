@@ -38,7 +38,9 @@ Context context;
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Subset);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_Subset_Prodcut);
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Collection);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_Collection_Product);
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Member);
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Opinion);
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Business);
@@ -63,7 +65,9 @@ Context context;
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older  tables if existed
         db.execSQL("DROP TABLE IF EXISTS "+ InstructionsSqlite.TABLE_NAME_SUBSET);
+        db.execSQL("DROP TABLE IF EXISTS "+ InstructionsSqlite.TABLE_NAME_SUBSET_PRODUCT);
         db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_COLLECTION);
+        db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_COLLECTION_PRODUCT);
         db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_MEMBER);
         db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_OPINION);
         db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_BUSINESS);
@@ -98,13 +102,26 @@ Context context;
         values.put(InstructionsSqlite.COLLECTIONID_subset, collectionid);
 
         // 3. insert
-        db.insert(InstructionsSqlite.TABLE_NAME_SUBSET, // table
-                null, //nullColumnHack
-                values); // key/value
-
-        // 4. close
+        db.insert(InstructionsSqlite.TABLE_NAME_SUBSET,null,values);
         db.close();
     }
+
+    public void Add_subset_Product(Integer id, String subsetname, Integer collectionid) {
+
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put(InstructionsSqlite.ID_subset, id);
+        values.put(InstructionsSqlite.NAME_subset, subsetname);
+        values.put(InstructionsSqlite.COLLECTIONID_subset, collectionid);
+
+        // 3. insert
+        db.insert(InstructionsSqlite.TABLE_NAME_SUBSET_PRODUCT,null,values);
+        db.close();
+    }
+
 
     /**
      *
@@ -278,13 +295,28 @@ Context context;
         values.put(InstructionsSqlite.NAME_collection, collectionname);
 
         // 3. insert
-        db.insert(InstructionsSqlite.TABLE_NAME_COLLECTION, // table
-                null, //nullColumnHack
-                values); // key/value
-
-        // 4. close
+        db.insert(InstructionsSqlite.TABLE_NAME_COLLECTION,null, //nullColumnHack
+                values);
         db.close();
     }
+
+    public void Add_collection_Product(Integer id, String collectionname) {
+
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put(InstructionsSqlite.ID_colection, id);
+        values.put(InstructionsSqlite.NAME_collection, collectionname);
+
+        // 3. insert
+        db.insert(InstructionsSqlite.TABLE_NAME_COLLECTION_PRODUCT,null, //nullColumnHack
+                values);
+        db.close();
+    }
+
+
 
     public void Add_member(Integer id,String name,String email,String mobile,Integer age,Boolean sex,String username,String password,Integer cityid)
     {
@@ -1107,6 +1139,14 @@ Context context;
 
     }
 
+    public Cursor select_SubsetProductId(String subsetname)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT Id FROM " + InstructionsSqlite.TABLE_NAME_SUBSET_PRODUCT + "  WHERE SubsetName='" + subsetname+"'", null);
+
+    }
+
     public Cursor select_SubsetId(Integer CollectionId)
     {
 
@@ -1215,6 +1255,12 @@ Context context;
     {
         SQLiteDatabase db=this.getReadableDatabase();
         return  db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_SUBSET,null);
+    }
+
+    public Cursor select_Subset_Product()
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return  db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_SUBSET_PRODUCT,null);
     }
 
     public Cursor select_SearchSubset(String subsetName)
@@ -1401,6 +1447,16 @@ Context context;
 
     }
 
+
+    public void delete_Subset_Product()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_SUBSET_PRODUCT);
+        db.close();
+
+    }
+
+
     public void delete_BusinessImage()
     {
         SQLiteDatabase db=this.getWritableDatabase();
@@ -1434,6 +1490,15 @@ Context context;
         db.close();
 
     }
+
+    public void delete_Collection_Product()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_COLLECTION_PRODUCT);
+        db.close();
+
+    }
+
     /**
      * delete all record table notification
      */

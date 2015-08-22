@@ -75,6 +75,7 @@ public class HTTPPostProductJson extends AsyncTask<String ,Long,Integer>
         Integer result=0;
         try
         {
+            Log.i("JsonProductMember",getProduct_json());
             HttpClient httpClient=new DefaultHttpClient();
             HttpContext httpContext=new BasicHttpContext();
             HttpPost httpPost=new HttpPost(url_product);

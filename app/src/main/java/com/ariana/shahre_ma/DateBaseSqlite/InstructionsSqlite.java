@@ -8,7 +8,9 @@ public class  InstructionsSqlite {
 
     // Database table name
     public static final String TABLE_NAME_SUBSET= "subset";
+    public static final String TABLE_NAME_SUBSET_PRODUCT= "subset_Product";
     public static final String TABLE_NAME_COLLECTION = "collection";
+    public static final String TABLE_NAME_COLLECTION_PRODUCT = "collection_Product";
     public static final String TABLE_NAME_MEMBER = "member";
     public static final String TABLE_NAME_OPINION = "opinion";
     public static final String TABLE_NAME_BUSINESS_TOPS = "business_Tops";
@@ -167,9 +169,20 @@ public class  InstructionsSqlite {
     public static final String NAME_subset = "SubsetName";
     public static final String COLLECTIONID_subset = "CollectionId";
 
+    //subset_Product Table Columns names
+    public static final String ID_subset_Product = "Id";
+    public static final String NAME_subset_Product = "SubsetName";
+    public static final String COLLECTIONID_subset_Product = "CollectionId";
+
+
     //collection Table Columns names
     public static final String ID_colection = "Id";
     public static final String NAME_collection = "CollectionName";
+
+
+    //collection_product Table Columns names
+    public static final String ID_colection_Product = "Id";
+    public static final String NAME_collection_Product = "CollectionName";
 
 
     //Member Table Columns names
@@ -493,12 +506,27 @@ public class  InstructionsSqlite {
             " CollectionName TEXT" +
             ");";
 
+    // SQL statement to create Collection table
+    public static final String CREATE_TABLE_Collection_Product  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_COLLECTION_PRODUCT + " (" +
+            " Id INTEGER PRIMARY KEY ," +
+            " CollectionName TEXT" +
+            ");";
+
+
     // SQL statement to create Subset table
     public static final String CREATE_TABLE_Subset  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_SUBSET + " (" +
             "Id INTEGER PRIMARY KEY ," +
             "SubsetName TEXT," +
             "CollectionId INTEGER" +
             ");";
+
+    // SQL statement to create Subset_Product table
+    public static final String CREATE_TABLE_Subset_Prodcut  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_SUBSET_PRODUCT + " (" +
+            "Id INTEGER PRIMARY KEY ," +
+            "SubsetName TEXT," +
+            "CollectionId INTEGER" +
+            ");";
+
 
 
     // SQL statement to create bookmark table

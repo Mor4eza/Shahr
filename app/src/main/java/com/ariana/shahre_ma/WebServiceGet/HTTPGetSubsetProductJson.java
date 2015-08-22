@@ -34,7 +34,12 @@ public class HTTPGetSubsetProductJson   extends AsyncTask<String,Void,Integer>
     List<String>  selectName =new ArrayList<>();
     List<Integer>  selectCollectionId =new ArrayList<>();
 
+    Integer Id[];
+    String subsetname[];
+    Integer collectionId[];
     Integer len;
+
+
     private static Context context;
         /**
          *
@@ -72,9 +77,22 @@ public class HTTPGetSubsetProductJson   extends AsyncTask<String,Void,Integer>
             try {
                 if(result==1) {
 
+                    try {
+                        KeySettings setting=new KeySettings(context);
+                        if(len>0) {
 
+                            DataBaseSqlite dbs = new DataBaseSqlite(context);
+                            dbs.delete_Subset_Product();
 
+                            for (int i = 0; i < len; i++) {
+                                dbs.Add_subset_Product(Id[i], subsetname[i], collectionId[i]);
 
+                            }
+                        }
+
+                    } catch (Exception e) {
+
+                    }
                 }
                 else
                 {
@@ -90,20 +108,30 @@ public class HTTPGetSubsetProductJson   extends AsyncTask<String,Void,Integer>
             try {
 
                 JSONArray areas = new JSONArray(JSONString);
-                Log.i("JSONsubset", JSONString);
+                Log.i("JSONsubsetProduct", JSONString);
 
+                Id=new Integer[areas.length()];
+                subsetname=new String[areas.length()];
+                collectionId=new Integer[areas.length()];
                 len=areas.length();
                 for (int i = 0; i < areas.length(); i++) {
 
                     JSONObject area = areas.getJSONObject(i);
+                    collectionId[i]=area.getInt("CollectionId");
+                    Id[i]=area.getInt("Id");
+                    subsetname[i]=area.getString("Name");
 
-                    selectId.add(area.getInt("Id"));
+
+               /*     selectId.add(area.getInt("Id"));
                     selectName.add(area.getString("Name"));
-                    selectCollectionId.add(area.getInt("CollectionId"));
+                    selectCollectionId.add(area.getInt("CollectionId"));*/
                 }
-                fieldDataBase.setId_Subset(selectId);
+
+                /*fieldDataBase.setId_Subset(selectId);
                 fieldDataBase.setName_Subset(selectName);
-                fieldDataBase.setCollectionId_Subset(selectCollectionId);
+                fieldDataBase.setCollectionId_Subset(selectCollectionId);*/
+
+
             } catch (JSONException e) {
             }
         }

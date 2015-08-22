@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionProductJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetProductJson;
 
 public class Bazarche extends ActionBarActivity {
 
@@ -15,6 +17,12 @@ public class Bazarche extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bazarche);
+
+        HTTPGetSubsetProductJson httpGetSubsetProductJson=new HTTPGetSubsetProductJson(this);
+        httpGetSubsetProductJson.execute();
+
+        HTTPGetCollectionProductJson httpGetCollectionProductJson=new HTTPGetCollectionProductJson(this);
+        httpGetCollectionProductJson.execute();
     }
 
     public void products(View view) {

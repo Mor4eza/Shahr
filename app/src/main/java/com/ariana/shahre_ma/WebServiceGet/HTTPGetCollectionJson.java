@@ -42,9 +42,6 @@ public class HTTPGetCollectionJson extends AsyncTask<String,Void, Integer> {
     protected Integer doInBackground(String... args) {
         Integer result=0;
         try {
-
-
-
             InputStream jsonStream = getStreamFromURL(url_collection, "GET");
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);

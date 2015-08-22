@@ -36,12 +36,14 @@ public class HTTPGetCollectionProductJson extends AsyncTask<String,Void, Integer
 
 
     }
-    private static final String url_collectionproduct="http://test.shahrma.com/api/apigiveProductCollection";
+    private static final String url_collectionproduct="http://test.shahrma.com/api/ApiGiveProductColletion";
 
     FieldDataBase fieldDataBase=new FieldDataBase();
     List<Integer> selectId =new ArrayList<>();
     List<String>  selectName =new ArrayList<>();
 
+    Integer Id[];
+    String collectionname[];
     Integer len;
 
     /**
@@ -75,7 +77,21 @@ public class HTTPGetCollectionProductJson extends AsyncTask<String,Void, Integer
         try {
             if (result==1) {
 
+                try {
+                    if(len>0) {
+                        DataBaseSqlite db = new DataBaseSqlite(context);
+                        db.delete_Collection_Product();
 
+                        for (int i = 0; i < len; i++) {
+                            db.Add_collection_Product(Id[i], collectionname[i]);
+
+                        }
+                    }
+
+
+                } catch (Exception e) {
+
+                }
 
             }
             else
@@ -97,16 +113,23 @@ public class HTTPGetCollectionProductJson extends AsyncTask<String,Void, Integer
             JSONArray areas = new JSONArray(JSONString);
             Log.i("JSONCollectionProduct",JSONString);
 
+            Id=new Integer[areas.length()];
+            collectionname=new String[areas.length()];
             len=areas.length();
             for (int i = 0; i < areas.length(); i++) {
 
                 JSONObject area = areas.getJSONObject(i);
+                Id[i]=area.getInt("Id");
+                collectionname[i]=area.getString("Name");
+
+
+               /* JSONObject area = areas.getJSONObject(i);
                 selectId.add(area.getInt("Id"));
-                selectName.add(area.getString("Name"));
+                selectName.add(area.getString("Name"));*/
             }
 
-            fieldDataBase.setId_Collection(selectId);
-            fieldDataBase.setName_Collection(selectName);
+          /*  fieldDataBase.setId_Collection(selectId);
+            fieldDataBase.setName_Collection(selectName);*/
 
 
         } catch (JSONException e) {
