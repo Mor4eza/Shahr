@@ -46,7 +46,7 @@ public class Add_New_Business extends ActionBarActivity {
     EditText Market_desc;
     AutoCompleteTextView Market_subset;
     AutoCompleteTextView Market_city;
-    AutoCompleteTextView Market_zone;
+    AutoCompleteTextView Market_area;
     EditText Market_field;
 
     private ToolTipView myToolTipView;
@@ -122,7 +122,7 @@ public class Add_New_Business extends ActionBarActivity {
         Market_address =(EditText)findViewById(R.id.add_market_address);
         Market_desc =(EditText)findViewById(R.id.add_market_desc);
         Market_subset =(AutoCompleteTextView)findViewById(R.id.ac_subset);
-        Market_zone =(AutoCompleteTextView)findViewById(R.id.ac_area);
+        Market_area =(AutoCompleteTextView)findViewById(R.id.ac_area);
         Market_field =(EditText)findViewById(R.id.ac_field);
         Market_city =(AutoCompleteTextView)findViewById(R.id.ac_city);
         save_edit=(CircularProgressButton)findViewById(R.id.btn_save_edit);
@@ -195,14 +195,14 @@ public class Add_New_Business extends ActionBarActivity {
 
                 alertDialog.show();
 
-            } else if (query.getAreaID(Market_zone.getText().toString().trim()) < 0) {
+            } else if (query.getAreaID(Market_area.getText().toString().trim()) < 0) {
                 AlertDialog alertDialog = new AlertDialog.Builder(Add_New_Business.this).create();
                 alertDialog.setTitle("هشدار ");
                 alertDialog.setMessage("منطقه خود را انتخاب کنید");
                 alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
-                        Market_zone.requestFocus();
+                        Market_area.requestFocus();
                     }
                 });
 
@@ -284,7 +284,7 @@ public class Add_New_Business extends ActionBarActivity {
                         Market_owner.getText().toString().trim(), Market_address.getText().toString().trim(),
                         Market_desc.getText().toString().trim(), dt.Now(), EXPDateTime(), "null"
                         , query.getsubsetID(Market_subset.getText().toString().trim()),
-                        fc.GetLatitude_Business(), fc.GetLongtiude_Business(), query.getAreaID(Market_zone.getText().toString().trim()),
+                        fc.GetLatitude_Business(), fc.GetLongtiude_Business(), query.getAreaID(Market_area.getText().toString().trim()),
                         "null", "null", Fields_ID[0], Fields_ID[1], Fields_ID[2],
                         Fields_ID[3], Fields_ID[4], Fields_ID[5], Fields_ID[6]);
 
@@ -355,7 +355,7 @@ public class Add_New_Business extends ActionBarActivity {
         try {
 
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, getId(query.getCityId(namecity)));
-            Market_city.setAdapter(adapter);
+            Market_area.setAdapter(adapter);
 
         }
         catch (Exception e)

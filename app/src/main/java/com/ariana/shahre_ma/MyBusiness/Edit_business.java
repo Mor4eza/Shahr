@@ -41,7 +41,7 @@ public class Edit_business extends ActionBarActivity {
     EditText Market_address;
     EditText Market_desc;
     AutoCompleteTextView Market_subset;
-    AutoCompleteTextView Market_zone;
+    AutoCompleteTextView Market_area;
     AutoCompleteTextView Market_city;
     MultiAutoCompleteTextView Market_field;
     Integer Fields_ID[]=new Integer[7];
@@ -89,7 +89,7 @@ public class Edit_business extends ActionBarActivity {
        Market_address =(EditText)findViewById(R.id.add_market_address);
        Market_desc =(EditText)findViewById(R.id.add_market_desc);
        Market_subset =(AutoCompleteTextView)findViewById(R.id.ac_subset);
-       Market_zone =(AutoCompleteTextView)findViewById(R.id.ac_area);
+       Market_area =(AutoCompleteTextView)findViewById(R.id.ac_area);
        Market_field =(MultiAutoCompleteTextView)findViewById(R.id.ac_field);
        Market_city =(AutoCompleteTextView)findViewById(R.id.ac_city);
        save_edit = (CircularProgressButton)findViewById(R.id.btn_save_edit);
@@ -118,7 +118,7 @@ public class Edit_business extends ActionBarActivity {
 
             Cursor rows2 = db.select_AreaName(rows.getInt(20));
             rows2.moveToFirst();
-            Market_zone.setText(rows2.getString(0));
+            Market_area.setText(rows2.getString(0));
 
            for (int i = 0; i < 7; i++) {
                 Log.i("CounterFor", String.valueOf(rows.getInt((12) + (i))));
@@ -224,14 +224,14 @@ public class Edit_business extends ActionBarActivity {
                 });
                 alertDialog.show();
 
-            } else if (query.getAreaID(Market_zone.getText().toString().trim()) < 0) {
+            } else if (query.getAreaID(Market_area.getText().toString().trim()) < 0) {
                 AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
                 alertDialog.setTitle("هشدار ");
                 alertDialog.setMessage("منطقه خود را انتخاب کنید");
                 alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
-                        Market_zone.requestFocus();
+                        Market_area.requestFocus();
                     }
                 });
 
@@ -315,7 +315,7 @@ public class Edit_business extends ActionBarActivity {
                         Market_desc.getText().toString().trim(), dt.Now(), EXPDateTime(), "null"
                         , query.getsubsetID(Market_subset.getText().toString().trim()),
                         fc.GetLatitude_Business(), fc.GetLongtiude_Business(),
-                        query.getAreaID(Market_zone.getText().toString().trim()),
+                        query.getAreaID(Market_area.getText().toString().trim()),
                         "null", "null", Fields_ID[0], Fields_ID[1], Fields_ID[2],
                         Fields_ID[3], Fields_ID[4], Fields_ID[5], Fields_ID[6]);
 
@@ -416,7 +416,7 @@ public class Edit_business extends ActionBarActivity {
         try {
 
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, getId(query.getCityId(namecity)));
-            Market_city.setAdapter(adapter);
+            Market_area.setAdapter(adapter);
 
         }
         catch (Exception e)
