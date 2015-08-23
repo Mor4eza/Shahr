@@ -33,19 +33,10 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
 
         List<Integer> selectMemberId =new ArrayList<>();
         List<String>  selectName =new ArrayList<>();
-        List<String>  selectProperty =new ArrayList<>();
         List<Double>  selectPrice =new ArrayList<>();
-        List<Double>  selectLatitude =new ArrayList<>();
-        List<Double>  selectLongtiude =new ArrayList<>();
         List<Boolean> selectAdaptive =new ArrayList<>();
-        List<String>  selectDescription =new ArrayList<>();
         List<String>  selectImage =new ArrayList<>();
-        List<String>  selectPhone =new ArrayList<>();
-        List<String>  selectMobile =new ArrayList<>();
-        List<String>  selectAddress =new ArrayList<>();
-        List<String>  selectEmail =new ArrayList<>();
-        List<Integer> selectSubsetId =new ArrayList<>();
-        List<Integer> selectAreaId =new ArrayList<>();
+
 
 
         public  void setUrl_product(Integer cityid,Integer pagesize,Integer page,Integer subsetid,Integer sort)
@@ -122,37 +113,17 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
 
                     selectMemberId.add(area.getInt("MemberId"));
                     selectName.add(area.getString("Name"));
-                    selectProperty.add(area.getString("Property"));
                     selectPrice.add(area.getDouble("Price"));
-                    selectLatitude.add(area.getDouble("Latitude"));
-                    selectLongtiude.add(area.getDouble("Longtiude"));
                     selectAdaptive.add(area.getBoolean("Adaptive"));
-                    selectDescription.add(area.getString("Description"));
                     selectImage.add(area.getString("Image"));
-                    selectPhone.add(area.getString("Phone"));
-                    selectMobile.add(area.getString("Mobile"));
-                    selectAddress.add(area.getString("Address"));
-                    selectEmail.add(area.getString("Email"));
-                    selectSubsetId.add(area.getInt("SubsetId"));
-                    selectAreaId.add(area.getInt("AreaId"));
 
                 }
 
                 fdb.setMemberId_Product(selectMemberId);
                 fdb.setName_Product(selectName);
-                fdb.setProperty_Product(selectProperty);
                 fdb.setPrice_Product(selectPrice);
-                fdb.setLatitude_Product(selectLatitude);
-                fdb.setLongtiude_Product(selectLongtiude);
                 fdb.setAdaptive__Product(selectAdaptive);
-                fdb.setDescription_Product(selectDescription);
                 fdb.setImage_Product(selectImage);
-                fdb.setPhone__Product(selectPhone);
-                fdb.setMobile_Product(selectMobile);
-                fdb.setAddress_Product(selectAddress);
-                fdb.setEmail_Product(selectEmail);
-                fdb.setSubsetId_Product(selectAreaId);
-                fdb.setAreaId_Product(selectAreaId);
 
             } catch (JSONException e) {
 

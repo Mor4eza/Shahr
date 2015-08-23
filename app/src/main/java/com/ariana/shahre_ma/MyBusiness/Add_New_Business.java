@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -73,8 +74,8 @@ public class Add_New_Business extends ActionBarActivity {
         setContentView(R.layout.activity_add_new_business);
 
         Initialize_Views();
-        GetAreaName();
         GetSubSet();
+        GetNameCity();
 
         toolTipRelativeLayout = (ToolTipRelativeLayout) findViewById(R.id.tooltipRelativeLayout);
 
@@ -96,6 +97,16 @@ public class Add_New_Business extends ActionBarActivity {
                 }
             }
         });
+
+
+        Market_city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i("onItemClick", Market_city.getText().toString());
+                GetNameArea(Market_city.getText().toString());
+            }
+        });
+
 
     }
 
@@ -215,7 +226,7 @@ public class Add_New_Business extends ActionBarActivity {
                 AlertDialog alertDialog = new AlertDialog.Builder(Add_New_Business.this).create();
                 alertDialog.setTitle("هشدار ");
                 alertDialog.setMessage("زمینه فعالیت خود را وارد کنید");
-                alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Write your code here to execute after dialog closed
                         // Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
@@ -273,7 +284,8 @@ public class Add_New_Business extends ActionBarActivity {
                         Market_owner.getText().toString().trim(), Market_address.getText().toString().trim(),
                         Market_desc.getText().toString().trim(), dt.Now(), EXPDateTime(), "null"
                         , query.getsubsetID(Market_subset.getText().toString().trim()),
-                        fc.GetLatitude_Business(), fc.GetLongtiude_Business(), query.getAreaID(Market_zone.getText().toString().trim()), "null", "null", Fields_ID[0], Fields_ID[1], Fields_ID[2],
+                        fc.GetLatitude_Business(), fc.GetLongtiude_Business(), query.getAreaID(Market_zone.getText().toString().trim()),
+                        "null", "null", Fields_ID[0], Fields_ID[1], Fields_ID[2],
                         Fields_ID[3], Fields_ID[4], Fields_ID[5], Fields_ID[6]);
 
 
@@ -288,7 +300,7 @@ public class Add_New_Business extends ActionBarActivity {
         catch (Exception e){
             AlertDialog alertDialog = new AlertDialog.Builder(Add_New_Business.this).create();
             alertDialog.setTitle("هشدار ");
-            alertDialog.setMessage("خطا دوباره امتحان کنید");
+            alertDialog.setMessage("ثبت نشد دوباره امتحان کنید");
             alertDialog.setButton("باشه", new DialogInterface.OnClickListener()
             {
                 public void onClick(DialogInterface dialog, int which)
@@ -301,41 +313,7 @@ public class Add_New_Business extends ActionBarActivity {
     }
 
 
-    public List<String> getId() {
 
-        DataBaseSqlite db=new DataBaseSqlite(this);
-        List<String> studentList = new ArrayList<String>();
-        Cursor allrows  = db.select_AllArea();
-        if (allrows.moveToFirst()) {
-            do {
-
-                studentList.add(allrows.getString(1));
-
-
-            } while (allrows.moveToNext());
-        }
-
-        return studentList;
-    }
-
-    public void GetAreaName()
-    {
-        try {
-
-
-
-            ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getId());
-            Market_zone.setAdapter(adapter);
-
-            //  multiAutoComplete.setAdapter(adapter);
-
-            Market_zone.setThreshold(1);
-        }
-        catch (Exception e)
-        {
-
-        }
-    }
 
     public List<String> getId1() {
 
@@ -369,6 +347,72 @@ public class Add_New_Business extends ActionBarActivity {
         {
 
         }
+    }
+
+
+    public void GetNameArea(String namecity)
+    {
+        try {
+
+            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, getId(query.getCityId(namecity)));
+            Market_city.setAdapter(adapter);
+
+        }
+        catch (Exception e)
+        {
+            Log.e("ExceptionSQL", e.toString());
+        }
+    }
+
+
+    public List<String> getId(Integer cityid) {
+
+        DataBaseSqlite db=new DataBaseSqlite(this);
+        List<String> studentList = new ArrayList<String>();
+        Cursor allrows  = db.select_Area(cityid);
+        if (allrows.moveToFirst()) {
+            do {
+
+                Log.i("area",allrows.getString(1));
+                studentList.add(allrows.getString(1));
+
+
+            } while (allrows.moveToNext());
+        }
+
+        return studentList;
+    }
+
+
+
+    public void GetNameCity()
+    {
+        try {
+
+            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, getId2());
+            Market_city.setAdapter(adapter);
+        }
+        catch (Exception e)
+        {
+            Log.e("ExceptionSQL", e.toString());
+        }
+    }
+    public List<String> getId2() {
+
+        DataBaseSqlite db=new DataBaseSqlite(this);
+        List<String> studentList = new ArrayList<String>();
+        Cursor allrows  = db.select_AllCity();
+        if (allrows.moveToFirst()) {
+            do {
+
+                Log.i("city",allrows.getString(1));
+                studentList.add(allrows.getString(1));
+
+
+            } while (allrows.moveToNext());
+        }
+
+        return studentList;
     }
 
 

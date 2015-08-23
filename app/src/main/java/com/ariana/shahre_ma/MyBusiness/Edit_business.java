@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -53,6 +54,8 @@ public class Edit_business extends ActionBarActivity {
     String date;
     Integer year;
     public static CircularProgressButton save_edit;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,12 +63,19 @@ public class Edit_business extends ActionBarActivity {
 
         Initialize_Views();
 
-        GetAreaName();
         GetSubSet();
+        GetNameCity();
         GetNameActivity();
         Show_Business();
 
 
+        Market_city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i("onItemClick", Market_city.getText().toString());
+                GetNameArea(Market_city.getText().toString());
+            }
+        });
     }
     
    void Initialize_Views(){
@@ -91,7 +101,7 @@ public class Edit_business extends ActionBarActivity {
 
        try {
             DataBaseSqlite db = new DataBaseSqlite(this);
-            Log.i("id",String.valueOf(fc.GetBusiness_Id()));
+            Log.i("id", String.valueOf(fc.GetBusiness_Id()));
             Cursor rows = db.select_AllBusinessId(fc.GetBusiness_Id());
             rows.moveToFirst();
 
@@ -103,9 +113,8 @@ public class Edit_business extends ActionBarActivity {
             Market_owner.setText(rows.getString(6));//BusinessOwner
             Market_address.setText(rows.getString(7));//Address
             Market_desc.setText(rows.getString(8));//Description
-
-
-            Market_subset.setText(query.getsubsetName(rows.getInt(9)));
+            Market_city.setText(query.getCityName(rows.getInt(22)));//City Name
+            Market_subset.setText(query.getsubsetName(rows.getInt(9)));//Subset Name
 
             Cursor rows2 = db.select_AreaName(rows.getInt(20));
             rows2.moveToFirst();
@@ -246,7 +255,7 @@ public class Edit_business extends ActionBarActivity {
                 AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
                 alertDialog.setTitle("هشدار ");
                 alertDialog.setMessage("زمینه فعالیت خود را وارد کنید");
-                alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Write your code here to execute after dialog closed
                         // Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
@@ -320,7 +329,7 @@ public class Edit_business extends ActionBarActivity {
         catch (Exception e){
             AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
             alertDialog.setTitle("هشدار ");
-            alertDialog.setMessage("خطا دوباره امتحان کنید");
+            alertDialog.setMessage("ویرایش نشد ، دوباره امتحان کنید");
             alertDialog.setButton("باشه", new DialogInterface.OnClickListener()
             {
                 public void onClick(DialogInterface dialog, int which)
@@ -361,44 +370,10 @@ public class Edit_business extends ActionBarActivity {
         }
         catch (Exception e)
         {
-          Log.e("ExceptionSQL",e.toString());
+          Log.e("ExceptionSQL", e.toString());
         }
     }
-    public List<String> getId() {
 
-        DataBaseSqlite db=new DataBaseSqlite(this);
-        List<String> studentList = new ArrayList<String>();
-        Cursor allrows  = db.select_AllArea();
-        if (allrows.moveToFirst()) {
-            do {
-
-                studentList.add(allrows.getString(1));
-
-
-            } while (allrows.moveToNext());
-        }
-
-        return studentList;
-    }
-
-    public void GetAreaName()
-    {
-        try {
-
-
-
-            ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getId());
-            Market_zone.setAdapter(adapter);
-
-            //  multiAutoComplete.setAdapter(adapter);
-
-            Market_zone.setThreshold(1);
-        }
-        catch (Exception e)
-        {
-
-        }
-    }
 
     public List<String> getId1() {
 
@@ -434,6 +409,70 @@ public class Edit_business extends ActionBarActivity {
         }
     }
 
+
+
+    public void GetNameArea(String namecity)
+    {
+        try {
+
+            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, getId(query.getCityId(namecity)));
+            Market_city.setAdapter(adapter);
+
+        }
+        catch (Exception e)
+        {
+            Log.e("ExceptionSQL", e.toString());
+        }
+    }
+
+
+    public List<String> getId(Integer cityid) {
+
+        DataBaseSqlite db=new DataBaseSqlite(this);
+        List<String> studentList = new ArrayList<String>();
+        Cursor allrows  = db.select_Area(cityid);
+        if (allrows.moveToFirst()) {
+            do {
+
+                Log.i("area",allrows.getString(1));
+                studentList.add(allrows.getString(1));
+
+
+            } while (allrows.moveToNext());
+        }
+
+        return studentList;
+    }
+
+    public void GetNameCity()
+    {
+        try {
+
+            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, getId3());
+            Market_city.setAdapter(adapter);
+        }
+        catch (Exception e)
+        {
+            Log.e("ExceptionSQL", e.toString());
+        }
+    }
+    public List<String> getId3() {
+
+        DataBaseSqlite db=new DataBaseSqlite(this);
+        List<String> studentList = new ArrayList<String>();
+        Cursor allrows  = db.select_AllCity();
+        if (allrows.moveToFirst()) {
+            do {
+
+                Log.i("city",allrows.getString(1));
+                studentList.add(allrows.getString(1));
+
+
+            } while (allrows.moveToNext());
+        }
+
+        return studentList;
+    }
 
 
 
