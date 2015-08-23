@@ -62,5 +62,6 @@
     <string name="title_activity_add_product">add_product</string>
     <string name="title_activity_my_products">My_products</string>
     <string name="title_activity_edit__product">Edit_Product</string>
+    <string name="title_activity_product__list">Product_List</string>
 
 </resources>

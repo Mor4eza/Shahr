@@ -19,7 +19,6 @@ import com.ariana.shahre_ma.CityDialog;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.ListExpand.Continent;
 import com.ariana.shahre_ma.ListExpand.Country;
-import com.ariana.shahre_ma.ListExpand.MyListAdapter;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionProductJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetProductJson;
@@ -31,7 +30,7 @@ public class Bazarche extends ActionBarActivity implements
         SearchView.OnQueryTextListener, SearchView.OnCloseListener{
 
     private SearchView mSearchView;
-    private MyListAdapter listAdapter;
+    private Collection_Adapter listAdapter;
     private ExpandableListView myList;
     private ArrayList<Continent> continentList = new ArrayList<Continent>();
     ArrayList<Country> countryList;
@@ -55,7 +54,7 @@ public class Bazarche extends ActionBarActivity implements
         //display the list
         displayList();
         //expand all Groups
-        expandAll();
+       // expandAll();
 
     }
 
@@ -76,7 +75,7 @@ public class Bazarche extends ActionBarActivity implements
         //get reference to the ExpandableListView
         myList = (ExpandableListView) findViewById(R.id.expandable_bazarche);
         //create the adapter by passing your ArrayList data
-        listAdapter = new MyListAdapter(Bazarche.this, continentList);
+        listAdapter = new Collection_Adapter(Bazarche.this, continentList);
         //attach the adapter to the list
         myList.setAdapter(listAdapter);
 

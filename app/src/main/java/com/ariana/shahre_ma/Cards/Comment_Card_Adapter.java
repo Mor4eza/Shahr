@@ -11,9 +11,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
-import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceSend.HTTPSendLikeURL;
 
@@ -33,7 +33,7 @@ Query query;
 
           this.context=context;
 
-
+        CalendarTool ct=new CalendarTool();
         mItems = new ArrayList<Comment_Card_items>();
         query=new Query(this.context);
 
@@ -60,7 +60,7 @@ Query query;
                     nature = new Comment_Card_items();
                     nature.settag(allrows.getInt(0));
                     nature.setmUser(allrows.getString(6));
-                    nature.setmDate(allrows.getString(2));
+                    nature.setmDate((allrows.getString(2)));
                     nature.setmComm(allrows.getString(1));
                     nature.setmlike(allrows.getInt(4));
                     nature.setmdisslike(allrows.getInt(5));
