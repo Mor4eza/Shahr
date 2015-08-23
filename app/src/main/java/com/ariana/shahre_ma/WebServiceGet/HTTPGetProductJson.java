@@ -1,14 +1,12 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Bazarche.Product_List;
+import com.ariana.shahre_ma.Bazarche.Product_List_Adapter;
 import com.ariana.shahre_ma.Fields.FieldDataBase;
-import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,7 +29,7 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
         FieldDataBase fdb=new FieldDataBase();
         private String url_product="http://test.shahrma.com/api/ApiGiveListProduct";
 
-        List<Integer> selectMemberId =new ArrayList<>();
+        List<Integer> selectId =new ArrayList<>();
         List<String>  selectName =new ArrayList<>();
         List<Double>  selectPrice =new ArrayList<>();
         List<Boolean> selectAdaptive =new ArrayList<>();
@@ -41,7 +39,8 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
 
         public  void setUrl_product(Integer cityid,Integer pagesize,Integer page,Integer subsetid,Integer sort)
         {
-            url_product="http://test.shahrma.com/api/ApiGiveProductList&page="+page+"&pageSize="+pagesize+"&cityId="+cityid+"&subsetId="+subsetid+"&sort="+sort;
+            url_product="http://test.shahrma.com/api/ApiGiveProductList?page="+page+"&pageSize="+pagesize+"&cityId="+cityid+"&subsetId="+subsetid+"&sort="+sort;
+            Log.i("url",url_product);
         }
 
         private String getUrl_product()
@@ -66,8 +65,6 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
         protected Integer doInBackground(String... args) {
             Integer result=0;
             try {
-
-
                 InputStream jsonStream = getStreamFromURL(getUrl_product(), "GET");
                 String jsonString = streamToString(jsonStream);
                 parseJSON(jsonString);
@@ -87,7 +84,17 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
             {
                 if(result==1)
                 {
+                    Log.i("get","Products");
 
+                    Product_List.mRecyclerView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Product_List_Adapter adapter = new Product_List_Adapter(context);
+                            Product_List.mRecyclerView.setAdapter(adapter);
+                            Product_List.Product_Adapter.notifyDataSetChanged();
+
+                        }
+                    });
                 }
                 else
                 {
@@ -105,13 +112,13 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
             try {
 
                 JSONArray areas = new JSONArray(JSONString);
-                Log.i("JSONsubset", JSONString);
+                Log.i("JSONProduct", JSONString);
                 len=areas.length();
                 for (int i = 0; i < areas.length(); i++) {
 
                     JSONObject area = areas.getJSONObject(i);
 
-                    selectMemberId.add(area.getInt("MemberId"));
+                    selectId.add(area.getInt("Id"));
                     selectName.add(area.getString("Name"));
                     selectPrice.add(area.getDouble("Price"));
                     selectAdaptive.add(area.getBoolean("Adaptive"));
@@ -119,7 +126,7 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
 
                 }
 
-                fdb.setMemberId_Product(selectMemberId);
+                fdb.setId_Product(selectId);
                 fdb.setName_Product(selectName);
                 fdb.setPrice_Product(selectPrice);
                 fdb.setAdaptive__Product(selectAdaptive);
