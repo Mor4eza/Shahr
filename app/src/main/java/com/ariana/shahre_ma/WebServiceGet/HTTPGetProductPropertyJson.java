@@ -28,6 +28,7 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
     private static String url_productproperty="http://test.shahrma.com/api/ApiGiveProduct?Id=";
 
     List<Integer> selectMemberId =new ArrayList<>();
+    List<Integer> selectId =new ArrayList<>();
     List<String>  selectName =new ArrayList<>();
     List<String>  selectProperty =new ArrayList<>();
     List<Double>  selectPrice =new ArrayList<>();
@@ -115,6 +116,7 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
 
                 JSONObject area = areas.getJSONObject(i);
 
+                selectId.add(area.getInt("Id"));
                 selectMemberId.add(area.getInt("MemberId"));
                 selectName.add(area.getString("Name"));
                 selectProperty.add(area.getString("Property"));
@@ -133,6 +135,7 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
 
             }
 
+            fdb.setId_Product(selectId);
             fdb.setMemberId_Product(selectMemberId);
             fdb.setName_Product(selectName);
             fdb.setProperty_Product(selectProperty);
