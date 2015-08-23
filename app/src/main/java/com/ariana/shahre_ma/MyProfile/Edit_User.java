@@ -114,99 +114,101 @@ public class Edit_User extends ActionBarActivity {
 
     public void edit_member(View v){
 
+          try
+          {
+              Aname = name.getText().toString();
+              Aemail = email.getText().toString();
+              Acity = city.getText().toString();
+              Aphone = phone.getText().toString();
+              Aage = Integer.parseInt(age.getText().toString());
+              Ausername = user.getText().toString();
+              Apass = pass.getText().toString();
 
-        Aname = name.getText().toString();
-        Aemail = email.getText().toString();
-        Acity = city.getText().toString();
-        Aphone = phone.getText().toString();
-        Aage = Integer.parseInt(age.getText().toString());
-        Ausername = user.getText().toString();
-        Apass = pass.getText().toString();
+              Integer cityid = query.getCityId(Acity);
 
-        Integer cityid=query.getCityId(Acity);
+              if (cityid <= 0) {
+                  AlertDialog alertDialog = new AlertDialog.Builder(Edit_User.this).create();
+                  alertDialog.setTitle("هشدار ");
+                  alertDialog.setMessage("شهر خود را انتخاب کنید");
+                  alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
+                      public void onClick(DialogInterface dialog, int which) {
+                          city.requestFocus();
 
-        if(cityid<=0)
-        {
-            AlertDialog alertDialog = new AlertDialog.Builder(Edit_User.this).create();
-            alertDialog.setTitle("هشدار ");
-            alertDialog.setMessage("شهر خود را انتخاب کنید");
-            alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    city.requestFocus();
+                      }
+                  });
 
-                }
-            });
+                  alertDialog.show();
+              } else if (Aname.length() == 0) {
+                  AlertDialog alertDialog = new AlertDialog.Builder(Edit_User.this).create();
+                  alertDialog.setTitle("هشدار ");
+                  alertDialog.setMessage("نام خود را وارد کنید");
+                  alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
+                      public void onClick(DialogInterface dialog, int which) {
+                          name.requestFocus();
 
-            alertDialog.show();
-        }
-        else if(Aname.length()==0)
-        {
-            AlertDialog alertDialog = new AlertDialog.Builder(Edit_User.this).create();
-            alertDialog.setTitle("هشدار ");
-            alertDialog.setMessage("نام خود را وارد کنید");
-            alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    name.requestFocus();
+                      }
+                  });
 
-                }
-            });
-
-            alertDialog.show();
-        }
-        else if(Ausername.length()==0)
-        {
-            AlertDialog alertDialog = new AlertDialog.Builder(Edit_User.this).create();
-            alertDialog.setTitle("هشدار ");
-            alertDialog.setMessage("نام کاربری را وارد کنید");
-            alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
+                  alertDialog.show();
+              } else if (Ausername.length() == 0) {
+                  AlertDialog alertDialog = new AlertDialog.Builder(Edit_User.this).create();
+                  alertDialog.setTitle("هشدار ");
+                  alertDialog.setMessage("نام کاربری را وارد کنید");
+                  alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
+                      public void onClick(DialogInterface dialog, int which) {
 
 
-                }
-            });
+                      }
+                  });
 
-            alertDialog.show();
-        }
-        else if(Apass.length()==0)
-        {
-            AlertDialog alertDialog = new AlertDialog.Builder(Edit_User.this).create();
-            alertDialog.setTitle("هشدار ");
-            alertDialog.setMessage("رمز را وارد کنید");
-            alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
+                  alertDialog.show();
+              } else if (Apass.length() == 0) {
+                  AlertDialog alertDialog = new AlertDialog.Builder(Edit_User.this).create();
+                  alertDialog.setTitle("هشدار ");
+                  alertDialog.setMessage("رمز را وارد کنید");
+                  alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
+                      public void onClick(DialogInterface dialog, int which) {
 
 
-                }
-            });
+                      }
+                  });
 
-            alertDialog.show();
-        }
-        else
-        {
-            if(Apass.equals(change_pass) || Ausername.equals(change_user))
-            {
+                  alertDialog.show();
+              }
+              else
+              {
 
-                _json = (json.getSqliteTOjson(Aname, Aemail, Aphone, Aage, Asex, Ausername, Apass, query.getCityId(Acity)));
-                fc.SetMember_Name(Aname);
-                fc.SetMember_Email(Aemail);
-                fc.SetMember_Mobile(Aphone);
-                fc.SetMember_Age(Aage);
-                fc.SetMember_Sex(Asex);
-                fc.SetMember_UserName(Ausername);
-                fc.SetMember_Password(Apass);
-                fc.SetMember_CityId(query.getCityId(Acity));
+                      _json = (json.getSqliteTOjson(Aname, Aemail, Aphone, Aage, Asex, Ausername, Apass, query.getCityId(Acity)));
+                      fc.SetMember_Name(Aname);
+                      fc.SetMember_Email(Aemail);
+                      fc.SetMember_Mobile(Aphone);
+                      fc.SetMember_Age(Aage);
+                      fc.SetMember_Sex(Asex);
+                      fc.SetMember_UserName(Ausername);
+                      fc.SetMember_Password(Apass);
+                      fc.SetMember_CityId(query.getCityId(Acity));
 
-                sendPost = new HTTPPostMemberEditJson(this);
-                sendPost.SetMember_Json(_json);
-                Log.i("MemberJson", _json);
-                sendPost.execute();
-            }
-            else {
+                      sendPost = new HTTPPostMemberEditJson(this);
+                      sendPost.SetMember_Json(_json);
+                      Log.i("MemberJson", _json);
+                      sendPost.execute();
 
-                Old_Password old_password=new Old_Password(this);
-                old_password.show();
-            }
-        }
+              }
+          }
+          catch (Exception e)
+          {
+              AlertDialog alertDialog = new AlertDialog.Builder(Edit_User.this).create();
+              alertDialog.setTitle("هشدار ");
+              alertDialog.setMessage("ویرایش نشد،دوباره امتحان کنید");
+              alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
+                  public void onClick(DialogInterface dialog, int which) {
+
+
+                  }
+              });
+
+              alertDialog.show();
+          }
     }
 
 

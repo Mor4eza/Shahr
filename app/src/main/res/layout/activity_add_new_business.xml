@@ -166,6 +166,19 @@
             <AutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="شهر"
+                android:id="@+id/ac_city"
+                android:inputType="textPersonName" />
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:hint="منطقه"
                 android:id="@+id/ac_area"
                 android:inputType="textPersonName" />

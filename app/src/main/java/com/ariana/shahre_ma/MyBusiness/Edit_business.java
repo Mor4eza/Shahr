@@ -41,6 +41,7 @@ public class Edit_business extends ActionBarActivity {
     EditText Market_desc;
     AutoCompleteTextView Market_subset;
     AutoCompleteTextView Market_zone;
+    AutoCompleteTextView Market_city;
     MultiAutoCompleteTextView Market_field;
     Integer Fields_ID[]=new Integer[7];
     DateTime dt=new DateTime();
@@ -80,6 +81,7 @@ public class Edit_business extends ActionBarActivity {
        Market_subset =(AutoCompleteTextView)findViewById(R.id.ac_subset);
        Market_zone =(AutoCompleteTextView)findViewById(R.id.ac_area);
        Market_field =(MultiAutoCompleteTextView)findViewById(R.id.ac_field);
+       Market_city =(AutoCompleteTextView)findViewById(R.id.ac_city);
        save_edit = (CircularProgressButton)findViewById(R.id.btn_save_edit);
        
    }

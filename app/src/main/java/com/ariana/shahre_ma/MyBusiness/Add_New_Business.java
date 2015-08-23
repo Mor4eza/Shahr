@@ -44,6 +44,7 @@ public class Add_New_Business extends ActionBarActivity {
     EditText Market_address;
     EditText Market_desc;
     AutoCompleteTextView Market_subset;
+    AutoCompleteTextView Market_city;
     AutoCompleteTextView Market_zone;
     EditText Market_field;
 
@@ -112,6 +113,7 @@ public class Add_New_Business extends ActionBarActivity {
         Market_subset =(AutoCompleteTextView)findViewById(R.id.ac_subset);
         Market_zone =(AutoCompleteTextView)findViewById(R.id.ac_area);
         Market_field =(EditText)findViewById(R.id.ac_field);
+        Market_city =(AutoCompleteTextView)findViewById(R.id.ac_city);
         save_edit=(CircularProgressButton)findViewById(R.id.btn_save_edit);
 
 
