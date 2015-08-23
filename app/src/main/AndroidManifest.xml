@@ -301,6 +301,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.Bazarche.Bazarche" />
         </activity>
+        <activity
+            android:name=".Bazarche.product_Details"
+            android:label="@string/title_activity_product__details"
+            android:parentActivityName=".Bazarche.Product_List" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ariana.shahre_ma.Bazarche.Product_List" />
+        </activity>
     </application>
 
 </manifest>
