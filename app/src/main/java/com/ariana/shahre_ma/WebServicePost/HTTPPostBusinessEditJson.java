@@ -3,6 +3,7 @@ package com.ariana.shahre_ma.WebServicePost;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
@@ -108,7 +109,7 @@ public class HTTPPostBusinessEditJson extends AsyncTask<String,Long,Integer>
             db.delete_BusinessId(fc.GetBusiness_Id());
 
             ((Activity)context).finish();
-
+            Toast.makeText(context, "تغییرات شما پس از تایید اعمال میشود!", Toast.LENGTH_LONG).show();
             Edit_business.save_edit.setProgress(100);
         }
         else

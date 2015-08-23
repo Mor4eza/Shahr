@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -111,6 +112,7 @@ public class HTTPPostBusinessJson extends AsyncTask<String,Long,Integer>
             ((Activity)context).finish();
 
             Add_New_Business.save_edit.setProgress(100);
+            Toast.makeText(context, "کسب و کار شما پس از تایید به نمایش گذاشته میشود!", Toast.LENGTH_LONG).show();
         }
         else
         {

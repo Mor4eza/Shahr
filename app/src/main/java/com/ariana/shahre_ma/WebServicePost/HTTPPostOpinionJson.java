@@ -143,10 +143,10 @@ public class HTTPPostOpinionJson extends AsyncTask<String, Void, Integer>
                     httponion.seturl_opinion(fc.GetBusiness_Id());
                     httponion.execute();
                     pd.dismiss();
-
+                    Toast.makeText(context,"نظر شما پس از تایید به نمایش گذاشته میشود!",Toast.LENGTH_LONG).show();
 
             } else {
-                Toast.makeText(context, "کاربر ساخته نشد دوباره امتحان کنید", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "ارسال نشد، دوباره امتحان کنید", Toast.LENGTH_LONG).show();
                 pd.dismiss();
             }
         }
