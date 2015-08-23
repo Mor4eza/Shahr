@@ -52,7 +52,7 @@ Query query=new Query(this);
 
     String Aname, Aemail, Acity, Aphone, Ausername, Apass;
     Boolean Asex;
-    Integer Aage=0;
+    String Aage="";
     String _json="";
 
     @Override
@@ -111,7 +111,7 @@ Query query=new Query(this);
             Aemail = email.getText().toString();
             Acity = city.getText().toString();
             Aphone = phone.getText().toString();
-            Aage = Integer.parseInt(age.getText().toString());
+            Aage = age.getText().toString();
             Asex = _sex;
             Ausername = username.getText().toString();
             Apass = pass.getText().toString();
@@ -156,47 +156,44 @@ Query query=new Query(this);
                 alertDialog.setMessage("نام کاربری را وارد کنید");
                 alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-
-
+                        username.requestFocus();
                     }
                 });
 
                 alertDialog.show();
             }
-            else if(Apass.length()==0)
+            else if(Apass.length()==0 )
             {
                 AlertDialog alertDialog = new AlertDialog.Builder(Sign_Up.this).create();
                 alertDialog.setTitle("هشدار ");
                 alertDialog.setMessage("رمز را وارد کنید");
                 alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-
-
+                        pass.requestFocus();
                     }
                 });
 
                 alertDialog.show();
             }
-            else if(Aage==0)
+            else if(Aage.equals(null) || Aage.length()==0 || Aage.equals("null"))
             {
                 AlertDialog alertDialog = new AlertDialog.Builder(Sign_Up.this).create();
                 alertDialog.setTitle("هشدار ");
                 alertDialog.setMessage("سن خود را وارد کنید");
                 alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-
-
+                        age.requestFocus();
                     }
                 });
 
                 alertDialog.show();
             }
             else {
-                _json = (json.getSqliteTOjson(Aname, Aemail, Aphone, Aage, Asex, Ausername, Apass, query.getCityId(Acity)));
+                _json = (json.getSqliteTOjson(Aname, Aemail, Aphone, Integer.parseInt(Aage), Asex, Ausername, Apass, query.getCityId(Acity)));
                 fc.SetMember_Name(Aname);
                 fc.SetMember_Email(Aemail);
                 fc.SetMember_Mobile(Aphone);
-                fc.SetMember_Age(Aage);
+                fc.SetMember_Age(Integer.parseInt(Aage));
                 fc.SetMember_Sex(Asex);
                 fc.SetMember_UserName(Ausername);
                 fc.SetMember_Password(Apass);

@@ -417,7 +417,7 @@ public class Edit_business extends ActionBarActivity {
 
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, getId(query.getCityId(namecity)));
             Market_area.setAdapter(adapter);
-
+            Market_area.setThreshold(1);
         }
         catch (Exception e)
         {
