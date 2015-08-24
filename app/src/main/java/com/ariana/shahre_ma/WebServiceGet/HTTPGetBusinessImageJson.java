@@ -26,12 +26,12 @@ public class HTTPGetBusinessImageJson extends AsyncTask<String,Void,Integer>
 {
 
     private static Context context;
-
     private String url_businessimage="http://test.shahrma.com/api/ApiGiveBusinessImage?BusinessId=";
 
     Integer Id[];
     String src[];
     Integer businessId[];
+    Integer type[];
     Integer len;
 
 
@@ -87,7 +87,7 @@ public class HTTPGetBusinessImageJson extends AsyncTask<String,Void,Integer>
                     for (int i = 0; i < len; i++)
                     {
                         dbs.delete_BusinessImage(Id[i]);
-                        dbs.Add_BusinessImage(Id[i], businessId[i],src[i]);
+                        dbs.Add_BusinessImage(Id[i], businessId[i],src[i],type[i]);
 
                     }
 
@@ -121,6 +121,7 @@ public class HTTPGetBusinessImageJson extends AsyncTask<String,Void,Integer>
                 JSONObject area = areas.getJSONObject(i);
                 businessId[i]=area.getInt("BusinessId");
                 Id[i]=area.getInt("Id");
+                type[i]=area.getInt("type");
                 src[i]=area.getString("Src");
 
 

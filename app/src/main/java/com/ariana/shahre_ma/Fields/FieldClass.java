@@ -83,6 +83,8 @@ public class FieldClass
     private static Integer Count_Like=0;
     private static Integer Count_DisLike=0;
 
+    private static Integer ProductId=0;
+
     private static Boolean ShowNotification=false;
     private static Boolean SearchOffline=false;
     private static Boolean SearchOnlinee=false;
@@ -651,6 +653,16 @@ public class FieldClass
     public Boolean GetBusinessDisCountTops(){
         return BusinessDiscountTops;
     }
+
+
+    public void SetProductId(Integer id){
+        ProductId=id;
+    }
+    public Integer GetProductId(){
+        return ProductId;
+    }
+
+
 
 }
 

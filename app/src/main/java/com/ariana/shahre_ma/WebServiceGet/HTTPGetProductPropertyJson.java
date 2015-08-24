@@ -1,7 +1,9 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.ariana.shahre_ma.Fields.FieldDataBase;
@@ -96,6 +98,8 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
             if(result==1)
             {
 
+                Intent intent = new Intent("Product_property");
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
             }
             else
             {

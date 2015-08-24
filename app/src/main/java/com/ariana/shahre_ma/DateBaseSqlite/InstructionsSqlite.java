@@ -95,10 +95,11 @@ public class  InstructionsSqlite {
     public static final String LINK_Advertisment = "Link";
     public static final String TYPE_Advertisment = "Type";
 
-    //Advertisment Table Columns names
+    //Business Image Table Columns names
     public static final String ID_BusinessImage= "Id";
     public static final String BUSINESSID_BusinessImage = "BusinessId";
     public static final String SRC_BusinessImage = "Src";
+    public static final String TYPE_BusinessImage = "Type";
 
 
     //ShowNotification Table Columns names
@@ -244,7 +245,8 @@ public class  InstructionsSqlite {
     public static final String CREATE_TABLE_BusinessImage = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_BUSINESS_IMAGE + " (" +
             "Id INTEGER PRIMARY KEY ," +
             "BusinessId INTEGER," +
-            "Src TEXT" +
+            "Src TEXT," +
+            "Type INTEGER" +
             ");";
 
 

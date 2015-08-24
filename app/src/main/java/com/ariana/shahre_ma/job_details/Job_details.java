@@ -17,13 +17,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
-import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
-import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
 import com.ariana.shahre_ma.WebServiceSend.HTTPSendBookMarkURL;
 
 import org.osmdroid.DefaultResourceProxyImpl;
@@ -41,11 +38,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
 
 
     Query query;
-    CalendarTool ct=new CalendarTool();
     FieldClass fc = new FieldClass();
-    HTTPPostMemberJson sendPost;
-    SqliteTOjson json = new SqliteTOjson(this);
-    String _json;
     SectionsPagerAdapter mSectionsPagerAdapter;
     MenuItem fav;
 
@@ -66,7 +59,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
         {
            db.Add_ShowNotification(fc.GetShowNotificationId(),fc.GetBusiness_Id(),true);
 
-            fc.SetShowNotification(true);
+            fc.SetShowNotification(false);
         }
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();

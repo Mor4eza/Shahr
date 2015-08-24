@@ -527,7 +527,7 @@ Context context;
         db.close();
     }
 
-    public void Add_BusinessImage(Integer id, Integer businessid, String src) {
+    public void Add_BusinessImage(Integer id, Integer businessid, String src,Integer type) {
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -537,6 +537,7 @@ Context context;
         values.put(InstructionsSqlite.ID_BusinessImage, id);
         values.put(InstructionsSqlite.BUSINESSID_BusinessImage, businessid);
         values.put(InstructionsSqlite.SRC_BusinessImage, src);
+        values.put(InstructionsSqlite.TYPE_BusinessImage, type);
 
         // 3. insert
         db.insert(InstructionsSqlite.TABLE_NAME_BUSINESS_IMAGE, // table
