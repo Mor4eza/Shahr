@@ -538,7 +538,7 @@ public class Add_New_Business extends ActionBarActivity implements ImageView.OnC
                 //  /*TextView tv_path = (TextView) findViewById(R.id.textView);
                  Path=getRealPathFromURI(currImageURI);
 
-                Bitmap myBitmap = BitmapFactory.decodeFile(getTitle().toString());
+                Bitmap myBitmap = BitmapFactory.decodeFile(Path);
                 if(ViewId==image1.getId()){
                     image1.setImageBitmap(myBitmap);
                 }else if(ViewId==image2.getId()){

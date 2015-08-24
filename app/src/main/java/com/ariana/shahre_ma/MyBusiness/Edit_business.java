@@ -30,6 +30,7 @@ import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostBusinessEditJson;
+import com.ariana.shahre_ma.WebServicePost.HTTPPostUploadImage;
 import com.dd.CircularProgressButton;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -592,6 +593,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        HTTPPostUploadImage uploadImage=new HTTPPostUploadImage(this);
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
                 // currImageURI is the global variable I’m using to hold the content:
@@ -600,15 +602,27 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
                 //  /*TextView tv_path = (TextView) findViewById(R.id.textView);
                 Path=getRealPathFromURI(currImageURI);
 
-                Bitmap myBitmap = BitmapFactory.decodeFile(getTitle().toString());
+                Bitmap myBitmap = BitmapFactory.decodeFile(Path);
                 if(ViewId==image1.getId()){
                     image1.setImageBitmap(myBitmap);
+                    uploadImage.SetImage(fc.GetBusiness_Id(),1);
+                    uploadImage.setFileImage(Path);
+                    uploadImage.execute();
                 }else if(ViewId==image2.getId()){
                     image2.setImageBitmap(myBitmap);
+                    uploadImage.SetImage(fc.GetBusiness_Id(),1);
+                    uploadImage.setFileImage(Path);
+                    uploadImage.execute();
                 }else if(ViewId==image3.getId()){
                     image3.setImageBitmap(myBitmap);
+                    uploadImage.SetImage(fc.GetBusiness_Id(),1);
+                    uploadImage.setFileImage(Path);
+                    uploadImage.execute();
                 }else if(ViewId==image4.getId()){
                     image4.setImageBitmap(myBitmap);
+                    uploadImage.SetImage(fc.GetBusiness_Id(),1);
+                    uploadImage.setFileImage(Path);
+                    uploadImage.execute();
                 }
 
 
@@ -618,12 +632,24 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
                 Bitmap photo = (Bitmap) data.getExtras().get("data");
                 if(ViewId==image1.getId()){
                     image1.setImageBitmap(photo);
+                    uploadImage.SetImage(fc.GetBusiness_Id(),1);
+                    uploadImage.setFileImage(Path);
+                    uploadImage.execute();
                 }else if(ViewId==image2.getId()){
                     image2.setImageBitmap(photo);
+                    uploadImage.SetImage(fc.GetBusiness_Id(),1);
+                    uploadImage.setFileImage(Path);
+                    uploadImage.execute();
                 }else if(ViewId==image3.getId()){
                     image3.setImageBitmap(photo);
+                    uploadImage.SetImage(fc.GetBusiness_Id(),1);
+                    uploadImage.setFileImage(Path);
+                    uploadImage.execute();
                 }else if(ViewId==image4.getId()){
                     image4.setImageBitmap(photo);
+                    uploadImage.SetImage(fc.GetBusiness_Id(),1);
+                    uploadImage.setFileImage(Path);
+                    uploadImage.execute();
                 }
             }
         }
