@@ -13,6 +13,7 @@ public class FieldDataBase
     static List<Integer> Id_Product =new ArrayList<>();
     static List<Integer> MemberId_Product =new ArrayList<>();
     static List<String> Name_Product =new ArrayList<>();
+    static List<String> Date_Product =new ArrayList<>();
     static List<String> Property_Product =new ArrayList<>();
     static List<Double>  Price_Product =new ArrayList<>();
     static List<Double>  Latitude_Product =new ArrayList<>();
@@ -49,6 +50,7 @@ public class FieldDataBase
     public void setMemberId_Product(List<Integer> memberId){this.MemberId_Product=memberId;}
     public void setName_Product(List<String> name){this.Name_Product=name;}
     public void setProperty_Product(List<String> property){this.Property_Product=property;}
+    public void setDate_Product(List<String> date){this.Date_Product=date;}
     public void setPrice_Product(List<Double> price){this.Price_Product=price;}
     public void setLatitude_Product(List<Double> latitude){this.Latitude_Product=latitude;}
     public void setLongtiude_Product(List<Double> longtiude){this.Longtiude_Product=longtiude;}
@@ -64,6 +66,7 @@ public class FieldDataBase
     //Fields set the table Product
     public List<Integer> getId_Product(){return this.Id_Product;}
     public List<String> getName_Product(){return this.Name_Product;}
+    public List<String> getDate_Product(){return this.Date_Product;}
     public List<String> getProperty_Product(){return this.Property_Product;}
     public List<Double> getprice_Product(){return this.Price_Product;}
     public List<Double> getLatitude_Product(){return this.Latitude_Product;}

@@ -123,7 +123,7 @@
             android:layout_marginTop="30dp"
             android:layout_below="@id/product_name"
             android:layout_alignParentRight="true"
-            android:text="نام"/>
+            android:text="توضیحات"/>
         <TextView
             android:id="@+id/product_property"
             android:layout_width="wrap_content"
@@ -131,7 +131,7 @@
             android:layout_marginTop="30dp"
             android:layout_below="@id/product_desc"
             android:layout_alignParentRight="true"
-            android:text="نام"/>
+            android:text="ویژگی"/>
 
 
     </RelativeLayout>
@@ -170,7 +170,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_alignParentRight="true"
-            android:text="نام"/>
+            android:text="تلفن"/>
         <TextView
             android:id="@+id/product_email"
             android:layout_width="wrap_content"
@@ -178,7 +178,7 @@
             android:layout_marginTop="30dp"
             android:layout_below="@id/product_tell"
             android:layout_alignParentRight="true"
-            android:text="نام"/>
+            android:text="ایمیل"/>
         <TextView
             android:id="@+id/product_address"
             android:layout_width="wrap_content"
@@ -186,7 +186,7 @@
             android:layout_marginTop="30dp"
             android:layout_below="@id/product_email"
             android:layout_alignParentRight="true"
-            android:text="نام"/>
+            android:text="آدرس"/>
 
     </RelativeLayout>
 
@@ -205,4 +205,5 @@
         android:background="@color/accent"
         android:layout_marginBottom="10dp"
         android:text="25000 ریال"/>
+
 </RelativeLayout>
