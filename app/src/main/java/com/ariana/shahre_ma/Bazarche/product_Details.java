@@ -117,11 +117,11 @@ public class product_Details extends ActionBarActivity {
                 property.setText(fieldDataBase.getProperty_Product().get(i));
                 email.setText(fieldDataBase.getEmail_Product().get(i));
                 address.setText(fieldDataBase.getAddress_Product().get(i));
-                name.setText(fieldDataBase.getName_Collection().get(i));
+                name.setText(fieldDataBase.getName_Product().get(i));
                 price.setText(String.valueOf(fieldDataBase.getprice_Product().get(i)));
 
 
-                Picasso.with(this).load("").placeholder(R.drawable.img_not_found).into(img1);
+                Picasso.with(this).load("http://www.shahrma.com/image/business/"+fieldDataBase.getImage_Product().get(i)).into(img1);
             }
         }
         catch (Exception e)
@@ -142,6 +142,7 @@ public class product_Details extends ActionBarActivity {
                 do
                 {
                     urlImage[i]="http://www.shahrma.com/image/business/"+rows.getString(2);
+                    Log.i("AddressImage",urlImage[i]);
                     i++;
 
                 }while (rows.moveToNext());

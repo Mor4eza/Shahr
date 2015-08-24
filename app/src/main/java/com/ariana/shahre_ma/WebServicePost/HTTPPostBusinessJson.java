@@ -3,9 +3,11 @@ package com.ariana.shahre_ma.WebServicePost;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.Bazarche.Select_Image;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MyBusiness.Add_New_Business;
@@ -110,6 +112,9 @@ public class HTTPPostBusinessJson extends AsyncTask<String,Long,Integer>
         {
 
             ((Activity)context).finish();
+            fc.SetType(1);
+            Intent i=new Intent(context, Select_Image.class);
+            context.startActivity(i);
 
             Add_New_Business.save_edit.setProgress(100);
             Toast.makeText(context, "کسب و کار شما پس از تایید به نمایش گذاشته میشود!", Toast.LENGTH_LONG).show();

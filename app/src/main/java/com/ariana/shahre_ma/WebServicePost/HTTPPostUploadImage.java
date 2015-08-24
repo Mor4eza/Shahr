@@ -73,6 +73,7 @@ public class HTTPPostUploadImage extends AsyncTask<String,Integer,Integer>
 
     private String URL()
     {
+        Log.i("ImageUrl",upLoadServerUri);
         return  upLoadServerUri;
     }
 

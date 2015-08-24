@@ -593,7 +593,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        HTTPPostUploadImage uploadImage=new HTTPPostUploadImage(this);
+
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
                 // currImageURI is the global variable I’m using to hold the content:
@@ -605,24 +605,16 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
                 Bitmap myBitmap = BitmapFactory.decodeFile(Path);
                 if(ViewId==image1.getId()){
                     image1.setImageBitmap(myBitmap);
-                    uploadImage.SetImage(fc.GetBusiness_Id(),1);
-                    uploadImage.setFileImage(Path);
-                    uploadImage.execute();
+                    UploadImage();
                 }else if(ViewId==image2.getId()){
                     image2.setImageBitmap(myBitmap);
-                    uploadImage.SetImage(fc.GetBusiness_Id(),1);
-                    uploadImage.setFileImage(Path);
-                    uploadImage.execute();
+                    UploadImage();
                 }else if(ViewId==image3.getId()){
                     image3.setImageBitmap(myBitmap);
-                    uploadImage.SetImage(fc.GetBusiness_Id(),1);
-                    uploadImage.setFileImage(Path);
-                    uploadImage.execute();
+                    UploadImage();
                 }else if(ViewId==image4.getId()){
                     image4.setImageBitmap(myBitmap);
-                    uploadImage.SetImage(fc.GetBusiness_Id(),1);
-                    uploadImage.setFileImage(Path);
-                    uploadImage.execute();
+                    UploadImage();
                 }
 
 
@@ -632,27 +624,28 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
                 Bitmap photo = (Bitmap) data.getExtras().get("data");
                 if(ViewId==image1.getId()){
                     image1.setImageBitmap(photo);
-                    uploadImage.SetImage(fc.GetBusiness_Id(),1);
-                    uploadImage.setFileImage(Path);
-                    uploadImage.execute();
+                    UploadImage();
                 }else if(ViewId==image2.getId()){
                     image2.setImageBitmap(photo);
-                    uploadImage.SetImage(fc.GetBusiness_Id(),1);
-                    uploadImage.setFileImage(Path);
-                    uploadImage.execute();
+                    UploadImage();
                 }else if(ViewId==image3.getId()){
                     image3.setImageBitmap(photo);
-                    uploadImage.SetImage(fc.GetBusiness_Id(),1);
-                    uploadImage.setFileImage(Path);
-                    uploadImage.execute();
+                    UploadImage();
                 }else if(ViewId==image4.getId()){
                     image4.setImageBitmap(photo);
-                    uploadImage.SetImage(fc.GetBusiness_Id(),1);
-                    uploadImage.setFileImage(Path);
-                    uploadImage.execute();
+                    UploadImage();
                 }
             }
         }
+    }
+
+
+    public void UploadImage()
+    {
+        HTTPPostUploadImage uploadImage=new HTTPPostUploadImage(this);
+        uploadImage.SetImage(fc.GetBusiness_Id(),1);
+        uploadImage.setFileImage(Path);
+        uploadImage.execute();
     }
     public String getRealPathFromURI(Uri contentUri) {
         String [] proj={MediaStore.Images.Media.DATA};
