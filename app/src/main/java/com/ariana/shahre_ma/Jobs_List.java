@@ -67,12 +67,14 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
            tv_count.setText(job_list_Adapter.getItemCount()+" "+"مورد");
         }
 
-
-        String showWhatsNew = "showHelpJobsList";
-        if (!Once.beenDone(Once.THIS_APP_INSTALL, showWhatsNew)) {
-            help1();
-            Once.markDone(showWhatsNew);
+        if(fc.GetSearchOnline() || fc.GetSearchOffline()){
+            String showWhatsNew = "showHelpJobsList";
+            if (!Once.beenDone(Once.THIS_APP_INSTALL, showWhatsNew)) {
+                help1();
+                Once.markDone(showWhatsNew);
+            }
         }
+
     }
         public void img_click(View v){
             Intent i = new Intent(getApplicationContext(), Job_details.class);
