@@ -7,6 +7,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
@@ -34,6 +35,7 @@ public class HTTPGetBusinessImageJson extends AsyncTask<String,Void,Integer>
     Integer type[];
     Integer len;
 
+    FieldClass fc=new FieldClass();
 
     public void SetBusinessId(Integer BusinessId)
     {
@@ -91,8 +93,18 @@ public class HTTPGetBusinessImageJson extends AsyncTask<String,Void,Integer>
 
                     }
 
-                    Intent intent = new Intent("BusinessImage");
-                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                    if(fc.GetProductReceiver())
+                    {
+                        Intent intent = new Intent("Product_property");
+                        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                    }
+                    else
+                    {
+                        Intent intent = new Intent("BusinessImage");
+                        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                    }
+
+
                 }
 
 

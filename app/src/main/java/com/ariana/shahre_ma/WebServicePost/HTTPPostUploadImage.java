@@ -76,7 +76,7 @@ public class HTTPPostUploadImage extends AsyncTask<String,Integer,Integer>
         return  upLoadServerUri;
     }
 
-    public void FileImage(String src)
+    public void setFileImage(String src)
     {
         sourceFileUri=src;
     }

@@ -4,17 +4,22 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBase;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessImageJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetProductPropertyJson;
 import com.squareup.picasso.Picasso;
 
 public class product_Details extends ActionBarActivity {
@@ -35,7 +40,11 @@ public class product_Details extends ActionBarActivity {
     ImageView img3;
     ImageView img4;
 
+    String urlImage[]=new String[2];
+
+    DataBaseSqlite db=new DataBaseSqlite(this);
     FieldDataBase fieldDataBase=new FieldDataBase();
+    FieldClass fc=new FieldClass();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +52,17 @@ public class product_Details extends ActionBarActivity {
         Initilize();
         LocalBroadcastManager.getInstance(this).registerReceiver(mProductReceiver, new IntentFilter("Product_property"));
 
+
+
+        HTTPGetProductPropertyJson httpGetProductPropertyJson=new HTTPGetProductPropertyJson(this);
+        httpGetProductPropertyJson.setProductId(fc.GetProductId());
+        httpGetProductPropertyJson.execute();
+
+
         HTTPGetBusinessImageJson httpGetBusinessImageJson=new HTTPGetBusinessImageJson(this);
-        httpGetBusinessImageJson.SetBusinessId();
+        httpGetBusinessImageJson.SetBusinessId(fc.GetProductId());
         httpGetBusinessImageJson.execute();
+
 
     }
 
@@ -91,30 +108,70 @@ public class product_Details extends ActionBarActivity {
 
     private void LoadData()
     {
-        for(int i=0; i<fieldDataBase.getName_Product().size();i++) {
-            phone.setText(fieldDataBase.getPhone__Product().get(i));
-            date.setText(fieldDataBase.getDate_Product().get(i));
-            description.setText(fieldDataBase.getDescription_Product().get(i));
-            property .setText(fieldDataBase.getProperty_Product().get(i));
-            email.setText(fieldDataBase.getEmail_Product().get(i));
-            address.setText(fieldDataBase.getAddress_Product().get(i));
-            name.setText(fieldDataBase.getName_Collection().get(i));
-            price.setText(String.valueOf(fieldDataBase.getprice_Product().get(i)));
-            Picasso.with(this).load("").placeholder(R.drawable.img_not_found) .into(img1);
-            Picasso.with(this).load("").into(img1);
-            Picasso.with(this).load("").into(img1);
-            Picasso.with(this).load("").into(img1);
+        try {
+            for (int i = 0; i < fieldDataBase.getName_Product().size(); i++) {
+                phone.setText(fieldDataBase.getPhone__Product().get(i));
+                date.setText(fieldDataBase.getDate_Product().get(i));
+                description.setText(fieldDataBase.getDescription_Product().get(i));
+                property.setText(fieldDataBase.getProperty_Product().get(i));
+                email.setText(fieldDataBase.getEmail_Product().get(i));
+                address.setText(fieldDataBase.getAddress_Product().get(i));
+                name.setText(fieldDataBase.getName_Collection().get(i));
+                price.setText(String.valueOf(fieldDataBase.getprice_Product().get(i)));
+
+
+                Picasso.with(this).load("").placeholder(R.drawable.img_not_found).into(img1);
+            }
+        }
+        catch (Exception e)
+        {
+
+        }
 
     }
 
-    }
+    private void LoadImage()
+    {
+        try
+        {
+            int i=0;
+            Cursor rows=db.select_BusinessImage(fc.GetProductId());
+            if(rows.moveToFirst())
+            {
+                do
+                {
+                    urlImage[i]="http://www.shahrma.com/image/business/"+rows.getString(2);
+                    i++;
 
+                }while (rows.moveToNext());
+            }
+
+
+            Picasso.with(this).load(urlImage[0]).into(img2);
+            Picasso.with(this).load(urlImage[1]).into(img3);
+            Picasso.with(this).load(urlImage[2]).into(img4);
+
+        }
+        catch (Exception e)
+        {
+
+        }
+    }
     private BroadcastReceiver mProductReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent)
         {
-        LoadData();
+            if(fc.GetProductReceiver()) {
+                LoadImage();
+                fc.SetProductReceiver(false);
+                Log.i("ProductReceiver","image");
+            }
+            else {
+                LoadData();
+                Log.i("ProductReceiver", "date");
+            }
         }
 
     };
+
 }
