@@ -109,7 +109,8 @@ public class product_Details extends ActionBarActivity {
     private void LoadData()
     {
         try {
-            for (int i = 0; i < fieldDataBase.getName_Product().size(); i++) {
+            for (int i = 0; i < fieldDataBase.getName_Product().size(); i++)
+            {
                 phone.setText(fieldDataBase.getPhone__Product().get(i));
                 date.setText(fieldDataBase.getDate_Product().get(i));
                 description.setText(fieldDataBase.getDescription_Product().get(i));

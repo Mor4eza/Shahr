@@ -32,7 +32,6 @@ public class HTTPGetBusinessImageJson extends AsyncTask<String,Void,Integer>
     Integer Id[];
     String src[];
     Integer businessId[];
-    Integer type[];
     Integer len;
 
     FieldClass fc=new FieldClass();
@@ -62,8 +61,6 @@ public class HTTPGetBusinessImageJson extends AsyncTask<String,Void,Integer>
     protected Integer doInBackground(String... args) {
         Integer result=0;
         try {
-
-
             InputStream jsonStream = getStreamFromURL(GetURL(), "GET");
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);
@@ -89,10 +86,11 @@ public class HTTPGetBusinessImageJson extends AsyncTask<String,Void,Integer>
                     for (int i = 0; i < len; i++)
                     {
                         dbs.delete_BusinessImage(Id[i]);
-                        dbs.Add_BusinessImage(Id[i], businessId[i],src[i],type[i]);
+                        dbs.Add_BusinessImage(Id[i], businessId[i],src[i]);
 
                     }
 
+                    Log.i("Productproperty",String.valueOf(fc.GetProductReceiver()));
                     if(fc.GetProductReceiver())
                     {
                         Intent intent = new Intent("Product_property");
@@ -133,7 +131,6 @@ public class HTTPGetBusinessImageJson extends AsyncTask<String,Void,Integer>
                 JSONObject area = areas.getJSONObject(i);
                 businessId[i]=area.getInt("BusinessId");
                 Id[i]=area.getInt("Id");
-                type[i]=area.getInt("type");
                 src[i]=area.getString("Src");
 
 

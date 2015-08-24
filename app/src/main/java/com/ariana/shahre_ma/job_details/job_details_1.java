@@ -335,6 +335,7 @@ public class job_details_1 extends ActionBarActivity {
 
                      if (rows.moveToFirst()) {
                          do {
+                             Log.i("image",rows.getString(2));
                              final TextSliderView textSliderView = new TextSliderView(getActivity());
                              textSliderView.image("http://www.shahrma.com/image/business/" + rows.getString(2));
                              slider.addSlider(textSliderView);

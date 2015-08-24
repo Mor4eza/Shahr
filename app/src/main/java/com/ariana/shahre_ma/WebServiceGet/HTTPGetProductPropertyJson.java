@@ -114,21 +114,16 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
     void parseJSON(String JSONString) {
         try {
 
-            JSONArray areas = new JSONArray(JSONString);
-            Log.i("JSONProductJson", JSONString);
-            len=areas.length();
-            for (int i = 0; i < areas.length(); i++) {
-
-                JSONObject area = areas.getJSONObject(i);
-
+                Log.i("ProductProperty",JSONString);
+                JSONObject area =new JSONObject(JSONString);
                 selectId.add(area.getInt("Id"));
                 selectMemberId.add(area.getInt("MemberId"));
                 selectName.add(area.getString("Name"));
-                selectDate.add(area.getString("Date"));
+                selectDate.add(area.getString("DateTime"));
                 selectProperty.add(area.getString("Property"));
                 selectPrice.add(area.getDouble("Price"));
                 selectLatitude.add(area.getDouble("Latitude"));
-                selectLongtiude.add(area.getDouble("Longtiude"));
+                selectLongtiude.add(area.getDouble("Longtude"));
                 selectAdaptive.add(area.getBoolean("Adaptive"));
                 selectDescription.add(area.getString("Description"));
                 selectImage.add(area.getString("Image"));
@@ -136,10 +131,10 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
                 selectMobile.add(area.getString("Mobile"));
                 selectAddress.add(area.getString("Address"));
                 selectEmail.add(area.getString("Email"));
-                selectSubsetId.add(area.getInt("SubsetId"));
+                selectSubsetId.add(area.getInt("ProductSubsetId"));
                 selectAreaId.add(area.getInt("AreaId"));
 
-            }
+
 
             fdb.setId_Product(selectId);
             fdb.setMemberId_Product(selectMemberId);
