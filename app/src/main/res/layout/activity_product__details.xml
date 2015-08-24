@@ -1,0 +1,208 @@
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        tools:context="com.ariana.shahre_ma.Bazarche.product_Details">
+
+
+    <HorizontalScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/horizontalScrollView">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/img_not_found"
+        android:id="@+id/image1"
+        android:layout_alignParentTop="true"
+        />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/img_not_found"
+        android:id="@+id/image2"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/image1"
+        android:layout_toEndOf="@+id/image1"
+        android:layout_marginLeft="1dp" />
+
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/img_not_found"
+            android:id="@+id/image3"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/image2"
+            android:layout_toEndOf="@+id/image2"
+            android:layout_marginLeft="1dp" />
+
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/img_not_found"
+                android:id="@+id/image4"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/image3"
+                android:layout_toEndOf="@+id/image3"
+                android:layout_marginLeft="1dp" />
+
+        </RelativeLayout>
+    </HorizontalScrollView>
+
+    <RelativeLayout
+        android:id="@+id/rel_desc"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/horizontalScrollView"
+        android:layout_marginTop="20dp"
+        android:gravity="right"
+       >
+        <TextView
+            android:id="@+id/hint1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="مشخصات محصول"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#00695c"
+                android:layout_toLeftOf="@id/hint1"
+                android:layout_marginTop="7dp"
+                android:layout_marginRight="3dp"
+               />
+
+
+        <TextView
+            android:id="@+id/product_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_alignParentRight="true"
+            android:text="تاریخ"/>
+
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/product_date"
+            android:layout_alignParentRight="true"
+            android:text="نام"/>
+        <TextView
+            android:id="@+id/product_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/product_name"
+            android:layout_alignParentRight="true"
+            android:text="نام"/>
+        <TextView
+            android:id="@+id/product_property"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/product_desc"
+            android:layout_alignParentRight="true"
+            android:text="نام"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rel_desc"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"
+        android:gravity="right"
+        >
+        <TextView
+            android:id="@+id/hint2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="اطلاعات تماس"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#00695c"
+            android:layout_toLeftOf="@id/hint2"
+            android:layout_marginTop="7dp"
+            android:layout_marginRight="3dp"
+            />
+
+
+        <TextView
+            android:id="@+id/product_tell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_alignParentRight="true"
+            android:text="نام"/>
+        <TextView
+            android:id="@+id/product_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/product_tell"
+            android:layout_alignParentRight="true"
+            android:text="نام"/>
+        <TextView
+            android:id="@+id/product_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/product_email"
+            android:layout_alignParentRight="true"
+            android:text="نام"/>
+
+    </RelativeLayout>
+
+
+    </RelativeLayout>
+        </ScrollView>
+
+    <TextView
+        android:id="@+id/product_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="19sp"
+        android:textColor="@color/white"
+        android:background="@color/accent"
+        android:layout_marginBottom="10dp"
+        android:text="25000 ریال"/>
+</RelativeLayout>
