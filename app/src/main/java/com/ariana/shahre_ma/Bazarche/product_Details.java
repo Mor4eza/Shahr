@@ -4,9 +4,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.ariana.shahre_ma.Fields.FieldDataBase;
 import com.ariana.shahre_ma.R;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessImageJson;
 import com.squareup.picasso.Picasso;
 
 public class product_Details extends ActionBarActivity {
@@ -43,9 +42,7 @@ public class product_Details extends ActionBarActivity {
         Initilize();
         LocalBroadcastManager.getInstance(this).registerReceiver(mProductReceiver, new IntentFilter("Product_property"));
 
-        HTTPGetBusinessImageJson httpGetBusinessImageJson=new HTTPGetBusinessImageJson(this);
-        httpGetBusinessImageJson.SetBusinessId();
-        httpGetBusinessImageJson.execute();
+
 
     }
 

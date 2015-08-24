@@ -4,14 +4,21 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.PopupMenu;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Toast;
 
@@ -30,7 +37,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Edit_business extends ActionBarActivity {
+public class Edit_business extends ActionBarActivity implements ImageView.OnClickListener{
     
     EditText Market_name;
     EditText Market_tell;
@@ -40,6 +47,10 @@ public class Edit_business extends ActionBarActivity {
     EditText Market_owner;
     EditText Market_address;
     EditText Market_desc;
+    ImageView image1;
+    ImageView image2;
+    ImageView image3;
+    ImageView image4;
     AutoCompleteTextView Market_subset;
     AutoCompleteTextView Market_area;
     AutoCompleteTextView Market_city;
@@ -49,6 +60,10 @@ public class Edit_business extends ActionBarActivity {
     FieldClass fc=new FieldClass();
     Query query=new Query(Edit_business.this);
     NetState net=new NetState(this);
+    Uri currImageURI;
+    String picturePath;
+    String Path="";
+    Integer ViewId=0;
     Integer modatgh=3;
     Integer month;
     String date;
@@ -76,6 +91,11 @@ public class Edit_business extends ActionBarActivity {
                 GetNameArea(Market_city.getText().toString());
             }
         });
+
+        image1.setOnClickListener(this);
+        image2.setOnClickListener(this);
+        image3.setOnClickListener(this);
+        image4.setOnClickListener(this);
     }
     
    void Initialize_Views(){
@@ -93,6 +113,10 @@ public class Edit_business extends ActionBarActivity {
        Market_field =(MultiAutoCompleteTextView)findViewById(R.id.ac_field);
        Market_city =(AutoCompleteTextView)findViewById(R.id.ac_city);
        save_edit = (CircularProgressButton)findViewById(R.id.btn_save_edit);
+       image1=(ImageView)findViewById(R.id.edit_image1);
+       image2=(ImageView)findViewById(R.id.edit_image2);
+       image3=(ImageView)findViewById(R.id.edit_image3);
+       image4=(ImageView)findViewById(R.id.edit_image4);
        
    }
 
@@ -434,7 +458,7 @@ public class Edit_business extends ActionBarActivity {
         if (allrows.moveToFirst()) {
             do {
 
-                Log.i("area",allrows.getString(1));
+                Log.i("area", allrows.getString(1));
                 studentList.add(allrows.getString(1));
 
 
@@ -525,4 +549,96 @@ public class Edit_business extends ActionBarActivity {
 
         }
     }
+    @Override
+    public void onClick(final View v) {
+
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.getMenuInflater().inflate(R.menu.image_popup, popup.getMenu());
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                ViewId=v.getId();
+                if (item.getTitle().equals("دوربین"))
+                    //my_business.openCamera();
+                    openCamera();
+                else if (item.getTitle().equals("گالری"))
+                    selectImageFromGallery();
+
+                else if (item.getTitle().equals("حذف"))
+                    Log.i("", "");
+                return true;
+            }
+        });
+        popup.show();//showing popup menu
+
+
+
+    }
+
+    public void openCamera() {
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // intent.putExtra(MediaStore.EXTRA_OUTPUT, currImageURI);
+        startActivityForResult(intent, 100);
+
+    }
+    public void selectImageFromGallery() {
+
+        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        pickIntent.setType("image/*");
+        startActivityForResult(pickIntent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 1) {
+                // currImageURI is the global variable I’m using to hold the content:
+                currImageURI = data.getData();
+                System.out.println("Current image Path is —--->" + getRealPathFromURI(currImageURI));
+                //  /*TextView tv_path = (TextView) findViewById(R.id.textView);
+                Path=getRealPathFromURI(currImageURI);
+
+                Bitmap myBitmap = BitmapFactory.decodeFile(getTitle().toString());
+                if(ViewId==image1.getId()){
+                    image1.setImageBitmap(myBitmap);
+                }else if(ViewId==image2.getId()){
+                    image2.setImageBitmap(myBitmap);
+                }else if(ViewId==image3.getId()){
+                    image3.setImageBitmap(myBitmap);
+                }else if(ViewId==image4.getId()){
+                    image4.setImageBitmap(myBitmap);
+                }
+
+
+            }else if(requestCode == 100){
+                currImageURI = data.getData();
+                Path=getRealPathFromURI(currImageURI);
+                Bitmap photo = (Bitmap) data.getExtras().get("data");
+                if(ViewId==image1.getId()){
+                    image1.setImageBitmap(photo);
+                }else if(ViewId==image2.getId()){
+                    image2.setImageBitmap(photo);
+                }else if(ViewId==image3.getId()){
+                    image3.setImageBitmap(photo);
+                }else if(ViewId==image4.getId()){
+                    image4.setImageBitmap(photo);
+                }
+            }
+        }
+    }
+    public String getRealPathFromURI(Uri contentUri) {
+        String [] proj={MediaStore.Images.Media.DATA};
+        android.database.Cursor cursor = managedQuery( contentUri,
+                proj, // Which columns to return
+                null, // WHERE clause; which rows to return (all rows)
+                null, // WHERE clause selection arguments (none)
+                null); // Order-by clause (ascending by name)
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        picturePath = cursor.getString(column_index);
+        return cursor.getString(column_index);
+    }
+
 }

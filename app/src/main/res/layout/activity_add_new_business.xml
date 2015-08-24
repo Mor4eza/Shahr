@@ -183,6 +183,72 @@
                 android:id="@+id/ac_area"
                 android:inputType="textPersonName" />
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="تصاویر:"/>
+
+        <HorizontalScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/horizontalScrollView">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/add_image1"
+                    android:src="@drawable/fab_plus_icon"
+                    android:background="#72224422"
+                    android:layout_alignParentTop="true"
+                    />
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/fab_plus_icon"
+                    android:background="#72224422"
+                    android:id="@+id/add_image2"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/add_image1"
+                    android:layout_toEndOf="@+id/add_image1"
+                    android:layout_marginLeft="1dp" />
+
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/fab_plus_icon"
+                    android:background="#72224422"
+                    android:id="@+id/add_image3"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/add_image2"
+                    android:layout_toEndOf="@+id/add_image2"
+                    android:layout_marginLeft="1dp" />
+
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/fab_plus_icon"
+                    android:background="#72224422"
+                    android:id="@+id/add_image4"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/add_image3"
+                    android:layout_toEndOf="@+id/add_image3"
+                    android:layout_marginLeft="1dp" />
+
+            </RelativeLayout>
+        </HorizontalScrollView>
 
 
         <Button
