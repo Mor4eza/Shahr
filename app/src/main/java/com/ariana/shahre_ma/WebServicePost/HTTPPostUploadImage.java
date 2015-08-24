@@ -39,9 +39,6 @@ import java.util.ArrayList;
  */
 public class HTTPPostUploadImage extends AsyncTask<String,Integer,Integer>
 {
-
-
-
     private ProgressDialog dialog;
     Context context;
     String sourceFileUri="";
@@ -193,7 +190,8 @@ public class HTTPPostUploadImage extends AsyncTask<String,Integer,Integer>
 
 
     @Override
-    protected void onProgressUpdate(Integer... progress) {
+    protected void onProgressUpdate(Integer... progress)
+    {
         dialog.setProgress(progress[0]);
     }
 
