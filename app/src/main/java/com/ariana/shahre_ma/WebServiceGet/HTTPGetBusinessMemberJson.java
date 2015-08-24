@@ -167,7 +167,10 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
 
 
                         if(count==0)
-                            dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i],latitude[i], longitude[i], areaid[i], area1[i], user[i],cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i],src[i]);
+                            dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i]
+                                    , address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i],
+                                    subsetid[i],latitude[i], longitude[i], areaid[i],area1[i], user[i],cityid, userid[i],
+                                    field1[i], field2[i], field3[i], field4[i], field5[i],field6[i], field7[i], ratecount[i], ratevalue[i],src[i]);
 
                     }
 

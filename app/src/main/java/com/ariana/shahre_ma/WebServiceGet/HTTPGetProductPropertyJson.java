@@ -32,6 +32,7 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
     List<Integer> selectMemberId =new ArrayList<>();
     List<Integer> selectId =new ArrayList<>();
     List<String>  selectName =new ArrayList<>();
+    List<String>  selectDate =new ArrayList<>();
     List<String>  selectProperty =new ArrayList<>();
     List<Double>  selectPrice =new ArrayList<>();
     List<Double>  selectLatitude =new ArrayList<>();
@@ -65,7 +66,9 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
 
     private String getUrl_productproperty()
     {
+        Log.i("url",url_productproperty);
         return url_productproperty;
+
     }
     /**
      *
@@ -75,8 +78,6 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
     protected Integer doInBackground(String... args) {
         Integer result=0;
         try {
-
-
             InputStream jsonStream = getStreamFromURL(getUrl_productproperty(), "GET");
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);
@@ -114,7 +115,7 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
         try {
 
             JSONArray areas = new JSONArray(JSONString);
-            Log.i("JSONsubset", JSONString);
+            Log.i("JSONProductJson", JSONString);
             len=areas.length();
             for (int i = 0; i < areas.length(); i++) {
 
@@ -123,6 +124,7 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
                 selectId.add(area.getInt("Id"));
                 selectMemberId.add(area.getInt("MemberId"));
                 selectName.add(area.getString("Name"));
+                selectDate.add(area.getString("Date"));
                 selectProperty.add(area.getString("Property"));
                 selectPrice.add(area.getDouble("Price"));
                 selectLatitude.add(area.getDouble("Latitude"));
@@ -142,6 +144,7 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
             fdb.setId_Product(selectId);
             fdb.setMemberId_Product(selectMemberId);
             fdb.setName_Product(selectName);
+            fdb.setDate_Product(selectDate);
             fdb.setProperty_Product(selectProperty);
             fdb.setPrice_Product(selectPrice);
             fdb.setLatitude_Product(selectLatitude);
@@ -157,7 +160,7 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
             fdb.setAreaId_Product(selectAreaId);
 
         } catch (JSONException e) {
-
+            Log.i("JSONException",e.toString());
         }
     }
 
@@ -170,6 +173,7 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
      */
     InputStream getStreamFromURL(String urlString, String method) {
         try {
+            Log.i("getStreamFromURL", "true");
             URL url = new URL(urlString);
             HttpURLConnection huc = (HttpURLConnection) url.openConnection();
             huc.setReadTimeout(10000);
@@ -177,12 +181,13 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
             huc.setRequestMethod(method);
 
             huc.setDoInput(true);
-
             huc.connect();
 
             return huc.getInputStream();
         } catch (Exception e) {
+            Log.e("ExceptiongetStream",e.toString());
             return null;
+
         }
 
     }

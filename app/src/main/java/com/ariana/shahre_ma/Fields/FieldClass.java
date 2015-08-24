@@ -84,6 +84,7 @@ public class FieldClass
     private static Integer Count_DisLike=0;
 
     private static Integer ProductId=0;
+    private static Boolean ProductReciver=false;
 
     private static Boolean ShowNotification=false;
     private static Boolean SearchOffline=false;
@@ -660,6 +661,14 @@ public class FieldClass
     }
     public Integer GetProductId(){
         return ProductId;
+    }
+
+
+    public void SetProductReceiver(Boolean productReciver){
+        ProductReciver=productReciver;
+    }
+    public Boolean GetProductReceiver(){
+        return ProductReciver;
     }
 
 

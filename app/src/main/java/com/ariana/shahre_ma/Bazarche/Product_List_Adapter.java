@@ -99,7 +99,8 @@ public class Product_List_Adapter extends RecyclerView.Adapter<Product_List_Adap
                     Log.i("ON_______CLICK", tvDesNature.getTag().toString());
 
 
-                   Intent i=new Intent(context, product_Details.class);
+                    fc.SetProductId(Integer.valueOf(String.valueOf(tvDesNature.getTag())));
+                    Intent i=new Intent(context, product_Details.class);
                     context.startActivity(i);
 
                 }

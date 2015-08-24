@@ -232,25 +232,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
 
 
     }
-  /* public void route(){
 
-        MapView map = (MapView) findViewById(R.id.map);
-        RoadManager roadManager = new OSRMRoadManager();
-        GeoPoint startPoint= new GeoPoint(35.6876661, 51.0195912);
-        ArrayList<GeoPoint> waypoints = new ArrayList<GeoPoint>();
-        waypoints.add(startPoint);
-        GeoPoint endPoint = new GeoPoint(35.683703,51.1139485);
-        waypoints.add(endPoint);
-
-        Road road = roadManager.getRoad(waypoints);
-
-        Polyline roadOverlay = RoadManager.buildRoadOverlay(road, this);
-        roadOverlay.setColor(this.getResources().getColor(R.color.material_blue_grey_900));
-        map.getOverlays().add(roadOverlay);
-        map.invalidate();
-
-    }
-*/
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
