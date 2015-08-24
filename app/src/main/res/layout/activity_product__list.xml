@@ -11,4 +11,22 @@
 
     </android.support.v7.widget.RecyclerView>
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pg_product_list"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="تلاش مجدد"
+        android:id="@+id/pl_retry"
+        android:visibility="invisible"
+        android:layout_below="@+id/pg_product_list"
+        android:onClick="retry"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

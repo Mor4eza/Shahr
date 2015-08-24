@@ -3,6 +3,7 @@ package com.ariana.shahre_ma.WebServiceGet;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 
 import com.ariana.shahre_ma.Bazarche.Product_List;
 import com.ariana.shahre_ma.Bazarche.Product_List_Adapter;
@@ -84,7 +85,7 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
             {
                 if(result==1)
                 {
-                    Log.i("get","Products");
+                    Log.i("get", "Products");
 
                     Product_List.mRecyclerView.post(new Runnable() {
                         @Override
@@ -92,13 +93,21 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
                             Product_List_Adapter adapter = new Product_List_Adapter(context);
                             Product_List.mRecyclerView.setAdapter(adapter);
                             Product_List.Product_Adapter.notifyDataSetChanged();
+                            Product_List.pg.setVisibility(View.GONE);
 
                         }
                     });
                 }
                 else
                 {
-
+                    Product_List.retry.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (Product_List.retry.getVisibility()==View.INVISIBLE){
+                                Product_List.retry.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    });
                 }
             } catch (Exception e) {
 

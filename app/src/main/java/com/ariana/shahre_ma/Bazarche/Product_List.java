@@ -6,6 +6,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetProductJson;
@@ -17,11 +20,15 @@ public class Product_List extends ActionBarActivity {
     public static RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     public static RecyclerView.Adapter Product_Adapter;
+    public static ProgressBar pg;
+    public static Button retry;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product__list);
 
+        pg=(ProgressBar)findViewById(R.id.pg_product_list);
+        retry=(Button)findViewById(R.id.pl_retry);
         HTTPGetProductJson httpGetProductJson=new HTTPGetProductJson(this);
         httpGetProductJson.setUrl_product(68,0,0,1,1);
         httpGetProductJson.execute();
@@ -71,5 +78,11 @@ public class Product_List extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void retry(View view) {
+        HTTPGetProductJson httpGetProductJson=new HTTPGetProductJson(this);
+        httpGetProductJson.setUrl_product(68,0,0,1,1);
+        httpGetProductJson.execute();
     }
 }

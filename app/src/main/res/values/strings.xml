@@ -64,5 +64,6 @@
     <string name="title_activity_edit__product">Edit_Product</string>
     <string name="title_activity_product__list">Product_List</string>
     <string name="title_activity_product__details">product_Details</string>
+    <string name="title_activity_select__image">Select_Image</string>
 
 </resources>
