@@ -13,7 +13,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.MyBusiness.Edit_business;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.WebServicePost.HTTPPostUploadImage;
 
 public class Select_Image extends ActionBarActivity implements ImageView.OnClickListener {
 
@@ -25,6 +28,9 @@ public class Select_Image extends ActionBarActivity implements ImageView.OnClick
     String picturePath;
     Integer ViewId=0;
     String Path="";
+    HTTPPostUploadImage uploadImage=new HTTPPostUploadImage(this);
+    FieldClass fc=new FieldClass();
+    Edit_business edit_business=new Edit_business();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,19 +88,30 @@ public class Select_Image extends ActionBarActivity implements ImageView.OnClick
             if (requestCode == 1) {
                 // currImageURI is the global variable I’m using to hold the content:
                 currImageURI = data.getData();
-                System.out.println("Current image Path is —--->" + getRealPathFromURI(currImageURI));
+
                 //  /*TextView tv_path = (TextView) findViewById(R.id.textView);
                 Path=getRealPathFromURI(currImageURI);
 
                 Bitmap myBitmap = BitmapFactory.decodeFile(Path);
-                if(ViewId==image1.getId()){
+                if(ViewId==image1.getId())
+                {
                     image1.setImageBitmap(myBitmap);
-                }else if(ViewId==image2.getId()){
+                    UploadImage();
+                }
+                else if(ViewId==image2.getId())
+                {
                     image2.setImageBitmap(myBitmap);
-                }else if(ViewId==image3.getId()){
+                    UploadImage();
+                }
+                else if(ViewId==image3.getId())
+                {
                     image3.setImageBitmap(myBitmap);
-                }else if(ViewId==image4.getId()){
+                    UploadImage();
+                }
+                else if(ViewId==image4.getId())
+                {
                     image4.setImageBitmap(myBitmap);
+                    UploadImage();
                 }
 
 
@@ -102,18 +119,36 @@ public class Select_Image extends ActionBarActivity implements ImageView.OnClick
                 currImageURI = data.getData();
                 Path=getRealPathFromURI(currImageURI);
                 Bitmap photo = (Bitmap) data.getExtras().get("data");
-                if(ViewId==image1.getId()){
+                if(ViewId==image1.getId())
+                {
                     image1.setImageBitmap(photo);
-                }else if(ViewId==image2.getId()){
+                    UploadImage();
+                }
+                else if(ViewId==image2.getId())
+                {
                     image2.setImageBitmap(photo);
-                }else if(ViewId==image3.getId()){
+                    UploadImage();
+                }
+                else if(ViewId==image3.getId())
+                {
                     image3.setImageBitmap(photo);
-                }else if(ViewId==image4.getId()){
+                    UploadImage();
+                }
+                else if(ViewId==image4.getId())
+                {
                     image4.setImageBitmap(photo);
+                    UploadImage();
                 }
             }
         }
     }
+
+    public void UploadImage() {
+        uploadImage.SetImage(fc.GetProductId(),fc.GetType());
+        uploadImage.setFileImage(Path);
+        uploadImage.execute();
+    }
+
     public String getRealPathFromURI(Uri contentUri) {
         String [] proj={MediaStore.Images.Media.DATA};
         android.database.Cursor cursor = managedQuery( contentUri,

@@ -27,11 +27,12 @@ public class HTTPGetProductMemberJson extends AsyncTask<String,Void,Integer>
 {
     private static Context context;
     FieldDataBase fdb=new FieldDataBase();
-    private  String url_productmember="";
+    private  String url_productmember="http://test.shahrma.com/api/ApiGiveMyProduct?MemberId=";
 
-    List<Integer> selectId =new ArrayList<>();
     List<Integer> selectMemberId =new ArrayList<>();
+    List<Integer> selectId =new ArrayList<>();
     List<String>  selectName =new ArrayList<>();
+    List<String>  selectDate =new ArrayList<>();
     List<String>  selectProperty =new ArrayList<>();
     List<Double>  selectPrice =new ArrayList<>();
     List<Double>  selectLatitude =new ArrayList<>();
@@ -45,6 +46,7 @@ public class HTTPGetProductMemberJson extends AsyncTask<String,Void,Integer>
     List<String>  selectEmail =new ArrayList<>();
     List<Integer> selectSubsetId =new ArrayList<>();
     List<Integer> selectAreaId =new ArrayList<>();
+
 
 
     Integer len;
@@ -116,7 +118,7 @@ public class HTTPGetProductMemberJson extends AsyncTask<String,Void,Integer>
         try {
 
             JSONArray areas = new JSONArray(JSONString);
-            Log.i("JSONsubset", JSONString);
+            Log.i("JSONmyProduct", JSONString);
             len=areas.length();
             for (int i = 0; i < areas.length(); i++) {
 
@@ -125,10 +127,11 @@ public class HTTPGetProductMemberJson extends AsyncTask<String,Void,Integer>
                 selectId.add(area.getInt("Id"));
                 selectMemberId.add(area.getInt("MemberId"));
                 selectName.add(area.getString("Name"));
+                selectDate.add(area.getString("DateTime"));
                 selectProperty.add(area.getString("Property"));
                 selectPrice.add(area.getDouble("Price"));
                 selectLatitude.add(area.getDouble("Latitude"));
-                selectLongtiude.add(area.getDouble("Longtiude"));
+                selectLongtiude.add(area.getDouble("Longtude"));
                 selectAdaptive.add(area.getBoolean("Adaptive"));
                 selectDescription.add(area.getString("Description"));
                 selectImage.add(area.getString("Image"));
@@ -136,29 +139,32 @@ public class HTTPGetProductMemberJson extends AsyncTask<String,Void,Integer>
                 selectMobile.add(area.getString("Mobile"));
                 selectAddress.add(area.getString("Address"));
                 selectEmail.add(area.getString("Email"));
-                selectSubsetId.add(area.getInt("SubsetId"));
+                selectSubsetId.add(area.getInt("ProductSubsetId"));
                 selectAreaId.add(area.getInt("AreaId"));
 
             }
 
-            fdb.setMemberId_Product(selectId);
-            fdb.setMemberId_Product(selectMemberId);
-            fdb.setName_Product(selectName);
-            fdb.setProperty_Product(selectProperty);
-            fdb.setPrice_Product(selectPrice);
-            fdb.setLatitude_Product(selectLatitude);
-            fdb.setLongtiude_Product(selectLongtiude);
-            fdb.setAdaptive__Product(selectAdaptive);
-            fdb.setDescription_Product(selectDescription);
-            fdb.setImage_Product(selectImage);
-            fdb.setPhone__Product(selectPhone);
-            fdb.setMobile_Product(selectMobile);
-            fdb.setAddress_Product(selectAddress);
-            fdb.setEmail_Product(selectEmail);
-            fdb.setSubsetId_Product(selectAreaId);
-            fdb.setAreaId_Product(selectAreaId);
+                fdb.setId_Product(selectId);
+                fdb.setMemberId_Product(selectMemberId);
+                fdb.setName_Product(selectName);
+                fdb.setDate_Product(selectDate);
+                fdb.setProperty_Product(selectProperty);
+                fdb.setPrice_Product(selectPrice);
+                fdb.setLatitude_Product(selectLatitude);
+                fdb.setLongtiude_Product(selectLongtiude);
+                fdb.setAdaptive__Product(selectAdaptive);
+                fdb.setDescription_Product(selectDescription);
+                fdb.setImage_Product(selectImage);
+                fdb.setPhone__Product(selectPhone);
+                fdb.setMobile_Product(selectMobile);
+                fdb.setAddress_Product(selectAddress);
+                fdb.setEmail_Product(selectEmail);
+                fdb.setSubsetId_Product(selectAreaId);
+                fdb.setAreaId_Product(selectAreaId);
 
-        } catch (JSONException e) {
+        } catch (JSONException e)
+        {
+            Log.e("JSONException", e.toString());
         }
     }
 
@@ -183,6 +189,7 @@ public class HTTPGetProductMemberJson extends AsyncTask<String,Void,Integer>
 
             return huc.getInputStream();
         } catch (Exception e) {
+            Log.e("Exceptiongetstreamurl", e.toString());
             return null;
         }
 

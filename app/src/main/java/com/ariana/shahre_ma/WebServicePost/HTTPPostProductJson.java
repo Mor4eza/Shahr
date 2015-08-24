@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.ariana.shahre_ma.Bazarche.Select_Image;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MainActivity;
@@ -35,7 +36,7 @@ public class HTTPPostProductJson extends AsyncTask<String ,Long,Integer>
     private static  final  String url_product="http://test.shahrma.com/api/ApiTakeProduct";
 
     private static String data_json;// variable get json
-    private  static Integer response_message;// variable response
+    private   Integer response_message;// variable response
     FieldClass fc=new FieldClass();
     ProgressDialog pd;
     // get/set
@@ -117,6 +118,7 @@ public class HTTPPostProductJson extends AsyncTask<String ,Long,Integer>
         try {
             if(integer==1)
             {
+                fc.SetProductId(response_message);
                     pd.dismiss();
                     AlertDialog alertDialog = new AlertDialog.Builder(context).create();
                     alertDialog.setTitle("پیغام");
@@ -127,6 +129,11 @@ public class HTTPPostProductJson extends AsyncTask<String ,Long,Integer>
                         }
                     });
                     alertDialog.show();
+
+                  ((Activity)context).finish();
+                  fc.SetType(2);
+                  Intent i=new Intent(context, Select_Image.class);
+                  context.startActivity(i);
 
 
             }

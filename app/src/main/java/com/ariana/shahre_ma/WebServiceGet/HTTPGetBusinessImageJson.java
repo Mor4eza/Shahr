@@ -43,6 +43,7 @@ public class HTTPGetBusinessImageJson extends AsyncTask<String,Void,Integer>
 
     private String GetURL()
     {
+        Log.i("ImageUrl",url_businessimage);
         return  url_businessimage;
     }
     /**

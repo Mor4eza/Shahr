@@ -9,6 +9,7 @@ public class My_Product_Items {
     private Double mPrice;
     private int mThumbnail;
     private Integer Id;
+    private Integer mi;
 
 
     public Integer getId() {
@@ -18,6 +19,16 @@ public class My_Product_Items {
     public void setId(Integer id) {
         this.Id = id;
     }
+
+
+    public Integer getmI() {
+        return mi;
+    }
+
+    public void setmI(Integer mi) {
+        this.mi = mi;
+    }
+
 
 
     public String getName() {

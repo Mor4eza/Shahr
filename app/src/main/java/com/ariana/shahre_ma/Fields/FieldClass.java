@@ -83,6 +83,10 @@ public class FieldClass
     private static Integer Count_Like=0;
     private static Integer Count_DisLike=0;
 
+    private static Integer Number=0;
+    private static Integer Type=0;
+
+
     private static Integer ProductId=0;
     private static Boolean ProductReciver=false;
 
@@ -664,11 +668,26 @@ public class FieldClass
     }
 
 
+    public void SetNumber(Integer id){
+        Number=id;
+    }
+    public Integer GetNumber(){
+        return Number;
+    }
+
+
     public void SetProductReceiver(Boolean productReciver){
         ProductReciver=productReciver;
     }
     public Boolean GetProductReceiver(){
         return ProductReciver;
+    }
+
+    public void SetType(Integer type){
+        Type=type;
+    }
+    public Integer GetType(){
+        return Type;
     }
 
 

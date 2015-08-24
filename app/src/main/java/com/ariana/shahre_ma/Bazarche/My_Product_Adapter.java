@@ -57,6 +57,7 @@ public class My_Product_Adapter extends RecyclerView.Adapter<My_Product_Adapter.
             nature = new My_Product_Items();
 
             nature.setId(fieldDataBase.getId_Product().get(i));
+            nature.setmI(i);
             nature.setName(fieldDataBase.getName_Product().get(i));
             nature.setmPrice(fieldDataBase.getprice_Product().get(i));
             nature.setThumbnail(R.drawable.pooshak1);
@@ -80,7 +81,9 @@ public class My_Product_Adapter extends RecyclerView.Adapter<My_Product_Adapter.
         My_Product_Items nature = mItems.get(i);
         viewHolder.tvNature.setText(nature.getName());
         viewHolder.tvNature.setTag(nature.getId());
-        // viewHolder.tvDesNature.setText(nature.getmAddress());
+        viewHolder.Price.setText(String.valueOf(nature.getmPrice()));
+        viewHolder.Price.setTag(nature.getmI());
+       // viewHolder.tvDesNature.setText(nature.getmAddress());
         viewHolder.img1.setImageResource(nature.getThumbnail());
     }
 
@@ -176,6 +179,22 @@ public class My_Product_Adapter extends RecyclerView.Adapter<My_Product_Adapter.
                 }
             });
 
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Log.i("ON_______CLICK", tvNature.getTag().toString());
+
+
+                    fc.SetProductId(Integer.valueOf(String.valueOf(tvNature.getTag())));
+                    fc.SetNumber(Integer.valueOf(String.valueOf(Price.getTag())));
+                    Intent i=new Intent(context, Edit_Product.class);
+                    context.startActivity(i);
+                }
+            });
+
+
         }
 
         @Override
@@ -214,12 +233,16 @@ public class My_Product_Adapter extends RecyclerView.Adapter<My_Product_Adapter.
             ((Activity)context).startActivityForResult(intent, 100);
 
         }
-        public void selectImageFromGallery() {
+        public void selectImageFromGallery()
+        {
             Intent intent = new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
             ((Activity)context).startActivityForResult(Intent.createChooser(intent,"انتخاب کنید"), 1);
         }
+
+
+
 
     }
 }
