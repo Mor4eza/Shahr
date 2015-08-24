@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -23,22 +24,44 @@ import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
  * Created by ariana on 7/29/2015.
  */
-public class HTTPPostUploadImage extends AsyncTask<String,Void,Integer>
+public class HTTPPostUploadImage extends AsyncTask<String,Integer,Integer>
 {
 
-    String urlDisCount="http://test.shahrma.com/api/ApiTakeImage";
-    FieldClass fc=new FieldClass();
-    ProgressDialog pd;
+
+
+    private ProgressDialog dialog;
     Context context;
-    String mesage;
-    String jsonstring;
+    String sourceFileUri="";
+
+
+    String upLoadServerUri = "";
+    String fileName = SrcImage();
+    int serverResponseCode = 0;
+    HttpURLConnection conn = null;
+    DataOutputStream dos = null;
+    String lineEnd = "\r\n";
+    String twoHyphens = "--";
+    String boundary = "*****";
+    int bytesRead, bytesAvailable, bufferSize;
+    byte[] buffer;
+    int maxBufferSize = 1 * 1024 * 1024;
+
+
+
+
 
 
     public HTTPPostUploadImage(Context context)
@@ -46,32 +69,37 @@ public class HTTPPostUploadImage extends AsyncTask<String,Void,Integer>
         this.context=context;
     }
 
-    /**
-     *
-     * @param json
-     */
-    public void SetDisCountJson(String json)
+    public void SetImage(Integer id,Integer type)
     {
-        jsonstring = json;
-
+        upLoadServerUri="http://test.shahrma.com/api/ApiTakeImage?id="+id+"&type="+type;
     }
 
-    private String GetJson()
+    private String URL()
     {
-        return jsonstring;
+        return  upLoadServerUri;
     }
 
+    public void FileImage(String src)
+    {
+        sourceFileUri=src;
+    }
+
+    private String SrcImage()
+    {
+        return sourceFileUri;
+    }
 
     /**
      *
      */
     @Override
     protected void onPreExecute() {
-        super.onPreExecute();
-        pd = new ProgressDialog(context);
-        pd.setMessage("Saveing...");
-        pd.setCancelable(false);
-        pd.show();
+        dialog = new ProgressDialog(context);
+        dialog.setMessage("در حال ارسال");
+        dialog.setIndeterminate(false);
+        dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        dialog.setProgress(0);
+        dialog.show();
     }
 
     /**
@@ -80,43 +108,94 @@ public class HTTPPostUploadImage extends AsyncTask<String,Void,Integer>
      * @return
      */
     @Override
-    protected Integer doInBackground(String... params) {
+    protected Integer doInBackground(String... params)
+    {
         Integer result=0;
+        File sourceFile = new File(SrcImage());
+        if (!sourceFile.isFile()) {
+            Log.e("uploadFile", "File not exist");
+            return 0;
+        }
         try
-        {
-            HttpClient httpClient=new DefaultHttpClient();
-            HttpContext httpContext=new BasicHttpContext();
-            HttpPost httpPost=new HttpPost(urlDisCount);
-            StringEntity se=new StringEntity(GetJson(),"UTF-8");
+        { // open a URL connection to the Servlet
+            FileInputStream fileInputStream = new FileInputStream(sourceFile);
+            URL url = new URL(URL());
+            conn = (HttpURLConnection) url.openConnection(); // Open a HTTP  connection to  the URL
+            conn.setDoInput(true); // Allow Inputs
+            conn.setDoOutput(true); // Allow Outputs
+            conn.setUseCaches(false); // Don't use a Cached Copy
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Connection", "Keep-Alive");
+            conn.setRequestProperty("ENCTYPE", "multipart/form-data");
+            conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+            conn.setRequestProperty("uploaded_file", fileName);
+            dos = new DataOutputStream(conn.getOutputStream());
 
-            httpPost.setEntity(se);
-            httpPost.setHeader("Accept", "application/json");
-            httpPost.setHeader("Content-type", "application/json");
 
-            HttpResponse httpResponse=httpClient.execute(httpPost,httpContext);
-            HttpEntity entity=httpResponse.getEntity();
-            InputStream webs=entity.getContent();
-            try
+            Log.i("linedEnd+towhyphend",String.valueOf(twoHyphens + boundary + twoHyphens + lineEnd));
+            Log.i("linedEnd",String.valueOf(lineEnd));
+
+
+
+            dos.writeBytes(twoHyphens + boundary + lineEnd);
+            dos.writeBytes("Content-Disposition: form-data; name=\"uploaded_file\";filename=\""+ fileName + "\"" + lineEnd);
+            dos.writeBytes(lineEnd);
+
+            bytesAvailable = fileInputStream.available(); // create a buffer of  maximum size
+
+            bufferSize = Math.min(bytesAvailable, maxBufferSize);
+            buffer = new byte[bufferSize];
+
+            // read file and write it into form...
+            bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+            while (bytesRead > 0)
             {
-                BufferedReader reader=new BufferedReader(new InputStreamReader(webs,"UTF-8"),8);
-                mesage=(reader.readLine());
-                webs.close();
+                dos.write(buffer, 0, bufferSize);
+                bytesAvailable = fileInputStream.available();
+                bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+            }
+
+
+            // send multipart form data necesssary after file data...
+            dos.writeBytes(lineEnd);
+            dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+
+            // Responses from the server (code and message)
+            serverResponseCode = conn.getResponseCode();
+            String serverResponseMessage = conn.getResponseMessage();
+
+
+            Log.i("uploadFile", "HTTP Response is : " + serverResponseMessage + ": " + serverResponseCode);
+            if(serverResponseCode == 200)
+            {
+                Log.i("File Upload ","Complete");
                 result=1;
             }
-            catch (Exception e)
-            {
-                result=0;
-                Log.e("Error in conversion", e.toString());
-            }
-        }
-        catch (Exception e)
-        {
+
+            //close the streams //
+            fileInputStream.close();
+            dos.flush();
+            dos.close();
+
+        } catch (MalformedURLException ex) {
             result=0;
+            ex.printStackTrace();
+            Log.e("Upload file to server", "error: " + ex.getMessage(), ex);
+        } catch (Exception e) {
+            result=0;
+            e.printStackTrace();
+            Log.e("Upload file to server ","error"+ e.getMessage());
         }
         return result;
     }
 
 
+    @Override
+    protected void onProgressUpdate(Integer... progress) {
+        dialog.setProgress(progress[0]);
+    }
 
     /**
      *
@@ -127,11 +206,11 @@ public class HTTPPostUploadImage extends AsyncTask<String,Void,Integer>
         super.onPostExecute(result);
         if(result==1)
         {
-
+            dialog.dismiss();
         }
         else
         {
-
+            dialog.dismiss();
 
         }
     }
