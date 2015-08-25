@@ -28,12 +28,14 @@ import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessImageJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostBusinessEditJson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostUploadImage;
 import com.dd.CircularProgressButton;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +71,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
     Integer month;
     String date;
     Integer year;
+
     public static CircularProgressButton save_edit;
 
 
@@ -84,6 +87,12 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
         GetNameActivity();
         Show_Business();
 
+
+        HTTPGetBusinessImageJson httpGetBusinessImageJson=new HTTPGetBusinessImageJson(this);
+        httpGetBusinessImageJson.SetBusinessId(fc.GetBusiness_Id());
+        httpGetBusinessImageJson.execute();
+
+        LoadImage();
 
         Market_city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -660,4 +669,40 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
         return cursor.getString(column_index);
     }
 
+    private void LoadImage()
+    {
+        String urlImage[]=new String[4];
+        try
+        {
+            DataBaseSqlite db=new DataBaseSqlite(this);
+            int i=0;
+            Cursor rows=db.select_BusinessImage(fc.GetBusiness_Id());
+            if(rows.moveToFirst())
+            {
+                do
+                {
+                    urlImage[i]="http://www.shahrma.com/image/business/"+rows.getString(2);
+                    Log.i("AddressImage", urlImage[i]);
+                    i++;
+
+                }while (rows.moveToNext());
+
+                Log.i("image1", urlImage[0]);
+                Log.i("image2", urlImage[1]);
+                Picasso.with(this).load(urlImage[0]).placeholder(R.drawable.fab_plus_icon).error(R.drawable.img_not_found).into(image1);
+                Picasso.with(this).load(urlImage[1]).placeholder(R.drawable.fab_plus_icon).error(R.drawable.img_not_found).into(image2);
+                Picasso.with(this).load(urlImage[2]).placeholder(R.drawable.fab_plus_icon).error(R.drawable.img_not_found).into(image3);
+                Picasso.with(this).load(urlImage[3]).placeholder(R.drawable.fab_plus_icon).error(R.drawable.img_not_found).into(image4);
+
+            }
+
+
+
+        }
+        catch (Exception e)
+        {
+
+        }
+
+    }
 }

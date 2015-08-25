@@ -59,11 +59,11 @@
     <string name="aboutUs">درباره ما</string>
     <string name="title_activity_about_us">درباره ما</string>
     <string name="title_activity_bazarche">بازارچه</string>
-    <string name="title_activity_add_product">add_product</string>
-    <string name="title_activity_my_products">My_products</string>
-    <string name="title_activity_edit__product">Edit_Product</string>
-    <string name="title_activity_product__list">Product_List</string>
-    <string name="title_activity_product__details">product_Details</string>
-    <string name="title_activity_select__image">Select_Image</string>
+    <string name="title_activity_add_product">اضافه کردن محصول</string>
+    <string name="title_activity_my_products">محصولات من</string>
+    <string name="title_activity_edit__product">ویرایش</string>
+    <string name="title_activity_product__list">لیست محصولات</string>
+    <string name="title_activity_product__details">جزئیات محصول</string>
+    <string name="title_activity_select__image">انتخاب تصاویر</string>
 
 </resources>

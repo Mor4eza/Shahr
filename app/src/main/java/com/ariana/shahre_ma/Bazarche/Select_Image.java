@@ -28,7 +28,7 @@ public class Select_Image extends ActionBarActivity implements ImageView.OnClick
     String picturePath;
     Integer ViewId=0;
     String Path="";
-    HTTPPostUploadImage uploadImage=new HTTPPostUploadImage(this);
+
     FieldClass fc=new FieldClass();
     Edit_business edit_business=new Edit_business();
     @Override
@@ -39,6 +39,13 @@ public class Select_Image extends ActionBarActivity implements ImageView.OnClick
         image2=(ImageView)findViewById(R.id.ap_image2);
         image3=(ImageView)findViewById(R.id.ap_image3);
         image4=(ImageView)findViewById(R.id.ap_image4);
+
+        image1.setOnClickListener(this);
+        image2.setOnClickListener(this);
+        image3.setOnClickListener(this);
+        image4.setOnClickListener(this);
+
+
     }
 
     @Override
@@ -144,6 +151,7 @@ public class Select_Image extends ActionBarActivity implements ImageView.OnClick
     }
 
     public void UploadImage() {
+        HTTPPostUploadImage uploadImage=new HTTPPostUploadImage(this);
         uploadImage.SetImage(fc.GetProductId(),fc.GetType());
         uploadImage.setFileImage(Path);
         uploadImage.execute();

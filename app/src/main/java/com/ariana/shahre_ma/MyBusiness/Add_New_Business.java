@@ -4,23 +4,15 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.PopupMenu;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
@@ -442,9 +434,6 @@ public class Add_New_Business extends ActionBarActivity  {
 
             date=dt.Yaer()+"-"+month.toString()+"-"+dt.Day();
         }
-
-
-        Toast.makeText(getApplicationContext(), date, Toast.LENGTH_LONG).show();
         return  date;
 
     }

@@ -253,12 +253,11 @@ private  static Context context;
             viewHolder.tvNature.setText(nature.getName());
             viewHolder.tvDesNature.setText(nature.getDes());
 
-            if(nature.getNameImage().equals("null")) {
-                nature.setThumbnail(R.drawable.img_not_found);
-            }else{
-                image_url_1 = "http://www.shahrma.com/image/business/" + nature.getNameImage();
-                Picasso.with(context).load(image_url_1).into(viewHolder.imgThumbnail);
-            }
+
+            image_url_1 = "http://www.shahrma.com/image/business/" + nature.getNameImage();
+            Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(viewHolder.imgThumbnail);
+
+
             viewHolder.rates.setRating((float) nature.getRate());
             viewHolder.rates.setTag(nature.getmId());
             if (viewHolder.tvTell.getText().toString().equals("1")) {

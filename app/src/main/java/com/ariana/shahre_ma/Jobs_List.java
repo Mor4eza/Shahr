@@ -68,6 +68,8 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
         }
 
         if(fc.GetSearchOnline() || fc.GetSearchOffline()){
+
+            }else {
             String showWhatsNew = "showHelpJobsList";
             if (!Once.beenDone(Once.THIS_APP_INSTALL, showWhatsNew)) {
                 help1();
