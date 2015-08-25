@@ -791,6 +791,7 @@ public class MainActivity extends ActionBarActivity {
 
         new MaterialShowcaseView.Builder(this)
                 .setTarget(Action)
+                .setDismissOnTouch(true)
                 .setDismissText("باشه")
                 .setContentText("برای وارد شدن به برنامه یا ثبت نام از این دکمه استفاده کنید")
                 .setDelay(1000) // optional but starting animations immediately in onCreate can make them choppy

@@ -1,8 +1,10 @@
 package com.ariana.shahre_ma.MyProfile;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
@@ -84,14 +86,27 @@ public class My_Profile extends Activity {
      */
     public void Log_Out(View v){
         try {
-            DataBaseSqlite db = new DataBaseSqlite(this);
-            db.delete_bookmark();
+            AlertDialog alertDialog = new AlertDialog.Builder(My_Profile.this).create();
+            alertDialog.setTitle("خروج!");
+            alertDialog.setMessage("از حساب خود خارج میشوید؟!");
+            alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    DataBaseSqlite db = new DataBaseSqlite(My_Profile.this);
+                    db.delete_bookmark();
+                    db.delete_Member();
+                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+            });
 
+            alertDialog.setButton2("بعدا", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
 
-            db.delete_Member();
-            Intent i=new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(i);
-            finish();
+                }
+            });
+            alertDialog.show();
+
         }
         catch (SQLiteException e)
         {
