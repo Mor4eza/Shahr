@@ -21,62 +21,17 @@
             android:layout_width="fill_parent"
             android:layout_height="300dp">
 
-            <View android:id="@+id/fakeView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_centerInParent="true"/>
 
             <ImageView
                 android:id="@+id/my_business_image1"
-                android:layout_width="wrap_content"
-                android:layout_height="115dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:scaleType="centerCrop"
                 android:src="@drawable/pooshak"
                 android:clickable="true"
                 android:background="?android:selectableItemBackground"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignRight="@id/fakeView"
-                 />
-            <ImageView
-                android:id="@+id/my_business_image2"
-                android:layout_width="170dp"
-                android:layout_height="115dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/pooshak"
-                android:clickable="true"
-                android:background="?android:selectableItemBackground"
-                android:layout_alignLeft="@id/fakeView"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-            <ImageView
-                android:id="@+id/my_business_image3"
-                android:layout_width="170dp"
-                android:layout_height="115dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/pooshak"
-                android:clickable="true"
-                android:background="?android:selectableItemBackground"
-                android:layout_below="@+id/my_business_image1"
-                android:layout_toLeftOf="@+id/my_business_image2"
-                android:layout_toStartOf="@+id/my_business_image2"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
 
-            <ImageView
-                android:id="@+id/my_business_image4"
-                android:layout_width="170dp"
-                android:layout_height="115dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/pooshak"
-                android:clickable="true"
-                android:background="?android:selectableItemBackground"
-                android:layout_alignTop="@+id/my_business_image3"
-                android:layout_alignLeft="@id/fakeView"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_above="@+id/fab_toolbar" />
 
             <TextView
 

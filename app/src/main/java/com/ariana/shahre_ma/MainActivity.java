@@ -71,6 +71,7 @@ import com.software.shell.fab.ActionButton;
 
 import github.chenupt.dragtoplayout.DragTopLayout;
 import jonathanfinerty.once.Once;
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -124,64 +125,64 @@ public class MainActivity extends ActionBarActivity {
          db=new DataBaseSqlite(this);
 
 
-    try {
-            toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
-            fab();
+
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        fab();
 
 
-            top = (DragTopLayout) findViewById(R.id.top);
-            slider = (SliderLayout) findViewById(R.id.slider);
 
-            top.setTouchMode(true);
-            top.setOverDrag(false);
+        top = (DragTopLayout) findViewById(R.id.top);
+        slider = (SliderLayout) findViewById(R.id.slider);
 
-            ii = new IntentFilter("android.intent.action.TIME_TICK");
-            tsr = new TimeSetReceiver();
-            registerReceiver(tsr, ii);
+        top.setTouchMode(true);
+        top.setOverDrag(false);
 
-            //setup();
-            LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("custom-event-name"));
+        ii=new IntentFilter("android.intent.action.TIME_TICK");
+        tsr=new TimeSetReceiver();
+        registerReceiver(tsr, ii);
 
-            if (net.checkInternetConnection() == false) {
-                Toast.makeText(getApplication(), "شبکه اینترنت قطع می باشد", Toast.LENGTH_LONG).show();
-            } else {
-                  /*  String url= "http://uplod.ir/tpy6oft0407u/app-debug.apk.htm";
-                    HTTPGetUpdate update=new HTTPGetUpdate(this);
-                    update.execute(url);
-                    */
+        //setup();
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,new IntentFilter("custom-event-name"));
 
-                HTTPGetAdvertismentJson httpGetAdvertismentJson = new HTTPGetAdvertismentJson(this);
-                httpGetAdvertismentJson.SetAdvertisment(query.getCityId(setting.getCityName()));
-                httpGetAdvertismentJson.execute();
+        if (net.checkInternetConnection() == false) {
+            Toast.makeText(getApplication(), "شبکه اینترنت قطع می باشد", Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+          /*  String url= "http://uplod.ir/tpy6oft0407u/app-debug.apk.htm";
+            HTTPGetUpdate update=new HTTPGetUpdate(this);
+            update.execute(url);
+            */
 
-
-                HTTPGetTopsBusinessJson httpGetTopsBusinessJson = new HTTPGetTopsBusinessJson(this);
-                httpGetTopsBusinessJson.SetTopBusiness(query.getCityId(setting.getCityName()));
-                httpGetTopsBusinessJson.execute();
-            }
+            HTTPGetAdvertismentJson httpGetAdvertismentJson=new HTTPGetAdvertismentJson(this);
+            httpGetAdvertismentJson.SetAdvertisment(query.getCityId(setting.getCityName()));
+            httpGetAdvertismentJson.execute();
 
 
-            ViewPager vpPager = (ViewPager) findViewById(R.id.viewPager);
-            adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
-            vpPager.setAdapter(adapterViewPager);
-            vpPager.setCurrentItem(2);
+           HTTPGetTopsBusinessJson httpGetTopsBusinessJson=new HTTPGetTopsBusinessJson(this);
+            httpGetTopsBusinessJson.SetTopBusiness(query.getCityId(setting.getCityName()));
+            httpGetTopsBusinessJson.execute();
+        }
 
 
-            Image_slider();
+        ViewPager vpPager = (ViewPager) findViewById(R.id.viewPager);
+        adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
+        vpPager.setAdapter(adapterViewPager);
+        vpPager.setCurrentItem(2);
 
 
-            String showWhatsNew = "showHelp";
+        Image_slider();
 
-            if (!Once.beenDone(Once.THIS_APP_INSTALL, showWhatsNew)) {
-                //help1();
-                CityDialog cityDialog = new CityDialog(this);
-                cityDialog.show();
-                Once.markDone(showWhatsNew);
-            }
-    }
-    catch (Exception e){}
 
+        String showWhatsNew = "showHelp";
+
+        if (!Once.beenDone(Once.THIS_APP_INSTALL, showWhatsNew)) {
+            showcase();
+            CityDialog cityDialog=new CityDialog(this);
+            cityDialog.show();
+            Once.markDone(showWhatsNew);
+        }
     }
 
     public void fab_click(View v) {
@@ -782,6 +783,19 @@ public class MainActivity extends ActionBarActivity {
                 .build();
         sv.setButtonText("خب");
         sv.setButtonPosition(lps);
+
+    }
+
+
+    public void showcase(){
+
+        new MaterialShowcaseView.Builder(this)
+                .setTarget(Action)
+                .setDismissText("باشه")
+                .setContentText("برای وارد شدن به برنامه یا ثبت نام از این دکمه استفاده کنید")
+                .setDelay(1000) // optional but starting animations immediately in onCreate can make them choppy
+                .show();
+
 
     }
 }
