@@ -8,6 +8,7 @@ public class Business_Card_Items {
     private String mName;
     private String mAddress;
     double rate;
+    private String mNameImage;
     private int mThumbnail;
     private Integer Id;
 
@@ -51,5 +52,12 @@ public class Business_Card_Items {
 
     public void setRate(double rate) {
         this.rate = rate;
+    }
+
+    public String getNameImage() {
+        return mNameImage;
+    }
+    public void setNameImage(String nameimage) {
+        this.mNameImage = nameimage;
     }
 }

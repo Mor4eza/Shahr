@@ -102,8 +102,6 @@ public class HTTPGetBusinessImageJson extends AsyncTask<String,Void,Integer>
                         Intent intent = new Intent("BusinessImage");
                         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                     }
-
-
                 }
 
 

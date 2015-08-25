@@ -1,14 +1,18 @@
 package com.ariana.shahre_ma.MyBusiness;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
@@ -92,7 +96,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
         httpGetBusinessImageJson.SetBusinessId(fc.GetBusiness_Id());
         httpGetBusinessImageJson.execute();
 
-        LoadImage();
+        LocalBroadcastManager.getInstance(this).registerReceiver(mImageReceiver, new IntentFilter("BusinessImage"));
 
         Market_city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -686,9 +690,6 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
                     i++;
 
                 }while (rows.moveToNext());
-
-                Log.i("image1", urlImage[0]);
-                Log.i("image2", urlImage[1]);
                 Picasso.with(this).load(urlImage[0]).placeholder(R.drawable.fab_plus_icon).error(R.drawable.img_not_found).into(image1);
                 Picasso.with(this).load(urlImage[1]).placeholder(R.drawable.fab_plus_icon).error(R.drawable.img_not_found).into(image2);
                 Picasso.with(this).load(urlImage[2]).placeholder(R.drawable.fab_plus_icon).error(R.drawable.img_not_found).into(image3);
@@ -705,4 +706,13 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
         }
 
     }
+    private BroadcastReceiver mImageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+                LoadImage();
+
+        }
+
+    };
 }

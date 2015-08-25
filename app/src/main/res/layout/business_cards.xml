@@ -133,58 +133,10 @@
                         android:layout_marginLeft="40dp"
                         android:layout_marginRight="40dp"
                         />
-                    <ImageView
-                        android:id="@+id/btn_change"
-                        android:layout_width="50dp"
-                        android:layout_height="40dp"
-                        android:src="@android:drawable/ic_menu_crop"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginRight="40dp"
-                        />
-
 
                 <!-- More buttons can be added here -->
 
             </com.github.alexkolpa.fabtoolbar.FabToolbar>
-
-            <Button
-                android:id="@+id/overflow1"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:visibility="invisible"
-                android:layout_alignRight="@id/my_business_image1"
-                android:layout_alignEnd="@id/my_business_image1"
-                android:layout_alignBottom="@id/my_business_image1"
-                android:background="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"/>
-            <Button
-                android:id="@+id/overflow2"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:visibility="invisible"
-                android:layout_alignRight="@id/my_business_image2"
-                android:layout_alignEnd="@id/my_business_image2"
-                android:layout_alignBottom="@id/my_business_image2"
-                android:background="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"/>
-            <Button
-                android:id="@+id/overflow3"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:visibility="invisible"
-                android:layout_alignRight="@id/my_business_image3"
-                android:layout_alignEnd="@id/my_business_image3"
-                android:layout_alignBottom="@id/my_business_image3"
-                android:background="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"/>
-            <Button
-                android:id="@+id/overflow4"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:visibility="invisible"
-                android:layout_alignRight="@id/my_business_image4"
-                android:layout_alignEnd="@id/my_business_image4"
-                android:layout_alignBottom="@id/my_business_image4"
-                android:background="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"/>
-
-
 
 
         </RelativeLayout>
