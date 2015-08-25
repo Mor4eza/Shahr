@@ -76,6 +76,11 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
     String date;
     Integer year;
 
+
+    Bitmap  bp1;
+    private int maxWidth = 250;
+    private int maxHeight = 250;
+
     public static CircularProgressButton save_edit;
 
 
@@ -610,12 +615,15 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
                 // currImageURI is the global variable I’m using to hold the content:
-                currImageURI = data.getData();
-                System.out.println("Current image Path is —--->" + getRealPathFromURI(currImageURI));
-                //  /*TextView tv_path = (TextView) findViewById(R.id.textView);
-                Path=getRealPathFromURI(currImageURI);
+                //currImageURI = data.getData();
 
-                Bitmap myBitmap = BitmapFactory.decodeFile(Path);
+                //  *//*TextView tv_path = (TextView) findViewById(R.id.textView);
+                //Path=getRealPathFromURI(currImageURI);
+                //Bitmap myBitmap = BitmapFactory.decodeFile(Path);
+                Bitmap myBitmap=selectPhotoControl(data);
+
+                selectPhotoControl(data);
+
                 if(ViewId==image1.getId()){
                     image1.setImageBitmap(myBitmap);
                     UploadImage();
@@ -635,6 +643,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
                 currImageURI = data.getData();
                 Path=getRealPathFromURI(currImageURI);
                 Bitmap photo = (Bitmap) data.getExtras().get("data");
+
                 if(ViewId==image1.getId()){
                     image1.setImageBitmap(photo);
                     UploadImage();
@@ -650,6 +659,77 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
                 }
             }
         }
+    }
+
+
+
+    private Bitmap selectPhotoControl(Intent data) {
+        //check photo is selected
+
+        if (data == null)
+            return null;
+
+
+        Uri photoUri = data.getData();
+        if (photoUri != null) {
+            //decode the Uri
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+            Cursor cursor = getContentResolver().query(photoUri,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String filePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            Bitmap  bp1 = resize(filePath);
+            //if (bp != null)
+            //postImage(bp, filePath);
+        }
+
+        return bp1;
+    }
+
+
+    private Bitmap resize(String path){
+        // create the options
+        BitmapFactory.Options opts = new BitmapFactory.Options();
+
+        //just decode the file
+        opts.inJustDecodeBounds = true;
+        Bitmap bp = BitmapFactory.decodeFile(path, opts);
+
+        //get the original size
+        int orignalHeight = opts.outHeight;
+        int orignalWidth = opts.outWidth;
+        //initialization of the scale
+        int resizeScale = 1;
+        //get the good scale
+        if ( orignalWidth > maxWidth || orignalHeight > maxHeight ) {
+            final int heightRatio = Math.round((float) orignalHeight / (float) maxHeight);
+            final int widthRatio = Math.round((float) orignalWidth / (float) maxWidth);
+            resizeScale = heightRatio < widthRatio ? heightRatio : widthRatio;
+
+            Log.i("heightRatio",String.valueOf(heightRatio));
+            Log.i("widthRatio",String.valueOf(widthRatio));
+        }
+
+
+        Log.i("resizeScale",String.valueOf(resizeScale));
+
+        //put the scale instruction (1 -> scale to (1/1); 8-> scale to 1/8)
+        opts.inSampleSize = resizeScale;
+        opts.inJustDecodeBounds = false;
+        //get the futur size of the bitmap
+        int bmSize = (orignalWidth / resizeScale) * (orignalHeight / resizeScale) * 4;
+        Log.i("bmSize",String.valueOf(bmSize));
+        //check if it's possible to store into the vm java the picture
+        if ( Runtime.getRuntime().freeMemory() > bmSize ) {
+            //decode the file
+            bp = BitmapFactory.decodeFile(path, opts);
+        } else
+            return null;
+        return bp;
     }
 
 
