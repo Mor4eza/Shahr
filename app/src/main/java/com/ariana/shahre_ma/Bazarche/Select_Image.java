@@ -150,9 +150,10 @@ public class Select_Image extends ActionBarActivity implements ImageView.OnClick
         }
     }
 
-    public void UploadImage() {
+    public void UploadImage()
+    {
         HTTPPostUploadImage uploadImage=new HTTPPostUploadImage(this);
-        uploadImage.SetImage(fc.GetProductId(),fc.GetType());
+        uploadImage.SetImage(fc.GetBusiness_Id(),fc.GetType());
         uploadImage.setFileImage(Path);
         uploadImage.execute();
     }

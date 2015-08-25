@@ -27,6 +27,7 @@ public class Forget_Dialog extends Dialog {
     @Override
     public void onCreate(Bundle savedInstanceState) {
        // requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setTitle("بازیابی رمز عبور");
         setContentView(R.layout.forget_dialog);
         btnSend=(Button)findViewById(R.id.btn_send);
         etEmail=(EditText)findViewById(R.id.et_email);

@@ -21,6 +21,7 @@ import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.job_details.Job_details;
 import com.github.alexkolpa.fabtoolbar.FabToolbar;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +66,7 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
         else
         {
 
-            Cursor rows = db.select_BusinessAndBusinessImage(fc.GetBusiness_Id());
+            Cursor rows = db.select_AllBusinessId(fc.GetBusiness_Id());
 
             if (rows.moveToFirst()) {
                 do {
@@ -73,10 +74,9 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
                     nature = new Business_Card_Items();
                     nature.setId(rows.getInt(0));
                     nature.setName(rows.getString(1));
-                    nature.setmAddress(rows.getString(2));
+                    nature.setmAddress(rows.getString(7));
                     nature.setThumbnail(R.drawable.pooshak1);
-                    nature.setRate(rows.getFloat(3));
-                    nature.setNameImage(rows.getString(4));
+                    nature.setRate(rows.getFloat(19));
                     mItems.add(nature);
 
                 } while (rows.moveToNext());
@@ -104,9 +104,9 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
         viewHolder.tvNature.setTag(nature.getId());
        // viewHolder.tvDesNature.setText(nature.getmAddress());
         viewHolder.Rates.setRating((float) nature.getRate());
-
-  /*      image_url_1 = "http://www.shahrma.com/image/business/" + nature.getNameImage();
-        Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(viewHolder.imgThumbnail);*/
+        Log.i("image",nature.getNameImage());
+        String image_url_1 = "http://www.shahrma.com/image/business/" + nature.getNameImage();
+        Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(viewHolder.img1);
 
     }
 
@@ -120,9 +120,6 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public ImageView img1;
-        public ImageView img2;
-        public ImageView img3;
-        public ImageView img4;
         public ImageView img_edit;
         public ImageView img_discount;
         public ImageView img_pic;
@@ -133,13 +130,9 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
             super(itemView);
 
             img1 = (ImageView)itemView.findViewById(R.id.my_business_image1);
-            img2 = (ImageView)itemView.findViewById(R.id.my_business_image2);
-            img3 = (ImageView)itemView.findViewById(R.id.my_business_image3);
-            img4 = (ImageView)itemView.findViewById(R.id.my_business_image4);
             tvNature = (TextView)itemView.findViewById(R.id.my_business_title);
             img_edit = (ImageView)itemView.findViewById(R.id.btn_edit_business);
             img_discount = (ImageView)itemView.findViewById(R.id.btn_discount);
-            img_pic = (ImageView)itemView.findViewById(R.id.btn_change_image);
             Rates = (RatingBar)itemView.findViewById(R.id.my_business_rate);
             fab=(FabToolbar)itemView.findViewById(R.id.fab_toolbar);
 

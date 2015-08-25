@@ -119,5 +119,6 @@ dependencies {
     compile 'com.jonathanfinerty.once:once:0.3.2'
     compile 'com.nhaarman.supertooltips:library:3.0.0'
     //compile 'com.mohamadamin:persianmaterialdatetimepicker:1.2.1'
+    compile 'com.github.deano2390:MaterialShowcaseView:1.0.5@aar'
 }
 

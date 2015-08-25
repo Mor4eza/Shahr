@@ -75,6 +75,7 @@
         android:layout_height="25dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/tverror"
+        android:gravity="center"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textColor="#ffff231b" />

@@ -10,9 +10,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.ariana.shahre_ma.Bazarche.Select_Image;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
-import com.ariana.shahre_ma.MainActivity;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -118,7 +116,7 @@ public class HTTPPostProductJson extends AsyncTask<String ,Long,Integer>
         try {
             if(integer==1)
             {
-                fc.SetProductId(response_message);
+                fc.SetBusiness_Id(response_message);
                     pd.dismiss();
                     AlertDialog alertDialog = new AlertDialog.Builder(context).create();
                     alertDialog.setTitle("پیغام");
