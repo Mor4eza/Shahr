@@ -1049,6 +1049,12 @@ Context context;
         return db.rawQuery("SELECT Id,Market,Phone,Mobile,Fax,Email,BusinessOwner,Address,Description,SubsetId,Latitude,Longitude,Field1,Field2,Field3,Field4,Field5,Field6,Field7,RateValue,AreaId,Src,CityId  FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE Id=" +id, null);
     }
 
+    public Cursor select_BusinessAndBusinessImage(Integer id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("select p.Id,p.Market,p.Address,P.RateValue,H.Src from  "+ InstructionsSqlite.TABLE_NAME_BUSINESS+"  P inner join "+InstructionsSqlite.TABLE_NAME_BUSINESS_IMAGE+" H on (H.BusinessId ="+id+" and  P.Id="+id+" )" +id, null);
+    }
+
     public Cursor select_business_NameMarket(Integer businessID)
     {
 

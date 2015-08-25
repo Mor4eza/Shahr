@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Bazarche.Select_Image;
@@ -31,6 +32,7 @@ public class HTTPPostBusinessJson extends AsyncTask<String,Long,Integer>
 
     String url_Business="http://test.shahrma.com/api/ApiTakeoneBusiness";
     String jsonstring="";
+    Integer resultmessage=0;
     Query query;
     FieldClass fc=new FieldClass();
     Context context;
@@ -92,11 +94,13 @@ public class HTTPPostBusinessJson extends AsyncTask<String,Long,Integer>
 
             String jsonstring= EntityUtils.toString(entity);
 
-            jsonResult=Integer.parseInt(jsonstring);
+            resultmessage=Integer.parseInt(jsonstring);
 
+            jsonResult=1;
         }
-        catch (Exception e){
-
+        catch (Exception e)
+        {
+            jsonResult=0;
         }
         return jsonResult;
     }
@@ -116,6 +120,8 @@ public class HTTPPostBusinessJson extends AsyncTask<String,Long,Integer>
             Intent i=new Intent(context, Select_Image.class);
             context.startActivity(i);
 
+            Log.i("resultmessage", String.valueOf(resultmessage));
+            fc.SetBusiness_Id(resultmessage);
             Add_New_Business.save_edit.setProgress(100);
             Toast.makeText(context, "کسب و کار شما پس از تایید به نمایش گذاشته میشود!", Toast.LENGTH_LONG).show();
         }

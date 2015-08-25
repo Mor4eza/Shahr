@@ -57,6 +57,7 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
                 nature.setmAddress(fdb.GetAddressBusiness().get(i));
                 nature.setThumbnail(R.drawable.pooshak1);
                 nature.setRate(fdb.GetRateBusiness().get(i));
+                nature.setNameImage(fdb.GetSrc().get(i));
                 mItems.add(nature);
 
             }
@@ -64,7 +65,7 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
         else
         {
 
-            Cursor rows = db.select_AllBusinessId(fc.GetBusiness_Id());
+            Cursor rows = db.select_BusinessAndBusinessImage(fc.GetBusiness_Id());
 
             if (rows.moveToFirst()) {
                 do {
@@ -72,9 +73,10 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
                     nature = new Business_Card_Items();
                     nature.setId(rows.getInt(0));
                     nature.setName(rows.getString(1));
-                    nature.setmAddress(rows.getString(7));
+                    nature.setmAddress(rows.getString(2));
                     nature.setThumbnail(R.drawable.pooshak1);
-                    nature.setRate(rows.getFloat(19));
+                    nature.setRate(rows.getFloat(3));
+                    nature.setNameImage(rows.getString(4));
                     mItems.add(nature);
 
                 } while (rows.moveToNext());
@@ -137,7 +139,7 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
             tvNature = (TextView)itemView.findViewById(R.id.my_business_title);
             img_edit = (ImageView)itemView.findViewById(R.id.btn_edit_business);
             img_discount = (ImageView)itemView.findViewById(R.id.btn_discount);
-            img_pic = (ImageView)itemView.findViewById(R.id.btn_change);
+            img_pic = (ImageView)itemView.findViewById(R.id.btn_change_image);
             Rates = (RatingBar)itemView.findViewById(R.id.my_business_rate);
             fab=(FabToolbar)itemView.findViewById(R.id.fab_toolbar);
 

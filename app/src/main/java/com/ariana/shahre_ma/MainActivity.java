@@ -124,65 +124,63 @@ public class MainActivity extends ActionBarActivity {
          db=new DataBaseSqlite(this);
 
 
-
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        fab();
-
-
-
-        top = (DragTopLayout) findViewById(R.id.top);
-        slider = (SliderLayout) findViewById(R.id.slider);
-
-        top.setTouchMode(true);
-        top.setOverDrag(false);
-
-        ii=new IntentFilter("android.intent.action.TIME_TICK");
-        tsr=new TimeSetReceiver();
-        registerReceiver(tsr, ii);
-
-        //setup();
-        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,new IntentFilter("custom-event-name"));
-
-        if (net.checkInternetConnection() == false) {
-            Toast.makeText(getApplication(), "شبکه اینترنت قطع می باشد", Toast.LENGTH_LONG).show();
-        }
-        else
-        {
-          /*  String url= "http://uplod.ir/tpy6oft0407u/app-debug.apk.htm";
-            HTTPGetUpdate update=new HTTPGetUpdate(this);
-            update.execute(url);
-            */
-
-            HTTPGetAdvertismentJson httpGetAdvertismentJson=new HTTPGetAdvertismentJson(this);
-            httpGetAdvertismentJson.SetAdvertisment(query.getCityId(setting.getCityName()));
-            httpGetAdvertismentJson.execute();
+    try {
+            toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            fab();
 
 
-           HTTPGetTopsBusinessJson httpGetTopsBusinessJson=new HTTPGetTopsBusinessJson(this);
-            httpGetTopsBusinessJson.SetTopBusiness(query.getCityId(setting.getCityName()));
-            httpGetTopsBusinessJson.execute();
-        }
+            top = (DragTopLayout) findViewById(R.id.top);
+            slider = (SliderLayout) findViewById(R.id.slider);
+
+            top.setTouchMode(true);
+            top.setOverDrag(false);
+
+            ii = new IntentFilter("android.intent.action.TIME_TICK");
+            tsr = new TimeSetReceiver();
+            registerReceiver(tsr, ii);
+
+            //setup();
+            LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("custom-event-name"));
+
+            if (net.checkInternetConnection() == false) {
+                Toast.makeText(getApplication(), "شبکه اینترنت قطع می باشد", Toast.LENGTH_LONG).show();
+            } else {
+                  /*  String url= "http://uplod.ir/tpy6oft0407u/app-debug.apk.htm";
+                    HTTPGetUpdate update=new HTTPGetUpdate(this);
+                    update.execute(url);
+                    */
+
+                HTTPGetAdvertismentJson httpGetAdvertismentJson = new HTTPGetAdvertismentJson(this);
+                httpGetAdvertismentJson.SetAdvertisment(query.getCityId(setting.getCityName()));
+                httpGetAdvertismentJson.execute();
 
 
-        ViewPager vpPager = (ViewPager) findViewById(R.id.viewPager);
-        adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
-        vpPager.setAdapter(adapterViewPager);
-        vpPager.setCurrentItem(2);
+                HTTPGetTopsBusinessJson httpGetTopsBusinessJson = new HTTPGetTopsBusinessJson(this);
+                httpGetTopsBusinessJson.SetTopBusiness(query.getCityId(setting.getCityName()));
+                httpGetTopsBusinessJson.execute();
+            }
 
 
-        Image_slider();
+            ViewPager vpPager = (ViewPager) findViewById(R.id.viewPager);
+            adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
+            vpPager.setAdapter(adapterViewPager);
+            vpPager.setCurrentItem(2);
 
 
-        String showWhatsNew = "showHelp";
+            Image_slider();
 
-        if (!Once.beenDone(Once.THIS_APP_INSTALL, showWhatsNew)) {
-            //help1();
-            CityDialog cityDialog=new CityDialog(this);
-            cityDialog.show();
-            Once.markDone(showWhatsNew);
-        }
 
+            String showWhatsNew = "showHelp";
+
+            if (!Once.beenDone(Once.THIS_APP_INSTALL, showWhatsNew)) {
+                //help1();
+                CityDialog cityDialog = new CityDialog(this);
+                cityDialog.show();
+                Once.markDone(showWhatsNew);
+            }
+    }
+    catch (Exception e){}
 
     }
 
