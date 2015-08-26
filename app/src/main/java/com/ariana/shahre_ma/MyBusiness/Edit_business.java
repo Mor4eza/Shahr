@@ -36,11 +36,17 @@ import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessImageJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostBusinessEditJson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostUploadImage;
+import com.ariana.shahre_ma.WebServiceSend.HTTPDeleteBusinessImageURL;
 import com.dd.CircularProgressButton;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.squareup.picasso.Picasso;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,11 +81,6 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
     Integer month;
     String date;
     Integer year;
-
-
-    Bitmap  bp1;
-    private int maxWidth = 250;
-    private int maxHeight = 250;
 
     public static CircularProgressButton save_edit;
 
@@ -575,15 +576,31 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
         popup.getMenuInflater().inflate(R.menu.image_popup, popup.getMenu());
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
-                ViewId=v.getId();
-                if (item.getTitle().equals("دوربین"))
-                    //my_business.openCamera();
-                    openCamera();
-                else if (item.getTitle().equals("گالری"))
-                    selectImageFromGallery();
+                ViewId = v.getId();
+                if (item.getTitle().equals("دوربین")) {
+                    if (v.getTag() != null) {
+                        Log.i("Tag",v.getTag().toString());
+                        Toast.makeText(getApplicationContext(), "ابتدا تصویر قبلی را حذف نمایید", Toast.LENGTH_LONG).show();
+                    }else{
+                        openCamera();
+                    }
 
-                else if (item.getTitle().equals("حذف"))
-                    Log.i("", "");
+                } else if (item.getTitle().equals("گالری"))
+                    if (v.getTag() != null) {
+                        Log.i("Tag",v.getTag().toString());
+                        Toast.makeText(getApplicationContext(), "ابتدا تصویر قبلی را حذف نمایید", Toast.LENGTH_LONG).show();
+                    }else{
+                        selectImageFromGallery();
+                    }
+
+                else if (item.getTitle().equals("حذف")) {
+
+                        HTTPDeleteBusinessImageURL deleteBusinessImageURL = new HTTPDeleteBusinessImageURL(Edit_business.this);
+                        deleteBusinessImageURL.SetDeleteBusinessImage(fc.GetBusiness_Id(), String.valueOf(v.getTag()), 1);
+                        deleteBusinessImageURL.execute();
+
+
+                }
                 return true;
             }
         });
@@ -615,16 +632,26 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
                 // currImageURI is the global variable I’m using to hold the content:
-                //currImageURI = data.getData();
+                currImageURI = data.getData();
+                System.out.println("Current image Path is —--->" + getRealPathFromURI(currImageURI));
+                BufferedOutputStream out = null;
+                Path=getRealPathFromURI(currImageURI);
+                Bitmap myBitmap = BitmapFactory.decodeFile(Path);
 
-                //  *//*TextView tv_path = (TextView) findViewById(R.id.textView);
-                //Path=getRealPathFromURI(currImageURI);
-                //Bitmap myBitmap = BitmapFactory.decodeFile(Path);
-                Bitmap myBitmap=selectPhotoControl(data);
-
-                selectPhotoControl(data);
-
-                if(ViewId==image1.getId()){
+                try {
+                    File dump = new File(Path);
+                    out = new BufferedOutputStream(new FileOutputStream(dump));
+                    myBitmap.compress(Bitmap.CompressFormat.JPEG, 55, out);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (out != null) try {
+                        out.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                    if(ViewId==image1.getId()){
                     image1.setImageBitmap(myBitmap);
                     UploadImage();
                 }else if(ViewId==image2.getId()){
@@ -640,10 +667,24 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
 
 
             }else if(requestCode == 100){
+                BufferedOutputStream out = null;
                 currImageURI = data.getData();
                 Path=getRealPathFromURI(currImageURI);
                 Bitmap photo = (Bitmap) data.getExtras().get("data");
 
+                try {
+                    File dump = new File(Path);
+                    out = new BufferedOutputStream(new FileOutputStream(dump));
+                    photo.compress(Bitmap.CompressFormat.JPEG, 100, out);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (out != null) try {
+                        out.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
                 if(ViewId==image1.getId()){
                     image1.setImageBitmap(photo);
                     UploadImage();
@@ -659,77 +700,6 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
                 }
             }
         }
-    }
-
-
-
-    private Bitmap selectPhotoControl(Intent data) {
-        //check photo is selected
-
-        if (data == null)
-            return null;
-
-
-        Uri photoUri = data.getData();
-        if (photoUri != null) {
-            //decode the Uri
-            String[] filePathColumn = { MediaStore.Images.Media.DATA };
-
-            Cursor cursor = getContentResolver().query(photoUri,
-                    filePathColumn, null, null, null);
-            cursor.moveToFirst();
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String filePath = cursor.getString(columnIndex);
-            cursor.close();
-
-            Bitmap  bp1 = resize(filePath);
-            //if (bp != null)
-            //postImage(bp, filePath);
-        }
-
-        return bp1;
-    }
-
-
-    private Bitmap resize(String path){
-        // create the options
-        BitmapFactory.Options opts = new BitmapFactory.Options();
-
-        //just decode the file
-        opts.inJustDecodeBounds = true;
-        Bitmap bp = BitmapFactory.decodeFile(path, opts);
-
-        //get the original size
-        int orignalHeight = opts.outHeight;
-        int orignalWidth = opts.outWidth;
-        //initialization of the scale
-        int resizeScale = 1;
-        //get the good scale
-        if ( orignalWidth > maxWidth || orignalHeight > maxHeight ) {
-            final int heightRatio = Math.round((float) orignalHeight / (float) maxHeight);
-            final int widthRatio = Math.round((float) orignalWidth / (float) maxWidth);
-            resizeScale = heightRatio < widthRatio ? heightRatio : widthRatio;
-
-            Log.i("heightRatio",String.valueOf(heightRatio));
-            Log.i("widthRatio",String.valueOf(widthRatio));
-        }
-
-
-        Log.i("resizeScale",String.valueOf(resizeScale));
-
-        //put the scale instruction (1 -> scale to (1/1); 8-> scale to 1/8)
-        opts.inSampleSize = resizeScale;
-        opts.inJustDecodeBounds = false;
-        //get the futur size of the bitmap
-        int bmSize = (orignalWidth / resizeScale) * (orignalHeight / resizeScale) * 4;
-        Log.i("bmSize",String.valueOf(bmSize));
-        //check if it's possible to store into the vm java the picture
-        if ( Runtime.getRuntime().freeMemory() > bmSize ) {
-            //decode the file
-            bp = BitmapFactory.decodeFile(path, opts);
-        } else
-            return null;
-        return bp;
     }
 
 
@@ -756,6 +726,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
     private void LoadImage()
     {
         String urlImage[]=new String[4];
+        String imageName[]=new String[4];
         try
         {
             DataBaseSqlite db=new DataBaseSqlite(this);
@@ -765,11 +736,19 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
             {
                 do
                 {
-                    urlImage[i]="http://www.shahrma.com/image/business/"+rows.getString(2);
-                    Log.i("AddressImage", urlImage[i]);
+                    if(i<=3) {
+                        urlImage[i] = "http://www.shahrma.com/image/business/" + rows.getString(2);
+                        Log.i("AddressImage", urlImage[i]);
+                        imageName[i] = rows.getString(2);
+                        Log.i("ImageName", imageName[i]);
+                    }
                     i++;
 
                 }while (rows.moveToNext());
+                image1.setTag(imageName[0]);
+                image2.setTag(imageName[1]);
+                image3.setTag(imageName[2]);
+                image4.setTag(imageName[3]);
                 Picasso.with(this).load(urlImage[0]).placeholder(R.drawable.fab_plus_icon).error(R.drawable.img_not_found).into(image1);
                 Picasso.with(this).load(urlImage[1]).placeholder(R.drawable.fab_plus_icon).error(R.drawable.img_not_found).into(image2);
                 Picasso.with(this).load(urlImage[2]).placeholder(R.drawable.fab_plus_icon).error(R.drawable.img_not_found).into(image3);

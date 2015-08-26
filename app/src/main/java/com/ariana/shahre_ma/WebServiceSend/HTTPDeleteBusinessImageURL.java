@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessImageJson;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -119,6 +120,10 @@ public class HTTPDeleteBusinessImageURL extends AsyncTask<String, Void, Boolean>
             db.delete_BusinessImage(src,BusinessId);
 
             pd.dismiss();
+
+            HTTPGetBusinessImageJson httpGetBusinessImageJson=new HTTPGetBusinessImageJson(context);
+            httpGetBusinessImageJson.SetBusinessId(fc.GetBusiness_Id());
+            httpGetBusinessImageJson.execute();
 
             AlertDialog alertDialog = new AlertDialog.Builder(context).create();
             alertDialog.setTitle("پیام");

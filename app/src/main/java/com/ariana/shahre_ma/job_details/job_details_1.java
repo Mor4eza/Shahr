@@ -328,6 +328,7 @@ public class job_details_1 extends ActionBarActivity {
 
          private void  display_Images() {
              try {
+                 slider.removeAllSliders();
                  DataBaseSqlite db = new DataBaseSqlite(getActivity());
                  Cursor rows = db.select_BusinessImage(fc.GetBusiness_Id());
 
