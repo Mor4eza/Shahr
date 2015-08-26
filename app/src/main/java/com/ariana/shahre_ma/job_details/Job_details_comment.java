@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.Cards.Comment_Card_Adapter;
 import com.ariana.shahre_ma.Date.CalendarTool;
+import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
@@ -53,6 +54,7 @@ public class Job_details_comment extends ActionBarActivity {
 
         CalendarTool ct=new CalendarTool();
         FieldClass fc = new FieldClass();
+        DateTime dt=new DateTime();
         HTTPPostMemberJson sendPost;
         SqliteTOjson json ;
         String _json;
@@ -83,11 +85,12 @@ public class Job_details_comment extends ActionBarActivity {
                         Toast.makeText(getActivity(), "شبکه اینترنت قطع می باشد", Toast.LENGTH_LONG).show();
                     } else {
                         try {
-                            if (query.getMemberId() > 0) {
+                            if (query.getMemberId() > 0)
+                            {
                                 Log.i("getMemberId", String.valueOf(query.getMemberId()));
-                                _json = (json.getOpinionTOjson(txtComm.getText().toString(), ct.getIranianDate(), query.getMemberId(), fc.GetBusiness_Id()));
+                                _json = (json.getOpinionTOjson(txtComm.getText().toString(),dt.Date()+" "+dt.Time(), query.getMemberId(), fc.GetBusiness_Id()));
                                 fc.SetOpinion_Description(txtComm.getText().toString());
-                                fc.SetOpinion_Date(ct.getIranianDate().toString());
+                                fc.SetOpinion_Date(dt.Date()+" "+dt.Time());
                                 fc.SetOpinion_MemberName("");
                                 fc.SetOpinion_Erja(fc.GetBusiness_SubsetIdb());
 
@@ -95,7 +98,8 @@ public class Job_details_comment extends ActionBarActivity {
                                 sendPost1.SetOpinion_Json(_json);
                                 sendPost1.execute();
                                 txtComm.setText("");
-                            } else {
+                            } else
+                            {
                                 Toast.makeText(getActivity(), "کاربری وارد نشد است", Toast.LENGTH_LONG).show();
                             }
                         } catch (Exception e) {

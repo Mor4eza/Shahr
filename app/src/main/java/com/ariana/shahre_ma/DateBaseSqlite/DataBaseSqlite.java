@@ -1486,10 +1486,10 @@ Context context;
         db.close();
     }
 
-    public void delete_BusinessImage(String src)
+    public void delete_BusinessImage(String src,Integer businessid)
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_BUSINESS_IMAGE+" WHERE Src='"+src+"'");
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_BUSINESS_IMAGE+" WHERE BusinessId="+businessid+" AND  Src='"+src+"'");
         db.close();
     }
 

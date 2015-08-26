@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
@@ -32,6 +33,8 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
     FieldClass fc=new FieldClass();
     KeySettings setting;
     DateTime t=new DateTime();
+    CalendarTool ct=new CalendarTool();
+    String date;
     private  static Context context;
 
 
@@ -70,7 +73,9 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
 
                     if(rowalls.getInt(3)==1) {
                         nci = new Notify_Card_Items();
-                        nci.setNdate(rowalls.getString(5));
+
+                        ct.setIranianDate(Integer.parseInt(rowalls.getString(5).substring(0, 4)), Integer.parseInt(rowalls.getString(5).substring(5, 7)), Integer.parseInt(rowalls.getString(5).substring(8, 10)));
+                        nci.setNdate(ct.getIranianDate());
                         nci.setNdetail(rowalls.getString(4));
                         nci.setNmarket(query.getNameBusiness(rowalls.getInt(2)));
                         nci.setNId(rowalls.getInt(2));
@@ -95,7 +100,9 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
                     {
                         Log.i("ShowNotifi","elseto");
                         nci = new Notify_Card_Items();
-                        nci.setNdate(rowalls.getString(5));
+                        ct.setIranianDate(Integer.parseInt(rowalls.getString(5).substring(0, 4)),Integer.parseInt(rowalls.getString(5).substring(5, 7)),Integer.parseInt(rowalls.getString(5).substring(8,10)));
+
+                        nci.setNdate(ct.getIranianDate());
                         nci.setNdetail(rowalls.getString(4));
                         nci.setNmarket(query.getNameBusiness(rowalls.getInt(2)));
                         nci.setNId(rowalls.getInt(2));
