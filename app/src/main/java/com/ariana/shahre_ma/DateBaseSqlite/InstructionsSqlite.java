@@ -47,6 +47,7 @@ public class  InstructionsSqlite {
     public static final String CityId_Notification="CityId";
     public static final String Subset_Notification="Subset";
     public static final String SubsetId_Notification="SubsetId";
+    public static final String TITEL_Notification="Title";
 
 
     //ProductMember Table Columns names
@@ -260,7 +261,8 @@ public class  InstructionsSqlite {
             "City TEXT," +
             "CityId INTEGER," +
             "Subset TEXT ," +
-            "SubsetId INTEGER " +
+            "SubsetId INTEGER, " +
+            "Title TEXT " +
             ");";
 
     //SQL statement to create DisCoutn table

@@ -2,6 +2,7 @@ package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.ariana.shahre_ma.Date.DateTime;
@@ -35,6 +36,7 @@ public class HTTPGetNotificationJson extends AsyncTask<String,Void,Integer> {
     String Description[];
     String ExpirationDate[];
     String City[];
+    String title[];
     Integer CityId[];
     String Subset[];
     Integer SubsetId[];
@@ -112,6 +114,7 @@ public class HTTPGetNotificationJson extends AsyncTask<String,Void,Integer> {
             CityId = new Integer[areas.length()];
             Subset = new String[areas.length()];
             SubsetId = new Integer[areas.length()];
+            title=new String[areas.length()];
             len = areas.length();
 
             for (int i = 0; i < areas.length(); i++) {
@@ -126,6 +129,7 @@ public class HTTPGetNotificationJson extends AsyncTask<String,Void,Integer> {
                 CityId[i] = area.getInt("CityId");
                 Subset[i] = area.getString("Subset");
                 SubsetId[i] = area.getInt("SubsetId");
+                title[i]=area.getString("Title");
                 test = area.getString("Description");
             }
 
@@ -150,7 +154,7 @@ public class HTTPGetNotificationJson extends AsyncTask<String,Void,Integer> {
                 if (len > 0) {
                     for (int i = 0; i < len; i++)
                     {
-                          db.Add_Notification(Id[i], OpinionType[i], erja[i], ExecutionTime[i], Description[i], ExpirationDate[i], City[i], CityId[i], Subset[i], SubsetId[i]);
+                          db.Add_Notification(Id[i], OpinionType[i], erja[i], ExecutionTime[i], Description[i], ExpirationDate[i], City[i], CityId[i], Subset[i], SubsetId[i],title[i]);
                     }
 
 

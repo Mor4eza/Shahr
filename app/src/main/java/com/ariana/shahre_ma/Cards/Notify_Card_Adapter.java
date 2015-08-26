@@ -78,7 +78,7 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
                         ct.setIranianDate(Integer.parseInt(rowalls.getString(5).substring(0, 4)), Integer.parseInt(rowalls.getString(5).substring(5, 7)), Integer.parseInt(rowalls.getString(5).substring(8, 10)));
                         nci.setNdate(ct.getIranianDate());
                         nci.setNdetail(rowalls.getString(4));
-                        nci.setNmarket(query.getNameBusiness(rowalls.getInt(2)));
+                        nci.setNmarket(rowalls.getString(10));
                         nci.setNId(rowalls.getInt(2));
                         nci.setNotiyId(rowalls.getInt(0));
 
@@ -105,7 +105,7 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
 
                         nci.setNdate(ct.getIranianDate());
                         nci.setNdetail(rowalls.getString(4));
-                        nci.setNmarket(query.getNameBusiness(rowalls.getInt(2)));
+                        nci.setNmarket(rowalls.getString(10));
                         nci.setNId(rowalls.getInt(2));
                         nci.setNotiyId(rowalls.getInt(0));
 

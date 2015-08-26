@@ -13,7 +13,7 @@ import android.util.Log;
 public class DataBaseSqlite extends SQLiteOpenHelper
 {
     //Database Version
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     // Database Name
     private static final String DATABASE_NAME = "DBshahrma.db";
@@ -256,7 +256,7 @@ Context context;
      * @param Subset
      * @param SubsetId
      */
-    public void Add_Notification(Integer id,Integer OpinionType,Integer erja,Boolean ExecutionTime,String Description,String ExpirationDate,String City,Integer CityId,String Subset,Integer SubsetId){
+    public void Add_Notification(Integer id,Integer OpinionType,Integer erja,Boolean ExecutionTime,String Description,String ExpirationDate,String City,Integer CityId,String Subset,Integer SubsetId,String title){
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -272,6 +272,7 @@ Context context;
         values.put(InstructionsSqlite.CityId_Notification, CityId);
         values.put(InstructionsSqlite.Subset_Notification, Subset);
         values.put(InstructionsSqlite.SubsetId_Notification, SubsetId);
+        values.put(InstructionsSqlite.TITEL_Notification, title);
 
         // 3. insert
         db.insert(InstructionsSqlite.TABLE_NAME_NOTIFICATION, // table
@@ -299,6 +300,7 @@ Context context;
                 values);
         db.close();
     }
+
 
     public void Add_collection_Product(Integer id, String collectionname) {
 
