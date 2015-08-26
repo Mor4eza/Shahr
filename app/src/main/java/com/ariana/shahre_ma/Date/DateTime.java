@@ -79,4 +79,15 @@ public class DateTime
         return output.toString();
     }
 
+    public String Date()
+    {
+        sdf=new SimpleDateFormat("MM/dd/yyyy");
+        Calendar c = Calendar.getInstance();
+        currentDateandTime = sdf.format(new Date());
+        c.add(Calendar.DATE, 0);
+        String output = sdf.format(c.getTime());
+        return output.toString();
+    }
+
+
 }

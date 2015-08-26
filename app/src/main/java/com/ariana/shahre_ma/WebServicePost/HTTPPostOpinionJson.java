@@ -89,6 +89,7 @@ public class HTTPPostOpinionJson extends AsyncTask<String, Void, Integer>
         try {
 
             //onPostExecute();
+            Log.i("JSONopinion",GetOpinion_json());
             JSONObject json = new JSONObject(GetOpinion_json()); //your array;
             HttpClient httpClient = new DefaultHttpClient();
             HttpContext httpContext = new BasicHttpContext();
