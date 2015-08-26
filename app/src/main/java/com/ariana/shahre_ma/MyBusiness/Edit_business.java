@@ -41,6 +41,11 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.squareup.picasso.Picasso;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -612,11 +617,24 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
                 // currImageURI is the global variable I’m using to hold the content:
                 currImageURI = data.getData();
                 System.out.println("Current image Path is —--->" + getRealPathFromURI(currImageURI));
-                //  /*TextView tv_path = (TextView) findViewById(R.id.textView);
+                BufferedOutputStream out = null;
                 Path=getRealPathFromURI(currImageURI);
-
                 Bitmap myBitmap = BitmapFactory.decodeFile(Path);
-                if(ViewId==image1.getId()){
+
+                try {
+                    File dump = new File(Path);
+                    out = new BufferedOutputStream(new FileOutputStream(dump));
+                    myBitmap.compress(Bitmap.CompressFormat.JPEG, 60, out);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (out != null) try {
+                        out.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                    if(ViewId==image1.getId()){
                     image1.setImageBitmap(myBitmap);
                     UploadImage();
                 }else if(ViewId==image2.getId()){
@@ -632,9 +650,24 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
 
 
             }else if(requestCode == 100){
+                BufferedOutputStream out = null;
                 currImageURI = data.getData();
                 Path=getRealPathFromURI(currImageURI);
                 Bitmap photo = (Bitmap) data.getExtras().get("data");
+
+                try {
+                    File dump = new File(Path);
+                    out = new BufferedOutputStream(new FileOutputStream(dump));
+                    photo.compress(Bitmap.CompressFormat.JPEG, 100, out);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (out != null) try {
+                        out.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
                 if(ViewId==image1.getId()){
                     image1.setImageBitmap(photo);
                     UploadImage();

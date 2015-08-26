@@ -18,6 +18,12 @@ import com.ariana.shahre_ma.MyBusiness.Edit_business;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostUploadImage;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class Select_Image extends ActionBarActivity implements ImageView.OnClickListener {
 
     ImageView image1;
@@ -95,11 +101,25 @@ public class Select_Image extends ActionBarActivity implements ImageView.OnClick
             if (requestCode == 1) {
                 // currImageURI is the global variable I’m using to hold the content:
                 currImageURI = data.getData();
-
+                BufferedOutputStream out = null;
                 //  /*TextView tv_path = (TextView) findViewById(R.id.textView);
                 Path=getRealPathFromURI(currImageURI);
-
                 Bitmap myBitmap = BitmapFactory.decodeFile(Path);
+                try {
+                    File dump = new File(Path);
+                    out = new BufferedOutputStream(new FileOutputStream(dump));
+                    myBitmap.compress(Bitmap.CompressFormat.JPEG, 60, out);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (out != null) try {
+                        out.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
                 if(ViewId==image1.getId())
                 {
                     image1.setImageBitmap(myBitmap);
@@ -123,9 +143,27 @@ public class Select_Image extends ActionBarActivity implements ImageView.OnClick
 
 
             }else if(requestCode == 100){
+                BufferedOutputStream out = null;
                 currImageURI = data.getData();
                 Path=getRealPathFromURI(currImageURI);
                 Bitmap photo = (Bitmap) data.getExtras().get("data");
+
+
+                try {
+                    File dump = new File(Path);
+                    out = new BufferedOutputStream(new FileOutputStream(dump));
+                    photo.compress(Bitmap.CompressFormat.JPEG, 100, out);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (out != null) try {
+                        out.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
                 if(ViewId==image1.getId())
                 {
                     image1.setImageBitmap(photo);
