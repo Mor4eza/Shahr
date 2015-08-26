@@ -1552,6 +1552,10 @@ Context context;
         db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_BUSINESS +" WHERE CityId="+cityid+" AND SubsetId="+subsetid);
         db.close();
     }
+
+
+
+
     public void delete_BusinessTops()
     {
         SQLiteDatabase db=this.getWritableDatabase();

@@ -18,6 +18,7 @@ import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MyInterest.My_Interest;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.Settings.KeySettings;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetOneBusinessJson;
 import com.ariana.shahre_ma.job_details.Job_details;
 
 import java.util.ArrayList;
@@ -178,13 +179,27 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
                         Intent intent=new Intent(context, My_Interest.class);
                         context.startActivity(intent);
                     }
-                    else {
-                        fc.SetShowNotification(true);
-                        fc.SetShowNotificationId((Integer) tvdetail.getTag());
-                        fc.SetMarket_Business(tvmarket.getText().toString());
-                        fc.SetBusiness_Id((Integer) tvmarket.getTag());
-                        Intent i = new Intent(context, Job_details.class);
-                        context.startActivity(i);
+                    else
+                    {
+
+                        DataBaseSqlite db=new DataBaseSqlite(context);
+                        Cursor cursor=db.select_CountBusinessId((Integer) tvmarket.getTag());
+                        cursor.moveToFirst();
+                        if(cursor.getInt(0)>0)
+                        {
+                            fc.SetShowNotification(true);
+                            fc.SetShowNotificationId((Integer) tvdetail.getTag());
+                            fc.SetMarket_Business(tvmarket.getText().toString());
+                            fc.SetBusiness_Id((Integer) tvmarket.getTag());
+                            Intent i = new Intent(context, Job_details.class);
+                            context.startActivity(i);
+                        }
+                        else
+                        {
+                            HTTPGetOneBusinessJson httpGetOneBusinessJson=new HTTPGetOneBusinessJson(context);
+                            httpGetOneBusinessJson.SetUrl_business((Integer) tvmarket.getTag(),(Integer) tvdetail.getTag());
+                            httpGetOneBusinessJson.execute();
+                        }
                     }
 
                 }
