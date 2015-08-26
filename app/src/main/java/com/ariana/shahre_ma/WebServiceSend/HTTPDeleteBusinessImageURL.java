@@ -29,7 +29,7 @@ public class HTTPDeleteBusinessImageURL extends AsyncTask<String, Void, Boolean>
     String url="";
 
     String src="";
-    Integer businessid=0;
+    Integer BusinessId=0;
 
     Context context;
     ProgressDialog pd;
@@ -45,11 +45,11 @@ public class HTTPDeleteBusinessImageURL extends AsyncTask<String, Void, Boolean>
     }
 
 
-    public void SetDeleteBusinessImage(String imagename,Integer type)
+    public void SetDeleteBusinessImage(Integer businessid,String imagename,Integer type)
     {
         src=imagename;
-
-        url="http://test.shahrma.com/api/ApiDeleteImage?Id="+imagename+"&type="+type;
+        BusinessId=businessid;
+        url="http://test.shahrma.com/api/ApiDeleteImage?Id="+businessid+"&img="+imagename+"&type="+type;
     }
 
 
@@ -116,7 +116,7 @@ public class HTTPDeleteBusinessImageURL extends AsyncTask<String, Void, Boolean>
 
         if(result==true)
         {
-            db.delete_BusinessImage(src);
+            db.delete_BusinessImage(src,BusinessId);
 
             pd.dismiss();
 
