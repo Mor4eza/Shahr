@@ -58,6 +58,7 @@ public class Frag_main_search extends Fragment
     private  List<String>  selectMobile=new ArrayList<String>();
     private  List<String>  selectAddress=new ArrayList<>();
     private  List<String>  selectMarketName=new ArrayList<String>();
+    private  List<String>  selectSrc=new ArrayList<String>();
 
     // newInstance constructor for creating fragment with arguments
     public static Frag_main_search newInstance(int page, String title) {
@@ -87,8 +88,7 @@ public class Frag_main_search extends Fragment
         TextView tvLabel = (TextView) view.findViewById(R.id.tvLabel);
         tvLabel.setText(page + " -- " + title);
 
-        GetNameActivity();
-        GetNameSubset();
+
 
     try {
     btnSearch = (Button) view.findViewById(R.id.btn_search);
@@ -113,7 +113,8 @@ public class Frag_main_search extends Fragment
         }
     });
 
-
+        GetNameActivity();
+        GetNameSubset();
 
     btnSearch.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -124,6 +125,8 @@ public class Frag_main_search extends Fragment
                 DataBaseSqlite db = new DataBaseSqlite(getActivity());
                 Query query = new Query(getActivity());
                 KeySettings setting = new KeySettings(getActivity());
+
+
                 int i = 0;
                 String selectedWord[] = new String[]{"", "", "", "", ""};
                 selectedWord[0] = "";
@@ -131,29 +134,36 @@ public class Frag_main_search extends Fragment
                 selectedWord[2] = "";
                 selectedWord[3] = "";
                 selectedWord[4] = "";
+
+
                 fc.SetSelected_job(txtWhat.getText().toString());
                 int startSelection = txtWhat.getSelectionStart();
 
                 Integer cityid = query.getCityId(txtWhere.getText().toString());
-                if (ns.checkInternetConnection()) {
+                if (ns.checkInternetConnection())
+                {
                     try {
-                        if (cityid > 0) {
+                        if (cityid > 0)
+                        {
                             String textwhat = URLEncoder.encode(txtWhat.getText().toString().trim(), "UTF-8");
                             HTTPGetOnlineSearchJson httpGetOnlineSearchJson = new HTTPGetOnlineSearchJson(getActivity());
                             httpGetOnlineSearchJson.SetValueSearch(textwhat, cityid);
                             httpGetOnlineSearchJson.execute();
 
-                        } else {
+                        } else
+                        {
                             Toast.makeText(getActivity(), "در کجا؟!", Toast.LENGTH_LONG).show();
                         }
                     } catch (Exception e) {
                         Log.e("search", e.toString());
                     }
 
-                } else {
+                } else
+                {
                     for (String currentWord : txtWhat.getText().toString().split(" ")) {
 
-                        if (i <= 4) {
+                        if (i <= 4)
+                        {
                             selectedWord[i] = currentWord;
                             i++;
                         }
@@ -163,7 +173,7 @@ public class Frag_main_search extends Fragment
 
 
                     //جستجو کامل متن در نام مشاغل و آدرس
-                    rows_Business = db.select_BusinessSearch(txtWhat.getText().toString());
+                    rows_Business = db.select_BusinessSearch(txtWhat.getText().toString(),cityid);
                     Log.i("BusinessgetCount", String.valueOf(rows_Business.getCount()));
                     if (rows_Business.getCount() > 0) {
                         Log.i("Businessget", "on");
@@ -177,6 +187,7 @@ public class Frag_main_search extends Fragment
                                 selectLatitude.add(rows_Business.getDouble(16));
                                 selectLongtiude.add(rows_Business.getDouble(15));
                                 selectRate.add(rows_Business.getDouble(30));
+                                selectSrc.add(rows_Business.getString(31));
 
                             } while (rows_Business.moveToNext());
 
@@ -193,15 +204,19 @@ public class Frag_main_search extends Fragment
                         fdb.SetMarketBusiness(selectMarketName);
                         fdb.SetPhoneBusiness(selectPhone);
                         fdb.SetMobileBusiness(selectMobile);
+                        fdb.SetSrc(selectSrc);
 
                         fc.SetSearchOffline(true);
                         Intent intent = new Intent(getActivity(), Jobs_List.class);
                         getActivity().startActivity(intent);
-                    } else {
+                    }
+                    else
+                    {
                         //جستجو کلمه اول در مجموعه
                         rows_Collection = db.select_Collection(selectedWord[0]);
                         Log.i("CollectiongetCount", String.valueOf(rows_Collection.getCount()));
-                        if (rows_Collection.getCount() > 0) {
+                        if (rows_Collection.getCount() > 0)
+                        {
                             Log.i("Collection", "on");
                             rows_Collection.moveToFirst();
                             //جستجوآی دی مجوعه در زیر مجموعه
@@ -210,7 +225,8 @@ public class Frag_main_search extends Fragment
                             rows_Subset.moveToFirst();
                             //جستجو آی دی زیر مجموعه و کلمات دیگر در مشاغل
                             rows_Business = db.select_BusinessSearch(selectedWord[0], selectedWord[1], selectedWord[2], selectedWord[3], selectedWord[4], rows_Subset.getInt(0));
-                            if (rows_Business.moveToFirst()) {
+                            if (rows_Business.moveToFirst())
+                            {
                                 do {
                                     selectAddress.add(rows_Business.getString(8));
                                     selectMarketName.add(rows_Business.getString(1));
@@ -220,6 +236,7 @@ public class Frag_main_search extends Fragment
                                     selectLatitude.add(rows_Business.getDouble(16));
                                     selectLongtiude.add(rows_Business.getDouble(15));
                                     selectRate.add(rows_Business.getDouble(30));
+                                    selectSrc.add(rows_Business.getString(31));
 
                                 } while (rows_Business.moveToNext());
 
@@ -234,20 +251,25 @@ public class Frag_main_search extends Fragment
                             fdb.SetMarketBusiness(selectMarketName);
                             fdb.SetPhoneBusiness(selectPhone);
                             fdb.SetMobileBusiness(selectMobile);
+                            fdb.SetSrc(selectSrc);
 
                             fc.SetSearchOffline(true);
                             Intent intent = new Intent(getActivity(), Jobs_List.class);
                             getActivity().startActivity(intent);
-                        } else {
+                        }
+                        else
+                        {
                             //جستجو کلمه اول در زیرمجموعه
                             rows_Subset = db.select_SubsetId(selectedWord[0]);
                             Log.i("SubsetgetCount", String.valueOf(rows_Subset.getCount()));
-                            if (rows_Subset.getCount() > 0) {
+                            if (rows_Subset.getCount() > 0)
+                            {
                                 Log.i("Subsetget", "on");
                                 rows_Subset.moveToFirst();
                                 //جستجو آی دی زیر مجموعه و کلمات دیگر در مشاغل
                                 rows_Business = db.select_BusinessSearch(selectedWord[0], selectedWord[2], selectedWord[2], selectedWord[3], selectedWord[4], rows_Subset.getInt(0));
-                                if (rows_Business.moveToFirst()) {
+                                if (rows_Business.moveToFirst())
+                                {
                                     do {
                                         selectAddress.add(rows_Business.getString(8));
                                         selectMarketName.add(rows_Business.getString(1));
@@ -257,9 +279,9 @@ public class Frag_main_search extends Fragment
                                         selectLatitude.add(rows_Business.getDouble(16));
                                         selectLongtiude.add(rows_Business.getDouble(15));
                                         selectRate.add(rows_Business.getDouble(30));
+                                        selectSrc.add(rows_Business.getString(31));
 
                                     } while (rows_Business.moveToNext());
-
 
                                 }
                                 //نمایش به کاربر
@@ -272,12 +294,15 @@ public class Frag_main_search extends Fragment
                                 fdb.SetMarketBusiness(selectMarketName);
                                 fdb.SetPhoneBusiness(selectPhone);
                                 fdb.SetMobileBusiness(selectMobile);
+                                fdb.SetSrc(selectSrc);
 
 
                                 fc.SetSearchOffline(true);
                                 Intent intent = new Intent(getActivity(), Jobs_List.class);
                                 getActivity().startActivity(intent);
-                            } else {
+                            }
+                            else
+                            {
 
                             }
                         }

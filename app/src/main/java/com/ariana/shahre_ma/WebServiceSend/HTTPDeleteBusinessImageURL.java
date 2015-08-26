@@ -1,6 +1,9 @@
 package com.ariana.shahre_ma.WebServiceSend;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -19,70 +22,64 @@ import java.io.IOException;
 /**
  * Created by ariana on 8/25/2015.
  */
-public class HTTPDeleteBusinessImageURL {
-        //extends AsyncTask<String, Void, Boolean> {
+public class HTTPDeleteBusinessImageURL extends AsyncTask<String, Void, Boolean> {
 
 
+    private  String mesage;
+    String url="";
 
-/*
+    String src="";
+    Integer memberid;
+
     Context context;
-
+    ProgressDialog pd;
     FieldClass fc=new FieldClass();
 
-    *//**
+    /**
      *
      * @param context
-     *//*
+     */
     public HTTPDeleteBusinessImageURL(Context context)
     {
         this.context=context;
     }
 
-    *//**
-     *
-     * @param businessid
-     *//*
-    public void SetBusinessid(Integer businessid)
-    {
-        this.businessid=businessid;
-    }
 
-    *//**
-     *
-     * @param memberid
-     *//*
-    public void SetMemberid(Integer memberid)
+    public void SetDeleteBusinessImage(String imagename,Integer type)
     {
-        this.memberid=memberid;
+        src=imagename;
+        url="http://test.shahrma.com/api/ApiDeleteImage?Id="+imagename+"&type="+type;
     }
 
 
-    *//**
+
+    /**
      *
      * @return
-     *//*
+     */
     public String GetURL()
     {
-        String url="";
-        url="http://test.shahrma.com/api/ApiTakeBookmark?businessId="+businessid+"&memberId="+memberid;
         Log.i("URLurl", url);
         return url;
     }
 
-    *//**
+    /**
      *
-     *//*
+     */
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-
+        pd = new ProgressDialog(context);
+        pd.setMessage("حذف عکس ...");
+        pd.setCancelable(false);
+        pd.show();
     }
 
-    *//**
+    /**
      *
      * @param urls
      * @return
-     *//*
+     */
     @Override
     protected Boolean doInBackground(String... urls) {
         try {
@@ -109,21 +106,49 @@ public class HTTPDeleteBusinessImageURL {
         return false;
     }
 
-    *//**
+    /**
      *
      * @param result
-     *//*
+     */
     protected void onPostExecute(Boolean result) {
-        DataBaseSqlite dbs = new DataBaseSqlite(context);
+        DataBaseSqlite db = new DataBaseSqlite(context);
 
-        if(result==true) {
+        if(result==true)
+        {
+            db.delete_BusinessImage(src);
 
+            pd.dismiss();
+
+            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+            alertDialog.setTitle("هشدار ");
+            alertDialog.setMessage("عکس حذف شد .");
+            alertDialog.setButton("باشه", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int which)
+                {
+
+                }
+            });
+            alertDialog.show();
 
         }
-        else {
+        else
+        {
+            pd.dismiss();
 
+            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+            alertDialog.setTitle("هشدار ");
+            alertDialog.setMessage("عکس حذف نشد. دوباره امتحان کنید");
+            alertDialog.setButton("باشه", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int which)
+                {
+
+                }
+            });
+            alertDialog.show();
         }
 
-    }*/
+    }
 
 }

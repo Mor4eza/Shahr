@@ -90,19 +90,20 @@ private  static Context context;
             Log.i("date", setting.getSortBusiness());
         }
         Log.i("job_list_cards_adapter","strat");
-        try {
+        //try {
             if(fc.GetSearchOffline())
                 {
                     Log.i("SearchOffline","strat");
+                    Log.i("SearchOffline",String.valueOf(fdb.GetMarketBusiness().size()));
                     mItems = new ArrayList<Job_lists_card_item>();
 
                     for (int i = 0; i < fdb.GetMarketBusiness().size(); i++)
                     {
-
+                        Log.i("SearchOffline",String.valueOf(fdb.GetMarketBusiness().size()));
                         nature = new Job_lists_card_item();
                         nature.setName(fdb.GetMarketBusiness().get(i));
                         nature.setDes(fdb.GetAddressBusiness().get(i));
-                        nature.setThumbnail(R.drawable.img_not_found);
+                        //nature.setThumbnail(R.drawable.img_not_found);
 
                         nature.setRate(fdb.GetRateBusiness().get(i));
                         nature.setmId(fdb.GetIdBusiness().get(i));
@@ -127,6 +128,7 @@ private  static Context context;
 
 
                     }
+                    fc.SetSearchOffline(false);
                 }
             else
                 {
@@ -172,7 +174,6 @@ private  static Context context;
                         {
                             mItems = new ArrayList<Job_lists_card_item>();
                             do {
-
 
                                 nature = new Job_lists_card_item();
                                 nature.setName(allrows.getString(1));
@@ -224,10 +225,10 @@ private  static Context context;
 
             }
 
-            }
+    /*        }
        catch(Exception e)
-        {
-        }
+    {
+    }*/
 
     }
 

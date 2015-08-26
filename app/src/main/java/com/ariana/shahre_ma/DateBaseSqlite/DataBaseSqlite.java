@@ -778,14 +778,14 @@ Context context;
 
     }
 
-    public Cursor select_BusinessSearch(String namemarket)
+    public Cursor select_BusinessSearch(String namemarket,Integer cityid)
     {
         String query="";
 
             query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
                     " Market like'%" + namemarket +
-                    "%') or (Address like '%" + namemarket +
-                    "%')";
+                    "%' or Address like '%" + namemarket +
+                    "%') AND (CityId="+cityid+")";
 
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(query, null);
@@ -1486,6 +1486,12 @@ Context context;
         db.close();
     }
 
+    public void delete_BusinessImage(String src)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_BUSINESS_IMAGE+" WHERE Src='"+src+"'");
+        db.close();
+    }
 
     public void delete_Advertisment()
     {

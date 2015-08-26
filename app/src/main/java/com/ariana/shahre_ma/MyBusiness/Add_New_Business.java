@@ -288,8 +288,7 @@ public class Add_New_Business extends ActionBarActivity  {
                         Market_desc.getText().toString().trim(), dt.Now(), EXPDateTime(), "null"
                         , query.getsubsetID(Market_subset.getText().toString().trim()),
                         fc.GetLatitude_Business(), fc.GetLongtiude_Business(), query.getAreaID(Market_area.getText().toString().trim()),
-                        "null", "null", Fields_ID[0], Fields_ID[1], Fields_ID[2],
-                        Fields_ID[3], Fields_ID[4], Fields_ID[5], Fields_ID[6]);
+                        "null", "null", Fields_ID[0]);
 
 
                 Log.i("JSONnewBusiness", str);
