@@ -63,6 +63,8 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
     Continent continent;
     Country country;
     public static ProgressBar PgUpdate;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

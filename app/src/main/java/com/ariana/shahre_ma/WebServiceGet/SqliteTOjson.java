@@ -176,13 +176,11 @@ public class SqliteTOjson {
         return Result_json;
     }
 
-    public  String getBusinessTOjsonArray(Integer id,Integer memberId,String market,String phone,String mobile,String fax,String email,String businessowner,String address,String description,String startdate,String expirationdate,String subset,Integer subsetid,Double latitude,Double longitude,Integer areaid,String area,String user,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7)
+    public  String getBusinessTOjsonArray(Integer id,Integer memberId,String market,String phone,String mobile,String fax,String email,String businessowner,String address,String description,String startdate,String expirationdate,String subset,Integer subsetid,Double latitude,Double longitude,Integer areaid,String area,String user,Integer field1)
     {
         String Result_json="";
         try{
             JSONObject jsonobject=new JSONObject();
-
-
 
             jsonobject.put("Id",String.valueOf(id));
             jsonobject.put("MemberId",memberId);
@@ -205,14 +203,7 @@ public class SqliteTOjson {
            /* jsonobject.put("Area",JSONObject.NULL);
             jsonobject.put("User",JSONObject.NULL);*/
             jsonobject.put("UserId",1);
-            jsonobject.put("Field1",String.valueOf(field1));
-            jsonobject.put("Field2",String.valueOf(field2));
-            jsonobject.put("Field3",String.valueOf(field3));
-            jsonobject.put("Field4",String.valueOf(field4));
-            jsonobject.put("Field5",String.valueOf(field5));
-            jsonobject.put("Field6",String.valueOf(field6));
-            jsonobject.put("Field7",String.valueOf(field7));
-
+            jsonobject.put("FieldText",String.valueOf(field1));
 
             Result_json=jsonobject.toString();
         }

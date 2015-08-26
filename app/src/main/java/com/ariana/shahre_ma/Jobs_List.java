@@ -77,6 +77,7 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
             }
         }
 
+
     }
         public void img_click(View v){
             Intent i = new Intent(getApplicationContext(), Job_details.class);

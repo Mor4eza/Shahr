@@ -1,7 +1,9 @@
 package com.ariana.shahre_ma.WebServicePost;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -95,6 +97,7 @@ public class HTTPPostUploadImage extends AsyncTask<String,Integer,Integer>
         dialog = new ProgressDialog(context);
         dialog.setMessage("در حال ارسال");
         dialog.setIndeterminate(false);
+        dialog.setCancelable(false);
         dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         dialog.setProgress(0);
         dialog.show();
@@ -206,10 +209,36 @@ public class HTTPPostUploadImage extends AsyncTask<String,Integer,Integer>
         if(result==1)
         {
             dialog.dismiss();
+
+            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+            alertDialog.setTitle("هشدار ");
+            alertDialog.setMessage("عکس ثبت شد .");
+            alertDialog.setButton("باشه", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int which)
+                {
+
+                }
+            });
+            alertDialog.show();
+
         }
         else
         {
             dialog.dismiss();
+
+            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+            alertDialog.setTitle("هشدار ");
+            alertDialog.setMessage("عکس ثبت نشد . دوباره امتحان کنید");
+            alertDialog.setButton("باشه", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int which)
+                {
+
+                }
+            });
+            alertDialog.show();
+
 
         }
     }
