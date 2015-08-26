@@ -36,6 +36,7 @@ import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessImageJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostBusinessEditJson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostUploadImage;
+import com.ariana.shahre_ma.WebServiceSend.HTTPDeleteBusinessImageURL;
 import com.dd.CircularProgressButton;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -575,15 +576,31 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
         popup.getMenuInflater().inflate(R.menu.image_popup, popup.getMenu());
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
-                ViewId=v.getId();
-                if (item.getTitle().equals("دوربین"))
-                    //my_business.openCamera();
-                    openCamera();
-                else if (item.getTitle().equals("گالری"))
-                    selectImageFromGallery();
+                ViewId = v.getId();
+                if (item.getTitle().equals("دوربین")) {
+                    if (v.getTag() != null) {
+                        Log.i("Tag",v.getTag().toString());
+                        Toast.makeText(getApplicationContext(), "ابتدا تصویر قبلی را حذف نمایید", Toast.LENGTH_LONG).show();
+                    }else{
+                        openCamera();
+                    }
 
-                else if (item.getTitle().equals("حذف"))
-                    Log.i("", "");
+                } else if (item.getTitle().equals("گالری"))
+                    if (v.getTag() != null) {
+                        Log.i("Tag",v.getTag().toString());
+                        Toast.makeText(getApplicationContext(), "ابتدا تصویر قبلی را حذف نمایید", Toast.LENGTH_LONG).show();
+                    }else{
+                        selectImageFromGallery();
+                    }
+
+                else if (item.getTitle().equals("حذف")) {
+
+                        HTTPDeleteBusinessImageURL deleteBusinessImageURL = new HTTPDeleteBusinessImageURL(Edit_business.this);
+                        deleteBusinessImageURL.SetDeleteBusinessImage(fc.GetBusiness_Id(), String.valueOf(v.getTag()), 1);
+                        deleteBusinessImageURL.execute();
+
+
+                }
                 return true;
             }
         });
@@ -624,7 +641,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
                 try {
                     File dump = new File(Path);
                     out = new BufferedOutputStream(new FileOutputStream(dump));
-                    myBitmap.compress(Bitmap.CompressFormat.JPEG, 60, out);
+                    myBitmap.compress(Bitmap.CompressFormat.JPEG, 55, out);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } finally {
@@ -709,6 +726,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
     private void LoadImage()
     {
         String urlImage[]=new String[4];
+        String imageName[]=new String[4];
         try
         {
             DataBaseSqlite db=new DataBaseSqlite(this);
@@ -718,11 +736,19 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
             {
                 do
                 {
-                    urlImage[i]="http://www.shahrma.com/image/business/"+rows.getString(2);
-                    Log.i("AddressImage", urlImage[i]);
+                    if(i<=3) {
+                        urlImage[i] = "http://www.shahrma.com/image/business/" + rows.getString(2);
+                        Log.i("AddressImage", urlImage[i]);
+                        imageName[i] = rows.getString(2);
+                        Log.i("ImageName", imageName[i]);
+                    }
                     i++;
 
                 }while (rows.moveToNext());
+                image1.setTag(imageName[0]);
+                image2.setTag(imageName[1]);
+                image3.setTag(imageName[2]);
+                image4.setTag(imageName[3]);
                 Picasso.with(this).load(urlImage[0]).placeholder(R.drawable.fab_plus_icon).error(R.drawable.img_not_found).into(image1);
                 Picasso.with(this).load(urlImage[1]).placeholder(R.drawable.fab_plus_icon).error(R.drawable.img_not_found).into(image2);
                 Picasso.with(this).load(urlImage[2]).placeholder(R.drawable.fab_plus_icon).error(R.drawable.img_not_found).into(image3);
