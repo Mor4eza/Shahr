@@ -176,7 +176,7 @@ public class SqliteTOjson {
         return Result_json;
     }
 
-    public  String getBusinessTOjsonArray(Integer id,Integer memberId,String market,String phone,String mobile,String fax,String email,String businessowner,String address,String description,String startdate,String expirationdate,String subset,Integer subsetid,Double latitude,Double longitude,Integer areaid,String area,String user,Integer field1)
+    public  String getBusinessTOjsonArray(Integer id,Integer memberId,String market,String phone,String mobile,String fax,String email,String businessowner,String address,String description,String startdate,String expirationdate,String subset,Integer subsetid,Double latitude,Double longitude,Integer areaid,String area,String user,String field1)
     {
         String Result_json="";
         try{

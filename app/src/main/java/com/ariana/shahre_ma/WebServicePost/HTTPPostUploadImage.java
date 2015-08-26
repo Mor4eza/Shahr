@@ -211,7 +211,7 @@ public class HTTPPostUploadImage extends AsyncTask<String,Integer,Integer>
             dialog.dismiss();
 
             AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-            alertDialog.setTitle("هشدار ");
+            alertDialog.setTitle("پیام");
             alertDialog.setMessage("عکس ثبت شد .");
             alertDialog.setButton("باشه", new DialogInterface.OnClickListener()
             {

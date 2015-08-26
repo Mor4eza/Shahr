@@ -225,7 +225,7 @@ public class Add_New_Business extends ActionBarActivity  {
                 // Showing Alert Message
                 alertDialog.show();
 
-            } else if (Market_field.length() == 0) {
+            } else if (Market_field.equals("") || Market_field.equals("null")) {
                 AlertDialog alertDialog = new AlertDialog.Builder(Add_New_Business.this).create();
                 alertDialog.setTitle("هشدار ");
                 alertDialog.setMessage("زمینه فعالیت خود را وارد کنید");
@@ -288,7 +288,7 @@ public class Add_New_Business extends ActionBarActivity  {
                         Market_desc.getText().toString().trim(), dt.Now(), EXPDateTime(), "null"
                         , query.getsubsetID(Market_subset.getText().toString().trim()),
                         fc.GetLatitude_Business(), fc.GetLongtiude_Business(), query.getAreaID(Market_area.getText().toString().trim()),
-                        "null", "null", Fields_ID[0]);
+                        "null", "null",Market_field.getText().toString());
 
 
                 Log.i("JSONnewBusiness", str);

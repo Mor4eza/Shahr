@@ -336,12 +336,12 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
 
 
 
-            if(len==0) {
+            if(len==0)
+            {
                 //  Toast.makeText(get, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
                 Log.i("Count Business : ", "فروشگاه ثبت نشد");
                 pd.dismiss();
                 Toast.makeText(context,"نتیجه ای یافت نشد",Toast.LENGTH_LONG).show();
-
             }
 
             else {

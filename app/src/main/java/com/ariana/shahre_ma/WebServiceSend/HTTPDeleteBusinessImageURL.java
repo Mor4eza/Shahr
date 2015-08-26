@@ -121,7 +121,7 @@ public class HTTPDeleteBusinessImageURL extends AsyncTask<String, Void, Boolean>
             pd.dismiss();
 
             AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-            alertDialog.setTitle("هشدار ");
+            alertDialog.setTitle("پیام");
             alertDialog.setMessage("عکس حذف شد .");
             alertDialog.setButton("باشه", new DialogInterface.OnClickListener()
             {
