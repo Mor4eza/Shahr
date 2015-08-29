@@ -135,27 +135,24 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
             {
                 DataBaseSqlite dbs = new DataBaseSqlite(context);
                 Integer ID = GetResponse();
-                Log.i("respones1",String.valueOf(ID));
+                Log.i("respones1", String.valueOf(ID));
                 if (ID >0) {
                     Log.i("fc.GetMember_Name()", fc.GetMember_Name());
                     dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
                     pd.dismiss();
 
 
-                    AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-                    alertDialog.setTitle("پیام ");
-                    alertDialog.setMessage("کاربر ساخته شد");
-                    alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            Intent i = new Intent(context, MainActivity.class);
-                            context.startActivity(i);
-                            ((Activity)context).finish();
-
-                        }
-                    });
-
-                    alertDialog.show();
+                            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                            alertDialog.setTitle("خوش آمدید");
+                            alertDialog.setMessage("ورود شما را به خانواده بزرگ شهر ما تبریک می گوییم .");
+                            alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent i = new Intent(context, MainActivity.class);
+                                    context.startActivity(i);
+                                    ((Activity)context).finish();
+                                }
+                            });
+                            alertDialog.show();
 
 
                 }

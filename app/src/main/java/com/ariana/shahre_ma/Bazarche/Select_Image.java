@@ -1,5 +1,7 @@
 package com.ariana.shahre_ma.Bazarche;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -211,6 +213,16 @@ public class Select_Image extends ActionBarActivity implements ImageView.OnClick
 
 
     public void submit(View view) {
-        finish();
+
+        AlertDialog alertDialog = new AlertDialog.Builder(Select_Image.this).create();
+        alertDialog.setTitle("تبریک");
+        alertDialog.setMessage("کسب وکار شما ثبت شد،از این پس میتوانید برای کسب وکار خود امتیاز جمع آوری کرده و بیشتر در معرض دید باشید.");
+        alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+               finish();
+            }
+        });
+        alertDialog.show();
+
     }
 }

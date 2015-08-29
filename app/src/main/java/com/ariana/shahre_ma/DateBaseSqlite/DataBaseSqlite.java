@@ -1397,6 +1397,13 @@ Context context;
         db.close();
 
     }
+    public void delete_Interest()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE  FROM "+ InstructionsSqlite.TABLE_NAME_Interest);
+        db.close();
+
+    }
 
     /**
      *

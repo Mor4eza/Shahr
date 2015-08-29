@@ -130,9 +130,21 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
                     dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
 
                     Log_In.btn.setProgress(100);
-                    Intent i =new Intent(context, MainActivity.class);
-                    context.startActivity(i);
-                    ((Activity) context).finish();
+
+                    Log_In.btn.setProgress(0);
+                    AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                    alertDialog.setTitle("خوش آمدید");
+                    alertDialog.setMessage("ورود شما را به خانواده بزرگ شهر ما تبریک می گوییم .");
+                    alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent i = new Intent(context, MainActivity.class);
+                            context.startActivity(i);
+                            ((Activity) context).finish();
+                        }
+                    });
+                    alertDialog.show();
+
+
 
                 } else
                 {

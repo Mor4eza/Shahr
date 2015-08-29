@@ -40,23 +40,24 @@ public class MainService extends Service {
     @Override
     public void onStart(Intent intent, int startId)
     {
-        super.onStart(intent, startId);
-
-        Log.i("Service", "onStart");
-
         try {
-            noti = new HTTPGetNotificationJson(this);
-            noti.SetUrl_MemberId(query.getMemberId());
-            noti.execute();
+            super.onStart(intent, startId);
 
-            HTTPGetInterestJson httpGetInterestJson = new HTTPGetInterestJson(this);
-            httpGetInterestJson.SetUrl_Interest(query.getMemberId());
-            httpGetInterestJson.execute();
-        }
-        catch (Exception e)
-        {
+            Log.i("Service", "onStart");
 
+            try {
+                noti = new HTTPGetNotificationJson(this);
+                noti.SetUrl_MemberId(query.getMemberId());
+                noti.execute();
+
+                HTTPGetInterestJson httpGetInterestJson = new HTTPGetInterestJson(this);
+                httpGetInterestJson.SetUrl_Interest(query.getMemberId());
+                httpGetInterestJson.execute();
+            } catch (Exception e) {
+
+            }
         }
+        catch (Exception e){}
     }
 
     @Override

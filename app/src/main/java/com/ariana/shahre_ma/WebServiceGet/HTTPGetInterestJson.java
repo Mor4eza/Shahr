@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
-import com.ariana.shahre_ma.Jobs;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,30 +81,28 @@ public class HTTPGetInterestJson  extends AsyncTask<String,Void, Integer>
 
     @Override
     protected void onPostExecute(Integer result) {
-
-
         onPostExecute(result);
-        if (result == 1)
-        {
+        try {
+            if (result == 1) {
 
-            try {
+                try {
 
-                DataBaseSqlite dbs = new DataBaseSqlite(context);
-                for (int i = 0; i < len; i++) {
-                    dbs.Add_Interest(subsetid[i], memberid[i]);
-                    Log.i("onPostExecuteInterest", "strt1");
+                    DataBaseSqlite db = new DataBaseSqlite(context);
+                    db.delete_Interest();
+                    for (int i = 0; i < len; i++) {
+
+                        db.Add_Interest(subsetid[i], memberid[i]);
+                        Log.i("onPostExecuteInterest", "strt1");
+                    }
+                    pd.dismiss();
+                } catch (Exception e) {
+                    Log.e("ExceptionInterest", e.toString());
                 }
-                pd.dismiss();
-            }
-            catch (Exception e)
-            {
-                Log.e("ExceptionInterest", e.toString());
-            }
-        }
-        else
-        {
+            } else {
 
+            }
         }
+        catch (Exception e){}
     }
 
     /**
