@@ -17,7 +17,6 @@ import android.widget.RelativeLayout;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.ListExpand.Continent;
 import com.ariana.shahre_ma.ListExpand.Country;
-import com.ariana.shahre_ma.MyCity.My_city;
 import com.ariana.shahre_ma.MyCity.TotalListener;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
