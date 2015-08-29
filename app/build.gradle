@@ -22,6 +22,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             proguardFile 'C:/Users/ariana2/AppData/Local/Android/sdk/tools/proguard/proguard-android.txt'
             zipAlignEnabled true
@@ -41,8 +42,6 @@ dependencies {
     compile('com.mikepenz:materialdrawer:3.0.9@aar') {
         transitive = true
     }
-    compile files('libs/osmbonuspack_v5.0.jar')
-    //compile 'com.android.support:appcompat-v7:22.1.1'
 
     //appCompact
 
