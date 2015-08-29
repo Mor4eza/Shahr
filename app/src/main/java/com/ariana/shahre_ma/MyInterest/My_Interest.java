@@ -1,6 +1,8 @@
 package com.ariana.shahre_ma.MyInterest;
 
+import android.app.AlertDialog;
 import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -15,12 +17,12 @@ import android.widget.RelativeLayout;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.ListExpand.Continent;
 import com.ariana.shahre_ma.ListExpand.Country;
+import com.ariana.shahre_ma.MyCity.My_city;
 import com.ariana.shahre_ma.MyCity.TotalListener;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.Service.MyReceiver;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetInterestJson;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostInterestJson;
 import com.github.amlcurran.showcaseview.ShowcaseView;
@@ -91,11 +93,21 @@ public class My_Interest extends ActionBarActivity implements TotalListener {
     public void SendPostInterest(View v) {
        SqliteTOjson json=new SqliteTOjson(this);
         Log.i("", json.getSqliteInterestTOjson());
+        if(ns.checkInternetConnection()) {
+            HTTPPostInterestJson httpinterest = new HTTPPostInterestJson(this);
+            httpinterest.SetInterest_Json(json.getSqliteInterestTOjson());
+            httpinterest.execute();
+        }else{
+            AlertDialog alertDialog = new AlertDialog.Builder(My_Interest.this).create();
+            alertDialog.setTitle("هشدار");
+            alertDialog.setMessage("اینترنت قطع می باشد");
+            alertDialog.setButton("خب", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
 
-        HTTPPostInterestJson httpinterest=new HTTPPostInterestJson(this);
-        httpinterest.SetInterest_Json(json.getSqliteInterestTOjson());
-        httpinterest.execute();
-
+                }
+            });
+            alertDialog.show();
+        }
 
     }
 

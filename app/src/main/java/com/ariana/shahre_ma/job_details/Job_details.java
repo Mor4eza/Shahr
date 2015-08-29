@@ -1,6 +1,5 @@
 package com.ariana.shahre_ma.job_details;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -23,15 +22,6 @@ import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceSend.HTTPSendBookMarkURL;
 
-import org.osmdroid.DefaultResourceProxyImpl;
-import org.osmdroid.ResourceProxy;
-import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
-import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.ItemizedIconOverlay;
-import org.osmdroid.views.overlay.OverlayItem;
-
-import java.util.ArrayList;
 import java.util.Locale;
 
 public class Job_details extends ActionBarActivity implements ActionBar.TabListener {
@@ -111,7 +101,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
         mViewPager.setCurrentItem(tab.getPosition());
 
         if (tab.getPosition()==2){
-       map();
+        //map();
       // route();
 
         }else if(tab.getPosition()==1){
@@ -206,7 +196,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
     }
 
 
-
+/*
    public void map(){
        try {
            ResourceProxy resourceProxy;
@@ -231,7 +221,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
        }
 
 
-    }
+    }*/
 
 
   @Override

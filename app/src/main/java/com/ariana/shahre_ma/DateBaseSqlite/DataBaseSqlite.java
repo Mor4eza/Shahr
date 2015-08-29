@@ -64,7 +64,7 @@ Context context;
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older  tables if existed
-        db.execSQL("DROP TABLE IF EXISTS "+ InstructionsSqlite.TABLE_NAME_SUBSET);
+      /*  db.execSQL("DROP TABLE IF EXISTS "+ InstructionsSqlite.TABLE_NAME_SUBSET);
         db.execSQL("DROP TABLE IF EXISTS "+ InstructionsSqlite.TABLE_NAME_SUBSET_PRODUCT);
         db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_COLLECTION);
         db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_COLLECTION_PRODUCT);
@@ -85,9 +85,10 @@ Context context;
         db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_LikeDisCount);
         db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_DisCountMember);
         db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_Advertisment);
-        db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_BUSINESS_IMAGE);
+        db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_BUSINESS_IMAGE);*/
         // create fresh  tables
         this.onCreate(db);
+
     }
 
     public void Add_subset(Integer id, String subsetname, Integer collectionid) {

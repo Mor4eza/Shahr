@@ -18,6 +18,8 @@ import com.ariana.shahre_ma.Settings.KeySettings;
 import java.util.ArrayList;
 import java.util.List;
 
+import jonathanfinerty.once.Once;
+
 /**
  * Created by ariana2 on 7/9/2015.
  */
@@ -66,6 +68,12 @@ public class CityDialog extends Dialog {
             }
         });
 
+        String showWhatsNew = "showCity";
+
+        if (!Once.beenDone(Once.THIS_APP_INSTALL, showWhatsNew)) {
+         btnchange.setText("انتخاب شهر");
+            Once.markDone(showWhatsNew);
+        }
 
     }
 

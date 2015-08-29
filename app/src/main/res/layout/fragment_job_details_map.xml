@@ -7,12 +7,22 @@
     tools:context="com.z3_soft.shahre_ma.job_details.Job_details_map$PlaceholderFragment">
 
 
+
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/map"
+        tools:context="com.z3_soft.shahre_ma.job_details.Job_details_map$PlaceholderFragment"
+        android:name="com.google.android.gms.maps.MapFragment"
+        />
+<!--
   <org.osmdroid.views.MapView android:id="@+id/map"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         tilesource="Mapnik"
-
         />
+-->
 
     <ImageButton
         android:layout_width="50dp"
