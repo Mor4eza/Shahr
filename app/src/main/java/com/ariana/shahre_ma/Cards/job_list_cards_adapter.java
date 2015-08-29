@@ -254,10 +254,19 @@ private  static Context context;
             viewHolder.tvNature.setText(nature.getName());
             viewHolder.tvDesNature.setText(nature.getDes());
 
-
-            image_url_1 = "http://www.shahrma.com/image/business/" + nature.getNameImage();
+          /*  image_url_1 = "http://www.shahrma.com/image/business/"+fc.GetSubsetId()+".jpg";
             Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(viewHolder.imgThumbnail);
+            Log.i("nature",nature.getNameImage());*/
+            
+            if (nature.getNameImage().equals("null")||nature.getNameImage().equals("")||nature.getNameImage().equals(null)||nature.getNameImage()==null){
+                Log.i("SubsetId",fc.GetSubsetId().toString());
+                image_url_1 = "http://www.shahrma.com/image/business/" +fc.GetSubsetId()+".jpg";
+                Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(viewHolder.imgThumbnail);
 
+            }else {
+                image_url_1 = "http://www.shahrma.com/image/business/" + nature.getNameImage();
+                Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(viewHolder.imgThumbnail);
+            }
 
             viewHolder.rates.setRating((float) nature.getRate());
             viewHolder.rates.setTag(nature.getmId());
