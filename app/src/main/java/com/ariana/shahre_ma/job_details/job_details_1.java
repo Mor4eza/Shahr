@@ -337,17 +337,18 @@ public class job_details_1 extends ActionBarActivity {
                      if (rows.moveToFirst()) {
                          do {
                              Log.i("image",rows.getString(2));
-                             final TextSliderView textSliderView = new TextSliderView(getActivity());
-                             textSliderView.image("http://www.shahrma.com/image/business/" + rows.getString(2));
-                             slider.addSlider(textSliderView);
+                             final TextSliderView textSliderView1 = new TextSliderView(getActivity());
+                             textSliderView1.image("http://www.shahrma.com/image/business/" + rows.getString(2));
+                             slider.addSlider(textSliderView1);
 
                          } while (rows.moveToNext());
                      }
                  }else{
                      final TextSliderView textSliderView = new TextSliderView(getActivity());
-                     textSliderView.image(R.drawable.img_not_found);
+                     textSliderView.image("http://www.shahrma.com/image/business/" +query.getsubsetID(subset.getText().toString())+".jpg");
                      slider.addSlider(textSliderView);
                  }
+
                  slider.stopAutoCycle();
                  slider.setPresetTransformer(SliderLayout.Transformer.ZoomOutSlide);
                  slider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);

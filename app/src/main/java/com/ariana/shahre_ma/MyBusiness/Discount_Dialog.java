@@ -5,28 +5,25 @@ import android.app.Dialog;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.datetimepicker.date.DatePickerDialog;
 import com.appyvet.rangebar.RangeBar;
 import com.ariana.shahre_ma.Date.DateTime;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostDisCount;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostDisCountEdit;
+import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
+import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,12 +31,12 @@ import java.util.List;
 /**
  * Created by ariana2 on 7/12/2015.
  */
-public class Discount_Dialog extends Dialog {
+public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDateSetListener {
 
     Context context;
     DateTime dt=new DateTime();
     EditText tv_desc;
-    EditText tv_date;
+    Button tv_date;
     EditText tv_title;
     Button btn_save;
     RangeBar rangeBar;
@@ -48,8 +45,12 @@ public class Discount_Dialog extends Dialog {
     Boolean SaveEdit=false;
     Spinner Sp_City;
     Integer countday=7;
+    FragmentManager fragmentManager;
     public Discount_Dialog(Context context) {
         super(context);
+        this.context=context;
+        fragmentManager = ((FragmentActivity) context).getFragmentManager();
+
     }
 
     @Override
@@ -93,9 +94,8 @@ public class Discount_Dialog extends Dialog {
                     fc.SetPercent_DisCount(percent);
                     fc.SetBusinessId_DisCount(fc.GetBusiness_Id());
 
-                    if (fc.GetText_DisCount().equals(""))
-                    {
-                        AlertDialog alertDialog=new AlertDialog.Builder(getContext()).create();
+                    if (fc.GetText_DisCount().equals("")) {
+                        AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
                         alertDialog.setTitle("هشدار");
                         alertDialog.setMessage("متن تخفیف را وارد کنید");
                         alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
@@ -108,9 +108,8 @@ public class Discount_Dialog extends Dialog {
 
 
                         alertDialog.show();
-                    } else if (fc.GetDescription_DisCount().equals(""))
-                    {
-                        AlertDialog alertDialog=new AlertDialog.Builder(getContext()).create();
+                    } else if (fc.GetDescription_DisCount().equals("")) {
+                        AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
                         alertDialog.setTitle("هشدار");
                         alertDialog.setMessage("توضیحات برای تخیفیف را وارد کنید");
                         alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
@@ -124,9 +123,8 @@ public class Discount_Dialog extends Dialog {
 
                         alertDialog.show();
 
-                    } else if (fc.GetPercent_DisCount().length() == 0)
-                    {
-                        AlertDialog alertDialog=new AlertDialog.Builder(getContext()).create();
+                    } else if (fc.GetPercent_DisCount().length() == 0) {
+                        AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
                         alertDialog.setTitle("هشدار");
                         alertDialog.setMessage("درصد تخفیف را معیین کنید");
                         alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
@@ -140,8 +138,7 @@ public class Discount_Dialog extends Dialog {
 
                         alertDialog.show();
 
-                    } else
-                    {
+                    } else {
                         json = sqliteTOjson.getDisCountTOjson(fc.GetId_DisCount(), fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());
 
                         HTTPPostDisCountEdit httpPostDisCount = new HTTPPostDisCountEdit(getContext());
@@ -163,9 +160,8 @@ public class Discount_Dialog extends Dialog {
                     fc.SetPercent_DisCount(percent);
                     fc.SetBusinessId_DisCount(fc.GetBusiness_Id());
 
-                    if (fc.GetText_DisCount().equals(""))
-                    {
-                        AlertDialog alertDialog=new AlertDialog.Builder(getContext()).create();
+                    if (fc.GetText_DisCount().equals("")) {
+                        AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
                         alertDialog.setTitle("هشدار");
                         alertDialog.setMessage("متن تخفیف را وارد کنید");
                         alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
@@ -178,9 +174,8 @@ public class Discount_Dialog extends Dialog {
 
 
                         alertDialog.show();
-                    } else if (fc.GetDescription_DisCount().equals(""))
-                    {
-                        AlertDialog alertDialog=new AlertDialog.Builder(getContext()).create();
+                    } else if (fc.GetDescription_DisCount().equals("")) {
+                        AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
                         alertDialog.setTitle("هشدار");
                         alertDialog.setMessage("توضیحات برای تخیفیف را وارد کنید");
                         alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
@@ -194,9 +189,8 @@ public class Discount_Dialog extends Dialog {
 
                         alertDialog.show();
 
-                    } else if (fc.GetPercent_DisCount().length() == 0)
-                    {
-                        AlertDialog alertDialog=new AlertDialog.Builder(getContext()).create();
+                    } else if (fc.GetPercent_DisCount().length() == 0) {
+                        AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
                         alertDialog.setTitle("هشدار");
                         alertDialog.setMessage("درصد تخفیف را معیین کنید");
                         alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
@@ -210,8 +204,7 @@ public class Discount_Dialog extends Dialog {
 
                         alertDialog.show();
 
-                    } else
-                    {
+                    } else {
                         json = sqliteTOjson.getDisCountTOjson(fc.GetId_DisCount(), fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());
 
                         HTTPPostDisCount httpPostDisCount = new HTTPPostDisCount(getContext());
@@ -259,12 +252,29 @@ public class Discount_Dialog extends Dialog {
             }
         });
 
+
+        tv_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PersianCalendar now = new PersianCalendar();
+                DatePickerDialog dpd = DatePickerDialog.newInstance(
+                        Discount_Dialog.this,
+                        now.getPersianYear(),
+                        now.getPersianMonth(),
+                        now.getPersianDay()
+                );
+
+                dpd.show(fragmentManager,"date");
+                
+            }
+        });
+
     }
 
 
     void InitViews(){
         tv_desc=(EditText)findViewById(R.id.et_desc);
-        tv_date=(EditText)findViewById(R.id.tv_discount_date);
+        tv_date=(Button)findViewById(R.id.btn_discount_date);
         btn_save=(Button)findViewById(R.id.discount_save);
         rangeBar=(RangeBar)findViewById(R.id.rangebar);
         tv_title=(EditText)findViewById(R.id.et_discount_title);
@@ -273,7 +283,7 @@ public class Discount_Dialog extends Dialog {
 
     void SpinnerSetUp(){
          Sp_City = (Spinner) findViewById(R.id.sp_expire);
-        Sp_City.setPrompt("انتخاب شهر:");
+        Sp_City.setPrompt("مدت تخفیف:");
         List<String> list = new ArrayList<String>();
         list.add("1 هفته");
         list.add("10 روز");
@@ -310,4 +320,16 @@ public class Discount_Dialog extends Dialog {
 
     }
 
+    @Override
+    public void onDateSet(DatePickerDialog datePickerDialog, int year, int month, int day) {
+        if (month <= 9)
+        {
+            month=Integer.valueOf("0"+(String.valueOf(month)));
+        }
+        if (day<=9)
+        {
+            day=Integer.valueOf("0"+(String.valueOf(day)));
+        }
+        tv_date.setText(String.valueOf(year + "/" + month + "/" + day));
+    }
 }
