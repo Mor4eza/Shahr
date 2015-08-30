@@ -42,6 +42,8 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
 
 
     private  List<Integer> selectId=new ArrayList<>();
+    private  List<Integer> selectDiscountId=new ArrayList<>();
+    private  List<Integer> selectSubsetId=new ArrayList<>();
     private  List<Double>  selectLongtiude=new ArrayList<>();
     private  List<Double>  selectLatitude=new ArrayList<>();
     private  List<Double>  selectRate=new ArrayList<>();
@@ -200,7 +202,9 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
                     });
                     alertDialog.show();
 
-                } else {
+                }
+                else
+                {
 
 
                     Intent intent = new Intent(this.context, Jobs_List.class);
@@ -210,9 +214,12 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
 
                     for (int i = 0; i < len; i++) {
                         dbs.delete_DisCount(discountid[i]);
-                        if (discountid[i] == 0) {
+                        if (discountid[i] == 0)
+                        {
                             Log.i("ifbusiness", "0");
-                        } else {
+                        }
+                        else
+                        {
                             Log.i("elsebusiness", "i>0");
                             dbs.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i], likediscount[i], dislikediscount[i]);
                         }
@@ -387,6 +394,8 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
 
 
                 selectId.add(area.getInt("Id"));
+                selectDiscountId.add(area.getInt("DiscountId"));
+                selectSubsetId.add(area.getInt("SubsetId"));
                 selectLatitude.add(Double.valueOf(area.getString("Latitude")));
                 selectLongtiude.add(Double.valueOf(area.getString("Longitude")));
                 selectAddress.add(area.getString("Address"));
@@ -400,6 +409,8 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
             }
 
             fdb.SetIdBusiness(selectId);
+            fdb.SetDisCountId(selectDiscountId);
+            fdb.SetSubsetId(selectSubsetId);
             fdb.SetLatitudeBusiness(selectLatitude);
             fdb.SetLongtiudeBusiness(selectLongtiude);
             fdb.SetRateBusiness(selectRate);

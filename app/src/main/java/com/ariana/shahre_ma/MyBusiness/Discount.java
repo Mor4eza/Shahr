@@ -31,6 +31,8 @@ public class Discount extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discount);
+
+
         tv_id=(TextView)findViewById(R.id.tv_dis_id);
         discount_Adapter adapter = new discount_Adapter(this, generateData());
         listView = (ListView) findViewById(R.id.listview);

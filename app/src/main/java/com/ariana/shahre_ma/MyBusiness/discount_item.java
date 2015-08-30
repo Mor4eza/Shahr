@@ -4,7 +4,8 @@ package com.ariana.shahre_ma.MyBusiness;
 /**
  * Created by ariana2 on 7/12/2015.
  */
-public class discount_item {
+public class discount_item
+{
     private String title;
     private String description;
     private String expireDate;

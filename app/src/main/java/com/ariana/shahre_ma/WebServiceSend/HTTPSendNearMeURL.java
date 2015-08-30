@@ -38,6 +38,7 @@ public class HTTPSendNearMeURL extends AsyncTask<String,Void,Integer >
     FieldDataBusiness fdb=new FieldDataBusiness();
 
     private List<Integer> selectId=new ArrayList<>();
+    private  List<Integer> selectDiscountId=new ArrayList<>();
     private List<Integer> selectsubsetId=new ArrayList<>();
     private  List<Double>  selectLongtiude=new ArrayList<>();
     private  List<Double>  selectLatitude=new ArrayList<>();
@@ -342,6 +343,7 @@ public class HTTPSendNearMeURL extends AsyncTask<String,Void,Integer >
                 longitude[i] = Double.valueOf(area.getString("Longitude"));
 
                 selectsubsetId.add(area.getInt("SubsetId"));
+                selectDiscountId.add(area.getInt("DiscountId"));
                 selectId.add(area.getInt("Id"));
                 selectLatitude.add(Double.valueOf(area.getString("Latitude")));
                 selectLongtiude.add(Double.valueOf(area.getString("Longitude")));
@@ -356,6 +358,7 @@ public class HTTPSendNearMeURL extends AsyncTask<String,Void,Integer >
             }
 
             fdb.SetSubsetId(selectsubsetId);
+            fdb.SetDisCountId(selectDiscountId);
             fdb.SetIdBusiness(selectId);
             fdb.SetLatitudeBusiness(selectLatitude);
             fdb.SetLongtiudeBusiness(selectLongtiude);
