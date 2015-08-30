@@ -9,6 +9,7 @@ public class TopBusiness_Item {
     private String mDes;
     private Integer mId;
     private int mThumbnail;
+    private Integer mSubsetId;
 
     public void setId(Integer id)
     {
@@ -42,4 +43,7 @@ public class TopBusiness_Item {
     public void setThumbnail(int thumbnail) {
         this.mThumbnail = thumbnail;
     }
+
+    public void setSubsetId(Integer subsetid){this.mSubsetId=subsetid;}
+    public Integer getSubsetId(){return  this.mSubsetId;}
 }

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.job_details.Job_details;
@@ -28,12 +29,14 @@ public class TopDiscount_Card_Adapter extends RecyclerView.Adapter<TopDiscount_C
     TopDiscount_Item nature;
     Context context;
     FieldClass fc=new FieldClass();
+    Query query;
     public TopDiscount_Card_Adapter(Context context) {
 
         super();
         this.context=context;
         fc=new FieldClass();
         mItems = new ArrayList<TopDiscount_Item>();
+        query=new Query(context);
 
         DataBaseSqlite db=new DataBaseSqlite(context);
         Cursor rows=db.select_AllBusinessDisCount();
@@ -45,6 +48,7 @@ public class TopDiscount_Card_Adapter extends RecyclerView.Adapter<TopDiscount_C
                 nature.setName(rows.getString(1));
                 nature.setDes(rows.getString(8));
                 nature.setId(rows.getInt(0));
+                nature.setSubsetId(rows.getInt(14));
                 nature.setThumbnail(R.drawable.pooshak);
                 mItems.add(nature);
             }while (rows.moveToNext());
@@ -70,6 +74,7 @@ public class TopDiscount_Card_Adapter extends RecyclerView.Adapter<TopDiscount_C
         viewHolder.tvDesNature.setText(nature.getDes());
         viewHolder.tvDesNature.setTag(nature.getId());
         viewHolder.imgThumbnail.setImageResource(nature.getThumbnail());
+        viewHolder.tvSubset.setText(query.getsubsetName(nature.getSubsetId()));
     }
 
     @Override
@@ -83,6 +88,7 @@ public class TopDiscount_Card_Adapter extends RecyclerView.Adapter<TopDiscount_C
         public ImageView imgThumbnail;
         public TextView tvNature;
         public TextView tvDesNature;
+        public TextView tvSubset;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -90,6 +96,7 @@ public class TopDiscount_Card_Adapter extends RecyclerView.Adapter<TopDiscount_C
             imgThumbnail = (ImageView)itemView.findViewById(R.id.img_thumbnail);
             tvNature = (TextView)itemView.findViewById(R.id.tv_nature);
             tvDesNature = (TextView)itemView.findViewById(R.id.tv_des_nature);
+            tvSubset=(TextView)itemView.findViewById(R.id.tv_subset);
             itemView.setOnClickListener(new View.OnClickListener(){
 
                 @Override

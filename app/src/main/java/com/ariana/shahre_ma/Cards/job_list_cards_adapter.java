@@ -104,6 +104,7 @@ private  static Context context;
                         nature.setName(fdb.GetMarketBusiness().get(i));
                         nature.setDes(fdb.GetAddressBusiness().get(i));
                         nature.setSubsetId(fdb.GetSubsetId().get(i));
+                        nature.setDisCount(fdb.GetDisCountId().get(i));
                         nature.setRate(fdb.GetRateBusiness().get(i));
                         nature.setmId(fdb.GetIdBusiness().get(i));
                         nature.setNameImage(fdb.GetSrc().get(i));
@@ -143,6 +144,7 @@ private  static Context context;
                             nature.setName(fdb.GetMarketBusiness().get(i));
                             nature.setDes(fdb.GetAddressBusiness().get(i));
                             nature.setSubsetId(fdb.GetSubsetId().get(i));
+                            nature.setDisCount(fdb.GetDisCountId().get(i));
                             nature.setRate(fdb.GetRateBusiness().get(i));
                             nature.setmId(fdb.GetIdBusiness().get(i));
                             nature.setNameImage(fdb.GetSrc().get(i));
@@ -178,7 +180,7 @@ private  static Context context;
                                 nature.setName(allrows.getString(1));
                                 nature.setDes(allrows.getString(8));
                                 nature.setSubsetId(allrows.getInt(14));
-                                nature.setDisCount(allrows.getInt(14));
+                               // nature.setDisCount(allrows.getInt(14));
                                 Log.i("Rate", String.valueOf(allrows.getDouble(30)));
                                 nature.setRate(allrows.getDouble(30));
                                 nature.setmId(allrows.getInt(0));
@@ -260,7 +262,7 @@ private  static Context context;
             Log.i("nature",nature.getNameImage());*/
             
             if (nature.getNameImage().equals("null")||nature.getNameImage().equals("")||nature.getNameImage().equals(null)||nature.getNameImage()==null){
-                Log.i("SubsetId",fc.GetSubsetId().toString());
+                Log.i("SubsetId",nature.getSubsetId().toString());
                 image_url_1 = "http://www.shahrma.com/image/business/" +nature.getSubsetId()+".jpg";
                 Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(viewHolder.imgThumbnail);
 
