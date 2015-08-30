@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.job_details.Job_details;
@@ -25,15 +26,12 @@ public class TopBusiness_Card_Adapter extends RecyclerView.Adapter<TopBusiness_C
     TopBusiness_Item  nature;
     FieldClass fc=new FieldClass();
     Context context;
+    Query query;
     public TopBusiness_Card_Adapter(Context context) {
         super();
         this.context=context;
         mItems = new ArrayList<TopBusiness_Item>();
-
-
-
-
-
+        query=new Query(context);
 
         DataBaseSqlite db=new DataBaseSqlite(context);
         Cursor rows=db.select_AllBusinessTops();
@@ -44,6 +42,7 @@ public class TopBusiness_Card_Adapter extends RecyclerView.Adapter<TopBusiness_C
                 nature = new TopBusiness_Item();
                 nature.setName(rows.getString(1));
                 nature.setDes(rows.getString(8));
+                nature.setSubsetId(rows.getInt(14));
                 nature.setId(rows.getInt(0));
                 nature.setThumbnail(R.drawable.pooshak);
                 mItems.add(nature);
@@ -70,6 +69,7 @@ public class TopBusiness_Card_Adapter extends RecyclerView.Adapter<TopBusiness_C
         viewHolder.tvDesNature.setText(nature.getDes());
         viewHolder.tvDesNature.setTag(nature.getId());
         viewHolder.imgThumbnail.setImageResource(nature.getThumbnail());
+        viewHolder.tvSubset.setText(query.getsubsetName(nature.getSubsetId()));
     }
 
     @Override
@@ -83,6 +83,7 @@ public class TopBusiness_Card_Adapter extends RecyclerView.Adapter<TopBusiness_C
         public ImageView imgThumbnail;
         public TextView tvNature;
         public TextView tvDesNature;
+        public TextView tvSubset;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -90,6 +91,7 @@ public class TopBusiness_Card_Adapter extends RecyclerView.Adapter<TopBusiness_C
             imgThumbnail = (ImageView)itemView.findViewById(R.id.img_thumbnail);
             tvNature = (TextView)itemView.findViewById(R.id.tv_nature);
             tvDesNature = (TextView)itemView.findViewById(R.id.tv_des_nature);
+            tvSubset=(TextView)itemView.findViewById(R.id.tv_subset);
             itemView.setOnClickListener(new View.OnClickListener(){
 
                 @Override

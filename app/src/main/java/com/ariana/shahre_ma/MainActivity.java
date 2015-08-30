@@ -345,7 +345,7 @@ public class MainActivity extends ActionBarActivity {
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName(R.string.Works).withIcon(FontAwesome.Icon.faw_money),
                         new PrimaryDrawerItem().withName(R.string.Near).withIcon(FontAwesome.Icon.faw_map_marker),
-                       // new PrimaryDrawerItem().withName(R.string.title_activity_bazarche).withIcon(FontAwesome.Icon.faw_shopping_cart),
+                        new PrimaryDrawerItem().withName(R.string.title_activity_bazarche).withIcon(FontAwesome.Icon.faw_shopping_cart),
                         new DividerDrawerItem(),
                         new SecondaryDrawerItem().withName(R.string.My_business).withIcon(FontAwesome.Icon.faw_briefcase),
                         new SecondaryDrawerItem().withName(R.string.My_Account).withIcon(FontAwesome.Icon.faw_user),

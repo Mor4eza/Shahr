@@ -58,8 +58,22 @@
                 android:layout_below="@+id/tv_nature"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="43dp" />
+                android:layout_marginTop="20dp" />
 
+            <TextView
+                android:id="@+id/tv_subset"
+                android:text=""
+                android:alpha=".8"
+                android:gravity="center_vertical"
+                android:drawablePadding="5dp"
+                android:textColor="@color/white"
+                android:background="@color/md_red_400"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_discount"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="5dp" />
 
             <TextView
                  android:gravity="right"
