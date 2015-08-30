@@ -9,6 +9,7 @@ import java.util.List;
 public class FieldDataBusiness
 {
     private static List<Integer> Id=new ArrayList<>();
+    private static List<Integer> DisCountId=new ArrayList<>();
     private static List<Double> Longtiude=new ArrayList<>();
     private static List<Double> Latitude=new ArrayList<>();
     private static List<Double> Rate=new ArrayList<>();
@@ -40,6 +41,16 @@ public class FieldDataBusiness
         return SubsetId;
     }
 
+
+    public void SetDisCountId(List<Integer> disCountId)
+    {
+        DisCountId=disCountId;
+    }
+
+    public List<Integer> GetDisCountId()
+    {
+        return DisCountId;
+    }
 
     /**
      * Get rate Business

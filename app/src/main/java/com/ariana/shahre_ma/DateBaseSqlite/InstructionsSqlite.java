@@ -421,7 +421,6 @@ public class  InstructionsSqlite {
             " RateCount INTEGER ," +
             " RateValue DOUBLE ," +
             " Src TEXT " +
-
             ");";
 
     // SQL statement to create business table
@@ -458,7 +457,6 @@ public class  InstructionsSqlite {
             " RateCount INTEGER ," +
             " RateValue DOUBLE ," +
             " Src TEXT " +
-
             ");";
 
     // SQL statement to create Like table

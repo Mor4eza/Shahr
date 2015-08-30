@@ -103,8 +103,7 @@ private  static Context context;
                         nature = new Job_lists_card_item();
                         nature.setName(fdb.GetMarketBusiness().get(i));
                         nature.setDes(fdb.GetAddressBusiness().get(i));
-                        //nature.setThumbnail(R.drawable.img_not_found);
-
+                        nature.setSubsetId(fdb.GetSubsetId().get(i));
                         nature.setRate(fdb.GetRateBusiness().get(i));
                         nature.setmId(fdb.GetIdBusiness().get(i));
                         nature.setNameImage(fdb.GetSrc().get(i));
@@ -143,7 +142,7 @@ private  static Context context;
                             nature = new Job_lists_card_item();
                             nature.setName(fdb.GetMarketBusiness().get(i));
                             nature.setDes(fdb.GetAddressBusiness().get(i));
-                            nature.setThumbnail(R.drawable.img_not_found);
+                            nature.setSubsetId(fdb.GetSubsetId().get(i));
                             nature.setRate(fdb.GetRateBusiness().get(i));
                             nature.setmId(fdb.GetIdBusiness().get(i));
                             nature.setNameImage(fdb.GetSrc().get(i));
@@ -178,11 +177,13 @@ private  static Context context;
                                 nature = new Job_lists_card_item();
                                 nature.setName(allrows.getString(1));
                                 nature.setDes(allrows.getString(8));
-                                nature.setThumbnail(R.drawable.img_not_found);
+                                nature.setSubsetId(allrows.getInt(14));
+                                nature.setDisCount(allrows.getInt(14));
                                 Log.i("Rate", String.valueOf(allrows.getDouble(30)));
                                 nature.setRate(allrows.getDouble(30));
                                 nature.setmId(allrows.getInt(0));
                                 nature.setNameImage(allrows.getString(31));
+
 
 
 
@@ -260,10 +261,12 @@ private  static Context context;
             
             if (nature.getNameImage().equals("null")||nature.getNameImage().equals("")||nature.getNameImage().equals(null)||nature.getNameImage()==null){
                 Log.i("SubsetId",fc.GetSubsetId().toString());
-                image_url_1 = "http://www.shahrma.com/image/business/" +fc.GetSubsetId()+".jpg";
+                image_url_1 = "http://www.shahrma.com/image/business/" +nature.getSubsetId()+".jpg";
                 Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(viewHolder.imgThumbnail);
 
-            }else {
+            }
+            else
+            {
                 image_url_1 = "http://www.shahrma.com/image/business/" + nature.getNameImage();
                 Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(viewHolder.imgThumbnail);
             }

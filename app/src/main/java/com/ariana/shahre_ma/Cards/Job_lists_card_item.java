@@ -17,9 +17,22 @@ public class Job_lists_card_item {
     private String mNameImage;
     private int mThumbnail;
     private Integer mId;
+    private Integer mSubsetId;
+    private Integer mDiscount;
+
+
+
 
     public void setImage(Bitmap image){this.Image=image;}
     public Bitmap getImage(){return  this.Image;}
+
+
+    public void setSubsetId(Integer subsetid){this.mSubsetId=subsetid;}
+    public Integer getSubsetId(){return  this.mSubsetId;}
+
+    public void setDisCount(Integer discount){this.mDiscount=discount;}
+    public Integer getDisCount(){return  this.mDiscount;}
+
 
     public double getRate() {
         return rate;
