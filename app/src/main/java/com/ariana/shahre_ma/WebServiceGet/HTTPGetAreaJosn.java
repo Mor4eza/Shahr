@@ -90,8 +90,8 @@ public class HTTPGetAreaJosn extends AsyncTask<String,Void,Integer>
 
                         if(setting.getAllUpdate())
                         {
-                                HTTPGetFieldActivityJson httpGetFieldActivityJson = new HTTPGetFieldActivityJson(context);
-                                httpGetFieldActivityJson.execute();
+                                HTTPGetSubsetJson httpGetSubsetJson = new HTTPGetSubsetJson(context);
+                                httpGetSubsetJson.execute();
                         }
                     }
                     else

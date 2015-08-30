@@ -67,10 +67,13 @@ public class HTTPGetSubsetJson extends AsyncTask<String,Void,Integer>
     @Override
     protected void onPostExecute(Integer result) {
 //        onPostExecute(result);
-        if(result==1) {
+        KeySettings setting=new KeySettings(context);
+        if(result==1)
+        {
             try {
-                KeySettings setting=new KeySettings(context);
-                if(len>0) {
+
+                if(len>0)
+                {
 
                     DataBaseSqlite dbs = new DataBaseSqlite(context);
                     dbs.delete_Subset();
@@ -79,6 +82,22 @@ public class HTTPGetSubsetJson extends AsyncTask<String,Void,Integer>
                         dbs.Add_subset(Id[i], subsetname[i], collectionId[i]);
 
                     }
+
+
+                    if(setting.getAllUpdate())
+                    {
+                        HTTPGetFieldActivityJson httpGetFieldActivityJson = new HTTPGetFieldActivityJson(context);
+                        httpGetFieldActivityJson.execute();
+                    }
+
+                }
+                else
+                {
+                    if (setting.getAllUpdate())
+                    {
+                        Intent intent = new Intent("GetCity");
+                        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                    }
                 }
 
 
@@ -86,18 +105,29 @@ public class HTTPGetSubsetJson extends AsyncTask<String,Void,Integer>
                 Intent intent = new Intent("Collection");
                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
-                if(setting.getAllUpdate()) {
+                if(setting.getAllUpdate())
+                {
                     HTTPGetAreaJosn httpGetAreaJosn = new HTTPGetAreaJosn(context);
                     httpGetAreaJosn.execute();
                 }
 
-            } catch (Exception e) {
+            } catch (Exception e)
+            {
 
+                if (setting.getAllUpdate())
+                {
+                    Intent intent = new Intent("GetCity");
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                }
             }
         }
         else
         {
-
+            if (setting.getAllUpdate())
+            {
+                Intent intent = new Intent("GetCity");
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+            }
         }
     }
 
