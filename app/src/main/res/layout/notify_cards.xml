@@ -26,7 +26,7 @@
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:background="@color/md_blue_grey_600"
-                android:textColor="@color/white"
+                android:textColor="@color/md_white_1000"
                 android:layout_gravity="start"
                 android:gravity="left"
                 android:textSize="17sp"
@@ -40,7 +40,7 @@
                 android:layout_height="30dp"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
-                android:textColor="@color/white"
+                android:textColor="@color/md_white_1000"
                 android:background="@color/md_blue_grey_600"
                 android:layout_gravity="end"
 

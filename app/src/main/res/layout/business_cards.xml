@@ -54,7 +54,7 @@
                 android:id="@+id/my_business_rate"
                 android:layout_width="wrap_content"
                 style="?android:attr/ratingBarStyleSmall"
-                android:background="@color/blue_focused"
+                android:background="@color/md_blue_500"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/fab_toolbar"
                 android:layout_alignParentLeft="true"

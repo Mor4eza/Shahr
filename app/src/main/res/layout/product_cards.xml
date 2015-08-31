@@ -99,7 +99,7 @@
                 android:id="@+id/my_product_price"
                 android:layout_width="wrap_content"
                 android:text="قیمت"
-                android:background="@color/blue_focused"
+                android:background="@color/md_blue_A100"
                 android:layout_height="wrap_content"
 
                 android:layout_alignParentBottom="true"

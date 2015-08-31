@@ -23,7 +23,7 @@
 
             <View
                 android:id="@+id/center"
-                android:background="@color/red"
+                android:background="@color/md_red_400"
                 android:layout_width="3dp"
                 android:layout_height="3dp"
                 android:layout_centerInParent="true"

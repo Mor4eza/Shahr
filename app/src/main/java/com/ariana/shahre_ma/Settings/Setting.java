@@ -3,17 +3,17 @@ package com.ariana.shahre_ma.Settings;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ListView;
-import android.support.v7.widget.SwitchCompat;
 import android.widget.Toast;
 
-import com.android.datetimepicker.time.RadialPickerLayout;
-import com.android.datetimepicker.time.TimePickerDialog;
 import com.ariana.shahre_ma.R;
+import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
+import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -84,7 +84,6 @@ public class Setting extends ActionBarActivity implements TimePickerDialog.OnTim
                     TimePickerDialog t = new TimePickerDialog();
                     t.initialize(Setting.this, 16, 00, false);
                     t.show(getFragmentManager(), "end");
-                    t.setUserVisibleHint(true);
                     t.setOnTimeSetListener(new TimePickerDialog.OnTimeSetListener() {
                         @Override
                         public void onTimeSet(RadialPickerLayout radialPickerLayout, int i, int i1) {

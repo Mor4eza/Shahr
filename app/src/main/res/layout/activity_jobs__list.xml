@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0 مورد"
-        android:textColor="@color/white"
+        android:textColor="@color/md_white_1000"
         android:id="@+id/tv_count"
         android:background="@color/accent"
         android:alpha=".5"
