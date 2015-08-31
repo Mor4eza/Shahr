@@ -41,19 +41,34 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="10dp"/>
-        <RatingBar
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:id="@+id/ratingBar1"
-            android:layout_gravity="center"
-            android:numStars="5"
-            android:progressTint="#ffff3d15"
-            android:progressBackgroundTintMode="multiply"
-            android:progressBackgroundTint="#ff31bdff"
-            android:progressTintMode="multiply"
-            android:secondaryProgressTint="#ffff3013"
-            android:secondaryProgressTintMode="multiply"
-            />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            >
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:id="@+id/ratingBar1"
+                android:layout_gravity="center"
+                android:numStars="5"
+                android:progressTint="#ffff3d15"
+                android:progressBackgroundTintMode="multiply"
+                android:progressBackgroundTint="#ff31bdff"
+                android:progressTintMode="multiply"
+                android:secondaryProgressTint="#ffff3013"
+                android:secondaryProgressTintMode="multiply"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="5dp"
+                android:text=""
+                android:id="@+id/market_rateCount"/>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -10,11 +10,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 
 import com.appyvet.rangebar.RangeBar;
 import com.ariana.shahre_ma.Date.DateTime;
@@ -26,9 +23,6 @@ import com.ariana.shahre_ma.WebServicePost.HTTPPostDisCount;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostDisCountEdit;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by ariana2 on 7/12/2015.
@@ -45,8 +39,9 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
     FieldClass fc=new FieldClass();
     String percent="";
     Boolean SaveEdit=false;
-    Spinner Sp_City;
+    Button Expire;
     Integer countday=7;
+    int ViewId;
     FragmentManager fragmentManager;
     public Discount_Dialog(Context context) {
         super(context);
@@ -65,7 +60,6 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
         np.setMinValue(0);*/
 
         setTitle("ثبت تخفیف جدید");
-        SpinnerSetUp();
         InitViews();
         ShowEditDisCount();
         rangeBar.setRight(20);
@@ -217,42 +211,6 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
             }
         });
 
-        Sp_City.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-
-                switch (pos) {
-                    case 0:
-
-                        countday = 7;
-                        break;
-                    case 1:
-
-                        countday = 10;
-                        break;
-                    case 2:
-
-                        countday = 20;
-                        break;
-                    case 3:
-
-                        countday = 30;
-                        break;
-                    case 4:
-                        countday = 60;
-                        break;
-                    case 5:
-                        countday = 90;
-                        break;
-
-                }
-            }
-
-
-            public void onNothingSelected(AdapterView<?> arg0) {
-
-            }
-        });
 
 
         tv_date.setOnClickListener(new View.OnClickListener() {
@@ -265,12 +223,28 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
                         now.getPersianMonth(),
                         now.getPersianDay()
                 );
-
-                dpd.show(fragmentManager,"date");
+                ViewId=tv_date.getId();
+                dpd.show(fragmentManager,"StartDate");
                 
             }
         });
 
+
+        Expire.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PersianCalendar now = new PersianCalendar();
+                DatePickerDialog dpd = DatePickerDialog.newInstance(
+                        Discount_Dialog.this,
+                        now.getPersianYear(),
+                        now.getPersianMonth(),
+                        now.getPersianDay()
+                );
+                ViewId=Expire.getId();
+                dpd.show(fragmentManager,"EndDate");
+
+            }
+        });
     }
 
 
@@ -280,23 +254,7 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
         btn_save=(Button)findViewById(R.id.discount_save);
         rangeBar=(RangeBar)findViewById(R.id.rangebar);
         tv_title=(EditText)findViewById(R.id.et_discount_title);
-
-    }
-
-    void SpinnerSetUp(){
-         Sp_City = (Spinner) findViewById(R.id.sp_expire);
-        Sp_City.setPrompt("مدت تخفیف:");
-        List<String> list = new ArrayList<String>();
-        list.add("1 هفته");
-        list.add("10 روز");
-        list.add("20 روز");
-        list.add("1 ماه");
-        list.add("2 ماه");
-        list.add("3 ماه");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(),
-                android.R.layout.simple_spinner_item, list);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Sp_City.setAdapter(dataAdapter);
+        Expire=(Button)findViewById(R.id.btn_discount_expire);
 
     }
 
@@ -339,6 +297,10 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
         {
            Day="0"+Day;
         }
-        tv_date.setText(String.valueOf(Year + "/" + Month + "/" + Day));
+        if (ViewId==tv_date.getId()) {
+            tv_date.setText(String.valueOf(Year + "/" + Month + "/" + Day));
+        }else{
+            Expire.setText(String.valueOf(Year + "/" + Month + "/" + Day));
+        }
     }
 }

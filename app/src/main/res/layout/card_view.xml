@@ -40,7 +40,7 @@
                 android:alpha="0.9"
                 android:textColor="#fff"
                 android:textSize="26sp"
-                android:text="Test"
+                android:text=""
                 android:layout_alignTop="@+id/img_thumbnail"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
@@ -67,7 +67,7 @@
                 android:gravity="center_vertical"
                 android:drawablePadding="5dp"
                 android:textColor="@color/md_white_1000"
-                android:background="@color/md_red_400"
+                android:background="@drawable/text_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_discount"
@@ -80,7 +80,7 @@
                  android:id="@+id/tv_des_nature"
                  android:layout_width="fill_parent"
                  android:layout_height="50dp"
-                 android:text="hello"
+                 android:text=""
                  android:layout_alignParentBottom="true"
                 />
 

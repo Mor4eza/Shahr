@@ -82,35 +82,46 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textColor="#ffff231b" />
-
-    <Button
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ثبت نام نکرده اید؟"
-        android:textColor="@color/md_white_1000"
-        android:id="@+id/btn_register"
-        android:onClick="register"
         android:background="@color/primary"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/fakeView1"
-        android:layout_toStartOf="@+id/fakeView1" />
-
+        android:layout_toStartOf="@+id/fakeView1">
     <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="ثبت نام نکرده اید؟"
+        android:textColor="@color/md_white_1000"
+        android:id="@+id/btn_register"
+        android:onClick="register"
+        android:background="?android:attr/selectableItemBackground"
+         />
+        </FrameLayout>
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="رمز خود را فراموش کرده اید؟"
-        android:textColor="@color/md_white_1000"
-        android:id="@+id/btn_forget"
-        android:textSize="12sp"
         android:background="@color/primary"
-        android:onClick="forget"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/btn_login"
         android:layout_alignEnd="@+id/btn_login"
         android:layout_toRightOf="@+id/fakeView1"
-        android:layout_toEndOf="@+id/fakeView1" />
+        android:layout_toEndOf="@+id/fakeView1">
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:text="رمز خود را فراموش کرده اید؟"
+        android:textColor="@color/md_white_1000"
+        android:id="@+id/btn_forget"
+        android:textSize="12sp"
+        android:background="?android:attr/selectableItemBackground"
+        android:onClick="forget"
+
+       />
+    </FrameLayout>
 
     <TextView
         android:layout_width="wrap_content"

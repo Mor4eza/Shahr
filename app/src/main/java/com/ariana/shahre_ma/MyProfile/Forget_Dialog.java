@@ -3,10 +3,10 @@ package com.ariana.shahre_ma.MyProfile;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceSend.HTTPSendForgetMemberURL;
@@ -38,7 +38,8 @@ public class Forget_Dialog extends Dialog {
                 HTTPSendForgetMemberURL httpSendForgetMemberURL=new HTTPSendForgetMemberURL(context);
                 httpSendForgetMemberURL.Setusername(etEmail.getText().toString());
                 httpSendForgetMemberURL.execute();
-                Log.i("Send", etEmail.getText().toString());
+                dismiss();
+                Toast.makeText(getContext(),"رمز عبور به ایمیل شما ارسال شد",Toast.LENGTH_LONG).show();
             }
         });
 

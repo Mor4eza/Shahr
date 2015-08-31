@@ -83,6 +83,13 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="10dp"
         android:lines="3" />
+    <TextView
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:text="تاریخ شروع تخفیف:"
+        android:textSize="14dp"
+        android:layout_marginRight="5dp"
+        android:layout_gravity="end"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -105,18 +112,29 @@
     <TextView
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:text="مدت زمان تخفیف:"
+        android:text="تاریخ اتمام تخفیف:"
         android:textSize="14dp"
         android:layout_marginRight="5dp"
         android:layout_gravity="end"/>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical">
 
-    <Spinner
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btn_discount_expire"
+            android:layout_width="300dp"
+            android:hint="تاریخ اتمام"
             android:layout_height="wrap_content"
-            android:id="@+id/sp_expire"
+            android:layout_margin="10dp"
             android:layout_gravity="center_horizontal"
+            android:background="@android:drawable/edit_text"
             />
+
+    </LinearLayout>
+
 
     <Button
 
