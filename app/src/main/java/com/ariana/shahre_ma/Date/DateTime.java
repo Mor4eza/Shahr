@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.Date;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -69,13 +70,27 @@ public class DateTime
         return currentDateandTime.toString();
     }
 
-    public String Add(Integer day)
+    public String Add(Integer day,String date)
     {
-        sdf=new SimpleDateFormat("MM/dd/yyyy");
+      /*  sdf=new SimpleDateFormat("MM/dd/yyyy");
         Calendar c = Calendar.getInstance();
-        currentDateandTime = sdf.format(new Date());
+        currentDateandTime = sdf.format(date);
         c.add(Calendar.DATE, day);
-        String output = sdf.format(c.getTime());
+
+        String output = sdf.format(c.getTime());*/
+
+        String dt = date;  // Start date
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        Calendar c = Calendar.getInstance();
+        try {
+            c.setTime(sdf.parse(dt));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        c.add(Calendar.DATE, day);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
+        SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy");
+        String output = sdf1.format(c.getTime());
+
         return output.toString();
     }
 

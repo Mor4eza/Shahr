@@ -78,6 +78,7 @@ public class HTTPPostDisCountEdit extends AsyncTask<String,Void,Integer>
             HttpClient httpClient=new DefaultHttpClient();
             HttpContext httpContext=new BasicHttpContext();
             HttpPost httpPost=new HttpPost(urlDisCount);
+            Log.i("JsonPlstDisCountEdit",GetJson());
             StringEntity se=new StringEntity(GetJson(),"UTF-8");
 
             httpPost.setEntity(se);
@@ -123,6 +124,7 @@ public class HTTPPostDisCountEdit extends AsyncTask<String,Void,Integer>
                 db.delete_DisCountMember(Integer.parseInt(mesage));
                 db.Add_DisCountMember(Integer.parseInt(mesage), fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());
                 pd.dismiss();
+                fc.SetId_DisCount(0);//refresh Discount dialog for Add
             }
             catch (Exception e)
             {

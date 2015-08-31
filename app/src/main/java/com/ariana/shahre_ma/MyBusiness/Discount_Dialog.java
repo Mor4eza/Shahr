@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.appyvet.rangebar.RangeBar;
+import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -40,9 +41,13 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
     String percent="";
     Boolean SaveEdit=false;
     Button Expire;
+    String ExpireDate="";
     Integer countday=7;
     int ViewId;
     FragmentManager fragmentManager;
+    CalendarTool ct=new CalendarTool();
+    CalendarTool ct1=new CalendarTool();
+
     public Discount_Dialog(Context context) {
         super(context);
         this.context=context;
@@ -84,8 +89,10 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
                     fc.SetId_DisCount(fc.GetId_DisCount());
                     fc.SetText_DisCount(tv_title.getText().toString());
                     fc.SetImage_DisCount("");
-                    fc.SetStartDate_DisCount(tv_date.getText().toString());
-                    fc.SetExpirationDate_DisCount(dt.Add(countday));
+                    ct.setIranianDate(Integer.valueOf(tv_date.getText().toString().substring(0, 4)), Integer.valueOf(tv_date.getText().toString().substring(5, 7)), Integer.valueOf(tv_date.getText().toString().substring(8, 10)));
+                    fc.SetStartDate_DisCount(ct.getGregorianDate());
+                    ct1.setIranianDate(Integer.valueOf(ExpireDate.toString().substring(0, 4)), Integer.valueOf(ExpireDate.toString().substring(5, 7)), Integer.valueOf(ExpireDate.toString().substring(8, 10)));
+                    fc.SetExpirationDate_DisCount(ct1.getGregorianDate());
                     fc.SetDescription_DisCount(tv_desc.getText().toString());
                     fc.SetPercent_DisCount(percent);
                     fc.SetBusinessId_DisCount(fc.GetBusiness_Id());
@@ -134,24 +141,30 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
 
                         alertDialog.show();
 
-                    } else {
+                    }
+                    else
+                    {
+
                         json = sqliteTOjson.getDisCountTOjson(fc.GetId_DisCount(), fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());
 
                         HTTPPostDisCountEdit httpPostDisCount = new HTTPPostDisCountEdit(getContext());
                         httpPostDisCount.SetDisCountJson(json);
                         httpPostDisCount.execute();
+
                     }
 
 
                 }
-
+                else
                 {
                     Log.i("Save", "false");
                     fc.SetId_DisCount(1);
                     fc.SetText_DisCount(tv_title.getText().toString());
                     fc.SetImage_DisCount("");
-                    fc.SetStartDate_DisCount(dt.Now());
-                    fc.SetExpirationDate_DisCount(dt.Add(countday));
+                    ct.setIranianDate(Integer.valueOf(tv_date.getText().toString().substring(0, 4)), Integer.valueOf(tv_date.getText().toString().substring(5, 7)), Integer.valueOf(tv_date.getText().toString().substring(8, 10)));
+                    fc.SetStartDate_DisCount(ct.getGregorianDate());
+                    ct1.setIranianDate(Integer.valueOf(ExpireDate.toString().substring(0, 4)), Integer.valueOf(ExpireDate.toString().substring(5, 7)), Integer.valueOf(ExpireDate.toString().substring(8, 10)));
+                    fc.SetExpirationDate_DisCount(ct1.getGregorianDate());
                     fc.SetDescription_DisCount(tv_desc.getText().toString());
                     fc.SetPercent_DisCount(percent);
                     fc.SetBusinessId_DisCount(fc.GetBusiness_Id());
@@ -261,6 +274,11 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
     private  void ShowEditDisCount()
     {
         try {
+
+            tv_title.setText("");
+            tv_desc.setText("");
+            tv_date.setText("");
+
             DataBaseSqlite db = new DataBaseSqlite(getContext());
             Log.i("Id-DisCount", String.valueOf(fc.GetId_DisCount()));
             Cursor rows = db.select_AllDisCountMember(fc.GetId_DisCount());
@@ -274,8 +292,11 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
             Log.i("rangebar", (rows.getString(6)));
             rangeBar.setSeekPinByValue(Float.valueOf(rows.getString(6)));
 
-            if(fc.GetId_DisCount()>0)
-                SaveEdit=true;
+
+
+            if(fc.GetId_DisCount()>0) {
+                SaveEdit = true;
+            }
         }catch (Exception e){
             Log.i("Exception",e.toString());
         }
@@ -284,14 +305,14 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
 
     @Override
     public void onDateSet(DatePickerDialog datePickerDialog, int year, int month, int day) {
-        String Month=String.valueOf(month);
+        String Month=String.valueOf(month+1);
         String Day=String.valueOf(day);
         String Year=String.valueOf(year);
 
        Log.i("date",String.valueOf(year)+String.valueOf(month)+String.valueOf(day));
         if (month <= 9)
         {
-            Month="0"+Month;
+            Month="0"+(Month);
         }
         if (day<=9)
         {
@@ -301,6 +322,7 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
             tv_date.setText(String.valueOf(Year + "/" + Month + "/" + Day));
         }else{
             Expire.setText(String.valueOf(Year + "/" + Month + "/" + Day));
+            ExpireDate=Expire.getText().toString();
         }
     }
 }
