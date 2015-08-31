@@ -322,14 +322,19 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
 
     @Override
     public void onDateSet(DatePickerDialog datePickerDialog, int year, int month, int day) {
+        String Month=String.valueOf(month);
+        String Day=String.valueOf(day);
+        String Year=String.valueOf(year);
+
+       Log.i("date",String.valueOf(year)+String.valueOf(month)+String.valueOf(day));
         if (month <= 9)
         {
-            month=Integer.valueOf("0"+(String.valueOf(month)));
+            Month="0"+Month;
         }
         if (day<=9)
         {
-            day=Integer.valueOf("0"+(String.valueOf(day)));
+           Day="0"+Day;
         }
-        tv_date.setText(String.valueOf(year + "/" + month + "/" + day));
+        tv_date.setText(String.valueOf(Year + "/" + Month + "/" + Day));
     }
 }
