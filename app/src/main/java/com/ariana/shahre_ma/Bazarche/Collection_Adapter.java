@@ -119,9 +119,9 @@ public class Collection_Adapter extends BaseExpandableListAdapter {
             heading.setText(continent.getName().trim());
 
             if (isExpanded) {
-                view.setBackgroundColor(context.getResources().getColor(R.color.blue_focused));
+                view.setBackgroundColor(context.getResources().getColor(R.color.md_light_blue_300));
             } else {
-                view.setBackgroundColor(context.getResources().getColor(R.color.white));
+                view.setBackgroundColor(context.getResources().getColor(R.color.md_white_1000));
             }
         }
         catch (Exception e)
