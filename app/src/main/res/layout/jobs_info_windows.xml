@@ -10,6 +10,7 @@
         android:layout_width="170dp"
         android:layout_height="70dp"
         card_view:cardCornerRadius="3dp"
+        card_view:cardElevation="5dp"
         card_view:cardUseCompatPadding="true"
 
         >

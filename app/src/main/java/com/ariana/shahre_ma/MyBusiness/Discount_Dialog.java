@@ -312,11 +312,9 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
             Log.i("Exception", rows.getString(3));
             tv_title.setText(rows.getString(1));
             tv_desc.setText(rows.getString(5));
-            tv_date.setText((rows.getString(3).substring(0, 4))+"/"+(rows.getString(3).substring(5, 7))+"/"+(rows.getString(3).substring(8, 10)));
-            Log.i("rangebar",(rows.getString(6)));
-            rangeBar.setRight(Integer.parseInt(rows.getString(6)));
-
-
+            tv_date.setText((rows.getString(3).substring(0, 4)) + "/" + (rows.getString(3).substring(5, 7)) + "/" + (rows.getString(3).substring(8, 10)));
+            Log.i("rangebar", (rows.getString(6)));
+            rangeBar.setSeekPinByValue(Float.valueOf(rows.getString(6)));
 
             if(fc.GetId_DisCount()>0)
                 SaveEdit=true;

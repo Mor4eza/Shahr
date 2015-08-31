@@ -152,7 +152,7 @@ public class MyListAdapter extends BaseExpandableListAdapter {
             final RelativeLayout header = (RelativeLayout) view.findViewById(R.id.relative_parent);
 
             if (isExpanded) {
-                view.setBackgroundColor(context.getResources().getColor(R.color.md_light_blue_300));
+                view.setBackgroundColor(context.getResources().getColor(R.color.md_light_blue_200));
             } else {
                 view.setBackgroundColor(context.getResources().getColor(R.color.md_white_1000));
             }
