@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class Discount extends ActionBarActivity {
 
-
+    discount_Adapter adapter;
     FieldClass fc=new FieldClass();
     Query query =new Query(this);
     public static  ListView listView;
@@ -34,7 +34,7 @@ public class Discount extends ActionBarActivity {
 
 
         tv_id=(TextView)findViewById(R.id.tv_dis_id);
-        discount_Adapter adapter = new discount_Adapter(this, generateData());
+         adapter = new discount_Adapter(this, generateData());
         listView = (ListView) findViewById(R.id.listview);
         listView.setAdapter(adapter);
         final int count = adapter.getCount();
@@ -43,14 +43,18 @@ public class Discount extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == count - 1) {
-/*
+
+                    fc.SetId_DisCount(adapter.getItem(position).GetId());
                     Discount_Dialog dialog = new Discount_Dialog(Discount.this);
                     dialog.show();
-                    Toast.makeText(getApplicationContext(),String.valueOf(tv_id.getText()).toString(),Toast.LENGTH_LONG).show();
-*/
 
-                } else {
-                    Toast.makeText(getApplicationContext(), "فقط مجاز به ویرایش آخرین تخفیف هستید", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),String.valueOf(adapter.getItem(position).GetId()),Toast.LENGTH_LONG).show();
+
+
+                }
+                else
+                {
+                    //Toast.makeText(getApplicationContext(), "فقط مجاز به ویرایش آخرین تخفیف هستید", Toast.LENGTH_LONG).show();
                     Snackbar.make(listView, "فقط مجاز به ویرایش آخرین تخفیف هستید", Snackbar.LENGTH_LONG).show();
 
                 }
@@ -79,7 +83,7 @@ public class Discount extends ActionBarActivity {
             do {
 
 
-                items.add(new discount_item(" % "+rows.getString(6),rows.getString(5),rows.getString(4),rows.getString(1),rows.getString(3),rows.getInt(0)));
+                items.add(new discount_item(" % "+rows.getString(6),rows.getString(5),(rows.getString(4).substring(0, 4))+"/"+(rows.getString(4).substring(5, 7))+"/"+(rows.getString(4).substring(8, 10)),rows.getString(1),(rows.getString(3).substring(0, 4))+"/"+(rows.getString(3).substring(5, 7))+"/"+(rows.getString(3).substring(8, 10)),rows.getInt(0)));
 
 
                 //  items.add(new discount_item("20% تخفیف", "به مناسبت روز مرد", "1394/5/8"));
