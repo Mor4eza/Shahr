@@ -167,7 +167,7 @@ public class job_details_1 extends ActionBarActivity {
                  Log.i("Longitude", String.valueOf(allrows.getDouble(16)));
                  name.setText(allrows.getString(1));//Market
                  tel.setText(allrows.getString(3));//Phone
-                 tv_rateCount.setText(allrows.getInt(30));
+                 //tv_rateCount.setText(allrows.getInt(30));
 
                  //check email
                  if(allrows.getString(6).equals("null") || allrows.getString(6).equals(null) || allrows.getString(6).equals("")) {
@@ -221,7 +221,7 @@ public class job_details_1 extends ActionBarActivity {
                  fc.SetLongtiude_Business(allrows.getDouble(16));//Longtiude
                  name.setText(allrows.getString(1));//Market
                  tel.setText(allrows.getString(3));//Phone
-                 tv_rateCount.setText(allrows.getInt(30)); //rateCount
+                // tv_rateCount.setText(allrows.getInt(30)); //rateCount
 
                  //check email
                  if(allrows.getString(6).equals("null") || allrows.getString(6).equals(null) || allrows.getString(6).equals("")){
@@ -277,7 +277,7 @@ public class job_details_1 extends ActionBarActivity {
                  Log.i("Longitude", String.valueOf(allrows.getDouble(11)));
                  name.setText(allrows.getString(1));//Market
                  tel.setText(allrows.getString(2));//Phone
-                 tv_rateCount.setText(allrows.getInt(30)); //rateCount
+                // tv_rateCount.setText(allrows.getInt(30)); //rateCount
                  //check email
                  if(allrows.getString(5).equals("null") || allrows.getString(5).equals(null) || allrows.getString(5).equals("")){
                      web.setText("");//Email
