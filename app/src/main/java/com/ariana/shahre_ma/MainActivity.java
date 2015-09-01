@@ -18,7 +18,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -214,7 +213,6 @@ public class MainActivity extends ActionBarActivity {
             do
             {
                 imag[i]=rows.getString(1);
-                Log.i("imag" + i, rows.getString(1));
                 i++;
             }while (rows.moveToNext());
         }
@@ -373,7 +371,6 @@ public class MainActivity extends ActionBarActivity {
 
                             try {
                                 int v = getPackageManager().getPackageInfo("com.google.android.gms", 0).versionCode;
-                                Log.i("Vesion",String.valueOf(v));
                             // Showing status
                             if (v >=6587000) {
                                 Intent i = new Intent(getApplicationContext(), NearMeActivity.class);
@@ -453,7 +450,6 @@ public class MainActivity extends ActionBarActivity {
                                 DataBaseSqlite db = new DataBaseSqlite(MainActivity.this);
                                 Cursor cursor = db.select_Member();
                                 cursor.moveToFirst();
-                                Log.i("memberID", String.valueOf(cursor.getInt(0)));
                                 if (cursor.getInt(0) > 0) {
                                     Intent i = new Intent(getApplicationContext(), My_Profile.class);
                                     startActivity(i);
@@ -472,7 +468,6 @@ public class MainActivity extends ActionBarActivity {
                                 DataBaseSqlite db = new DataBaseSqlite(MainActivity.this);
                                 Cursor cursor = db.select_Member();
                                 cursor.moveToFirst();
-                                Log.i("memberID", String.valueOf(cursor.getInt(0)));
                                 if (cursor.getInt(0) > 0) {
                                     Intent i = new Intent(getApplicationContext(), BookMark.class);
                                     startActivity(i);
@@ -688,7 +683,6 @@ public class MainActivity extends ActionBarActivity {
             String message = intent.getStringExtra("message");
             slider.removeAllSliders();
             Image_slider();
-            Log.d("receiver", "Got message: " + message);
         }
 
     };

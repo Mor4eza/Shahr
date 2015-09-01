@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
@@ -55,7 +54,6 @@ public class SplashActivity extends ActionBarActivity {
                         alertDialog.setMessage("برای اولین بار ورود به برنامه اینترنت مورد نیاز است . اینترنت خود را روشن کنید و بر روی ادامه کلیک کنید .");
                         alertDialog.setButton("ادامه", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Log.i("Broad", "restart1");
                                 Restart();
                             }
                         });
@@ -159,7 +157,6 @@ public class SplashActivity extends ActionBarActivity {
         @Override
         public void onReceive(Context context, Intent intent)
         {
-            Log.i("Broad","restart");
             Restart();
         }
     };
@@ -194,7 +191,6 @@ public class SplashActivity extends ActionBarActivity {
                 alertDialog.setMessage("برای اولین بار ورود به برنامه اینترنت مورد نیاز است . اینترنت خود را روشن کنید و بر روی ادامه کلیک کنید .");
                 alertDialog.setButton("ادامه", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.i("Broad", "restart");
                         Restart();
                     }
                 });

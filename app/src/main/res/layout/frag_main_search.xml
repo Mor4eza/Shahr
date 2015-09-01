@@ -1,11 +1,7 @@
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-     android:layout_height="match_parent"
-     android:layout_width="fill_parent">
-
 
 <RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -74,11 +70,13 @@
         android:layout_height="wrap_content"
         android:background="@color/accent"
         android:id="@+id/frameLayout"
+        android:layout_marginTop="10dp"
         android:layout_below="@id/relative_advance"
         android:layout_centerHorizontal="true">
     <Button
         android:layout_width="180dp"
         android:layout_height="fill_parent"
+
         android:background="?android:attr/selectableItemBackground"
         android:text="جستجو..."
         android:textColor="@color/md_white_1000"
@@ -94,6 +92,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btn_advanced"
+        android:visibility="gone"
+        android:textColor="@color/primary_dark"
         android:background="?android:attr/selectableItemBackground"
         android:drawableLeft="@android:drawable/arrow_down_float"
         android:gravity="center_vertical"
@@ -102,4 +102,3 @@
         />
 
 </RelativeLayout>
-</ScrollView>
