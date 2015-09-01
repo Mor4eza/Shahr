@@ -51,18 +51,18 @@ public class Discount extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == count - 1) {
 
-                    fc.SetId_DisCount(adapter.getItem(position).GetId());
+                 /*   fc.SetId_DisCount(adapter.getItem(position).GetId());
                     Discount_Dialog dialog = new Discount_Dialog(Discount.this);
                     dialog.show();
 
                     Toast.makeText(getApplicationContext(),String.valueOf(adapter.getItem(position).GetId()),Toast.LENGTH_LONG).show();
-
+*/
 
                 }
                 else
                 {
                     //Toast.makeText(getApplicationContext(), "فقط مجاز به ویرایش آخرین تخفیف هستید", Toast.LENGTH_LONG).show();
-                    Snackbar.make(listView, "فقط مجاز به ویرایش آخرین تخفیف هستید", Snackbar.LENGTH_LONG).show();
+                  //  Snackbar.make(listView, "فقط مجاز به ویرایش آخرین تخفیف هستید", Snackbar.LENGTH_LONG).show();
 
                 }
             }
@@ -136,7 +136,7 @@ public class Discount extends ActionBarActivity {
 
                 if(date1.compareTo(date2)>0)
                 {
-                    System.out.println("Date1 is after Date2");
+                    Snackbar.make(listView, "تا زمانی که اتمام تاریخ فعلی به پایان نرسیده نمی توانید تخفیف جدید ثبت کنید", Snackbar.LENGTH_LONG).show();
                 }
                 else if(date1.compareTo(date2)<0)
                 {
@@ -146,11 +146,11 @@ public class Discount extends ActionBarActivity {
                 }
                 else if(date1.compareTo(date2)==0)
                 {
-                    System.out.println("Date1 is equal to Date2");
+                    Snackbar.make(listView, "تا زمانی که اتمام تاریخ فعلی به پایان نرسیده نمی توانید تخفیف جدید ثبت کنید", Snackbar.LENGTH_LONG).show();
                 }
                 else
                 {
-                    System.out.println("How to get here?");
+                    Snackbar.make(listView, "تا زمانی که اتمام تاریخ فعلی به پایان نرسیده نمی توانید تخفیف جدید ثبت کنید", Snackbar.LENGTH_LONG).show();
                 }
 
             }catch(ParseException ex){

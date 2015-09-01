@@ -90,8 +90,10 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
                     fc.SetText_DisCount(tv_title.getText().toString());
                     fc.SetImage_DisCount("");
                     ct.setIranianDate(Integer.valueOf(tv_date.getText().toString().substring(0, 4)), Integer.valueOf(tv_date.getText().toString().substring(5, 7)), Integer.valueOf(tv_date.getText().toString().substring(8, 10)));
+                    Log.i("startDateEdit", ct.getGregorianDate());
                     fc.SetStartDate_DisCount(ct.getGregorianDate());
                     ct1.setIranianDate(Integer.valueOf(ExpireDate.toString().substring(0, 4)), Integer.valueOf(ExpireDate.toString().substring(5, 7)), Integer.valueOf(ExpireDate.toString().substring(8, 10)));
+                    Log.i("ExpireDateEdit", ct1.getGregorianDate());
                     fc.SetExpirationDate_DisCount(ct1.getGregorianDate());
                     fc.SetDescription_DisCount(tv_desc.getText().toString());
                     fc.SetPercent_DisCount(percent);
@@ -162,8 +164,10 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
                     fc.SetText_DisCount(tv_title.getText().toString());
                     fc.SetImage_DisCount("");
                     ct.setIranianDate(Integer.valueOf(tv_date.getText().toString().substring(0, 4)), Integer.valueOf(tv_date.getText().toString().substring(5, 7)), Integer.valueOf(tv_date.getText().toString().substring(8, 10)));
+                    Log.i("startDate", ct.getGregorianDate());
                     fc.SetStartDate_DisCount(ct.getGregorianDate());
                     ct1.setIranianDate(Integer.valueOf(ExpireDate.toString().substring(0, 4)), Integer.valueOf(ExpireDate.toString().substring(5, 7)), Integer.valueOf(ExpireDate.toString().substring(8, 10)));
+                    Log.i("ExpireDate", ct1.getGregorianDate());
                     fc.SetExpirationDate_DisCount(ct1.getGregorianDate());
                     fc.SetDescription_DisCount(tv_desc.getText().toString());
                     fc.SetPercent_DisCount(percent);
@@ -289,6 +293,7 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
             tv_title.setText(rows.getString(1));
             tv_desc.setText(rows.getString(5));
             tv_date.setText((rows.getString(3).substring(0, 4)) + "/" + (rows.getString(3).substring(5, 7)) + "/" + (rows.getString(3).substring(8, 10)));
+            Expire.setText((rows.getString(4).substring(0, 4)) + "/" + (rows.getString(4).substring(5, 7)) + "/" + (rows.getString(4).substring(8, 10)));
             Log.i("rangebar", (rows.getString(6)));
             rangeBar.setSeekPinByValue(Float.valueOf(rows.getString(6)));
 

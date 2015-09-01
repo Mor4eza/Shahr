@@ -35,9 +35,7 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
     String mesage;
     Integer ID=0;
     FieldClass fc=new FieldClass();
-    private String[] blogTitles;
     Context context;
-
 
     /**
      *
@@ -117,13 +115,21 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
                 fc.SetMember_Name(area.getString("Name"));
                 fc.SetMember_Email(area.getString("Email"));
                 fc.SetMember_Mobile(area.getString("Mobile"));
-                fc.SetMember_Sex(area.getBoolean("Sex"));
                 fc.SetMember_UserName(area.getString("UserName"));
                 fc.SetMember_Password(area.getString("Password"));
                 fc.SetMember_CityId(area.getInt("CityId"));
                 fc.SetMember_Email(area.getString("Email"));
                 fc.SetMember_Mobile(area.getString("Mobile"));
-                fc.SetMember_Age(area.getInt("Age"));
+
+                    if(String.valueOf(area.getString("Sex")).equals(null) || String.valueOf(area.getString("Sex")).equals("null"))
+                    fc.SetMember_Sex(true);
+                        else
+                    fc.SetMember_Sex(area.getBoolean("Sex"));
+
+                    if(String.valueOf(area.getString("Age")).equals(null) || String.valueOf(area.getString("Age")).equals("null"))
+                        fc.SetMember_Age(0);
+                        else
+                       fc.SetMember_Age(area.getInt("Age"));
 
                 }
                 catch (Exception e){

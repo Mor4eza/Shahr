@@ -120,9 +120,9 @@ public class HTTPPostDisCountEdit extends AsyncTask<String,Void,Integer>
         if(result==1)
         {
             try {
-                DataBaseSqlite db = new DataBaseSqlite(context);
+               /* DataBaseSqlite db = new DataBaseSqlite(context);
                 db.delete_DisCountMember(Integer.parseInt(mesage));
-                db.Add_DisCountMember(Integer.parseInt(mesage), fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());
+                db.Add_DisCountMember(Integer.parseInt(mesage), fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());*/
                 pd.dismiss();
                 fc.SetId_DisCount(0);//refresh Discount dialog for Add
             }
