@@ -112,16 +112,23 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
                 {
                 JSONObject area = new JSONObject(mesage);
 
+
                 ID = area.getInt("Id");
                 fc.SetMember_Name(area.getString("Name"));
                 fc.SetMember_Email(area.getString("Email"));
                 fc.SetMember_Mobile(area.getString("Mobile"));
-                fc.SetMember_Age(area.getInt("Age"));
                 fc.SetMember_Sex(area.getBoolean("Sex"));
                 fc.SetMember_UserName(area.getString("UserName"));
                 fc.SetMember_Password(area.getString("Password"));
-                fc.SetMember_CityId(area.getInt("CityId"));}
-                catch (Exception e){}
+                fc.SetMember_CityId(area.getInt("CityId"));
+                fc.SetMember_Email(area.getString("Email"));
+                fc.SetMember_Mobile(area.getString("Mobile"));
+                fc.SetMember_Age(area.getInt("Age"));
+
+                }
+                catch (Exception e){
+                    Log.i("ExceptionMemberJson",e.toString());
+                }
 
 
                 if (ID > 0)
@@ -143,6 +150,17 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
                         }
                     });
                     alertDialog.show();
+
+
+
+                    fc.SetMember_Name("");
+                    fc.SetMember_Email("");
+                    fc.SetMember_Mobile("");
+                    fc.SetMember_Age(0);
+                    fc.SetMember_Sex(true);
+                    fc.SetMember_UserName("");
+                    fc.SetMember_Password("");
+                    fc.SetMember_CityId(0);
 
 
 

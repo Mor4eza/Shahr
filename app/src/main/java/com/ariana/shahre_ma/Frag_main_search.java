@@ -1,5 +1,7 @@
 package com.ariana.shahre_ma;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -13,6 +15,9 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,14 +36,19 @@ import java.util.List;
 /**
  * Created by ariana2 on 7/16/2015.
  */
-public class Frag_main_search extends Fragment
-    {
+public class Frag_main_search extends Fragment {
+
     private String title;
     private int page;
     private Button btnSearch;
     private AutoCompleteTextView txtWhat;
     private AutoCompleteTextView txtWhere;
-
+    private AutoCompleteTextView txtField;
+    private EditText txtAddress;
+    private RelativeLayout advance;
+    private Button  btnAdvance;
+    private boolean visable=false;
+    private FrameLayout frame;
     FieldClass fc=new FieldClass();
     FieldDataBusiness fdb=new FieldDataBusiness();
     Cursor rows_Business;
@@ -91,24 +101,69 @@ public class Frag_main_search extends Fragment
 
 
     try {
-    btnSearch = (Button) view.findViewById(R.id.btn_search);
-    txtWhat = (AutoCompleteTextView) view.findViewById(R.id.et_search_what);
-    txtWhere = (AutoCompleteTextView) view.findViewById(R.id.et_search_where);
+        btnSearch = (Button) view.findViewById(R.id.btn_search);
+        txtWhat = (AutoCompleteTextView) view.findViewById(R.id.et_search_what);
+        txtWhere = (AutoCompleteTextView) view.findViewById(R.id.et_search_where);
+        txtField= (AutoCompleteTextView) view.findViewById(R.id.et_search_field);
+        txtAddress =(EditText) view.findViewById(R.id.et_search_address);
+        advance = (RelativeLayout) view.findViewById(R.id.relative_advance);
+        btnAdvance=(Button) view.findViewById(R.id.btn_advanced);
+        frame=(FrameLayout)view.findViewById(R.id.frameLayout);
+
+        btnAdvance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!visable) {
+                    MainActivity.top.closeTopView(true);
+                    advance.setVisibility(View.VISIBLE);
+                    advance.setAlpha(0.0f);
+                    frame.setAlpha(0.0f);
+                    advance.animate()
+                            .translationY(0)
+                            .setDuration(300)
+                            .alpha(1.0f)
+                            .setListener(new AnimatorListenerAdapter() {
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                    super.onAnimationEnd(animation);
+                                    advance.setVisibility(View.VISIBLE);
+                                    frame.animate().alpha(1.0f).setDuration(10);
+                                    btnAdvance.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(android.R.drawable.arrow_up_float), null, null, null);
+                                }
+                            });
+                    visable=true;
+                }else {
+                    frame.setAlpha(0.0f);
+                    advance.animate()
+                            .translationY(0)
+                            .alpha(0.0f)
+                            .setDuration(300)
+                            .setListener(new AnimatorListenerAdapter() {
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                    super.onAnimationEnd(animation);
+                                    advance.setVisibility(View.GONE);
+                                    frame.animate().alpha(1.0f).setDuration(10);
+                                    btnAdvance.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(android.R.drawable.arrow_down_float),null,null,null);
+                                }
+                            });
+                    visable=false;
+                }
+
+            }
+        });
+
+
+
 
         txtWhat.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-
                     boolean isValidKey = event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER;
                     boolean isValidAction = actionId == EditorInfo.IME_ACTION_DONE;
-
                     if (isValidKey || isValidAction) {
                         btnSearch.performClick();
                     }
-
-
-
                 return false;
         }
     });

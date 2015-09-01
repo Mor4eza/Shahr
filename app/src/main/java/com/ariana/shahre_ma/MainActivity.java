@@ -78,7 +78,7 @@ public class MainActivity extends ActionBarActivity {
 
     FragmentPagerAdapter adapterViewPager;
     public static SliderLayout slider;
-    DragTopLayout top;
+    public static DragTopLayout top;
     ActionButton Action;
     NetState net = new NetState(this);
     Query query = new Query(this);
@@ -105,7 +105,7 @@ public class MainActivity extends ActionBarActivity {
             DataBaseSqlite db = new DataBaseSqlite(this);
             Cursor allrows = db.select_Member();
             allrows.moveToNext();
-            if (allrows.getString(6).equals(null))
+            if (allrows.getInt(0)==0)
             {
                 Action.setVisibility(View.VISIBLE);
             }
