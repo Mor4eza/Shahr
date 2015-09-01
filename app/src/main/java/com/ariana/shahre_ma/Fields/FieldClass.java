@@ -127,13 +127,7 @@ public class FieldClass
     }
 
 
-    public void SetEditBusiness_Json(String json){
-        data_json=json;
-    }
-
-    public String GetEditBusiness_Json(){
-        return data_json;
-    }
+ 
 
     // Set  Member
     public void  SetMember_Name(String name)

@@ -106,7 +106,7 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
 
                 JSONObject area = areas.getJSONObject(i);
                 id[i]=area.getInt("Id");
-                activity[i]=area.getString("Activity");
+                activity[i]=area.getString("Activity").trim();
 
             }
 
