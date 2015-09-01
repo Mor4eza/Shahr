@@ -129,8 +129,8 @@ public class SearchOfline
                  //Search FieldActivity
                  SearchFieldActivity(textSearch.toString());
                  Log.i("size len word", String.valueOf(LenWord));
-                 if(LenWord==1) {
-                     OneSearch(selectedWord[0], cityid, _FieldActivityId[0], _FieldActivityId[1], _FieldActivityId[2]);
+                // if(LenWord==1) {
+                     OneSearch(textSearch.toString().trim(),selectedWord[0], cityid, _FieldActivityId[0], _FieldActivityId[1], _FieldActivityId[2]);
                      if (onesearch > 0)//One Search
                      {
 
@@ -144,7 +144,7 @@ public class SearchOfline
                              ThreeSearch(selectedWord[0], selectedWord[1], selectedWord[2], selectedWord[3], selectedWord[4], cityid);
                          }
                      }
-                 }
+                /* }
                  else
                  {
                      Log.i("size len word >=1", String.valueOf(LenWord));
@@ -163,7 +163,7 @@ public class SearchOfline
                          }
                      }
                  }
-
+*/
 
              }
         /* }
@@ -368,7 +368,7 @@ public class SearchOfline
     }
 
 
-    private void OneSearch(String textSearch,Integer cityid,Integer fieldActivity1,Integer fieldActivity2,Integer fieldActivity3)
+    private void OneSearch(String market,String textSearch,Integer cityid,Integer fieldActivity1,Integer fieldActivity2,Integer fieldActivity3)
     {
         Cursor rows_Business=null;
         //try {
@@ -379,7 +379,7 @@ public class SearchOfline
             else if (fieldActivity1 > 0)
                 rows_Business = sdb.select_BusinessSearch(textSearch.toString(), cityid, fieldActivity1);
             else
-                rows_Business = sdb.select_BusinessSearch(textSearch.toString(), cityid);
+                rows_Business = sdb.select_BusinessSearch(market,textSearch.toString(), cityid);
 
 
             if (rows_Business.getCount() > 0) {

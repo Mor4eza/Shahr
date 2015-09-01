@@ -220,9 +220,11 @@ public class job_details_1 extends ActionBarActivity {
                      if (allrows.getInt((22) + (i)) > 0) {
 
                          Cursor rows3 = db.select_FieldActivityName(allrows.getInt((22) + (i)));
-                         rows3.moveToFirst();
+                         if(rows3.getCount()>0) {
+                             rows3.moveToFirst();
 
-                         zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");
+                             zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");
+                         }
                      }
                  }
 
@@ -286,9 +288,11 @@ public class job_details_1 extends ActionBarActivity {
                      if (allrows.getInt((22) + (i)) > 0) {
 
                          Cursor rows3 = db.select_FieldActivityName(allrows.getInt((22) + (i)));
-                         rows3.moveToFirst();
+                         if(rows3.getCount()>0) {
+                             rows3.moveToFirst();
 
-                         zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");
+                             zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");
+                         }
                      }
                  }
 
@@ -348,9 +352,11 @@ public class job_details_1 extends ActionBarActivity {
                      if (allrows.getInt((12) + (i)) > 0) {
 
                          Cursor rows3 = db.select_FieldActivityName(allrows.getInt((12) + (i)));
-                         rows3.moveToFirst();
+                         if(rows3.getCount()>0) {
+                             rows3.moveToFirst();
 
-                         zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");
+                             zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");
+                         }
                      }
                  }
 

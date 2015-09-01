@@ -907,12 +907,13 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     }
 
 
-    public Cursor select_BusinessSearch(String namemarket,Integer cityid)
+    public Cursor select_BusinessSearch(String market,String namemarket,Integer cityid)
     {
         query="";
         Log.i("select_BusinessSearch","one");
         query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
-                " Market like'%" + namemarket +"%'" +
+                " Market like'%" + market +"%'" +
+                " or Market like'%" + market +"%'" +
                 " or Address like '%" + namemarket +
                 "%'"+" ) AND (CityId="+cityid+")";
 

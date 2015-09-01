@@ -33,8 +33,8 @@ public class SelectDataBaseSqlite extends DataBaseSqlite {
     }
 
     @Override
-    public Cursor select_BusinessSearch(String namemarket, Integer cityid) {
-        return super.select_BusinessSearch(namemarket, cityid);
+    public Cursor select_BusinessSearch(String market, String namemarket, Integer cityid) {
+        return super.select_BusinessSearch(market, namemarket, cityid);
     }
 
     @Override
