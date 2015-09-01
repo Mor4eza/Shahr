@@ -43,6 +43,7 @@ public class SearchOfline
     Integer _FieldActivityId[]=new Integer[6];
     Integer onesearch=1;
     Integer twosearch=1;
+    Integer LenWord=0;
     Integer threesearch=0;
     Integer SubsetCount=0;
 
@@ -83,7 +84,7 @@ public class SearchOfline
     }
 
      public void TextSearch(String cityname,String textSearch) {
-         try {
+       //  try {
              int i = 0;
              String selectedWord[] = new String[]{"", "", "", "", ""};
              selectedWord[0] = "";
@@ -113,11 +114,13 @@ public class SearchOfline
 
              } else {
                  //Word
+                 LenWord=0;
                  for (String currentWord : textSearch.toString().trim().split(" ")) {
 
                      if (i <= 4) {
                          selectedWord[i] = currentWord;
                          i++;
+                         LenWord++;
                      }
                      Log.i("length", String.valueOf(length));
                  }
@@ -125,37 +128,57 @@ public class SearchOfline
                  i = 0;
                  //Search FieldActivity
                  SearchFieldActivity(textSearch.toString());
-
-                 OneSearch(selectedWord[0], cityid, _FieldActivityId[0], _FieldActivityId[1], _FieldActivityId[2]);
-                 if (onesearch > 0)//One Search
-                 {
-
-                 } else {
-
-                     TwoSearch(selectedWord[0], selectedWord[1], selectedWord[2], selectedWord[3], selectedWord[4], cityid);
-                     if (twosearch > 0) //Two Search
+                 Log.i("size len word", String.valueOf(LenWord));
+                 if(LenWord==1) {
+                     OneSearch(selectedWord[0], cityid, _FieldActivityId[0], _FieldActivityId[1], _FieldActivityId[2]);
+                     if (onesearch > 0)//One Search
                      {
 
                      } else {
-                         ThreeSearch(selectedWord[0], selectedWord[1], selectedWord[2], selectedWord[3], selectedWord[4], cityid);
+
+                         TwoSearch(selectedWord[0], selectedWord[1], selectedWord[2], selectedWord[3], selectedWord[4], cityid);
+                         if (twosearch > 0) //Two Search
+                         {
+
+                         } else {
+                             ThreeSearch(selectedWord[0], selectedWord[1], selectedWord[2], selectedWord[3], selectedWord[4], cityid);
+                         }
+                     }
+                 }
+                 else
+                 {
+                     Log.i("size len word >=1", String.valueOf(LenWord));
+                     TwoSearch(selectedWord[0], selectedWord[1], selectedWord[2], selectedWord[3], selectedWord[4], cityid);
+                     if (onesearch > 0)//One Search
+                     {
+
+                     } else {
+
+                         TwoSearch(selectedWord[0], selectedWord[1], selectedWord[2], selectedWord[3], selectedWord[4], cityid);
+                         if (twosearch > 0) //Two Search
+                         {
+
+                         } else {
+                             ThreeSearch(selectedWord[0], selectedWord[1], selectedWord[2], selectedWord[3], selectedWord[4], cityid);
+                         }
                      }
                  }
 
 
              }
-         }
+        /* }
          catch (Exception e){
              fc.SetSearchOffline(true);
              Intent intent = new Intent(context, SearchListActivity.class);
              context.startActivity(intent);
-         }
+         }*/
      }
 
 
 
     public void TextAdvancedSearch(Integer cityId,String Market,String address,String subset) {
         Cursor rows_Business;
-        try {
+        //try {
             if (ns.checkInternetConnection()) {
                 try {
                     String MARKET = URLEncoder.encode(Market.toString().trim(), "UTF-8");
@@ -224,12 +247,12 @@ public class SearchOfline
                     context.startActivity(intent);
                 }
             }
-        }
+        /*}
         catch (Exception e){
             fc.SetSearchOffline(true);
             Intent intent = new Intent(context, SearchListActivity.class);
             context.startActivity(intent);
-        }
+        }*/
 
     }
 
@@ -348,13 +371,15 @@ public class SearchOfline
     private void OneSearch(String textSearch,Integer cityid,Integer fieldActivity1,Integer fieldActivity2,Integer fieldActivity3)
     {
         Cursor rows_Business=null;
-        try {
+        //try {
             if (fieldActivity1 > 0 && fieldActivity2 > 0 && fieldActivity3 > 0)
                 rows_Business = sdb.select_BusinessSearch(textSearch.toString(), cityid, fieldActivity1, fieldActivity2, fieldActivity3);
             else if (fieldActivity1 > 0 && fieldActivity2 > 0)
                 rows_Business = sdb.select_BusinessSearch(textSearch.toString(), cityid, fieldActivity1, fieldActivity2);
             else if (fieldActivity1 > 0)
                 rows_Business = sdb.select_BusinessSearch(textSearch.toString(), cityid, fieldActivity1);
+            else
+                rows_Business = sdb.select_BusinessSearch(textSearch.toString(), cityid);
 
 
             if (rows_Business.getCount() > 0) {
@@ -406,16 +431,16 @@ public class SearchOfline
             } else {
                 onesearch = 0;
             }
-        }
+     /*   }
         catch (Exception e){
             onesearch = 0;
-        }
+        }*/
     }
 
     private void TwoSearch(String word1,String word2,String word3,String word4,String word5,Integer cityid)
     {
         Cursor rows_Business;
-        try {
+       // try {
 
             SearchFieldActivity(word1);
             rows_Collection = sdb.select_Collection(word2);
@@ -495,7 +520,7 @@ public class SearchOfline
                                 rows_Business.getDouble(15),rows_Business.getDouble(16),rows_Business.getInt(17),"","",
                                 rows_Business.getInt(20),rows_Business.getInt(21),rows_Business.getInt(22),rows_Business.getInt(23),
                                 rows_Business.getInt(24),rows_Business.getInt(25),rows_Business.getInt(26),rows_Business.getInt(27),
-                                rows_Business.getInt(28),rows_Business.getInt(29),rows_Business.getDouble(30),rows_Business.getString(231));
+                                rows_Business.getInt(28),rows_Business.getInt(29),rows_Business.getDouble(30),rows_Business.getString(31));
 
 
                     } while (rows_Business.moveToNext());
@@ -519,10 +544,10 @@ public class SearchOfline
             } else {
                 twosearch = 0;
             }
-        }
+        /*}
         catch (Exception e){
             twosearch = 0;
-        }
+        }*/
     }
 
     private  void ThreeSearch(String word1,String word2,String word3,String word4,String word5,Integer cityid)
@@ -558,7 +583,7 @@ public class SearchOfline
                                 rows_Business.getDouble(15),rows_Business.getDouble(16),rows_Business.getInt(17),"","",
                                 rows_Business.getInt(20),rows_Business.getInt(21),rows_Business.getInt(22),rows_Business.getInt(23),
                                 rows_Business.getInt(24),rows_Business.getInt(25),rows_Business.getInt(26),rows_Business.getInt(27),
-                                rows_Business.getInt(28),rows_Business.getInt(29),rows_Business.getDouble(30),rows_Business.getString(231));
+                                rows_Business.getInt(28),rows_Business.getInt(29),rows_Business.getDouble(30),rows_Business.getString(31));
 
                     } while (rows_Business.moveToNext());
 

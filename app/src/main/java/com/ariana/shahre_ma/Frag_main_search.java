@@ -174,10 +174,10 @@ public class Frag_main_search extends Fragment {
             Log.i("Cityid", String.valueOf(Cityid));
 
             if (txtField.getText().equals(null) || txtField.getText().equals("") || txtField.getText().length() == 0) {
-                if (txtWhat.getText().length() == 0 || txtWhat.getText().equals(" ") || txtWhat.getText().equals("")) {
+                /*if (txtWhat.getText().length() == 0 || txtWhat.getText().equals(" ") || txtWhat.getText().equals("")) {
                     txtWhat.setError("یه چیز بنویس  ، مثلا نام فروشگاه یا مشاغل");
                     txtWhat.requestFocus();
-                } else {
+                } else {*/
                     if (txtWhat.getText().toString().trim().length() <= 2) {
                         txtWhat.setError("تعداد حروف باید حداقل سه حرف باشه");
                         txtWhat.requestFocus();
@@ -185,7 +185,7 @@ public class Frag_main_search extends Fragment {
                         SearchOfline searchOfline = new SearchOfline(getActivity());
                         searchOfline.TextSearch(txtWhere.getText().toString(), txtWhat.getText().toString());
                     }
-                }
+               // }
             } else {
                 if (subsetid > 0 || fieldactivity > 0) {
                     if (Cityid <= 0) {
