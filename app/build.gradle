@@ -3,10 +3,8 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         config {
-            keyAlias 'ariana'
+            keyAlias 'mori'
             keyPassword '101015'
-            storeFile file('D:/Sign/ShahreMa.jks')
-            storePassword '101015'
         }
     }
     compileSdkVersion 22
@@ -24,7 +22,6 @@ android {
             minifyEnabled false
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            proguardFile 'C:/Users/ariana2/AppData/Local/Android/sdk/tools/proguard/proguard-android.txt'
             zipAlignEnabled true
         }
     }
@@ -38,49 +35,29 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile('com.mikepenz:materialdrawer:3.0.9@aar') {
         transitive = true
     }
-
     //appCompact
-
     //recycle view animation
-
     // android support
-
     //Floating action button
-
     //Card view
-
     //recycle view
-
     //draggable top layout
-
     //for sliding image
-
     //support old android
-
     //sliding image
-
     //play Service
-
     //adnroid design
-
     //floatable hints
-
     //Download progressbar
-
     //Location Tracker
-
     //progress Button
-
     //map Extension
-
     //range Bar
-
     //Show Case
-
     //FAB ToolBar
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'jp.wasabeef:recyclerview-animators:1.2.0@aar'
@@ -105,9 +82,8 @@ dependencies {
     compile 'com.nhaarman.supertooltips:library:3.0.0'
     compile 'com.mohamadamin:persianmaterialdatetimepicker:1.2.1'
     compile 'com.github.deano2390:MaterialShowcaseView:1.0.5@aar'
-    compile 'com.victor:lib:1.0.1' //Loading Library
+    compile 'com.victor:lib:1.0.1'
+    //Loading Library
     compile 'com.tsengvn:Typekit:1.0.0'
-
-
 }
 
