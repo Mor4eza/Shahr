@@ -1,8 +1,10 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 
@@ -155,7 +157,7 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
             cityid=query.getCityId(setting.getCityName());
             idsubset=fc.GetSubsetId();
             if(len>0){
-                    dbs.delete_Business(cityid,idsubset);
+                    dbs.delete_Business(cityid, idsubset);
 
                     for (int i = 0; i <len; i++)
                     {
@@ -187,8 +189,9 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
                     }
                 });
 
-            }
-            else {
+                Intent intent = new Intent("MyBusiness");
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+            } else {
                 final My_Business business=new My_Business();
                 business.mRecyclerView.post(new Runnable() {
                     @Override
@@ -199,7 +202,11 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
                         business.pg.setVisibility(View.INVISIBLE);
                     }
                 });
-                        Log.i("Count Business : ","دریافت ثبت شده ها");
+                        Log.i("Count Business : ", "دریافت ثبت شده ها");
+
+                Intent intent = new Intent("MyBusiness");
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
             }
 
         } catch (Exception e) {
