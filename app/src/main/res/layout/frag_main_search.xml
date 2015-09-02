@@ -51,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/et_search_field"
-            android:hint="زمینه کاری"
+            android:hint="زیر گروه"
 
             android:completionThreshold="1"/>
         <EditText
@@ -92,7 +92,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btn_advanced"
-        android:visibility="gone"
+        android:visibility="visible"
         android:textColor="@color/primary_dark"
         android:background="?android:attr/selectableItemBackground"
         android:drawableLeft="@android:drawable/arrow_down_float"

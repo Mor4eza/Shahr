@@ -33,10 +33,11 @@ public class SearchListActivity extends ActionBarActivity {
         tv_null=(TextView)findViewById(R.id.tv_null);
         tv_count=(TextView)findViewById(R.id.tv_count);
         if(Search_list_Adapter.getItemCount()!=0){
-            img_null.setVisibility(View.INVISIBLE);
-            tv_null.setVisibility(View.INVISIBLE);
-            tv_count.setText(Search_list_Adapter.getItemCount()+" "+"مورد");
+                img_null.setVisibility(View.INVISIBLE);
+                tv_null.setVisibility(View.INVISIBLE);
+                tv_count.setText(Search_list_Adapter.getItemCount()+" "+"مورد");
         }
+       
     }
 
 
