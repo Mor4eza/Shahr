@@ -78,12 +78,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
             }
         });
 
-        // For each of the sections in the app, add a tab to the action bar.
         for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
-            // Create a tab with text corresponding to the page title defined by
-            // the adapter. Also specify this Activity object, which implements
-            // the TabListener interface, as the callback (listener) for when
-            // this tab is selected.
             actionBar.addTab(
                     actionBar.newTab()
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
@@ -103,15 +98,6 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
         // the ViewPager.
         mViewPager.setCurrentItem(tab.getPosition());
 
-        if (tab.getPosition()==2){
-        //map();
-      // route();
-
-        }else if(tab.getPosition()==1){
-
-
-
-        }
     }
 
     @Override

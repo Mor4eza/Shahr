@@ -33,7 +33,7 @@
         android:id="@+id/et_search_what"
         android:hint="نام فروشگاه"
         android:layout_below="@+id/et_search_where"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="10dp"
         android:completionThreshold="1"
         android:layout_alignRight="@+id/et_search_where"
         android:layout_alignEnd="@+id/et_search_where"
@@ -97,7 +97,7 @@
         android:background="?android:attr/selectableItemBackground"
         android:drawableLeft="@android:drawable/arrow_down_float"
         android:gravity="center_vertical"
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
         android:layout_below="@+id/et_search_what"
         />
 

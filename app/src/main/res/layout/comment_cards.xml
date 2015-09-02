@@ -12,43 +12,42 @@
         android:layout_marginTop="9dp"
         android:layout_marginLeft="9dp"
         android:layout_marginRight="9dp"
-        card_view:cardElevation="0.1dp"
-        card_view:cardBackgroundColor="#ffededed"
-        android:layout_marginBottom="0dp">
+        card_view:cardElevation="3dp"
+        android:layout_marginBottom="1dp">
 
         <RelativeLayout
             android:id="@+id/top_layout"
             android:layout_width="fill_parent"
             android:layout_height="120dp"
-            android:background="@drawable/bubble"
            >
 
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="start"
-                android:gravity="left"
+                android:background="@color/md_blue_grey_800"
+                android:textColor="@color/md_white_1000"
+                android:layout_gravity="left"
                 android:textSize="17sp"
-                android:text="date"
-               />
+                android:paddingLeft="5dp"
+                android:gravity="center_vertical"
+                android:text="965..."
+                android:layout_alignBottom="@+id/tv_user"
+                android:layout_alignParentTop="true" />
 
             <TextView
 
                 android:id="@+id/tv_user"
                 android:layout_width="fill_parent"
-                android:layout_height="40dp"
+                android:layout_height="30dp"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:layout_gravity="end"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:gravity="right"
+                android:gravity="center_vertical|right"
                 android:textSize="20sp"
-                android:text="Test"
+                android:text="میلاد"
+                android:background="@color/md_blue_grey_800"
+                android:textColor="@color/md_white_1000"
                 android:layout_alignParentRight="true"
                 android:layout_toRightOf="@+id/tv_date"
                 android:layout_toEndOf="@+id/tv_date" />
@@ -59,48 +58,47 @@
                 android:id="@+id/tv_comment"
                 android:layout_width="fill_parent"
                 android:layout_height="70dp"
-                android:layout_marginTop="60dp"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:text="hello"
-                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp"
                 android:layout_alignParentBottom="true"
                 android:layout_toEndOf="@+id/txt_like"
-                android:layout_toRightOf="@+id/txt_like" />
+                android:layout_toRightOf="@+id/txt_like"
+                android:layout_below="@+id/tv_user" />
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_like"
                 android:src="@drawable/comment_like"
+                android:layout_marginTop="10dp"
+                android:cropToPadding="false"
+                android:background="#fff9f9f9"
                 android:layout_below="@+id/tv_date"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="10dp"
-                android:cropToPadding="false"
-                android:background="#fff9f9f9" />
+                android:layout_alignParentStart="true" />
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_disslike"
-                android:layout_marginTop="10dp"
                 android:src="@drawable/comment_dislike"
+                android:background="#fff9f9f9"
+                android:layout_marginTop="5dp"
                 android:layout_below="@+id/btn_like"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="10dp"
-                android:background="#fff9f9f9" />
+                android:layout_alignParentStart="true" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="n"
-                android:layout_marginLeft="5dp"
+                android:text="1"
+                android:layout_marginBottom="7dp"
                 android:id="@+id/txt_like"
-                android:layout_centerVertical="true"
+                android:layout_alignBottom="@+id/btn_like"
                 android:layout_toRightOf="@+id/btn_like"
                 android:layout_toEndOf="@+id/btn_like" />
 
@@ -108,13 +106,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="n"
+                android:text="1"
+                android:layout_marginBottom="7dp"
                 android:id="@+id/txt_disslike"
-                android:layout_marginLeft="5dp"
                 android:layout_alignBottom="@+id/btn_disslike"
-                android:layout_marginBottom="8dp"
-                android:layout_toRightOf="@+id/btn_disslike"
-                android:layout_toEndOf="@+id/btn_disslike" />
+                android:layout_alignLeft="@+id/txt_like"
+                android:layout_alignStart="@+id/txt_like" />
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

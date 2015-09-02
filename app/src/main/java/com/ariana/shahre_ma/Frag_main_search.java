@@ -2,9 +2,6 @@ package com.ariana.shahre_ma;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,18 +18,12 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
-import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
-import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.Search.SearchOfline;
-import com.ariana.shahre_ma.Settings.KeySettings;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetOnlineSearchJson;
 
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,6 +93,8 @@ public class Frag_main_search extends Fragment {
             public void onClick(View v) {
                 if (!visable) {
                     MainActivity.top.closeTopView(true);
+                    txtAddress.setText("");
+                    txtField.setText("");
                     advance.setVisibility(View.VISIBLE);
                     advance.setAlpha(0.0f);
                     frame.setAlpha(0.0f);

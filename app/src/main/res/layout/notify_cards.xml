@@ -23,12 +23,11 @@
                 android:id="@+id/tv_notify_date"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
                 android:background="@color/md_blue_grey_600"
                 android:textColor="@color/md_white_1000"
-                android:layout_gravity="start"
+                android:layout_gravity="center_horizontal"
                 android:gravity="left"
+                android:paddingTop="3dp"
                 android:textSize="17sp"
                 android:text="date"
                 />
@@ -43,7 +42,7 @@
                 android:textColor="@color/md_white_1000"
                 android:background="@color/md_blue_grey_600"
                 android:layout_gravity="end"
-
+                android:paddingTop="3dp"
                 android:gravity="right"
                 android:textSize="20sp"
                 android:text="Test"
