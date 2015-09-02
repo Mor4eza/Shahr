@@ -27,8 +27,8 @@ public class SelectDataBaseSqlite extends DataBaseSqlite {
     }
 
     @Override
-    public Cursor select_BusinessSearch(String namemarket, Integer cityid) {
-        return super.select_BusinessSearch(namemarket, cityid);
+    public Cursor select_BusinessSearch(String namemarket, Integer cityid, Integer fieldactivty) {
+        return super.select_BusinessSearch(namemarket, cityid, fieldactivty);
     }
 
     @Override
@@ -39,6 +39,11 @@ public class SelectDataBaseSqlite extends DataBaseSqlite {
     @Override
     public Cursor select_BusinessFieldAdvanceSearch(String namemarket, String address, Integer cityid, Integer Field) {
         return super.select_BusinessFieldAdvanceSearch(namemarket, address, cityid, Field);
+    }
+
+    @Override
+    public Cursor select_SearchFieldActivityId(String fieldname) {
+        return super.select_SearchFieldActivityId(fieldname);
     }
 
     @Override

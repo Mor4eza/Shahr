@@ -148,40 +148,39 @@ public class HTTPGetBookMarkJson extends AsyncTask<String,Void,Integer>
      */
     @Override
     protected void onPostExecute(Integer result) {
-        if(result==1) {
-            try {
+        try {
+            if(result==1)
+            {
+                    AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+                    DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
+                    ddb.delete_bookmark();
+                     Log.i("len", String.valueOf(len));
+                    for (int i = 0; i < len; i++)
+                    {
+                        Log.i("subsetid", String.valueOf(subsetid[i]));
+                        ddb.delete_BusinessId(Id[i]);
+                       try
+                       {
+                           adb.Add_bookmark(Id[i], MEMberID);
+                           adb.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], latitude[i], longitude[i], areaid[i], area1[i], user[i], 68, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i], src[i]);
+                       }
+                       catch (Exception e){}
 
+                    }
+                    pd.dismiss();
+                    generateData();
+                    final BookmarkAdapter adapter = new BookmarkAdapter(context, generateData());
+                    BookMark.lv.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
 
-                AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
-                DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
-                ddb.delete_bookmark();
-                 Log.i("len", String.valueOf(len));
-                for (int i = 0; i < len; i++)
-                {
-                    Log.i("subsetid", String.valueOf(subsetid[i]));
-                    ddb.delete_BusinessId(Id[i]);
-                   try
-                   {
-                       adb.Add_bookmark(Id[i], MEMberID);
-                       adb.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], latitude[i], longitude[i], areaid[i], area1[i], user[i], 68, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i], src[i]);
-                   }
-                   catch (Exception e){}
-
-                }
-                pd.dismiss();
-                generateData();
-                final BookmarkAdapter adapter = new BookmarkAdapter(context, generateData());
-                BookMark.lv.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-            } catch (Exception e) {
-                pd.dismiss();
-                Toast.makeText(context, "در پایگاه داده ذخیره نشد", Toast.LENGTH_LONG).show();
-                Log.i("Exception", e.toString());
             }
-        }
-        else
-        {
+            else
+            {
 
+            }
+        } catch (Exception e) {
+            pd.dismiss();
+            Log.i("Exception", e.toString());
         }
     }
 
@@ -310,7 +309,7 @@ public class HTTPGetBookMarkJson extends AsyncTask<String,Void,Integer>
      * @param method
      * @return
      */
-    InputStream getStreamFromURL(String urlString, String method) {
+    InputStream getStreamFromURL(String urlString, String method){
         try {
             URL url = new URL(urlString);
             HttpURLConnection huc = (HttpURLConnection) url.openConnection();

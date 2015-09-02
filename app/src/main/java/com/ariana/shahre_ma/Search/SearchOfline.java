@@ -39,6 +39,7 @@ public class SearchOfline
     Cursor rows_Collection;
     Cursor rows_Subset;
     Cursor rows_FieldActivity;
+    Integer _FieldActivityId[]=new Integer[6];
 
     int length = 0;
 
@@ -53,7 +54,7 @@ public class SearchOfline
     }
         
 
-    private List<Integer> selectId=new ArrayList<>();
+    private  List<Integer> selectId=new ArrayList<>();
     private  List<Integer> selectDisCount=new ArrayList<>();
     private  List<Integer> selectRateCount=new ArrayList<>();
     private  List<Integer> selectSubsetId=new ArrayList<>();
@@ -107,6 +108,7 @@ public class SearchOfline
          }
          else
          {
+             //Word
              for (String currentWord : textSearch.toString().trim().split(" ")) {
 
                  if (i <= 4) {
@@ -114,10 +116,22 @@ public class SearchOfline
                      i++;
                  }
                  Log.i("length", String.valueOf(length));
-
              }
 
-             rows_Business = sdb.select_BusinessSearch(textSearch.toString(), cityid);
+             i=0;
+             //Search FieldActivity
+             rows_FieldActivity=sdb.select_SearchFieldActivityId(textSearch.toString());
+             if(rows_FieldActivity.moveToFirst())
+             {
+                 do
+                 {
+                      _FieldActivityId[i]=rows_FieldActivity.getInt(0);
+                      i++;
+                 }while (rows_FieldActivity.moveToNext());
+             }
+
+             Log.i("rows_FieldActivity", String.valueOf(rows_FieldActivity));
+             rows_Business = sdb.select_BusinessSearch(textSearch.toString(), cityid,_FieldActivityId[0]);
              Log.i("BusinessgetCount", String.valueOf(rows_Business.getCount()));
              if (rows_Business.getCount() > 0) {
                  Log.i("Businessget", "on");

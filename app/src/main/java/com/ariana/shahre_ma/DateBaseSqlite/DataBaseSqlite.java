@@ -783,14 +783,14 @@ Context context;
 
     }
 
-    public Cursor select_BusinessSearch(String namemarket,Integer cityid)
+    public Cursor select_BusinessSearch(String namemarket,Integer cityid,Integer fieldactivty)
     {
         String query="";
         Log.i("select_BusinessSearch","one");
             query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
                     " Market like'%" + namemarket +
                     "%' or Address like '%" + namemarket +
-                    "%') AND (CityId="+cityid+")";
+                    "%' or Field1="+fieldactivty+") AND (CityId="+cityid+")";
 
         Log.i("select_BusinessSearch",query);
         SQLiteDatabase db = this.getReadableDatabase();
@@ -1165,7 +1165,11 @@ Context context;
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT Id FROM " + InstructionsSqlite.TABLE_NAME_FieldActivity +" WHERE Activity='"+fieldname+"'" , null);
     }
-
+    public Cursor select_SearchFieldActivityId(String fieldname)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT Id FROM " + InstructionsSqlite.TABLE_NAME_FieldActivity +" WHERE Activity like'%"+fieldname+"%'" , null);
+    }
 
 
     public Cursor select_FieldActivityName(Integer id)
