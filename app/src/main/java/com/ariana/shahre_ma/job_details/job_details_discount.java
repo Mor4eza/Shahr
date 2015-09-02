@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -71,6 +72,8 @@ public class job_details_discount extends FragmentActivity {
         RelativeLayout relativeLayout;
         ImageView imageView;
 
+        CalendarTool ct=new CalendarTool();
+
         public PlaceholderFragment() {
         }
 
@@ -94,28 +97,27 @@ public class job_details_discount extends FragmentActivity {
             try {
                 DataBaseSqlite db = new DataBaseSqlite(getActivity());
                 Cursor cursor = db.select_DisCount(fc.GetBusiness_Id());
-
-                cursor.moveToFirst();
-                Log.i("IDdiscount",String.valueOf(cursor.getInt(0)));
-                if(cursor.getInt(0)==0)
+//                Log.i("IDdiscount",String.valueOf(cursor.getInt(0)));
+                if(cursor.getCount()<=0)
                 {
                     tv_dis_percent.setVisibility(View.INVISIBLE);
                     tv_like.setVisibility(View.INVISIBLE);
                     tv_unlike.setVisibility(View.INVISIBLE);
                     tv_dis_start.setVisibility(View.INVISIBLE);
-                    tv_dis_name.setVisibility(View.INVISIBLE);
                     tv_dis_end.setVisibility(View.INVISIBLE);
                     tv_dis_desc.setVisibility(View.INVISIBLE);
-
                     like.setVisibility(View.INVISIBLE);
                     dislike.setVisibility(View.INVISIBLE);
-
                     relativeLayout.setVisibility(View.INVISIBLE);
-                    imageView.setVisibility(View.INVISIBLE);
+                    tv_dis_name.setText("تخفیفی برای این کسب و کار ثبت نشده است.");
+                    tv_dis_name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+                    tv_dis_name.setTextColor(Color.GRAY);
+                    tv_dis_name.setGravity(Gravity.CENTER);
 
                 }
                 else
                 {
+                    cursor.moveToFirst();
                     discountid = cursor.getInt(0);
                     tv_dis_percent.setText(cursor.getString(6));
                     tv_dis_name.setText(cursor.getString(1));
@@ -128,19 +130,7 @@ public class job_details_discount extends FragmentActivity {
                 }
             }catch (Exception e)
             {
-                tv_dis_percent.setVisibility(View.INVISIBLE);
-                tv_like.setVisibility(View.INVISIBLE);
-                tv_unlike.setVisibility(View.INVISIBLE);
-                tv_dis_start.setVisibility(View.INVISIBLE);
-                tv_dis_end.setVisibility(View.INVISIBLE);
-                tv_dis_desc.setVisibility(View.INVISIBLE);
-                like.setVisibility(View.INVISIBLE);
-                dislike.setVisibility(View.INVISIBLE);
-                relativeLayout.setVisibility(View.INVISIBLE);
-                tv_dis_name.setText("تخفیفی برای این کسب و کار ثبت نشده است.");
-                tv_dis_name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
-                tv_dis_name.setTextColor(Color.GRAY);
-                tv_dis_name.setGravity(Gravity.CENTER);
+
             }
 
 

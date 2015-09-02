@@ -84,11 +84,11 @@ Query query=new Query(this);
                 switch (pos) {
                     case 0:
 
-                        _sex = false;
+                        _sex = true;//man
                         break;
                     case 1:
 
-                        _sex = true;
+                        _sex = false;//woman
                         break;
 
                 }

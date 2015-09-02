@@ -1,5 +1,7 @@
 package com.ariana.shahre_ma.Date;
 
+import android.util.Log;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -270,7 +272,7 @@ public class CalendarTool
         gYear = year;
         gMonth = month;
         gDay = day;
-        JDN = gregorianDateToJDN(year,month,day);
+        JDN = gregorianDateToJDN(year, month, day);
         JDNToIranian();
         JDNToJulian();
         JDNToGregorian();
@@ -288,7 +290,7 @@ public class CalendarTool
         juYear = year;
         juMonth = month;
         juDay = day;
-        JDN = julianDateToJDN(year,month,day);
+        JDN = julianDateToJDN(year, month, day);
         JDNToIranian();
         JDNToJulian();
         JDNToGregorian();
@@ -526,6 +528,144 @@ public class CalendarTool
         gYear = j/1461 - 100100 + (8-gMonth)/6;
     }
 
+
+    private String ShamesiToMiladi(String date)
+    {
+
+
+        return null;
+    }
+
+
+    public String MiladiToShamesi(String date)
+    {
+        CalendarTool ct=new CalendarTool();
+        String month="";
+        String day="";
+        String year="";
+        String result="";
+
+        Integer _month=0;
+        Integer _day=0;
+
+
+        year=date.substring(0,4);
+        month=date.substring(5,7);
+        day=date.substring(8, 10);
+
+        _month=Integer.valueOf(date.substring(0,4));
+        _day=Integer.valueOf(date.substring(5,7));
+
+
+        if (_month <= 9)
+        {
+            month="0"+(month);
+        }
+        if (_day<=9)
+        {
+            day="0"+day;
+        }
+
+        ct.setGregorianDate(Integer.valueOf(year),Integer.valueOf(month),Integer.valueOf(day));
+             result=ct.getIranianDate();
+
+        year=result.substring(0,4);
+        month=result.substring(5,6);
+        day=result.substring(7,8);
+
+        _month=Integer.valueOf(result.substring(5,6));
+        _day=Integer.valueOf(result.substring(7,8));
+
+
+        if (_month <= 9)
+        {
+            month="0"+(month);
+        }
+        if (_day<=9)
+        {
+            day="0"+day;
+        }
+
+        result=(year+"/"+month+"/"+day);
+
+
+        Log.i("MiladiToShamesi", result);
+        return   result;
+    }
+
+
+    public String MiladiToShamesipublic(String date)
+    {
+        CalendarTool ct=new CalendarTool();
+        String month="";
+        String day="";
+        String year="";
+        String result="";
+
+        Integer _month=0;
+        Integer _day=0;
+
+
+        year=date.substring(0,4);
+        month=date.substring(5,7);
+        day=date.substring(8, 10);
+
+        _month=Integer.valueOf(date.substring(0,4));
+        _day=Integer.valueOf(date.substring(5,7));
+
+
+        if (_month <= 9)
+        {
+            month="0"+(month);
+        }
+        if (_day<=9)
+        {
+            day="0"+day;
+        }
+
+        ct.setGregorianDate(Integer.valueOf(year),Integer.valueOf(month),Integer.valueOf(day));
+        result=ct.getIranianDate();
+
+        year=result.substring(0,4);
+        month=result.substring(5,7);
+        day=result.substring(8,10);
+
+        _month=Integer.valueOf(result.substring(5,7));
+        _day=Integer.valueOf(result.substring(8,10));
+
+
+        if (_month <= 9)
+        {
+            month="0"+(month);
+        }
+        if (_day<=9)
+        {
+            day="0"+day;
+        }
+
+        result=(year+"/"+month+"/"+day);
+
+
+        Log.i("MiladiToShamesi", result);
+        return   result;
+    }
+
+
+    public String SubToMiladi(String date)
+    {
+        String month="";
+        String day="";
+        String year="";
+        String result="";
+
+        month=date.substring(0,4);
+        day=date.substring(5,7);
+        year=date.substring(8, 10);
+
+        result=year+"/"+month+"/"+day;
+        Log.i("SubToMiladi", result);
+        return   result;
+    }
 
     private int irYear; // Year part of a Iranian date
     private int irMonth; // Month part of a Iranian date

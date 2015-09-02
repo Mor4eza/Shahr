@@ -51,12 +51,12 @@ public class Discount extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == count - 1) {
 
-                 /*   fc.SetId_DisCount(adapter.getItem(position).GetId());
+                   fc.SetId_DisCount(adapter.getItem(position).GetId());
                     Discount_Dialog dialog = new Discount_Dialog(Discount.this);
                     dialog.show();
 
                     Toast.makeText(getApplicationContext(),String.valueOf(adapter.getItem(position).GetId()),Toast.LENGTH_LONG).show();
-*/
+
 
                 }
                 else

@@ -117,9 +117,14 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
                 fc.SetMember_Mobile(area.getString("Mobile"));
                 fc.SetMember_UserName(area.getString("UserName"));
                 fc.SetMember_Password(area.getString("Password"));
-                fc.SetMember_CityId(area.getInt("CityId"));
                 fc.SetMember_Email(area.getString("Email"));
                 fc.SetMember_Mobile(area.getString("Mobile"));
+
+
+                    if(String.valueOf(area.getString("CityId")).equals(null) || String.valueOf(area.getString("CityId")).equals("null"))
+                        fc.SetMember_CityId(1);
+                    else
+                        fc.SetMember_CityId(area.getInt("CityId"));
 
                     if(String.valueOf(area.getString("Sex")).equals(null) || String.valueOf(area.getString("Sex")).equals("null"))
                     fc.SetMember_Sex(true);
