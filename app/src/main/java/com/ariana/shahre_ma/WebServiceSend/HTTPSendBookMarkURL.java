@@ -5,9 +5,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
-import com.ariana.shahre_ma.Fields.FieldClass;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -15,14 +12,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 /**
  * Created by ariana2 on 6/17/2015.

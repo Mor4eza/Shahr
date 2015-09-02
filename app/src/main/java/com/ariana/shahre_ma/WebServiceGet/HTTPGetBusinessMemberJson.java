@@ -10,7 +10,6 @@ import android.view.View;
 
 import com.ariana.shahre_ma.Cards.Business_Card_Adapter;
 import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
@@ -191,12 +190,14 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
                         business.mRecyclerView.setAdapter(adapter);
                         business.job_list_Adapter.notifyDataSetChanged();
                         business.pg.setVisibility(View.INVISIBLE);
+                        business.tv_null.setVisibility(View.GONE);
+                        business.img_null.setVisibility(View.GONE);
                     }
                 });
 
                 Intent intent = new Intent("MyBusiness");
                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
-            } else {
+            } else if (len==0 && errorCode==200){
                 final My_Business business=new My_Business();
                 business.mRecyclerView.post(new Runnable() {
                     @Override
@@ -205,6 +206,9 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
                         business.mRecyclerView.setAdapter(adapter);
                         business.job_list_Adapter.notifyDataSetChanged();
                         business.pg.setVisibility(View.INVISIBLE);
+                        business.tv_null.setVisibility(View.VISIBLE);
+                        business.img_null.setVisibility(View.VISIBLE);
+
                     }
                 });
                         Log.i("Count Business : ", "دریافت ثبت شده ها");

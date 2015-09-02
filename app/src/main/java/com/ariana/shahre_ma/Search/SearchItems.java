@@ -7,6 +7,7 @@ public class SearchItems {
     private String mName;
     double rate;
     private String mtell;
+    private Integer mRateCount;
     private String mAdd;
     private String mNameImage;
     private int mThumbnail;
@@ -73,4 +74,10 @@ public class SearchItems {
         this.mNameImage = nameimage;
     }
 
+    public Integer getmRateCount() {
+        return mRateCount;
+    }
+    public void setmRateCount(Integer rate) {
+        this.mRateCount = rate;
+    }
 }

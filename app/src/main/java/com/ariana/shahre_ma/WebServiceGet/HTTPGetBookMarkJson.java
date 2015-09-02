@@ -5,17 +5,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
 
 import com.ariana.shahre_ma.Bookmarks.BookMark;
 import com.ariana.shahre_ma.Bookmarks.BookmarkAdapter;
 import com.ariana.shahre_ma.Bookmarks.Bookmark_Item;
 import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
-import com.ariana.shahre_ma.Fields.FieldClass;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +25,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by ariana2 on 6/17/2015.
@@ -151,6 +148,12 @@ public class HTTPGetBookMarkJson extends AsyncTask<String,Void,Integer>
         try {
             if(result==1)
             {
+
+                if(len==0 && errorCode==200)
+                {
+                    BookMark.img_null.setVisibility(View.VISIBLE);
+                    BookMark.tv_null.setVisibility(View.VISIBLE);
+                }
                     AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
                     DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
                     ddb.delete_bookmark();
@@ -176,6 +179,7 @@ public class HTTPGetBookMarkJson extends AsyncTask<String,Void,Integer>
             }
             else
             {
+
 
             }
         } catch (Exception e) {

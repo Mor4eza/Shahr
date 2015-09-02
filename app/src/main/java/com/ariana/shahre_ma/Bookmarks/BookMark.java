@@ -10,11 +10,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -48,6 +49,8 @@ public class BookMark extends ActionBarActivity {
     FieldClass fc = new FieldClass();
     NetState ns=new NetState(this);
     Integer len=0;
+    public static TextView tv_null;
+    public static ImageView img_null;
     Integer BusinessId[];
     public static BookmarkAdapter adapter;
 
@@ -56,10 +59,10 @@ public class BookMark extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_mark);
         lv=(ListView) findViewById(R.id.lvbookmark);
-
+        tv_null=(TextView)findViewById(R.id.tv_null);
+        img_null=(ImageView)findViewById(R.id.img_null);
         adapter = new BookmarkAdapter(this, generateData());
         lv.setAdapter(adapter);
-
         if(ns.checkInternetConnection())
         {
             //The user Getting bookmark
@@ -71,8 +74,6 @@ public class BookMark extends ActionBarActivity {
         {
            Toast.makeText(getApplicationContext(),"شبکه اینترنت قطع می باشد",Toast.LENGTH_LONG).show();
         }
-
-
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
