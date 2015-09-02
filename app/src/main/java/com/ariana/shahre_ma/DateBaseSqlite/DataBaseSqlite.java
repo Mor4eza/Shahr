@@ -800,7 +800,7 @@ Context context;
     {
         String query="";
         Log.i("select_BusinessSearch","one");
-        query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +" Market like'%" + txtMarket + "%' or Address like '%" + address + "%') AND (AreaId="+arreaId+") AND (SubsetId="+SubsetId+")";
+        query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +" Market like'%" + txtMarket + "%' AND Address like '%" + address + "%') AND (AreaId="+arreaId+") AND (SubsetId="+SubsetId+")";
 
         Log.i("select_BusinessSearch",query);
         SQLiteDatabase db = this.getReadableDatabase();
