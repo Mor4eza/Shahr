@@ -30,7 +30,7 @@ public class HTTPGetCollectionProductJson extends AsyncTask<String,Void, Integer
 
 
     private static Context context;
-
+    Integer errorCode=0;
     public HTTPGetCollectionProductJson(Context c) {
         context = c;
 
@@ -154,7 +154,7 @@ public class HTTPGetCollectionProductJson extends AsyncTask<String,Void, Integer
             huc.setDoInput(true);
 
             huc.connect();
-
+            errorCode=huc.getResponseCode();
             return huc.getInputStream();
         } catch (Exception e) {
             return null;

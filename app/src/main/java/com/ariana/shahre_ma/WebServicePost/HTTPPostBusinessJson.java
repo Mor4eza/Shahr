@@ -36,7 +36,7 @@ public class HTTPPostBusinessJson extends AsyncTask<String,Long,Integer>
     Query query;
     FieldClass fc=new FieldClass();
     Context context;
-    ProgressDialog pd;
+    Integer errorCode=0;
 
     /**
      *

@@ -36,7 +36,7 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
     Integer ID=0;
     FieldClass fc=new FieldClass();
     Context context;
-
+    Integer errorCode=0;
     /**
      *
      * @param context
@@ -75,6 +75,7 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
              Log.e("Exception",e.toString());
             }
             int statusCode = httpResponse.getStatusLine().getStatusCode();
+            errorCode=httpResponse.getStatusLine().getStatusCode();
             if (statusCode == 200) {
 
                 result = 1; // Successful

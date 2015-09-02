@@ -13,6 +13,7 @@ import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.Jobs_List;
+import com.ariana.shahre_ma.MessageDialog;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
@@ -39,7 +40,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
     FieldDataBusiness fdb=new FieldDataBusiness();
     private  String url_Business;
     ProgressDialog pd;
-
+    Integer errorCode=0;
 
     private  List<Integer> selectId=new ArrayList<>();
     private  List<Integer> selectDiscountId=new ArrayList<>();
@@ -189,18 +190,10 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
                 dbs.delete_Business(cityid, idsubset);
 
                 Log.i("count", String.valueOf(len));
-                if (len == 0) {
+                if (len == 0 && errorCode==200) {
                     pd.dismiss();
-
-                    AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-                    alertDialog.setTitle("هشدار");
-                    alertDialog.setMessage("مشاغلی برای این شهر و این زیرمجموعه پیدا نشد!!!");
-                    alertDialog.setButton("خب", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-                    alertDialog.show();
+                    MessageDialog messageDialog=new MessageDialog(context);
+                    messageDialog.ShowMessage("هشدار","مشاغلی برای این زیر مجموعه ثبت نشده . ","باشه","false");
 
                 }
                 else
@@ -234,19 +227,11 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
             }
             else
             {
-                if (len == 0) {
+                if (errorCode==504 || errorCode==503)
+                {
                     pd.dismiss();
-
-                    AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-                    alertDialog.setTitle("هشدار");
-                    alertDialog.setMessage("مشاغلی برای این شهر و این زیرمجموعه پیدا نشد!!!");
-                    alertDialog.setButton("خب", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-                    alertDialog.show();
-
+                    MessageDialog messageDialog=new MessageDialog(context);
+                    messageDialog.ShowMessage("هشدار","پیامی از سمت سرور دریافت نشد دوباره امتحان کنید","باشه","false");
                 }
             }
 
@@ -254,29 +239,15 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
         {
             pd.dismiss();
 
-            if(len==0)
+            if(len==0 || errorCode==504 || errorCode==503)
             {
-                AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-                alertDialog.setTitle("هشدار");
-                alertDialog.setMessage("مشاغلی برای این شهر و این زیرمجموعه پیدا نشد!!!");
-                alertDialog.setButton("خب", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                alertDialog.show();
+                MessageDialog messageDialog=new MessageDialog(context);
+                messageDialog.ShowMessage("هشدار", "پیامی از سمت سرور دریافت نشد دوباره امتحان کنید", "باشه", "false");
             }
             else
             {
-                AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-                alertDialog.setTitle("هشدار");
-                alertDialog.setMessage("دوباره امتحان کنید");
-                alertDialog.setButton("خب", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                alertDialog.show();
+                MessageDialog messageDialog=new MessageDialog(context);
+                messageDialog.ShowMessage("هشدار", "پیامی از سمت سرور دریافت نشد دوباره امتحان کنید", "باشه", "false");
             }
             Log.e("ExceptionBusinessJson",e.toString());
         }
@@ -443,7 +414,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
             huc.setDoInput(true);
 
             huc.connect();
-
+            errorCode=huc.getResponseCode();
             return huc.getInputStream();
         } catch (Exception e) {
             return null;

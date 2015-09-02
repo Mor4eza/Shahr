@@ -34,7 +34,7 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
     String  Name_city[];
     Integer PROVINCEID_city[];
     Integer len;
-
+    Integer errorCode=0;
     private static Context context;
 
     /**
@@ -183,7 +183,7 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
             huc.setDoInput(true);
 
             huc.connect();
-
+            errorCode=huc.getResponseCode();
             return huc.getInputStream();
         } catch (Exception e) {
             return null;

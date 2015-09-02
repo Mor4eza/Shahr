@@ -28,6 +28,7 @@ public class HTTPGetNotificationJson extends AsyncTask<String,Void,Integer> {
     private static Context context;
     private static String url_Notification;
     private Integer MEMberID;
+    Integer errorCode=0;
     KeySettings setting;
     Integer Id[];
     Integer OpinionType[];
@@ -192,7 +193,7 @@ public class HTTPGetNotificationJson extends AsyncTask<String,Void,Integer> {
             huc.setDoInput(true);
 
             huc.connect();
-
+            errorCode=huc.getResponseCode();
             return huc.getInputStream();
         } catch (Exception e) {
             return null;

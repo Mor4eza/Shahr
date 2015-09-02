@@ -37,7 +37,7 @@ public class HTTPGetOneBusinessJson extends AsyncTask<String,Void,Integer>
     private static Context context;
     FieldClass fc=new FieldClass();
     Query query;
-    FieldDataBusiness fdb=new FieldDataBusiness();
+    Integer errorCode=0;
     private  String url_Business;
     ProgressDialog pd;
 
@@ -352,7 +352,7 @@ public class HTTPGetOneBusinessJson extends AsyncTask<String,Void,Integer>
             huc.setDoInput(true);
 
             huc.connect();
-
+            errorCode=huc.getResponseCode();
             return huc.getInputStream();
         } catch (Exception e) {
             return null;

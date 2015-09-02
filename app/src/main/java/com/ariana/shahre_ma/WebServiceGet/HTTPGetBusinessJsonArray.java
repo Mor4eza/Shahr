@@ -28,6 +28,7 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
     FieldClass fc=new FieldClass();
     Query query;
     private  String url_Business;
+    Integer errorCode=0;
 
     Integer Id[];
     String market[];
@@ -318,7 +319,7 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
             huc.setDoInput(true);
 
             huc.connect();
-
+            errorCode=huc.getResponseCode();
             return huc.getInputStream();
         } catch (Exception e) {
             return null;

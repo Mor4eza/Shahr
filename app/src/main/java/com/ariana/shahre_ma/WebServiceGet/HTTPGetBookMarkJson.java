@@ -33,6 +33,7 @@ public class HTTPGetBookMarkJson extends AsyncTask<String,Void,Integer>
 {
 
     ProgressDialog pd;
+    Integer errorCode=0;
     private static Context context;//context
     private static   String bookmark;// business api url
     private    Integer MEMberID; // member id
@@ -315,7 +316,7 @@ public class HTTPGetBookMarkJson extends AsyncTask<String,Void,Integer>
             huc.setDoInput(true);
 
             huc.connect();
-
+            errorCode=huc.getResponseCode();
             return huc.getInputStream();
         } catch (Exception e) {
             return null;

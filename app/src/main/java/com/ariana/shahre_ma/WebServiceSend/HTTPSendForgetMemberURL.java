@@ -19,7 +19,7 @@ import org.apache.http.util.EntityUtils;
 public class HTTPSendForgetMemberURL extends AsyncTask<String,Integer,Integer> {
 
     String url="";
-
+    Integer errorCode=0;
     Context context;
     ProgressDialog pd;
 

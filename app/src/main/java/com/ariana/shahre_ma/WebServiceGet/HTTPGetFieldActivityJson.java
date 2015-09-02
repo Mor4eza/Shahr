@@ -39,7 +39,7 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
     Context context;
     Integer len;
     CalendarTool ct=new CalendarTool();
-
+    Integer errorCode=0;
 
 
     /**
@@ -130,7 +130,7 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
             huc.setDoInput(true);
 
             huc.connect();
-
+            errorCode=huc.getResponseCode();
             return huc.getInputStream();
         } catch (Exception e) {
             return null;

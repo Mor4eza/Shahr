@@ -25,13 +25,11 @@ import java.io.IOException;
  */
 public class HTTPDeleteBusinessImageURL extends AsyncTask<String, Void, Boolean> {
 
-
-    private  String mesage;
     String url="";
 
     String src="";
     Integer BusinessId=0;
-
+    Integer errorCode=0;
     Context context;
     ProgressDialog pd;
     FieldClass fc=new FieldClass();

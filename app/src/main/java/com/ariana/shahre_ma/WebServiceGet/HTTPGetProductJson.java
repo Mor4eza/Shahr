@@ -29,6 +29,7 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
         private static Context context;
         FieldDataBase fdb=new FieldDataBase();
         private String url_product="http://test.shahrma.com/api/ApiGiveListProduct";
+        Integer errorCode=0;
 
         List<Integer> selectId =new ArrayList<>();
         List<String>  selectName =new ArrayList<>();
@@ -164,7 +165,7 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
                 huc.setDoInput(true);
 
                 huc.connect();
-
+                errorCode=huc.getResponseCode();
                 return huc.getInputStream();
             } catch (Exception e) {
                 return null;

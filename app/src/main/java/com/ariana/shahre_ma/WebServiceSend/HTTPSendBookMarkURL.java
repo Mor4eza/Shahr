@@ -27,17 +27,11 @@ import java.io.InputStreamReader;
  */
 public class HTTPSendBookMarkURL extends AsyncTask<String, Void, Boolean> {
 
-    private String[] blogTitles;
-    private static final String TAG = "Http Connection";
-    private  String mesage;
-
-
+    Integer errorCode=0;
     Integer businessid;
     Integer memberid;
 
     Context context;
-
-    FieldClass fc=new FieldClass();
 
     /**
      *

@@ -28,7 +28,7 @@ public class HTTPGetSubsetJson extends AsyncTask<String,Void,Integer>
     private static Context context;
 
     private static final String url_subset="http://test.shahrma.com/api/apigivesubset";
-
+    Integer errorCode=0;
     Integer Id[];
     String subsetname[];
     Integer collectionId[];
@@ -174,7 +174,7 @@ public class HTTPGetSubsetJson extends AsyncTask<String,Void,Integer>
             huc.setDoInput(true);
 
             huc.connect();
-
+            errorCode=huc.getResponseCode();
             return huc.getInputStream();
         } catch (Exception e) {
             return null;

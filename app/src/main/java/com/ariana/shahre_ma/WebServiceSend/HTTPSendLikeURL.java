@@ -26,13 +26,12 @@ import java.io.InputStreamReader;
 public class  HTTPSendLikeURL extends AsyncTask<String, Void, Boolean> {
 
     private String[] blogTitles;
-    private static final String TAG = "Http Connection";
     private  String mesage;
     ProgressDialog pd;
     Boolean like;
     Integer opinionid;
     Integer memberid;
-
+    Integer errorCode=0;
     Context context;
 
     public HTTPSendLikeURL(Context context)

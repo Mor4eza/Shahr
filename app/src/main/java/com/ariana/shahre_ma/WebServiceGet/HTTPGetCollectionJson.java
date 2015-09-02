@@ -29,7 +29,7 @@ public class HTTPGetCollectionJson extends AsyncTask<String,Void, Integer> {
        private static Context context;
         public HTTPGetCollectionJson(Context c) {context = c;}
         private static final String url_collection="http://test.shahrma.com/api/apigivecollection";
-
+    Integer errorCode=0;
         Integer Id[];
         String collectionname[];
         Integer len;
@@ -135,7 +135,7 @@ public class HTTPGetCollectionJson extends AsyncTask<String,Void, Integer> {
             huc.setConnectTimeout(15000);
             huc.setRequestMethod(method);
             huc.setDoInput(true);
-
+            errorCode=huc.getResponseCode();
             huc.connect();
 
             return huc.getInputStream();

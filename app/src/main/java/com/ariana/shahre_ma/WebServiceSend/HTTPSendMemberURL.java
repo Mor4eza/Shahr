@@ -17,6 +17,7 @@ import java.io.IOException;
  */
 public class HTTPSendMemberURL extends AsyncTask<String,Void,Boolean>
 {
+    Integer errorCode=0;
     @Override
     protected void onPreExecute()
     {
