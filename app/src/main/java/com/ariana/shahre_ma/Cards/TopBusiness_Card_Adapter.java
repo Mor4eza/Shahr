@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.job_details.Job_details;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +70,9 @@ public class TopBusiness_Card_Adapter extends RecyclerView.Adapter<TopBusiness_C
         viewHolder.tvDesNature.setTag(nature.getId());
         viewHolder.imgThumbnail.setImageResource(nature.getThumbnail());
         viewHolder.tvSubset.setText(query.getsubsetName(nature.getSubsetId()));
+        String image_url_1;
+        image_url_1 = "http://www.shahrma.com/image/business/" +nature.getSubsetId()+".jpg";
+        Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(viewHolder.imgThumbnail);
     }
 
     @Override
@@ -96,8 +99,6 @@ public class TopBusiness_Card_Adapter extends RecyclerView.Adapter<TopBusiness_C
 
                 @Override
                 public void onClick(View v) {
-
-                    Log.i("ON_______CLICK",tvDesNature.getTag().toString());
                     fc.SetMarket_Business(tvNature.getText().toString());
                     fc.SetBusiness_Id(Integer.valueOf(String.valueOf(tvDesNature.getTag())));
                     fc.SetBusinessTops(true);
