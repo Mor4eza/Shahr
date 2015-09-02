@@ -1,12 +1,17 @@
 package com.ariana.shahre_ma.MyBusiness;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -42,12 +47,11 @@ public class My_Business extends ActionBarActivity {
     Query query=new Query(this);
     KeySettings setting=new KeySettings(this);
     TextView title;
+    public static SwipeRefreshLayout mSwipeRefreshLayout;
     FloatingActionButton discount;
     public static ProgressBar pg;
     Uri currImageURI;
     String picturePath;
-    String ba1;
-
     public static RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     public static RecyclerView.Adapter job_list_Adapter;
@@ -57,9 +61,22 @@ public class My_Business extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my__business);
         pg=(ProgressBar)findViewById(R.id.pb_business);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.my_business_swipe_refresh_layout);
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRefresh, new IntentFilter("MyBusiness"));
 
+        mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.md_blue_A400),
+                getResources().getColor(R.color.md_red_400),
+                getResources().getColor(R.color.accent),
+                getResources().getColor(R.color.md_yellow_400));
 
-
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                HTTPGetBusinessMemberJson httpGetBusinessMemberJson = new HTTPGetBusinessMemberJson(My_Business.this);
+                httpGetBusinessMemberJson.SetUrl_businessMember(query.getMemberId());// get id member
+                httpGetBusinessMemberJson.execute();// Run
+            }
+        });
 
         HTTPGetBusinessMemberJson httpGetBusinessMemberJson = new HTTPGetBusinessMemberJson(My_Business.this);
         httpGetBusinessMemberJson.SetUrl_businessMember(query.getMemberId());// get id member
@@ -292,5 +309,15 @@ public class My_Business extends ActionBarActivity {
         picturePath = cursor.getString(column_index);
         return cursor.getString(column_index);
     }
+
+    private BroadcastReceiver mRefresh = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+            mSwipeRefreshLayout.setRefreshing(false);
+        }
+
+    };
+
 
 }

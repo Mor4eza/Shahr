@@ -7,8 +7,10 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-
+    android:background="@drawable/bg_gradiant"
     tools:context="com.ariana.shahre_ma.MyProfile.Log_In">
+
+
     <View
         android:layout_width="5dp"
         android:layout_height="0dp"
@@ -17,42 +19,45 @@
         android:layout_centerInParent="true"
         />
 
+    <LinearLayout
+        android:id="@+id/relative_login"
+        android:orientation="vertical"
+        android:background="@drawable/bg_form_rounded"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_marginBottom="50dp"
+        android:layout_above="@+id/btn_login"
+        android:layout_centerInParent="true"
+   >
+
+
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
         android:inputType="textPersonName"
+        android:background="@null"
         android:ems="10"
         android:ellipsize="start"
         android:id="@+id/et_username"
-        android:layout_marginTop="77dp"
         android:hint="نام کاربری"
-
         android:gravity="center"
-        android:layout_below="@+id/tverror"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:singleLine="true" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
         android:inputType="textPassword"
         android:ems="10"
+        android:layout_marginTop="5dp"
+        android:background="@null"
         android:id="@+id/et_password"
-        android:layout_below="@+id/et_username"
         android:hint="رمز عبور"
         android:gravity="center"
         android:imeActionLabel="ورود"
         android:ellipsize="start"
-        android:layout_marginTop="30dp"
-        android:layout_alignRight="@+id/et_username"
-        android:layout_alignEnd="@+id/et_username"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+ />
 
-
+    </LinearLayout>
 
     <com.dd.CircularProgressButton
         android:id="@+id/btn_login"
@@ -61,17 +66,17 @@
         android:layout_gravity="center"
         android:textColor="@color/md_white_1000"
         android:textSize="18sp"
-        android:layout_below="@+id/et_password"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="43dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         app:cpb_cornerRadius="48dp"
         app:cpb_textComplete="انجام شد"
         app:cpb_textError="خطا"
         app:cpb_textIdle="ورود "
-        android:onClick="Click_Login" />
+        android:onClick="Click_Login"
+        android:layout_above="@+id/frameLayout2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="97dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="300dp"
@@ -90,7 +95,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/fakeView1"
-        android:layout_toStartOf="@+id/fakeView1">
+        android:layout_toStartOf="@+id/fakeView1"
+        android:id="@+id/frameLayout2">
     <Button
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -123,15 +129,15 @@
        />
     </FrameLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="شهر ما"
-        android:id="@+id/textView12"
-        android:textColor="@color/mdtp_dark_gray"
-        android:textSize="50sp"
-        android:layout_below="@+id/tverror"
+
+    <view
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="20dp"
+        class="com.mikepenz.materialdrawer.view.BezelImageView"
+        android:id="@+id/view2"
+        android:src="@mipmap/ic_launcher"
+        android:layout_above="@+id/relative_login"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
