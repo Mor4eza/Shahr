@@ -29,15 +29,17 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
     List<SearchItems> mItems;
     SearchItems  nature;
     FieldClass fc=new FieldClass();
-
+    FieldDataBusiness fdb=new FieldDataBusiness();
     Context context;
+    DataBaseSqlite db;
     Query query;
+
     public SearchListAdapter(Context context) {
         super();
         this.context=context;
-        DataBaseSqlite db=new DataBaseSqlite(context);
-        Query query=new Query(context);
-        FieldDataBusiness fdb=new FieldDataBusiness();
+         db=new DataBaseSqlite(context);
+         query=new Query(context);
+
 
 
             Log.i("SearchOffline", "strat");
@@ -46,6 +48,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
 
         if(fc.GetSearchOffline())
         {
+            Log.i("SearchOffline1", "strat1");
             for (int i = 0; i < fdb.GetMarketBusiness().size(); i++) {
                 Log.i("SearchOffline", String.valueOf(fdb.GetMarketBusiness().size()));
                 nature = new SearchItems();

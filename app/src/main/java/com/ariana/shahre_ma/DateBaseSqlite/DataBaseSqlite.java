@@ -796,6 +796,19 @@ Context context;
 
     }
 
+    public Cursor select_BusinessSearchBazarYab(Integer SubsetId,String txtMarket,String address,Integer arreaId)
+    {
+        String query="";
+        Log.i("select_BusinessSearch","one");
+        query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +" Market like'%" + txtMarket + "%' or Address like '%" + address + "%') AND (AreaId="+arreaId+") AND (SubsetId="+SubsetId+")";
+
+        Log.i("select_BusinessSearch",query);
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(query, null);
+
+    }
+
+
     public Cursor select_BusinessSearch(String namemarket1,String namemarket2,String namemarket3,String namemarket4,String namemarket5,Integer cityid)
     {
 

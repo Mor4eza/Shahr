@@ -256,4 +256,49 @@ public class SearchOfline
 
          }
      }
+
+    public void TextSearch(Integer SubsetId,String txtMarket,String address,Integer arreaId) {
+
+        fc.SetSelected_job("adaklsjfkl");
+        rows_Business = db.select_BusinessSearchBazarYab(SubsetId, txtMarket, address, arreaId);
+        Log.i("BusinessgetCount", String.valueOf(rows_Business.getCount()));
+        if (rows_Business.getCount() > 0) {
+            Log.i("Businessget", "on");
+            if (rows_Business.moveToFirst()) {
+                do {
+
+                    selectId.add(rows_Business.getInt(0));
+                    selectMarketName.add(rows_Business.getString(1));
+                    selectPhone.add(rows_Business.getString(3));
+                    selectMobile.add(rows_Business.getString(4));
+                    selectAddress.add(rows_Business.getString(8));
+                    selectSubsetId.add(rows_Business.getInt(14));
+                    selectLongtiude.add(rows_Business.getDouble(15));
+                    selectLatitude.add(rows_Business.getDouble(16));
+                    selectRate.add(rows_Business.getDouble(30));
+                    selectSrc.add(rows_Business.getString(31));
+
+                } while (rows_Business.moveToNext());
+
+
+            }
+            fdb.SetIdBusiness(selectId);
+            fdb.SetLatitudeBusiness(selectLatitude);
+            fdb.SetLongtiudeBusiness(selectLongtiude);
+            fdb.SetRateBusiness(selectRate);
+            fdb.SetSubsetId(selectSubsetId);
+            fdb.SetAddressBusiness(selectAddress);
+            fdb.SetMarketBusiness(selectMarketName);
+            fdb.SetPhoneBusiness(selectPhone);
+            fdb.SetMobileBusiness(selectMobile);
+            fdb.SetSrc(selectSrc);
+            Log.i("BusinessgetCount", String.valueOf(rows_Business.getCount()));
+            fc.SetSearchOffline(true);
+            Intent intent = new Intent(context, SearchListActivity.class);
+            context.startActivity(intent);
+        }
+    }
+
+
+
 }

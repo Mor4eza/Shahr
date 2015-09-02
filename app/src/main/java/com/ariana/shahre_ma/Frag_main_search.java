@@ -160,8 +160,10 @@ public class Frag_main_search extends Fragment {
         @Override
         public void onClick(View v) {
 
+            Query query=new Query(getActivity());
             SearchOfline searchOfline=new SearchOfline(getActivity());
-            searchOfline.TextSearch(txtWhere.getText().toString(),txtWhat.getText().toString());
+            //searchOfline.TextSearch(txtWhere.getText().toString(),txtWhat.getText().toString());
+            searchOfline.TextSearch(query.getsubsetID(txtField.getText().toString()),txtWhat.getText().toString(),txtAddress.getText().toString(),query.getAreaID(txtWhere.getText().toString()));
 
         }
     });
@@ -175,7 +177,7 @@ public class Frag_main_search extends Fragment {
 
             DataBaseSqlite db=new DataBaseSqlite(getActivity());
             List<String> studentList = new ArrayList<String>();
-            Cursor allrows=db.select_AllCity();
+            Cursor allrows=db.select_AllArea();
             if (allrows.moveToFirst()) {
                 do {
 
@@ -224,8 +226,8 @@ public class Frag_main_search extends Fragment {
             try {
 
                 ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, getId3());
-                txtWhat.setAdapter(adapter);
-                txtWhat.setThreshold(1);
+                txtField.setAdapter(adapter);
+                txtField.setThreshold(1);
                 //  txtWhere.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
             }
             catch (Exception e)

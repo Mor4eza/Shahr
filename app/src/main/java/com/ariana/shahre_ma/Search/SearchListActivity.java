@@ -42,7 +42,7 @@ public class SearchListActivity extends ActionBarActivity {
 
 
     private void setCards(){
-        try {
+       // try {
 
 
             mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_Search);
@@ -58,8 +58,8 @@ public class SearchListActivity extends ActionBarActivity {
             mRecyclerView.setAdapter(alphaAdapter);
             Search_list_Adapter.notifyItemChanged(0);
             Search_list_Adapter.notifyDataSetChanged();
-        }
-        catch (Exception e){}
+        /*}
+        catch (Exception e){}*/
     }
 
    /* @Override
