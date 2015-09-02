@@ -12,6 +12,7 @@ import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.Jobs_List;
+import com.ariana.shahre_ma.Search.SearchListActivity;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
@@ -353,7 +354,7 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
             else {
 
                 fc.SetSearchOnline(true);
-                Intent intent = new Intent(this.context, Jobs_List.class);
+                Intent intent = new Intent(this.context, SearchListActivity.class);
                 this.context.startActivity(intent);
                 Log.i("Count Business : ", "دریافت ثبت شده ها");
                 pd.dismiss();
