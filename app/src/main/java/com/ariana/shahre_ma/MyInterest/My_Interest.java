@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.ListExpand.Continent;
 import com.ariana.shahre_ma.ListExpand.Country;
+import com.ariana.shahre_ma.MessageDialog;
 import com.ariana.shahre_ma.MyCity.TotalListener;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
@@ -35,16 +36,9 @@ public class My_Interest extends ActionBarActivity implements TotalListener {
     Query query;
     ExpandableListView expListView;
     int lastExpandedPosition = -1;
-    Integer Id_co;
-    Integer Collection_ID_subset;
+
     HTTPGetBusinessJson httpbusin;
     NetState ns;
-    private ExpandableListView myList;
-    private ArrayList<Continent> continentList = new ArrayList<Continent>();
-    ArrayList<Country> countryList;
-
-    Continent continent;
-    Country country;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,20 +86,16 @@ public class My_Interest extends ActionBarActivity implements TotalListener {
     public void SendPostInterest(View v) {
        SqliteTOjson json=new SqliteTOjson(this);
         Log.i("", json.getSqliteInterestTOjson());
-        if(ns.checkInternetConnection()) {
+        if(ns.checkInternetConnection())
+        {
             HTTPPostInterestJson httpinterest = new HTTPPostInterestJson(this);
             httpinterest.SetInterest_Json(json.getSqliteInterestTOjson());
             httpinterest.execute();
-        }else{
-            AlertDialog alertDialog = new AlertDialog.Builder(My_Interest.this).create();
-            alertDialog.setTitle("هشدار");
-            alertDialog.setMessage("اینترنت قطع می باشد");
-            alertDialog.setButton("خب", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-
-                }
-            });
-            alertDialog.show();
+        }
+        else
+        {
+            MessageDialog messageDialog=new MessageDialog(getApplicationContext());
+            messageDialog.ShowMessage("هشدار","اینترنت قطع می باشد","باشه","false");
         }
 
     }

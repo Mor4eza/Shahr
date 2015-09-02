@@ -38,6 +38,7 @@ public class HTTPGetInterestJson  extends AsyncTask<String,Void, Integer>
     public void SetUrl_Interest(Integer memberid)
     {
         url_Interest ="http://test.shahrma.com/api/ApiGiveInterest?memberId="+memberid;
+
     }
 
     private String getUrl_Interest()

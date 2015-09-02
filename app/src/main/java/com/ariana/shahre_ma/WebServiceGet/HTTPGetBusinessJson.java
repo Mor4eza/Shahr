@@ -33,7 +33,6 @@ import java.util.List;
  */
 public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
 {
-
     private static Context context;
     FieldClass fc=new FieldClass();
     Query query;
@@ -180,6 +179,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
 
                 Integer cityid = 0;
                 Integer idsubset = 0;
+                String fieldactivty[]=new String[7];
 
                 DataBaseSqlite dbs = new DataBaseSqlite(context);
 
@@ -217,7 +217,8 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
                             dbs.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i], likediscount[i], dislikediscount[i]);
                         }
 
-                        dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], latitude[i], longitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i], src[i]);
+
+                        dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], latitude[i], longitude[i], areaid[i], area1[i], user[i], cityid, userid[i],field1[i],field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i], src[i]);
 
                     }
 

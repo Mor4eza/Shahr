@@ -784,12 +784,13 @@ Context context;
     public Cursor select_BusinessSearch(String namemarket,Integer cityid)
     {
         String query="";
-
+        Log.i("select_BusinessSearch","one");
             query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
                     " Market like'%" + namemarket +
                     "%' or Address like '%" + namemarket +
                     "%') AND (CityId="+cityid+")";
 
+        Log.i("select_BusinessSearch",query);
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(query, null);
 
@@ -1144,7 +1145,7 @@ Context context;
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT Id FROM " + InstructionsSqlite.TABLE_NAME_SUBSET + "  WHERE SubsetName='" + subsetname+"'", null);
+        return db.rawQuery("SELECT Id FROM " + InstructionsSqlite.TABLE_NAME_SUBSET + "  WHERE SubsetName LIKE '%" + subsetname+"%'", null);
 
     }
 
