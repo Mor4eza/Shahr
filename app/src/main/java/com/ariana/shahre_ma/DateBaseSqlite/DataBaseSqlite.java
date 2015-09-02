@@ -790,7 +790,35 @@ Context context;
             query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
                     " Market like'%" + namemarket +
                     "%' or Address like '%" + namemarket +
-                    "%' or Field1="+fieldactivty+") AND (CityId="+cityid+")";
+                    "%' or Field1="+fieldactivty+" ) AND (CityId="+cityid+")";
+
+        Log.i("select_BusinessSearch",query);
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(query, null);
+    }
+
+    public Cursor select_BusinessSearch(String namemarket,Integer cityid,Integer fieldactivity,Integer fieldactivity2)
+    {
+        String query="";
+        Log.i("select_BusinessSearch", "one");
+        query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
+                " Market like'%" + namemarket +
+                "%' or Address like '%" + namemarket +
+                "%' or Field1="+fieldactivity+ " or Field1="+fieldactivity2+ " ) AND (CityId="+cityid+")";
+
+        Log.i("select_BusinessSearch",query);
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(query, null);
+    }
+
+    public Cursor select_BusinessSearch(String namemarket,Integer cityid,Integer fieldactivity,Integer fieldactivity2,Integer fieldactivity3)
+    {
+        String query="";
+        Log.i("select_BusinessSearch", "one");
+        query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
+                " Market like'%" + namemarket +
+                "%' or Address like '%" + namemarket +
+                "%' or Field1="+fieldactivity+" or Field1="+fieldactivity2+ " or Field1="+fieldactivity3+" ) AND (CityId="+cityid+")";
 
         Log.i("select_BusinessSearch",query);
         SQLiteDatabase db = this.getReadableDatabase();
@@ -803,7 +831,7 @@ Context context;
         Log.i("select_BusinessSearch","one");
         query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
                 " Market like'%" + namemarket +
-                "%' AND Address like '%" + address +
+                "%' or Address like '%" + address +
                 "%') AND (SubsetId="+subsetId+") AND (CityId="+cityid+")";
         Log.i("select_BusinessSearch",query);
         SQLiteDatabase db = this.getReadableDatabase();
@@ -919,7 +947,7 @@ Context context;
 
     }
 
-    public Cursor select_BusinessSearch(String namemarket1,String namemarket2,String namemarket3,String namemarket4,String namemarket5,Integer SubsetId,Integer cityid)
+    public Cursor select_BusinessSearch(String namemarket1,String namemarket2,String namemarket3,String namemarket4,String namemarket5,Integer SubsetId,Integer cityid,Integer fieldactivity)
     {
         String query="";
         Log.i("namemarket[len]",String.valueOf(namemarket1.length()));
@@ -931,7 +959,7 @@ Context context;
         if(namemarket1.length()>0 && namemarket2.length()>0 && namemarket3.length()>0 && namemarket4.length()>0 && namemarket5.length()>0)
         {
             Log.i("search 5 word",namemarket1+","+namemarket2+","+namemarket3+","+namemarket4+","+namemarket5);
-            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(((" +
+            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where((" +
                     " Market like'%" + namemarket1 +
                     "%' or Market like '%" + namemarket2 +
                     "%' or Market like '%" + namemarket3 +
@@ -942,12 +970,12 @@ Context context;
                     "%' or Address like '%" + namemarket3 +
                     "%' or Address like '%" + namemarket4 +
                     "%' or Address like '%" + namemarket5 +
-                    "%')) AND (SubsetId="+SubsetId+ ") AND (CityId="+cityid+"))";
+                    "%') AND (SubsetId="+SubsetId+" or Field1="+fieldactivity+ ") AND (CityId="+cityid+"))";
         }
         else if(namemarket1.length()>0 && namemarket2.length()>0 && namemarket3.length()>0 && namemarket4.length()>0)
         {
             Log.i("search 4 word",namemarket1+","+namemarket2+","+namemarket3+","+namemarket4);
-            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(((" +
+            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where((" +
                     " Market like'%" + namemarket1 +
                     "%' or Market like '%" + namemarket2 +
                     "%' or Market like '%" + namemarket3 +
@@ -956,43 +984,45 @@ Context context;
                     "%' or Address like '%" + namemarket2 +
                     "%' or Address like '%" + namemarket3 +
                     "%' or Address like '%" + namemarket4 +
-                    "%')) AND (SubsetId="+SubsetId+ ") AND (CityId="+cityid+"))";
+                    "%') AND (SubsetId="+SubsetId+ " or Field1="+fieldactivity+ ") AND (CityId="+cityid+"))";
         }
         else if(namemarket1.length()>0 && namemarket2.length()>0 && namemarket3.length()>0 )
         {
             Log.i("search 3 word",namemarket1+","+namemarket2+","+namemarket3);
-            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(((" +
+            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where((" +
                     " Market like'%" + namemarket1 +
                     "%' or Market like '%" + namemarket2 +
                     "%' or Market like '%" + namemarket3 +
                     "%') or (Address like '%" + namemarket1 +
                     "%' or Address like '%" + namemarket2 +
                     "%' or Address like '%" + namemarket3 +
-                    "%')) AND (SubsetId="+SubsetId+ ") AND (CityId="+cityid+"))";
+                    "%') AND (SubsetId="+SubsetId+ " or Field1="+fieldactivity+ ") AND (CityId="+cityid+"))";
         }
         else if(namemarket1.length()>0 && namemarket2.length()>0  )
         {
             Log.i("search 2 word",namemarket1+","+namemarket2);
-            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(((" +
+            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where((" +
                     " Market like'%" + namemarket1 +
                     "%' or Market like '%" + namemarket2 +
                     "%') or (Address like '%" + namemarket1 +
                     "%' or Address like '%" + namemarket2 +
-                    "%')) AND (SubsetId="+SubsetId+ ") AND (CityId="+cityid+"))";
+                    "%') AND (SubsetId="+SubsetId+ " or Field1="+fieldactivity+") AND (CityId="+cityid+"))";
         }
         else if(namemarket1.length()>0)
         {
             Log.i("search 1 word",namemarket1);
-            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(((" +
+            query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where((" +
                     " Market like'%" + namemarket1 +
                     "%') or (Address like '%" + namemarket1 +
-                    "%')) AND (SubsetId="+SubsetId+ ") AND (CityId="+cityid+"))";
+                    "%') AND (SubsetId="+SubsetId+ " or Field1="+fieldactivity+") AND (CityId="+cityid+"))";
         }
+
         Log.i("namemarket[0]",namemarket1);
         Log.i("namemarket[1]", namemarket2);
         Log.i("namemarket[2]", namemarket3);
         Log.i("namemarket[1]", namemarket4);
         Log.i("namemarket[2]", namemarket5);
+        Log.i("query", query);
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(query, null);
 

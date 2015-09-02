@@ -50,7 +50,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
     Integer id[];
     Integer Id_co;
     Integer Collection_ID_subset;
-    HTTPGetBusinessJson httpbusin;
+     HTTPGetBusinessJson httpbusin;
     NetState ns;
 
     Boolean refresh_display=true;

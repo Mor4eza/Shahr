@@ -2,6 +2,7 @@ package com.ariana.shahre_ma.WebServiceGet;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -40,7 +41,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
     private  String url_Business;
     ProgressDialog pd;
     Integer errorCode=0;
-
+    private AsyncTask<String,Void,Integer> updateTask = null;
     private  List<Integer> selectId=new ArrayList<>();
     private  List<Integer> selectRateCount=new ArrayList<>();
     private  List<Integer> selectDiscountId=new ArrayList<>();
@@ -141,6 +142,12 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
         pd = new ProgressDialog(context);
         pd.setMessage("دریافت...");
         pd.setCancelable(false);
+        pd.setButton("توقف", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
         pd.show();
     }
 
@@ -261,7 +268,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
                 MessageDialog messageDialog=new MessageDialog(context);
                 messageDialog.ShowMessage("هشدار", "پیامی از سمت سرور دریافت نشد دوباره امتحان کنید", "باشه", "false");
             }
-            Log.e("ExceptionBusinessJson",e.toString());
+            Log.e("ExceptionBusinessJson", e.toString());
         }
     }
 
@@ -458,4 +465,8 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
         return result;
     }
 
+    @Override
+    protected void onCancelled() {
+        super.onCancelled();
+    }
 }

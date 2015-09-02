@@ -32,6 +32,16 @@ public class SelectDataBaseSqlite extends DataBaseSqlite {
     }
 
     @Override
+    public Cursor select_BusinessSearch(String namemarket, Integer cityid, Integer fieldactivity, Integer fieldactivity2) {
+        return super.select_BusinessSearch(namemarket, cityid, fieldactivity, fieldactivity2);
+    }
+
+    @Override
+    public Cursor select_BusinessSearch(String namemarket, Integer cityid, Integer fieldactivity, Integer fieldactivity2, Integer fieldactivity3) {
+        return super.select_BusinessSearch(namemarket, cityid, fieldactivity, fieldactivity2, fieldactivity3);
+    }
+
+    @Override
     public Cursor select_BusinessAdvanceSearch(String namemarket, String address, Integer cityid, Integer subsetId) {
         return super.select_BusinessAdvanceSearch(namemarket, address, cityid, subsetId);
     }
@@ -57,8 +67,8 @@ public class SelectDataBaseSqlite extends DataBaseSqlite {
     }
 
     @Override
-    public Cursor select_BusinessSearch(String namemarket1, String namemarket2, String namemarket3, String namemarket4, String namemarket5, Integer SubsetId, Integer cityid) {
-        return super.select_BusinessSearch(namemarket1, namemarket2, namemarket3, namemarket4, namemarket5, SubsetId, cityid);
+    public Cursor select_BusinessSearch(String namemarket1, String namemarket2, String namemarket3, String namemarket4, String namemarket5, Integer SubsetId, Integer cityid, Integer fieldactivity) {
+        return super.select_BusinessSearch(namemarket1, namemarket2, namemarket3, namemarket4, namemarket5, SubsetId, cityid, fieldactivity);
     }
 
     @Override

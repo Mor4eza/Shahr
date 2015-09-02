@@ -167,8 +167,23 @@ public class Frag_main_search extends Fragment {
 
             if (txtField.getText().equals(null) || txtField.getText().equals("") || txtField.getText().length()==0)
             {
-                SearchOfline searchOfline=new SearchOfline(getActivity());
-                searchOfline.TextSearch(txtWhere.getText().toString(),txtWhat.getText().toString());
+                if(txtWhat.getText().length()==0 || txtWhat.getText().equals(" ") || txtWhat.getText().equals("")) {
+                    txtWhat.setError("یه چیز بنویس  ، مثلا نام فروشگاه یا مشاغل");
+                    txtWhat.requestFocus();
+                }
+                else
+                {
+                    if(txtWhat.getText().toString().trim().length()<=2)
+                    {
+                        txtWhat.setError("تعداد حروف باید حداقل سه حرف باشه");
+                        txtWhat.requestFocus();
+                    }
+                    else
+                    {
+                        SearchOfline searchOfline = new SearchOfline(getActivity());
+                        searchOfline.TextSearch(txtWhere.getText().toString(), txtWhat.getText().toString());
+                    }
+                }
             }
             else
             {

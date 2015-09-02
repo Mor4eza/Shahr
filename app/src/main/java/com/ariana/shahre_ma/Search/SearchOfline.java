@@ -40,6 +40,10 @@ public class SearchOfline
     Cursor rows_Subset;
     Cursor rows_FieldActivity;
     Integer _FieldActivityId[]=new Integer[6];
+    Integer onesearch=1;
+    Integer twosearch=1;
+    Integer threesearch=0;
+    Integer SubsetCount=0;
 
     int length = 0;
 
@@ -88,9 +92,11 @@ public class SearchOfline
 
          fc.SetSelected_job(cityname.toString());
          Integer cityid = query.getCityId(cityname.toString().trim());
-         if (ns.checkInternetConnection()) {
+         if (ns.checkInternetConnection())
+         {
              try {
-                 if (cityid > 0) {
+                 if (cityid > 0)
+                 {
                      String textwhat = URLEncoder.encode(textSearch.toString().trim(), "UTF-8");
                      HTTPGetOnlineSearchJson httpGetOnlineSearchJson = new HTTPGetOnlineSearchJson(context);
                      httpGetOnlineSearchJson.SetValueSearch(textwhat, cityid);
@@ -120,149 +126,24 @@ public class SearchOfline
 
              i=0;
              //Search FieldActivity
-             rows_FieldActivity=sdb.select_SearchFieldActivityId(textSearch.toString());
-             if(rows_FieldActivity.moveToFirst())
+             SearchFieldActivity(textSearch.toString());
+
+             OneSearch(selectedWord[0], cityid, _FieldActivityId[0],_FieldActivityId[1],_FieldActivityId[2]);
+             if(onesearch>0)//One Search
              {
-                 do
-                 {
-                      _FieldActivityId[i]=rows_FieldActivity.getInt(0);
-                      i++;
-                 }while (rows_FieldActivity.moveToNext());
+
              }
+             else
+             {
 
-             Log.i("rows_FieldActivity", String.valueOf(rows_FieldActivity));
-             rows_Business = sdb.select_BusinessSearch(textSearch.toString(), cityid,_FieldActivityId[0]);
-             Log.i("BusinessgetCount", String.valueOf(rows_Business.getCount()));
-             if (rows_Business.getCount() > 0) {
-                 Log.i("Businessget", "on");
-                 if (rows_Business.moveToFirst()) {
-                     do {
+                 TwoSearch(selectedWord[0],selectedWord[1],selectedWord[2],selectedWord[3],selectedWord[4],cityid);
+                 if(twosearch>0) //Two Search
+                 {
 
-                         selectId.add(rows_Business.getInt(0));
-                         selectMarketName.add(rows_Business.getString(1));
-                         selectPhone.add(rows_Business.getString(3));
-                         selectMobile.add(rows_Business.getString(4));
-                         selectAddress.add(rows_Business.getString(8));
-                         selectSubsetId.add(rows_Business.getInt(14));
-                         selectLongtiude.add(rows_Business.getDouble(15));
-                         selectLatitude.add(rows_Business.getDouble(16));
-                         selectRate.add(rows_Business.getDouble(30));
-                         selectSrc.add(rows_Business.getString(31));
-
-                     } while (rows_Business.moveToNext());
-
-
-                 }
-
-                 //نمایش به کاربر
-
-                 fdb.SetIdBusiness(selectId);
-                 fdb.SetLatitudeBusiness(selectLatitude);
-                 fdb.SetLongtiudeBusiness(selectLongtiude);
-                 fdb.SetRateBusiness(selectRate);
-                 fdb.SetSubsetId(selectSubsetId);
-                 fdb.SetAddressBusiness(selectAddress);
-                 fdb.SetMarketBusiness(selectMarketName);
-                 fdb.SetPhoneBusiness(selectPhone);
-                 fdb.SetMobileBusiness(selectMobile);
-                 fdb.SetSrc(selectSrc);
-
-                 fc.SetSearchOffline(true);
-                 Intent intent = new Intent(context, SearchListActivity.class);
-                 context.startActivity(intent);
-             } else {
-
-                 rows_Collection = sdb.select_Collection(selectedWord[0]);
-                 Log.i("CollectiongetCount", String.valueOf(rows_Collection.getCount()));
-                 if (rows_Collection.getCount() > 0) {
-                     Log.i("Collection", "on");
-                     rows_Collection.moveToFirst();
-                     //SubsetId Search
-                     rows_Subset = sdb.select_SubsetId(rows_Collection.getInt(0));
-                     Log.i("SubsetgetCount", String.valueOf(rows_Subset.getCount()));
-                     rows_Subset.moveToFirst();
-
-                     rows_Business = sdb.select_BusinessSearch(selectedWord[0], selectedWord[1], selectedWord[2], selectedWord[3], selectedWord[4], rows_Subset.getInt(0), cityid);
-                     if (rows_Business.moveToFirst()) {
-                         do {
-                             selectAddress.add(rows_Business.getString(8));
-                             selectMarketName.add(rows_Business.getString(1));
-                             selectPhone.add(rows_Business.getString(3));
-                             selectMobile.add(rows_Business.getString(4));
-                             selectId.add(rows_Business.getInt(0));
-                             selectSubsetId.add(rows_Business.getInt(14));
-                             selectLatitude.add(rows_Business.getDouble(16));
-                             selectLongtiude.add(rows_Business.getDouble(15));
-                             selectRate.add(rows_Business.getDouble(30));
-                             selectSrc.add(rows_Business.getString(31));
-
-                         } while (rows_Business.moveToNext());
-
-                     }
-
-                     fdb.SetIdBusiness(selectId);
-                     fdb.SetLatitudeBusiness(selectLatitude);
-                     fdb.SetLongtiudeBusiness(selectLongtiude);
-                     fdb.SetRateBusiness(selectRate);
-                     fdb.SetSubsetId(selectSubsetId);
-                     fdb.SetAddressBusiness(selectAddress);
-                     fdb.SetMarketBusiness(selectMarketName);
-                     fdb.SetPhoneBusiness(selectPhone);
-                     fdb.SetMobileBusiness(selectMobile);
-                     fdb.SetSrc(selectSrc);
-
-                     fc.SetSearchOffline(true);
-                     Intent intent = new Intent(context, SearchListActivity.class);
-                     context.startActivity(intent);
                  }
                  else
                  {
-                     rows_Subset = sdb.select_SubsetId(selectedWord[0]);
-                     Log.i("SubsetgetCount", String.valueOf(rows_Subset.getCount()));
-                     if (rows_Subset.getCount() > 0) {
-                         Log.i("Subsetget", "on");
-                         rows_Subset.moveToFirst();
-
-                         rows_Business = sdb.select_BusinessSearch(selectedWord[0], selectedWord[2], selectedWord[2], selectedWord[3], selectedWord[4], rows_Subset.getInt(0), cityid);
-                         if (rows_Business.moveToFirst()) {
-                             do {
-                                 selectAddress.add(rows_Business.getString(8));
-                                 selectMarketName.add(rows_Business.getString(1));
-                                 selectPhone.add(rows_Business.getString(3));
-                                 selectMobile.add(rows_Business.getString(4));
-                                 selectId.add(rows_Business.getInt(0));
-                                 selectSubsetId.add(rows_Business.getInt(14));
-                                 selectLatitude.add(rows_Business.getDouble(16));
-                                 selectLongtiude.add(rows_Business.getDouble(15));
-                                 selectRate.add(rows_Business.getDouble(30));
-                                 selectSrc.add(rows_Business.getString(31));
-
-                             } while (rows_Business.moveToNext());
-
-                         }
-
-                         fdb.SetIdBusiness(selectId);
-                         fdb.SetLatitudeBusiness(selectLatitude);
-                         fdb.SetLongtiudeBusiness(selectLongtiude);
-                         fdb.SetRateBusiness(selectRate);
-                         fdb.SetSubsetId(selectSubsetId);
-                         fdb.SetAddressBusiness(selectAddress);
-                         fdb.SetMarketBusiness(selectMarketName);
-                         fdb.SetPhoneBusiness(selectPhone);
-                         fdb.SetMobileBusiness(selectMobile);
-                         fdb.SetSrc(selectSrc);
-
-
-                         fc.SetSearchOffline(true);
-                         Intent intent = new Intent(context, SearchListActivity.class);
-                         context.startActivity(intent);
-                     }
-                     else
-                     {
-                         fc.SetSearchOffline(true);
-                         Intent intent = new Intent(context, SearchListActivity.class);
-                         context.startActivity(intent);
-                     }
+                   ThreeSearch(selectedWord[0],selectedWord[1],selectedWord[2],selectedWord[3],selectedWord[4],cityid);
                  }
              }
 
@@ -400,5 +281,226 @@ public class SearchOfline
     }
 
 
+    private void SearchFieldActivity(String text)
+    {
+        int i=0;
+        _FieldActivityId[0]=0;
+        _FieldActivityId[1]=0;
+        _FieldActivityId[2]=0;
+        _FieldActivityId[3]=0;
+        _FieldActivityId[4]=0;
+        _FieldActivityId[5]=0;
+
+
+        try {
+            rows_FieldActivity = sdb.select_SearchFieldActivityId(text);
+            if (rows_FieldActivity.moveToFirst()) {
+                do {
+                    _FieldActivityId[i] = rows_FieldActivity.getInt(0);
+                    Log.i("_FieldActivityId",String.valueOf(_FieldActivityId[i]));
+                    i++;
+                } while (rows_FieldActivity.moveToNext());
+            }
+        }
+        catch (Exception  e)
+        {
+
+        }
+    }
+
+
+    private void OneSearch(String textSearch,Integer cityid,Integer fieldActivity1,Integer fieldActivity2,Integer fieldActivity3)
+    {
+        if(fieldActivity1>0 && fieldActivity2>0 && fieldActivity3>0)
+        rows_Business = sdb.select_BusinessSearch(textSearch.toString(), cityid,fieldActivity1,fieldActivity2,fieldActivity3);
+        else if(fieldActivity1>0 && fieldActivity2>0)
+        rows_Business = sdb.select_BusinessSearch(textSearch.toString(), cityid,fieldActivity1,fieldActivity2);
+        else if(fieldActivity1>0)
+        rows_Business = sdb.select_BusinessSearch(textSearch.toString(), cityid,fieldActivity1);
+
+
+        Log.i("OneSearchBusiness", String.valueOf(rows_Business.getCount()));
+        if (rows_Business.getCount() > 0)
+        {
+            Log.i("Businessget", "on");
+            if (rows_Business.moveToFirst())
+            {
+                do {
+                    selectId.add(rows_Business.getInt(0));
+                    selectMarketName.add(rows_Business.getString(1));
+                    selectPhone.add(rows_Business.getString(3));
+                    selectMobile.add(rows_Business.getString(4));
+                    selectAddress.add(rows_Business.getString(8));
+                    selectSubsetId.add(rows_Business.getInt(14));
+                    selectLongtiude.add(rows_Business.getDouble(15));
+                    selectLatitude.add(rows_Business.getDouble(16));
+                    selectRate.add(rows_Business.getDouble(30));
+                    selectSrc.add(rows_Business.getString(31));
+
+                } while (rows_Business.moveToNext());
+
+
+            }
+
+            fdb.SetIdBusiness(selectId);
+            fdb.SetLatitudeBusiness(selectLatitude);
+            fdb.SetLongtiudeBusiness(selectLongtiude);
+            fdb.SetRateBusiness(selectRate);
+            fdb.SetSubsetId(selectSubsetId);
+            fdb.SetAddressBusiness(selectAddress);
+            fdb.SetMarketBusiness(selectMarketName);
+            fdb.SetPhoneBusiness(selectPhone);
+            fdb.SetMobileBusiness(selectMobile);
+            fdb.SetSrc(selectSrc);
+
+            fc.SetSearchOffline(true);
+            Intent intent = new Intent(context, SearchListActivity.class);
+            context.startActivity(intent);
+        }
+        else
+        {
+          onesearch=0;
+        }
+    }
+
+    private void TwoSearch(String word1,String word2,String word3,String word4,String word5,Integer cityid)
+    {
+
+        SearchFieldActivity(word1);
+        rows_Collection = sdb.select_Collection(word2);
+        Log.i("CollectiongetCount", String.valueOf(rows_Collection.getCount()));
+        if (rows_Collection.getCount() > 0) {
+            rows_Collection.moveToFirst();
+            //SubsetId Search
+            rows_Subset = sdb.select_SubsetId(rows_Collection.getInt(0));
+            Log.i("SubsetgetCount", String.valueOf(rows_Subset.getCount()));
+            if(rows_Subset.getCount()>0)
+            rows_Subset.moveToFirst();
+
+            rows_Business = sdb.select_BusinessSearch(word1, word2, word3, word4, word5, rows_Subset.getInt(0), cityid, _FieldActivityId[0]);
+            if (rows_Business.moveToFirst()) {
+                do {
+                    selectAddress.add(rows_Business.getString(8));
+                    selectMarketName.add(rows_Business.getString(1));
+                    selectPhone.add(rows_Business.getString(3));
+                    selectMobile.add(rows_Business.getString(4));
+                    selectId.add(rows_Business.getInt(0));
+                    selectSubsetId.add(rows_Business.getInt(14));
+                    selectLatitude.add(rows_Business.getDouble(16));
+                    selectLongtiude.add(rows_Business.getDouble(15));
+                    selectRate.add(rows_Business.getDouble(30));
+                    selectSrc.add(rows_Business.getString(31));
+
+                } while (rows_Business.moveToNext());
+
+            }
+
+            fdb.SetIdBusiness(selectId);
+            fdb.SetLatitudeBusiness(selectLatitude);
+            fdb.SetLongtiudeBusiness(selectLongtiude);
+            fdb.SetRateBusiness(selectRate);
+            fdb.SetSubsetId(selectSubsetId);
+            fdb.SetAddressBusiness(selectAddress);
+            fdb.SetMarketBusiness(selectMarketName);
+            fdb.SetPhoneBusiness(selectPhone);
+            fdb.SetMobileBusiness(selectMobile);
+            fdb.SetSrc(selectSrc);
+
+            fc.SetSearchOffline(true);
+            Intent intent = new Intent(context, SearchListActivity.class);
+            context.startActivity(intent);
+        }
+        else if( _FieldActivityId[0]>0)
+        {
+            rows_Business = sdb.select_BusinessSearch(word1, word2, word3, word4, word5,0, cityid, _FieldActivityId[0]);
+            if (rows_Business.moveToFirst()) {
+                do {
+                    selectAddress.add(rows_Business.getString(8));
+                    selectMarketName.add(rows_Business.getString(1));
+                    selectPhone.add(rows_Business.getString(3));
+                    selectMobile.add(rows_Business.getString(4));
+                    selectId.add(rows_Business.getInt(0));
+                    selectSubsetId.add(rows_Business.getInt(14));
+                    selectLatitude.add(rows_Business.getDouble(16));
+                    selectLongtiude.add(rows_Business.getDouble(15));
+                    selectRate.add(rows_Business.getDouble(30));
+                    selectSrc.add(rows_Business.getString(31));
+
+                } while (rows_Business.moveToNext());
+
+            }
+
+            fdb.SetIdBusiness(selectId);
+            fdb.SetLatitudeBusiness(selectLatitude);
+            fdb.SetLongtiudeBusiness(selectLongtiude);
+            fdb.SetRateBusiness(selectRate);
+            fdb.SetSubsetId(selectSubsetId);
+            fdb.SetAddressBusiness(selectAddress);
+            fdb.SetMarketBusiness(selectMarketName);
+            fdb.SetPhoneBusiness(selectPhone);
+            fdb.SetMobileBusiness(selectMobile);
+            fdb.SetSrc(selectSrc);
+
+            fc.SetSearchOffline(true);
+            Intent intent = new Intent(context, SearchListActivity.class);
+            context.startActivity(intent);
+        }
+        else
+        {
+            twosearch=0;
+        }
+    }
+
+    private  void ThreeSearch(String word1,String word2,String word3,String word4,String word5,Integer cityid)
+    {
+
+        SearchFieldActivity(word1);
+        rows_Subset = sdb.select_SubsetId(word1);
+        Log.i("SubsetgetCount", String.valueOf(rows_Subset.getCount()));
+        if (rows_Subset.getCount() > 0 || _FieldActivityId[0]>0) {
+            Log.i("Subsetget", "on");
+            rows_Subset.moveToFirst();
+            rows_Business = sdb.select_BusinessSearch(word1,word2,word3,word4,word5, rows_Subset.getInt(0), cityid,_FieldActivityId[0]);
+            Log.i("ThreeSearch", String.valueOf(rows_Business.getCount()));
+            if (rows_Business.moveToFirst()) {
+                do {
+                    selectAddress.add(rows_Business.getString(8));
+                    selectMarketName.add(rows_Business.getString(1));
+                    selectPhone.add(rows_Business.getString(3));
+                    selectMobile.add(rows_Business.getString(4));
+                    selectId.add(rows_Business.getInt(0));
+                    selectSubsetId.add(rows_Business.getInt(14));
+                    selectLatitude.add(rows_Business.getDouble(16));
+                    selectLongtiude.add(rows_Business.getDouble(15));
+                    selectRate.add(rows_Business.getDouble(30));
+                    selectSrc.add(rows_Business.getString(31));
+
+                } while (rows_Business.moveToNext());
+
+            }
+
+            fdb.SetIdBusiness(selectId);
+            fdb.SetLatitudeBusiness(selectLatitude);
+            fdb.SetLongtiudeBusiness(selectLongtiude);
+            fdb.SetRateBusiness(selectRate);
+            fdb.SetSubsetId(selectSubsetId);
+            fdb.SetAddressBusiness(selectAddress);
+            fdb.SetMarketBusiness(selectMarketName);
+            fdb.SetPhoneBusiness(selectPhone);
+            fdb.SetMobileBusiness(selectMobile);
+            fdb.SetSrc(selectSrc);
+
+
+            fc.SetSearchOffline(true);
+            Intent intent = new Intent(context, SearchListActivity.class);
+            context.startActivity(intent);
+        }
+        else
+        {
+            fc.SetSearchOffline(true);
+            Intent intent = new Intent(context, SearchListActivity.class);
+            context.startActivity(intent);
+        }
+    }
 
 }
