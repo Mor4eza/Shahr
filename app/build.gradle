@@ -15,8 +15,8 @@ android {
         applicationId "com.ariana.shahre_ma"
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 108
-        versionName '1.0.8'
+        versionCode 109
+        versionName '1.0.9'
         signingConfig signingConfigs.config
     }
     buildTypes {
