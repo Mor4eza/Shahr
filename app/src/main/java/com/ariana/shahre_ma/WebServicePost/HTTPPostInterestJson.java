@@ -6,12 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetOpinionJson;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -22,7 +18,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -150,18 +145,7 @@ public class HTTPPostInterestJson     extends AsyncTask<String, Long, Integer>
 
         } catch (Exception e)
         {
-            pd.dismiss();
-            result=0;
 
-            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-            alertDialog.setTitle("خطا");
-            alertDialog.setMessage("ثبت نشد دوباره امتحان کنید");
-            alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-
-                }
-            });
-            alertDialog.show();
 
             e.printStackTrace();
             Log.e("Error in Exception: ", e.toString());
