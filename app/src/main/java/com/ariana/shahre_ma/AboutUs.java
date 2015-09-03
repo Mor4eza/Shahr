@@ -27,7 +27,8 @@ public class AboutUs extends ActionBarActivity {
 
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
-        String shareBody = "اطلاعات مشاغل ایران"+" \n" + "دانلود از :"+"\n" +"https://cafebazaar.ir/app/com.ariana.shahre_ma/?l=fa" ;
+        String shareBody = "شهر ما"+" \n" + " بانک اطلاعات مشاغل"+"\n"+"دانلود از:" +
+                "\n"+"https://cafebazaar.ir/app/com.ariana.shahre_ma/?l=fa" ;
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
         startActivity(Intent.createChooser(sharingIntent, "اشتراک گذاری با..."));
 

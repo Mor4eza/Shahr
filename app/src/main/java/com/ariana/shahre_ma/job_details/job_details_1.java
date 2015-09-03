@@ -159,7 +159,7 @@ public class job_details_1 extends ActionBarActivity {
             });
         }
 
-         private  void display_detail() {
+        private  void display_detail() {
 
              SelectDataBaseSqlite db = new SelectDataBaseSqlite(getActivity());
              try {
@@ -176,7 +176,6 @@ public class job_details_1 extends ActionBarActivity {
                  Log.i("Longitude", String.valueOf(allrows.getDouble(16)));
                  name.setText(allrows.getString(1));//Market
                  tel.setText(allrows.getString(3));//Phone
-                 //tv_rateCount.setText(allrows.getInt(30));
 
                  //check email
                  if(allrows.getString(6).equals("null") || allrows.getString(6).equals(null) || allrows.getString(6).equals("")) {
@@ -208,7 +207,7 @@ public class job_details_1 extends ActionBarActivity {
                  subset.setText(query.getsubsetName(allrows.getInt(14)));//Subset
 
                  for (int i = 0; i < 7; i++) {
-                     Log.i("CounterFor", String.valueOf(allrows.getInt((22) + (i))));
+
                      if (allrows.getInt((22) + (i)) > 0) {
 
                          Cursor rows3 = db.select_FieldActivityName(allrows.getInt((22) + (i)));
@@ -217,7 +216,7 @@ public class job_details_1 extends ActionBarActivity {
                          zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");
                      }
                  }
-
+                 Log.i("Rate---Tops", String.valueOf(allrows.getDouble(30)));
 
              }
              else if(fc.GetBusinessDisCountTops())
@@ -271,7 +270,8 @@ public class job_details_1 extends ActionBarActivity {
                          zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");
                      }
                  }
-
+                 Log.i("Rate---Discount", String.valueOf(allrows.getDouble(30)));
+                 //rate1.setRating((float)allrows.getDouble(30));
              }
              else
              {
@@ -324,8 +324,7 @@ public class job_details_1 extends ActionBarActivity {
                          zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");
                      }
                  }
-
-
+                 Log.i("Rate---", String.valueOf(allrows.getDouble(23)));
 
              }
 
@@ -333,9 +332,7 @@ public class job_details_1 extends ActionBarActivity {
                  tel.setVisibility(View.GONE);
              }
        }
-        catch (Exception e){
-            //Toast.makeText(getActivity(),e.toString(),Toast.LENGTH_LONG).show();
-        }
+        catch (Exception e){}
 
     }
 
