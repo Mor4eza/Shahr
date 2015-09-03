@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -222,11 +221,6 @@ private  static Context context;
                 image_url_1 = "http://www.shahrma.com/image/business/" +nature.getSubsetId()+".jpg";
                 Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(viewHolder.imgThumbnail);
 
-            }
-            else if(setting.getCacheImage())
-            {
-                image_url_1 = "http://www.shahrma.com/image/business/" + nature.getNameImage();
-                Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(viewHolder.imgThumbnail);
             }
             else
             {
