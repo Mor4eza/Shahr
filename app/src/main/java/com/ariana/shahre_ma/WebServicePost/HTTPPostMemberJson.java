@@ -12,6 +12,7 @@ import android.util.Log;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MainActivity;
+import com.ariana.shahre_ma.MessageDialog;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -37,7 +38,7 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
     private static String data_json;// variable get json
     private  static Integer response_message;// variable response
     FieldClass fc=new FieldClass();
-
+    MessageDialog messageDialog;
     ProgressDialog pd;
     Integer errorCode=0;
     // get/set
@@ -65,6 +66,7 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
 
    public HTTPPostMemberJson(Context c) {
         context = c;
+       messageDialog=new MessageDialog(context);
     }
 
 
@@ -105,6 +107,7 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
           //  String json_String = EntityUtils.toString(entity); //if response in JSON format
 
             HttpEntity entity = httpresponse.getEntity();
+
             InputStream webs = entity.getContent();
             try {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(webs, "UTF-8"), 8);
@@ -142,64 +145,24 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
                     dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
                     pd.dismiss();
 
-
-                            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-                            alertDialog.setTitle("خوش آمدید");
-                            alertDialog.setMessage("ورود شما را به خانواده بزرگ شهر ما تبریک می گوییم .");
-                            alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Intent i = new Intent(context, MainActivity.class);
-                                    context.startActivity(i);
-                                    ((Activity)context).finish();
-                                }
-                            });
-                            alertDialog.show();
-
-
+                    messageDialog.ShowMessage("هشدار","ورود شما را به خانواده بزرگ شهر ما تبریک می گوییم .","باشه","false");
                 }
                 else
                 {
-                    pd.dismiss();
-                    AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-                    alertDialog.setTitle("هشدار ");
-                    alertDialog.setMessage("این نام کاربری وجود دارد");
-                    alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-                    alertDialog.show();
+                    if(response_message==0)
+                        messageDialog.ShowMessage("هشدار","این نام کاربری قبلا ساخته شده لطفا نام کاربری دیگری وارد کنید","باشه","false");
 
                 }
             }
             else
             {
-                pd.dismiss();
-                AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-                alertDialog.setTitle("هشدار ");
-                alertDialog.setMessage("دوباره امتحان کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                alertDialog.show();
+               messageDialog.ShowMessage("هشدار","پاسخی از سمت دریافت نشد . دوباره امتحان کنید","باشه","false");
             }
 
         }
         catch (Exception e)
         {
-            pd.dismiss();
-            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-            alertDialog.setTitle("هشدار ");
-            alertDialog.setMessage("خطا هنگام ثبت رخ داده دوباره امتحان کنید");
-            alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-
-                }
-            });
-            alertDialog.show();
-
+            messageDialog.ShowMessage("هشدار","لطفا دوباره امتحان کنید","باشه","false");
         }
 
 

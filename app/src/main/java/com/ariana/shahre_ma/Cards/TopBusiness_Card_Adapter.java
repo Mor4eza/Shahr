@@ -72,7 +72,10 @@ public class TopBusiness_Card_Adapter extends RecyclerView.Adapter<TopBusiness_C
         viewHolder.tvSubset.setText(query.getsubsetName(nature.getSubsetId()));
         String image_url_1;
         image_url_1 = "http://www.shahrma.com/image/business/" +nature.getSubsetId()+".jpg";
-        Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(viewHolder.imgThumbnail);
+        Picasso.with(context)
+                .load(image_url_1)
+                .placeholder(R.drawable.img_not_found)
+                .into(viewHolder.imgThumbnail);
     }
 
     @Override
