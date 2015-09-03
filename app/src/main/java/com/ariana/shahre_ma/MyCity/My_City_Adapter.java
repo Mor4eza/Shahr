@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 
 import com.ariana.shahre_ma.R;
 
@@ -43,19 +42,39 @@ public class My_City_Adapter extends ArrayAdapter<My_City_Items> {
 
 
 
-            labelView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        /*    labelView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if(isChecked){
+
+                        mCheckedState[position]=true;
+                        selectedsubset.add(labelView.getText().toString());
                         Log.i("selectedsubset",selectedsubset.toString());
                     }
                     else{
+                        mCheckedState[position]=false;
+                        selectedsubset.remove(labelView.getText().toString());
                         Log.i("selectedsubset", selectedsubset.toString());
                     }
                 }
             });
-            labelView.setChecked(mCheckedState[position]);
+            labelView.setChecked(mCheckedState[position]);*/
 
+        labelView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(labelView.isChecked()){
+                    mCheckedState[position]=true;
+                    selectedsubset.add(labelView.getText().toString());
+                    Log.i("selectedsubset",selectedsubset.toString());
+                }else{
+                    mCheckedState[position]=false;
+                    selectedsubset.remove(labelView.getText().toString());
+                    Log.i("selectedsubset", selectedsubset.toString());
+                }
+            }
+        });
+        labelView.setChecked(mCheckedState[position]);
             return rowView;
         }
 }
