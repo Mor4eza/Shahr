@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.Settings;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -11,7 +12,7 @@ import android.widget.TextView;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
-import com.drivemode.android.typeface.TypefaceHelper;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 public class UpdateActivity extends ActionBarActivity {
 
@@ -36,7 +37,6 @@ public class UpdateActivity extends ActionBarActivity {
         BtnUpdate=(Button)findViewById(R.id.btn_update_all);
         PgUpdate=(ProgressBar)findViewById(R.id.progressBar_update);
         PgUpdate.setVisibility(View.INVISIBLE);
-        TypefaceHelper.getInstance().setTypeface(this, "font/Yekan.ttf");
 
         BtnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,5 +50,8 @@ public class UpdateActivity extends ActionBarActivity {
             }
         });
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
 }

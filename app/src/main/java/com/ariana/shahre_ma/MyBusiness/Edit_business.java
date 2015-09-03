@@ -43,6 +43,7 @@ import com.dd.CircularProgressButton;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.squareup.picasso.Picasso;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -667,4 +668,8 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
         }
 
     };
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
 }

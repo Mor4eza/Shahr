@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.job_details;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -23,6 +23,7 @@ import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceSend.HTTPDeleteBookMarkURL;
 import com.ariana.shahre_ma.WebServiceSend.HTTPSendBookMarkURL;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.util.Locale;
 
@@ -255,7 +256,9 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
 
     }
 
-
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
 
 }

@@ -1,22 +1,17 @@
 package com.ariana.shahre_ma.MyInterest;
 
-import android.app.AlertDialog;
 import android.app.PendingIntent;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.RelativeLayout;
 
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
-import com.ariana.shahre_ma.ListExpand.Continent;
-import com.ariana.shahre_ma.ListExpand.Country;
 import com.ariana.shahre_ma.MessageDialog;
 import com.ariana.shahre_ma.MyCity.TotalListener;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
@@ -27,8 +22,7 @@ import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostInterestJson;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
-
-import java.util.ArrayList;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import jonathanfinerty.once.Once;
 
@@ -102,34 +96,6 @@ public class My_Interest extends ActionBarActivity implements TotalListener {
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_jobs, menu);
-
-
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_Map) {
-
-            return true;
-        }
-
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    @Override
     public void onTotalChanged(int sum) {
 
     }
@@ -164,5 +130,9 @@ public class My_Interest extends ActionBarActivity implements TotalListener {
         sv.setButtonText("خب");
         sv.setButtonPosition(lps);
 
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

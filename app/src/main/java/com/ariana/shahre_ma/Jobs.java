@@ -34,6 +34,7 @@ import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -190,7 +191,6 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
     @Override
     public boolean onClose() {
-        Log.i("onClose", "close");
         listAdapter.filterData("");
         collapseAll();
         return false;
@@ -207,7 +207,6 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
     @Override
     public boolean onQueryTextSubmit(String query) {
         expandAll();
-        Log.i("onQueryTextSubmit", "submit");
         listAdapter.filterData(query);
         return false;
     }
@@ -369,13 +368,9 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
     private BroadcastReceiver mCollectionReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.i("getCollection", "4");
-            Log.i("Collection", setting.getCollection().toString());
-            Log.i("Subset", setting.getSubset().toString());
-            Log.i("refresh_display", refresh_display.toString());
+
             if (setting.getCollection() && setting.getSubset() && refresh_display) {
                 refresh_display = false;
-                Log.i("getCollection", "3");
                 displayList();
                 PgUpdate.setVisibility(View.INVISIBLE);
             }
@@ -393,5 +388,9 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
             super.onBackPressed();
         }
 
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

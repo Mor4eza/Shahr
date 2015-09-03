@@ -31,6 +31,7 @@ import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.util.List;
 
@@ -404,4 +405,8 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
 
     }
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
 }

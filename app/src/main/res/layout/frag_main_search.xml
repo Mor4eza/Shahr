@@ -52,13 +52,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/et_search_field"
             android:hint="زیر  مجموعه"
-
+            android:singleLine="true"
+            android:imeOptions="actionNext"
             android:completionThreshold="1"/>
         <EditText
             android:id="@+id/et_search_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="بخشی از آدرس"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
             android:layout_below="@id/et_search_field"
             android:textColor="@android:color/black"
             android:layout_marginTop="10dp"
