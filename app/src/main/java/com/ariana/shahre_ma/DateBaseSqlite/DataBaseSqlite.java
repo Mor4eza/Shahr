@@ -20,7 +20,9 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     private static final String DATABASE_NAME = "DBshahrma.db";
     InstructionsSqlite instructionsSqlite=new InstructionsSqlite();
 
-Context context;
+    String query="";
+
+    Context context;
 
 
 
@@ -786,7 +788,7 @@ Context context;
 
     public Cursor select_BusinessSearch(String namemarket,Integer cityid,Integer fieldactivty)
     {
-        String query="";
+        query="";
         Log.i("select_BusinessSearch","one");
             query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
                     "  Field1="+fieldactivty+
@@ -823,7 +825,7 @@ Context context;
 
     public Cursor select_BusinessSearch(String namemarket,Integer cityid,Integer fieldactivity,Integer fieldactivity2,Integer fieldactivity3)
     {
-        String query="";
+        query="";
         Log.i("select_BusinessSearch", "one");
         query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
                 "  Field1="+fieldactivity+
@@ -846,7 +848,7 @@ Context context;
 
     public Cursor select_BusinessAdvanceSearch(String namemarket,String address,Integer cityid,Integer subsetId)
     {
-        String query="";
+        query="";
         Log.i("select_BusinessSearch","one");
         query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
                 " SubsetId="+subsetId+
@@ -860,7 +862,7 @@ Context context;
 
     public Cursor select_BusinessFieldAdvanceSearch(String namemarket,String address,Integer cityid,Integer Field)
     {
-        String query="";
+        query="";
         Log.i("select_BusinessSearch","one");
         query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
                 " Field1="+Field +
@@ -883,7 +885,7 @@ Context context;
 
     public Cursor select_BusinessSearchBazarYab(Integer SubsetId,String txtMarket,String address,Integer arreaId)
     {
-        String query="";
+        query="";
         Log.i("select_BusinessSearch","one");
         query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +" Market like'%" + txtMarket + "%' AND Address like '%" + address + "%') AND (AreaId="+arreaId+") AND (SubsetId="+SubsetId+")";
 
@@ -897,7 +899,7 @@ Context context;
     public Cursor select_BusinessSearch(String namemarket1,String namemarket2,String namemarket3,String namemarket4,String namemarket5,Integer cityid)
     {
 
-        String query="";
+        query="";
         Log.i("namemarket[len]",String.valueOf(namemarket1.length()));
         Log.i("namemarket[len]",String.valueOf(namemarket2.length()));
         Log.i("namemarket[len]",String.valueOf(namemarket3.length()));
@@ -976,7 +978,7 @@ Context context;
 
     public Cursor select_BusinessSearch(String namemarket1,String namemarket2,String namemarket3,String namemarket4,String namemarket5,Integer SubsetId,Integer cityid,Integer fieldactivity)
     {
-        String query="";
+        query="";
         Log.i("namemarket[len]",String.valueOf(namemarket1.length()));
         Log.i("namemarket[len]",String.valueOf(namemarket2.length()));
         Log.i("namemarket[len]",String.valueOf(namemarket3.length()));

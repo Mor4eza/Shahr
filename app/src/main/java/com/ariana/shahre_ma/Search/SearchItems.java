@@ -13,15 +13,15 @@ public class SearchItems {
     private int mThumbnail;
     private Integer mId;
     private Integer mSubsetId;
-    private String mDiscount;
+    private Integer mDiscount;
 
 
 
     public void setSubsetId(Integer subsetid){this.mSubsetId=subsetid;}
     public Integer getSubsetId(){return  this.mSubsetId;}
 
-    public void setDisCount(String discount){this.mDiscount=discount;}
-    public String getDisCount(){return  this.mDiscount;}
+    public void setDisCount(Integer discount){this.mDiscount=discount;}
+    public Integer getDisCount(){return  this.mDiscount;}
 
 
     public double getRate() {
