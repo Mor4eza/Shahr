@@ -1231,6 +1231,13 @@ Context context;
         return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_DisCountMember, null);
     }
 
+    public Cursor select_DisCountMember(Integer businessid)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_DisCountMember+ " WHERE BusinessId="+businessid, null);
+    }
+
     public Cursor select_AllDisCountMember(Integer id)
     {
 

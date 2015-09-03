@@ -651,16 +651,28 @@ public class CalendarTool
         return   result;
     }
 
-    public String SubToMiladi(String date)
+    public String MiladiToMiladi(String date)
     {
         String month="";
         String day="";
         String year="";
         String result="";
 
-        month=date.substring(0,4);
-        day=date.substring(5,7);
-        year=date.substring(8, 10);
+        Integer MONTH=0;
+        Integer DAY=0;
+
+
+        month=date.substring(7,8);
+        day=date.substring(5,6);
+        year=date.substring(0,4);
+
+        MONTH=Integer.parseInt(date.substring(5, 6));
+        DAY=Integer.parseInt(date.substring(7,8));
+        if(MONTH<=9)
+            month="0"+month;
+        if(DAY<=9)
+            day="0"+day;
+
 
         result=year+"/"+month+"/"+day;
         Log.i("SubToMiladi", result);

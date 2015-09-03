@@ -187,6 +187,11 @@ public class SelectDataBaseSqlite extends DataBaseSqlite {
     }
 
     @Override
+    public Cursor select_DisCountMember(Integer businessid) {
+        return super.select_DisCountMember(businessid);
+    }
+
+    @Override
     public Cursor select_AllDisCountMember() {
         return super.select_AllDisCountMember();
     }

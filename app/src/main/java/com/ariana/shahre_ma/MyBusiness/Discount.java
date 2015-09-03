@@ -89,11 +89,11 @@ public class Discount extends ActionBarActivity {
     {
         ArrayList<discount_item> items = new ArrayList<discount_item>();
         SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(this);
-            Cursor rows = sdb.select_AllDisCountMember();
+            Cursor rows = sdb.select_DisCountMember(fc.GetBusiness_Id());
             if (rows.moveToFirst()) {
                 do {
                     ct.setGregorianDate(Integer.valueOf(rows.getString(3).substring(0, 4)),Integer.valueOf(rows.getString(3).substring(5, 7)),Integer.valueOf(rows.getString(3).substring(8, 10)));
-                    ct1.setGregorianDate(Integer.valueOf(rows.getString(4).substring(0, 4)),Integer.valueOf(rows.getString(4).substring(5, 7)),Integer.valueOf(rows.getString(4).substring(8, 10)));
+                    ct1.setGregorianDate(Integer.valueOf(rows.getString(4).substring(0, 4)), Integer.valueOf(rows.getString(4).substring(5, 7)), Integer.valueOf(rows.getString(4).substring(8, 10)));
                     items.add(new discount_item(" % " + rows.getString(6), rows.getString(5),ct1.getIranianDate(), rows.getString(1),ct.getIranianDate(), rows.getInt(0)));
 
                 } while (rows.moveToNext());
@@ -105,7 +105,7 @@ public class Discount extends ActionBarActivity {
 
     public void add_discount(View v)
     {
-        String date="";
+        /*String date="";
         String day="";
         String month="";
         String year="";
@@ -113,28 +113,39 @@ public class Discount extends ActionBarActivity {
 
         SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(this);
         Cursor rows = sdb.select_AllDisCountMember();
-        if (rows.moveToFirst()) {
-            do {
-               date=rows.getString(4);
-            } while (rows.moveToNext());
+        if(rows.getCount()>0) {
+            if (rows.moveToFirst()) {
+                do {
+                    date = rows.getString(4);
+                } while (rows.moveToNext());
+            }
+        }
+        else
+        {
+            Log.i("getCount","0");
+            Discount_Dialog dialog=new Discount_Dialog(this);
+            dialog.show();
+            System.out.println("Date1 is before Date2");
+        }
 
-            year=date.substring(0, 4);
-            month=date.substring(5, 7);
-            day=date.substring(8, 10);
 
             try{
 
-                Log.i("tarikh", ct.getGregorianDate());
+                year=date.substring(0, 4);
+                month=date.substring(5, 7);
+                day=date.substring(8, 10);
+
+                Log.i("tarikh", ct.MiladiToMiladi(ct.getGregorianDate()));
                 Log.i("tarikh1", year+"/"+month+"/"+day);
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
                 Date date1 = sdf.parse(year+"/"+month+"/"+day);
 
-                Date date2 = sdf.parse(ct.getGregorianDate());
+                Date date2 = sdf.parse(ct.MiladiToMiladi(ct.getGregorianDate()));
 
-                System.out.println(sdf.format(date1));
-                System.out.println(sdf.format(date2));
+                System.out.println(sdf.format("tarikh end"+ date1));
+                System.out.println(sdf.format(ct.MiladiToMiladi(date2.toString())));
 
-                if(date1.compareTo(date2)>0)
+                if(date2.compareTo(date1)>0)
                 {
                     Snackbar.make(listView, "تا زمانی که اتمام تاریخ فعلی به پایان نرسیده نمی توانید تخفیف جدید ثبت کنید", Snackbar.LENGTH_LONG).show();
                 }
@@ -153,13 +164,13 @@ public class Discount extends ActionBarActivity {
                     Snackbar.make(listView, "تا زمانی که اتمام تاریخ فعلی به پایان نرسیده نمی توانید تخفیف جدید ثبت کنید", Snackbar.LENGTH_LONG).show();
                 }
 
-            }catch(ParseException ex){
-                ex.printStackTrace();
+            }catch(Exception ex){
+               Log.i("exceptioncopmaredate",ex.toString());
             }
+*/
 
-        }
-
-
+        Discount_Dialog dialog=new Discount_Dialog(this);
+        dialog.show();
 
     }
 

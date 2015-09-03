@@ -104,7 +104,7 @@ private  static Context context;
                             nature.setName(fdb.GetMarketBusiness().get(i));
                             nature.setDes(fdb.GetAddressBusiness().get(i));
                             nature.setSubsetId(fdb.GetSubsetId().get(i));
-                            nature.setDisCount(fdb.GetDisCountId().get(i));
+                            //nature.setDisCount(fdb.Get().get(i));
                             nature.setRate(fdb.GetRateBusiness().get(i));
                             nature.setmId(fdb.GetIdBusiness().get(i));
                             nature.setNameImage(fdb.GetSrc().get(i));
@@ -214,12 +214,19 @@ private  static Context context;
             Job_lists_card_item nature = mItems.get(i);
             viewHolder.tvNature.setText(nature.getName());
             viewHolder.tvDesNature.setText(nature.getDes());
+            viewHolder.Discount.setText(String.valueOf(nature.getDisCount()));
+
 
             if (nature.getNameImage().equals("null")||nature.getNameImage().equals("")||nature.getNameImage().equals(null)||nature.getNameImage()==null){
                 Log.i("SubsetId",nature.getSubsetId().toString());
                 image_url_1 = "http://www.shahrma.com/image/business/" +nature.getSubsetId()+".jpg";
                 Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(viewHolder.imgThumbnail);
 
+            }
+            else if(setting.getCacheImage())
+            {
+                image_url_1 = "http://www.shahrma.com/image/business/" + nature.getNameImage();
+                Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(viewHolder.imgThumbnail);
             }
             else
             {
@@ -270,6 +277,7 @@ private  static Context context;
         public TextView tvDesNature;
         public RatingBar rates;
         public TextView rateCount;
+        public TextView Discount;
         public TextView tvTell;
         public CardView cards;
         FieldClass fc=new FieldClass();
@@ -281,6 +289,7 @@ private  static Context context;
             tvDesNature = (TextView)itemView.findViewById(R.id.tv_address);
             rates = (RatingBar)itemView.findViewById(R.id.rates);
             rateCount=(TextView)itemView.findViewById(R.id.tv_rateCount);
+            Discount=(TextView)itemView.findViewById(R.id.tv_discount);
             tvTell=(TextView)itemView.findViewById(R.id.tv_tell);
             cards=(CardView)itemView.findViewById(R.id.cards);
             imgThumbnail.setOnClickListener(this);

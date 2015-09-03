@@ -318,13 +318,13 @@ public class Add_New_Business extends ActionBarActivity  {
         {
             year=((dt.Yaer())+1);
             month=(12-month);
-            date=year.toString()+"-"+month.toString()+"-"+dt.Day();
+            date=year.toString()+"/"+month.toString()+"/"+dt.Day();
         }
 
         else
         {
 
-            date=dt.Yaer()+"-"+month.toString()+"-"+dt.Day();
+            date=dt.Yaer()+"/"+month.toString()+"/"+dt.Day();
         }
         return  date;
 

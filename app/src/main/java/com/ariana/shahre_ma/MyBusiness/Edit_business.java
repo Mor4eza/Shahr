@@ -277,17 +277,8 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
             }
         }
         catch (Exception e){
-            AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
-            alertDialog.setTitle("هشدار ");
-            alertDialog.setMessage("ویرایش نشد ، دوباره امتحان کنید");
-            alertDialog.setButton("باشه", new DialogInterface.OnClickListener()
-            {
-                public void onClick(DialogInterface dialog, int which)
-                {
-
-                }
-            });
-            alertDialog.show();
+           MessageDialog messageDialog=new MessageDialog(this);
+            messageDialog.ShowMessage("پیام","ویرایش نشد . دوباره امتحان کنید","باشه","false");
         }
     }
 
