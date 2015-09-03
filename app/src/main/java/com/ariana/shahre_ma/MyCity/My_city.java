@@ -69,9 +69,8 @@ public class My_city extends ActionBarActivity{
 
         Sp_City.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-            {
-             cityname= Sp_City.getSelectedItem().toString();
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                cityname = Sp_City.getSelectedItem().toString();
             }
 
             @Override
@@ -119,19 +118,22 @@ public class My_city extends ActionBarActivity{
                 List<String> listurl = new ArrayList<String>();
                 String url[] = new String[fc.GetNameSubset().size()];
                 for (String name : fc.GetNameSubset()) {
-
-                    Cursor cursor = db.select_SubsetId(name);
-                    cursor.moveToFirst();
-                    Result = cursor.getInt(0);
-                    url[i] = "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=" + Result + "&cityid=" + query.getCityId(cityname);
-                    listurl.add("http://test.shahrma.com/api/ApiGiveBusiness?subsetId=" + Result + "&cityid=" + query.getCityId(cityname));
-                    Log.i("", "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=" + Result + "&cityid=" + query.getCityId(cityname));
+                    url[i] = "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=" + name + "&cityid=" + query.getCityId(cityname);
+                    listurl.add("http://test.shahrma.com/api/ApiGiveBusiness?subsetId=" + name + "&cityid=" + query.getCityId(cityname));
+                    Log.i("", "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=" + name + "&cityid=" + query.getCityId(cityname));
                     i++;
                 }
 
-                if (cityname.equals("") || listurl.size() == 0) {
-                    Toast.makeText(getApplicationContext(), "لطفا زیرمجموعه ای را انتخاب کنید", Toast.LENGTH_LONG).show();
-                } else {
+                if (cityname.equals(""))
+                {
+                    Toast.makeText(getApplicationContext(), "شهر انتخاب نشده است", Toast.LENGTH_LONG).show();
+                }
+                else if(listurl.size() == 0)
+                {
+                    Toast.makeText(getApplicationContext(), "زیر مجموعه انتخاب نشده است", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
                     HTTPGetBusinessJsonArray business = new HTTPGetBusinessJsonArray(this);
                     business.execute(url);
                     Download_dialog dialog = new Download_dialog(this);
@@ -164,9 +166,9 @@ public class My_city extends ActionBarActivity{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_my_city, menu);
 
+        // Inflate the menu; this adds items to the action bar if it is present.
 
         return true;
     }
