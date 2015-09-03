@@ -5,10 +5,10 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.MyCity.My_city;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
@@ -79,12 +79,14 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
     Integer len=0;
     Integer i=0;
     Integer URLLEN=0;
+    Integer compareLen=1;
      /**
      *
      * @param SubsetID
      */
     public   void SetUrl_business(Integer SubsetID)
     {
+
         url_Business="http://test.shahrma.com/api/ApiGiveBusiness?subsetId="+SubsetID+"&cityid=68";
         Log.i("url_Business",url_Business);
     }
@@ -156,7 +158,18 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
 
             if(len==0)
             {
-                Log.i("Count Business : ", "فروشگاه ثبت نشد");
+                Log.i("compareLen",String.valueOf(URLLEN));
+                Log.i("Count Business : ", "فروشگاهی موجود نیست برای این زیر مجموعه");
+                if(compareLen==URLLEN)
+                {
+                   // Toast.makeText(context.getApplicationContext(),"دانلود شد",Toast.LENGTH_LONG).show();
+                    My_city.myDialog.dismiss();
+                }
+                else
+                {
+                    Log.i("compareLen",String.valueOf(compareLen));
+                    compareLen++;
+                }
             }
 
             else
@@ -181,6 +194,16 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
                 }
 
 
+                if(compareLen==URLLEN)
+                {
+                   // Toast.makeText(context.getApplicationContext(),"دانلود شد",Toast.LENGTH_LONG).show();
+                    My_city.myDialog.dismiss();
+                }
+                else
+                {
+                    Log.i("compareLen",String.valueOf(compareLen));
+                    compareLen++;
+                }
             }
 
         } catch (Exception e) {
@@ -277,6 +300,7 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
                 startdate[i]=area.getString("Startdate");
                 subset[i]=area.getString("Subset");
                 subsetid[i]=area.getInt("SubsetId");
+
                 user[i]=area.getString("User");
                 userid[i]=area.getInt("UserId");
                 src[i]=area.getString("Src");
@@ -296,6 +320,7 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
 
                 likediscount[i]=area.getInt("DiscountLike");
                 dislikediscount[i]=area.getInt("DiscountDislike");
+
 
             }
 

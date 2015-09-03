@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -202,7 +201,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
                 if (len == 0 && errorCode==200) {
                     pd.dismiss();
                     MessageDialog messageDialog=new MessageDialog(context);
-                    messageDialog.ShowMessage("هشدار","مشاغلی برای این زیر مجموعه ثبت نشده . ","باشه","false");
+                    messageDialog.ShowMessage("توجه","متاسفانه در حال حاضر کسب و کاری برای این شهر و این زیرمجموعه ثبت نشده است!","باشه","false");
 
                 }
                 else if(len==0 || errorCode!=200)
@@ -210,7 +209,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
                     pd.dismiss();
                     MessageDialog messageDialog=new MessageDialog(context);
 
-                    messageDialog.ShowMessage("هشدار","مشکلی پیش آمده "+"\n"+"ارتباط اینترنت خود را بررسی کرده و دوباره امتحان کنید","باشه","false");
+                    messageDialog.ShowMessage("توجه","مشکلی پیش آمده "+"\n"+"ارتباط اینترنت خود را بررسی کرده و دوباره امتحان کنید","باشه","false");
 
                 }
                 else
