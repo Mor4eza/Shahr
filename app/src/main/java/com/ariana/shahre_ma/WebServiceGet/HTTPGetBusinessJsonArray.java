@@ -1,7 +1,9 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
@@ -26,7 +28,7 @@ import java.net.URL;
  */
 public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
 {
-    private static Context context;
+    Context context;
     FieldClass fc=new FieldClass();
     Query query;
     private  String url_Business;
@@ -105,7 +107,7 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
      * @param c
      */
     public HTTPGetBusinessJsonArray(Context c) {
-        context = c;
+        this.context = c;
     }
 
     /**
@@ -153,17 +155,22 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
 
             cityid=query.getCityId(setting.getCityName());
             idsubset=fc.GetSubsetId();
-
+            Log.i("CityId",String.valueOf(cityid));
 
 
             if(len==0)
             {
                 Log.i("compareLen",String.valueOf(URLLEN));
                 Log.i("Count Business : ", "فروشگاهی موجود نیست برای این زیر مجموعه");
+                Log.d("sender", compareLen.toString());
+                Intent intent = new Intent("myCity_Download");
+                intent.putExtra("received", compareLen - 1);
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                 if(compareLen==URLLEN)
                 {
                    // Toast.makeText(context.getApplicationContext(),"دانلود شد",Toast.LENGTH_LONG).show();
                     My_city.myDialog.dismiss();
+
                 }
                 else
                 {
@@ -193,6 +200,11 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
 
                 }
 
+                //send intent to My_City_dialog for receive data
+                Log.d("sender", compareLen.toString());
+                Intent intent = new Intent("myCity_Download");
+                intent.putExtra("received", compareLen - 1);
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
                 if(compareLen==URLLEN)
                 {

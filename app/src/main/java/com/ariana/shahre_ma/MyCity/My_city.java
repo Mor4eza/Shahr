@@ -22,6 +22,7 @@ import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MessageDialog;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJsonArray;
 import com.github.amlcurran.showcaseview.ShowcaseView;
@@ -49,7 +50,7 @@ public class My_city extends ActionBarActivity{
     public static Download_dialog myDialog;
     HTTPGetBusinessJson httpbusin;
     NetState ns;
-
+    KeySettings setting =new KeySettings(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +71,8 @@ public class My_city extends ActionBarActivity{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 cityname = Sp_City.getSelectedItem().toString();
+                setting.saveCityName(cityname);
+
             }
 
             @Override

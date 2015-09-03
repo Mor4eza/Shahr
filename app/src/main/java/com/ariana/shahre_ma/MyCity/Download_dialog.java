@@ -5,13 +5,18 @@ package com.ariana.shahre_ma.MyCity;
  */
 
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
@@ -41,8 +46,6 @@ public class Download_dialog extends Dialog {
         listView=(ListView)findViewById(R.id.dialog_listview);
         adapter= new City_Dialog_Adapter(getContext(),generateData());
         listView.setAdapter(adapter);
-
-        final RotateLoading loading=(RotateLoading)findViewById(R.id.loading);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -50,6 +53,7 @@ public class Download_dialog extends Dialog {
             }
         });
 
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(mMessageReceiver, new IntentFilter("myCity_Download"));
         cancel=(Button)findViewById(R.id.cancel);
 
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -60,17 +64,12 @@ public class Download_dialog extends Dialog {
                 dismiss();
             }
         });
+
     }
     public ArrayList<City_Dialog_Items> generateData(){
 
     items = new ArrayList<City_Dialog_Items>();
-       // int i=0;
-    /*    for (String subset: fc.GetNameSubset())
-        {
-            Log.i("Subsetid",subset);
-            items.add(new City_Dialog_Items(query.getsubsetName(Integer.valueOf(subset)),i++));
-        }
-*/
+
         Log.i("selectedSubset",String.valueOf(My_City_Adapter.selectedsubset.size()));
         for(int i=0;i<My_City_Adapter.selectedsubset.size();i++){
             items.add(new City_Dialog_Items(query.getsubsetName(Integer.valueOf(My_City_Adapter.selectedsubset.get(i))),0));
@@ -78,5 +77,24 @@ public class Download_dialog extends Dialog {
 
         return items;
     }
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Get extra data included in the Intent
+            try {
+
+                Integer position = intent.getIntExtra("received", 0);
+                Log.i("received", position.toString());
+                View load = listView.getChildAt(position);
+                RotateLoading loading = (RotateLoading) load.findViewById(R.id.loading);
+                loading.stop();
+                View dine = listView.getChildAt(position);
+                ImageView done = (ImageView) dine.findViewById(R.id.downloaded);
+                done.setVisibility(View.VISIBLE);
+            }catch (Exception e){
+
+            }
+        }
+    };
 
 }

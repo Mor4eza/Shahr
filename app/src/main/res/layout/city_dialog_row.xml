@@ -20,7 +20,15 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
+        android:layout_alignParentLeft="true"
         app:loading_width="3dp"
         android:layout_alignParentBottom="true"
    />
+    <ImageView
+        android:id="@+id/downloaded"
+        android:visibility="gone"
+        android:src="@drawable/ic_action_done"
+        android:layout_alignParentLeft="true"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
 </RelativeLayout>
