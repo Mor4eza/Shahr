@@ -88,9 +88,9 @@ public class Job_details_comment extends ActionBarActivity {
                             if (query.getMemberId() > 0)
                             {
                                 Log.i("getMemberId", String.valueOf(query.getMemberId()));
-                                _json = (json.getOpinionTOjson(txtComm.getText().toString(),dt.Date()+" "+dt.Time(), query.getMemberId(), fc.GetBusiness_Id()));
+                                _json = (json.getOpinionTOjson(txtComm.getText().toString(),ct.getGregorianDate()+dt.Time(), query.getMemberId(), fc.GetBusiness_Id()));
                                 fc.SetOpinion_Description(txtComm.getText().toString());
-                                fc.SetOpinion_Date(dt.Date()+" "+dt.Time());
+                                fc.SetOpinion_Date(ct.getGregorianDate()+dt.Time());
                                 fc.SetOpinion_MemberName("");
                                 fc.SetOpinion_Erja(fc.GetBusiness_SubsetIdb());
 

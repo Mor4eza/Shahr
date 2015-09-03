@@ -91,10 +91,10 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
                     fc.SetImage_DisCount("");
                    // ct.setIranianDate(Integer.valueOf(tv_date.getText().toString().substring(0, 4)), Integer.valueOf(tv_date.getText().toString().substring(5, 7)), Integer.valueOf(tv_date.getText().toString().substring(8, 10)));
                     Log.i("startDateEdit", ct.getGregorianDate());
-                    fc.SetStartDate_DisCount(tv_date.getText().toString());
+                    fc.SetStartDate_DisCount(tv_date.getText().toString()+dt.Time());
                    // ct1.setIranianDate(Integer.valueOf(ExpireDate.toString().substring(0, 4)), Integer.valueOf(ExpireDate.toString().substring(5, 7)), Integer.valueOf(ExpireDate.toString().substring(8, 10)));
                     Log.i("ExpireDateEdit", ct1.getGregorianDate());
-                    fc.SetExpirationDate_DisCount(Expire.getText().toString());
+                    fc.SetExpirationDate_DisCount(Expire.getText().toString()+dt.Time());
                     fc.SetDescription_DisCount(tv_desc.getText().toString());
                     fc.SetPercent_DisCount(percent);
                     fc.SetBusinessId_DisCount(fc.GetBusiness_Id());
@@ -165,10 +165,10 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
                     fc.SetImage_DisCount("");
                     ct.setIranianDate(Integer.valueOf(tv_date.getText().toString().substring(0, 4)), Integer.valueOf(tv_date.getText().toString().substring(5, 7)), Integer.valueOf(tv_date.getText().toString().substring(8, 10)));
                     Log.i("startDate", ct.getGregorianDate());
-                    fc.SetStartDate_DisCount(ct.getGregorianDate());
+                    fc.SetStartDate_DisCount(ct.getGregorianDate()+dt.Time());
                     ct1.setIranianDate(Integer.valueOf(ExpireDate.toString().substring(0, 4)), Integer.valueOf(ExpireDate.toString().substring(5, 7)), Integer.valueOf(ExpireDate.toString().substring(8, 10)));
                     Log.i("ExpireDate", ct1.getGregorianDate());
-                    fc.SetExpirationDate_DisCount(ct1.getGregorianDate());
+                    fc.SetExpirationDate_DisCount(ct1.getGregorianDate()+dt.Time());
                     fc.SetDescription_DisCount(tv_desc.getText().toString());
                     fc.SetPercent_DisCount(percent);
                     fc.SetBusinessId_DisCount(fc.GetBusiness_Id());

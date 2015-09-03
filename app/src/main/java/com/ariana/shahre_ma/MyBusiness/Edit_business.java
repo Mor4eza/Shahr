@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
@@ -47,6 +48,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,6 +74,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
     DateTime dt=new DateTime();
     FieldClass fc=new FieldClass();
     Query query=new Query(Edit_business.this);
+    CalendarTool ct=new CalendarTool();
     NetState net=new NetState(this);
     Uri currImageURI;
     String picturePath;
@@ -356,7 +359,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
                         Market_tell.getText().toString().trim(), Market_mobile.getText().toString().trim(),
                         Market_fax.getText().toString().trim(), Market_email.getText().toString().trim(),
                         Market_owner.getText().toString().trim(), Market_address.getText().toString().trim(),
-                        Market_desc.getText().toString().trim(), dt.Now(), EXPDateTime(), "null"
+                        Market_desc.getText().toString().trim(), ct.getGregorianDate()+dt.Time(), EXPDateTime(), "null"
                         , query.getsubsetID(Market_subset.getText().toString().trim()),
                         fc.GetLatitude_Business(), fc.GetLongtiude_Business(),
                         query.getAreaID(Market_area.getText().toString().trim()),

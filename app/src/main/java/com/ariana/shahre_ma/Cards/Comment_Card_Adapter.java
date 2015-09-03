@@ -60,7 +60,7 @@ Query query;
                     nature = new Comment_Card_items();
                     nature.settag(allrows.getInt(0));
                     nature.setmUser(allrows.getString(6));
-                    nature.setmDate((allrows.getString(2)));
+                    nature.setmDate(allrows.getString(2));
                     nature.setmComm(allrows.getString(1));
                     nature.setmlike(allrows.getInt(4));
                     nature.setmdisslike(allrows.getInt(5));

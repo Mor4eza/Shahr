@@ -518,6 +518,7 @@ public class CalendarTool
      * D.A. Hatcher, Q.Jl.R.Astron.Soc. 25(1984), 53-55 slightly modified by K.M.
      * Borkowski, Post.Astron. 25(1987), 275-279).
      */
+
     private void JDNToGregorian()
     {
         int j= 4 * JDN + 139361631;
@@ -649,7 +650,6 @@ public class CalendarTool
         Log.i("MiladiToShamesi", result);
         return   result;
     }
-
 
     public String SubToMiladi(String date)
     {

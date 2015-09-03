@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
+import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
@@ -55,7 +56,7 @@ public class Add_New_Business extends ActionBarActivity  {
     FieldClass fc=new FieldClass();
     Query query=new Query(this);
     NetState net=new NetState(this);
-
+    CalendarTool ct=new CalendarTool();
     Integer modatgh=3;
     Integer month;
     String date;
@@ -285,7 +286,7 @@ public class Add_New_Business extends ActionBarActivity  {
                         Market_tell.getText().toString().trim(), Market_mobile.getText().toString().trim(),
                         Market_fax.getText().toString().trim(), Market_email.getText().toString().trim(),
                         Market_owner.getText().toString().trim(), Market_address.getText().toString().trim(),
-                        Market_desc.getText().toString().trim(), dt.Now(), EXPDateTime(), "null"
+                        Market_desc.getText().toString().trim(),ct.getGregorianDate()+dt.Time(), EXPDateTime(), "null"
                         , query.getsubsetID(Market_subset.getText().toString().trim()),
                         fc.GetLatitude_Business(), fc.GetLongtiude_Business(), query.getAreaID(Market_area.getText().toString().trim()),
                         "null", "null",Market_field.getText().toString());
