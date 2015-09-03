@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -31,6 +32,7 @@ public class SearchOfline
     Context context;
     NetState ns;
     SelectDataBaseSqlite sdb;
+    AddDataBaseSqlite adb;
     Query query ;
     KeySettings setting ;
     FieldClass fc=new FieldClass();
@@ -52,6 +54,7 @@ public class SearchOfline
         ns=new NetState(context);
         query=new Query(context);
         sdb=new SelectDataBaseSqlite(context);
+        adb=new AddDataBaseSqlite(context);
         setting=new KeySettings(context);
 
     }
@@ -186,6 +189,14 @@ public class SearchOfline
                             selectSrc.add(rows_Business.getString(31));
                             selectRateCount.add(rows_Business.getInt(29));
 
+                            adb.Add_Search(rows_Business.getInt(0),rows_Business.getString(1),"",rows_Business.getString(3)
+                                    ,rows_Business.getString(4),rows_Business.getString(5),rows_Business.getString(6),
+                                    rows_Business.getString(7),rows_Business.getString(8),rows_Business.getString(9),
+                                    rows_Business.getString(10),rows_Business.getString(11),"","",rows_Business.getInt(14),
+                                    rows_Business.getDouble(15),rows_Business.getDouble(16),rows_Business.getInt(17),"","",
+                                    rows_Business.getInt(20),rows_Business.getInt(21),rows_Business.getInt(22),rows_Business.getInt(23),
+                                    rows_Business.getInt(24),rows_Business.getInt(25),rows_Business.getInt(26),rows_Business.getInt(27),
+                                    rows_Business.getInt(28),rows_Business.getInt(29),rows_Business.getDouble(30),rows_Business.getString(31));
                         } while (rows_Business.moveToNext());
 
 
@@ -252,6 +263,15 @@ public class SearchOfline
                             selectRate.add(rows_Business.getDouble(30));
                             selectRateCount.add(rows_Business.getInt(29));
                             selectSrc.add(rows_Business.getString(31));
+
+                            adb.Add_Search(rows_Business.getInt(0), rows_Business.getString(1), "", rows_Business.getString(3)
+                                    , rows_Business.getString(4), rows_Business.getString(5), rows_Business.getString(6),
+                                    rows_Business.getString(7), rows_Business.getString(8), rows_Business.getString(9),
+                                    rows_Business.getString(10), rows_Business.getString(11), "", "", rows_Business.getInt(14),
+                                    rows_Business.getDouble(15), rows_Business.getDouble(16), rows_Business.getInt(17), "", "",
+                                    rows_Business.getInt(20), rows_Business.getInt(21), rows_Business.getInt(22), rows_Business.getInt(23),
+                                    rows_Business.getInt(24), rows_Business.getInt(25), rows_Business.getInt(26), rows_Business.getInt(27),
+                                    rows_Business.getInt(28), rows_Business.getInt(29), rows_Business.getDouble(30), rows_Business.getString(31));
 
                         } while (rows_Business.moveToNext());
 
@@ -342,6 +362,15 @@ public class SearchOfline
                         selectRateCount.add(rows_Business.getInt(29));
                         selectSrc.add(rows_Business.getString(31));
 
+                        adb.Add_Search(rows_Business.getInt(0), rows_Business.getString(1), "", rows_Business.getString(3)
+                                , rows_Business.getString(4), rows_Business.getString(5), rows_Business.getString(6),
+                                rows_Business.getString(7), rows_Business.getString(8), rows_Business.getString(9),
+                                rows_Business.getString(10), rows_Business.getString(11), "", "", rows_Business.getInt(14),
+                                rows_Business.getDouble(15), rows_Business.getDouble(16), rows_Business.getInt(17), "", "",
+                                rows_Business.getInt(20), rows_Business.getInt(21), rows_Business.getInt(22), rows_Business.getInt(23),
+                                rows_Business.getInt(24), rows_Business.getInt(25), rows_Business.getInt(26), rows_Business.getInt(27),
+                                rows_Business.getInt(28), rows_Business.getInt(29), rows_Business.getDouble(30), rows_Business.getString(31));
+
                     } while (rows_Business.moveToNext());
 
 
@@ -402,6 +431,16 @@ public class SearchOfline
                         selectSrc.add(rows_Business.getString(31));
                         selectRateCount.add(rows_Business.getInt(29));
 
+                        adb.Add_Search(rows_Business.getInt(0),rows_Business.getString(1),"",rows_Business.getString(3)
+                                ,rows_Business.getString(4),rows_Business.getString(5),rows_Business.getString(6),
+                                rows_Business.getString(7),rows_Business.getString(8),rows_Business.getString(9),
+                                rows_Business.getString(10),rows_Business.getString(11),"","",rows_Business.getInt(14),
+                                rows_Business.getDouble(15),rows_Business.getDouble(16),rows_Business.getInt(17),"","",
+                                rows_Business.getInt(20),rows_Business.getInt(21),rows_Business.getInt(22),rows_Business.getInt(23),
+                                rows_Business.getInt(24),rows_Business.getInt(25),rows_Business.getInt(26),rows_Business.getInt(27),
+                                rows_Business.getInt(28),rows_Business.getInt(29),rows_Business.getDouble(30),rows_Business.getString(31));
+
+
                     } while (rows_Business.moveToNext());
 
                 }
@@ -436,6 +475,17 @@ public class SearchOfline
                         selectRate.add(rows_Business.getDouble(30));
                         selectSrc.add(rows_Business.getString(31));
                         selectRateCount.add(rows_Business.getInt(29));
+
+                        adb.Add_Search(rows_Business.getInt(0),rows_Business.getString(1),"",rows_Business.getString(3)
+                                ,rows_Business.getString(4),rows_Business.getString(5),rows_Business.getString(6),
+                                rows_Business.getString(7),rows_Business.getString(8),rows_Business.getString(9),
+                                rows_Business.getString(10),rows_Business.getString(11),"","",rows_Business.getInt(14),
+                                rows_Business.getDouble(15),rows_Business.getDouble(16),rows_Business.getInt(17),"","",
+                                rows_Business.getInt(20),rows_Business.getInt(21),rows_Business.getInt(22),rows_Business.getInt(23),
+                                rows_Business.getInt(24),rows_Business.getInt(25),rows_Business.getInt(26),rows_Business.getInt(27),
+                                rows_Business.getInt(28),rows_Business.getInt(29),rows_Business.getDouble(30),rows_Business.getString(231));
+
+
                     } while (rows_Business.moveToNext());
 
                 }
@@ -488,6 +538,16 @@ public class SearchOfline
                         selectRate.add(rows_Business.getDouble(30));
                         selectSrc.add(rows_Business.getString(31));
                         selectRateCount.add(rows_Business.getInt(29));
+
+                        adb.Add_Search(rows_Business.getInt(0),rows_Business.getString(1),"",rows_Business.getString(3)
+                                ,rows_Business.getString(4),rows_Business.getString(5),rows_Business.getString(6),
+                                rows_Business.getString(7),rows_Business.getString(8),rows_Business.getString(9),
+                                rows_Business.getString(10),rows_Business.getString(11),"","",rows_Business.getInt(14),
+                                rows_Business.getDouble(15),rows_Business.getDouble(16),rows_Business.getInt(17),"","",
+                                rows_Business.getInt(20),rows_Business.getInt(21),rows_Business.getInt(22),rows_Business.getInt(23),
+                                rows_Business.getInt(24),rows_Business.getInt(25),rows_Business.getInt(26),rows_Business.getInt(27),
+                                rows_Business.getInt(28),rows_Business.getInt(29),rows_Business.getDouble(30),rows_Business.getString(231));
+
                     } while (rows_Business.moveToNext());
 
                 }

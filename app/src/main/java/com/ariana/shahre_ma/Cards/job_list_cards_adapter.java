@@ -66,25 +66,25 @@ private  static Context context;
         }
         else
         {
-            allrows = mydb.SearchBusiness(fc.GetMarket_Business(), fc.GetBusiness_SubsetIdb());
+            allrows = mydb.SearchBusiness(fc.GetMarket_Business(), fc.GetBusiness_SubsetIdb(),cityid);
             setting.saveSearchBusiness(false); //No Search
             search=false;
         }
 
          if(setting.getSortBusiness().equals("rate"))
         {
-            allrows = mydb.select_SortRateBusiness(fc.GetBusiness_SubsetIdb());
+            allrows = mydb.select_SortRateBusiness(fc.GetBusiness_SubsetIdb(),cityid);
             setting.saveSortBusiness("0"); //No Sort
             search=false;
             Log.i("rate",setting.getSortBusiness());
         }  else if(setting.getSortBusiness().equals("name"))
         {
-            allrows = mydb.select_SortNameBusiness(fc.GetBusiness_SubsetIdb());
+            allrows = mydb.select_SortNameBusiness(fc.GetBusiness_SubsetIdb(),cityid);
             setting.saveSortBusiness("0"); //No Sort
             search=false;
             Log.i("name", setting.getSortBusiness());
         }  else if(setting.getSortBusiness().equals("date")) {
-             allrows = mydb.select_SortDateBusiness(fc.GetBusiness_SubsetIdb());
+             allrows = mydb.select_SortDateBusiness(fc.GetBusiness_SubsetIdb(),cityid);
              setting.saveSortBusiness("0"); //No Sort
              search=false;
             Log.i("date", setting.getSortBusiness());

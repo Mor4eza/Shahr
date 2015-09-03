@@ -21,6 +21,7 @@ public class  InstructionsSqlite {
     public static final String TABLE_NAME_Bookmark = "bookmark";
     public static final String TABLE_NAME_Area = "area";
     public static final String TABLE_NAME_UpdateTime = "UpdateTime";
+    public static final String TABLE_NAME_Search = "Search";
     public static final String TABLE_NAME_Like = "Like";
     public static final String TABLE_NAME_Interest = "Interest";
     public static final String TABLE_NAME_NOTIFICATION="Notification";
@@ -349,6 +350,42 @@ public class  InstructionsSqlite {
             " CityId INTEGER" +
             ");";
 
+
+    // SQL statement to create Search table
+    public static final String CREATE_TABLE_Search  = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_Search+ " (" +
+            " Id INTEGER PRIMARY KEY ," +
+            " Market TEXT ," +
+            " Code TEXT ," +
+            " Phone TEXT ," +
+            " Mobile TEXT ," +
+            " Fax TEXT ," +
+            " Email TEXT ," +
+            " BusinessOwner TEXT ," +
+            " Address TEXT ," +
+            " Description TEXT ," +
+            " Startdate TEXT ," +
+            " ExpirationDate TEXT ," +
+            " Inactive TEXT ," +
+            " Subset TEXT ," +
+            " SubsetId INTEGER ," +
+            " Latitude REAL," +
+            " Longitude REAL," +
+            " AreaId INTEGER ," +
+            " Area TEXT ," +
+            " User TEXT ," +
+            " CityId INTEGER ," +
+            " UserId INTEGER," +
+            " Field1 INTEGER," +
+            " Field2 INTEGER," +
+            " Field3 INTEGER," +
+            " Field4 INTEGER," +
+            " Field5 INTEGER," +
+            " Field6 INTEGER," +
+            " Field7 INTEGER, " +
+            " RateCount INTEGER ," +
+            " RateValue DOUBLE ," +
+            " Src TEXT " +
+            ");";
 
 
     // SQL statement to create business_disCount table

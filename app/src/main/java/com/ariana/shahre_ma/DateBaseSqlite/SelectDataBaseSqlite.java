@@ -117,18 +117,43 @@ public class SelectDataBaseSqlite extends DataBaseSqlite {
     }
 
     @Override
-    public Cursor select_SortRateBusiness(Integer subsetID) {
-        return super.select_SortRateBusiness(subsetID);
+    public Cursor select_SortRateBusiness(Integer subsetID, Integer cityid) {
+        return super.select_SortRateBusiness(subsetID, cityid);
     }
 
     @Override
-    public Cursor select_SortNameBusiness(Integer subsetID) {
-        return super.select_SortNameBusiness(subsetID);
+    public void DeleteAllDataBase() {
+        super.DeleteAllDataBase();
     }
 
     @Override
-    public Cursor select_SortDateBusiness(Integer subsetID) {
-        return super.select_SortDateBusiness(subsetID);
+    public Cursor select_TableSearchSortId() {
+        return super.select_TableSearchSortId();
+    }
+
+    @Override
+    public Cursor select_TableSearchSortName() {
+        return super.select_TableSearchSortName();
+    }
+
+    @Override
+    public Cursor select_TableSearchSortRate() {
+        return super.select_TableSearchSortRate();
+    }
+
+    @Override
+    public Cursor select_TableSearch(String market) {
+        return super.select_TableSearch(market);
+    }
+
+    @Override
+    public Cursor select_SortNameBusiness(Integer subsetID, Integer cityid) {
+        return super.select_SortNameBusiness(subsetID, cityid);
+    }
+
+    @Override
+    public Cursor select_SortDateBusiness(Integer subsetID, Integer cityid) {
+        return super.select_SortDateBusiness(subsetID, cityid);
     }
 
     @Override
@@ -212,8 +237,8 @@ public class SelectDataBaseSqlite extends DataBaseSqlite {
     }
 
     @Override
-    public Cursor SearchBusiness(String nameMarket, Integer subsetId) {
-        return super.SearchBusiness(nameMarket, subsetId);
+    public Cursor SearchBusiness(String nameMarket, Integer subsetId, Integer cityid) {
+        return super.SearchBusiness(nameMarket, subsetId, cityid);
     }
 
     @Override

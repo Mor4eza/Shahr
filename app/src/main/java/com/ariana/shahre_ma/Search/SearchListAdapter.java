@@ -2,6 +2,7 @@ package com.ariana.shahre_ma.Search;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -13,11 +14,13 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.ariana.shahre_ma.Cards.Job_lists_card_item;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.job_details.Job_details;
 import com.squareup.picasso.Picasso;
 
@@ -32,6 +35,9 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
     FieldDataBusiness fdb=new FieldDataBusiness();
     Context context;
     SelectDataBaseSqlite sdb;
+    KeySettings setting;
+    Cursor allrows;
+    Boolean search=true;
     Query query;
 
     public SearchListAdapter(Context context) {
@@ -39,79 +45,140 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         this.context=context;
          sdb=new SelectDataBaseSqlite(context);
          query=new Query(context);
-
-
-
-            Log.i("SearchOffline", "strat");
-            Log.i("SearchOffline", String.valueOf(fdb.GetMarketBusiness().size()));
             mItems = new ArrayList<SearchItems>();
+       // try {
+            SelectDataBaseSqlite mydb = new SelectDataBaseSqlite(context);
+            Integer cityid=0;
+            setting=new KeySettings(context);
+            cityid=query.getCityId(setting.getCityName());
 
-        try {
-            if (fc.GetSearchOffline()) {
-                Log.i("SearchOffline1", "strat1");
-                for (int i = 0; i < fdb.GetMarketBusiness().size(); i++) {
-                    Log.i("SearchOffline", String.valueOf(fdb.GetMarketBusiness().size()));
-                    nature = new SearchItems();
-                    nature.setName(fdb.GetMarketBusiness().get(i));
-                    nature.setDes(fdb.GetAddressBusiness().get(i));
-                    nature.setSubsetId(fdb.GetSubsetId().get(i));
-                    // nature.setDisCount(fdb.GetDisCountId().get(i));
-                    nature.setmRateCount(fdb.GetRateCount().get(i));
-                    nature.setRate(fdb.GetRateBusiness().get(i));
-                    nature.setmId(fdb.GetIdBusiness().get(i));
-                    nature.setNameImage(fdb.GetSrc().get(i));
-
-
-                    if (fdb.GetMobileBusiness().get(i).length() == 0 || fdb.GetMobileBusiness().get(i).equals("") || fdb.GetMobileBusiness().get(i).equals(null) || fdb.GetMobileBusiness().get(i).equals("null")) {
-                        nature.setTell(fdb.GetPhoneBusiness().get(i));
-                    } else {
-                        nature.setTell(fdb.GetMobileBusiness().get(i));
-                    }
-                    if (nature.getTell().length() < 2) {
-                        nature.setTell("");
-                    }
-
-                    mItems.add(nature);
-                    notifyDataSetChanged();
-
-
-                }
-                fc.SetSearchOffline(false);
-            } else {
-                Log.i("checkInternetConnection", "strat");
-                mItems = new ArrayList<SearchItems>();
-
-                for (int i = 0; i < fdb.GetMarketBusiness().size(); i++) {
-                    nature = new SearchItems();
-                    nature.setName(fdb.GetMarketBusiness().get(i));
-                    nature.setDes(fdb.GetAddressBusiness().get(i));
-                    nature.setSubsetId(fdb.GetSubsetId().get(i));
-                    nature.setDisCount(String.valueOf(fdb.GetDisCountId().get(i)));
-                    nature.setRate(fdb.GetRateBusiness().get(i));
-                    nature.setmId(fdb.GetIdBusiness().get(i));
-                    nature.setmRateCount(fdb.GetRateCount().get(i));
-                    nature.setNameImage(fdb.GetSrc().get(i));
-
-
-                    if (fdb.GetMobileBusiness().get(i).length() == 0 || fdb.GetMobileBusiness().get(i).equals("") || fdb.GetMobileBusiness().get(i).equals(null) || fdb.GetMobileBusiness().get(i).equals("null")) {
-                        nature.setTell(fdb.GetPhoneBusiness().get(i));
-                    } else {
-                        nature.setTell(fdb.GetMobileBusiness().get(i));
-                    }
-                    if (nature.getTell().length() < 2) {
-                        nature.setTell("");
-                    }
-
-                    mItems.add(nature);
-                    notifyDataSetChanged();
-                }
+            if(setting.getSearchBusiness())
+            {
+                allrows = mydb.select_TableSearch(fc.GetMarket_Business());
+                setting.saveSearchBusiness(false); //No Search
+                search=false;
             }
 
-        }
+            if(setting.getSortBusiness().equals("rate"))
+            {
+                allrows = mydb.select_TableSearchSortRate();
+                setting.saveSortBusiness("0"); //No Sort
+                search=false;
+                Log.i("rate",setting.getSortBusiness());
+            }  else if(setting.getSortBusiness().equals("name"))
+            {
+                allrows = mydb.select_TableSearchSortName();
+                setting.saveSortBusiness("0"); //No Sort
+                search=false;
+                Log.i("name", setting.getSortBusiness());
+            }  else if(setting.getSortBusiness().equals("date")) {
+                allrows = mydb.select_TableSearchSortId();
+                setting.saveSortBusiness("0"); //No Sort
+                search=false;
+                Log.i("date", setting.getSortBusiness());
+            }
+
+            if(setting.getSearchBusiness() || setting.getSortBusiness().equals("rate") || setting.getSortBusiness().equals("name") || setting.getSortBusiness().equals("date")) {
+
+                for (int i = 0; i <allrows.getCount(); i++) {
+                    nature = new SearchItems();
+
+                    nature.setName(allrows.getString(1));
+                    nature.setDes(allrows.getString(8));
+                    nature.setSubsetId(allrows.getInt(14));
+                    nature.setmRateCount(allrows.getInt(29));
+                    nature.setRate(allrows.getDouble(30));
+                    nature.setmId(allrows.getInt(0));
+                    nature.setNameImage(allrows.getString(31));
+
+
+                    if (allrows.getString(3).equals("") || allrows.getString(3).equals("null"))//value phone null
+                    {
+                        nature.setTell(allrows.getString(4));
+                    }
+                    else if(allrows.getString(3).equals("1"))//value phone 1
+                    {
+                        nature.setTell("");
+                    }
+                    else
+                    {
+                        //nature.setTell(allrows.getString(3).substring(0,allrows.getString(3).indexOf("-")));
+                        nature.setTell(allrows.getString(3));
+
+
+                    }
+                    mItems.add(nature);
+                    notifyDataSetChanged();
+                }
+
+            }
+            else
+            {
+                if (fc.GetSearchOffline()) {
+                    Log.i("SearchOffline1", "strat1");
+                    for (int i = 0; i < fdb.GetMarketBusiness().size(); i++) {
+                        Log.i("SearchOffline", String.valueOf(fdb.GetMarketBusiness().size()));
+                        nature = new SearchItems();
+                        nature.setName(fdb.GetMarketBusiness().get(i));
+                        nature.setDes(fdb.GetAddressBusiness().get(i));
+                        nature.setSubsetId(fdb.GetSubsetId().get(i));
+                        // nature.setDisCount(fdb.GetDisCountId().get(i));
+                        nature.setmRateCount(fdb.GetRateCount().get(i));
+                        nature.setRate(fdb.GetRateBusiness().get(i));
+                        nature.setmId(fdb.GetIdBusiness().get(i));
+                        nature.setNameImage(fdb.GetSrc().get(i));
+
+
+                        if (fdb.GetMobileBusiness().get(i).length() == 0 || fdb.GetMobileBusiness().get(i).equals("") || fdb.GetMobileBusiness().get(i).equals(null) || fdb.GetMobileBusiness().get(i).equals("null")) {
+                            nature.setTell(fdb.GetPhoneBusiness().get(i));
+                        } else {
+                            nature.setTell(fdb.GetMobileBusiness().get(i));
+                        }
+                        if (nature.getTell().length() < 2) {
+                            nature.setTell("");
+                        }
+
+                        mItems.add(nature);
+                        notifyDataSetChanged();
+
+
+                    }
+                    fc.SetSearchOffline(false);
+                } else {
+                    Log.i("checkInternetConnection", "strat");
+                    mItems = new ArrayList<SearchItems>();
+
+                    for (int i = 0; i < fdb.GetMarketBusiness().size(); i++) {
+                        nature = new SearchItems();
+                        nature.setName(fdb.GetMarketBusiness().get(i));
+                        nature.setDes(fdb.GetAddressBusiness().get(i));
+                        nature.setSubsetId(fdb.GetSubsetId().get(i));
+                        nature.setDisCount(fdb.GetDisCountId().get(i));
+                        nature.setRate(fdb.GetRateBusiness().get(i));
+                        nature.setmId(fdb.GetIdBusiness().get(i));
+                        nature.setmRateCount(fdb.GetRateCount().get(i));
+                        nature.setNameImage(fdb.GetSrc().get(i));
+
+
+                        if (fdb.GetMobileBusiness().get(i).length() == 0 || fdb.GetMobileBusiness().get(i).equals("") || fdb.GetMobileBusiness().get(i).equals(null) || fdb.GetMobileBusiness().get(i).equals("null")) {
+                            nature.setTell(fdb.GetPhoneBusiness().get(i));
+                        } else {
+                            nature.setTell(fdb.GetMobileBusiness().get(i));
+                        }
+                        if (nature.getTell().length() < 2) {
+                            nature.setTell("");
+                        }
+
+                        mItems.add(nature);
+                        notifyDataSetChanged();
+                    }
+                }
+            }
+       /* }
         catch (Exception e)
         {
             Log.d("searachListAdapter",e.toString());
-        }
+        }*/
 
 
     }
