@@ -1268,6 +1268,12 @@ Context context;
     }
 
 
+    public Cursor select_Subset(Integer CollectionId)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT Id FROM " + instructionsSqlite.TABLE_NAME_SUBSET+ " WHERE CollectionId="+CollectionId, null);
+    }
+
     public Cursor select_Subset()
     {
         SQLiteDatabase db=this.getReadableDatabase();
