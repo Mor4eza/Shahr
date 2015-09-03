@@ -145,6 +145,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
+                cancel(true);
             }
         });
         pd.show();

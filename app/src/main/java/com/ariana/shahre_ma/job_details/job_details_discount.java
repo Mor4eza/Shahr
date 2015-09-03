@@ -95,7 +95,7 @@ public class job_details_discount extends FragmentActivity {
             tv_dis_desc=(TextView) rootView.findViewById(R.id.tv_dis_desc);
 
 
-            try {
+          //  try {
                 SelectDataBaseSqlite db = new SelectDataBaseSqlite(getActivity());
                 Cursor cursor = db.select_DisCount(fc.GetBusiness_Id());
 //                Log.i("IDdiscount",String.valueOf(cursor.getInt(0)));
@@ -122,17 +122,17 @@ public class job_details_discount extends FragmentActivity {
                     discountid = cursor.getInt(0);
                     tv_dis_percent.setText(cursor.getString(6));
                     tv_dis_name.setText(cursor.getString(1));
-                    tv_dis_start.setText(cursor.getString(3));
-                    tv_dis_end.setText(cursor.getString(4));
+                    tv_dis_start.setText(ct.MiladiToShamesipublic(cursor.getString(3)));
+                    tv_dis_end.setText(ct.MiladiToShamesipublic(cursor.getString(4)));
                     tv_dis_desc.setText(cursor.getString(5));
 
                     tv_like.setText(String.valueOf(cursor.getInt(8)));
                     tv_unlike.setText(String.valueOf(cursor.getInt(9)));
                 }
-            }catch (Exception e)
+           /* }catch (Exception e)
             {
 
-            }
+            }*/
 
 
             drawable_like = (TransitionDrawable) like.getBackground();

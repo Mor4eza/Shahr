@@ -2,7 +2,9 @@ package com.ariana.shahre_ma.Date;
 
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
@@ -607,45 +609,37 @@ public class CalendarTool
         Integer _day=0;
 
 
-        year=date.substring(0,4);
-        month=date.substring(5,7);
-        day=date.substring(8, 10);
-
-        _month=Integer.valueOf(date.substring(0,4));
-        _day=Integer.valueOf(date.substring(5,7));
-
-
-        if (_month <= 9)
-        {
-            month="0"+(month);
+        SimpleDateFormat sdf = new SimpleDateFormat("mm/dd/yyyy");
+        Date testDate = null;
+        try {
+            testDate = sdf.parse(date);
+        }catch(Exception ex){
+            ex.printStackTrace();
         }
-        if (_day<=9)
-        {
-            day="0"+day;
-        }
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/mm/dd");
+        String newFormat = formatter.format(testDate);
+        System.out.println(".....Date..."+newFormat);
+
+        year=newFormat.substring(0,4);
+        month=newFormat.substring(5,7);
+        day=newFormat.substring(8,10);
+
 
         ct.setGregorianDate(Integer.valueOf(year),Integer.valueOf(month),Integer.valueOf(day));
         result=ct.getIranianDate();
 
-        year=result.substring(0,4);
-        month=result.substring(5,7);
-        day=result.substring(8,10);
-
-        _month=Integer.valueOf(result.substring(5,7));
-        _day=Integer.valueOf(result.substring(8,10));
-
-
-        if (_month <= 9)
+        String _date1 = result;
+        SimpleDateFormat sdf1 = new SimpleDateFormat("mm/dd/yyyy");
+        Date testDate1 = null;
+        try
         {
-            month="0"+(month);
+            testDate1 = sdf1.parse(_date1);
+        }catch(Exception ex){
+            ex.printStackTrace();
         }
-        if (_day<=9)
-        {
-            day="0"+day;
-        }
-
-        result=(year+"/"+month+"/"+day);
-
+        SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/mm/dd");
+        String newFormat1 = formatter1.format(testDate);
+        System.out.println(".....Date..."+newFormat1);
 
         Log.i("MiladiToShamesi", result);
         return   result;
@@ -667,7 +661,7 @@ public class CalendarTool
         year=date.substring(0,4);
 
         MONTH=Integer.parseInt(date.substring(5, 6));
-        DAY=Integer.parseInt(date.substring(7,8));
+        DAY=Integer.parseInt(date.substring(7, 8));
         if(MONTH<=9)
             month="0"+month;
         if(DAY<=9)
