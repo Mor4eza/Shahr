@@ -132,7 +132,7 @@ public class SqliteTOjson {
         return field_Json;
     }
 
-    public  String getBusinessTOjson(Integer id,String market,String phone,String mobile,String fax,String email,String businessowner,String address,String description,String startdate,String expirationdate,String subset,Integer subsetid,Double latitude,Double longitude,Integer areaid,String area,String user,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7)
+    public  String getBusinessTOjson(Integer id,String market,String phone,String mobile,String fax,String email,String businessowner,String address,String description,String startdate,String expirationdate,String subset,Integer subsetid,Double latitude,Double longitude,Integer areaid,String area,String user,Integer memberid,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7)
     {
         String Result_json="";
         try{
@@ -159,6 +159,7 @@ public class SqliteTOjson {
            /* jsonobject.put("Area",JSONObject.NULL);
             jsonobject.put("User",JSONObject.NULL);*/
             jsonobject.put("UserId",1);
+            jsonobject.put("MemberId",memberid);
             jsonobject.put("Field1",String.valueOf(field1));
             jsonobject.put("Field2",String.valueOf(field2));
             jsonobject.put("Field3",String.valueOf(field3));
@@ -177,7 +178,7 @@ public class SqliteTOjson {
         return Result_json;
     }
 
-    public  String getBusinessTOjsonArray(Integer id,Integer memberId,String market,String phone,String mobile,String fax,String email,String businessowner,String address,String description,String startdate,String expirationdate,String subset,Integer subsetid,Double latitude,Double longitude,Integer areaid,String area,String user,String field1)
+    public  String getBusinessTOjsonArray(Integer id,Integer memberId,String market,String phone,String mobile,String fax,String email,String businessowner,String address,String description,String startdate,String expirationdate,String subset,Integer subsetid,Double latitude,Double longitude,Integer areaid,String area,String user,Integer memberid,String field1)
     {
         String Result_json="";
         try{
@@ -203,6 +204,8 @@ public class SqliteTOjson {
             jsonobject.put("AreaId",areaid);
            /* jsonobject.put("Area",JSONObject.NULL);
             jsonobject.put("User",JSONObject.NULL);*/
+            jsonobject.put("MemberId",memberid);
+
             jsonobject.put("UserId",1);
             jsonobject.put("FieldText",String.valueOf(field1));
 
