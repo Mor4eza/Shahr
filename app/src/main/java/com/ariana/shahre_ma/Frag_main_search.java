@@ -279,7 +279,7 @@ public class Frag_main_search extends Fragment {
                             Log.i("SubsetgetCount", String.valueOf(rows_Subset.getCount()));
                             rows_Subset.moveToFirst();
                             //جستجو آی دی زیر مجموعه و کلمات دیگر در مشاغل
-                            rows_Business = db.select_BusinessSearch(selectedWord[0], selectedWord[1], selectedWord[2], selectedWord[3], selectedWord[4], rows_Subset.getInt(0));
+                            rows_Business = db.select_BusinessSearch(selectedWord[0], selectedWord[1], selectedWord[2], selectedWord[3], selectedWord[4], rows_Subset.getInt(0),cityid);
                             if (rows_Business.moveToFirst())
                             {
                                 do {
@@ -322,7 +322,7 @@ public class Frag_main_search extends Fragment {
                                 Log.i("Subsetget", "on");
                                 rows_Subset.moveToFirst();
                                 //جستجو آی دی زیر مجموعه و کلمات دیگر در مشاغل
-                                rows_Business = db.select_BusinessSearch(selectedWord[0], selectedWord[2], selectedWord[2], selectedWord[3], selectedWord[4], rows_Subset.getInt(0));
+                                rows_Business = db.select_BusinessSearch(selectedWord[0], selectedWord[2], selectedWord[2], selectedWord[3], selectedWord[4], rows_Subset.getInt(0),cityid);
                                 if (rows_Business.moveToFirst())
                                 {
                                     do {
