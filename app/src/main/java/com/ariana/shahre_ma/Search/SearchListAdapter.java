@@ -47,40 +47,44 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
          query=new Query(context);
             mItems = new ArrayList<SearchItems>();
        // try {
-            SelectDataBaseSqlite mydb = new SelectDataBaseSqlite(context);
+            SelectDataBaseSqlite sdb = new SelectDataBaseSqlite(context);
             Integer cityid=0;
             setting=new KeySettings(context);
             cityid=query.getCityId(setting.getCityName());
 
             if(setting.getSearchBusiness())
             {
-                allrows = mydb.select_TableSearch(fc.GetMarket_Business());
+                Log.i("GetMarket_Business()",fc.GetMarket_Business());
+                allrows = sdb.select_TableSearch(fc.GetMarket_Business());
                 setting.saveSearchBusiness(false); //No Search
                 search=false;
             }
 
             if(setting.getSortBusiness().equals("rate"))
             {
-                allrows = mydb.select_TableSearchSortRate();
+                allrows = sdb.select_TableSearchSortRate();
                 setting.saveSortBusiness("0"); //No Sort
                 search=false;
                 Log.i("rate",setting.getSortBusiness());
             }  else if(setting.getSortBusiness().equals("name"))
             {
-                allrows = mydb.select_TableSearchSortName();
+                allrows = sdb.select_TableSearchSortName();
                 setting.saveSortBusiness("0"); //No Sort
                 search=false;
                 Log.i("name", setting.getSortBusiness());
             }  else if(setting.getSortBusiness().equals("date")) {
-                allrows = mydb.select_TableSearchSortId();
+                allrows = sdb.select_TableSearchSortId();
                 setting.saveSortBusiness("0"); //No Sort
                 search=false;
                 Log.i("date", setting.getSortBusiness());
             }
 
-            if(setting.getSearchBusiness() || setting.getSortBusiness().equals("rate") || setting.getSortBusiness().equals("name") || setting.getSortBusiness().equals("date")) {
+            if(!search) {
+                Log.i("count",String.valueOf(allrows.getCount()));
+                if(allrows.moveToFirst())
+                {
 
-                for (int i = 0; i <allrows.getCount(); i++) {
+                do {
                     nature = new SearchItems();
 
                     nature.setName(allrows.getString(1));
@@ -95,20 +99,19 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
                     if (allrows.getString(3).equals("") || allrows.getString(3).equals("null"))//value phone null
                     {
                         nature.setTell(allrows.getString(4));
-                    }
-                    else if(allrows.getString(3).equals("1"))//value phone 1
+                    } else if (allrows.getString(3).equals("1"))//value phone 1
                     {
                         nature.setTell("");
-                    }
-                    else
-                    {
+                    } else {
                         //nature.setTell(allrows.getString(3).substring(0,allrows.getString(3).indexOf("-")));
                         nature.setTell(allrows.getString(3));
 
-
+                        mItems.add(nature);
+                        notifyDataSetChanged();
                     }
-                    mItems.add(nature);
-                    notifyDataSetChanged();
+                }while (allrows.moveToNext());
+
+                  ;
                 }
 
             }
@@ -201,7 +204,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         viewHolder.rates.setRating((float) nature.getRate());
         viewHolder.rates.setTag(nature.getmId());
         viewHolder.tvTell.setText(nature.getTell());
-        viewHolder.tvRateCount.setText("/"+nature.getmRateCount().toString());
+        viewHolder.tvRateCount.setText("/" + nature.getmRateCount().toString());
         String image_url_1;
         if (nature.getNameImage().equals("null")||nature.getNameImage().equals("")||nature.getNameImage().equals(null)||nature.getNameImage()==null){
             Log.i("SubsetId",nature.getSubsetId().toString());

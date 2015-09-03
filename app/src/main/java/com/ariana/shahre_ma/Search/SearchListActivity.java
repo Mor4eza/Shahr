@@ -238,7 +238,7 @@ public class SearchListActivity extends ActionBarActivity implements SearchView.
     {
         //Submit
         // Search Sumbit To Business Parameters SubsetID and NameMarket
-
+        Log.i("GetMarket",query);
         if(query.equals(""))
         {
             setting.saveSearchBusiness(false);

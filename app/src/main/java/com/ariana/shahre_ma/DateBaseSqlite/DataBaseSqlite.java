@@ -1333,7 +1333,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE Market='%"+market+"%'", null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_Search + "  WHERE Market='%"+market+"%'", null);
 
     }
 
@@ -1341,7 +1341,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + " ORDER BY RateValue  DESC", null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_Search + " ORDER BY RateValue  DESC", null);
 
     }
 
@@ -1349,7 +1349,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + " ORDER BY Market ASC", null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_Search + " ORDER BY Market ASC", null);
 
     }
 
@@ -1357,7 +1357,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + " ORDER BY Id  ASC", null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_Search+ " ORDER BY Id  ASC", null);
 
     }
 
