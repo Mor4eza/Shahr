@@ -7,7 +7,9 @@ import android.os.AsyncTask;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Settings.KeySettings;
@@ -72,17 +74,18 @@ public class HTTPGetAreaJosn extends AsyncTask<String,Void,Integer>
         protected void onPostExecute(Integer result) {
 
             KeySettings setting=new KeySettings(context);
-            DataBaseSqlite db = new DataBaseSqlite(context);
+            AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+            DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
             try
             {
                 if(result==1)
                 {
                 if (len_Area > 0)
                 {
-                        db.delete_Area();
+                        ddb.delete_Area();
                         for (int i = 0; i < len_Area; i++)
                         {
-                            db.Add_area(Id_area[i], Name_Area[i], CityId_area[i]);
+                            adb.Add_area(Id_area[i], Name_Area[i], CityId_area[i]);
                         }
 
 

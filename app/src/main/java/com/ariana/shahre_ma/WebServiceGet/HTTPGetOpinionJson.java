@@ -7,7 +7,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Cards.Comment_Card_Adapter;
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.job_details.Job_details_comment;
 
@@ -102,13 +104,13 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
     protected void onPostExecute() {
         try {
 
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+            DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
 
-
-            dbs.delete_Opinion();
+            ddb.delete_Opinion();
             for (int i = 0; i <len; i++)
             {
-                dbs.Add_opinion(Id[i], description[i], date[i], erja[i], countlike[i], countdislike[i], membername[i]);
+                adb.Add_opinion(Id[i], description[i], date[i], erja[i], countlike[i], countdislike[i], membername[i]);
             }
 
 

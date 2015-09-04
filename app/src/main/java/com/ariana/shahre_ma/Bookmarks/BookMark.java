@@ -13,8 +13,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
@@ -95,7 +97,7 @@ public class BookMark extends ActionBarActivity {
 
     private List<String> getbookmark() {
         List<String> item=new ArrayList<String>();
-        DataBaseSqlite db=new DataBaseSqlite(this);
+        SelectDataBaseSqlite db=new SelectDataBaseSqlite(this);
         Cursor allrows = db.select_bookmark();
 
 
@@ -214,7 +216,7 @@ public class BookMark extends ActionBarActivity {
                 BusinessID[i] = json.getInt("BusinessId");
             }
 
-            DataBaseSqlite db=new DataBaseSqlite(this);
+            AddDataBaseSqlite db=new AddDataBaseSqlite(this);
             for (int i = 0; i <len; i++) {
                 db.Add_bookmark(BusinessID[i],query.getMemberId());
             }
@@ -224,7 +226,7 @@ public class BookMark extends ActionBarActivity {
     public ArrayList<Bookmark_Item> generateData(){
         ArrayList<Bookmark_Item> items = new ArrayList<Bookmark_Item>();
 
-        DataBaseSqlite db=new DataBaseSqlite(this);
+        SelectDataBaseSqlite db=new SelectDataBaseSqlite(this);
         Cursor rows=db.select_bookmark();
         if(rows.moveToNext())
         {

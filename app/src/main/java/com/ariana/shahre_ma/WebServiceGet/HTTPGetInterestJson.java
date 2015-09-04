@@ -5,7 +5,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -87,12 +89,12 @@ public class HTTPGetInterestJson  extends AsyncTask<String,Void, Integer>
             if (result == 1) {
 
                 try {
-
-                    DataBaseSqlite db = new DataBaseSqlite(context);
-                    db.delete_Interest();
+                    AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+                    DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
+                    ddb.delete_Interest();
                     for (int i = 0; i < len; i++) {
 
-                        db.Add_Interest(subsetid[i], memberid[i]);
+                        adb.Add_Interest(subsetid[i], memberid[i]);
                         Log.i("onPostExecuteInterest", "strt1");
                     }
                     pd.dismiss();

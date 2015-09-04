@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
@@ -166,8 +168,8 @@ public class HTTPGetOneBusinessJson extends AsyncTask<String,Void,Integer>
                 Integer cityid = 0;
                 Integer idsubset = 0;
 
-                DataBaseSqlite dbs = new DataBaseSqlite(context);
-
+                AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+                DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
 
                 cityid = query.getCityId(setting.getCityName());
                 idsubset = fc.GetSubsetId();
@@ -195,16 +197,16 @@ public class HTTPGetOneBusinessJson extends AsyncTask<String,Void,Integer>
 
 
 
-                    dbs.delete_BusinessId(Id);
-                    dbs.delete_DisCount(discountid);
+                    ddb.delete_BusinessId(Id);
+                    ddb.delete_DisCount(discountid);
                         if (discountid == 0) {
                             Log.i("ifbusiness", "0");
                         } else {
                             Log.i("elsebusiness", "i>0");
-                            dbs.Add_DisCount(discountid, discounttext, discountimage, discountstartdate, discountexpirationdate, discountdescription, discountpercent, discountbusinessid, likediscount, dislikediscount);
+                            adb.Add_DisCount(discountid, discounttext, discountimage, discountstartdate, discountexpirationdate, discountdescription, discountpercent, discountbusinessid, likediscount, dislikediscount);
                         }
 
-                        dbs.Add_business(Id, market, code, phone, mobile, fax, email, businessowner, address, description, startdate, expirationdate, inactive, subset, subsetid, latitude, longitude, areaid, area1, user, cityid, userid, field1, field2, field3, field4, field5, field6, field7, ratecount, ratevalue, src);
+                        adb.Add_business(Id, market, code, phone, mobile, fax, email, businessowner, address, description, startdate, expirationdate, inactive, subset, subsetid, latitude, longitude, areaid, area1, user, cityid, userid, field1, field2, field3, field4, field5, field6, field7, ratecount, ratevalue, src);
 
 
                     fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));

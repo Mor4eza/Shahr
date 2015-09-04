@@ -6,7 +6,9 @@ import android.os.AsyncTask;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -83,12 +85,13 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
                 if(len>0)
                 {
 
-                    DataBaseSqlite dbs = new DataBaseSqlite(context);
-                    dbs.delete_Advertisment();
+                    AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+                    DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
+                    ddb.delete_Advertisment();
 
                     for (int i = 0; i < len; i++)
                     {
-                        dbs.Add_Advertisment(Id[i], image[i], link[i],type[i]);
+                        adb.Add_Advertisment(Id[i], image[i], link[i],type[i]);
                     }
 
                     Intent intent = new Intent("custom-event-name");

@@ -7,7 +7,9 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.MyBusiness.Discount;
 import com.ariana.shahre_ma.MyBusiness.discount_Adapter;
 import com.ariana.shahre_ma.MyBusiness.discount_item;
@@ -123,11 +125,12 @@ public class HTTPGetDisCountJson extends AsyncTask<String,Void,Integer> {
             try {
 
 
-                DataBaseSqlite dbs = new DataBaseSqlite(context);
+                AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+                DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
 
-                dbs.delete_DisCountMember();
+                ddb.delete_DisCountMember();
                 for (int i = 0; i < len; i++) {
-                    dbs.Add_DisCountMember(Id[i], text[i], image[i], startdate[i], expirationdate[i], description[i], percent[i], businessid[i]);
+                    adb.Add_DisCountMember(Id[i], text[i], image[i], startdate[i], expirationdate[i], description[i], percent[i], businessid[i]);
                 }
                 pd.dismiss();
                 Discount dis=new Discount();

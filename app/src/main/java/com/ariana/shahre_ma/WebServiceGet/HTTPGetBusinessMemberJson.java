@@ -9,8 +9,11 @@ import android.util.Log;
 import android.view.View;
 
 import com.ariana.shahre_ma.Cards.Business_Card_Adapter;
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.MyBusiness.My_Business;
@@ -151,17 +154,19 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
             Integer cityid=0;
             Integer idsubset=0;
 
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+            DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
+            SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(context);
             KeySettings setting=new KeySettings(context);
             query=new Query(context);
             cityid=query.getCityId(setting.getCityName());
             idsubset=fc.GetSubsetId();
             if(len>0){
-                    dbs.delete_Business(cityid, idsubset);
+                    ddb.delete_Business(cityid, idsubset);
 
                     for (int i = 0; i <len; i++)
                     {
-                        Cursor rows=dbs.select_CountBusinessId(Id[i]);
+                        Cursor rows=sdb.select_CountBusinessId(Id[i]);
                         rows.moveToFirst();
                         count=rows.getInt(0);
                         rows.close();
@@ -171,7 +176,7 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
 
 
                         if(count==0)
-                            dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i]
+                            adb.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i]
                                     , address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i],
                                     subsetid[i],latitude[i], longitude[i], areaid[i],area1[i], user[i],cityid, userid[i],
                                     field1[i], field2[i], field3[i], field4[i], field5[i],field6[i], field7[i], ratecount[i], ratevalue[i],src[i]);

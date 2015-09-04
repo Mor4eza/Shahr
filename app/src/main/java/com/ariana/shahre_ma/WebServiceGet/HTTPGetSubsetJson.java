@@ -6,7 +6,9 @@ import android.os.AsyncTask;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
@@ -75,11 +77,12 @@ public class HTTPGetSubsetJson extends AsyncTask<String,Void,Integer>
                 if(len>0)
                 {
 
-                    DataBaseSqlite dbs = new DataBaseSqlite(context);
-                    dbs.delete_Subset();
+                    AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+                    DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
+                    ddb.delete_Subset();
 
                     for (int i = 0; i < len; i++) {
-                        dbs.Add_subset(Id[i], subsetname[i], collectionId[i]);
+                        adb.Add_subset(Id[i], subsetname[i], collectionId[i]);
 
                     }
 

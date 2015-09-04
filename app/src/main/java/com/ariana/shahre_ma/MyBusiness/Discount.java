@@ -12,8 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetDisCountJson;
@@ -85,10 +88,8 @@ public class Discount extends ActionBarActivity {
     public ArrayList<discount_item> generateData()
     {
         ArrayList<discount_item> items = new ArrayList<discount_item>();
-        DataBaseSqlite db = new DataBaseSqlite(this);
-
-
-            Cursor rows = db.select_AllDisCountMember();
+        SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(this);
+            Cursor rows = sdb.select_AllDisCountMember();
             if (rows.moveToFirst()) {
                 do {
                     ct.setGregorianDate(Integer.valueOf(rows.getString(3).substring(0, 4)),Integer.valueOf(rows.getString(3).substring(5, 7)),Integer.valueOf(rows.getString(3).substring(8, 10)));
@@ -110,9 +111,8 @@ public class Discount extends ActionBarActivity {
         String year="";
 
 
-
-        DataBaseSqlite db = new DataBaseSqlite(this);
-        Cursor rows = db.select_AllDisCountMember();
+        SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(this);
+        Cursor rows = sdb.select_AllDisCountMember();
         if (rows.moveToFirst()) {
             do {
                date=rows.getString(4);

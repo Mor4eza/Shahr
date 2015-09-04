@@ -11,7 +11,9 @@ import android.view.View;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.Date.DateTime;
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.MainActivity;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.Settings.UpdateActivity;
@@ -167,7 +169,8 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
     protected void onPostExecute(Integer o) {
 
         KeySettings setting=new KeySettings(context);
-        DataBaseSqlite db = new DataBaseSqlite(context);
+        AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+        DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
 
         try
         {
@@ -178,12 +181,12 @@ public class HTTPGetFieldActivityJson extends AsyncTask<String,Void,Integer>
                 if (len > 0)
                 {
 
-                    db.delete_Update();
-                    db.delete_FiledActivity();
+                    ddb.delete_Update();
+                    ddb.delete_FiledActivity();
                     for (int i = 0; i < len; i++)
-                        db.Add_FieldActivity(id[i], activity[i]);
+                        adb.Add_FieldActivity(id[i], activity[i]);
 
-                    db.Add_Update(ct.getIranianDate());
+                    adb.Add_Update(ct.getIranianDate());
 
 
                     try

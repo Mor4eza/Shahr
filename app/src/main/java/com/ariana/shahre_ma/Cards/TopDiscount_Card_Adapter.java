@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.job_details.Job_details;
@@ -38,7 +39,7 @@ public class TopDiscount_Card_Adapter extends RecyclerView.Adapter<TopDiscount_C
         mItems = new ArrayList<TopDiscount_Item>();
         query=new Query(context);
 
-        DataBaseSqlite db=new DataBaseSqlite(context);
+        SelectDataBaseSqlite db=new SelectDataBaseSqlite(context);
         Cursor rows=db.select_AllBusinessDisCount();
 
         if(rows.moveToFirst()) {

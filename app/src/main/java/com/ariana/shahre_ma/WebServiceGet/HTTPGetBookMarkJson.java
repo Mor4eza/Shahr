@@ -10,8 +10,11 @@ import android.widget.Toast;
 import com.ariana.shahre_ma.Bookmarks.BookMark;
 import com.ariana.shahre_ma.Bookmarks.BookmarkAdapter;
 import com.ariana.shahre_ma.Bookmarks.Bookmark_Item;
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 
 import org.json.JSONArray;
@@ -149,17 +152,18 @@ public class HTTPGetBookMarkJson extends AsyncTask<String,Void,Integer>
             try {
 
 
-                DataBaseSqlite dbs = new DataBaseSqlite(context);
-                dbs.delete_bookmark();
+                AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+                DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
+                ddb.delete_bookmark();
                  Log.i("len", String.valueOf(len));
                 for (int i = 0; i < len; i++)
                 {
                     Log.i("subsetid", String.valueOf(subsetid[i]));
-                    dbs.delete_BusinessId(Id[i]);
+                    ddb.delete_BusinessId(Id[i]);
                    try
                    {
-                       dbs.Add_bookmark(Id[i], MEMberID);
-                       dbs.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], latitude[i], longitude[i], areaid[i], area1[i], user[i], 68, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i], src[i]);
+                       adb.Add_bookmark(Id[i], MEMberID);
+                       adb.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], latitude[i], longitude[i], areaid[i], area1[i], user[i], 68, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i], src[i]);
                    }
                    catch (Exception e){}
 
@@ -348,8 +352,8 @@ public class HTTPGetBookMarkJson extends AsyncTask<String,Void,Integer>
     public ArrayList<Bookmark_Item> generateData(){
         ArrayList<Bookmark_Item> items = new ArrayList<Bookmark_Item>();
         Query query=new Query(context);
-        DataBaseSqlite db=new DataBaseSqlite(context);
-        Cursor rows=db.select_bookmark();
+        SelectDataBaseSqlite sdb = new SelectDataBaseSqlite(context);
+        Cursor rows=sdb.select_bookmark();
         if(rows.moveToNext())
         {
             do {

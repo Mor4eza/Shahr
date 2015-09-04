@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
@@ -58,8 +59,8 @@ public class Edit_User extends ActionBarActivity {
 
             Intialize();
 
-        DataBaseSqlite db=new DataBaseSqlite(this);
-        Cursor allrows=db.select_Member();
+        SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(this);
+        Cursor allrows=sdb.select_Member();
         allrows.moveToFirst();
 
         name.setText(allrows.getString(1));
@@ -214,10 +215,10 @@ public class Edit_User extends ActionBarActivity {
 
     public List<String> getId() {
 
-        DataBaseSqlite db=new DataBaseSqlite(this);
+        SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(this);
 
         List<String> studentList = new ArrayList<>();
-        Cursor allrows  = db.select_AllCity();
+        Cursor allrows  = sdb.select_AllCity();
         if (allrows.moveToFirst()) {
             do {
 

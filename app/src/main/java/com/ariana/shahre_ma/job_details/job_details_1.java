@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
@@ -154,12 +155,12 @@ public class job_details_1 extends ActionBarActivity {
 
          private  void display_detail() {
 
-        DataBaseSqlite mydb = new DataBaseSqlite(getActivity());
+             SelectDataBaseSqlite db = new SelectDataBaseSqlite(getActivity());
              try {
              if(fc.GetBusinessTops())
              {
 
-                 Cursor allrows = mydb.select_AllBusinessTops(fc.GetBusiness_Id());
+                 Cursor allrows = db.select_AllBusinessTops(fc.GetBusiness_Id());
                  allrows.moveToNext();
 
                  fc.SetBusiness_Id(allrows.getInt(0));//Id
@@ -204,7 +205,7 @@ public class job_details_1 extends ActionBarActivity {
                      Log.i("CounterFor", String.valueOf(allrows.getInt((22) + (i))));
                      if (allrows.getInt((22) + (i)) > 0) {
 
-                         Cursor rows3 = mydb.select_FieldActivityName(allrows.getInt((22) + (i)));
+                         Cursor rows3 = db.select_FieldActivityName(allrows.getInt((22) + (i)));
                          rows3.moveToFirst();
 
                          zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");
@@ -215,7 +216,7 @@ public class job_details_1 extends ActionBarActivity {
              }
              else if(fc.GetBusinessDisCountTops())
              {
-                 Cursor allrows = mydb.select_AllBusinessDisCount(fc.GetBusiness_Id());
+                 Cursor allrows = db.select_AllBusinessDisCount(fc.GetBusiness_Id());
                  allrows.moveToNext();
 
                  fc.SetBusiness_Id(allrows.getInt(0));//Id
@@ -258,7 +259,7 @@ public class job_details_1 extends ActionBarActivity {
                      Log.i("CounterFor", String.valueOf(allrows.getInt((22) + (i))));
                      if (allrows.getInt((22) + (i)) > 0) {
 
-                         Cursor rows3 = mydb.select_FieldActivityName(allrows.getInt((22) + (i)));
+                         Cursor rows3 = db.select_FieldActivityName(allrows.getInt((22) + (i)));
                          rows3.moveToFirst();
 
                          zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");
@@ -269,7 +270,7 @@ public class job_details_1 extends ActionBarActivity {
              else
              {
 
-                 Cursor allrows = mydb.select_AllBusinessId(fc.GetBusiness_Id());
+                 Cursor allrows = db.select_AllBusinessId(fc.GetBusiness_Id());
                  allrows.moveToNext();
 
                  fc.SetBusiness_Id(allrows.getInt(0));//Id
@@ -311,7 +312,7 @@ public class job_details_1 extends ActionBarActivity {
                      Log.i("CounterFor", String.valueOf(allrows.getInt((12) + (i))));
                      if (allrows.getInt((12) + (i)) > 0) {
 
-                         Cursor rows3 = mydb.select_FieldActivityName(allrows.getInt((12) + (i)));
+                         Cursor rows3 = db.select_FieldActivityName(allrows.getInt((12) + (i)));
                          rows3.moveToFirst();
 
                          zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");

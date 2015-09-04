@@ -8,7 +8,9 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
@@ -80,14 +82,15 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
             Log.i("onpostCity","onpostCity");
             if(result==1)
             {
-                    DataBaseSqlite dbs = new DataBaseSqlite(context);
+                AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+                DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
                     if (len > 0)
                     {
 
-                        dbs.delete_City();
+                        ddb.delete_City();
                         for (int i = 0; i < len; i++)
                         {
-                            dbs.Add_city(Id_city[i], Name_city[i], PROVINCEID_city[i]);
+                            adb.Add_city(Id_city[i], Name_city[i], PROVINCEID_city[i]);
 
                         }
 

@@ -7,7 +7,9 @@ import android.view.View;
 
 import com.ariana.shahre_ma.Cards.TopBusiness_Card_Adapter;
 import com.ariana.shahre_ma.Cards.TopDiscount_Card_Adapter;
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
@@ -269,7 +271,7 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
             }
         } catch (Exception e)
         {
-            Log.e("streamToStringTopBusiness",e.toString());
+            Log.e("ToStringTopBusiness",e.toString());
         }
 
         return result;
@@ -281,7 +283,8 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
                 super.onPostExecute(integer);
                 try {
 
-                    DataBaseSqlite db = new DataBaseSqlite(context);
+                    AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+                    DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
                     KeySettings setting=new KeySettings(context);
                     query=new Query(context);
 
@@ -297,12 +300,12 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
                     else {
 
 
-                        db.delete_BusinessTops();
-                        db.delete_BusinessDisCount();
+                        ddb.delete_BusinessTops();
+                        ddb.delete_BusinessDisCount();
 
                         for (int i = 0; i <len; i++)
                         {
-                            db.delete_DisCount(discountid[i]);
+                            ddb.delete_DisCount(discountid[i]);
 
 
                             if(discountid[i]==0) {
@@ -311,14 +314,14 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
                             else
                             {
                                 Log.i("elsebusiness", "i>0");
-                                db.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i],likediscount[i],dislikediscount[i]);
+                                adb.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i],likediscount[i],dislikediscount[i]);
                             }
 
 
                             if(i<=9)
-                                db.Add_businessTops(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i],latitude[i], longitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i],src[i]);
+                                adb.Add_businessTops(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i],latitude[i], longitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i],src[i]);
                             else
-                                db.Add_businessDisCount(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i],latitude[i], longitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i],src[i]);
+                                adb.Add_businessDisCount(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i],latitude[i], longitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i],src[i]);
                         }
 
                         fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));

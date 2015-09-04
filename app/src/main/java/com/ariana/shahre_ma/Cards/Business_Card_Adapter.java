@@ -13,6 +13,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.MyBusiness.Discount;
@@ -40,7 +41,7 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
         this.context=context;
 
         net=new NetState(context);
-            DataBaseSqlite db = new DataBaseSqlite(context);
+            SelectDataBaseSqlite db = new SelectDataBaseSqlite(context);
 
             mItems = new ArrayList<Business_Card_Items>();
 

@@ -6,7 +6,9 @@ import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.ariana.shahre_ma.Date.DateTime;
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
@@ -150,12 +152,13 @@ public class HTTPGetNotificationJson extends AsyncTask<String,Void,Integer> {
         Log.i("result", String.valueOf(result));
         if (result == 1){
             try {
-               DataBaseSqlite db = new DataBaseSqlite(context);
-                db.delete_Notification();
+                AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+                DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
+                ddb.delete_Notification();
                 if (len > 0) {
                     for (int i = 0; i < len; i++)
                     {
-                          db.Add_Notification(Id[i], OpinionType[i], erja[i], ExecutionTime[i], Description[i], ExpirationDate[i], City[i], CityId[i], Subset[i], SubsetId[i],title[i]);
+                          adb.Add_Notification(Id[i], OpinionType[i], erja[i], ExecutionTime[i], Description[i], ExpirationDate[i], City[i], CityId[i], Subset[i], SubsetId[i],title[i]);
                     }
 
 

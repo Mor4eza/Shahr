@@ -28,9 +28,13 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.Date.DateTime;
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.MessageDialog;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessImageJson;
@@ -84,7 +88,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
     Integer month;
     String date;
     Integer year;
-
+    MessageDialog messageDialog=new MessageDialog(this);
     public static CircularProgressButton save_edit;
 
 
@@ -147,9 +151,9 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
     {
 
        try {
-            DataBaseSqlite db = new DataBaseSqlite(this);
+           SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(this);
             Log.i("id", String.valueOf(fc.GetBusiness_Id()));
-            Cursor rows = db.select_AllBusinessId(fc.GetBusiness_Id());
+            Cursor rows = sdb.select_AllBusinessId(fc.GetBusiness_Id());
             rows.moveToFirst();
 
             Market_name.setText(rows.getString(1));//Market
@@ -163,7 +167,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
             Market_city.setText(query.getCityName(rows.getInt(22)));//City Name
             Market_subset.setText(query.getsubsetName(rows.getInt(9)));//Subset Name
 
-            Cursor rows2 = db.select_AreaName(rows.getInt(20));
+            Cursor rows2 = sdb.select_AreaName(rows.getInt(20));
             rows2.moveToFirst();
             Market_area.setText(rows2.getString(0));
 
@@ -171,7 +175,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
                 Log.i("CounterFor", String.valueOf(rows.getInt((12) + (i))));
                 if (rows.getInt((12) + (i)) > 0) {
 
-                    Cursor rows3 = db.select_FieldActivityName(rows.getInt((12) + (i)));
+                    Cursor rows3 = sdb.select_FieldActivityName(rows.getInt((12) + (i)));
                     rows3.moveToFirst();
 
                     Market_field.setText(Market_field.getText().toString() + rows3.getString(0) + ", ");
@@ -189,7 +193,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
         try {
 
             String str = "";
-            DataBaseSqlite db = new DataBaseSqlite(this);
+            SelectDataBaseSqlite db = new SelectDataBaseSqlite(this);
             SqliteTOjson json = new SqliteTOjson(this);
 
             String strmulti = Market_field.getText().toString();
@@ -218,139 +222,38 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
 
 
             if (Market_name.getText().toString().trim().equals("")) {
-                AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
-                alertDialog.setTitle("هشدار");
-                alertDialog.setMessage("نام فروشگاه را وارد کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Write your code here to execute after dialog closed
-                        // Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
-                        Market_name.requestFocus();
-                    }
-                });
-
-                // Showing Alert Message
-                alertDialog.show();
+                Market_name.requestFocus();
+                Market_name.setError("نام فروشگاه را وارد کنید");
 
             } else if (Market_tell.getText().length() == 0) {
-                AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
-                alertDialog.setTitle("هشدار");
-                alertDialog.setMessage("شماره تلفن را وارد کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        Market_tell.requestFocus();
-                    }
-                });
-
-                // Showing Alert Message
-                alertDialog.show();
-
+                Market_tell.requestFocus();
+                Market_tell.setError("تلقن را وارد کنید");
             } else if (Market_owner.getText().length() == 0) {
-                AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
-                alertDialog.setTitle("هشدار");
-                alertDialog.setMessage("نام مدیر فروشگاه را وارد کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        Market_owner.requestFocus();
-                    }
-                });
-
-                // Showing Alert Message
-                alertDialog.show();
+                Market_owner.requestFocus();
+                Market_owner.setError("نام مدیر فروشگاه را وارد کنید");
 
             } else if (Market_address.getText().length() == 0) {
-                AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
-                alertDialog.setTitle("هشدار ");
-                alertDialog.setMessage("آدرس را وارد کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        Market_address.requestFocus();
-
-                    }
-                });
-                alertDialog.show();
+                Market_address.requestFocus();
+                Market_address.setError("آدرس را وارد کنید");
 
             } else if (query.getAreaID(Market_area.getText().toString().trim()) < 0) {
-                AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
-                alertDialog.setTitle("هشدار ");
-                alertDialog.setMessage("منطقه خود را انتخاب کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        Market_area.requestFocus();
-                    }
-                });
-
-                // Showing Alert Message
-                alertDialog.show();
+                Market_area.requestFocus();
+                Market_area.setError("نام منطقه را وارد کنید");
 
             } else if (query.getsubsetID(Market_subset.getText().toString().trim()) < 0) {
-                AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
-                alertDialog.setTitle("هشدار ");
-                alertDialog.setMessage("زیر گروه را انتخاب کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        Market_subset.requestFocus();
-                    }
-                });
+                Market_subset.requestFocus();
+                Market_subset.setError("نام منطقه را وارد کنید");
 
-                // Showing Alert Message
-                alertDialog.show();
-
-            } else if (Market_field.length() == 0) {
-                AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
-                alertDialog.setTitle("هشدار ");
-                alertDialog.setMessage("زمینه فعالیت خود را وارد کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Write your code here to execute after dialog closed
-                        // Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
-                        Market_field.requestFocus();
-                    }
-                });
-
-                // Showing Alert Message
-                alertDialog.show();
+            } else if (Market_field.equals("") || Market_field.equals("null")) {
+                Market_field.setError("زمینه فعالیت خود را وارد کنید");
+                Market_field.requestFocus();
 
             } else if (fc.GetLatitude_Business() == 0 || fc.GetLatitude_Business() == 0.0 || fc.GetLatitude_Business().equals(null)) {
-                AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
-                alertDialog.setTitle("هشدار ");
-                alertDialog.setMessage("چی پی اس مقداری ندارد");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-
-                // Showing Alert Message
-                alertDialog.show();
-
+                messageDialog.ShowMessage("هشدار", "موقیعت کسب و کار خود را روی نقشه انتخاب کنید", "باشه", "false");
             } else if (fc.GetLongtiude_Business().equals(null) || fc.GetLongtiude_Business() == 0 || fc.GetLongtiude_Business() == 0.0) {
-                AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
-                alertDialog.setTitle("هشدار ");
-                alertDialog.setMessage("موقیعت خود را انتخاب کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-
-                // Showing Alert Message
-                alertDialog.show();
+                messageDialog.ShowMessage("هشدار", "موقیعت کسب و کار خود را روی نقشه انتخاب کنید", "باشه", "false");
             } else if (net.checkInternetConnection() == false) {
-                AlertDialog alertDialog = new AlertDialog.Builder(Edit_business.this).create();
-                alertDialog.setTitle("هشدار ");
-                alertDialog.setMessage("اینترنت قطع می باشد");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-
-                // Showing Alert Message
-                alertDialog.show();
-
+                messageDialog.ShowMessage("هشدار", "اینترنت قطع می باشد", "باشه", "false");
             } else {
                 save_edit.setIndeterminateProgressMode(true);
                 save_edit.setProgress(50);
@@ -391,7 +294,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
 
     public List<String> getId2() {
 
-        DataBaseSqlite db=new DataBaseSqlite(this);
+        SelectDataBaseSqlite db=new SelectDataBaseSqlite(this);
         List<String> studentList = new ArrayList<String>();
         Cursor allrows=db.select_FieldActivity();
         if (allrows.moveToFirst()) {
@@ -424,7 +327,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
 
     public List<String> getId1() {
 
-       DataBaseSqlite db=new DataBaseSqlite(this);
+        SelectDataBaseSqlite db=new SelectDataBaseSqlite(this);
         List<String> studentList = new ArrayList<String>();
         Cursor allrows  =db.select_Subset();
         if (allrows.moveToFirst()) {
@@ -475,7 +378,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
 
     public List<String> getId(Integer cityid) {
 
-        DataBaseSqlite db=new DataBaseSqlite(this);
+        SelectDataBaseSqlite db=new SelectDataBaseSqlite(this);
         List<String> studentList = new ArrayList<String>();
         Cursor allrows  = db.select_Area(cityid);
         if (allrows.moveToFirst()) {
@@ -505,7 +408,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
     }
     public List<String> getId3() {
 
-        DataBaseSqlite db=new DataBaseSqlite(this);
+        SelectDataBaseSqlite db=new SelectDataBaseSqlite(this);
         List<String> studentList = new ArrayList<String>();
         Cursor allrows  = db.select_AllCity();
         if (allrows.moveToFirst()) {
@@ -732,7 +635,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
         String imageName[]=new String[4];
         try
         {
-            DataBaseSqlite db=new DataBaseSqlite(this);
+            SelectDataBaseSqlite db=new SelectDataBaseSqlite(this);
             int i=0;
             Cursor rows=db.select_BusinessImage(fc.GetBusiness_Id());
             if(rows.moveToFirst())

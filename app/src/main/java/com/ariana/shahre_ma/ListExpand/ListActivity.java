@@ -11,6 +11,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.R;
 
 import java.util.ArrayList;
@@ -74,7 +75,7 @@ public class ListActivity extends ActionBarActivity implements
 
 
         try {
-            DataBaseSqlite db=new DataBaseSqlite(this);
+            SelectDataBaseSqlite db=new SelectDataBaseSqlite(this);
             Cursor allrows_Collection =db.select_Collection();
             Cursor allrows_Subset =db.select_Subset();
 

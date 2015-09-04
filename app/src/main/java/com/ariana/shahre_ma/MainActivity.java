@@ -36,6 +36,7 @@ import com.ariana.shahre_ma.Bazarche.Bazarche;
 import com.ariana.shahre_ma.Bookmarks.BookMark;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.MyBusiness.My_Business;
 import com.ariana.shahre_ma.MyCity.My_city;
 import com.ariana.shahre_ma.MyInterest.My_Interest;
@@ -90,8 +91,7 @@ public class MainActivity extends ActionBarActivity {
     IntentFilter ii;
     TimeSetReceiver tsr;
     Toolbar toolbar;
-    DataBaseSqlite db;
-
+    SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(this);
 
 
     @Override
@@ -101,8 +101,7 @@ public class MainActivity extends ActionBarActivity {
 
         navigation();
         try {
-            DataBaseSqlite db = new DataBaseSqlite(this);
-            Cursor allrows = db.select_Member();
+            Cursor allrows = sdb.select_Member();
             allrows.moveToNext();
             if (allrows.getInt(0)==0)
             {
@@ -121,11 +120,8 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-         db=new DataBaseSqlite(this);
 
-
-
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
+         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         fab();
 
@@ -206,7 +202,7 @@ public class MainActivity extends ActionBarActivity {
         String imag[]=new String[3];
         Integer i=0;
 
-        Cursor rows=db.select_Advertisment();
+        Cursor rows=sdb.select_Advertisment();
 
         if(rows.moveToFirst())
         {

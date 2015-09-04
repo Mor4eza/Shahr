@@ -7,7 +7,9 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessImageJson;
 
@@ -111,11 +113,12 @@ public class HTTPDeleteBusinessImageURL extends AsyncTask<String, Void, Boolean>
      * @param result
      */
     protected void onPostExecute(Boolean result) {
-        DataBaseSqlite db = new DataBaseSqlite(context);
+        AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+        DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
 
         if(result==true)
         {
-            db.delete_BusinessImage(src,BusinessId);
+            ddb.delete_BusinessImage(src,BusinessId);
 
             pd.dismiss();
 

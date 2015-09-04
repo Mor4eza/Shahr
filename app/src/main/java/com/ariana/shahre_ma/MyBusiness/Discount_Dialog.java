@@ -16,7 +16,10 @@ import android.widget.EditText;
 import com.appyvet.rangebar.RangeBar;
 import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.Date.DateTime;
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
@@ -283,9 +286,9 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
             tv_desc.setText("");
             tv_date.setText("");
 
-            DataBaseSqlite db = new DataBaseSqlite(getContext());
+            SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(getContext());
             Log.i("Id-DisCount", String.valueOf(fc.GetId_DisCount()));
-            Cursor rows = db.select_AllDisCountMember(fc.GetId_DisCount());
+            Cursor rows = sdb.select_AllDisCountMember(fc.GetId_DisCount());
             rows.moveToFirst();
             Log.i("Exception", rows.getString(1));
             Log.i("Exception", rows.getString(5));

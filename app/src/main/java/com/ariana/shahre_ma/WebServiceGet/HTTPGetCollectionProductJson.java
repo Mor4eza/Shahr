@@ -7,7 +7,9 @@ import android.os.AsyncTask;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldDataBase;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
@@ -79,11 +81,12 @@ public class HTTPGetCollectionProductJson extends AsyncTask<String,Void, Integer
 
                 try {
                     if(len>0) {
-                        DataBaseSqlite db = new DataBaseSqlite(context);
-                        db.delete_Collection_Product();
+                        AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+                        DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
+                        ddb.delete_Collection_Product();
 
                         for (int i = 0; i < len; i++) {
-                            db.Add_collection_Product(Id[i], collectionname[i]);
+                            adb.Add_collection_Product(Id[i], collectionname[i]);
 
                         }
                     }

@@ -9,6 +9,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetAreaJosn;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
@@ -30,8 +31,8 @@ public class UpdateActivity extends ActionBarActivity {
 
         try {
             tv_last = (TextView) findViewById(R.id.tv_lastUpdate);
-            DataBaseSqlite db = new DataBaseSqlite(this);
-            Cursor rows = db.select_Update();
+            SelectDataBaseSqlite sdb = new SelectDataBaseSqlite(this);
+            Cursor rows = sdb.select_Update();
             rows.moveToFirst();
             tv_last.setText(rows.getString(1));
         }

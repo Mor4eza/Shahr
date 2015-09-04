@@ -27,6 +27,7 @@ import com.androidmapsextensions.Marker;
 import com.androidmapsextensions.MarkerOptions;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
@@ -138,8 +139,8 @@ public class NearMeActivity extends ActionBarActivity {
     }
 
     private void setUpMap() {
-            DataBaseSqlite db = new DataBaseSqlite(this);
-            Cursor rows = db.select_BusinessSearchNearMe(curLat,curLong,0.01);
+        SelectDataBaseSqlite sdb = new SelectDataBaseSqlite(this);
+            Cursor rows = sdb.select_BusinessSearchNearMe(curLat,curLong,0.01);
             Log.i("Count", String.valueOf(rows.getCount()));
             if (rows.moveToFirst()) {
                 do {
@@ -252,11 +253,12 @@ public class NearMeActivity extends ActionBarActivity {
 
                     NetState ns=new NetState(getApplicationContext());
                     if(!ns.checkInternetConnection()) {
-                        DataBaseSqlite db = new DataBaseSqlite(getApplicationContext());
-                        Cursor rows = db.select_BusinessSearchNearMe(location.getLatitude(),location.getLongitude(),0.002);
+                        SelectDataBaseSqlite sdb = new SelectDataBaseSqlite(getApplicationContext());
+                        Cursor rows = sdb.select_BusinessSearchNearMe(location.getLatitude(),location.getLongitude(),0.002);
                         Log.i("Count",String.valueOf(rows.getCount()));
                         if (rows.moveToFirst()) {
-                        do {
+                        do
+                        {
                             mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(rows.getString(15)), Double.valueOf(rows.getString(16)))).title("\u200e" + rows.getString(1)));
                             len++;
                         } while (rows.moveToNext());

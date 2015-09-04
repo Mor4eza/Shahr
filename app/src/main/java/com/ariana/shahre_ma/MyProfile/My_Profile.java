@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.MainActivity;
 import com.ariana.shahre_ma.R;
 
@@ -56,8 +57,8 @@ public class My_Profile extends Activity {
         tv_member_name=(TextView)findViewById(R.id.tv_member_name);
         try {
 
-            DataBaseSqlite db = new DataBaseSqlite(this);
-            Cursor allrows = db.select_Member();
+            SelectDataBaseSqlite sdb = new SelectDataBaseSqlite(this);
+            Cursor allrows = sdb.select_Member();
             allrows.moveToFirst();
             tv_member_name.setText(allrows.getString(1));
             tv_user_email.setText(allrows.getString(2));

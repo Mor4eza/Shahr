@@ -27,7 +27,7 @@ public class Query {
         String Result = "";
 
         try {
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            SelectDataBaseSqlite dbs = new SelectDataBaseSqlite(context);
             Cursor allrows = dbs.select_SubsetName(id);
             allrows.moveToFirst();
             Result = allrows.getString(0);
@@ -47,7 +47,7 @@ public class Query {
         Integer Result=0;
         try {
 
-            DataBaseSqlite db=new DataBaseSqlite(context);
+            SelectDataBaseSqlite db=new SelectDataBaseSqlite(context);
             Cursor allrows = db.select_AreaId(Name);
             allrows.moveToFirst();
             Result = allrows.getInt(0);
@@ -72,7 +72,7 @@ public class Query {
         String Result = "";
 
         try {
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            SelectDataBaseSqlite dbs = new SelectDataBaseSqlite(context);
             Cursor allrows = dbs.select_CityName(id);
             allrows.moveToFirst();
             Result = allrows.getString(0);
@@ -92,7 +92,7 @@ public class Query {
         String Result = "";
 
         try {
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            SelectDataBaseSqlite dbs = new SelectDataBaseSqlite(context);
             Cursor allrows = dbs.select_FieldActivityName(id);
             allrows.moveToFirst();
             Result = allrows.getString(0);
@@ -112,7 +112,7 @@ public class Query {
         Integer Result = 0;
 
         try {
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            SelectDataBaseSqlite dbs = new SelectDataBaseSqlite(context);
             Cursor allrows = dbs.select_FieldActivityId(nameactivity);
             allrows.moveToFirst();
             Result = allrows.getInt(0);
@@ -134,7 +134,7 @@ public class Query {
         Integer id=0;
         try
         {
-            DataBaseSqlite db=new DataBaseSqlite(context);
+            SelectDataBaseSqlite db=new SelectDataBaseSqlite(context);
             Cursor allrows=db.select_DisCountId(businessid);
             allrows.moveToFirst();
             id=allrows.getInt(0);
@@ -156,7 +156,7 @@ public class Query {
         Integer Result = 0;
 
         try {
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            SelectDataBaseSqlite dbs = new SelectDataBaseSqlite(context);
             Cursor allrows = dbs.select_SubsetId(subsetname);
             allrows.moveToFirst();
             Result = allrows.getInt(0);
@@ -176,7 +176,7 @@ public class Query {
         Integer Result = 0;
 
         try {
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            SelectDataBaseSqlite dbs = new SelectDataBaseSqlite(context);
             Cursor allrows = dbs.select_AdvanceSubsetId(subsetname);
             allrows.moveToFirst();
             Result = allrows.getInt(0);
@@ -197,7 +197,7 @@ public class Query {
         Integer Result = 0;
 
         try {
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            SelectDataBaseSqlite dbs = new SelectDataBaseSqlite(context);
             Cursor allrows = dbs.select_SubsetProductId(subsetname);
             allrows.moveToFirst();
             Result = allrows.getInt(0);
@@ -218,7 +218,7 @@ public class Query {
         Integer Result = 0;
 
         try {
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            SelectDataBaseSqlite dbs = new SelectDataBaseSqlite(context);
             Cursor allrows = dbs.select_CityId(cityName);
             allrows.moveToFirst();
             Result = allrows.getInt(0);
@@ -236,7 +236,7 @@ public class Query {
     public Integer getCountSubset() {
         Integer Result = 0;
         try {
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            SelectDataBaseSqlite dbs = new SelectDataBaseSqlite(context);
             Cursor allrows = dbs.select_CountSubset();
             allrows.moveToFirst();
             Result = allrows.getInt(0);
@@ -254,7 +254,7 @@ public class Query {
     public Integer getCountCollection() {
         Integer Result = 0;
         try {
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            SelectDataBaseSqlite dbs = new SelectDataBaseSqlite(context);
             Cursor allrows = dbs.select_CountCollection();
             allrows.moveToFirst();
             Result = allrows.getInt(0);
@@ -273,7 +273,7 @@ public class Query {
         Integer Result = 0;
 
         try {
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            SelectDataBaseSqlite dbs = new SelectDataBaseSqlite(context);
             Cursor allrows = dbs.select_CountBusiness_SubsetId(subsetid);
             allrows.moveToFirst();
             Result = allrows.getInt(0);
@@ -289,7 +289,7 @@ public class Query {
         String Result = "";
 
         try {
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            SelectDataBaseSqlite dbs = new SelectDataBaseSqlite(context);
             Cursor allrows = dbs.select_business_NameMarket(businessid);
             allrows.moveToFirst();
             Result = allrows.getString(0);
@@ -307,7 +307,7 @@ public class Query {
         Integer Result =0;
 
         try {
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            SelectDataBaseSqlite dbs = new SelectDataBaseSqlite(context);
             Cursor allrows = dbs.select_Member();
             allrows.moveToFirst();
             Result = allrows.getInt(0);
@@ -329,7 +329,7 @@ public class Query {
         Integer Result =0;
 
         try {
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            SelectDataBaseSqlite dbs = new SelectDataBaseSqlite(context);
             Cursor allrows = dbs.select_ShowNotificationBusinessId(id);
             allrows.moveToFirst();
             Result = allrows.getInt(0);
@@ -348,7 +348,7 @@ public class Query {
         Integer Result =0;
 
         try {
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            SelectDataBaseSqlite dbs = new SelectDataBaseSqlite(context);
             Cursor allrows = dbs.select_bookmarkId(businessid);
             allrows.moveToFirst();
             Result = allrows.getInt(0);
@@ -364,7 +364,7 @@ public class Query {
         Integer Result =0;
 
         try {
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            SelectDataBaseSqlite dbs = new SelectDataBaseSqlite(context);
             Cursor allrows = dbs.select_opinion();
             allrows.moveToFirst();
             Result = allrows.getInt(0);
@@ -380,7 +380,7 @@ public class Query {
         Integer Result =0;
 
         try {
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            SelectDataBaseSqlite dbs = new SelectDataBaseSqlite(context);
             Cursor allrows = dbs.select_CountBusiness_SubsetId(14);
             allrows.moveToFirst();
             Result = allrows.getInt(0);
@@ -426,7 +426,7 @@ public class Query {
             if (time == "")
             {
                 Toast.makeText(getApplicationContext(), "Time: " + time, Toast.LENGTH_LONG).show();
-                DataBaseSqlite dbs = new DataBaseSqlite(Jobs.this);
+                SelectDataBaseSqlite dbs = new SelectDataBaseSqlite(Jobs.this);
                 dbs.Add_UpdateTime(fc.GetTableNameUpdateTime(), dt.Hours(), dt.Now());
 
                 httpbusin = new HTTPGetBusinessJson(Jobs.this);
@@ -437,7 +437,7 @@ public class Query {
             else
             {
                 if (Integer.parseInt(dt.Hours()) >= Integer.parseInt(time + 3) || date != dt.Now()) {
-                    DataBaseSqlite dbs = new DataBaseSqlite(Jobs.this);
+                    SelectDataBaseSqlite dbs = new SelectDataBaseSqlite(Jobs.this);
                     dbs.delete_UpdateTime(fc.GetTableNameUpdateTime());
                     dbs.Add_UpdateTime(fc.GetTableNameUpdateTime(), dt.Hours(), dt.Now());
 

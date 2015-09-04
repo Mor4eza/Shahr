@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
 import java.util.ArrayList;
@@ -71,8 +72,8 @@ public class CityDialog extends Dialog {
 
     public void sp(){
 
-        DataBaseSqlite db=new DataBaseSqlite(getContext());
-        Cursor allrows=db.select_AllCity();
+        SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(getContext());
+        Cursor allrows=sdb.select_AllCity();
 
         Sp_City = (Spinner) findViewById(R.id.select_city_dialog);
         Sp_City.setPrompt("انتخاب شهر:");

@@ -17,6 +17,7 @@ import com.androidmapsextensions.MarkerOptions;
 import com.androidmapsextensions.SupportMapFragment;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.Settings.KeySettings;
@@ -42,6 +43,7 @@ public class MapsActivity extends ActionBarActivity {
     FieldDataBusiness fdb=new FieldDataBusiness();
     Integer cityid=0;
 
+    SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,8 +94,8 @@ public class MapsActivity extends ActionBarActivity {
 
 
        if(fdb.GetMarketBusiness().size()==0) {
-            DataBaseSqlite mydb = new DataBaseSqlite(this);
-            Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb(), cityid);
+
+            Cursor allrows = sdb.select_AllBusiness(fc.GetBusiness_SubsetIdb(), cityid);
             Integer l = 0;
             if (allrows.moveToFirst()) {
 
@@ -184,8 +186,8 @@ public class MapsActivity extends ActionBarActivity {
            len=fc.GetCount_Business();
            id=new Integer[fc.GetCount_Business()];
 
-        DataBaseSqlite mydb = new DataBaseSqlite(this);
-        Cursor allrows = mydb.select_AllBusiness(fc.GetBusiness_SubsetIdb(),cityid);
+
+        Cursor allrows = sdb.select_AllBusiness(fc.GetBusiness_SubsetIdb(),cityid);
 
 
 

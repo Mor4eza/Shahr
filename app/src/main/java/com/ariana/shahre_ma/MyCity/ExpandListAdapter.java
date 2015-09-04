@@ -12,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 
@@ -65,11 +66,11 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
         mContext = context;
 
 
-        DataBaseSqlite db=new DataBaseSqlite(mContext);
+        SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(mContext);
 
-        Cursor collection_count=db.select_Collection();
+        Cursor collection_count=sdb.select_Collection();
 
-        Cursor subset_count=db.select_Subset();
+        Cursor subset_count=sdb.select_Subset();
 
         Integer ij=0;
 

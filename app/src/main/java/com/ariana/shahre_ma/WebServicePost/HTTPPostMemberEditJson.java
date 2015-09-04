@@ -8,7 +8,9 @@ import android.os.AsyncTask;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 
 import org.apache.http.HttpEntity;
@@ -133,13 +135,14 @@ public class HTTPPostMemberEditJson extends AsyncTask<String, Long, Integer>
 
         if(result==1) {
             Log.i("onPostExecute", "onPostExecute");
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+            DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
             Integer ID = Integer.parseInt(GetResponse());
-            dbs.delete_Member();
+            ddb.delete_Member();
             if (ID >= 0) {
                 Log.i("fc.GetMember_Name()", fc.GetMember_Name());
 
-                dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
+                adb.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
                 pd.dismiss();
 
                 Intent intent = new Intent("MyProfile");

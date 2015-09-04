@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.ContactsContract;
 import android.util.Log;
 
 /**
@@ -20,6 +21,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     InstructionsSqlite instructionsSqlite=new InstructionsSqlite();
 
 Context context;
+
 
 
     public  DataBaseSqlite(Context context) {

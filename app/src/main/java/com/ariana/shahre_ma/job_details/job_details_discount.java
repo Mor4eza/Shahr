@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
@@ -95,7 +96,7 @@ public class job_details_discount extends FragmentActivity {
 
 
             try {
-                DataBaseSqlite db = new DataBaseSqlite(getActivity());
+                SelectDataBaseSqlite db = new SelectDataBaseSqlite(getActivity());
                 Cursor cursor = db.select_DisCount(fc.GetBusiness_Id());
 //                Log.i("IDdiscount",String.valueOf(cursor.getInt(0)));
                 if(cursor.getCount()<=0)

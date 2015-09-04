@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
@@ -86,8 +87,8 @@ public class My_city extends ActionBarActivity{
 
     void SpinnerSetUp(){
 
-        DataBaseSqlite db=new DataBaseSqlite(this);
-        Cursor allrows=db.select_AllCity();
+        SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(this);
+        Cursor allrows=sdb.select_AllCity();
 
 
         Sp_City.setPrompt("انتخاب شهر:");
@@ -114,7 +115,6 @@ public class My_city extends ActionBarActivity{
             if(ns.checkInternetConnection()) {
                 Integer Result = 0;
                 Integer i = 0;
-                DataBaseSqlite db = new DataBaseSqlite(this);
                 List<String> listurl = new ArrayList<String>();
                 String url[] = new String[fc.GetNameSubset().size()];
                 for (String name : fc.GetNameSubset()) {

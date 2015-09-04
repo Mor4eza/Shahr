@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MainActivity;
 import com.ariana.shahre_ma.MyProfile.Log_In;
@@ -104,7 +106,8 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
         Log.i("resultLogin", String.valueOf(result));
         if(result==1)
         {
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+            DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
             try {
                 Log.i("JsonLoginMember",mesage);
                 try
@@ -146,7 +149,7 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
                 if (ID > 0)
                 {
                     Log.i("ID", String.valueOf(ID));
-                    dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
+                    adb.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
 
                     Log_In.btn.setProgress(100);
 

@@ -4,7 +4,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 
 import org.apache.http.HttpEntity;
@@ -118,11 +120,10 @@ public class HTTPSendBookMarkURL extends AsyncTask<String, Void, Boolean> {
      * @param result
      */
     protected void onPostExecute(Boolean result) {
-        DataBaseSqlite dbs = new DataBaseSqlite(context);
-
+        AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
         if(result==true) {
 
-                dbs.Add_bookmark(businessid, memberid);
+                adb.Add_bookmark(businessid, memberid);
         }
         else {
 

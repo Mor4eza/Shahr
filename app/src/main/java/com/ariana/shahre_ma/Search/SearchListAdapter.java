@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.R;
@@ -31,13 +32,13 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
     FieldClass fc=new FieldClass();
     FieldDataBusiness fdb=new FieldDataBusiness();
     Context context;
-    DataBaseSqlite db;
+    SelectDataBaseSqlite sdb;
     Query query;
 
     public SearchListAdapter(Context context) {
         super();
         this.context=context;
-         db=new DataBaseSqlite(context);
+         sdb=new SelectDataBaseSqlite(context);
          query=new Query(context);
 
 

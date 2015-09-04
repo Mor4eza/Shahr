@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceSend.HTTPSendBookMarkURL;
@@ -44,7 +45,7 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
         setContentView(R.layout.activity_job_details);
         setTitle(fc.GetMarket_Business());
         query=new Query(this);
-        DataBaseSqlite db=new DataBaseSqlite(this);
+        SelectDataBaseSqlite db=new SelectDataBaseSqlite(this);
         if(fc.GetShowNotification())
         {
            db.Add_ShowNotification(fc.GetShowNotificationId(),fc.GetBusiness_Id(),true);

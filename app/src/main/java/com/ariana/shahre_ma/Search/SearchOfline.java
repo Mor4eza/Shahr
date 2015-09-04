@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.MessageDialog;
@@ -29,7 +30,7 @@ public class SearchOfline
 {
     Context context;
     NetState ns;
-    DataBaseSqlite db;
+    SelectDataBaseSqlite sdb;
     Query query ;
     KeySettings setting ;
     FieldClass fc=new FieldClass();
@@ -46,7 +47,7 @@ public class SearchOfline
         this.context=context;
         ns=new NetState(context);
         query=new Query(context);
-        db=new DataBaseSqlite(context);
+        sdb=new SelectDataBaseSqlite(context);
         setting=new KeySettings(context);
 
     }
@@ -70,7 +71,7 @@ public class SearchOfline
         this.context=context;
         setting= new KeySettings(context);
         query = new Query(context);
-        db = new DataBaseSqlite(context);
+        sdb = new SelectDataBaseSqlite(context);
         ns = new NetState(context);
     }
 
@@ -116,7 +117,7 @@ public class SearchOfline
 
              }
 
-             rows_Business = db.select_BusinessSearch(textSearch.toString(), cityid);
+             rows_Business = sdb.select_BusinessSearch(textSearch.toString(), cityid);
              Log.i("BusinessgetCount", String.valueOf(rows_Business.getCount()));
              if (rows_Business.getCount() > 0) {
                  Log.i("Businessget", "on");
@@ -157,17 +158,17 @@ public class SearchOfline
                  context.startActivity(intent);
              } else {
 
-                 rows_Collection = db.select_Collection(selectedWord[0]);
+                 rows_Collection = sdb.select_Collection(selectedWord[0]);
                  Log.i("CollectiongetCount", String.valueOf(rows_Collection.getCount()));
                  if (rows_Collection.getCount() > 0) {
                      Log.i("Collection", "on");
                      rows_Collection.moveToFirst();
                      //SubsetId Search
-                     rows_Subset = db.select_SubsetId(rows_Collection.getInt(0));
+                     rows_Subset = sdb.select_SubsetId(rows_Collection.getInt(0));
                      Log.i("SubsetgetCount", String.valueOf(rows_Subset.getCount()));
                      rows_Subset.moveToFirst();
 
-                     rows_Business = db.select_BusinessSearch(selectedWord[0], selectedWord[1], selectedWord[2], selectedWord[3], selectedWord[4], rows_Subset.getInt(0), cityid);
+                     rows_Business = sdb.select_BusinessSearch(selectedWord[0], selectedWord[1], selectedWord[2], selectedWord[3], selectedWord[4], rows_Subset.getInt(0), cityid);
                      if (rows_Business.moveToFirst()) {
                          do {
                              selectAddress.add(rows_Business.getString(8));
@@ -202,13 +203,13 @@ public class SearchOfline
                  }
                  else
                  {
-                     rows_Subset = db.select_SubsetId(selectedWord[0]);
+                     rows_Subset = sdb.select_SubsetId(selectedWord[0]);
                      Log.i("SubsetgetCount", String.valueOf(rows_Subset.getCount()));
                      if (rows_Subset.getCount() > 0) {
                          Log.i("Subsetget", "on");
                          rows_Subset.moveToFirst();
 
-                         rows_Business = db.select_BusinessSearch(selectedWord[0], selectedWord[2], selectedWord[2], selectedWord[3], selectedWord[4], rows_Subset.getInt(0), cityid);
+                         rows_Business = sdb.select_BusinessSearch(selectedWord[0], selectedWord[2], selectedWord[2], selectedWord[3], selectedWord[4], rows_Subset.getInt(0), cityid);
                          if (rows_Business.moveToFirst()) {
                              do {
                                  selectAddress.add(rows_Business.getString(8));
@@ -278,7 +279,7 @@ public class SearchOfline
         else
         {
 
-            rows_Business = db.select_BusinessAdvanceSearch(Market, address, cityId, query.getsubsetID(subset));
+            rows_Business = sdb.select_BusinessAdvanceSearch(Market, address, cityId, query.getsubsetID(subset));
             Log.i("BusinessgetCount", String.valueOf(rows_Business.getCount()));
             if (rows_Business.getCount() > 0) {
                 Log.i("Businessget", "on");
@@ -341,7 +342,7 @@ public class SearchOfline
         else
         {
 
-            rows_Business = db.select_BusinessFieldAdvanceSearch(Market, address, cityId, query.getFieldActivityId(subset));
+            rows_Business = sdb.select_BusinessFieldAdvanceSearch(Market, address, cityId, query.getFieldActivityId(subset));
             Log.i("BusinessgetCount", String.valueOf(rows_Business.getCount()));
             if (rows_Business.getCount() > 0) {
                 Log.i("Businessget", "on");

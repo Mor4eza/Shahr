@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MyCity.TotalListener;
 import com.ariana.shahre_ma.R;
@@ -58,11 +59,11 @@ public class Interest_Adapter extends BaseExpandableListAdapter {
         mContext = context;
 
 
-        DataBaseSqlite db=new DataBaseSqlite(mContext);
+        SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(mContext);
 
-        Cursor collection_count=db.select_Collection();
+        Cursor collection_count=sdb.select_Collection();
 
-        Cursor subset_count=db.select_Subset();
+        Cursor subset_count=sdb.select_Subset();
 
         Integer ij=0;
 
@@ -295,21 +296,6 @@ public class Interest_Adapter extends BaseExpandableListAdapter {
      *
      * @param groupPosition : group position of list
      */
-/*    private void showTotal(int groupPosition) {
-        //Below code is to get the sum of checked prices
-        int sum = 0;
-        for (int j = 0; j < selectedChildCheckBoxStates.size(); j++) {
-            Log.d("TAG", "J = " + j);
-            for (int i = 0; i < selectedChildCheckBoxStates.get(groupPosition).size(); i++) {
-                Log.d("TAG", "I = " + i);
-
-                if (selectedChildCheckBoxStates.get(j).get(i)) {
-                  //  sum += Integer.parseInt(mGroupList.get(j).get(i));
-                }
-            }
-        }
-        mListener.onTotalChanged(sum);
-    }*/
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {

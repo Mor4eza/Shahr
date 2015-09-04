@@ -5,7 +5,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -79,10 +81,10 @@ public class HTTPGETLikeJson  extends AsyncTask<String, String, String>
     protected void onPostExecute() {
         try {
 
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
             for (int i = 0; i <len; i++)
             {
-                dbs.Add_Like(Id[i],like[i], memberid[i], opinionid[i]);
+                adb.Add_Like(Id[i],like[i], memberid[i], opinionid[i]);
 
             }
             pd.dismiss();

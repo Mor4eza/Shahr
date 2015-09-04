@@ -9,6 +9,8 @@ import android.util.Log;
 import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Notification.Notify;
 import com.ariana.shahre_ma.Settings.KeySettings;
@@ -25,14 +27,15 @@ public class TimeSetReceiver  extends BroadcastReceiver
     @Override
     public void onReceive(Context context, Intent intent) {
         KeySettings setting=new KeySettings(context);
-        DataBaseSqlite db=new DataBaseSqlite(context);
+        SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(context);
+        DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
         Log.d("AM",setting.getAMtime() );
         Log.d("Time",dt.Time() );
 
         if(dt.Time().equals(setting.getAMtime()) )
         {
 
-            Cursor rows=db.select_AllNotificaton();
+            Cursor rows=sdb.select_AllNotificaton();
             if(rows.moveToFirst())
             {
                 do
@@ -40,7 +43,7 @@ public class TimeSetReceiver  extends BroadcastReceiver
                     Log.i("ExpirationDate",rows.getString(5));
                     if(rows.getString(5).equals(dt.Now()))
                     {
-                        db.delete_Notification(rows.getInt(0));
+                        ddb.delete_Notification(rows.getInt(0));
                     }
                 }while (rows.moveToNext());
             }
@@ -64,7 +67,7 @@ public class TimeSetReceiver  extends BroadcastReceiver
         else if(setting.getPMtime().equals(dt.Time()))
         {
 
-            Cursor rows=db.select_AllNotificaton();
+            Cursor rows=sdb.select_AllNotificaton();
             if(rows.moveToFirst())
             {
                 do
@@ -72,7 +75,7 @@ public class TimeSetReceiver  extends BroadcastReceiver
                     Log.i("ExpirationDate",rows.getString(5));
                     if(rows.getString(5).equals(dt.Now()))
                     {
-                        db.delete_Notification(rows.getInt(0));
+                        ddb.delete_Notification(rows.getInt(0));
                     }
                 }while (rows.moveToNext());
             }

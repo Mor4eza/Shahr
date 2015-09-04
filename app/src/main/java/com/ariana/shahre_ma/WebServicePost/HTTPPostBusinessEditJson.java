@@ -5,7 +5,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MyBusiness.Edit_business;
@@ -105,9 +107,9 @@ public class HTTPPostBusinessEditJson extends AsyncTask<String,Long,Integer>
 
         if(integer==1)
         {
-            DataBaseSqlite db=new DataBaseSqlite(context);
-
-            db.delete_BusinessId(fc.GetBusiness_Id());
+            AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+            DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
+            ddb.delete_BusinessId(fc.GetBusiness_Id());
 
             ((Activity)context).finish();
             Toast.makeText(context, "تغییرات شما پس از تایید اعمال میشود!", Toast.LENGTH_LONG).show();

@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.R;
 
 /**
@@ -37,8 +38,8 @@ public class Old_Password extends Dialog {
             @Override
             public void onClick(View v) {
 
-                DataBaseSqlite db=new DataBaseSqlite(context);
-                Cursor allrows=db.select_Member();
+                SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(context);
+                Cursor allrows=sdb.select_Member();
                 allrows.moveToFirst();
                 old_pass=allrows.getString(7);
 

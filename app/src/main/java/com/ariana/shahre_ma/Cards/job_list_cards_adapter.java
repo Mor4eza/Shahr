@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
@@ -55,7 +56,7 @@ private  static Context context;
         mItems = new ArrayList<Job_lists_card_item>();
 
 
-        DataBaseSqlite mydb = new DataBaseSqlite(context);
+        SelectDataBaseSqlite mydb = new SelectDataBaseSqlite(context);
         Integer cityid=0;
         cityid=query.getCityId(setting.getCityName());
 

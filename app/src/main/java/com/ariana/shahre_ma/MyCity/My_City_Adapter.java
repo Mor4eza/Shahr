@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.squareup.picasso.Picasso;
@@ -52,8 +53,8 @@ public class My_City_Adapter extends ArrayAdapter<My_City_Items> {
             @Override
             public void onClick(View v) {
 
-                DataBaseSqlite db = new DataBaseSqlite(context);
-                Cursor rows = db.select_Subset(itemsArrayList.get(position).GetId());
+                SelectDataBaseSqlite sdb = new SelectDataBaseSqlite(context);
+                Cursor rows = sdb.select_Subset(itemsArrayList.get(position).GetId());
                 if (rows.moveToFirst()) {
                     if (labelView.isChecked()) {
                         mCheckedState[position] = true;

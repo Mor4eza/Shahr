@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceSend.HTTPSendLikeURL;
 
@@ -47,7 +48,7 @@ Query query;
 
       try {
 
-          DataBaseSqlite mydb = new DataBaseSqlite(context);
+          SelectDataBaseSqlite mydb = new SelectDataBaseSqlite(context);
             Cursor allrows = mydb.select_opinion();
 
 

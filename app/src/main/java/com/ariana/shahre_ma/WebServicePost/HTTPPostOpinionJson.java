@@ -6,8 +6,10 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetOpinionJson;
 
@@ -134,10 +136,11 @@ public class HTTPPostOpinionJson extends AsyncTask<String, Void, Integer>
             /* Download complete. Lets update UI */
 
         if(result==1) {
-            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+            DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
             Integer ID = Integer.parseInt(GetResponse());
             if (ID >= 0) {
-                dbs.Add_opinion(ID, fc.GetOpinion_Description(), fc.GetOpinion_Date(), fc.GetOpinion_Erja(), fc.GetOpinion_CountLike(), fc.GetOpinion_CountDisLike(), fc.GetOpinion_MemberName());
+                adb.Add_opinion(ID, fc.GetOpinion_Description(), fc.GetOpinion_Date(), fc.GetOpinion_Erja(), fc.GetOpinion_CountLike(), fc.GetOpinion_CountDisLike(), fc.GetOpinion_MemberName());
 
 
                     HTTPGetOpinionJson httponion = new HTTPGetOpinionJson(context);

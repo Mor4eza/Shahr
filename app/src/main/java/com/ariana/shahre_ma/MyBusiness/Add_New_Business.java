@@ -16,9 +16,13 @@ import android.widget.EditText;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.Date.DateTime;
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.MessageDialog;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
@@ -64,7 +68,10 @@ public class Add_New_Business extends ActionBarActivity  {
     ToolTipRelativeLayout toolTipRelativeLayout;
     String str="";
 
-    DataBaseSqlite db=new DataBaseSqlite(this);
+    AddDataBaseSqlite adb=new AddDataBaseSqlite(this);
+    SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(this);
+    DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(this);
+    MessageDialog messageDialog=new MessageDialog(this);
     SqliteTOjson json=new SqliteTOjson(this);
     public static CircularProgressButton save_edit;
 
@@ -140,143 +147,38 @@ public class Add_New_Business extends ActionBarActivity  {
         try {
 
             if (Market_name.getText().toString().trim().equals("")) {
-                AlertDialog alertDialog = new AlertDialog.Builder(Add_New_Business.this).create();
-                alertDialog.setTitle("هشدار");
-                alertDialog.setMessage("نام فروشگاه را وارد کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Write your code here to execute after dialog closed
-                        // Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
                         Market_name.requestFocus();
-                    }
-                });
-
-                // Showing Alert Message
-                alertDialog.show();
+                        Market_name.setError("نام فروشگاه را وارد کنید");
 
             } else if (Market_tell.getText().length() == 0) {
-                AlertDialog alertDialog = new AlertDialog.Builder(Add_New_Business.this).create();
-                alertDialog.setTitle("هشدار");
-                alertDialog.setMessage("شماره تلفن را وارد کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Write your code here to execute after dialog closed
-                        // Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
                         Market_tell.requestFocus();
-                    }
-                });
-
-                // Showing Alert Message
-                alertDialog.show();
-
+                        Market_tell.setError("تلقن را وارد کنید");
             } else if (Market_owner.getText().length() == 0) {
-                AlertDialog alertDialog = new AlertDialog.Builder(Add_New_Business.this).create();
-                alertDialog.setTitle("هشدار");
-                alertDialog.setMessage("نام مدیر فروشگاه را وارد کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Write your code here to execute after dialog closed
-                        //  Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
                         Market_owner.requestFocus();
-                    }
-                });
-
-                // Showing Alert Message
-                alertDialog.show();
+                        Market_owner.setError("نام مدیر فروشگاه را وارد کنید");
 
             } else if (Market_address.getText().length() == 0) {
-                AlertDialog alertDialog = new AlertDialog.Builder(Add_New_Business.this).create();
-                alertDialog.setTitle("هشدار ");
-                alertDialog.setMessage("آدرس را وارد کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
                         Market_address.requestFocus();
-
-                    }
-                });
-
-
-                alertDialog.show();
+                       Market_address.setError("آدرس را وارد کنید");
 
             } else if (query.getAreaID(Market_area.getText().toString().trim()) < 0) {
-                AlertDialog alertDialog = new AlertDialog.Builder(Add_New_Business.this).create();
-                alertDialog.setTitle("هشدار ");
-                alertDialog.setMessage("منطقه خود را انتخاب کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
                         Market_area.requestFocus();
-                    }
-                });
-
-                // Showing Alert Message
-                alertDialog.show();
+                        Market_area.setError("نام منطقه را وارد کنید");
 
             } else if (query.getsubsetID(Market_subset.getText().toString().trim()) < 0) {
-                AlertDialog alertDialog = new AlertDialog.Builder(Add_New_Business.this).create();
-                alertDialog.setTitle("هشدار ");
-                alertDialog.setMessage("زیر گروه را انتخاب کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
                         Market_subset.requestFocus();
-                    }
-                });
-
-                // Showing Alert Message
-                alertDialog.show();
+                        Market_subset.setError("نام منطقه را وارد کنید");
 
             } else if (Market_field.equals("") || Market_field.equals("null")) {
-                AlertDialog alertDialog = new AlertDialog.Builder(Add_New_Business.this).create();
-                alertDialog.setTitle("هشدار ");
-                alertDialog.setMessage("زمینه فعالیت خود را وارد کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Write your code here to execute after dialog closed
-                        // Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
-                        Market_field.requestFocus();
-                    }
-                });
-
-                // Showing Alert Message
-                alertDialog.show();
+                Market_field.setError("زمینه فعالیت خود را وارد کنید");
+                Market_field.requestFocus();
 
             } else if (fc.GetLatitude_Business() == 0 || fc.GetLatitude_Business() == 0.0 || fc.GetLatitude_Business().equals(null)) {
-                AlertDialog alertDialog = new AlertDialog.Builder(Add_New_Business.this).create();
-                alertDialog.setTitle("هشدار ");
-                alertDialog.setMessage("چی پی اس مقداری ندارد");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-
-                // Showing Alert Message
-                alertDialog.show();
-
+             messageDialog.ShowMessage("هشدار","موقیعت کسب و کار خود را روی نقشه انتخاب کنید","باشه","false");
             } else if (fc.GetLongtiude_Business().equals(null) || fc.GetLongtiude_Business() == 0 || fc.GetLongtiude_Business() == 0.0) {
-                AlertDialog alertDialog = new AlertDialog.Builder(Add_New_Business.this).create();
-                alertDialog.setTitle("هشدار ");
-                alertDialog.setMessage("موقیعت خود را انتخاب کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-
-                // Showing Alert Message
-                alertDialog.show();
+                messageDialog.ShowMessage("هشدار","موقیعت کسب و کار خود را روی نقشه انتخاب کنید","باشه","false");
             } else if (net.checkInternetConnection() == false) {
-                AlertDialog alertDialog = new AlertDialog.Builder(Add_New_Business.this).create();
-                alertDialog.setTitle("هشدار ");
-                alertDialog.setMessage("اینترنت قطع می باشد");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                alertDialog.show();
-
+                messageDialog.ShowMessage("هشدار","اینترنت قطع می باشد","باشه","false");
             } else {
                 save_edit.setIndeterminateProgressMode(true);
                 save_edit.setProgress(50);
@@ -301,17 +203,7 @@ public class Add_New_Business extends ActionBarActivity  {
 
         }
         catch (Exception e){
-            AlertDialog alertDialog = new AlertDialog.Builder(Add_New_Business.this).create();
-            alertDialog.setTitle("هشدار ");
-            alertDialog.setMessage("ثبت نشد دوباره امتحان کنید");
-            alertDialog.setButton("باشه", new DialogInterface.OnClickListener()
-            {
-                public void onClick(DialogInterface dialog, int which)
-                {
-
-                }
-            });
-            alertDialog.show();
+            messageDialog.ShowMessage("هشدار", "ثبت نشد . دوباره امتحان کنید", "باشه", "false");
         }
     }
 
@@ -447,15 +339,7 @@ public class Add_New_Business extends ActionBarActivity  {
                 startActivity(i);
             } else {
                 int requestCode = 10;
-                AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-                alertDialog.setTitle("هشدار");
-                alertDialog.setMessage("نسخه Google Play Service  شما قدیمی می باشد. لطفا بروز رسانی کنید");
-                alertDialog.setButton("خب", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                alertDialog.show();
+                messageDialog.ShowMessage("هشدار", "نسخه Google Play Service  شما قدیمی می باشد. لطفا بروز رسانی کنید","باشه","false");
             }
 
         } catch (Exception e) {

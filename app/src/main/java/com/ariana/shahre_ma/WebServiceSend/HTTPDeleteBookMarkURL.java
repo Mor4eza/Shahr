@@ -8,7 +8,9 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MessageDialog;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessImageJson;
@@ -103,11 +105,12 @@ public class HTTPDeleteBookMarkURL extends AsyncTask<String, Void, Boolean> {
      * @param result
      */
     protected void onPostExecute(Boolean result) {
-        DataBaseSqlite db = new DataBaseSqlite(context);
+        AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+        DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
 
         if (result == true) {
             pd.dismiss();
-            db.delete_bookmark(BusinessId);
+            ddb.delete_bookmark(BusinessId);
             MessageDialog messageDialog=new MessageDialog(context);
             messageDialog.ShowMessage("هشدار", "عکس حذف شد", "باشه", "false");
 

@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.ListExpand.Continent;
 import com.ariana.shahre_ma.ListExpand.Country;
 import com.ariana.shahre_ma.ListExpand.MyListAdapter;
@@ -157,9 +158,9 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
 
         try {
-            DataBaseSqlite db=new DataBaseSqlite(this);
-            Cursor allrows_Collection =db.select_Collection();
-            Cursor allrows_Subset =db.select_Subset();
+            SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(this);
+            Cursor allrows_Collection =sdb.select_Collection();
+            Cursor allrows_Subset =sdb.select_Subset();
 
             if (allrows_Collection.moveToFirst()) {
 

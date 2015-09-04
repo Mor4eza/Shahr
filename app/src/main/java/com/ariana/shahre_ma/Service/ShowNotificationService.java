@@ -8,6 +8,8 @@ import android.util.Log;
 
 import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Notification.Notify;
 import com.ariana.shahre_ma.Settings.KeySettings;
@@ -15,7 +17,8 @@ import com.ariana.shahre_ma.Settings.KeySettings;
 public class ShowNotificationService extends Service {
 
     KeySettings setting=new KeySettings(this);
-    DataBaseSqlite db=new DataBaseSqlite(this);
+    SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(this);
+    DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(this);
     DateTime dt=new DateTime();
     FieldClass fc=new FieldClass();
 
@@ -40,7 +43,7 @@ public class ShowNotificationService extends Service {
     {
         super.onStart(intent, startId);
 
-        Cursor rows=db.select_AllNotificaton();
+        Cursor rows=sdb.select_AllNotificaton();
         if(rows.moveToFirst())
         {
             do
@@ -48,7 +51,7 @@ public class ShowNotificationService extends Service {
                 Log.i("ExpirationDate",rows.getString(5));
                 if(rows.getString(5).equals(dt.Now()))
                 {
-                    db.delete_Notification(rows.getInt(0));
+                    ddb.delete_Notification(rows.getInt(0));
                 }
             }while (rows.moveToNext());
         }

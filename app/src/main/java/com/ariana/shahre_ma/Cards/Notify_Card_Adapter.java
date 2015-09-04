@@ -14,6 +14,7 @@ import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MyInterest.My_Interest;
 import com.ariana.shahre_ma.R;
@@ -59,7 +60,7 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
         nci.setNewTag("ثبت علاقه مندی ها");
         mItems.add(nci);
 
-        DataBaseSqlite db=new DataBaseSqlite(context);
+        SelectDataBaseSqlite db=new SelectDataBaseSqlite(context);
         Cursor rowalls=db.select_AllNotificaton();
 
         if(rowalls.moveToFirst())

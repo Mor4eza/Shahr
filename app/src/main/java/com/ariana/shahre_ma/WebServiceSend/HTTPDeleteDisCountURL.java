@@ -5,7 +5,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MessageDialog;
 
@@ -30,12 +32,13 @@ public class HTTPDeleteDisCountURL extends AsyncTask<String, Void, Boolean> {
     Context context;
     ProgressDialog pd;
     FieldClass fc = new FieldClass();
-
+    MessageDialog messageDialog;
     /**
      * @param context
      */
     public HTTPDeleteDisCountURL(Context context) {
         this.context = context;
+        messageDialog =new MessageDialog(context);
     }
 
 
@@ -99,19 +102,18 @@ public class HTTPDeleteDisCountURL extends AsyncTask<String, Void, Boolean> {
      * @param result
      */
     protected void onPostExecute(Boolean result) {
-        DataBaseSqlite db = new DataBaseSqlite(context);
+        AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+        DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
 
         if (result == true) {
             pd.dismiss();
-            db.delete_DisCountMember(discountid);
-            MessageDialog messageDialog=new MessageDialog(context);
+            ddb.delete_DisCountMember(discountid);
             messageDialog.ShowMessage("هشدار", "تخفیف حذف شد .", "باشه", "false");
 
         }
         else
         {
             pd.dismiss();
-            MessageDialog messageDialog=new MessageDialog(context);
             messageDialog.ShowMessage("هشدار","تخفیف حذف نشد . دوباره امتحان کنید","باشه","false");
         }
 

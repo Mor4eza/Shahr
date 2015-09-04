@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -219,8 +220,8 @@ public class SqliteTOjson {
     public String getSqliteInterestTOjson() {
 
         String Sqlite_Json="";
-        DataBaseSqlite db = new DataBaseSqlite(context);
-        Cursor cursor = db.select_Interest();
+        SelectDataBaseSqlite sdb = new SelectDataBaseSqlite(context);
+        Cursor cursor = sdb.select_Interest();
         JSONArray resultSet = new JSONArray();
 
 
