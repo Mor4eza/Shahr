@@ -1333,15 +1333,16 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_Search + "  WHERE Market='%"+market+"%'", null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_Search + "  WHERE Market Like '%"+market+"%'", null);
 
     }
 
     public Cursor select_TableSearchSortRate()
     {
 
+
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_Search + " ORDER BY RateValue  DESC", null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_Search + " ORDER BY (RateValue * RateCount)  DESC", null);
 
     }
 

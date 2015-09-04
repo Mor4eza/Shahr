@@ -173,7 +173,7 @@ public class SearchListActivity extends ActionBarActivity implements SearchView.
                 public boolean onMenuItemClick(MenuItem item) {
                     if (item.getTitle().equals("مرتب سازی بر اساس نام"))
                     {
-                        Toast.makeText(getApplicationContext(), item.getItemId(), Toast.LENGTH_LONG).show();
+
                         setting.saveSortBusiness("name");
                         setCards();
                     }
@@ -240,7 +240,8 @@ public class SearchListActivity extends ActionBarActivity implements SearchView.
         Log.i("GetMarket",query);
         if(query.equals(""))
         {
-            setting.saveSearchBusiness(false);
+            setting.saveSearchBusiness(true);
+            fc.SetMarket_Business(query);
             setCardsforsearch();
 
         }
@@ -260,15 +261,16 @@ public class SearchListActivity extends ActionBarActivity implements SearchView.
         Log.i("textserch", newText);
         if(newText.equals("")) // Text Empty Select Business All
         {
-            setting.saveSearchBusiness(false);
-           // setCardsforsearch();
+            setting.saveSearchBusiness(true);
+            fc.SetMarket_Business(newText);
+            setCardsforsearch();
         }
         else // Text Not Empty  Search Business
         {
 
             setting.saveSearchBusiness(true);
             fc.SetMarket_Business(newText);
-           // setCardsforsearch();
+            setCardsforsearch();
 
         }
         return false;
