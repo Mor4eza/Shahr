@@ -145,7 +145,7 @@ public class job_details_1 extends ActionBarActivity {
                     }
                     else
                     {
-                        Toast.makeText(getActivity(),"کاربری وارد نشده است",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),"ابتدا وارد حساب خود شوید",Toast.LENGTH_LONG).show();
                     }
                 }
             });

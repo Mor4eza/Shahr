@@ -121,7 +121,7 @@ private  static Context context;
                             {
                                 nature.setTell(fdb.GetMobileBusiness().get(i));
                             }
-
+                            nature.setmRateCount(fdb.GetRateCount().get(i));
                             mItems.add(nature);
                             notifyDataSetChanged();
                         }
@@ -141,6 +141,7 @@ private  static Context context;
                                 nature.setSubsetId(allrows.getInt(14));
                                // nature.setDisCount(allrows.getInt(14));
                                 Log.i("Rate", String.valueOf(allrows.getDouble(30)));
+                                nature.setmRateCount(allrows.getInt(29));
                                 nature.setRate(allrows.getDouble(30));
                                 nature.setmId(allrows.getInt(0));
                                 nature.setNameImage(allrows.getString(31));
@@ -233,6 +234,7 @@ private  static Context context;
                 viewHolder.tvTell.setText(nature.getTell());
                 viewHolder.tvTell.setPaintFlags(viewHolder.tvTell.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
             }
+            viewHolder.rateCount.setText("/" +nature.getmRateCount().toString());
         }
         catch (Exception e)
         {
@@ -266,6 +268,7 @@ private  static Context context;
         public TextView tvNature;
         public TextView tvDesNature;
         public RatingBar rates;
+        public TextView rateCount;
         public TextView tvTell;
         public CardView cards;
         FieldClass fc=new FieldClass();
@@ -276,6 +279,7 @@ private  static Context context;
             tvNature = (TextView)itemView.findViewById(R.id.tv_title);
             tvDesNature = (TextView)itemView.findViewById(R.id.tv_address);
             rates = (RatingBar)itemView.findViewById(R.id.rates);
+            rateCount=(TextView)itemView.findViewById(R.id.tv_rateCount);
             tvTell=(TextView)itemView.findViewById(R.id.tv_tell);
             cards=(CardView)itemView.findViewById(R.id.cards);
             imgThumbnail.setOnClickListener(this);

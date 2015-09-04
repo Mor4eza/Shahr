@@ -75,6 +75,22 @@
                 android:layout_alignParentStart="true" />
 
             <TextView
+                android:id="@+id/tv_rateCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="/"
+                android:layout_toRightOf="@id/rates"
+                android:layout_alignTop="@id/rates"/>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:paddingBottom="2dp"
+                    android:src="@drawable/user"
+                    android:layout_alignTop="@id/tv_rateCount"
+                    android:layout_toRightOf="@id/tv_rateCount"/>
+
+            <TextView
                 android:gravity="left"
                 android:id="@+id/tv_tell"
                 android:layout_width="fill_parent"
