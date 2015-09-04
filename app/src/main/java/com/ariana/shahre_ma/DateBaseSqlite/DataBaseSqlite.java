@@ -1680,6 +1680,14 @@ Context context;
         db.execSQL("DELETE FROM "+ InstructionsSqlite.TABLE_NAME_Bookmark);
         db.close();
     }
+
+    public  void delete_bookmark(Integer businessid)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE FROM "+ InstructionsSqlite.TABLE_NAME_Bookmark+" WHERE BusinessId="+businessid);
+        db.close();
+    }
+
     // Updating single
    /* public int update(Integer id) {
 

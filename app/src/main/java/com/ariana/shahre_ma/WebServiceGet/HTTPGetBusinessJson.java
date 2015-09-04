@@ -197,6 +197,14 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
                     messageDialog.ShowMessage("هشدار","مشاغلی برای این زیر مجموعه ثبت نشده . ","باشه","false");
 
                 }
+                else if(len==0 || errorCode!=200)
+                {
+                    pd.dismiss();
+                    MessageDialog messageDialog=new MessageDialog(context);
+
+                    messageDialog.ShowMessage("هشدار","مشکلی پیش آمده "+"\n"+"ارتباط اینترنت خود را بررسی کرده و دوباره امتحان کنید","باشه","false");
+
+                }
                 else
                 {
 
