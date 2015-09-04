@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,8 @@ public class Discount extends ActionBarActivity {
     Query query =new Query(this);
     public static  ListView listView;
     TextView tv_id;
+    public static TextView tv_null;
+    public static ImageView img_null;
     CalendarTool ct=new CalendarTool();
     CalendarTool ct1=new CalendarTool();
 
@@ -42,6 +45,8 @@ public class Discount extends ActionBarActivity {
         tv_id=(TextView)findViewById(R.id.tv_dis_id);
          adapter = new discount_Adapter(this, generateData());
         listView = (ListView) findViewById(R.id.listview);
+        img_null=(ImageView)findViewById(R.id.img_null);
+        tv_null=(TextView)findViewById(R.id.tv_null);
         listView.setAdapter(adapter);
         final int count = adapter.getCount();
 

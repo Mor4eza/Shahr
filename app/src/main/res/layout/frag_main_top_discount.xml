@@ -14,24 +14,26 @@
         android:id="@+id/top_dis_recycler_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"/>
-
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/pb_topDiscount"
-        android:layout_below="@+id/tvLabel"
-        android:visibility="invisible"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="145dp" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="لیست تخفیف های برتر در شهر شما خالی می باشد...!"
-        android:id="@+id/textView11"
-        android:visibility="invisible"
+        android:layout_margin="20dp"
+        android:id="@+id/tv_null"
+        android:visibility="gone"
+        android:gravity="center_vertical|center_horizontal"
+        android:textSize="25sp"
         android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/img_null"
+        android:visibility="gone"
+        android:layout_marginBottom="37dp"
+        android:src="@android:drawable/btn_star_big_off"
+        android:layout_above="@+id/tv_null"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

@@ -4,7 +4,7 @@
     tools:context="com.ariana.shahre_ma.Bookmarks.BookMark">
 
 
-    <ListView
+      <ListView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/lvbookmark"

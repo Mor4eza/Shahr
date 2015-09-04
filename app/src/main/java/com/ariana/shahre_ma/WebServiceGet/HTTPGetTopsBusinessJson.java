@@ -8,11 +8,9 @@ import android.view.View;
 import com.ariana.shahre_ma.Cards.TopBusiness_Card_Adapter;
 import com.ariana.shahre_ma.Cards.TopDiscount_Card_Adapter;
 import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
-import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.Frag_main_Top_Business;
 import com.ariana.shahre_ma.Frag_main_Top_discount;
 import com.ariana.shahre_ma.Settings.KeySettings;
@@ -318,10 +316,15 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
                             }
 
 
-                            if(i<=9)
-                                adb.Add_businessTops(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i],latitude[i], longitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i],src[i]);
-                            else
-                                adb.Add_businessDisCount(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i],latitude[i], longitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i],src[i]);
+                            if(i<=9) {
+                                adb.Add_businessTops(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], latitude[i], longitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i], src[i]);
+                                Frag_main_Top_discount.tv_null.setVisibility(View.VISIBLE);
+                                Frag_main_Top_discount.img_null.setVisibility(View.VISIBLE);
+                            } else {
+                                adb.Add_businessDisCount(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], latitude[i], longitude[i], areaid[i], area1[i], user[i], cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i], src[i]);
+                                Frag_main_Top_discount.tv_null.setVisibility(View.GONE);
+                                Frag_main_Top_discount.img_null.setVisibility(View.GONE);
+                            }
                         }
 
                         fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
@@ -329,19 +332,6 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
                         Frag_main_Top_Business.mRecyclerView.setAdapter(mAdapter);
                         TopDiscount_Card_Adapter dAdapter=new TopDiscount_Card_Adapter(context);
                         Frag_main_Top_discount.mRecyclerView.setAdapter(dAdapter);
-                        Frag_main_Top_Business.pb.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Frag_main_Top_Business.pb.setVisibility(View.INVISIBLE);
-                            }
-                        });
-
-                        Frag_main_Top_discount.pb.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Frag_main_Top_discount.pb.setVisibility(View.INVISIBLE);
-                            }
-                        });
 
                   }
 
