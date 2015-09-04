@@ -22,6 +22,7 @@ import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MessageDialog;
+import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostDisCount;
@@ -47,6 +48,7 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
     Button Expire;
     String ExpireDate="";
     MessageDialog messageDialog;
+
     Integer countday=7;
     int ViewId;
     FragmentManager fragmentManager;
@@ -71,7 +73,7 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
 
         setTitle("ثبت تخفیف جدید");
         InitViews();
-        ShowEditDisCount();
+        //ShowEditDisCount();
         rangeBar.setRight(20);
         rangeBar.setOnRangeBarChangeListener(new RangeBar.OnRangeBarChangeListener() {
             @Override
@@ -86,72 +88,92 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
             @Override
             public void onClick(View v) {
                 dismiss();
-
+                NetState net = new NetState(context);
                 SqliteTOjson sqliteTOjson = new SqliteTOjson(context);
                 String json;
-                if (SaveEdit == true) {
-                    Log.i("Edit", "true");
-                    fc.SetId_DisCount(fc.GetId_DisCount());
-                    fc.SetText_DisCount(tv_title.getText().toString());
-                    fc.SetImage_DisCount("");
+                if (net.checkInternetConnection()) {
+                    if (SaveEdit == true) {
 
-                    ct.setIranianDate(Integer.parseInt(tv_date.getText().toString().substring(0, 4)), Integer.parseInt(tv_date.getText().toString().substring(5, 7)), Integer.parseInt(tv_date.getText().toString().substring(8, 10)));
-                    Log.i("startDateEdit", ct.getGregorianDate());
-                    fc.SetStartDate_DisCount(ct.getGregorianDate());
-                    ct.setIranianDate(Integer.parseInt(Expire.getText().toString().substring(0, 4)), Integer.parseInt(Expire.getText().toString().substring(5, 7)), Integer.parseInt(Expire.getText().toString().substring(8, 10)));
-                    Log.i("ExpireDateEdit", ct1.getGregorianDate());
-                    fc.SetExpirationDate_DisCount(ct.getGregorianDate());
-                    fc.SetDescription_DisCount(tv_desc.getText().toString());
-                    fc.SetPercent_DisCount(percent);
-                    fc.SetBusinessId_DisCount(fc.GetBusiness_Id());
+                        if (tv_title.getText().equals("")) {
+                            messageDialog.ShowMessage("پیام", "متن تخفیف را وارد کنید", "باشه", "false");
+                        } else if (tv_desc.getText().equals("")) {
+                            messageDialog.ShowMessage("پیام", "توضیحات برای تحفیف را وارد کنید", "باشه", "false");
+                        } else if (Integer.parseInt(percent)== 0) {
+                            messageDialog.ShowMessage("پیام", "درصد تخفیف را وارد کنید", "باشه", "false");
+                        } else if (tv_date.getText().equals("") || tv_date.getText().equals(null) || tv_date.getText().length() == 0) {
+                            messageDialog.ShowMessage("پیام", "تاریخ شروع را وارد کنید", "باشه", "false");
+                        } else if (Expire.getText().equals("") || Expire.getText().equals(null) || Expire.getText().length() == 0) {
+                            messageDialog.ShowMessage("پیام", "تاریخ اتمام را وارد کنید", "باشه", "false");
+                        } else {
+                            Log.i("Edit", "true");
+                            fc.SetId_DisCount(fc.GetId_DisCount());
+                            fc.SetText_DisCount(tv_title.getText().toString());
+                            fc.SetImage_DisCount("");
 
-                    if (fc.GetText_DisCount().equals("")) {
-                        messageDialog.ShowMessage("پیام", "متن تخفیف را وارد کنید", "باشه", "false");
-                    } else if (fc.GetDescription_DisCount().equals("")) {
-                        messageDialog.ShowMessage("پیام", "توضیحات برای تحفیف را وارد کنید", "باشه", "false");
-                    } else if (fc.GetPercent_DisCount().length() == 0) {
-                        messageDialog.ShowMessage("پیام", "درصد تخفیف را وارد کنید", "باشه", "false");
+                            ct.setIranianDate(Integer.parseInt(tv_date.getText().toString().substring(0, 4)), Integer.parseInt(tv_date.getText().toString().substring(5, 7)), Integer.parseInt(tv_date.getText().toString().substring(8, 10)));
+                            Log.i("startDateEdit", ct.getGregorianDate());
+                            fc.SetStartDate_DisCount(ct.getGregorianDate());
+                            ct1.setIranianDate(Integer.parseInt(Expire.getText().toString().substring(0, 4)), Integer.parseInt(Expire.getText().toString().substring(5, 7)), Integer.parseInt(Expire.getText().toString().substring(8, 10)));
+                            Log.i("ExpireDateEdit", ct1.getGregorianDate());
+                            fc.SetExpirationDate_DisCount(ct1.getGregorianDate());
+                            fc.SetDescription_DisCount(tv_desc.getText().toString());
+                            fc.SetPercent_DisCount(percent);
+                            fc.SetBusinessId_DisCount(fc.GetBusiness_Id());
+
+                            json = sqliteTOjson.getDisCountTOjson(fc.GetId_DisCount(), fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());
+                            HTTPPostDisCountEdit httpPostDisCount = new HTTPPostDisCountEdit(getContext());
+                            httpPostDisCount.SetDisCountJson(json);
+                            httpPostDisCount.execute();
+
+                        }
+
+
                     } else {
-                        json = sqliteTOjson.getDisCountTOjson(fc.GetId_DisCount(), fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());
-                        HTTPPostDisCountEdit httpPostDisCount = new HTTPPostDisCountEdit(getContext());
-                        httpPostDisCount.SetDisCountJson(json);
-                        httpPostDisCount.execute();
 
+                        if (tv_title.getText().toString().trim().equals("")) {
+                            messageDialog.ShowMessage("پیام", "عنوان تخفیف را وارد کنید", "باشه", "false");
+                        } else if (tv_desc.getText().toString().trim().equals("")) {
+                            messageDialog.ShowMessage("پیام", "توضیحات برای تحفیف را وارد کنید", "باشه", "false");
+                        } else if (percent.equals("")) {
+                            messageDialog.ShowMessage("پیام", "درصد تخفیف را وارد کنید", "باشه", "false");
+                        } else if (tv_date.getText().equals("") || tv_date.getText().equals(null) || tv_date.getText().length() == 0) {
+                            messageDialog.ShowMessage("پیام", "تاریخ شروع را وارد کنید", "باشه", "false");
+                        } else if (Expire.getText().equals("") || Expire.getText().equals(null) || Expire.getText().length() == 0) {
+                            messageDialog.ShowMessage("پیام", "تاریخ اتمام را وارد کنید", "باشه", "false");
+                        }  else {
+
+                            Log.i("Save", "false");
+                            fc.SetId_DisCount(1);
+                            fc.SetText_DisCount(tv_title.getText().toString());
+                            fc.SetImage_DisCount("");
+                            ct.setIranianDate(Integer.parseInt(tv_date.getText().toString().substring(0, 4)), Integer.parseInt(tv_date.getText().toString().substring(5, 7)), Integer.parseInt(tv_date.getText().toString().substring(8, 10)));
+                            Log.i("startDateEdit", ct.getGregorianDate());
+                            fc.SetStartDate_DisCount(ct.getGregorianDate());
+                            ct1.setIranianDate(Integer.parseInt(Expire.getText().toString().substring(0, 4)), Integer.parseInt(Expire.getText().toString().substring(5, 7)), Integer.parseInt(Expire.getText().toString().substring(8, 10)));
+                            Log.i("ExpireDateEdit", ct1.getGregorianDate());
+                            fc.SetExpirationDate_DisCount(ct1.getGregorianDate());
+                            fc.SetDescription_DisCount(tv_desc.getText().toString());
+                            fc.SetPercent_DisCount(percent);
+                            fc.SetBusinessId_DisCount(fc.GetBusiness_Id());
+
+
+
+                            json = sqliteTOjson.getDisCountTOjson(fc.GetId_DisCount(), fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());
+
+                            HTTPPostDisCount httpPostDisCount = new HTTPPostDisCount(getContext());
+                            httpPostDisCount.SetDisCountJson(json);
+                            httpPostDisCount.execute();
+                        }
                     }
+                } else
 
-
-                } else {
-                    Log.i("Save", "false");
-                    fc.SetId_DisCount(1);
-                    fc.SetText_DisCount(tv_title.getText().toString());
-                    fc.SetImage_DisCount("");
-                    ct.setIranianDate(Integer.parseInt(tv_date.getText().toString().substring(0, 4)), Integer.parseInt(tv_date.getText().toString().substring(5, 7)), Integer.parseInt(tv_date.getText().toString().substring(8, 10)));
-                    Log.i("startDateEdit", ct.getGregorianDate());
-                    fc.SetStartDate_DisCount(ct.getGregorianDate());
-                    ct.setIranianDate(Integer.parseInt(Expire.getText().toString().substring(0, 4)), Integer.parseInt(Expire.getText().toString().substring(5, 7)), Integer.parseInt(Expire.getText().toString().substring(8, 10)));
-                    Log.i("ExpireDateEdit", ct1.getGregorianDate());
-                    fc.SetExpirationDate_DisCount(ct.getGregorianDate());
-                    fc.SetDescription_DisCount(tv_desc.getText().toString());
-                    fc.SetPercent_DisCount(percent);
-                    fc.SetBusinessId_DisCount(fc.GetBusiness_Id());
-
-                    if (fc.GetText_DisCount().equals("")) {
-                        messageDialog.ShowMessage("پیام", "متن تخفیف را وارد کنید", "باشه", "false");
-                    } else if (fc.GetDescription_DisCount().equals("")) {
-                        messageDialog.ShowMessage("پیام", "توضیحات برای تحفیف را وارد کنید", "باشه", "false");
-                    } else if (fc.GetPercent_DisCount().length() == 0) {
-                        messageDialog.ShowMessage("پیام", "درصد تخفیف را وارد کنید", "باشه", "false");
-                    } else {
-                        json = sqliteTOjson.getDisCountTOjson(fc.GetId_DisCount(), fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());
-
-                        HTTPPostDisCount httpPostDisCount = new HTTPPostDisCount(getContext());
-                        httpPostDisCount.SetDisCountJson(json);
-                        httpPostDisCount.execute();
-                    }
+                {
+                    messageDialog.ShowMessage("پیام", "اینترنت قطع می باشد", "باشه", "false");
                 }
-            }
-        });
 
+            }
+
+        });
 
 
         tv_date.setOnClickListener(new View.OnClickListener() {
@@ -208,17 +230,15 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
             tv_date.setText("");
 
             SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(getContext());
-            Log.i("Id-DisCount", String.valueOf(fc.GetId_DisCount()));
             Cursor rows = sdb.select_AllDisCountMember(fc.GetId_DisCount());
             rows.moveToFirst();
-            Log.i("Exception", rows.getString(1));
-            Log.i("Exception", rows.getString(5));
-            Log.i("Exception", rows.getString(3));
+
             tv_title.setText(rows.getString(1));
             tv_desc.setText(rows.getString(5));
-            tv_date.setText(ct.MiladiToShamesi(rows.getString(3)));
-            Expire.setText(ct.MiladiToShamesi(rows.getString(4)));
-            Log.i("rangebar", (rows.getString(6)));
+           // ct.setGregorianDate(Integer.valueOf(rows.getString(3).substring(0, 4)), Integer.valueOf(rows.getString(3).substring(5, 7)), Integer.valueOf(rows.getString(3).substring(8, 10)));
+            //ct1.setGregorianDate(Integer.valueOf(rows.getString(4).substring(0, 4)), Integer.valueOf(rows.getString(4).substring(5, 7)), Integer.valueOf(rows.getString(4).substring(8, 10)));
+//            tv_date.setText(ct.MiladiToShamesi(rows.getString(3)));
+//            Expire.setText(ct1.MiladiToShamesi(rows.getString(4)));
             rangeBar.setSeekPinByValue(Float.valueOf(rows.getString(6)));
 
 

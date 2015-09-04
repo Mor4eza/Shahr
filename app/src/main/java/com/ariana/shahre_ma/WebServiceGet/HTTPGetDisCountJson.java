@@ -10,6 +10,7 @@ import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
+import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MyBusiness.Discount;
 import com.ariana.shahre_ma.MyBusiness.discount_Adapter;
 import com.ariana.shahre_ma.MyBusiness.discount_item;
@@ -44,6 +45,7 @@ public class HTTPGetDisCountJson extends AsyncTask<String,Void,Integer> {
 
     Integer len;
     Integer memberid;
+    FieldClass fc=new FieldClass();
     ProgressDialog pd;
 
 
@@ -155,7 +157,7 @@ public class HTTPGetDisCountJson extends AsyncTask<String,Void,Integer> {
         DataBaseSqlite db = new DataBaseSqlite(context);
 
 
-        Cursor rows = db.select_AllDisCountMember();
+        Cursor rows = db.select_DisCountMember(fc.GetBusiness_Id());
         if (rows.moveToFirst()) {
             do {
                 ct.setGregorianDate(Integer.valueOf(rows.getString(3).substring(0, 4)),Integer.valueOf(rows.getString(3).substring(5, 7)),Integer.valueOf(rows.getString(3).substring(8, 10)));

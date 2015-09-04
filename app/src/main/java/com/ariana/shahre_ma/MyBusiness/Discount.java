@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -30,7 +31,7 @@ public class Discount extends ActionBarActivity {
     TextView tv_id;
     CalendarTool ct=new CalendarTool();
     CalendarTool ct1=new CalendarTool();
-//    KeySettings setting=new KeySettings(getApplicationContext());
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class Discount extends ActionBarActivity {
         listView.setAdapter(adapter);
         final int count = adapter.getCount();
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+ /*       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
@@ -55,7 +56,7 @@ public class Discount extends ActionBarActivity {
 
                 }
             }
-        });
+        });*/
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -65,9 +66,12 @@ public class Discount extends ActionBarActivity {
                 alertDialog.setMessage("آیا میخواهید این تخفیف را حذف کنید؟!");
                 alertDialog.setButton("آره", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        HTTPDeleteDisCountURL httpDeleteDisCountURL=new HTTPDeleteDisCountURL(Discount.this);
-                        httpDeleteDisCountURL.SetDisCount(adapter.getItem(position).GetId());
-                        httpDeleteDisCountURL.execute();
+                        try {
+                            HTTPDeleteDisCountURL httpDeleteDisCountURL = new HTTPDeleteDisCountURL(Discount.this);
+                            httpDeleteDisCountURL.SetDisCount(adapter.getItem(position).GetId());
+                            httpDeleteDisCountURL.execute();
+                        }
+                        catch (Exception e){}
                     }
                 });
 
@@ -98,85 +102,27 @@ public class Discount extends ActionBarActivity {
     public ArrayList<discount_item> generateData()
     {
         ArrayList<discount_item> items = new ArrayList<discount_item>();
-        SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(this);
+        SelectDataBaseSqlite sdb = new SelectDataBaseSqlite(this);
+        try {
             Cursor rows = sdb.select_DisCountMember(fc.GetBusiness_Id());
             if (rows.moveToFirst()) {
                 do {
-                    items.add(new discount_item(" % " + rows.getString(6), rows.getString(5),rows.getString(4), rows.getString(1),rows.getString(3), rows.getInt(0)));
+                    ct.setGregorianDate(Integer.valueOf(rows.getString(3).substring(0, 4)),Integer.valueOf(rows.getString(3).substring(5, 7)),Integer.valueOf(rows.getString(3).substring(8, 10)));
+                    ct1.setGregorianDate(Integer.valueOf(rows.getString(4).substring(0, 4)), Integer.valueOf(rows.getString(4).substring(5, 7)), Integer.valueOf(rows.getString(4).substring(8, 10)));
+                    items.add(new discount_item(" % " + rows.getString(6), rows.getString(5),ct1.getIranianDate(), rows.getString(1), ct.getIranianDate(), rows.getInt(0)));
 
                 } while (rows.moveToNext());
             }
 
+        }
+        catch (Exception e){}
 
         return items;
     }
 
     public void add_discount(View v)
     {
-        /*String date="";
-        String day="";
-        String month="";
-        String year="";
-
-
-        SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(this);
-        Cursor rows = sdb.select_AllDisCountMember();
-        if(rows.getCount()>0) {
-            if (rows.moveToFirst()) {
-                do {
-                    date = rows.getString(4);
-                } while (rows.moveToNext());
-            }
-        }
-        else
-        {
-            Log.i("getCount","0");
-            Discount_Dialog dialog=new Discount_Dialog(this);
-            dialog.show();
-            System.out.println("Date1 is before Date2");
-        }
-
-
-            try{
-
-                year=date.substring(0, 4);
-                month=date.substring(5, 7);
-                day=date.substring(8, 10);
-
-                Log.i("tarikh", ct.MiladiToMiladi(ct.getGregorianDate()));
-                Log.i("tarikh1", year+"/"+month+"/"+day);
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-                Date date1 = sdf.parse(year+"/"+month+"/"+day);
-
-                Date date2 = sdf.parse(ct.MiladiToMiladi(ct.getGregorianDate()));
-
-                System.out.println(sdf.format("tarikh end"+ date1));
-                System.out.println(sdf.format(ct.MiladiToMiladi(date2.toString())));
-
-                if(date2.compareTo(date1)>0)
-                {
-                    Snackbar.make(listView, "تا زمانی که اتمام تاریخ فعلی به پایان نرسیده نمی توانید تخفیف جدید ثبت کنید", Snackbar.LENGTH_LONG).show();
-                }
-                else if(date1.compareTo(date2)<0)
-                {
-                    Discount_Dialog dialog=new Discount_Dialog(this);
-                    dialog.show();
-                    System.out.println("Date1 is before Date2");
-                }
-                else if(date1.compareTo(date2)==0)
-                {
-                    Snackbar.make(listView, "تا زمانی که اتمام تاریخ فعلی به پایان نرسیده نمی توانید تخفیف جدید ثبت کنید", Snackbar.LENGTH_LONG).show();
-                }
-                else
-                {
-                    Snackbar.make(listView, "تا زمانی که اتمام تاریخ فعلی به پایان نرسیده نمی توانید تخفیف جدید ثبت کنید", Snackbar.LENGTH_LONG).show();
-                }
-
-            }catch(Exception ex){
-               Log.i("exceptioncopmaredate",ex.toString());
-            }
-*/
-
+        fc.SetId_DisCount(0);
         Discount_Dialog dialog=new Discount_Dialog(this);
         dialog.show();
 
