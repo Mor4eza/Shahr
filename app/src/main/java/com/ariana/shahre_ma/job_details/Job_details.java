@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +19,9 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.WebServiceSend.HTTPDeleteBookMarkURL;
 import com.ariana.shahre_ma.WebServiceSend.HTTPSendBookMarkURL;
 
 import java.util.Locale;
@@ -32,7 +33,8 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
     FieldClass fc = new FieldClass();
     SectionsPagerAdapter mSectionsPagerAdapter;
     MenuItem fav;
-
+    NetState ns=new NetState(this);
+    public boolean selected=false;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -197,33 +199,6 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
     }
 
 
-/*
-   public void map(){
-       try {
-           ResourceProxy resourceProxy;
-           MapView map = (MapView) findViewById(R.id.map);
-           map.setTileSource(TileSourceFactory.DEFAULT_TILE_SOURCE);
-           map.setMultiTouchControls(true);
-
-           map.getController().setZoom(15);
-           map.getController().animateTo(new GeoPoint((fc.GetLatitude_Business()), (fc.GetLongtiude_Business())));
-
-           ArrayList<OverlayItem> overlays = new ArrayList<OverlayItem>();
-           overlays.add(new OverlayItem("", "", new GeoPoint((fc.GetLatitude_Business()), (fc.GetLongtiude_Business()))));
-           Drawable marker = this.getResources().getDrawable(R.drawable.marker);
-
-           resourceProxy = new DefaultResourceProxyImpl(getApplicationContext());
-           ItemizedIconOverlay myLocationOverlay;
-           myLocationOverlay = new ItemizedIconOverlay<OverlayItem>(overlays, marker, null, resourceProxy);
-           map.getOverlays().add(myLocationOverlay);
-       }
-       catch (Exception e){
-
-       }
-
-
-    }*/
-
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -231,10 +206,10 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
 
       getMenuInflater().inflate(R.menu.menu_job_details, menu);
       fav=menu.findItem(R.id.action_Fav);
-
       if(query.getBookMarkId(fc.GetBusiness_Id())>0)
       {
           fav.setIcon(R.drawable.abc_btn_rating_star_on_mtrl_alpha);
+          selected=true;
       }
       return true;
   }
@@ -247,25 +222,33 @@ public class Job_details extends ActionBarActivity implements ActionBar.TabListe
         int id = item.getItemId();
 
 
-        //noinspection SimplifiableIfStatement
-
-
-
         if (id == R.id.action_Fav) {
-            if(query.getMemberId()>0) {
-                HTTPSendBookMarkURL httpbookmark = new HTTPSendBookMarkURL(this);
-                httpbookmark.SetBusinessid(fc.GetBusiness_Id());
-                Log.i("getBusinessId", String.valueOf(fc.GetBusiness_Id()));
-                httpbookmark.SetMemberid(query.getMemberId());
-                Log.i("getMemberId", String.valueOf(query.getMemberId()));
-                httpbookmark.execute();
-                fav.setIcon(R.drawable.abc_btn_rating_star_on_mtrl_alpha);
+            if (ns.checkInternetConnection()) {
+                if (selected) {
+                    if (query.getMemberId() > 0) {
+                        HTTPDeleteBookMarkURL delete = new HTTPDeleteBookMarkURL(this);
+                        delete.SetBookMark(fc.GetBusiness_Id(), query.getMemberId());
+                        delete.execute();
+                        fav.setIcon(R.drawable.abc_btn_rating_star_off_mtrl_alpha);
+                        selected = false;
+                    } else {
+                        Toast.makeText(getApplicationContext(), "کاربری وارد نشده است", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    if (query.getMemberId() > 0) {
+                        HTTPSendBookMarkURL httpbookmark = new HTTPSendBookMarkURL(this);
+                        httpbookmark.SetBusinessid(fc.GetBusiness_Id());
+                        httpbookmark.SetMemberid(query.getMemberId());
+                        httpbookmark.execute();
+                        fav.setIcon(R.drawable.abc_btn_rating_star_on_mtrl_alpha);
+                        selected = true;
+                    } else {
+                        Toast.makeText(getApplicationContext(), "کاربری وارد نشده است", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }else{
+                Toast.makeText(getApplicationContext(),"اینترنت قطع می باشد!",Toast.LENGTH_LONG).show();
             }
-            else
-            {
-                Toast.makeText(getApplicationContext(),"کاربری وارد نشده است",Toast.LENGTH_LONG).show();
-            }
-
             return true;
         }else if(id==android.R.id.home){
             fc.SetBusinessDisCountTops(false);

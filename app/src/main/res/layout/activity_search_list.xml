@@ -8,7 +8,7 @@
         android:id="@+id/recycler_view_Search"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        >
+        android:layout_below="@+id/tv_count">
     </android.support.v7.widget.RecyclerView>
 
     <TextView
@@ -36,8 +36,7 @@
         android:text="0 مورد"
         android:textColor="@color/md_white_1000"
         android:id="@+id/tv_count"
-        android:background="@color/accent"
-        android:alpha=".5"
+        android:background="@color/primary"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"

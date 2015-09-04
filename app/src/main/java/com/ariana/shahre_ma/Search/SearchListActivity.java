@@ -27,6 +27,9 @@ public class SearchListActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_list);
+        try {
+            getSupportActionBar().setElevation(0);
+        }catch (Exception e){}
         setCards();
         setTitle("نتایج جستجو...");
         img_null=(ImageView)findViewById(R.id.img_null);
@@ -37,7 +40,18 @@ public class SearchListActivity extends ActionBarActivity {
                 tv_null.setVisibility(View.INVISIBLE);
                 tv_count.setText(Search_list_Adapter.getItemCount()+" "+"مورد");
         }
-       
+        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                try {
+                    if (dy > 0)
+                        getSupportActionBar().hide();
+                    else
+                        getSupportActionBar().show();
+                }catch (Exception e){}
+            }
+        });
     }
 
 
