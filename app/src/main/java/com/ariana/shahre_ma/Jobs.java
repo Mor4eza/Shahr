@@ -21,7 +21,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.ListExpand.Continent;
@@ -50,16 +49,16 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
     Integer id[];
     Integer Id_co;
     Integer Collection_ID_subset;
-     HTTPGetBusinessJson httpbusin;
+    HTTPGetBusinessJson httpbusin;
     NetState ns;
-
-    Boolean refresh_display=true;
+    boolean expand=false;
+    Boolean refresh_display = true;
     private SearchView mSearchView;
     private MyListAdapter listAdapter;
     private ExpandableListView myList;
     private ArrayList<Continent> continentList = new ArrayList<Continent>();
     ArrayList<Country> countryList;
-    KeySettings setting=new KeySettings(this);
+    KeySettings setting = new KeySettings(this);
     Continent continent;
     Country country;
     public static ProgressBar PgUpdate;
@@ -69,46 +68,41 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jobs);
-        query=new Query(this);
+        query = new Query(this);
         setTitle(" مشاغل " + setting.getCityName());
 
-        KeySettings setting=new KeySettings(this);
-        httpbusin=new HTTPGetBusinessJson(this);
-        ns=new NetState(this);
+        KeySettings setting = new KeySettings(this);
+        httpbusin = new HTTPGetBusinessJson(this);
+        ns = new NetState(this);
 
-        PgUpdate=(ProgressBar)findViewById(R.id.progressBar_update);
+        PgUpdate = (ProgressBar) findViewById(R.id.progressBar_update);
 
-        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,new IntentFilter("City"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("City"));
         LocalBroadcastManager.getInstance(this).registerReceiver(mCollectionReceiver, new IntentFilter("Collection"));
-        if(!setting.getCollection())
-        {
+        if (!setting.getCollection()) {
 
 
             PgUpdate.setVisibility(View.VISIBLE);
 
             Log.i("getCollection", "1");
-            HTTPGetCollectionJson httpGetCollectionJson=new HTTPGetCollectionJson(this);
+            HTTPGetCollectionJson httpGetCollectionJson = new HTTPGetCollectionJson(this);
             httpGetCollectionJson.execute();
 
-            HTTPGetSubsetJson httpGetSubsetJson=new HTTPGetSubsetJson(this);
+            HTTPGetSubsetJson httpGetSubsetJson = new HTTPGetSubsetJson(this);
             httpGetSubsetJson.execute();
-        }else{
+        } else {
             Log.i("getCollection", "2");
             displayList();
         }
-
-
 
 
         try {
 
 
             myList.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-
                 @Override
                 public void onGroupExpand(int groupPosition) {
-
-
+                    expand=true;
                     if (lastExpandedPosition != -1
                             && groupPosition != lastExpandedPosition) {
                         myList.collapseGroup(lastExpandedPosition);
@@ -117,7 +111,14 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
                 }
             });
 
-        }catch (Exception e){
+            myList.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+                @Override
+                public void onGroupCollapse(int groupPosition) {
+                    expand=false;
+                }
+            });
+
+        } catch (Exception e) {
 
         }
 
@@ -133,7 +134,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
     //method to expand all groups
     private void expandAll() {
         int count = listAdapter.getGroupCount();
-        for (int i = 0; i < count; i++){
+        for (int i = 0; i < count; i++) {
             myList.expandGroup(i);
         }
     }
@@ -158,9 +159,9 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
 
         try {
-            SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(this);
-            Cursor allrows_Collection =sdb.select_Collection();
-            Cursor allrows_Subset =sdb.select_Subset();
+            SelectDataBaseSqlite sdb = new SelectDataBaseSqlite(this);
+            Cursor allrows_Collection = sdb.select_Collection();
+            Cursor allrows_Subset = sdb.select_Subset();
 
             if (allrows_Collection.moveToFirst()) {
 
@@ -168,23 +169,22 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
                     Id_co = allrows_Collection.getInt(0);
                     countryList = new ArrayList<Country>();
-                    if (allrows_Subset.moveToFirst())
-                    {
+                    if (allrows_Subset.moveToFirst()) {
                         do {
                             Collection_ID_subset = allrows_Subset.getInt(2);
-                            if (Collection_ID_subset == Id_co)
-                            {
+                            if (Collection_ID_subset == Id_co) {
                                 country = new Country(allrows_Subset.getString(1));
                                 countryList.add(country);
                             }
                         } while (allrows_Subset.moveToNext());
-                        continent = new Continent(allrows_Collection.getString(1),countryList,Id_co);
+                        continent = new Continent(allrows_Collection.getString(1), countryList, Id_co);
                     }
                     continentList.add(continent);
                 } while (allrows_Collection.moveToNext());
             }
+        } catch (Exception e) {
+            Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG).show();
         }
-        catch (Exception e){ Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG).show();}
 
     }
 
@@ -211,9 +211,10 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         listAdapter.filterData(query);
         return false;
     }
+
     private void collapseAll() {
         int count = listAdapter.getGroupCount();
-        for (int i = 0; i < count; i++){
+        for (int i = 0; i < count; i++) {
             myList.collapseGroup(i);
         }
     }
@@ -246,6 +247,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
         return super.onOptionsItemSelected(item);
     }
+
     private void setupSearchView() {
 
         mSearchView.setIconifiedByDefault(true);
@@ -258,8 +260,9 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         mSearchView.setOnQueryTextListener(this);
         mSearchView.setOnCloseListener(this);
     }
-    public void help1(){
-        ViewTarget Hdiscount=new ViewTarget(R.id.laptop_list,this);
+
+    public void help1() {
+        ViewTarget Hdiscount = new ViewTarget(R.id.laptop_list, this);
         RelativeLayout.LayoutParams lps = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         lps.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
@@ -267,7 +270,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         int margin = ((Number) (getResources().getDisplayMetrics().density * 80)).intValue();
         lps.setMargins(margin, margin, 10, margin);
 
-        ShowcaseView sv= new ShowcaseView.Builder(this)
+        ShowcaseView sv = new ShowcaseView.Builder(this)
                 .setTarget(Hdiscount)
                 .setContentTitle("مشاغل")
                 .setContentText("از این قسمت میتوانید دسته بندی کسب و کار را مشاهده کنید")
@@ -294,8 +297,9 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
             }
         });
     }
-    public void help2(){
-        ViewTarget Hdiscount=new ViewTarget(R.id.select_city,this);
+
+    public void help2() {
+        ViewTarget Hdiscount = new ViewTarget(R.id.select_city, this);
 
         RelativeLayout.LayoutParams lps = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
@@ -304,7 +308,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         int margin = ((Number) (getResources().getDisplayMetrics().density * 80)).intValue();
         lps.setMargins(margin, margin, 10, margin);
 
-        ShowcaseView sv=new ShowcaseView.Builder(this)
+        ShowcaseView sv = new ShowcaseView.Builder(this)
                 //.setTarget(new ActionViewTarget(this, ActionViewTarget.Type.HOME))
                 .setTarget(Hdiscount)
                 .setContentTitle("تغیر شهر")
@@ -331,8 +335,8 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         });
     }
 
-    public void help3(){
-        ViewTarget Hdiscount=new ViewTarget(R.id.action_search,this);
+    public void help3() {
+        ViewTarget Hdiscount = new ViewTarget(R.id.action_search, this);
 
         RelativeLayout.LayoutParams lps = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
@@ -341,9 +345,9 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
         int margin = ((Number) (getResources().getDisplayMetrics().density * 80)).intValue();
         lps.setMargins(margin, margin, 10, margin);
 
-        ShowcaseView sv=new ShowcaseView.Builder(this)
+        ShowcaseView sv = new ShowcaseView.Builder(this)
                 // .setTarget(new ActionViewTarget(this, ActionViewTarget.Type.HOME))
-                .setTarget( new ViewTarget( ((ViewGroup)findViewById(R.id.action_bar)).getChildAt(2) ) )
+                .setTarget(new ViewTarget(((ViewGroup) findViewById(R.id.action_bar)).getChildAt(2)))
                         //  .setTarget(Hdiscount)
                 .setContentTitle("فیلتر کردن لیست")
                 .setContentText("برای فیلتر کردن لیست مشاغل از این گزینه استفاده کنید")
@@ -356,8 +360,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
-        public void onReceive(Context context, Intent intent)
-        {
+        public void onReceive(Context context, Intent intent) {
             setTitle(" مشاغل " + setting.getCityName());
         }
 
@@ -365,19 +368,30 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
 
     private BroadcastReceiver mCollectionReceiver = new BroadcastReceiver() {
         @Override
-        public void onReceive(Context context, Intent intent)
-        {
-            Log.i("getCollection","4");
-            Log.i("Collection",setting.getCollection().toString());
-            Log.i("Subset",setting.getSubset().toString());
-            Log.i("refresh_display",refresh_display.toString());
-            if (setting.getCollection() && setting.getSubset() && refresh_display)
-            {
-                refresh_display=false;
-                Log.i("getCollection","3");
+        public void onReceive(Context context, Intent intent) {
+            Log.i("getCollection", "4");
+            Log.i("Collection", setting.getCollection().toString());
+            Log.i("Subset", setting.getSubset().toString());
+            Log.i("refresh_display", refresh_display.toString());
+            if (setting.getCollection() && setting.getSubset() && refresh_display) {
+                refresh_display = false;
+                Log.i("getCollection", "3");
                 displayList();
                 PgUpdate.setVisibility(View.INVISIBLE);
             }
         }
     };
+
+    @Override
+    public void onBackPressed() {
+
+
+        if (expand) {
+            myList.collapseGroup(lastExpandedPosition);
+            expand=false;
+        }else{
+            super.onBackPressed();
+        }
+
+    }
 }
