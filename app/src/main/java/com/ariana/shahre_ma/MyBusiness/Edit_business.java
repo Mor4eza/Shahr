@@ -434,7 +434,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
         }
 
 
-         Toast.makeText(getApplicationContext(),date,Toast.LENGTH_LONG).show();
+       //  Toast.makeText(getApplicationContext(),date,Toast.LENGTH_LONG).show();
         return  date;
 
     }

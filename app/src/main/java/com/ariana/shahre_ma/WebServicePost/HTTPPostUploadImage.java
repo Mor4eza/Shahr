@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.ariana.shahre_ma.MessageDialog;
+
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -72,12 +74,21 @@ public class HTTPPostUploadImage extends AsyncTask<String,Integer,Integer>
      */
     @Override
     protected void onPreExecute() {
+        super.onPreExecute();
         dialog = new ProgressDialog(context);
-        dialog.setMessage("در حال ارسال");
+        dialog.setMessage("در حال ثبت عکس...");
         dialog.setIndeterminate(false);
         dialog.setCancelable(false);
+        dialog.setMax(100);
         dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         dialog.setProgress(0);
+        dialog.setButton("توقف", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                cancel(true);
+            }
+        });
         dialog.show();
     }
 
@@ -90,7 +101,9 @@ public class HTTPPostUploadImage extends AsyncTask<String,Integer,Integer>
     protected Integer doInBackground(String... params)
     {
         Integer result=0;
+        long fileSize=0;
         File sourceFile = new File(SrcImage());
+        fileSize=sourceFile.length();
         if (!sourceFile.isFile()) {
             Log.e("uploadFile", "File not exist");
             return 0;
@@ -112,7 +125,7 @@ public class HTTPPostUploadImage extends AsyncTask<String,Integer,Integer>
 
 
             Log.i("linedEnd+towhyphend",String.valueOf(twoHyphens + boundary + twoHyphens + lineEnd));
-            Log.i("linedEnd",String.valueOf(lineEnd));
+            Log.i("linedEnd", String.valueOf(lineEnd));
 
 
 
@@ -128,16 +141,20 @@ public class HTTPPostUploadImage extends AsyncTask<String,Integer,Integer>
             // read file and write it into form...
             bytesRead = fileInputStream.read(buffer, 0, bufferSize);
 
+
             while (bytesRead > 0)
             {
+
                 dos.write(buffer, 0, bufferSize);
                 bytesAvailable = fileInputStream.available();
                 bufferSize = Math.min(bytesAvailable, maxBufferSize);
                 bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-                publishProgress(bufferSize/100);
-            }
+                publishProgress((int) (bufferSize * 100 / fileSize));
 
-            publishProgress(bufferSize/100);
+            }
+            publishProgress((int) (bufferSize * 100 / fileSize));
+
+           // publishProgress(bufferSize/100);
 
             // send multipart form data necesssary after file data...
             dos.writeBytes(lineEnd);
@@ -190,34 +207,16 @@ public class HTTPPostUploadImage extends AsyncTask<String,Integer,Integer>
         {
             dialog.dismiss();
 
-            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-            alertDialog.setTitle("پیام");
-            alertDialog.setMessage("عکس ثبت شد .");
-            alertDialog.setButton("باشه", new DialogInterface.OnClickListener()
-            {
-                public void onClick(DialogInterface dialog, int which)
-                {
-
-                }
-            });
-            alertDialog.show();
+            MessageDialog messageDialog=new MessageDialog(context);
+            messageDialog.ShowMessage("پیام", "عکس ثبت شد", "باشه", "false");
 
         }
         else
         {
             dialog.dismiss();
 
-            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-            alertDialog.setTitle("هشدار ");
-            alertDialog.setMessage("عکس ثبت نشد . دوباره امتحان کنید");
-            alertDialog.setButton("باشه", new DialogInterface.OnClickListener()
-            {
-                public void onClick(DialogInterface dialog, int which)
-                {
-
-                }
-            });
-            alertDialog.show();
+            MessageDialog messageDialog=new MessageDialog(context);
+            messageDialog.ShowMessage("پیام","عکس ثبت نشد . دوباره امتحان کنید","باشه","false");
 
 
         }

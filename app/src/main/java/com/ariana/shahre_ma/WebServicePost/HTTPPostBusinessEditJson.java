@@ -118,6 +118,7 @@ public class HTTPPostBusinessEditJson extends AsyncTask<String,Long,Integer>
         else
         {
             Edit_business.save_edit.setProgress(-1);
+            Toast.makeText(context, "تغییرات ثبت نشد. دوباره امتحان کنید", Toast.LENGTH_LONG).show();
         }
     }
 }
