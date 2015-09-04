@@ -633,7 +633,7 @@ public class CalendarTool
         String newFormat = formatter.format(testDate);
         System.out.println(".....Date..."+newFormat);
 
-        year=newFormat.substring(0,4);
+        year=newFormat.substring(0, 4);
         month=newFormat.substring(5,7);
         day=newFormat.substring(8,10);
 
@@ -656,6 +656,60 @@ public class CalendarTool
 
         Log.i("MiladiToShamesi", result);
         return   result;
+    }
+
+
+    public String MiladiToShamesipublic2(String date)
+    {
+        CalendarTool ct=new CalendarTool();
+        String month="";
+        String day="";
+        String year="";
+        String clock="";
+        String result="";
+
+        Integer _month=0;
+        Integer _day=0;
+
+
+        clock=date.substring(11,14);
+        Log.i("clock", clock);
+       SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/ddHH:MM");
+        Date testDate = null;
+        try {
+            testDate = sdf.parse(date);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/mm/ddHH:MM");
+        String newFormat = formatter.format(testDate);
+        System.out.println(".....Date..."+newFormat);
+
+        year=newFormat.substring(0,4);
+        month=newFormat.substring(5,7);
+        day=newFormat.substring(8,10);
+        Log.i("year", year);
+        Log.i("month", month);
+        Log.i("day", day);
+
+        ct.setGregorianDate(Integer.valueOf(year),Integer.valueOf(month),Integer.valueOf(day));
+        result=ct.getIranianDate();
+
+     /*   String _date1 = result;
+        SimpleDateFormat sdf1 = new SimpleDateFormat("mm/dd/yyyy");
+        Date testDate1 = null;
+        try
+        {
+            testDate1 = sdf1.parse(_date1);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/mm/dd ");
+        String newFormat1 = formatter1.format(testDate);
+        System.out.println(".....Date..."+newFormat1);
+
+        Log.i("MiladiToShamesi", newFormat1);*/
+        return   result+" "+clock;
     }
 
     public String MiladiToMiladi(String date)

@@ -44,6 +44,7 @@ public class HTTPGetOnlineAdvancedSearchJson extends AsyncTask<String,Void,Integ
     private List<Integer> selectId=new ArrayList<>();
     private  List<Integer> selectDiscountId=new ArrayList<>();
     private  List<Integer> selectSubsetId=new ArrayList<>();
+    private  List<String> selectDisCountPercent=new ArrayList<>();
     private  List<Double>  selectLongtiude=new ArrayList<>();
     private  List<Double>  selectLatitude=new ArrayList<>();
     private  List<Double>  selectRate=new ArrayList<>();
@@ -255,6 +256,7 @@ public class HTTPGetOnlineAdvancedSearchJson extends AsyncTask<String,Void,Integ
                 selectDiscountId.add(area.getInt("DiscountId"));
                 selectSubsetId.add(area.getInt("SubsetId"));
                 selectLatitude.add(Double.valueOf(area.getString("Latitude")));
+                selectDisCountPercent.add(area.getString("DiscountPercent"));
                 selectLongtiude.add(Double.valueOf(area.getString("Longitude")));
                 selectAddress.add(area.getString("Address"));
                 selectMarketName.add(area.getString("Market"));
@@ -271,6 +273,7 @@ public class HTTPGetOnlineAdvancedSearchJson extends AsyncTask<String,Void,Integ
             fdb.SetSubsetId(selectSubsetId);
             fdb.SetLatitudeBusiness(selectLatitude);
             fdb.SetLongtiudeBusiness(selectLongtiude);
+            fdb.SetDisCountPercent(selectDisCountPercent);
             fdb.SetRateBusiness(selectRate);
             fdb.SetAddressBusiness(selectAddress);
             fdb.SetSrc(selectSrc);

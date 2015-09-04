@@ -43,6 +43,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
     private AsyncTask<String,Void,Integer> updateTask = null;
     private  List<Integer> selectId=new ArrayList<>();
     private  List<Integer> selectRateCount=new ArrayList<>();
+    private  List<String> selectDisCountPercent=new ArrayList<>();
     private  List<Integer> selectDiscountId=new ArrayList<>();
     private  List<Integer> selectSubsetId=new ArrayList<>();
     private  List<Double>  selectLongtiude=new ArrayList<>();
@@ -386,6 +387,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
                 selectId.add(area.getInt("Id"));
                 selectDiscountId.add(area.getInt("DiscountId"));
                 selectSubsetId.add(area.getInt("SubsetId"));
+                selectDisCountPercent.add(area.getString("DiscountPercent"));
                 selectLatitude.add(Double.valueOf(area.getString("Latitude")));
                 selectLongtiude.add(Double.valueOf(area.getString("Longitude")));
                 selectAddress.add(area.getString("Address"));
@@ -405,6 +407,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
             fdb.SetLatitudeBusiness(selectLatitude);
             fdb.SetLongtiudeBusiness(selectLongtiude);
             fdb.SetRateBusiness(selectRate);
+            fdb.SetDisCountPercent(selectDisCountPercent);
             fdb.SetRateCount(selectRateCount);
             fdb.SetAddressBusiness(selectAddress);
             fdb.SetSrc(selectSrc);

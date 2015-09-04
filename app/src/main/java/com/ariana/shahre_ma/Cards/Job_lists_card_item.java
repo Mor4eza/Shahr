@@ -19,7 +19,7 @@ public class Job_lists_card_item {
     private int mThumbnail;
     private Integer mId;
     private Integer mSubsetId;
-    private Integer mDiscount;
+    private String mDiscount;
 
 
 
@@ -31,8 +31,8 @@ public class Job_lists_card_item {
     public void setSubsetId(Integer subsetid){this.mSubsetId=subsetid;}
     public Integer getSubsetId(){return  this.mSubsetId;}
 
-    public void setDisCount(Integer discount){this.mDiscount=discount;}
-    public Integer getDisCount(){return  this.mDiscount;}
+    public void setDisCount(String discount){this.mDiscount=discount;}
+    public String getDisCount(){return  this.mDiscount;}
 
 
     public double getRate() {

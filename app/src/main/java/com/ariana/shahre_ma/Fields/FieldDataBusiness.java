@@ -10,6 +10,7 @@ public class FieldDataBusiness
 {
     private static List<Integer> Id=new ArrayList<>();
     private static List<Integer> DisCountId=new ArrayList<>();
+    private static List<String> DisCountPercent=new ArrayList<>();
     private static List<Integer> RateCount=new ArrayList<>();
     private static List<Double> Longtiude=new ArrayList<>();
     private static List<Double> Latitude=new ArrayList<>();
@@ -32,6 +33,16 @@ public class FieldDataBusiness
         return RateCount;
     }
 
+
+    public void SetDisCountPercent(List<String> percent)
+    {
+        DisCountPercent=percent;
+    }
+
+    public List<String> GetDisCountPercent()
+    {
+        return DisCountPercent;
+    }
 
     public void SetIdBusiness(List<Integer> id)
     {

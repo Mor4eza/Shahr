@@ -38,6 +38,8 @@ import com.ariana.shahre_ma.Bookmarks.BookMark;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
+import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.MyBusiness.My_Business;
 import com.ariana.shahre_ma.MyCity.My_city;
 import com.ariana.shahre_ma.MyInterest.My_Interest;
@@ -83,8 +85,7 @@ public class MainActivity extends ActionBarActivity {
     ActionButton Action;
     NetState net = new NetState(this);
     Query query = new Query(this);
-    private static final int PROFILE_SETTING = 1;
-    private AccountHeader headerResult = null;
+
     private Drawer result = null;
     private WindowManager mWindowManager;
     private ImageView mImgFloatingView;
@@ -93,6 +94,7 @@ public class MainActivity extends ActionBarActivity {
     TimeSetReceiver tsr;
     Toolbar toolbar;
     SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(this);
+    FieldDataBusiness fdb=new FieldDataBusiness();
 
 
     @Override
@@ -414,6 +416,7 @@ public class MainActivity extends ActionBarActivity {
                                 if (query.getMemberId() > 0) // get member
                                 {
                                     // Getting Business Member
+                                    fdb.ClearAll();
                                     Intent i = new Intent(MainActivity.this, My_Business.class);
                                     startActivity(i);
 

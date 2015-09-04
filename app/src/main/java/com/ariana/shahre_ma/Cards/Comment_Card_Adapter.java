@@ -56,8 +56,7 @@ Query query;
 
                 mItems = new ArrayList<Comment_Card_items>();
                 do {
-
-
+                    
                     nature = new Comment_Card_items();
                     nature.settag(allrows.getInt(0));
                     nature.setmUser(allrows.getString(6));

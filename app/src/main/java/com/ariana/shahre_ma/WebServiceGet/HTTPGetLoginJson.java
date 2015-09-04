@@ -13,6 +13,7 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MainActivity;
+import com.ariana.shahre_ma.MessageDialog;
 import com.ariana.shahre_ma.MyProfile.Log_In;
 
 import org.apache.http.HttpEntity;
@@ -181,16 +182,16 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
 
                 } else
                 {
-                    Log_In.btn.setProgress(0);
-                    AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-                    alertDialog.setTitle("خطا");
-                    alertDialog.setMessage("رمز و نام کاربری اشتباه است");
-                    alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
+                    if(errorCode==200) {
+                        MessageDialog messageDialog=new MessageDialog(context);
+                        messageDialog.ShowMessage("هشدار","رمز یا نام کاربری اشتباه است","باشه","false");
+                    }
+                    else
+                    {
+                        MessageDialog messageDialog=new MessageDialog(context);
+                        messageDialog.ShowMessage("هشدار","ارتباط با سرور برقرار نشد دوباره امتحان کنید","باشه","false");
+                    }
 
-                        }
-                    });
-                    alertDialog.show();
 
                 }
 
@@ -198,33 +199,17 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
             catch (Exception e)
             {
                 Log_In.btn.setProgress(0);
-                Log.e("ExceptionLogin", e.toString());
-                AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-                alertDialog.setTitle("خطا");
-                alertDialog.setMessage("دوباره امتحان کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+                MessageDialog messageDialog=new MessageDialog(context);
+                messageDialog.ShowMessage("هشدار","ارتباط با سرور برقرار نشد دوباره امتحان کنید","باشه","false");
 
-                    }
-                });
-                alertDialog.show();
 
             }
         }
         else
         {
             Log_In.btn.setProgress(0);
-            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-            alertDialog.setTitle("خطا");
-            alertDialog.setMessage("رمز و نام کاربری اشتباه است");
-            alertDialog.setButton("باشه", new DialogInterface.OnClickListener()
-            {
-                public void onClick(DialogInterface dialog, int which)
-                {
-
-                }
-            });
-            alertDialog.show();
+            MessageDialog messageDialog=new MessageDialog(context);
+            messageDialog.ShowMessage("هشدار", "ارتباط با سرور برقرار نشد دوباره امتحان کنید", "باشه", "false");
         }
 
     }

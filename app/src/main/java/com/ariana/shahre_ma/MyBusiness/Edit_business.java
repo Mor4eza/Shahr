@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
@@ -525,7 +526,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-
+        String _path="";
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
                 // currImageURI is the global variable I’m using to hold the content:
@@ -534,12 +535,16 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
                 BufferedOutputStream out = null;
                 Path=getRealPathFromURI(currImageURI);
                 Bitmap myBitmap = BitmapFactory.decodeFile(Path);
-
+                _path=Path;
+                Bitmap _MyBitmap=ShrinkBitmap(_path,500,800);
                 try {
                     File dump = new File(Path);
-                    out = new BufferedOutputStream(new FileOutputStream(dump));
-                    myBitmap.compress(Bitmap.CompressFormat.JPEG, 55, out);
-                } catch (FileNotFoundException e) {
+                    Log.i("SizeImage",String.valueOf(dump.length()));
+                    /*out = new BufferedOutputStream(new FileOutputStream(dump));
+                    myBitmap.compress(Bitmap.CompressFormat.JPEG, 55, out);*/
+
+
+                } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
                     if (out != null) try {
@@ -549,16 +554,16 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
                     }
                 }
                     if(ViewId==image1.getId()){
-                    image1.setImageBitmap(myBitmap);
+                    image1.setImageBitmap(_MyBitmap);
                     UploadImage();
                 }else if(ViewId==image2.getId()){
-                    image2.setImageBitmap(myBitmap);
+                    image2.setImageBitmap(_MyBitmap);
                     UploadImage();
                 }else if(ViewId==image3.getId()){
-                    image3.setImageBitmap(myBitmap);
+                    image3.setImageBitmap(_MyBitmap);
                     UploadImage();
                 }else if(ViewId==image4.getId()){
-                    image4.setImageBitmap(myBitmap);
+                    image4.setImageBitmap(_MyBitmap);
                     UploadImage();
                 }
 
@@ -671,4 +676,31 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
         }
 
     };
+
+
+    public Bitmap ShrinkBitmap(String file, int width, int height)
+    {
+        BitmapFactory.Options bmpFactoryOptions = new BitmapFactory.Options();
+        bmpFactoryOptions.inJustDecodeBounds = true;
+        Bitmap bitmap = BitmapFactory.decodeFile(file, bmpFactoryOptions);
+
+        int heightRatio = (int) Math.ceil(bmpFactoryOptions.outHeight / (float) height);
+        int widthRatio = (int) Math.ceil(bmpFactoryOptions.outWidth / (float) width);
+
+        if(heightRatio > 1 || widthRatio > 1)
+        {
+            if(heightRatio > widthRatio)
+            {
+                bmpFactoryOptions.inSampleSize = heightRatio;
+            }
+            else
+            {
+                bmpFactoryOptions.inSampleSize = widthRatio;
+            }
+        }
+
+        bmpFactoryOptions.inJustDecodeBounds = false;
+        bitmap = BitmapFactory.decodeFile(file, bmpFactoryOptions);
+        return bitmap;
+    }
 }

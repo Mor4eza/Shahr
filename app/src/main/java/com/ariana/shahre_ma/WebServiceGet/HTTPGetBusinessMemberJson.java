@@ -77,6 +77,18 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
     Integer ratecount[];
     Double ratevalue[];
 
+    Integer discountid[];
+    String discounttext[];
+    String discountimage[];
+    String discountstartdate[];
+    String discountexpirationdate[];
+    String discountdescription[];
+    String discountpercent[];
+    Integer discountbusinessid[];
+
+    Integer likediscount[];
+    Integer dislikediscount[];
+
     Integer len=0;
     Integer i=0;
 
@@ -172,6 +184,16 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
                         Log.i("ID", String.valueOf(Id[i]));
                         Log.i("count", String.valueOf(count));
 
+                        ddb.delete_DisCount(discountid[i]);
+                        if (discountid[i] == 0)
+                        {
+                            Log.i("ifbusiness", "0");
+                        }
+                        else
+                        {
+                            Log.i("elsebusiness", "i>0");
+                            adb.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i], likediscount[i], dislikediscount[i]);
+                        }
 
 
                         if(count==0)
@@ -179,7 +201,6 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
                                     , address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i],
                                     subsetid[i],latitude[i], longitude[i], areaid[i],area1[i], user[i],cityid, userid[i],
                                     field1[i], field2[i], field3[i], field4[i], field5[i],field6[i], field7[i], ratecount[i], ratevalue[i],src[i]);
-
                     }
 
                 final My_Business business=new My_Business();
@@ -265,6 +286,21 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
             field7=new Integer[areas.length()];
             ratecount=new Integer[areas.length()];
             ratevalue=new Double[areas.length()];
+
+            discountid = new Integer[areas.length()];
+            discounttext = new String[areas.length()];
+            discountimage=new String[areas.length()];
+            discountstartdate=new String[areas.length()];
+            discountexpirationdate=new String[areas.length()];
+            discountdescription=new String[areas.length()];
+            discountpercent=new String[areas.length()];
+            discountbusinessid=new Integer[areas.length()];
+
+            likediscount=new Integer[areas.length()];
+            dislikediscount=new Integer[areas.length()];
+
+
+
             len=areas.length();
 
             for (int i = 0; i < areas.length(); i++) {
@@ -309,6 +345,19 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
 
                 latitude[i] = Double.valueOf(area.getString("Latitude"));
                 longitude[i] = Double.valueOf(area.getString("Longitude"));
+
+
+                discountid[i]=area.getInt("DiscountId");
+                discounttext[i]=area.getString("DiscountText");
+                discountimage[i]=area.getString("DiscountImage");
+                discountstartdate[i]=area.getString("DiscountStartdate");
+                discountexpirationdate[i]=area.getString("DiscountExpirationDate");
+                discountpercent[i]=area.getString("DiscountPercent");
+                discountdescription[i]=area.getString("DiscountDescription");
+                discountbusinessid[i]=area.getInt("Id");
+
+                likediscount[i]=area.getInt("DiscountLike");
+                dislikediscount[i]=area.getInt("DiscountDislike");
 
 
                 selectId.add(area.getInt("Id"));
