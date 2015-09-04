@@ -14,6 +14,7 @@ import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MyBusiness.Discount;
 import com.ariana.shahre_ma.MyBusiness.discount_Adapter;
 import com.ariana.shahre_ma.MyBusiness.discount_item;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetOneBusinessJson;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -134,8 +135,9 @@ public class HTTPPostDisCount extends AsyncTask<String,Void,Integer> {
                 AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
                 DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
                // adb.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i], likediscount[i], dislikediscount[i]);
-                adb.Add_DisCountMember(Integer.parseInt(mesage),fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());
+                adb.Add_DisCountMember(Integer.parseInt(mesage), fc.GetText_DisCount(), fc.GetImage_DisCount(), fc.GetStartDate_DisCount(), fc.GetExpirationDate_DisCount(), fc.GetDescription_DisCount(), fc.GetPercent_DisCount(), fc.GetBusinessId_DisCount());
                 pd.dismiss();
+
 
                 Discount dis=new Discount();
                 discount_Adapter adapter = new discount_Adapter(context,generateData());
