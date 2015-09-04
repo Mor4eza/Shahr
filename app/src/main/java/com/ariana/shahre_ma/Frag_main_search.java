@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.Search.SearchOfline;
@@ -44,6 +45,7 @@ public class Frag_main_search extends Fragment {
     private boolean visable=false;
     private FrameLayout frame;
     FieldDataBusiness fdb=new FieldDataBusiness();
+    DeleteDataBaseSqlite dda=new DeleteDataBaseSqlite(getActivity());
     Integer subsetid=0;
     Integer Cityid=0;
     Integer fieldactivity=0;
@@ -156,6 +158,8 @@ public class Frag_main_search extends Fragment {
         @Override
         public void onClick(View v) {
 
+
+            dda.delete_Search();
             Query query = new Query(getActivity());
             fieldactivity=query.getFieldActivityId(txtField.getText().toString());
             Cityid = query.getCityId(txtWhere.getText().toString());

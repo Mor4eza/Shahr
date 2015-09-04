@@ -149,6 +149,7 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
                 }
                 else
                 {
+                    pd.dismiss();
                     if(response_message==0)
                         messageDialog.ShowMessage("هشدار","این نام کاربری قبلا ساخته شده لطفا نام کاربری دیگری وارد کنید","باشه","false");
 
@@ -156,12 +157,14 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
             }
             else
             {
+                pd.dismiss();
                messageDialog.ShowMessage("هشدار","پاسخی از سمت دریافت نشد . دوباره امتحان کنید","باشه","false");
             }
 
         }
         catch (Exception e)
         {
+            pd.dismiss();
             messageDialog.ShowMessage("هشدار","لطفا دوباره امتحان کنید","باشه","false");
         }
 
