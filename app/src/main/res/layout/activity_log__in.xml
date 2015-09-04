@@ -136,7 +136,7 @@
         class="com.mikepenz.materialdrawer.view.BezelImageView"
         android:id="@+id/view2"
         android:src="@mipmap/ic_launcher"
-        android:layout_alignTop="@+id/tverror"
+        android:layout_below="@+id/tverror"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

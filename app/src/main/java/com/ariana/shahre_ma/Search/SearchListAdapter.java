@@ -46,7 +46,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
          sdb=new SelectDataBaseSqlite(context);
          query=new Query(context);
             mItems = new ArrayList<SearchItems>();
-       // try {
+        try {
             SelectDataBaseSqlite sdb = new SelectDataBaseSqlite(context);
             Integer cityid=0;
             setting=new KeySettings(context);
@@ -176,11 +176,11 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
                     }
                 }
             }
-       /* }
+       }
         catch (Exception e)
         {
             Log.d("searachListAdapter",e.toString());
-        }*/
+        }
 
 
     }
