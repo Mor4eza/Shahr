@@ -53,6 +53,7 @@ import com.ariana.shahre_ma.Settings.Setting;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetAdvertismentJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetTopsBusinessJson;
 import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
 import com.github.amlcurran.showcaseview.ShowcaseView;
@@ -206,6 +207,7 @@ public class MainActivity extends ActionBarActivity {
     private void Image_slider() {
 
         String imag[]=new String[3];
+        final String url[]=new String[3];
         Integer i=0;
 
         Cursor rows=sdb.select_Advertisment();
@@ -215,6 +217,7 @@ public class MainActivity extends ActionBarActivity {
             do
             {
                 imag[i]=rows.getString(1);
+                url[i]=rows.getString(2);
                 i++;
             }while (rows.moveToNext());
         }
@@ -224,12 +227,24 @@ public class MainActivity extends ActionBarActivity {
         textSliderView
                 .description("")
                 .image("http://www.shahrma.com/app/Advertisment/" + imag[0]);
+        textSliderView.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+            @Override
+            public void onSliderClick(BaseSliderView baseSliderView) {
+                Log.d("Image1",url[0]);
+            }
+        });
         slider.addSlider(textSliderView);
 
         TextSliderView textSliderView2 = new TextSliderView(this);
         textSliderView2
                 .description("")
                 .image("http://www.shahrma.com/app/Advertisment/" + imag[1]);
+        textSliderView2.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+            @Override
+            public void onSliderClick(BaseSliderView baseSliderView) {
+                Log.d("Image1", url[1]);
+            }
+        });
         slider.addSlider(textSliderView2);
 
 
@@ -237,6 +252,12 @@ public class MainActivity extends ActionBarActivity {
         textSliderView3
                 .description("")
                 .image("http://www.shahrma.com/app/Advertisment/" + imag[2]);
+        textSliderView3.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+            @Override
+            public void onSliderClick(BaseSliderView baseSliderView) {
+                Log.d("Image1", url[2]);
+            }
+        });
         slider.addSlider(textSliderView3);
 
         slider.setPresetTransformer(SliderLayout.Transformer.Accordion);
@@ -584,8 +605,32 @@ public class MainActivity extends ActionBarActivity {
                 }
                 return true;
             case R.id.notification:
+                if (query.getMemberId() > 0) // get member
+                {
                     Intent i=new Intent(getApplicationContext(), Activity_notify.class);
-                startActivity(i);
+                    startActivity(i);
+
+
+                } else {
+                    AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                    alertDialog.setTitle("وارد شوید");
+                    alertDialog.setMessage("وارد حساب کاربری خود شوید و از تمامی امکانات برنامه استفاده کنید.");
+                    alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent i = new Intent(getApplicationContext(), Log_In.class);
+                            startActivity(i);
+                            finish();
+                        }
+                    });
+
+                    alertDialog.setButton2("بعدا", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    alertDialog.show();
+
+                }
                 return true;
 
             default:
