@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
@@ -24,38 +25,28 @@ import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceSend.HTTPSendLikeDisCount;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.squareup.picasso.Picasso;
 
 
 public class job_details_discount extends FragmentActivity {
-
-
-
-
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_details_discount);
-
-
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
-
-
     }
-
-
-
-
     /**
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
-
-
         FieldClass fc=new FieldClass();
 
         Integer discountid=0;
@@ -95,7 +86,7 @@ public class job_details_discount extends FragmentActivity {
             tv_dis_desc=(TextView) rootView.findViewById(R.id.tv_dis_desc);
 
 
-          //  try {
+           try {
                 SelectDataBaseSqlite db = new SelectDataBaseSqlite(getActivity());
                 Cursor cursor = db.select_DisCount(fc.GetBusiness_Id());
 //                Log.i("IDdiscount",String.valueOf(cursor.getInt(0)));
@@ -129,10 +120,10 @@ public class job_details_discount extends FragmentActivity {
                     tv_like.setText(String.valueOf(cursor.getInt(8)));
                     tv_unlike.setText(String.valueOf(cursor.getInt(9)));
                 }
-           /* }catch (Exception e)
+            }catch (Exception e)
             {
 
-            }*/
+            }
 
 
             drawable_like = (TransitionDrawable) like.getBackground();
@@ -167,7 +158,7 @@ public class job_details_discount extends FragmentActivity {
                     }
                     else
                     {
-                        // Toast not net
+                        Toast.makeText(getActivity(),"اینترنت قطع می باشد",Toast.LENGTH_LONG).show();
                     }
                 }
             });
@@ -203,5 +194,25 @@ public class job_details_discount extends FragmentActivity {
             return rootView;
         }
 
+
+        private void  display_Images() {
+            try {
+                SelectDataBaseSqlite db = new SelectDataBaseSqlite(getActivity());
+                Cursor rows = db.select_BusinessImage(fc.GetBusiness_Id());
+                if (rows.getCount() > 0)
+                {
+                   String image_url_1 = "http://www.shahrma.com/image/business/" +rows.getString(9)+".jpg";
+                    Picasso.with(getActivity()).load(image_url_1).placeholder(R.drawable.img_not_found).into(imageView);
+
+                }
+                else
+                {
+
+                }
+
+            }
+            catch (Exception e){}
+
+        }
     }
 }

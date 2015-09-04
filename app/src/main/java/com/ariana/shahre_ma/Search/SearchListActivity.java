@@ -227,7 +227,7 @@ public class SearchListActivity extends ActionBarActivity implements SearchView.
     {
         Log.i("Search","Close");
         KeySettings setting=new KeySettings(this);
-        setting.saveSearchBusiness(false);
+        setting.saveSearchBusiness(true);
         setCards();
         return false;
     }

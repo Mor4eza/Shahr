@@ -277,7 +277,7 @@ public class  InstructionsSqlite {
             "Percent TEXT," +
             "BusinessId INTEGER," +
             "Like INTEGER," +
-            "DisLike INTEGER" +
+            "Src TEXT" +
             ");";
 
     //SQL statement to create DisCoutnMember table
@@ -289,7 +289,8 @@ public class  InstructionsSqlite {
             "ExpirationDate TEXT ," +
             "Description TEXT ," +
             "Percent TEXT," +
-            "BusinessId INTEGER" +
+            "BusinessId INTEGER," +
+            "Src TEXT" +
             ");";
 
     //SQL statement to create LikeDisCoutn table

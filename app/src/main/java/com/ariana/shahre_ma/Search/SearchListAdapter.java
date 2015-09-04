@@ -111,7 +111,6 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
                     }
                 }while (allrows.moveToNext());
 
-                  ;
                 }
 
             }

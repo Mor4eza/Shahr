@@ -79,6 +79,13 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
         pd = new ProgressDialog(context);
         pd.setMessage("در حال ثبت کاربر...");
         pd.setCancelable(false);
+        pd.setButton("توقف", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                cancel(true);
+            }
+        });
         pd.show();
     }
 
@@ -158,7 +165,7 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
             else
             {
                 pd.dismiss();
-               messageDialog.ShowMessage("هشدار","پاسخی از سمت دریافت نشد . دوباره امتحان کنید","باشه","false");
+               messageDialog.ShowMessage("هشدار","پاسخی از سمت سرور دریافت نشد . دوباره امتحان کنید","باشه","false");
             }
 
         }

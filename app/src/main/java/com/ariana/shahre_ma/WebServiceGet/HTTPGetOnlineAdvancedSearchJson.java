@@ -2,6 +2,7 @@ package com.ariana.shahre_ma.WebServiceGet;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -125,6 +126,13 @@ public class HTTPGetOnlineAdvancedSearchJson extends AsyncTask<String,Void,Integ
         pd = new ProgressDialog(context);
         pd.setMessage("درحال دریافت نتایج جستجو...");
         pd.setCancelable(false);
+        pd.setButton("توقف", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                cancel(true);
+            }
+        });
         pd.show();
     }
 
