@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -64,7 +65,7 @@ public class MyListAdapter extends BaseExpandableListAdapter {
             view = layoutInflater.inflate(R.layout.child_item, null);
         }
 
-       final TextView name = (TextView) view.findViewById(R.id.laptop);
+       final Button name = (Button) view.findViewById(R.id.laptop);
         name.setText(country.getName().trim());
 
         name.setOnClickListener(new View.OnClickListener() {
