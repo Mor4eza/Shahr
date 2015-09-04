@@ -236,7 +236,7 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
 
 
         } catch (JSONException e) {
-            Log.i("JSONException",e.toString());
+            Log.i("ExceptionTopBusiness",e.toString());
         }
     }
 
@@ -244,7 +244,8 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
         try {
             URL url = new URL(urlString);
             HttpURLConnection huc = (HttpURLConnection) url.openConnection();
-
+            huc.setReadTimeout(10000);
+            huc.setConnectTimeout(15000);
             huc.setRequestMethod(method);
             huc.setDoInput(true);
 
@@ -252,7 +253,7 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
             errorCode=huc.getResponseCode();
             return huc.getInputStream();
         } catch (Exception e) {
-            Log.e("getStreamFromURL",e.toString());
+            Log.e("FromURLTopBusiness",e.toString());
             return null;
         }
     }
@@ -268,7 +269,7 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
             }
         } catch (Exception e)
         {
-            Log.e("streamToString",e.toString());
+            Log.e("streamToStringTopBusiness",e.toString());
         }
 
         return result;

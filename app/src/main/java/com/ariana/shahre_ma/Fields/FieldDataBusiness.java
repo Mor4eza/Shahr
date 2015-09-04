@@ -10,6 +10,7 @@ public class FieldDataBusiness
 {
     private static List<Integer> Id=new ArrayList<>();
     private static List<Integer> DisCountId=new ArrayList<>();
+    private static List<Integer> RateCount=new ArrayList<>();
     private static List<Double> Longtiude=new ArrayList<>();
     private static List<Double> Latitude=new ArrayList<>();
     private static List<Double> Rate=new ArrayList<>();
@@ -19,6 +20,17 @@ public class FieldDataBusiness
     private static List<Integer> SubsetId=new ArrayList<>();
     private static List<String> Address=new ArrayList<>();
     private static List<String> MarketName=new ArrayList<String>();
+
+
+    public void SetRateCount(List<Integer> rateCount)
+    {
+        RateCount=rateCount;
+    }
+
+    public List<Integer> GetRateCount()
+    {
+        return RateCount;
+    }
 
 
     public void SetIdBusiness(List<Integer> id)
@@ -165,7 +177,7 @@ public class FieldDataBusiness
 
     public void ClearAll()
     {
-         Id.clear();
+        Id.clear();
         Longtiude.clear();
         Latitude.clear();
         Rate.clear();
@@ -173,6 +185,8 @@ public class FieldDataBusiness
         Mobile.clear();
         Address.clear();
         MarketName.clear();
-
+        DisCountId.clear();
+        Src.clear();
+        SubsetId.clear();
     }
 }

@@ -43,6 +43,7 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
     private List<Integer> selectId=new ArrayList<>();
     private  List<Integer> selectDiscountId=new ArrayList<>();
     private  List<Integer> selectSubsetId=new ArrayList<>();
+    private  List<Integer> selectRateCount=new ArrayList<>();
     private  List<Double>  selectLongtiude=new ArrayList<>();
     private  List<Double>  selectLatitude=new ArrayList<>();
     private  List<Double>  selectRate=new ArrayList<>();
@@ -261,6 +262,7 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
                     selectPhone.add(area.getString("Phone"));
                     selectMobile.add(area.getString("Mobile"));
                     selectRate.add(area.getDouble("RateAverage"));
+                    selectRateCount.add(area.getInt("RateCount"));
 
 
                 }
@@ -273,6 +275,7 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
                 fdb.SetRateBusiness(selectRate);
                 fdb.SetAddressBusiness(selectAddress);
                 fdb.SetSrc(selectSrc);
+                fdb.SetRateCount(selectRateCount);
                 fdb.SetMarketBusiness(selectMarketName);
                 fdb.SetPhoneBusiness(selectPhone);
                 fdb.SetMobileBusiness(selectMobile);

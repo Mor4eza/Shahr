@@ -54,6 +54,7 @@ public class SearchOfline
 
     private List<Integer> selectId=new ArrayList<>();
     private  List<Integer> selectDisCount=new ArrayList<>();
+    private  List<Integer> selectRateCount=new ArrayList<>();
     private  List<Integer> selectSubsetId=new ArrayList<>();
     private  List<Double>  selectLongtiude=new ArrayList<>();
     private  List<Double>  selectLatitude=new ArrayList<>();
@@ -356,6 +357,7 @@ public class SearchOfline
                         selectLongtiude.add(rows_Business.getDouble(15));
                         selectLatitude.add(rows_Business.getDouble(16));
                         selectRate.add(rows_Business.getDouble(30));
+                        selectRateCount.add(rows_Business.getInt(29));
                         selectSrc.add(rows_Business.getString(31));
 
                     } while (rows_Business.moveToNext());
@@ -366,6 +368,7 @@ public class SearchOfline
                 fdb.SetLatitudeBusiness(selectLatitude);
                 fdb.SetLongtiudeBusiness(selectLongtiude);
                 fdb.SetRateBusiness(selectRate);
+                fdb.SetRateCount(selectRateCount);
                 fdb.SetSubsetId(selectSubsetId);
                 fdb.SetAddressBusiness(selectAddress);
                 fdb.SetMarketBusiness(selectMarketName);

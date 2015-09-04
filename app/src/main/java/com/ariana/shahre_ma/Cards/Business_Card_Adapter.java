@@ -156,6 +156,7 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
                 @Override
                 public void onClick(View v) {
                     fab.hide();
+                    fc.SetBusiness_Id(Integer.valueOf(String.valueOf(tvNature.getTag())));
                     Intent i = new Intent(context, Discount.class);
                     context.startActivity(i);
                     Log.i("clicked", tvNature.getText().toString());

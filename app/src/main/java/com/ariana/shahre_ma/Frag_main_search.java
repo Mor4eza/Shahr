@@ -52,7 +52,7 @@ public class Frag_main_search extends Fragment {
     private Button  btnAdvance;
     private boolean visable=false;
     private FrameLayout frame;
-
+    FieldDataBusiness fdb=new FieldDataBusiness();
     Integer subsetid=0;
     Integer Cityid=0;
     Integer fieldactivity=0;
@@ -163,12 +163,11 @@ public class Frag_main_search extends Fragment {
         @Override
         public void onClick(View v) {
 
-
             Query query = new Query(getActivity());
             fieldactivity=query.getFieldActivityId(txtField.getText().toString());
             Cityid = query.getCityId(txtWhere.getText().toString());
             subsetid = query.getAdvancesubsetID(txtField.getText().toString());
-
+            fdb.ClearAll();
             Log.i("fieldactivity", String.valueOf(fieldactivity));
             Log.i("subsetid", String.valueOf(subsetid));
             Log.i("Cityid", String.valueOf(Cityid));

@@ -42,6 +42,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
     Integer errorCode=0;
 
     private  List<Integer> selectId=new ArrayList<>();
+    private  List<Integer> selectRateCount=new ArrayList<>();
     private  List<Integer> selectDiscountId=new ArrayList<>();
     private  List<Integer> selectSubsetId=new ArrayList<>();
     private  List<Double>  selectLongtiude=new ArrayList<>();
@@ -228,6 +229,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
             }
             else
             {
+                pd.dismiss();
                 if (errorCode==504 || errorCode==503)
                 {
                     pd.dismiss();
@@ -376,6 +378,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
                 selectSrc.add(area.getString("Src"));
                 selectMobile.add(area.getString("Mobile"));
                 selectRate.add(area.getDouble("RateAverage"));
+                selectRateCount.add(area.getInt("RateCount"));
 
 
             }
@@ -386,6 +389,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
             fdb.SetLatitudeBusiness(selectLatitude);
             fdb.SetLongtiudeBusiness(selectLongtiude);
             fdb.SetRateBusiness(selectRate);
+            fdb.SetRateCount(selectRateCount);
             fdb.SetAddressBusiness(selectAddress);
             fdb.SetSrc(selectSrc);
             fdb.SetMarketBusiness(selectMarketName);
@@ -417,7 +421,9 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
             huc.connect();
             errorCode=huc.getResponseCode();
             return huc.getInputStream();
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
+            Log.i("getStreamFromURL",errorCode.toString());
             return null;
         }
     }

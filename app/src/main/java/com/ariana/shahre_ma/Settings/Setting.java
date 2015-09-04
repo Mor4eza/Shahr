@@ -52,7 +52,7 @@ public class Setting extends ActionBarActivity implements TimePickerDialog.OnTim
                     //     TimePickerDialog.newInstance(Setting.this, calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE), false).show(getFragmentManager(), "timePicker");
 
                     TimePickerDialog t = new TimePickerDialog();
-                    t.initialize(Setting.this, 9, 00, false);
+                    t.initialize(Setting.this,Integer.parseInt(setting.getAMtime().substring(0, 2)), Integer.parseInt(setting.getAMtime().substring(3, 5)), false);
                     t.show(getFragmentManager(), "end");
                     t.setOnTimeSetListener(new TimePickerDialog.OnTimeSetListener() {
                         @Override
@@ -82,7 +82,7 @@ public class Setting extends ActionBarActivity implements TimePickerDialog.OnTim
                 } else if (position == 1) {
 
                     TimePickerDialog t = new TimePickerDialog();
-                    t.initialize(Setting.this, 16, 00, false);
+                    t.initialize(Setting.this,Integer.parseInt(setting.getPMtime().substring(0, 2)), Integer.parseInt(setting.getPMtime().substring(3, 5)), false);
                     t.show(getFragmentManager(), "end");
                     t.setOnTimeSetListener(new TimePickerDialog.OnTimeSetListener() {
                         @Override
