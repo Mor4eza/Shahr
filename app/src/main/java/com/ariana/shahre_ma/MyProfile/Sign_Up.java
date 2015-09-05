@@ -1,7 +1,5 @@
 package com.ariana.shahre_ma.MyProfile;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -121,72 +119,30 @@ Query query=new Query(this);
 
             if(cityid<=0)
             {
-                AlertDialog alertDialog = new AlertDialog.Builder(Sign_Up.this).create();
-                alertDialog.setTitle("هشدار ");
-                alertDialog.setMessage("شهر خود را انتخاب کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
                         city.requestFocus();
+                        city.setError("شهر خود را انتخاب کنید");
 
-                    }
-                });
-
-                alertDialog.show();
             }
-            else if(Aname.length()==0)
+            else if(Aname.length()<=3)
             {
-                AlertDialog alertDialog = new AlertDialog.Builder(Sign_Up.this).create();
-                alertDialog.setTitle("هشدار ");
-                alertDialog.setMessage("نام خود را وارد کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
+                        name.setError("بیش از 3 حرف وارد کنید");
                         name.requestFocus();
-
-                    }
-                });
-
-                alertDialog.show();
             }
-            else if(Ausername.length()==0)
+            else if(Ausername.length()<5)
             {
-                AlertDialog alertDialog = new AlertDialog.Builder(Sign_Up.this).create();
-                alertDialog.setTitle("هشدار ");
-                alertDialog.setMessage("نام کاربری را وارد کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+                        username.setError("نام کاربری باید حد اقل 5 حرف باشد");
                         username.requestFocus();
-                    }
-                });
-
-                alertDialog.show();
             }
-            else if(Apass.length()==0 )
+            else if(Apass.length()<6)
             {
-                AlertDialog alertDialog = new AlertDialog.Builder(Sign_Up.this).create();
-                alertDialog.setTitle("هشدار ");
-                alertDialog.setMessage("رمز را وارد کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+                        pass.setError("رمز عبور باید حداقل 6 حرف باشد");
                         pass.requestFocus();
-                    }
-                });
 
-                alertDialog.show();
             }
             else if(Aage.equals(null) || Aage.length()==0 || Aage.equals("null"))
             {
-                AlertDialog alertDialog = new AlertDialog.Builder(Sign_Up.this).create();
-                alertDialog.setTitle("هشدار ");
-                alertDialog.setMessage("سن خود را وارد کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+                        age.setError("سن خود را وارد کنید");
                         age.requestFocus();
-                    }
-                });
-
-                alertDialog.show();
             }
             else {
                 _json = (json.getSqliteTOjson(Aname, Aemail, Aphone, Integer.parseInt(Aage), Asex, Ausername, Apass, query.getCityId(Acity)));
