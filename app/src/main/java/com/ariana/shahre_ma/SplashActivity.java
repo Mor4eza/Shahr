@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.util.Timer;
@@ -74,6 +76,13 @@ public class SplashActivity extends ActionBarActivity {
 
                             HTTPGetCityJson httpGetCityJson = new HTTPGetCityJson(SplashActivity.this);
                             httpGetCityJson.execute();
+
+                            HTTPGetCollectionJson httpGetCollectionJson=new HTTPGetCollectionJson(SplashActivity.this);
+                            httpGetCollectionJson.execute();
+
+                            HTTPGetSubsetJson httpGetSubsetJson=new HTTPGetSubsetJson(SplashActivity.this);
+                            httpGetSubsetJson.execute();
+
 
                             finish();
                             Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);

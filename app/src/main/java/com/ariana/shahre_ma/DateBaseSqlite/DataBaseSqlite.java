@@ -1488,7 +1488,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     public Cursor select_Collection()
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        return  db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_COLLECTION,null);
+        return  db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_COLLECTION+" ORDER BY CollectionName ASC",null);
     }
 
     public Cursor select_Collection_Product()
@@ -1514,7 +1514,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     public Cursor select_Subset()
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        return  db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_SUBSET,null);
+        return  db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_SUBSET +"  ORDER BY SubsetName ASC",null);
     }
 
     public Cursor select_Subset_Product()

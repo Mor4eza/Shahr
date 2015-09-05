@@ -43,7 +43,7 @@
         android:id="@+id/relative_advance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_below="@+id/btn_advanced"
         android:layout_margin="10dp"
         >

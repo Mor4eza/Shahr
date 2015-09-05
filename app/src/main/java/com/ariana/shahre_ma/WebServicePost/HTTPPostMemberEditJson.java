@@ -9,9 +9,9 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.MessageDialog;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -132,39 +132,36 @@ public class HTTPPostMemberEditJson extends AsyncTask<String, Long, Integer>
     @Override
     protected void onPostExecute(Integer result) {
             /* Download complete. Lets update UI */
+        try {
+            if (result == 1) {
+                Log.i("onPostExecute", "onPostExecute");
+                AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+                DeleteDataBaseSqlite ddb = new DeleteDataBaseSqlite(context);
+                Integer ID = Integer.parseInt(GetResponse());
+                ddb.delete_Member();
+                if (ID >= 0) {
+                    Log.i("fc.GetMember_Name()", fc.GetMember_Name());
 
-        if(result==1) {
-            Log.i("onPostExecute", "onPostExecute");
-            AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
-            DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
-            Integer ID = Integer.parseInt(GetResponse());
-            ddb.delete_Member();
-            if (ID >= 0) {
-                Log.i("fc.GetMember_Name()", fc.GetMember_Name());
+                    adb.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
+                    pd.dismiss();
 
-                adb.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
+                    Intent intent = new Intent("MyProfile");
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
+                    ((Activity) context).finish();
+
+                } else {
+                    pd.dismiss();
+                    //
+                }
+            } else {
                 pd.dismiss();
-
-                Intent intent = new Intent("MyProfile");
-                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
-
-                ((Activity)context).finish();
-
             }
-            else
-            {
-                pd.dismiss();
-                //  Toast.makeText(context, "کاربر ساخته نشد دوباره امتحان کنید", Toast.LENGTH_LONG).show();
-            }
-        }
-        else
+        }catch (Exception e)
         {
-            pd.dismiss();
+            MessageDialog messageDialog=new MessageDialog(context);
+            messageDialog.ShowMessage("","ویرایش نشد . دوباره امتحان کنید","باشه","false");
         }
-
-
-
-
     }
 
 }
