@@ -213,10 +213,6 @@ private  static Context context;
             viewHolder.tvNature.setText(nature.getName());
             viewHolder.tvDesNature.setText(nature.getDes());
 
-          /*  image_url_1 = "http://www.shahrma.com/image/business/"+fc.GetSubsetId()+".jpg";
-            Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(viewHolder.imgThumbnail);
-            Log.i("nature",nature.getNameImage());*/
-            
             if (nature.getNameImage().equals("null")||nature.getNameImage().equals("")||nature.getNameImage().equals(null)||nature.getNameImage()==null){
                 Log.i("SubsetId",nature.getSubsetId().toString());
                 image_url_1 = "http://www.shahrma.com/image/business/" +nature.getSubsetId()+".jpg";

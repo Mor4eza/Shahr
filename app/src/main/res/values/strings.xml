@@ -65,7 +65,6 @@
     <string name="title_activity_product__list">لیست محصولات</string>
     <string name="title_activity_product__details">جزئیات محصول</string>
     <string name="title_activity_select__image">انتخاب تصاویر</string>
-    <string name="title_activity_my__city2">My_City2</string>
-    <string name="title_activity_search_list">SearchListActivity</string>
+    <string name="title_activity_search_list">نتایج جستجو...</string>
 
 </resources>

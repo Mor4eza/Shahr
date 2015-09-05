@@ -6,13 +6,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
-import com.ariana.shahre_ma.Jobs_List;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetOnlineSearchJson;
@@ -83,7 +81,6 @@ public class SearchOfline
 
 
          fc.SetSelected_job(cityname.toString());
-
          Integer cityid = query.getCityId(cityname.toString().trim());
          if (ns.checkInternetConnection()) {
              try {

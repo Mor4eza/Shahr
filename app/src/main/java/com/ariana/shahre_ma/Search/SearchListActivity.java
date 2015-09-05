@@ -1,13 +1,14 @@
 package com.ariana.shahre_ma.Search;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.ariana.shahre_ma.Cards.job_list_cards_adapter;
+import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 
 import jp.wasabeef.recyclerview.animators.OvershootInLeftAnimator;
@@ -17,11 +18,25 @@ public class SearchListActivity extends ActionBarActivity {
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter Search_list_Adapter;
+    FieldClass fc=new FieldClass();
+    TextView tv_null;
+    ImageView img_null;
+    TextView tv_count;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_list);
         setCards();
+        setTitle("نتایج جستجو...");
+        img_null=(ImageView)findViewById(R.id.img_null);
+        tv_null=(TextView)findViewById(R.id.tv_null);
+        tv_count=(TextView)findViewById(R.id.tv_count);
+        if(Search_list_Adapter.getItemCount()!=0){
+            img_null.setVisibility(View.INVISIBLE);
+            tv_null.setVisibility(View.INVISIBLE);
+            tv_count.setText(Search_list_Adapter.getItemCount()+" "+"مورد");
+        }
     }
 
 
@@ -46,7 +61,7 @@ public class SearchListActivity extends ActionBarActivity {
         catch (Exception e){}
     }
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_search_list, menu);
@@ -66,5 +81,5 @@ public class SearchListActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }

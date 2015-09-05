@@ -13,12 +13,13 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.ariana.shahre_ma.Cards.Job_lists_card_item;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.job_details.Job_details;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
 
 
             Log.i("SearchOffline", "strat");
-            Log.i("SearchOffline",String.valueOf(fdb.GetMarketBusiness().size()));
+            Log.i("SearchOffline", String.valueOf(fdb.GetMarketBusiness().size()));
             mItems = new ArrayList<SearchItems>();
 
         if(fc.GetSearchOffline())
@@ -128,6 +129,20 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         viewHolder.tvDesNature.setTag(nature.getmId());
         viewHolder.imgThumbnail.setImageResource(nature.getThumbnail());
         viewHolder.rates.setRating((float) nature.getRate());
+        viewHolder.rates.setTag(nature.getmId());
+        viewHolder.tvTell.setText(nature.getTell());
+        String image_url_1;
+        if (nature.getNameImage().equals("null")||nature.getNameImage().equals("")||nature.getNameImage().equals(null)||nature.getNameImage()==null){
+            Log.i("SubsetId",nature.getSubsetId().toString());
+            image_url_1 = "http://www.shahrma.com/image/business/" +nature.getSubsetId()+".jpg";
+            Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(viewHolder.imgThumbnail);
+
+        }
+        else
+        {
+            image_url_1 = "http://www.shahrma.com/image/business/" + nature.getNameImage();
+            Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(viewHolder.imgThumbnail);
+        }
     }
 
     @Override
@@ -136,7 +151,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         return mItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener {
 
         public ImageView imgThumbnail;
         public TextView tvNature;
@@ -154,6 +169,9 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
             rates = (RatingBar) itemView.findViewById(R.id.rates);
             tvTell = (TextView) itemView.findViewById(R.id.tv_tell);
             cards = (CardView) itemView.findViewById(R.id.cards);
+            imgThumbnail.setOnClickListener(this);
+            tvNature.setOnClickListener(this);
+            cards.setOnClickListener(this);
 
             tvTell.setOnClickListener(new View.OnClickListener() {
 
@@ -164,5 +182,15 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
                 }
             });
         }
+
+        @Override
+        public void onClick(View v) {
+            fc.SetMarket_Business(tvNature.getText().toString());
+            // fc.SetAddress_Business(tvDesNature.getText().toString());*/
+
+            fc.SetBusiness_Id((Integer) rates.getTag());
+            Intent i =new Intent(context,Job_details.class);
+            context.startActivity(i);
+        }
+        }
     }
-}
