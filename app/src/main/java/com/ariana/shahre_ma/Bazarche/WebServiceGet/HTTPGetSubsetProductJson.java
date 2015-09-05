@@ -27,159 +27,159 @@ import java.util.List;
  */
 public class HTTPGetSubsetProductJson   extends AsyncTask<String,Void,Integer>
 {
-    private static final String url_subsetproduct="http://test.shahrma.com/api/apigiveProductsubset";
+private static final String url_subsetproduct="http://test.shahrma.com/api/apigiveProductsubset";
 
- /*   FieldDataBase fieldDataBase=new FieldDataBase();
-    List<Integer> selectId =new ArrayList<>();
-    List<String>  selectName =new ArrayList<>();
-    List<Integer>  selectCollectionId =new ArrayList<>();*/
-    Integer errorCode=0;
-    Integer Id[];
-    String subsetname[];
-    Integer collectionId[];
-    Integer len;
-
-
-    private static Context context;
-        /**
-         *
-         * @param c
-         */
-        public HTTPGetSubsetProductJson(Context c) {
-            context = c;
-        }
-
-        /**
-         *
-         * @param args
-         * @return
-         */
-        protected Integer doInBackground(String... args) {
-            Integer result=0;
-            try {
+/*   FieldDataBase fieldDataBase=new FieldDataBase();
+   List<Integer> selectId =new ArrayList<>();
+   List<String>  selectName =new ArrayList<>();
+   List<Integer>  selectCollectionId =new ArrayList<>();*/
+Integer errorCode=0;
+Integer Id[];
+String subsetname[];
+Integer collectionId[];
+Integer len;
 
 
-                InputStream jsonStream = getStreamFromURL(url_subsetproduct, "GET");
-                String jsonString = streamToString(jsonStream);
-                parseJSON(jsonString);
-                result=1;
-            } catch (Exception e) {
-                result=0;
+private static Context context;
+    /**
+     *
+     * @param c
+     */
+    public HTTPGetSubsetProductJson(Context c) {
+        context = c;
+    }
 
-            }
-            return result;
+    /**
+     *
+     * @param args
+     * @return
+     */
+    protected Integer doInBackground(String... args) {
+        Integer result=0;
+        try {
 
+
+            InputStream jsonStream = getStreamFromURL(url_subsetproduct, "GET");
+            String jsonString = streamToString(jsonStream);
+            parseJSON(jsonString);
+            result=1;
+        } catch (Exception e) {
+            result=0;
 
         }
+        return result;
 
-        @Override
-        protected void onPostExecute(Integer result) {
-            try {
-                if(result==1) {
 
-                    try {
-                        KeySettings setting=new KeySettings(context);
-                        if(len>0) {
+    }
 
-                            DataBaseSqlite dbs = new DataBaseSqlite(context);
-                            dbs.delete_Subset_Product();
+    @Override
+    protected void onPostExecute(Integer result) {
+        try {
+            if(result==1) {
 
-                            for (int i = 0; i < len; i++) {
-                                dbs.Add_subset_Product(Id[i], subsetname[i], collectionId[i]);
+                try {
+                    KeySettings setting=new KeySettings(context);
+                    if(len>0) {
 
-                            }
+                        DataBaseSqlite dbs = new DataBaseSqlite(context);
+                        dbs.delete_Subset_Product();
+
+                        for (int i = 0; i < len; i++) {
+                            dbs.Add_subset_Product(Id[i], subsetname[i], collectionId[i]);
+
                         }
-
-                    } catch (Exception e) {
-
                     }
-                }
-                else
-                {
+
+                } catch (Exception e) {
 
                 }
-            } catch (Exception e) {
+            }
+            else
+            {
 
             }
+        } catch (Exception e) {
+
         }
+    }
 
 
-        void parseJSON(String JSONString) {
-            try {
+    void parseJSON(String JSONString) {
+        try {
 
-                JSONArray areas = new JSONArray(JSONString);
-                Log.i("JSONsubsetProduct", JSONString);
+            JSONArray areas = new JSONArray(JSONString);
+            Log.i("JSONsubsetProduct", JSONString);
 
-                Id=new Integer[areas.length()];
-                subsetname=new String[areas.length()];
-                collectionId=new Integer[areas.length()];
-                len=areas.length();
-                for (int i = 0; i < areas.length(); i++) {
+            Id=new Integer[areas.length()];
+            subsetname=new String[areas.length()];
+            collectionId=new Integer[areas.length()];
+            len=areas.length();
+            for (int i = 0; i < areas.length(); i++) {
 
-                    JSONObject area = areas.getJSONObject(i);
-                    collectionId[i]=area.getInt("CollectionId");
-                    Id[i]=area.getInt("Id");
-                    subsetname[i]=area.getString("Name");
+                JSONObject area = areas.getJSONObject(i);
+                collectionId[i]=area.getInt("CollectionId");
+                Id[i]=area.getInt("Id");
+                subsetname[i]=area.getString("Name");
 
 
                /*     selectId.add(area.getInt("Id"));
                     selectName.add(area.getString("Name"));
                     selectCollectionId.add(area.getInt("CollectionId"));*/
-                }
+            }
 
                 /*fieldDataBase.setId_Subset(selectId);
                 fieldDataBase.setName_Subset(selectName);
                 fieldDataBase.setCollectionId_Subset(selectCollectionId);*/
 
 
-            } catch (JSONException e) {
+        } catch (JSONException e) {
+        }
+    }
+
+
+    /**
+     *
+     * @param urlString
+     * @param method
+     * @return
+     */
+    InputStream getStreamFromURL(String urlString, String method) {
+        try {
+            URL url = new URL(urlString);
+            HttpURLConnection huc = (HttpURLConnection) url.openConnection();
+            huc.setReadTimeout(10000);
+            huc.setConnectTimeout(15000);
+            huc.setRequestMethod(method);
+
+            huc.setDoInput(true);
+
+            huc.connect();
+            errorCode=huc.getResponseCode();
+            return huc.getInputStream();
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
+
+    /**
+     *
+     * @param is
+     * @return
+     */
+    String streamToString(InputStream is) {
+        String result = "";
+        String line = null;
+
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            while ((line = br.readLine()) != null) {
+                result = line + "\n";
             }
+        } catch (Exception e) {
         }
 
 
-        /**
-         *
-         * @param urlString
-         * @param method
-         * @return
-         */
-        InputStream getStreamFromURL(String urlString, String method) {
-            try {
-                URL url = new URL(urlString);
-                HttpURLConnection huc = (HttpURLConnection) url.openConnection();
-                huc.setReadTimeout(10000);
-                huc.setConnectTimeout(15000);
-                huc.setRequestMethod(method);
-
-                huc.setDoInput(true);
-
-                huc.connect();
-                errorCode=huc.getResponseCode();
-                return huc.getInputStream();
-            } catch (Exception e) {
-                return null;
-            }
-
-        }
-
-        /**
-         *
-         * @param is
-         * @return
-         */
-        String streamToString(InputStream is) {
-            String result = "";
-            String line = null;
-
-            try {
-                BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                while ((line = br.readLine()) != null) {
-                    result = line + "\n";
-                }
-            } catch (Exception e) {
-            }
-
-
-            return result;
-        }
+        return result;
+    }
 }

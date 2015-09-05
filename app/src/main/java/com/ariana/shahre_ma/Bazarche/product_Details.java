@@ -19,7 +19,7 @@ import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBase;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessImageJson;
-import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductPropertyJson;
+import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductpropertiesJson;
 import com.squareup.picasso.Picasso;
 
 public class product_Details extends ActionBarActivity {
@@ -54,7 +54,7 @@ public class product_Details extends ActionBarActivity {
 
 
 
-        HTTPGetProductPropertyJson httpGetProductPropertyJson=new HTTPGetProductPropertyJson(this);
+        HTTPGetProductpropertiesJson httpGetProductPropertyJson=new HTTPGetProductpropertiesJson(this);
         httpGetProductPropertyJson.setProductId(fc.GetProductId());
         httpGetProductPropertyJson.execute();
 
