@@ -33,7 +33,8 @@ public class HTTPPostMemberEditJson extends AsyncTask<String, Long, Integer>
 
     private static  final  String url_Member="http://test.shahrma.com/api/ApiUpdateMembers";
 
-    private ProgressDialog mProgressDialog;
+    Integer errorCode=0;
+
     // variable get json
     private static String data_json;
     // variable response

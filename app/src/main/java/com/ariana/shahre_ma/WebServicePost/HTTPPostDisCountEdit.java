@@ -32,7 +32,7 @@ public class HTTPPostDisCountEdit extends AsyncTask<String,Void,Integer>
     Context context;
     String mesage;
     String jsonstring;
-
+    Integer errorCode=0;
     public HTTPPostDisCountEdit(Context context)
     {
         this.context=context;

@@ -23,7 +23,7 @@ public class HTTPPostUploadImage extends AsyncTask<String,Integer,Integer>
     Context context;
     String sourceFileUri="";
 
-
+    Integer errorCode=0;
     String upLoadServerUri = "";
     String fileName = SrcImage();
     int serverResponseCode = 0;
@@ -134,7 +134,9 @@ public class HTTPPostUploadImage extends AsyncTask<String,Integer,Integer>
                 bytesAvailable = fileInputStream.available();
                 bufferSize = Math.min(bytesAvailable, maxBufferSize);
                 bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+                publishProgress(bufferSize/100);
             }
+
             publishProgress(bufferSize/100);
 
             // send multipart form data necesssary after file data...
@@ -146,7 +148,7 @@ public class HTTPPostUploadImage extends AsyncTask<String,Integer,Integer>
             String serverResponseMessage = conn.getResponseMessage();
 
 
-            Log.i("uploadFile", "HTTP Response is : " + serverResponseMessage + ": " + serverResponseCode);
+                 Log.i("uploadFile", "HTTP Response is : " + serverResponseMessage + ": " + serverResponseCode);
             if(serverResponseCode == 200)
             {
                 Log.i("File Upload ","Complete");

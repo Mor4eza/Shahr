@@ -29,7 +29,7 @@ public class HTTPGetInterestJson  extends AsyncTask<String,Void, Integer>
         context = c;
     }
     private static  String url_Interest;
-
+    Integer errorCode=0;
 
     Integer subsetid[];
     Integer memberid[];
@@ -148,7 +148,7 @@ public class HTTPGetInterestJson  extends AsyncTask<String,Void, Integer>
             huc.setDoInput(true);
 
             huc.connect();
-
+            errorCode=huc.getResponseCode();
             return huc.getInputStream();
         } catch (Exception e) {
             return null;

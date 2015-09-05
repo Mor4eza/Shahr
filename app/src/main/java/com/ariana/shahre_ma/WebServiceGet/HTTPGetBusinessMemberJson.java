@@ -37,7 +37,7 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
     FieldDataBusiness fdb=new FieldDataBusiness();
     FieldClass fc=new FieldClass();
     Query query;
-
+    Integer errorCode=0;
 
     private static Context context;
     private  String url_Business;
@@ -349,7 +349,7 @@ public class HTTPGetBusinessMemberJson extends AsyncTask<String,Void, Integer>
             huc.setDoInput(true);
 
             huc.connect();
-
+            errorCode=huc.getResponseCode();
             return huc.getInputStream();
         } catch (Exception e) {
             return null;

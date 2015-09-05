@@ -37,6 +37,7 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
     Context context;
     FieldClass fc=new FieldClass();
     Query query;
+    Integer errorCode=0;
     FieldDataBusiness fdb=new FieldDataBusiness();
 
     private List<Integer> selectId=new ArrayList<>();
@@ -293,6 +294,7 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
                 huc.setRequestMethod(method);
                 huc.setDoInput(true);
                 huc.connect();
+                errorCode=huc.getResponseCode();
                 return huc.getInputStream();
             }
             catch (Exception e)

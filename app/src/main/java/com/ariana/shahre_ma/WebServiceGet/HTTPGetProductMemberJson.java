@@ -28,6 +28,7 @@ public class HTTPGetProductMemberJson extends AsyncTask<String,Void,Integer>
     private static Context context;
     FieldDataBase fdb=new FieldDataBase();
     private  String url_productmember="http://test.shahrma.com/api/ApiGiveMyProduct?MemberId=";
+    Integer errorCode=0;
 
     List<Integer> selectMemberId =new ArrayList<>();
     List<Integer> selectId =new ArrayList<>();
@@ -186,7 +187,7 @@ public class HTTPGetProductMemberJson extends AsyncTask<String,Void,Integer>
             huc.setDoInput(true);
 
             huc.connect();
-
+            errorCode=huc.getResponseCode();
             return huc.getInputStream();
         } catch (Exception e) {
             Log.e("Exceptiongetstreamurl", e.toString());

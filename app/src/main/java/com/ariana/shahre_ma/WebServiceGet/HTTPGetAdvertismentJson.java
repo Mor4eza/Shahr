@@ -25,7 +25,7 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
 {
 
     private static Context context;
-
+    Integer errorCode=0;
     private String url_advertisment="";
 
     Integer Id[];
@@ -151,7 +151,7 @@ public class HTTPGetAdvertismentJson extends AsyncTask<String,Void,Integer>
             huc.setDoInput(true);
 
             huc.connect();
-
+            errorCode=huc.getResponseCode();
             return huc.getInputStream();
         } catch (Exception e) {
             Log.i("getStreamFromURL", e.toString());

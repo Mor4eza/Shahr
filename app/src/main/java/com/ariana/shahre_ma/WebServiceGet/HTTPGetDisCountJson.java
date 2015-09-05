@@ -30,7 +30,7 @@ public class HTTPGetDisCountJson extends AsyncTask<String,Void,Integer> {
     private static Context context;
 
 
-
+    Integer errorCode=0;
     Integer Id[];
     String description[];
     String startdate[];
@@ -223,7 +223,7 @@ public class HTTPGetDisCountJson extends AsyncTask<String,Void,Integer> {
             huc.setDoInput(true);
 
             huc.connect();
-
+            errorCode=huc.getResponseCode();
             return huc.getInputStream();
         } catch (Exception e) {
             return null;

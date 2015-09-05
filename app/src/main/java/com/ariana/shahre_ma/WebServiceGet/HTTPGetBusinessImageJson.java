@@ -28,6 +28,7 @@ public class HTTPGetBusinessImageJson extends AsyncTask<String,Void,Integer>
 
     private static Context context;
     private String url_businessimage="http://test.shahrma.com/api/ApiGiveBusinessImage?BusinessId=";
+    Integer errorCode=0;
 
     Integer Id[];
     String src[];
@@ -157,7 +158,7 @@ public class HTTPGetBusinessImageJson extends AsyncTask<String,Void,Integer>
             huc.setDoInput(true);
 
             huc.connect();
-
+            errorCode=huc.getResponseCode();
             return huc.getInputStream();
         } catch (Exception e) {
             return null;

@@ -26,10 +26,7 @@ import java.io.InputStreamReader;
 public class HTTPSendRateURL extends AsyncTask<String, Void, Boolean> {
 
     ProgressDialog pd;
-    private String[] blogTitles;
-    private static final String TAG = "Http Connection";
-    private  String mesage;
-
+    Integer errorCode=0;
 
     Integer businessid;
     Integer memberid;

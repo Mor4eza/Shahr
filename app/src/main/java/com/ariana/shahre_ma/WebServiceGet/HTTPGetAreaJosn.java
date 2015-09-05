@@ -29,13 +29,14 @@ public class HTTPGetAreaJosn extends AsyncTask<String,Void,Integer>
 
 {
     Query query;
-    FieldClass fc=new FieldClass();
+    Integer errorCode=0;
     Context context;
     Integer Id_area[];
     Integer CityId_area[];
     String Name_Area[];
     Integer len_Area=0;
     ProgressDialog pd;
+
     private String url1_get_Area = "http://test.shahrma.com/api/apigivearea";
 
 
@@ -159,7 +160,7 @@ public class HTTPGetAreaJosn extends AsyncTask<String,Void,Integer>
                 huc.setDoInput(true);
 
                 huc.connect();
-
+                errorCode=huc.getResponseCode();
                 return huc.getInputStream();
             } catch (Exception e) {
                 return null;

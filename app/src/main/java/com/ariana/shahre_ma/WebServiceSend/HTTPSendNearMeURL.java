@@ -32,7 +32,7 @@ public class HTTPSendNearMeURL extends AsyncTask<String,Void,Integer >
 {
     Context context;
     String url_nearme="";
-
+    Integer errorCode=0;
     FieldClass fc=new FieldClass();
     Query query;
     FieldDataBusiness fdb=new FieldDataBusiness();

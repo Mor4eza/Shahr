@@ -29,7 +29,7 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
     private static Context context;
 
 
-
+    Integer errorCode=0;
     Integer Id[];
     String description[];
     String date[];
@@ -184,7 +184,7 @@ public class HTTPGetOpinionJson extends AsyncTask<String, String, String>
             huc.setDoInput(true);
 
             huc.connect();
-
+            errorCode=huc.getResponseCode();
             return huc.getInputStream();
         } catch (Exception e) {
             return null;

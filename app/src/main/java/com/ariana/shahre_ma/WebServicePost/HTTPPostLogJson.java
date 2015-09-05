@@ -33,6 +33,7 @@ public class HTTPPostLogJson extends AsyncTask<String,Void,Integer>
     String jsonLog;
     String urlLog="";
     Context context;
+    Integer errorCode=0;
     public HTTPPostLogJson(Context context)
     {
         this.context=context;

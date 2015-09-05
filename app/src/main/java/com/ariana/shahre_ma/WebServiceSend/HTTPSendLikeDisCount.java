@@ -33,7 +33,7 @@ public class HTTPSendLikeDisCount extends AsyncTask<String,Void,Boolean>
     Integer discountid;
     Integer memberid;
     Integer businessid;
-
+    Integer errorCode=0;
     Integer likecount=0;
     Integer dislikecount=0;
 

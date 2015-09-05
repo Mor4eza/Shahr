@@ -33,11 +33,9 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
 
     String urltopbusiness="";
     Context context;
-
+    Integer errorCode=0;
     FieldClass fc=new FieldClass();
     Query query;
-    FieldDataBusiness fdb=new FieldDataBusiness();
-
 
 
     Integer Id[];
@@ -251,7 +249,7 @@ public class HTTPGetTopsBusinessJson extends AsyncTask<String,Void,Integer>
             huc.setDoInput(true);
 
             huc.connect();
-
+            errorCode=huc.getResponseCode();
             return huc.getInputStream();
         } catch (Exception e) {
             Log.e("getStreamFromURL",e.toString());

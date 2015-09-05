@@ -36,6 +36,7 @@ public class HTTPPostProductJson extends AsyncTask<String ,Long,Integer>
     private static String data_json;// variable get json
     private   Integer response_message;// variable response
     FieldClass fc=new FieldClass();
+    Integer errorCode=0;
     ProgressDialog pd;
     // get/set
 

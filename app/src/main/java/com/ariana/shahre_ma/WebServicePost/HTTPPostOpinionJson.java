@@ -32,7 +32,7 @@ public class HTTPPostOpinionJson extends AsyncTask<String, Void, Integer>
 {
     private static  final  String url_Opinion="http://test.shahrma.com/api/ApiTakeOpinion";
 
-
+    Integer errorCode=0;
     // variable get json
     private static String data_json;
     // variable response

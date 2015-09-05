@@ -29,11 +29,11 @@ public class HTTPGetSubsetProductJson   extends AsyncTask<String,Void,Integer>
 {
     private static final String url_subsetproduct="http://test.shahrma.com/api/apigiveProductsubset";
 
-    FieldDataBase fieldDataBase=new FieldDataBase();
+ /*   FieldDataBase fieldDataBase=new FieldDataBase();
     List<Integer> selectId =new ArrayList<>();
     List<String>  selectName =new ArrayList<>();
-    List<Integer>  selectCollectionId =new ArrayList<>();
-
+    List<Integer>  selectCollectionId =new ArrayList<>();*/
+    Integer errorCode=0;
     Integer Id[];
     String subsetname[];
     Integer collectionId[];
@@ -154,7 +154,7 @@ public class HTTPGetSubsetProductJson   extends AsyncTask<String,Void,Integer>
                 huc.setDoInput(true);
 
                 huc.connect();
-
+                errorCode=huc.getResponseCode();
                 return huc.getInputStream();
             } catch (Exception e) {
                 return null;

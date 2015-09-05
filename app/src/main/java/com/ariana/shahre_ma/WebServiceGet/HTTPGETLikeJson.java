@@ -23,7 +23,7 @@ import java.net.URL;
 public class HTTPGETLikeJson  extends AsyncTask<String, String, String>
 {
     ProgressDialog pd;
-
+    Integer errorCode=0;
     private static Context context;
 
     private static final String url_Like="http://test.shahrma.com/api/apigivecollection";
@@ -141,7 +141,7 @@ public class HTTPGETLikeJson  extends AsyncTask<String, String, String>
             huc.setDoInput(true);
 
             huc.connect();
-
+            errorCode=huc.getResponseCode();
             return huc.getInputStream();
         } catch (Exception e) {
             return null;

@@ -37,8 +37,9 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
     private static String data_json;// variable get json
     private  static Integer response_message;// variable response
     FieldClass fc=new FieldClass();
-    private ProgressDialog dialog;
+
     ProgressDialog pd;
+    Integer errorCode=0;
     // get/set
 
     // Set json Member

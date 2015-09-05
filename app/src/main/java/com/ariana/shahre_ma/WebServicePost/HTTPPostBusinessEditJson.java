@@ -31,6 +31,7 @@ public class HTTPPostBusinessEditJson extends AsyncTask<String,Long,Integer>
     Query query;
     FieldClass fc=new FieldClass();
     Context context;
+    Integer errorCode=0;
 
 
     /**
