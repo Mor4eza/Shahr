@@ -9,8 +9,10 @@ public class  InstructionsSqlite {
     // Database table name
     public static final String TABLE_NAME_SUBSET= "subset";
     public static final String TABLE_NAME_SUBSET_PRODUCT= "subset_Product";
-    public static final String TABLE_NAME_COLLECTION = "collection";
     public static final String TABLE_NAME_COLLECTION_PRODUCT = "collection_Product";
+    public static final String TABLE_NAME_PROPERTY_PRODUCT = "PROPERTY_Product";
+    public static final String TABLE_NAME_VALUE_PRODUCT = "VALUE_Product";
+    public static final String TABLE_NAME_COLLECTION = "collection";
     public static final String TABLE_NAME_MEMBER = "member";
     public static final String TABLE_NAME_OPINION = "opinion";
     public static final String TABLE_NAME_BUSINESS_TOPS = "business_Tops";
@@ -69,6 +71,15 @@ public class  InstructionsSqlite {
     public static final String AREAID_ProductMembe="Phone";
     public static final String CITYID_ProductMembe="Phone";
 
+
+    //Value Table Columns names
+    public static final String ID_VALUE_PRODUCT="Id";
+    public static final String NAME_VALUE_PRODUCT="Activity";
+    public static final String IDPROPERTY_VALUE_PRODUCT="Activity";
+
+    //Propertiy Table Columns names
+    public static final String ID_PROPERTY_PRODUCT="Id";
+    public static final String NAME_PROPERTY_PRODUCT="Name";
 
 
     //FieldActivity Table Columns names
@@ -240,6 +251,20 @@ public class  InstructionsSqlite {
             "Id INTEGER PRIMARY KEY ," +
             "AreaName TEXT," +
             "CityId INTEGER" +
+            ");";
+
+
+    // SQL statement to create Value_Product table
+    public static final String CREATE_TABLE_Value_Product = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_VALUE_PRODUCT + " (" +
+            "Id INTEGER PRIMARY KEY ," +
+            "Name TEXT," +
+            "IdProperty INTEGER" +
+            ");";
+
+    // SQL statement to create Value_Product table
+    public static final String CREATE_TABLE_Property_Product = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_PROPERTY_PRODUCT + " (" +
+            "Id INTEGER PRIMARY KEY ," +
+            "Name TEXT," +
             ");";
 
 

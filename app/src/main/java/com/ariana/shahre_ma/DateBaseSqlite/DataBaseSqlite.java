@@ -44,8 +44,10 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Subset);
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Search);
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Subset_Prodcut);
-        db.execSQL(InstructionsSqlite.CREATE_TABLE_Collection);
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Collection_Product);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_Value_Product);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_Property_Product);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_Collection);
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Member);
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Opinion);
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Business);
@@ -129,6 +131,36 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
         // 3. insert
         db.insert(InstructionsSqlite.TABLE_NAME_SUBSET_PRODUCT,null,values);
+        db.close();
+    }
+    public void Add_Value_Product(Integer id, String valuename, Integer idProperty) {
+
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put(InstructionsSqlite.ID_VALUE_PRODUCT, id);
+        values.put(InstructionsSqlite.NAME_VALUE_PRODUCT, valuename);
+        values.put(InstructionsSqlite.IDPROPERTY_VALUE_PRODUCT, idProperty);
+
+        // 3. insert
+        db.insert(InstructionsSqlite.TABLE_NAME_VALUE_PRODUCT,null,values);
+        db.close();
+    }
+
+    public void Add_Property_Product(Integer id, String propertyname) {
+
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put(InstructionsSqlite.ID_PROPERTY_PRODUCT, id);
+        values.put(InstructionsSqlite.NAME_PROPERTY_PRODUCT, propertyname);
+
+        // 3. insert
+        db.insert(InstructionsSqlite.TABLE_NAME_PROPERTY_PRODUCT,null,values);
         db.close();
     }
 
@@ -1209,7 +1241,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     public Cursor select_SortRateBusiness(Integer subsetID,Integer cityid)
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetID+" AND CityId="+cityid+" ORDER BY "+ InstructionsSqlite.RATEVALUE_business+" DESC", null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetID+" AND CityId="+cityid+" ORDER BY (RateValue * RateCount) DESC", null);
     }
 
     public Cursor select_SortNameBusiness(Integer subsetID,Integer cityid)
@@ -1879,6 +1911,21 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.execSQL("DELETE FROM "+ InstructionsSqlite.TABLE_NAME_Bookmark);
         db.close();
     }
+
+    public  void delete_Value_Product()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE FROM "+ InstructionsSqlite.TABLE_NAME_VALUE_PRODUCT);
+        db.close();
+    }
+
+    public  void delete_Property_Product()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE FROM "+ InstructionsSqlite.TABLE_NAME_PROPERTY_PRODUCT);
+        db.close();
+    }
+
 
     public  void delete_bookmark(Integer businessid)
     {

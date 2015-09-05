@@ -180,7 +180,7 @@ public class Edit_User extends ActionBarActivity {
               else
               {
 
-                      _json = (json.getSqliteTOjson(Aname, Aemail, Aphone, Aage, Asex, Ausername, Apass, query.getCityId(Acity)));
+                      _json = (json.getSqliteTOjson(Aname.trim(), Aemail.trim(), Aphone.trim(), Aage, Asex, Ausername.trim(), Apass.trim(), query.getCityId(Acity)));
                       fc.SetMember_Name(Aname);
                       fc.SetMember_Email(Aemail);
                       fc.SetMember_Mobile(Aphone);

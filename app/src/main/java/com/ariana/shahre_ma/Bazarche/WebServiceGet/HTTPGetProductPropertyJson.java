@@ -1,4 +1,4 @@
-package com.ariana.shahre_ma.WebServiceGet;
+package com.ariana.shahre_ma.Bazarche.WebServiceGet;
 
 import android.content.Context;
 import android.content.Intent;

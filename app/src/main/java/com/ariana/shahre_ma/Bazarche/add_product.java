@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.text.method.CharacterPickerDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,7 +21,7 @@ import com.ariana.shahre_ma.Fields.FieldDataBase;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
-import com.ariana.shahre_ma.WebServicePost.HTTPPostProductJson;
+import com.ariana.shahre_ma.Bazarche.WebServicePost.HTTPPostProductJson;
 
 import java.util.ArrayList;
 import java.util.List;

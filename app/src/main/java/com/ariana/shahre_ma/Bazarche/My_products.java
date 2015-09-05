@@ -9,12 +9,11 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.R;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetProductMemberJson;
+import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductMemberJson;
 
 import jp.wasabeef.recyclerview.animators.OvershootInLeftAnimator;
 import jp.wasabeef.recyclerview.animators.adapters.ScaleInAnimationAdapter;

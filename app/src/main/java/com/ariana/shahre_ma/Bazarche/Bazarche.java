@@ -20,8 +20,8 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.ListExpand.Continent;
 import com.ariana.shahre_ma.ListExpand.Country;
 import com.ariana.shahre_ma.R;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionProductJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetProductJson;
+import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetCollectionProductJson;
+import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetSubsetProductJson;
 
 import java.util.ArrayList;
 import java.util.List;
