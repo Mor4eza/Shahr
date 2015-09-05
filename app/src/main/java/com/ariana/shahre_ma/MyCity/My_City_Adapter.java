@@ -8,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,28 +42,11 @@ public class My_City_Adapter extends ArrayAdapter<My_City_Items> {
             View rowView = inflater.inflate(R.layout.my_city_row, parent, false);
 
             final CheckBox labelView = (CheckBox) rowView.findViewById(R.id.city_child);
-
+            final ImageView img = (ImageView)rowView.findViewById(R.id.img_city);
             labelView.setText(itemsArrayList.get(position).getTitle());
 
+        Picasso.with(context).load("http://www.shahrma.com/app/img/collection_icon/" +itemsArrayList.get(position).GetId()+ ".png").into(img);
 
-
-        /*    labelView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if(isChecked){
-
-                        mCheckedState[position]=true;
-                        selectedsubset.add(labelView.getText().toString());
-                        Log.i("selectedsubset",selectedsubset.toString());
-                    }
-                    else{
-                        mCheckedState[position]=false;
-                        selectedsubset.remove(labelView.getText().toString());
-                        Log.i("selectedsubset", selectedsubset.toString());
-                    }
-                }
-            });
-            labelView.setChecked(mCheckedState[position]);*/
 
         labelView.setOnClickListener(new View.OnClickListener() {
             @Override
