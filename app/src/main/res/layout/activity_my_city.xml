@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:dividerHeight="0.9dp"
+            android:layout_margin="5dp"
             android:divider="#ff2195f2"
             android:id="@+id/my_city_list"
             android:layout_gravity="center_horizontal"
@@ -35,7 +36,6 @@
         android:layout_marginRight="@dimen/fab_margin"
         android:layout_marginBottom="@dimen/fab_margin"
         android:onClick="download"
-
         fab:shadow_color="#757575"
         fab:shadow_radius="1.0dp"
         fab:shadow_xOffset="0.5dp"
