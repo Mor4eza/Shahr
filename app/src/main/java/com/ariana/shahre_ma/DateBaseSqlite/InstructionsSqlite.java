@@ -277,6 +277,7 @@ public class  InstructionsSqlite {
             "Percent TEXT," +
             "BusinessId INTEGER," +
             "Like INTEGER," +
+            "DisLike INTEGER," +
             "Src TEXT" +
             ");";
 

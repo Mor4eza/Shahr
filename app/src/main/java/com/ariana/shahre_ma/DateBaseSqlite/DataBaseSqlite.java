@@ -91,6 +91,10 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_DisCountMember);
         db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_Advertisment);
         db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_BUSINESS_IMAGE);*/
+
+        db.execSQL("ALTER TABLE "+InstructionsSqlite.TABLE_NAME_DisCount+" ADD COLUMN Src TEXT");
+        db.execSQL("ALTER TABLE "+InstructionsSqlite.TABLE_NAME_DisCountMember+" ADD COLUMN Src TEXT");
+
         // create fresh  tables
         this.onCreate(db);
 
