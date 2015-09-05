@@ -314,6 +314,14 @@
             android:name=".Bazarche.Select_Image"
             android:label="@string/title_activity_select__image" >
         </activity>
+        <activity
+            android:name=".Search.SearchListActivity"
+            android:label="@string/title_activity_search_list"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ariana.shahre_ma.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
