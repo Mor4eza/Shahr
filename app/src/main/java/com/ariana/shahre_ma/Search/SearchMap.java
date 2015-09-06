@@ -2,8 +2,11 @@ package com.ariana.shahre_ma.Search;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -18,7 +21,10 @@ import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.job_details.Job_details;
 import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 public class SearchMap extends AppCompatActivity {
 
@@ -108,10 +114,7 @@ public class SearchMap extends AppCompatActivity {
                 final Marker marker=mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(rows.getString(15)), Double.valueOf(rows.getString(16)))).title("\u200e" + rows.getString(1)).snippet(String.valueOf(rows.getDouble(30))));
                 marker.setData(rows.getInt(0));
                 marker.showInfoWindow();
-
-              /*TODO Load Subset icon to Marker Icons & Control Rotation
-
-              Picasso.with(this).load("http://www.shahrma.com/app/img/collection_icon/32.png").into(new Target() {
+                Picasso.with(this).load("http://www.shahrma.com/app/img/markers/"+ query.getCollectionId(rows.getInt(14))+ ".png").resize(80,90).into(new Target() {
 
                     @Override
                     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
@@ -127,7 +130,7 @@ public class SearchMap extends AppCompatActivity {
                     public void onPrepareLoad(final Drawable placeHolderDrawable) {
                         Log.d("TAG", "Prepare Load");
                     }
-                });*/
+                });
 
             }while (rows.moveToNext());
 
