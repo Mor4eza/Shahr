@@ -4,7 +4,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
@@ -22,7 +24,7 @@ import java.net.URL;
  */
 public class HTTPGetProductValueJson  extends AsyncTask<String,Void,Integer>
 {
-    private static final String url_subsetproduct="http://test.shahrma.com/api/apigiveProductValue";
+    private static final String url_subsetproduct="http://test.shahrma.com/api/apigivePropertyValues";
 
     /*   FieldDataBase fieldDataBase=new FieldDataBase();
        List<Integer> selectId =new ArrayList<>();
@@ -74,11 +76,12 @@ public class HTTPGetProductValueJson  extends AsyncTask<String,Void,Integer>
                 KeySettings setting=new KeySettings(context);
                 if(len>0) {
 
-                    DataBaseSqlite dbs = new DataBaseSqlite(context);
-                    dbs.delete_Subset_Product();
+                    AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+                    DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
+                    ddb.delete_Subset_Product();
 
                     for (int i = 0; i < len; i++) {
-                        dbs.Add_Value_Product(Id[i], valuename[i],Idproperty[i]);
+                        adb.Add_Value_Product(Id[i], valuename[i],Idproperty[i]);
 
                     }
                 }

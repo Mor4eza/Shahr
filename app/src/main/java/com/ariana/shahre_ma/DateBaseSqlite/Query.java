@@ -62,6 +62,26 @@ public class Query {
         return  Result;
     }
 
+    public Integer getCollectionId(Integer subsetid)
+    {
+        Integer Result=0;
+        try {
+
+            SelectDataBaseSqlite db=new SelectDataBaseSqlite(context);
+            Cursor allrows = db.select_CollectionId(subsetid);
+            allrows.moveToFirst();
+            Result = allrows.getInt(0);
+            allrows.close();
+
+        }
+
+        catch (Exception e)
+        {
+            // Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+        }
+        return  Result;
+    }
+
     /**
      *
      * @param id

@@ -29,7 +29,7 @@ public class MessageDialog
         alertDialog.show();
     }
 
-    public  void ShowMessage2(String title,String message,String textbutton,String value1,String value2)
+    public  void ShowMessage(String title,String message,String textbutton,String value1,String value2)
     {
         AlertDialog alertDialog=new AlertDialog.Builder(context).create();
         alertDialog.setTitle(title);
@@ -48,4 +48,9 @@ public class MessageDialog
             }
         });
     }
+
+
+
 }
+
+

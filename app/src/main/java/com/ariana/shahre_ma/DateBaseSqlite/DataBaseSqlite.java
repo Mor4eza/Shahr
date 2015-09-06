@@ -1442,6 +1442,12 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     }
 
+    public  Cursor select_CollectionId(Integer subsetid)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT CollectionId FROM " + InstructionsSqlite.TABLE_NAME_SUBSET + "  WHERE Id=" +subsetid, null);
+
+    }
     public Cursor select_CityName(Integer id)
     {
 

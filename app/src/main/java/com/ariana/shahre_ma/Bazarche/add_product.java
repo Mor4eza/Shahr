@@ -14,6 +14,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
+import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductPropertyJson;
+import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductValueJson;
 import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
@@ -99,7 +101,11 @@ public class add_product extends ActionBarActivity {
         });
 
 
+        HTTPGetProductPropertyJson httpGetProductPropertyJson=new HTTPGetProductPropertyJson(this);
+        httpGetProductPropertyJson.execute();
 
+        HTTPGetProductValueJson httpGetProductValueJson=new HTTPGetProductValueJson(this);
+        httpGetProductValueJson.execute();
     }
 
     public void product_save(View view)

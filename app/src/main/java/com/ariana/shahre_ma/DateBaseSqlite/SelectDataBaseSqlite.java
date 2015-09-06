@@ -127,6 +127,11 @@ public class SelectDataBaseSqlite extends DataBaseSqlite {
     }
 
     @Override
+    public Cursor select_CollectionId(Integer subsetid) {
+        return super.select_CollectionId(subsetid);
+    }
+
+    @Override
     public void DeleteAllDataBase() {
         super.DeleteAllDataBase();
     }
