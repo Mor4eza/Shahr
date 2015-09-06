@@ -21,6 +21,20 @@
             android:layout_width="fill_parent"
             android:layout_height="160dp">
 
+            <TextView
+                android:id="@+id/tv_discount"
+                android:text="%"
+                android:alpha=".6"
+                android:gravity="center_vertical"
+                android:drawablePadding="5dp"
+                android:textColor="@color/md_white_1000"
+                android:background="@drawable/text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_tell"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                />
             <ImageView
                 android:id="@+id/img_market"
                 android:layout_width="170dp"
@@ -28,7 +42,6 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/img_not_found"
                 android:clickable="true"
-                android:background="?android:selectableItemBackground"
                 android:onClick="img_click"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"

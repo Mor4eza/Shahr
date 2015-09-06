@@ -135,7 +135,7 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
         getMenuInflater().inflate(R.menu.menu_main, menu);
         mSearchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         setupSearchView();
-       if(job_list_Adapter.getItemCount()==0 || fc.GetSearchOffline() || fc.GetSearchOnline())
+       if(job_list_Adapter.getItemCount()==0)
         {
             return  false;
         }
