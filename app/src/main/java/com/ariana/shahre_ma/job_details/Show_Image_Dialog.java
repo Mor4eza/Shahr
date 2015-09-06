@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.squareup.picasso.Picasso;
 
@@ -30,6 +31,7 @@ public class Show_Image_Dialog extends Dialog {
     ImageView close;
     Button download;
     String Url;
+    NetState ns=new NetState(getContext());
    FieldClass fc=new FieldClass();
     public Show_Image_Dialog(Context context,String url) {
         super(context);
@@ -47,7 +49,13 @@ public class Show_Image_Dialog extends Dialog {
         download=(Button)findViewById(R.id.btn_download);
         Log.i("url", Url);
 
-         Picasso.with(getOwnerActivity()).load(Url).placeholder(R.drawable.img_not_found).into(imgPreview);
+        if (!ns.checkInternetConnection()){
+            download.setVisibility(View.GONE);
+        }else{
+            download.setVisibility(View.VISIBLE);
+        }
+
+        Picasso.with(getOwnerActivity()).load(Url).placeholder(R.drawable.img_not_found).into(imgPreview);
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,12 +70,11 @@ public class Show_Image_Dialog extends Dialog {
                 Bitmap bmp = btmpDr.getBitmap();
 
 /*              File sdCardDirectory = Environment.getExternalStorageDirectory();*/
-                try
-                {
-                    File sdCardDirectory = new File(Environment.getExternalStorageDirectory() + File.separator + "Shahre_Ma"+File.separator+"Images");
+                try {
+                    File sdCardDirectory = new File(Environment.getExternalStorageDirectory() + File.separator + "Shahre_Ma" + File.separator + "Images");
                     sdCardDirectory.mkdirs();
 
-                   String  imageNameForSDCard = fc.GetMarket_Business() +"-" + System.currentTimeMillis() + ".jpg";
+                    String imageNameForSDCard = fc.GetMarket_Business() + "-" + System.currentTimeMillis() + ".jpg";
 
                     File image = new File(sdCardDirectory, imageNameForSDCard);
                     FileOutputStream outStream;
@@ -77,13 +84,11 @@ public class Show_Image_Dialog extends Dialog {
                     /* 100 to keep full quality of the image */
                     outStream.flush();
                     outStream.close();
-                    Toast.makeText(getContext(),"در پوشه Shahre_Ma/Images ذخیره شد!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "در پوشه Shahre_Ma/Images ذخیره شد!", Toast.LENGTH_LONG).show();
                     download.setVisibility(View.GONE);
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(getContext(),"ذخیره نشد!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "ذخیره نشد!", Toast.LENGTH_LONG).show();
                 }
             }
         });

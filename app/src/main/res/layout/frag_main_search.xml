@@ -1,4 +1,4 @@
-
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -16,8 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/et_search_where"
-        android:hint="در کجا...؟ (کرج،شیراز و...)"
-        android:gravity="start|end"
+        android:hint="\u0020در کجا...؟ (کرج،شیراز و...)"
+        android:ellipsize="start"
         android:layout_below="@+id/tvLabel"
         android:layout_marginTop="20dp"
         android:layout_marginRight="10dp"
