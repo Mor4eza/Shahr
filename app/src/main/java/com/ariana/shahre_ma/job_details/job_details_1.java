@@ -338,22 +338,29 @@ public class job_details_1 extends ActionBarActivity {
 
                      if (rows.moveToFirst()) {
                          do {
-                             Log.i("image",rows.getString(2));
-                             final TextSliderView textSliderView1 = new TextSliderView(getActivity());
+                             Log.i("image", rows.getString(2));
+                              final TextSliderView textSliderView1 = new TextSliderView(getActivity());
                              textSliderView1.image("http://www.shahrma.com/image/business/" + rows.getString(2));
                              slider.addSlider(textSliderView1);
-
+                             textSliderView1.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+                                 @Override
+                                 public void onSliderClick(BaseSliderView baseSliderView) {
+                                     Show_Image_Dialog dialog=new Show_Image_Dialog(getActivity(),baseSliderView.getUrl());
+                                     dialog.show();
+                                 }
+                             });
                          } while (rows.moveToNext());
+
                      }
                  }else{
                      final TextSliderView textSliderView = new TextSliderView(getActivity());
-                     textSliderView.image("http://www.shahrma.com/image/business/" +query.getsubsetID(subset.getText().toString())+".jpg");
+                     textSliderView.image("http://www.shahrma.com/image/business/" + query.getsubsetID(subset.getText().toString()) + ".jpg");
                      slider.addSlider(textSliderView);
                      textSliderView.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
                          @Override
                          public void onSliderClick(BaseSliderView baseSliderView) {
-                            Log.i("clicked",baseSliderView.getUrl());
-                            Show_Image_Dialog dialog=new Show_Image_Dialog(getActivity(),baseSliderView.getUrl());
+                             Log.i("clicked", slider.getCurrentSlider().getUrl());
+                             Show_Image_Dialog dialog = new Show_Image_Dialog(getActivity(), baseSliderView.getUrl());
                              dialog.show();
                          }
                      });
