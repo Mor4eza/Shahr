@@ -28,6 +28,7 @@ import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessImageJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetOpinionJson;
 import com.ariana.shahre_ma.WebServiceSend.HTTPSendRateURL;
 import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 
 import fr.quentinklein.slt.LocationTracker;
@@ -92,8 +93,6 @@ public class job_details_1 extends ActionBarActivity {
             }
             else
             {
-
-
                 HTTPGetOpinionJson httponion = new HTTPGetOpinionJson(getActivity());
                 httponion.seturl_opinion(fc.GetBusiness_Id());
                 httponion.execute();
@@ -121,6 +120,9 @@ public class job_details_1 extends ActionBarActivity {
             rates_change();
             display_Images();
             distance();
+
+
+
             return rootView;
         }
 
@@ -347,11 +349,21 @@ public class job_details_1 extends ActionBarActivity {
                      final TextSliderView textSliderView = new TextSliderView(getActivity());
                      textSliderView.image("http://www.shahrma.com/image/business/" +query.getsubsetID(subset.getText().toString())+".jpg");
                      slider.addSlider(textSliderView);
+                     textSliderView.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+                         @Override
+                         public void onSliderClick(BaseSliderView baseSliderView) {
+                            Log.i("clicked",baseSliderView.getUrl());
+                            Show_Image_Dialog dialog=new Show_Image_Dialog(getActivity(),baseSliderView.getUrl());
+                             dialog.show();
+                         }
+                     });
                  }
 
                  slider.stopAutoCycle();
                  slider.setPresetTransformer(SliderLayout.Transformer.ZoomOutSlide);
                  slider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+
+
              }
              catch (Exception e){}
 
