@@ -12,6 +12,7 @@ import com.androidmapsextensions.GoogleMap;
 import com.androidmapsextensions.Marker;
 import com.androidmapsextensions.MarkerOptions;
 import com.androidmapsextensions.SupportMapFragment;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
@@ -99,13 +100,35 @@ public class SearchMap extends AppCompatActivity {
     private void setUpMap() {
         SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(this);
         Cursor rows=sdb.select_TableSearch();
+        Query query=new Query(this);
         if (rows.moveToFirst()) {
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.valueOf(rows.getString(15)), Double.valueOf(rows.getString(16))), 15f));
 
             do {
-                Marker marker=mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(rows.getString(15)), Double.valueOf(rows.getString(16)))).title("\u200e" + rows.getString(1)).snippet(String.valueOf(rows.getDouble(30))));
+                final Marker marker=mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(rows.getString(15)), Double.valueOf(rows.getString(16)))).title("\u200e" + rows.getString(1)).snippet(String.valueOf(rows.getDouble(30))));
                 marker.setData(rows.getInt(0));
                 marker.showInfoWindow();
+
+              /*TODO Load Subset icon to Marker Icons & Control Rotation
+
+              Picasso.with(this).load("http://www.shahrma.com/app/img/collection_icon/32.png").into(new Target() {
+
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        marker.setIcon(BitmapDescriptorFactory.fromBitmap(bitmap));
+                    }
+
+                    @Override
+                    public void onBitmapFailed(final Drawable errorDrawable) {
+                        Log.d("TAG", "FAILED");
+                    }
+
+                    @Override
+                    public void onPrepareLoad(final Drawable placeHolderDrawable) {
+                        Log.d("TAG", "Prepare Load");
+                    }
+                });*/
+
             }while (rows.moveToNext());
 
         }
