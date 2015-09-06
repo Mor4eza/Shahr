@@ -107,6 +107,27 @@ public class Query {
         return Result;
     }
 
+    public Integer getFieldActivityId(String nameactivity) {
+
+        Integer Result = 0;
+
+        try {
+            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            Cursor allrows = dbs.select_FieldActivityId(nameactivity);
+            allrows.moveToFirst();
+            Result = allrows.getInt(0);
+            allrows.close();
+
+
+            //    fc.SetBusiness_SubsetId(Result);
+        }
+        catch (Exception e) {
+            // Toast.makeText(activity, e.toString(), Toast.LENGTH_LONG).show();
+        }
+        return Result;
+    }
+
+
 
     public  Integer getDisCountId(Integer businessid)
     {
@@ -149,6 +170,27 @@ public class Query {
         }
         return Result;
     }
+
+    public Integer getAdvancesubsetID(String subsetname) {
+
+        Integer Result = 0;
+
+        try {
+            DataBaseSqlite dbs = new DataBaseSqlite(context);
+            Cursor allrows = dbs.select_AdvanceSubsetId(subsetname);
+            allrows.moveToFirst();
+            Result = allrows.getInt(0);
+            allrows.close();
+
+
+            fc.SetBusiness_SubsetId(Result);
+        }
+        catch (Exception e) {
+            // Toast.makeText(activity, e.toString(), Toast.LENGTH_LONG).show();
+        }
+        return Result;
+    }
+
 
     public Integer getsubsetProductID(String subsetname) {
 

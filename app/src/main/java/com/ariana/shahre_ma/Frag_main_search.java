@@ -53,6 +53,9 @@ public class Frag_main_search extends Fragment {
     private boolean visable=false;
     private FrameLayout frame;
 
+    Integer subsetid=0;
+    Integer Cityid=0;
+    Integer fieldactivity=0;
 
     // newInstance constructor for creating fragment with arguments
     public static Frag_main_search newInstance(int page, String title) {
@@ -160,12 +163,73 @@ public class Frag_main_search extends Fragment {
         @Override
         public void onClick(View v) {
 
-            Query query=new Query(getActivity());
-            SearchOfline searchOfline=new SearchOfline(getActivity());
-            //searchOfline.TextSearch(txtWhere.getText().toString(),txtWhat.getText().toString());
-            searchOfline.TextSearch(query.getsubsetID(txtField.getText().toString()),txtWhat.getText().toString(),txtAddress.getText().toString(),query.getAreaID(txtWhere.getText().toString()));
 
-        }
+            Query query = new Query(getActivity());
+            fieldactivity=query.getFieldActivityId(txtField.getText().toString());
+            Cityid = query.getCityId(txtWhere.getText().toString());
+            subsetid = query.getAdvancesubsetID(txtField.getText().toString());
+
+            Log.i("fieldactivity", String.valueOf(fieldactivity));
+            Log.i("subsetid", String.valueOf(subsetid));
+            Log.i("Cityid", String.valueOf(Cityid));
+
+            if (txtField.getText().equals(null) || txtField.getText().equals("") || txtField.getText().length()==0)
+            {
+                SearchOfline searchOfline=new SearchOfline(getActivity());
+                searchOfline.TextSearch(txtWhere.getText().toString(),txtWhat.getText().toString());
+            }
+            else
+            {
+                if(subsetid>0 || fieldactivity>0)
+                {
+                    if(Cityid<=0)
+                    {
+                        MessageDialog messageDialog=new MessageDialog(getActivity());
+                        messageDialog.ShowMessage("هشدار","شهر مورد نظر یافت نشد","باشه","false");
+                    }
+                    else
+                    {
+                        if(txtAddress.getText().length()==0 || txtAddress.getText().equals(null) || txtAddress.getText().equals(""))
+                        {
+                            if(subsetid>0) {
+                                Log.i("address", "spaceSubset");
+                                SearchOfline searchOfline = new SearchOfline(getActivity());
+                                searchOfline.TextAdvancedSearch(Cityid, txtWhat.getText().toString(), " ", txtField.getText().toString());
+                            }
+                            else
+                            {
+                                Log.i("address", "spaceField");
+                                SearchOfline searchOfline = new SearchOfline(getActivity());
+                                searchOfline.TextAdvancedSearch2(Cityid, txtWhat.getText().toString(), " ", txtField.getText().toString());
+                            }
+                        }
+                        else if(subsetid>0)
+                        {
+                            SearchOfline searchOfline = new SearchOfline(getActivity());
+                            searchOfline.TextAdvancedSearch(Cityid, txtWhat.getText().toString(), txtAddress.getText().toString(), txtField.getText().toString());
+                        }
+                        else if(fieldactivity>0)
+                        {
+                            SearchOfline searchOfline = new SearchOfline(getActivity());
+                            searchOfline.TextAdvancedSearch2(Cityid, txtWhat.getText().toString(), txtAddress.getText().toString(), txtField.getText().toString());
+                        }
+                        else
+                        {
+                            SearchOfline searchOfline = new SearchOfline(getActivity());
+                            searchOfline.TextAdvancedSearch(Cityid, txtWhat.getText().toString(), txtAddress.getText().toString(), txtField.getText().toString());
+                        }
+
+                    }
+                }
+                else
+                {
+                    MessageDialog messageDialog=new MessageDialog(getActivity());
+                    messageDialog.ShowMessage("هشدار","زیر مجموعه مورد نظر یافت نشد","باشه","false");
+                }
+
+            }
+            }
+
     });
 
 
@@ -177,14 +241,12 @@ public class Frag_main_search extends Fragment {
 
             DataBaseSqlite db=new DataBaseSqlite(getActivity());
             List<String> studentList = new ArrayList<String>();
-            Cursor allrows=db.select_AllArea();
+            Cursor allrows=db.select_AllCity();
             if (allrows.moveToFirst()) {
-                do {
-
+                do
+                {
                     studentList.add(allrows.getString(1));
                     Log.i("FieldActivity", String.valueOf(allrows.getInt(0)) + " : " + allrows.getString(1));
-
-
                 } while (allrows.moveToNext());
             }
 
@@ -209,15 +271,24 @@ public class Frag_main_search extends Fragment {
         public List<String> getId3() {
             DataBaseSqlite db=new DataBaseSqlite(getActivity());
             List<String> studentList = new ArrayList<String>();
+
+            //Subset
             Cursor allrows=db.select_Subset();
             if (allrows.moveToFirst()) {
-                do {
-
+                do
+                {
                     studentList.add(allrows.getString(1));
-
                 } while (allrows.moveToNext());
             }
 
+            //FieldActivity
+            Cursor allrowsFieldActivity=db.select_FieldActivity();
+            if (allrowsFieldActivity.moveToFirst()) {
+                do
+                {
+                    studentList.add(allrowsFieldActivity.getString(1));
+                } while (allrowsFieldActivity.moveToNext());
+            }
             return studentList;
         }
 

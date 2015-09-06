@@ -793,8 +793,36 @@ Context context;
         Log.i("select_BusinessSearch",query);
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(query, null);
-
     }
+
+    public Cursor select_BusinessAdvanceSearch(String namemarket,String address,Integer cityid,Integer subsetId)
+    {
+        String query="";
+        Log.i("select_BusinessSearch","one");
+        query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
+                " Market like'%" + namemarket +
+                "%' AND Address like '%" + address +
+                "%') AND (SubsetId="+subsetId+") AND (CityId="+cityid+")";
+        Log.i("select_BusinessSearch",query);
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(query, null);
+    }
+
+    public Cursor select_BusinessFieldAdvanceSearch(String namemarket,String address,Integer cityid,Integer Field)
+    {
+        String query="";
+        Log.i("select_BusinessSearch","one");
+        query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
+                " Market like'%" + namemarket +
+                "%' AND Address like '%" + address +
+                "%') AND (Field1="+Field+" OR Field2="+Field+
+                " OR Field3="+Field+" OR Field4="+Field+" OR Field5="+Field+
+                " OR Field6="+Field+" OR Field7="+Field+") AND (CityId="+cityid+")";
+        Log.i("select_BusinessSearch",query);
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(query, null);
+    }
+
 
     public Cursor select_BusinessSearchBazarYab(Integer SubsetId,String txtMarket,String address,Integer arreaId)
     {
@@ -1136,6 +1164,8 @@ Context context;
         return db.rawQuery("SELECT Id FROM " + InstructionsSqlite.TABLE_NAME_FieldActivity +" WHERE Activity='"+fieldname+"'" , null);
     }
 
+
+
     public Cursor select_FieldActivityName(Integer id)
     {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -1156,10 +1186,14 @@ Context context;
 
     public Cursor select_SubsetId(String subsetname)
     {
-
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT Id FROM " + InstructionsSqlite.TABLE_NAME_SUBSET + "  WHERE SubsetName LIKE '%" + subsetname+"%'", null);
+        return db.rawQuery("SELECT Id FROM " + InstructionsSqlite.TABLE_NAME_SUBSET + "  WHERE SubsetName Like '%" + subsetname+"%'", null);
+    }
 
+    public Cursor select_AdvanceSubsetId(String subsetname)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT Id FROM " + InstructionsSqlite.TABLE_NAME_SUBSET + "  WHERE SubsetName='" + subsetname+"'", null);
     }
 
     public Cursor select_SubsetProductId(String subsetname)
