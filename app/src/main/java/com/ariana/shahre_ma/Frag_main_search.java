@@ -44,7 +44,7 @@ public class Frag_main_search extends Fragment {
     private String title;
     private int page;
     private Button btnSearch;
-    private AutoCompleteTextView txtWhat;
+    private EditText txtWhat;
     private AutoCompleteTextView txtWhere;
     private AutoCompleteTextView txtField;
     private EditText txtAddress;
@@ -86,7 +86,7 @@ public class Frag_main_search extends Fragment {
 
     try {
         btnSearch = (Button) view.findViewById(R.id.btn_search);
-        txtWhat = (AutoCompleteTextView) view.findViewById(R.id.et_search_what);
+        txtWhat = (EditText) view.findViewById(R.id.et_search_what);
         txtWhere = (AutoCompleteTextView) view.findViewById(R.id.et_search_where);
         txtField= (AutoCompleteTextView) view.findViewById(R.id.et_search_field);
         txtAddress =(EditText) view.findViewById(R.id.et_search_address);

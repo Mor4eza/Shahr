@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/et_search_where"
-        android:hint="منطقه"
+        android:hint="در کجا...؟ (کرج،شیراز و...)"
         android:gravity="start|end"
         android:layout_below="@+id/tvLabel"
         android:layout_marginTop="20dp"
@@ -27,7 +27,7 @@
         android:imeOptions="actionNext"
         />
 
-    <AutoCompleteTextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/et_search_what"
@@ -51,14 +51,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/et_search_field"
-            android:hint="زیر گروه"
+            android:hint="زیر  مجموعه"
 
             android:completionThreshold="1"/>
         <EditText
             android:id="@+id/et_search_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="آدرس"
+            android:hint="بخشی از آدرس"
             android:layout_below="@id/et_search_field"
             android:textColor="@android:color/black"
             android:layout_marginTop="10dp"

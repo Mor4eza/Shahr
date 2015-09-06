@@ -7,26 +7,28 @@
     >
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:id="@+id/img_preview"
-        android:layout_margin="40dp"
-       />
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_above="@+id/btn_download" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/img_close"
         android:src="@android:drawable/ic_delete"
-        android:layout_alignTop="@+id/img_preview"
-        android:layout_alignRight="@+id/img_preview"
-        android:layout_alignEnd="@+id/img_preview" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ذخیره"
         android:id="@+id/btn_download"
-        android:layout_alignBottom="@+id/img_preview"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
