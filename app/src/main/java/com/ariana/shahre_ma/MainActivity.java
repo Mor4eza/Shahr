@@ -237,7 +237,6 @@ public class MainActivity extends ActionBarActivity {
                 .image("http://www.shahrma.com/app/Advertisment/" + imag[2]);
         slider.addSlider(textSliderView3);
 
-
         slider.setPresetTransformer(SliderLayout.Transformer.Accordion);
         slider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
 

@@ -67,7 +67,7 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
            tv_count.setText(job_list_Adapter.getItemCount()+" "+"مورد");
         }
 
-        if(fc.GetSearchOnline() || fc.GetSearchOffline()){
+        if(job_list_Adapter.getItemCount()==0){
 
             }else {
             String showWhatsNew = "showHelpJobsList";
