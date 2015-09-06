@@ -15,8 +15,8 @@ android {
         applicationId "com.ariana.shahre_ma"
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 109
-        versionName '1.0.9'
+        versionCode 110
+        versionName '1.1.0'
         signingConfig signingConfigs.config
     }
     buildTypes {
@@ -105,7 +105,8 @@ dependencies {
     compile 'com.nhaarman.supertooltips:library:3.0.0'
     compile 'com.mohamadamin:persianmaterialdatetimepicker:1.2.1'
     compile 'com.github.deano2390:MaterialShowcaseView:1.0.5@aar'
-    compile 'com.victor:lib:1.0.1'
+    compile 'com.drivemode:TypefaceHelper:1.0.0@aar'
+    compile 'com.victor:lib:1.0.1' //Rotate Library
 
 }
 

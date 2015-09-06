@@ -8,14 +8,10 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.R;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetAreaJosn;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetFieldActivityJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetSubsetJson;
+import com.drivemode.android.typeface.TypefaceHelper;
 
 public class UpdateActivity extends ActionBarActivity {
 
@@ -40,7 +36,7 @@ public class UpdateActivity extends ActionBarActivity {
         BtnUpdate=(Button)findViewById(R.id.btn_update_all);
         PgUpdate=(ProgressBar)findViewById(R.id.progressBar_update);
         PgUpdate.setVisibility(View.INVISIBLE);
-
+        TypefaceHelper.getInstance().setTypeface(this, "font/Yekan.ttf");
 
         BtnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,8 +45,6 @@ public class UpdateActivity extends ActionBarActivity {
 
                 KeySettings setting=new KeySettings(UpdateActivity.this);
                 setting.setUpdateAll(true);
-
-
                 HTTPGetCollectionJson httpGetCollectionJson = new HTTPGetCollectionJson(UpdateActivity.this);
                 httpGetCollectionJson.execute();
             }
