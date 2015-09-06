@@ -46,78 +46,72 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
             Log.i("SearchOffline", String.valueOf(fdb.GetMarketBusiness().size()));
             mItems = new ArrayList<SearchItems>();
 
-        if(fc.GetSearchOffline())
-        {
-            Log.i("SearchOffline1", "strat1");
-            for (int i = 0; i < fdb.GetMarketBusiness().size(); i++) {
-                Log.i("SearchOffline", String.valueOf(fdb.GetMarketBusiness().size()));
-                nature = new SearchItems();
-                nature.setName(fdb.GetMarketBusiness().get(i));
-                nature.setDes(fdb.GetAddressBusiness().get(i));
-                nature.setSubsetId(fdb.GetSubsetId().get(i));
-                // nature.setDisCount(fdb.GetDisCountId().get(i));
-                nature.setmRateCount(fdb.GetRateCount().get(i));
-                nature.setRate(fdb.GetRateBusiness().get(i));
-                nature.setmId(fdb.GetIdBusiness().get(i));
-                nature.setNameImage(fdb.GetSrc().get(i));
+        try {
+            if (fc.GetSearchOffline()) {
+                Log.i("SearchOffline1", "strat1");
+                for (int i = 0; i < fdb.GetMarketBusiness().size(); i++) {
+                    Log.i("SearchOffline", String.valueOf(fdb.GetMarketBusiness().size()));
+                    nature = new SearchItems();
+                    nature.setName(fdb.GetMarketBusiness().get(i));
+                    nature.setDes(fdb.GetAddressBusiness().get(i));
+                    nature.setSubsetId(fdb.GetSubsetId().get(i));
+                    // nature.setDisCount(fdb.GetDisCountId().get(i));
+                    nature.setmRateCount(fdb.GetRateCount().get(i));
+                    nature.setRate(fdb.GetRateBusiness().get(i));
+                    nature.setmId(fdb.GetIdBusiness().get(i));
+                    nature.setNameImage(fdb.GetSrc().get(i));
 
 
+                    if (fdb.GetMobileBusiness().get(i).length() == 0 || fdb.GetMobileBusiness().get(i).equals("") || fdb.GetMobileBusiness().get(i).equals(null) || fdb.GetMobileBusiness().get(i).equals("null")) {
+                        nature.setTell(fdb.GetPhoneBusiness().get(i));
+                    } else {
+                        nature.setTell(fdb.GetMobileBusiness().get(i));
+                    }
+                    if (nature.getTell().length() < 2) {
+                        nature.setTell("");
+                    }
 
-                if(fdb.GetMobileBusiness().get(i).length()==0 || fdb.GetMobileBusiness().get(i).equals("") || fdb.GetMobileBusiness().get(i).equals(null) || fdb.GetMobileBusiness().get(i).equals("null"))
-                {
-                    nature.setTell(fdb.GetPhoneBusiness().get(i));
+                    mItems.add(nature);
+                    notifyDataSetChanged();
+
+
                 }
-                else
-                {
-                    nature.setTell(fdb.GetMobileBusiness().get(i));
+                fc.SetSearchOffline(false);
+            } else {
+                Log.i("checkInternetConnection", "strat");
+                mItems = new ArrayList<SearchItems>();
+
+                for (int i = 0; i < fdb.GetMarketBusiness().size(); i++) {
+                    nature = new SearchItems();
+                    nature.setName(fdb.GetMarketBusiness().get(i));
+                    nature.setDes(fdb.GetAddressBusiness().get(i));
+                    nature.setSubsetId(fdb.GetSubsetId().get(i));
+                    nature.setDisCount(fdb.GetDisCountId().get(i));
+                    nature.setRate(fdb.GetRateBusiness().get(i));
+                    nature.setmId(fdb.GetIdBusiness().get(i));
+                    nature.setmRateCount(fdb.GetRateCount().get(i));
+                    nature.setNameImage(fdb.GetSrc().get(i));
+
+
+                    if (fdb.GetMobileBusiness().get(i).length() == 0 || fdb.GetMobileBusiness().get(i).equals("") || fdb.GetMobileBusiness().get(i).equals(null) || fdb.GetMobileBusiness().get(i).equals("null")) {
+                        nature.setTell(fdb.GetPhoneBusiness().get(i));
+                    } else {
+                        nature.setTell(fdb.GetMobileBusiness().get(i));
+                    }
+                    if (nature.getTell().length() < 2) {
+                        nature.setTell("");
+                    }
+
+                    mItems.add(nature);
+                    notifyDataSetChanged();
                 }
-                if (nature.getTell().length()<2){
-                    nature.setTell("");
-                }
-
-                mItems.add(nature);
-                notifyDataSetChanged();
-
-
             }
-            fc.SetSearchOffline(false);
+
         }
-        else
+        catch (Exception e)
         {
-            Log.i("checkInternetConnection","strat");
-            mItems = new ArrayList<SearchItems>();
-
-            for (int i = 0; i < fdb.GetMarketBusiness().size(); i++)
-            {
-                nature = new SearchItems();
-                nature.setName(fdb.GetMarketBusiness().get(i));
-                nature.setDes(fdb.GetAddressBusiness().get(i));
-                nature.setSubsetId(fdb.GetSubsetId().get(i));
-                nature.setDisCount(fdb.GetDisCountId().get(i));
-                nature.setRate(fdb.GetRateBusiness().get(i));
-                nature.setmId(fdb.GetIdBusiness().get(i));
-                nature.setmRateCount(fdb.GetRateCount().get(i));
-                nature.setNameImage(fdb.GetSrc().get(i));
-
-
-                if(fdb.GetMobileBusiness().get(i).length()==0 || fdb.GetMobileBusiness().get(i).equals("") || fdb.GetMobileBusiness().get(i).equals(null) || fdb.GetMobileBusiness().get(i).equals("null"))
-                {
-                    nature.setTell(fdb.GetPhoneBusiness().get(i));
-                }
-                else
-                {
-                    nature.setTell(fdb.GetMobileBusiness().get(i));
-                }
-                if (nature.getTell().length()<2){
-                    nature.setTell("");
-                }
-
-                mItems.add(nature);
-                notifyDataSetChanged();
-            }
+            Log.d("searachListAdapter",e.toString());
         }
-
-
 
 
     }

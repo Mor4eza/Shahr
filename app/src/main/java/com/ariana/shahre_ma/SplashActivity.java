@@ -71,6 +71,9 @@ public class SplashActivity extends ActionBarActivity {
                         @Override
                         public void run() {
 
+                            HTTPGetCityJson httpGetCityJson = new HTTPGetCityJson(SplashActivity.this);
+                            httpGetCityJson.execute();
+
                             finish();
                             Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(mainIntent);

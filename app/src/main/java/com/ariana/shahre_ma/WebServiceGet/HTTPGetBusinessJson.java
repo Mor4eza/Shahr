@@ -40,10 +40,12 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
     private  String url_Business;
     ProgressDialog pd;
     Integer errorCode=0;
-    private AsyncTask<String,Void,Integer> updateTask = null;
+
+    private  AsyncTask<String,Void,Integer> updateTask = null;
+
     private  List<Integer> selectId=new ArrayList<>();
     private  List<Integer> selectRateCount=new ArrayList<>();
-    private  List<String> selectDisCountPercent=new ArrayList<>();
+    private  List<String>  selectDisCountPercent=new ArrayList<>();
     private  List<Integer> selectDiscountId=new ArrayList<>();
     private  List<Integer> selectSubsetId=new ArrayList<>();
     private  List<Double>  selectLongtiude=new ArrayList<>();
