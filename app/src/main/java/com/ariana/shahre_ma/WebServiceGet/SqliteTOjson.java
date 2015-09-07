@@ -344,9 +344,9 @@ public class SqliteTOjson {
             json.put("Value",5);
 
 
-
-            //array.put("ProductProperties",json);
-            array.put(rowObject);
+            array.put(json);
+            rowObject.put("ProductProperties",array);
+           // array.put(rowObject);
 
             field_Json = rowObject.toString();
 

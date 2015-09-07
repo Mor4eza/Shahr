@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.ariana.shahre_ma.Bazarche.Select_Image;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.MessageDialog;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -117,17 +118,8 @@ public class HTTPPostProductJson extends AsyncTask<String ,Long,Integer>
         try {
             if(integer==1)
             {
-                fc.SetBusiness_Id(response_message);
+                    fc.SetBusiness_Id(response_message);
                     pd.dismiss();
-                    AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-                    alertDialog.setTitle("پیغام");
-                    alertDialog.setMessage("ثبت شد .");
-                    alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-                    alertDialog.show();
 
                   ((Activity)context).finish();
                   fc.SetType(2);
@@ -139,15 +131,8 @@ public class HTTPPostProductJson extends AsyncTask<String ,Long,Integer>
             else
             {
                 pd.dismiss();
-                AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-                alertDialog.setTitle("هشدار");
-                alertDialog.setMessage("ارسال نشد دوباره امتحان کنید");
-                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                alertDialog.show();
+                MessageDialog messageDialog=new MessageDialog(context);
+                messageDialog.ShowMessage("پیام","ثبت نشد . دوباره امتحان کنید","باشه","false");
             }
 
 
@@ -155,15 +140,8 @@ public class HTTPPostProductJson extends AsyncTask<String ,Long,Integer>
         catch (Exception e)
         {
             pd.dismiss();
-            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-            alertDialog.setTitle("خطا");
-            alertDialog.setMessage(" .خطا ثبت نشد دوباره امتحان کنید");
-            alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-
-                }
-            });
-            alertDialog.show();
+            MessageDialog messageDialog=new MessageDialog(context);
+            messageDialog.ShowMessage("پیام", "ثبت نشد . دوباره امتحان کنید", "باشه", "false");
 
         }
 

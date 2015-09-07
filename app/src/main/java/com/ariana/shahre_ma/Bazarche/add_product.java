@@ -79,6 +79,7 @@ public class add_product extends ActionBarActivity {
 
         GetNameCity();
         GetNameSubset();
+        GetNameCollection();
 
         //Radio Group
 
@@ -253,7 +254,8 @@ public class add_product extends ActionBarActivity {
     }
 
 
-    public List<String> getId(Integer cityid) {
+    public List<String> getId(Integer cityid)
+    {
 
         DataBaseSqlite db=new DataBaseSqlite(this);
         List<String> studentList = new ArrayList<String>();
@@ -335,6 +337,39 @@ public class add_product extends ActionBarActivity {
 
         return studentList;
     }
+
+    public void GetNameCollection()
+    {
+        try {
+
+            Log.i("subsetProduct",String.valueOf(fieldDataBase.getName_Subset().size()));
+            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,getnamecollect());
+            Sp_collection.setAdapter(adapter);
+        }
+        catch (Exception e)
+        {
+            Log.e("ExceptionSQL", e.toString());
+        }
+    }
+
+
+    public List<String> getnamecollect() {
+
+        DataBaseSqlite db=new DataBaseSqlite(this);
+        List<String> studentList = new ArrayList<String>();
+        Cursor allrows  = db.select_Collection_Product();
+        if (allrows.moveToFirst()) {
+            do {
+
+                studentList.add(allrows.getString(1));
+
+            } while (allrows.moveToNext());
+        }
+
+        return studentList;
+    }
+
+
 
 
 }
