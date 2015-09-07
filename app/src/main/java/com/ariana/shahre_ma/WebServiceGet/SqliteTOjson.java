@@ -320,6 +320,8 @@ public class SqliteTOjson {
             // JSONobject get key/value convert to json
             JSONObject rowObject = new JSONObject();
             JSONObject json = new JSONObject();
+            JSONArray array=new JSONArray();
+
             rowObject.put("MemberId",memberid);
             rowObject.put("Name", name);
             rowObject.put("DateTime", datetime);
@@ -343,7 +345,9 @@ public class SqliteTOjson {
 
 
 
-            rowObject.put("ProductProperties",json);
+            //array.put("ProductProperties",json);
+            array.put(rowObject);
+
             field_Json = rowObject.toString();
 
         } catch (Exception e) {

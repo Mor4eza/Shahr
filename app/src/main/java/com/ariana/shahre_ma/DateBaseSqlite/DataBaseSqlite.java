@@ -94,8 +94,8 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_Advertisment);
         db.execSQL("DROP TABLE IF EXISTS " + InstructionsSqlite.TABLE_NAME_BUSINESS_IMAGE);*/
 
-        db.execSQL("ALTER TABLE "+InstructionsSqlite.TABLE_NAME_DisCount+" ADD COLUMN Src TEXT");
-        db.execSQL("ALTER TABLE "+InstructionsSqlite.TABLE_NAME_DisCountMember+" ADD COLUMN Src TEXT");
+        db.execSQL("ALTER TABLE " + InstructionsSqlite.TABLE_NAME_DisCount + " ADD COLUMN Src TEXT");
+        db.execSQL("ALTER TABLE " + InstructionsSqlite.TABLE_NAME_DisCountMember + " ADD COLUMN Src TEXT");
 
         // create fresh  tables
         this.onCreate(db);
@@ -832,6 +832,28 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         // 4. close
         db.close();
     }
+
+
+    public void Add_SubsetProperty(Integer id,Integer propertyid,Integer productsubsetid) {
+
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put(InstructionsSqlite.ID_SubsetProperty_PRODUCT,id);
+        values.put(InstructionsSqlite.PROPERTYID_SubsetProperty_PRODUCT,propertyid);
+        values.put(InstructionsSqlite.PRODUCTSUBSETID_SubsetProperty_PRODUCT,productsubsetid);
+
+        // 3. insert
+        db.insert(InstructionsSqlite.TABLE_NAME_SubsetProperty_PRODUCT, // table
+                null, //nullColumnHack
+                values); // key/value
+
+        // 4. close
+        db.close();
+    }
+
     /**
      * SelectBusiness
      * @param
@@ -1646,6 +1668,13 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         return db.rawQuery("SELECT Id FROM "+ InstructionsSqlite.TABLE_NAME_City +" WHERE Name='"+cityname+"'",null);
     }
 
+    public  Cursor select_SubsetProperty()
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return db.rawQuery("SELECT Id FROM "+ InstructionsSqlite.TABLE_NAME_SubsetProperty_PRODUCT,null);
+    }
+
+
     // Deleting Opinion
     public void delete_Opinion() {
 
@@ -1924,6 +1953,15 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.execSQL("DELETE FROM "+ InstructionsSqlite.TABLE_NAME_VALUE_PRODUCT);
         db.close();
     }
+
+    public  void delete_SubsetProperty_Product()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE FROM "+ InstructionsSqlite.TABLE_NAME_SubsetProperty_PRODUCT);
+        db.close();
+    }
+
+
 
     public  void delete_Property_Product()
     {

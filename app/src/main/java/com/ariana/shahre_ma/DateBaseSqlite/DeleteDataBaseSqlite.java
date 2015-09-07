@@ -22,6 +22,21 @@ public class DeleteDataBaseSqlite extends DataBaseSqlite
     }
 
     @Override
+    public void delete_Property_Product() {
+        super.delete_Property_Product();
+    }
+
+    @Override
+    public void delete_SubsetProperty_Product() {
+        super.delete_SubsetProperty_Product();
+    }
+
+    @Override
+    public void delete_Value_Product() {
+        super.delete_Value_Product();
+    }
+
+    @Override
     public void delete_bookmark(Integer businessid) {
         super.delete_bookmark(businessid);
     }

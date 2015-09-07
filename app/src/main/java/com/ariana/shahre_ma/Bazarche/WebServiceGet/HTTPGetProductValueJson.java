@@ -72,15 +72,16 @@ public class HTTPGetProductValueJson  extends AsyncTask<String,Void,Integer>
     @Override
     protected void onPostExecute(Integer result) {
         try {
-            if(result==1) {
-                KeySettings setting=new KeySettings(context);
-                if(len>0) {
-
+            if(result==1)
+            {
+                if(len>0)
+                {
                     AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
                     DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
-                    ddb.delete_Subset_Product();
+                    ddb.delete_Value_Product();
 
-                    for (int i = 0; i < len; i++) {
+                    for (int i = 0; i < len; i++)
+                    {
                         adb.Add_Value_Product(Id[i], valuename[i],Idproperty[i]);
 
                     }
