@@ -11,6 +11,7 @@ public class Job_lists_card_item {
 
     private String mName;
     double rate;
+    private Integer mRateCount;
     private String mtell;
     private Bitmap Image;
     private String mAdd;
@@ -82,5 +83,13 @@ public class Job_lists_card_item {
     }
     public void setNameImage(String nameimage) {
         this.mNameImage = nameimage;
+    }
+
+
+    public Integer getmRateCount() {
+        return mRateCount;
+    }
+    public void setmRateCount(Integer rate) {
+        this.mRateCount = rate;
     }
 }
