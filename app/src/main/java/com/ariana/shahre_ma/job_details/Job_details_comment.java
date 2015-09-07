@@ -1,6 +1,7 @@
 package com.ariana.shahre_ma.job_details;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -73,14 +73,13 @@ public class Job_details_comment extends ActionBarActivity {
             ns=new NetState(getActivity());
 
             json = new SqliteTOjson(getActivity());
-     query=new Query(getActivity());
+            query=new Query(getActivity());
 
-            final Button btnsend = (Button)rootView.findViewById(R.id.bnt_send);
-
+            final FloatingActionButton btnsend = (FloatingActionButton)rootView.findViewById(R.id.bnt_send);
+            txtComm = (EditText) rootView.findViewById(R.id.txt_comm);
             btnsend.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    txtComm = (EditText) rootView.findViewById(R.id.txt_comm);
                     if (ns.checkInternetConnection() == false) {
                         Toast.makeText(getActivity(), "شبکه اینترنت قطع می باشد", Toast.LENGTH_LONG).show();
                     } else {
