@@ -55,12 +55,14 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jobs__list);
+        try {
+            getSupportActionBar().setElevation(0);
+        }catch (Exception e){}
         setTitle(fc.GetSelected_job());
         img_null=(ImageView)findViewById(R.id.img_null);
         tv_null=(TextView)findViewById(R.id.tv_null);
         tv_count=(TextView)findViewById(R.id.tv_count);
         setCards();
-
        if(job_list_Adapter.getItemCount()!=0){
             img_null.setVisibility(View.INVISIBLE);
             tv_null.setVisibility(View.INVISIBLE);
@@ -77,6 +79,18 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
             }
         }
 
+
+       mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+           @Override
+           public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+               super.onScrolled(recyclerView, dx, dy);
+               if (dy>0)
+                   getSupportActionBar().hide();
+               else
+                   getSupportActionBar().show();
+
+           }
+       });
 
     }
         public void img_click(View v){

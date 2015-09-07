@@ -12,7 +12,6 @@ import com.ariana.shahre_ma.Bookmarks.BookmarkAdapter;
 import com.ariana.shahre_ma.Bookmarks.Bookmark_Item;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
-import com.ariana.shahre_ma.Fields.FieldClass;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,7 +23,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by ariana2 on 6/17/2015.
@@ -165,7 +163,6 @@ public class HTTPGetBookMarkJson extends AsyncTask<String,Void,Integer>
 
                 }
                 pd.dismiss();
-                generateData();
                 final BookmarkAdapter adapter = new BookmarkAdapter(context, generateData());
                 BookMark.lv.setAdapter(adapter);
                 adapter.notifyDataSetChanged();

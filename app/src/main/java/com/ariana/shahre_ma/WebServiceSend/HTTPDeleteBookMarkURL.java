@@ -1,9 +1,6 @@
 package com.ariana.shahre_ma.WebServiceSend;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -11,7 +8,6 @@ import android.widget.Toast;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MessageDialog;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessImageJson;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -32,7 +28,6 @@ public class HTTPDeleteBookMarkURL extends AsyncTask<String, Void, Boolean> {
     Integer BusinessId = 0;
     Integer errorCode = 0;
     Context context;
-    ProgressDialog pd;
     FieldClass fc = new FieldClass();
 
     /**
@@ -63,10 +58,7 @@ public class HTTPDeleteBookMarkURL extends AsyncTask<String, Void, Boolean> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        pd = new ProgressDialog(context);
-        pd.setMessage("حذف عکس ...");
-        pd.setCancelable(false);
-        pd.show();
+        Toast.makeText(context,"در حال حذف...",Toast.LENGTH_LONG).show();
     }
 
     /**
@@ -106,17 +98,15 @@ public class HTTPDeleteBookMarkURL extends AsyncTask<String, Void, Boolean> {
         DataBaseSqlite db = new DataBaseSqlite(context);
 
         if (result == true) {
-            pd.dismiss();
             db.delete_bookmark(BusinessId);
-            MessageDialog messageDialog=new MessageDialog(context);
-            messageDialog.ShowMessage("هشدار", "عکس حذف شد", "باشه", "false");
+            Toast.makeText(context,"از نشانه گذاری ها حذف شد...!",Toast.LENGTH_LONG).show();
 
         }
         else
         {
-            pd.dismiss();
+
             MessageDialog messageDialog=new MessageDialog(context);
-            messageDialog.ShowMessage("هشدار","عکس حذف نشد دوباره امتحان کنید","باشه","false");
+            messageDialog.ShowMessage("هشدار","حذف نشد! دوباره امتحان کنید","باشه","false");
         }
 
     }
