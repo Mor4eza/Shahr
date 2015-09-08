@@ -80,29 +80,31 @@ public class Job_details_comment extends ActionBarActivity {
             btnsend.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (ns.checkInternetConnection() == false) {
-                        Toast.makeText(getActivity(), "شبکه اینترنت قطع می باشد", Toast.LENGTH_LONG).show();
-                    } else {
-                        try {
-                            if (query.getMemberId() > 0)
-                            {
-                                Log.i("getMemberId", String.valueOf(query.getMemberId()));
-                                _json = (json.getOpinionTOjson(txtComm.getText().toString(),ct.getGregorianDate()+dt.Time(), query.getMemberId(), fc.GetBusiness_Id()));
-                                fc.SetOpinion_Description(txtComm.getText().toString());
-                                fc.SetOpinion_Date(ct.getGregorianDate()+dt.Time());
-                                fc.SetOpinion_MemberName("");
-                                fc.SetOpinion_Erja(fc.GetBusiness_SubsetIdb());
+                    if (txtComm.getText().length() > 1) {
+                        if (ns.checkInternetConnection() == false) {
+                            Toast.makeText(getActivity(), "شبکه اینترنت قطع می باشد", Toast.LENGTH_LONG).show();
+                             } else {
+                                  try {
+                                     if (query.getMemberId() > 0) {
+                                        Log.i("getMemberId", String.valueOf(query.getMemberId()));
+                                        _json = (json.getOpinionTOjson(txtComm.getText().toString(), ct.getGregorianDate() + dt.Time(), query.getMemberId(), fc.GetBusiness_Id()));
+                                        fc.SetOpinion_Description(txtComm.getText().toString());
+                                        fc.SetOpinion_Date(ct.getGregorianDate() + dt.Time());
+                                        fc.SetOpinion_MemberName("");
+                                        fc.SetOpinion_Erja(fc.GetBusiness_SubsetIdb());
 
-                                HTTPPostOpinionJson sendPost1 = new HTTPPostOpinionJson(getActivity());
-                                sendPost1.SetOpinion_Json(_json);
-                                sendPost1.execute();
-                                txtComm.setText("");
-                            } else
-                            {
-                                Toast.makeText(getActivity(), "کاربری وارد نشد است", Toast.LENGTH_LONG).show();
-                            }
-                        } catch (Exception e) {
+                                        HTTPPostOpinionJson sendPost1 = new HTTPPostOpinionJson(getActivity());
+                                        sendPost1.SetOpinion_Json(_json);
+                                        sendPost1.execute();
+                                        txtComm.setText("");
+                                     } else {
+                                        Toast.makeText(getActivity(), "کاربری وارد نشد است", Toast.LENGTH_LONG).show();
+                                     }
+                                  } catch (Exception e) {
+                                  }
                         }
+                    }else {
+                        txtComm.setError("یه چیزی بنویس...!");
                     }
                 }
             });

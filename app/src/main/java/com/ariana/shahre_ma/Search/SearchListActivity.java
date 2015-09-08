@@ -38,7 +38,7 @@ public class SearchListActivity extends ActionBarActivity {
         if(Search_list_Adapter.getItemCount()!=0){
                 img_null.setVisibility(View.INVISIBLE);
                 tv_null.setVisibility(View.INVISIBLE);
-                tv_count.setText(Search_list_Adapter.getItemCount()+" "+"مورد");
+                tv_count.setText(Search_list_Adapter.getItemCount()+" "+"پیدا شد...");
         }
         mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
