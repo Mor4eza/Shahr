@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -57,6 +56,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
                 nature.setDes(fdb.GetAddressBusiness().get(i));
                 nature.setSubsetId(fdb.GetSubsetId().get(i));
                 // nature.setDisCount(fdb.GetDisCountId().get(i));
+                nature.setmRateCount(fdb.GetRateCount().get(i));
                 nature.setRate(fdb.GetRateBusiness().get(i));
                 nature.setmId(fdb.GetIdBusiness().get(i));
                 nature.setNameImage(fdb.GetSrc().get(i));
@@ -91,6 +91,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
                 nature.setDisCount(fdb.GetDisCountId().get(i));
                 nature.setRate(fdb.GetRateBusiness().get(i));
                 nature.setmId(fdb.GetIdBusiness().get(i));
+                nature.setmRateCount(fdb.GetRateCount().get(i));
                 nature.setNameImage(fdb.GetSrc().get(i));
 
 
@@ -135,6 +136,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         viewHolder.rates.setRating((float) nature.getRate());
         viewHolder.rates.setTag(nature.getmId());
         viewHolder.tvTell.setText(nature.getTell());
+        viewHolder.tvRateCount.setText("/"+nature.getmRateCount().toString());
         String image_url_1;
         if (nature.getNameImage().equals("null")||nature.getNameImage().equals("")||nature.getNameImage().equals(null)||nature.getNameImage()==null){
             Log.i("SubsetId",nature.getSubsetId().toString());
@@ -163,11 +165,12 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         public RatingBar rates;
         public TextView tvTell;
         public CardView cards;
-
+        public TextView tvRateCount;
         public ViewHolder(View itemView) {
             super(itemView);
 
             imgThumbnail = (ImageView) itemView.findViewById(R.id.img_market);
+            tvRateCount=(TextView) itemView.findViewById(R.id.tv_rateCount);
             tvNature = (TextView) itemView.findViewById(R.id.tv_title);
             tvDesNature = (TextView) itemView.findViewById(R.id.tv_address);
             rates = (RatingBar) itemView.findViewById(R.id.rates);
