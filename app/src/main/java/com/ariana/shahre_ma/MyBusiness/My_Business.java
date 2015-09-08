@@ -50,6 +50,8 @@ public class My_Business extends ActionBarActivity {
     public static SwipeRefreshLayout mSwipeRefreshLayout;
     FloatingActionButton discount;
     public static ProgressBar pg;
+    public static TextView tv_null;
+    public static ImageView img_null;
     Uri currImageURI;
     String picturePath;
     public static RecyclerView mRecyclerView;
@@ -60,6 +62,9 @@ public class My_Business extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my__business);
+        tv_null=(TextView)findViewById(R.id.tv_null);
+        img_null=(ImageView)findViewById(R.id.img_null);
+
         pg=(ProgressBar)findViewById(R.id.pb_business);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.my_business_swipe_refresh_layout);
         LocalBroadcastManager.getInstance(this).registerReceiver(mRefresh, new IntentFilter("MyBusiness"));
@@ -86,7 +91,6 @@ public class My_Business extends ActionBarActivity {
          Intialize();
          setCards();
 
-
         if(!setting.getFieldActivity())
         {
             HTTPGetFieldActivityJson httpGetFieldActivityJson = new HTTPGetFieldActivityJson(this);
@@ -112,10 +116,10 @@ public class My_Business extends ActionBarActivity {
     }
     public void Intialize()
     {
-        //rate=(RatingBar) findViewById(R.id.my_business_rate);
+
         title=(TextView) findViewById(R.id.my_business_title);
-       // address=(TextView) findViewById(R.id.my_business_address);
         discount=(FloatingActionButton)findViewById(R.id.btn_discount);
+
 
     }
     public void discount(View v){

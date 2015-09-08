@@ -151,7 +151,6 @@ public class job_details_1 extends ActionBarActivity {
                     }
                 }
             });
-
         }
 
          private  void display_detail() {
