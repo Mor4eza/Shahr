@@ -64,14 +64,7 @@ public class Download_dialog extends Dialog {
                 dismiss();
             }
         });
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            View v=listView.getChildAt(position);
-                RotateLoading loading = (RotateLoading) v.findViewById(R.id.loading);
-                loading.stop();
-            }
-        });
+
     }
     public ArrayList<City_Dialog_Items> generateData(){
 

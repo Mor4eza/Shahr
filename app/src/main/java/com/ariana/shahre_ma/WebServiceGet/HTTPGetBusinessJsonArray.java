@@ -203,7 +203,7 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
                 //send intent to My_City_dialog for receive data
                 Log.d("sender", compareLen.toString());
                 Intent intent = new Intent("myCity_Download");
-                intent.putExtra("position", compareLen - 1);
+                intent.putExtra("received", compareLen - 1);
                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
                 if(compareLen==URLLEN)
