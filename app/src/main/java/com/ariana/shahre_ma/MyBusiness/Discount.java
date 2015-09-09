@@ -1,10 +1,10 @@
 package com.ariana.shahre_ma.MyBusiness;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -12,19 +12,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
-import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetDisCountJson;
+import com.ariana.shahre_ma.WebServiceSend.HTTPDeleteDisCountURL;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Discount extends ActionBarActivity {
 
@@ -52,25 +47,39 @@ public class Discount extends ActionBarActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == count - 1) {
 
                    fc.SetId_DisCount(adapter.getItem(position).GetId());
                     Discount_Dialog dialog = new Discount_Dialog(Discount.this);
                     dialog.show();
 
-                    Toast.makeText(getApplicationContext(),String.valueOf(adapter.getItem(position).GetId()),Toast.LENGTH_LONG).show();
-
-
-                }
-                else
-                {
-                    //Toast.makeText(getApplicationContext(), "فقط مجاز به ویرایش آخرین تخفیف هستید", Toast.LENGTH_LONG).show();
-                  //  Snackbar.make(listView, "فقط مجاز به ویرایش آخرین تخفیف هستید", Snackbar.LENGTH_LONG).show();
-
-                }
             }
         });
 
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+
+                AlertDialog alertDialog = new AlertDialog.Builder(Discount.this).create();
+                alertDialog.setTitle("حذف!");
+                alertDialog.setMessage("آیا میخواهید این تخفیف را حذف کنید؟!");
+                alertDialog.setButton("آره", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        HTTPDeleteDisCountURL httpDeleteDisCountURL=new HTTPDeleteDisCountURL(Discount.this);
+                        httpDeleteDisCountURL.SetDisCount(adapter.getItem(position).GetId());
+                        httpDeleteDisCountURL.execute();
+                    }
+                });
+
+                alertDialog.setButton2("نه", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog.show();
+
+                return false;
+            }
+        });
 
         try
         {
@@ -92,9 +101,7 @@ public class Discount extends ActionBarActivity {
             Cursor rows = sdb.select_DisCountMember(fc.GetBusiness_Id());
             if (rows.moveToFirst()) {
                 do {
-                    ct.setGregorianDate(Integer.valueOf(rows.getString(3).substring(0, 4)),Integer.valueOf(rows.getString(3).substring(5, 7)),Integer.valueOf(rows.getString(3).substring(8, 10)));
-                    ct1.setGregorianDate(Integer.valueOf(rows.getString(4).substring(0, 4)), Integer.valueOf(rows.getString(4).substring(5, 7)), Integer.valueOf(rows.getString(4).substring(8, 10)));
-                    items.add(new discount_item(" % " + rows.getString(6), rows.getString(5),ct1.getIranianDate(), rows.getString(1),ct.getIranianDate(), rows.getInt(0)));
+                    items.add(new discount_item(" % " + rows.getString(6), rows.getString(5),rows.getString(4), rows.getString(1),rows.getString(3), rows.getInt(0)));
 
                 } while (rows.moveToNext());
             }

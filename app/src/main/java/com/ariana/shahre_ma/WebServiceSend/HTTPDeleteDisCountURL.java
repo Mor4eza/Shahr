@@ -6,10 +6,10 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MessageDialog;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetDisCountJson;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -42,7 +42,7 @@ public class HTTPDeleteDisCountURL extends AsyncTask<String, Void, Boolean> {
     }
 
 
-    public void SetBookMark(Integer discountid) {
+    public void SetDisCount(Integer discountid) {
         discountid = discountid;
         url = "http://test.shahrma.com/api/ApiDeleteDisCount?DisCountId=" +discountid ;
     }
@@ -63,7 +63,7 @@ public class HTTPDeleteDisCountURL extends AsyncTask<String, Void, Boolean> {
     protected void onPreExecute() {
         super.onPreExecute();
         pd = new ProgressDialog(context);
-        pd.setMessage("حذف عکس ...");
+        pd.setMessage("در حال حذف تخفیف...");
         pd.setCancelable(false);
         pd.show();
     }
@@ -109,6 +109,9 @@ public class HTTPDeleteDisCountURL extends AsyncTask<String, Void, Boolean> {
             pd.dismiss();
             ddb.delete_DisCountMember(discountid);
             messageDialog.ShowMessage("هشدار", "تخفیف حذف شد .", "باشه", "false");
+            HTTPGetDisCountJson httpGetDisCountJson = new HTTPGetDisCountJson(context);
+            httpGetDisCountJson.seturl_DisCount(fc.GetBusiness_Id());
+            httpGetDisCountJson.execute();
 
         }
         else
