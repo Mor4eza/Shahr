@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -45,6 +44,7 @@ public class TopBusiness_Card_Adapter extends RecyclerView.Adapter<TopBusiness_C
                 nature.setDes(rows.getString(8));
                 nature.setSubsetId(rows.getInt(14));
                 nature.setId(rows.getInt(0));
+                nature.setImageName(rows.getString(31));
                 nature.setThumbnail(R.drawable.pooshak);
                 mItems.add(nature);
             }while (rows.moveToNext());
@@ -71,12 +71,18 @@ public class TopBusiness_Card_Adapter extends RecyclerView.Adapter<TopBusiness_C
         viewHolder.tvDesNature.setTag(nature.getId());
         viewHolder.imgThumbnail.setImageResource(nature.getThumbnail());
         viewHolder.tvSubset.setText(query.getsubsetName(nature.getSubsetId()));
-        String image_url_1;
-        image_url_1 = "http://www.shahrma.com/image/business/" +nature.getSubsetId()+".jpg";
-        Picasso.with(context)
-                .load(image_url_1)
-                .placeholder(R.drawable.img_not_found)
-                .into(viewHolder.imgThumbnail);
+
+        try {
+            String image_url_1;
+            if (nature.getImageName().equals("null") || nature.getImageName().equals("") || nature.getImageName().equals(null) || nature.getImageName() == null) {
+                image_url_1 = "http://www.shahrma.com/image/business/" + nature.getSubsetId() + ".jpg";
+                Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(viewHolder.imgThumbnail);
+
+            } else {
+                image_url_1 = "http://www.shahrma.com/image/business/" + nature.getImageName();
+                Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(viewHolder.imgThumbnail);
+            }
+        }catch (Exception e){}
     }
 
     @Override

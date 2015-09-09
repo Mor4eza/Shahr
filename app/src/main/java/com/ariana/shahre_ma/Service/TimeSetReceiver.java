@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.util.Log;
 
-import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.Date.DateTime;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -94,8 +92,8 @@ public class TimeSetReceiver  extends BroadcastReceiver
             }
 
 
-           /* Intent service1 = new Intent(context, ShowNotificationService.class);
-            context.startService(service1);*/
+            Intent service1 = new Intent(context, ShowNotificationService.class);
+            context.startService(service1);
         }
 
 

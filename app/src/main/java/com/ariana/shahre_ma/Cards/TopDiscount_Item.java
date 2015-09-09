@@ -10,6 +10,7 @@ public class TopDiscount_Item {
     private Integer mId;
     private int mThumbnail;
     private Integer mSubsetId;
+    private String ImageName;
 
     public void setId(Integer id)
     {
@@ -46,6 +47,14 @@ public class TopDiscount_Item {
 
     public void setSubsetId(Integer subsetid){this.mSubsetId=subsetid;}
     public Integer getSubsetId(){return  this.mSubsetId;}
+
+    public void setImageName(String imageName) {
+        this.ImageName = imageName;
+    }
+
+    public String getImageName() {
+        return ImageName;
+    }
 }
 
 
