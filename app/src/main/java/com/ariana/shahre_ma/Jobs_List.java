@@ -80,7 +80,7 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
         }
 
 
-       mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+      /* mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
            @Override
            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                super.onScrolled(recyclerView, dx, dy);
@@ -90,7 +90,7 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
                    getSupportActionBar().show();
 
            }
-       });
+       });*/
 
     }
         public void img_click(View v){

@@ -38,9 +38,9 @@ public class SearchListActivity extends ActionBarActivity {
         if(Search_list_Adapter.getItemCount()!=0){
                 img_null.setVisibility(View.INVISIBLE);
                 tv_null.setVisibility(View.INVISIBLE);
-                tv_count.setText(Search_list_Adapter.getItemCount()+" "+"پیدا شد...");
+                tv_count.setText(Search_list_Adapter.getItemCount()+" "+"مورد پیدا شد!");
         }
-        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+     /*   mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -51,7 +51,7 @@ public class SearchListActivity extends ActionBarActivity {
                         getSupportActionBar().show();
                 }catch (Exception e){}
             }
-        });
+        });*/
     }
 
 

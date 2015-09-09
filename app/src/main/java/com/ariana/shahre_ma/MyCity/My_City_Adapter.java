@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
@@ -61,17 +60,18 @@ public class My_City_Adapter extends ArrayAdapter<My_City_Items> {
                         do{
                             selectedsubset.add(String.valueOf(rows.getInt(0)));
                             Log.i("selectedsubset", selectedsubset.toString());
-                            fc.SetNameSubset(selectedsubset);
+
                         }while (rows.moveToNext());
+
+                        fc.SetNameSubset(selectedsubset);
                     } else {
                         mCheckedState[position] = false;
                         do{
                             selectedsubset.remove(String.valueOf(rows.getInt(0)));
-                            fc.SetNameSubset(selectedsubset);
+
                             Log.i("selectedsubset", selectedsubset.toString());
-                            Log.i("Rows", String.valueOf(rows.getInt(0)));
                         }while (rows.moveToNext());
-                        
+                        fc.SetNameSubset(selectedsubset);
                     }
                 }
             }

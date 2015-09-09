@@ -1,7 +1,5 @@
 package com.ariana.shahre_ma.MyCity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -21,6 +19,7 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.MessageDialog;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJson;
@@ -47,7 +46,7 @@ public class My_city extends ActionBarActivity{
 
     Spinner Sp_City ;
     String cityname="";
-
+    public static Download_dialog myDialog;
     HTTPGetBusinessJson httpbusin;
     NetState ns;
 
@@ -65,7 +64,6 @@ public class My_city extends ActionBarActivity{
         myList = (ListView) findViewById(R.id.my_city_list);
         My_City_Adapter adapter = new My_City_Adapter(this, generateData());
         myList.setAdapter(adapter);
-
 
 
         Sp_City.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -110,7 +108,7 @@ public class My_city extends ActionBarActivity{
 
     public void download(View v){
         // download multiple Business
-        try{
+      //  try{
 
             if(ns.checkInternetConnection()) {
                 Integer Result = 0;
@@ -136,25 +134,17 @@ public class My_city extends ActionBarActivity{
                 {
                     HTTPGetBusinessJsonArray business = new HTTPGetBusinessJsonArray(this);
                     business.execute(url);
-                    Download_dialog dialog = new Download_dialog(this);
-                    dialog.show();
+                    myDialog = new Download_dialog(this);
+                    myDialog.show();
                 }
             }else{
-
-                AlertDialog alertDialog = new AlertDialog.Builder(My_city.this).create();
-                alertDialog.setTitle("هشدار");
-                alertDialog.setMessage("اینترنت قطع می باشد");
-                alertDialog.setButton("خب", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                alertDialog.show();
+                MessageDialog messageDialog=new MessageDialog(this);
+                messageDialog.ShowMessage("هشدار","اینترنت قطع می باشد","باشه","false");
             }
 
-        }catch (Exception e){
+     /*   }catch (Exception e){
 
-        }
+        }*/
 
     }
 
@@ -200,6 +190,7 @@ public class My_city extends ActionBarActivity{
         }
 
 
+
         return super.onOptionsItemSelected(item);
     }
     public ArrayList<My_City_Items> generateData(){
@@ -214,5 +205,19 @@ public class My_city extends ActionBarActivity{
         }
 
         return items;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        fc.GetNameSubset().clear();
+        Log.i("Subset",String.valueOf(fc.GetNameSubset().size()));
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        fc.GetNameSubset().clear();
+        Log.i("Subset",String.valueOf(fc.GetNameSubset().size()));
     }
 }
