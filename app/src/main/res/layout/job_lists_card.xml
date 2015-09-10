@@ -24,22 +24,20 @@
             <TextView
                 android:id="@+id/tv_discount"
                 android:text="%"
-                android:alpha=".6"
                 android:gravity="center_vertical"
                 android:drawablePadding="5dp"
                 android:textColor="@color/md_white_1000"
-                android:background="@drawable/text_style"
+                android:background="@color/md_blue_grey_400"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_tell"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
+                android:layout_alignTop="@+id/rates"
+                android:layout_toLeftOf="@id/img_market"
                 />
             <ImageView
                 android:id="@+id/img_market"
                 android:layout_width="170dp"
                 android:layout_height="120dp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 android:src="@drawable/img_not_found"
                 android:clickable="true"
                 android:onClick="img_click"
@@ -88,7 +86,8 @@
                     android:paddingBottom="2dp"
                     android:src="@drawable/user"
                     android:layout_alignTop="@id/tv_rateCount"
-                    android:layout_toRightOf="@id/tv_rateCount"/>
+                    android:layout_toRightOf="@id/tv_rateCount"
+                    android:id="@+id/imageView" />
 
             <TextView
                 android:gravity="left"
@@ -100,13 +99,12 @@
                 android:paddingRight="7dp"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="7dp"
-                android:layout_alignRight="@+id/tv_title"
-                android:layout_alignEnd="@+id/tv_title"
                 android:layout_below="@+id/rates"
                 android:textIsSelectable="true"
                 android:focusableInTouchMode="false"
                 android:focusable="true"
-               />
+                android:layout_toLeftOf="@+id/tv_discount"
+                android:layout_toStartOf="@+id/tv_discount" />
 
             <TextView
                 android:gravity="right"

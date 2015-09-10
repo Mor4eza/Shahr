@@ -11,7 +11,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
@@ -29,9 +28,6 @@ import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.Date.DateTime;
-import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -53,7 +49,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -526,8 +521,8 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        String _path="";
-        if (resultCode == RESULT_OK) {
+
+        if (resultCode == RESULT_OK && data!=null) {
             if (requestCode == 1) {
                 // currImageURI is the global variable I’m using to hold the content:
                 currImageURI = data.getData();
@@ -535,16 +530,12 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
                 BufferedOutputStream out = null;
                 Path=getRealPathFromURI(currImageURI);
                 Bitmap myBitmap = BitmapFactory.decodeFile(Path);
-                _path=Path;
-                Bitmap _MyBitmap=ShrinkBitmap(_path,500,800);
+
                 try {
                     File dump = new File(Path);
-                    Log.i("SizeImage",String.valueOf(dump.length()));
-                    /*out = new BufferedOutputStream(new FileOutputStream(dump));
-                    myBitmap.compress(Bitmap.CompressFormat.JPEG, 55, out);*/
-
-
-                } catch (Exception e) {
+                    out = new BufferedOutputStream(new FileOutputStream(dump));
+                    myBitmap.compress(Bitmap.CompressFormat.JPEG, 55, out);
+                } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } finally {
                     if (out != null) try {
@@ -554,21 +545,21 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
                     }
                 }
                     if(ViewId==image1.getId()){
-                    image1.setImageBitmap(_MyBitmap);
+                    image1.setImageBitmap(myBitmap);
                     UploadImage();
                 }else if(ViewId==image2.getId()){
-                    image2.setImageBitmap(_MyBitmap);
+                    image2.setImageBitmap(myBitmap);
                     UploadImage();
                 }else if(ViewId==image3.getId()){
-                    image3.setImageBitmap(_MyBitmap);
+                    image3.setImageBitmap(myBitmap);
                     UploadImage();
                 }else if(ViewId==image4.getId()){
-                    image4.setImageBitmap(_MyBitmap);
+                    image4.setImageBitmap(myBitmap);
                     UploadImage();
                 }
 
 
-            }else if(requestCode == 100){
+            }else if(requestCode == 100 && data!=null ){
                 BufferedOutputStream out = null;
                 currImageURI = data.getData();
                 Path=getRealPathFromURI(currImageURI);
@@ -676,31 +667,4 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
         }
 
     };
-
-
-    public Bitmap ShrinkBitmap(String file, int width, int height)
-    {
-        BitmapFactory.Options bmpFactoryOptions = new BitmapFactory.Options();
-        bmpFactoryOptions.inJustDecodeBounds = true;
-        Bitmap bitmap = BitmapFactory.decodeFile(file, bmpFactoryOptions);
-
-        int heightRatio = (int) Math.ceil(bmpFactoryOptions.outHeight / (float) height);
-        int widthRatio = (int) Math.ceil(bmpFactoryOptions.outWidth / (float) width);
-
-        if(heightRatio > 1 || widthRatio > 1)
-        {
-            if(heightRatio > widthRatio)
-            {
-                bmpFactoryOptions.inSampleSize = heightRatio;
-            }
-            else
-            {
-                bmpFactoryOptions.inSampleSize = widthRatio;
-            }
-        }
-
-        bmpFactoryOptions.inJustDecodeBounds = false;
-        bitmap = BitmapFactory.decodeFile(file, bmpFactoryOptions);
-        return bitmap;
-    }
 }
