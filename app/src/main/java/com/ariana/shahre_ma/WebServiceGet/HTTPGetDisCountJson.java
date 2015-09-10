@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
@@ -121,31 +122,34 @@ public class HTTPGetDisCountJson extends AsyncTask<String,Void,Integer> {
      */
     @Override
     protected void onPostExecute(Integer result) {
+        try {
         if(result==1) {
-            try {
-
-
+            if(len==0 &&  errorCode==200){
+                Discount.img_null.setVisibility(View.VISIBLE);
+                Discount.tv_null.setVisibility(View.VISIBLE);
+            }
                 AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
-                DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
+                DeleteDataBaseSqlite ddb = new DeleteDataBaseSqlite(context);
 
                 ddb.delete_DisCountMember();
                 for (int i = 0; i < len; i++) {
                     adb.Add_DisCountMember(Id[i], text[i], image[i], startdate[i], expirationdate[i], description[i], percent[i], businessid[i]);
                 }
                 pd.dismiss();
-                Discount dis=new Discount();
-                discount_Adapter adapter = new discount_Adapter(context,generateData());
+                Discount dis = new Discount();
+                discount_Adapter adapter = new discount_Adapter(context, generateData());
                 Discount.listView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
-           } catch (Exception e) {
+
+        } else
+            {
+                pd.dismiss();
+            }
+        } catch (Exception e) {
                 pd.dismiss();
 
             }
-        }
-        else
-        {
-            pd.dismiss();
-        }
+
     }
     public ArrayList<discount_item> generateData()
     {

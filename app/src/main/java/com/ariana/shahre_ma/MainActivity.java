@@ -18,6 +18,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -98,6 +99,15 @@ public class MainActivity extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
 
+        Log.i("resume","true");
+
+        HTTPGetAdvertismentJson httpGetAdvertismentJson=new HTTPGetAdvertismentJson(this);
+        httpGetAdvertismentJson.SetAdvertisment(query.getCityId(setting.getCityName()));
+        httpGetAdvertismentJson.execute();
+
+        HTTPGetTopsBusinessJson httpGetTopsBusinessJson=new HTTPGetTopsBusinessJson(this);
+        httpGetTopsBusinessJson.SetTopBusiness(query.getCityId(setting.getCityName()));
+        httpGetTopsBusinessJson.execute();
 
         navigation();
         try {
@@ -150,14 +160,6 @@ public class MainActivity extends ActionBarActivity {
             update.execute(url);
             */
 
-            HTTPGetAdvertismentJson httpGetAdvertismentJson=new HTTPGetAdvertismentJson(this);
-            httpGetAdvertismentJson.SetAdvertisment(query.getCityId(setting.getCityName()));
-            httpGetAdvertismentJson.execute();
-
-
-           HTTPGetTopsBusinessJson httpGetTopsBusinessJson=new HTTPGetTopsBusinessJson(this);
-            httpGetTopsBusinessJson.SetTopBusiness(query.getCityId(setting.getCityName()));
-            httpGetTopsBusinessJson.execute();
         }
 
 

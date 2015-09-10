@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ariana.shahre_ma.Cards.TopDiscount_Card_Adapter;
@@ -20,8 +20,9 @@ public class Frag_main_Top_discount extends Fragment {
     // Store instance variables
     private String title;
     private int page;
-    public static ProgressBar pb;
-   public static RecyclerView mRecyclerView;
+    public static TextView tv_null;
+    public static ImageView img_null;
+    public static RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter mAdapter;
     // newInstance constructor for creating fragment with arguments
@@ -49,8 +50,9 @@ public class Frag_main_Top_discount extends Fragment {
         View view = inflater.inflate(R.layout.frag_main_top_discount, container, false);
         TextView tvLabel = (TextView) view.findViewById(R.id.tvLabel);
         tvLabel.setText(page + " -- " + title);
+        img_null=(ImageView)view.findViewById(R.id.img_null);
+        tv_null=(TextView)view.findViewById(R.id.tv_null);
 
-        pb=(ProgressBar)view.findViewById(R.id.pb_topBusiness);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.top_dis_recycler_view);
         mRecyclerView.setHasFixedSize(true);
 

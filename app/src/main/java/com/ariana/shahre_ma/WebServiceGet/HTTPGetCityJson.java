@@ -1,17 +1,12 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 
-import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
@@ -31,7 +26,6 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
 {
 
     private String url_get_Proviced = "http://test.shahrma.com/api/ApiGivecity";
-    ProgressDialog pd;
     Integer Id_city[];
     String  Name_city[];
     Integer PROVINCEID_city[];
@@ -79,7 +73,6 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
         KeySettings setting=new KeySettings(context);
         try {
 
-            Log.i("onpostCity","onpostCity");
             if(result==1)
             {
                 AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
@@ -97,7 +90,6 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
 
                         if (setting.getAllUpdate())
                         {
-                            Log.i("getCity","len>0");
                             HTTPGetAreaJosn httpGetAreaJosn = new HTTPGetAreaJosn(context);
                             httpGetAreaJosn.execute();
 
@@ -108,7 +100,6 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
                     {
                         if (setting.getAllUpdate())
                         {
-                            Log.i("getCity","len<0");
                             Intent intent = new Intent("GetCity");
                             LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                         }
@@ -121,7 +112,6 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
 
                     if (setting.getAllUpdate())
                     {
-                        Log.i("getCity","else");
                         Intent intent = new Intent("GetCity");
                         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                     }
@@ -131,7 +121,6 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
         {
             if (setting.getAllUpdate())
             {
-                Log.i("getCity","exception");
                 Intent intent = new Intent("GetCity");
                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
             }
@@ -147,8 +136,6 @@ public class HTTPGetCityJson extends AsyncTask<String,Void,Integer>
      */
     void parseJSON(String JSONString) {
         try {
-
-            Log.i("JSONcity",JSONString);
             JSONArray areas = new JSONArray(JSONString);
 
             Id_city=new Integer[areas.length()];
