@@ -47,14 +47,15 @@ public class Discount extends ActionBarActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                   fc.SetId_DisCount(adapter.getItem(position).GetId());
+                try {
+                    fc.SetId_DisCount(adapter.getItem(position).GetId());
                     Discount_Dialog dialog = new Discount_Dialog(Discount.this);
                     dialog.show();
+                }catch (Exception e){
 
+                }
             }
         });
-
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {

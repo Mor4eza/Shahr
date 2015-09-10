@@ -14,7 +14,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -46,12 +46,7 @@ public class Download_dialog extends Dialog {
         listView=(ListView)findViewById(R.id.dialog_listview);
         adapter= new City_Dialog_Adapter(getContext(),generateData());
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //adapter.notifyDataSetChanged();
-            }
-        });
+        listView.setEnabled(false);
 
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(mMessageReceiver, new IntentFilter("myCity_Download"));
         cancel=(Button)findViewById(R.id.cancel);
@@ -85,15 +80,36 @@ public class Download_dialog extends Dialog {
 
                 Integer position = intent.getIntExtra("received", 0);
                 Log.i("received", position.toString());
+                listView.smoothScrollToPosition(position);
                 View load = listView.getChildAt(position);
                 RotateLoading loading = (RotateLoading) load.findViewById(R.id.loading);
                 loading.stop();
                 View dine = listView.getChildAt(position);
                 ImageView done = (ImageView) dine.findViewById(R.id.downloaded);
                 done.setVisibility(View.VISIBLE);
+
+                listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+                    @Override
+                    public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+                    }
+
+                    @Override
+                    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+                        View load = listView.getChildAt(1);
+                        RotateLoading loading = (RotateLoading) load.findViewById(R.id.loading);
+                        loading.stop();
+                        View dine = listView.getChildAt(1);
+                        ImageView done = (ImageView) dine.findViewById(R.id.downloaded);
+                        done.setVisibility(View.VISIBLE);
+
+                    }
+                });
             }catch (Exception e){
 
             }
+
         }
     };
 
