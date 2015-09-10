@@ -9,22 +9,17 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="آخرین آپدیت:"
+        android:text="آخرین به روزرسانی:"
         android:drawableRight="@drawable/discount_start"
-        android:drawablePadding="20dp"
+        android:drawablePadding="10dp"
+        android:textColor="@color/md_red_400"
+        android:layout_marginTop="10dp"
         android:id="@+id/tv_last_update"
-        android:paddingTop="20dp"
-        android:layout_centerVertical="true"
+        android:paddingTop="10dp"
+        android:layout_below="@+id/textView6"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="بروزرسانی"
-        android:id="@+id/btn_update_all"
-        android:layout_above="@+id/progressBar_update"
-        android:layout_centerHorizontal="true" />
 
     <ProgressBar
         style="?android:attr/progressBarStyleLarge"
@@ -34,18 +29,16 @@
         android:max="100"
         android:progress="0"
         android:indeterminate="false"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="61dp"
-        android:layout_alignRight="@+id/tv_last_update"
-        android:layout_alignEnd="@+id/tv_last_update" />
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="در این قسمت می توانید به صورت کلی برنامه را بروزرسانی کنید قسمت های که بروزرسانی می شود عبارت است  شهر ٍ گروه ها ٍ زیر گروه ها ٍ زمینه کاری ٍ بوک مارک ٍ علاقه مندی  "
+        android:text="از این قسمت میتوانید اطلاعات ثابت برنامه (مانند:شهرها،زمینه کاری ها،گروه ها و زیر گروه های مشاغل و...) را به صورت دستی بروز رسانی نمایید."
         android:id="@+id/textView6"
+        android:lineSpacingMultiplier="1.5"
+        android:textSize="18sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -60,4 +53,23 @@
         android:layout_alignBottom="@+id/tv_last_update"
         android:layout_toLeftOf="@+id/tv_last_update"
         android:layout_toStartOf="@+id/tv_last_update" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/frameLayout2"
+        android:layout_centerHorizontal="true">
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="بروزرسانی"
+            android:textColor="@color/md_white_1000"
+            android:id="@+id/btn_update_all"
+            android:background="?android:attr/selectableItemBackground"
+         />
+    </FrameLayout>
 </RelativeLayout>
