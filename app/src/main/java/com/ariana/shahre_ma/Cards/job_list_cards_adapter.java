@@ -113,13 +113,12 @@ private  static Context context;
                             {
                                 nature.setTell(fdb.GetPhoneBusiness().get(i));
                             }
-                            else if(fdb.GetPhoneBusiness().get(i).equals("1"))
-                            {
-                                nature.setTell("");
-                            }
                             else
                             {
                                 nature.setTell(fdb.GetMobileBusiness().get(i));
+                            }
+                            if (nature.getTell().length()<2){
+                                nature.setTell("");
                             }
                             nature.setmRateCount(fdb.GetRateCount().get(i));
                             mItems.add(nature);

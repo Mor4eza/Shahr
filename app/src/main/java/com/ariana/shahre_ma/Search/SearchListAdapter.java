@@ -62,12 +62,17 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
                 nature.setNameImage(fdb.GetSrc().get(i));
 
 
-                if (fdb.GetMobileBusiness().get(i).length() == 0 || fdb.GetMobileBusiness().get(i).equals("") || fdb.GetMobileBusiness().get(i).equals(null) || fdb.GetMobileBusiness().get(i).equals("null")) {
+
+                if(fdb.GetMobileBusiness().get(i).length()==0 || fdb.GetMobileBusiness().get(i).equals("") || fdb.GetMobileBusiness().get(i).equals(null) || fdb.GetMobileBusiness().get(i).equals("null"))
+                {
                     nature.setTell(fdb.GetPhoneBusiness().get(i));
-                } else if (fdb.GetPhoneBusiness().get(i).equals("1")) {
-                    nature.setTell("");
-                } else {
+                }
+                else
+                {
                     nature.setTell(fdb.GetMobileBusiness().get(i));
+                }
+                if (nature.getTell().length()<2){
+                    nature.setTell("");
                 }
 
                 mItems.add(nature);
@@ -99,13 +104,12 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
                 {
                     nature.setTell(fdb.GetPhoneBusiness().get(i));
                 }
-                else if(fdb.GetPhoneBusiness().get(i).equals("1"))
-                {
-                    nature.setTell("");
-                }
                 else
                 {
                     nature.setTell(fdb.GetMobileBusiness().get(i));
+                }
+                if (nature.getTell().length()<2){
+                    nature.setTell("");
                 }
 
                 mItems.add(nature);
