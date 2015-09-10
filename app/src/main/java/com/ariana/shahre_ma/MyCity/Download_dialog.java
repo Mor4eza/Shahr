@@ -78,7 +78,7 @@ public class Download_dialog extends Dialog {
             // Get extra data included in the Intent
             try {
 
-                Integer position = intent.getIntExtra("received", 0);
+                final Integer position = intent.getIntExtra("received", 0);
                 Log.i("received", position.toString());
                 listView.smoothScrollToPosition(position);
                 View load = listView.getChildAt(position);
@@ -97,13 +97,12 @@ public class Download_dialog extends Dialog {
                     @Override
                     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
-                        View load = listView.getChildAt(1);
+                        View load = listView.getChildAt(position);
                         RotateLoading loading = (RotateLoading) load.findViewById(R.id.loading);
                         loading.stop();
-                        View dine = listView.getChildAt(1);
+                        View dine = listView.getChildAt(position);
                         ImageView done = (ImageView) dine.findViewById(R.id.downloaded);
                         done.setVisibility(View.VISIBLE);
-
                     }
                 });
             }catch (Exception e){
