@@ -120,6 +120,13 @@ private  static Context context;
                             if (nature.getTell().length()<2){
                                 nature.setTell("");
                             }
+                            if (nature.getDisCount().equals("") || nature.getDisCount().equals(null) || nature.getDisCount().equals("null")){
+                                nature.setDisCount("");
+                            }
+                            else
+                            {
+                                nature.setDisCount(nature.getDisCount()+"%");
+                            }
                             nature.setmRateCount(fdb.GetRateCount().get(i));
                             mItems.add(nature);
                             notifyDataSetChanged();
@@ -212,6 +219,7 @@ private  static Context context;
             Job_lists_card_item nature = mItems.get(i);
             viewHolder.tvNature.setText(nature.getName());
             viewHolder.tvDesNature.setText(nature.getDes());
+
             viewHolder.Discount.setText(String.valueOf(nature.getDisCount()));
 
 

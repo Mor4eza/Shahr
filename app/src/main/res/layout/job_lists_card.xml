@@ -20,19 +20,6 @@
             android:id="@+id/top_layout"
             android:layout_width="fill_parent"
             android:layout_height="160dp">
-
-            <TextView
-                android:id="@+id/tv_discount"
-                android:text="%"
-                android:gravity="center_vertical"
-                android:drawablePadding="5dp"
-                android:textColor="@color/md_white_1000"
-                android:background="@color/md_blue_grey_400"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/rates"
-                android:layout_toLeftOf="@id/img_market"
-                />
             <ImageView
                 android:id="@+id/img_market"
                 android:layout_width="170dp"
@@ -43,7 +30,21 @@
                 android:onClick="img_click"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-              />
+                />
+            <TextView
+                android:id="@+id/tv_discount"
+                android:text=""
+                android:gravity="center_vertical"
+                android:drawablePadding="5dp"
+                android:textColor="@color/md_white_1000"
+                android:background="@color/md_blue_grey_400"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="1dp"
+                android:layout_alignTop="@+id/rates"
+                android:layout_toLeftOf="@id/img_market"
+                />
+
             <TextView
 
                 android:id="@+id/tv_title"

@@ -93,12 +93,19 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
                 nature.setName(fdb.GetMarketBusiness().get(i));
                 nature.setDes(fdb.GetAddressBusiness().get(i));
                 nature.setSubsetId(fdb.GetSubsetId().get(i));
-                nature.setDisCount(fdb.GetDisCountId().get(i));
+                nature.setDisCount(fdb.GetDisCountPercent().get(i));
                 nature.setRate(fdb.GetRateBusiness().get(i));
                 nature.setmId(fdb.GetIdBusiness().get(i));
                 nature.setmRateCount(fdb.GetRateCount().get(i));
                 nature.setNameImage(fdb.GetSrc().get(i));
 
+                if (nature.getDisCount().equals("") || nature.getDisCount().equals(null) || nature.getDisCount().equals("null")){
+                    nature.setDisCount("");
+                }
+                else
+                {
+                    nature.setDisCount(nature.getDisCount()+"%");
+                }
 
                 if(fdb.GetMobileBusiness().get(i).length()==0 || fdb.GetMobileBusiness().get(i).equals("") || fdb.GetMobileBusiness().get(i).equals(null) || fdb.GetMobileBusiness().get(i).equals("null"))
                 {
@@ -141,6 +148,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         viewHolder.rates.setTag(nature.getmId());
         viewHolder.tvTell.setText(nature.getTell());
         viewHolder.tvRateCount.setText("/"+nature.getmRateCount().toString());
+        viewHolder.tvDiscount.setText(nature.getDisCount());
         String image_url_1;
         if (nature.getNameImage().equals("null")||nature.getNameImage().equals("")||nature.getNameImage().equals(null)||nature.getNameImage()==null){
             Log.i("SubsetId",nature.getSubsetId().toString());
@@ -170,6 +178,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         public TextView tvTell;
         public CardView cards;
         public TextView tvRateCount;
+        public TextView tvDiscount;
         public ViewHolder(View itemView) {
             super(itemView);
 
@@ -180,6 +189,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
             rates = (RatingBar) itemView.findViewById(R.id.rates);
             tvTell = (TextView) itemView.findViewById(R.id.tv_tell);
             cards = (CardView) itemView.findViewById(R.id.cards);
+            tvDiscount=(TextView)itemView.findViewById(R.id.tv_discount);
             imgThumbnail.setOnClickListener(this);
             tvNature.setOnClickListener(this);
             cards.setOnClickListener(this);
