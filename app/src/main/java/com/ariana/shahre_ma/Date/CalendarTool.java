@@ -556,8 +556,8 @@ public class CalendarTool
         month=date.substring(5,7);
         day=date.substring(8, 10);
 
-        _month=Integer.valueOf(date.substring(0,4));
-        _day=Integer.valueOf(date.substring(5,7));
+        _month=Integer.valueOf(date.substring(5,7));
+        _day=Integer.valueOf(date.substring(8,10));
 
 
         if (_month <= 9)
@@ -572,7 +572,7 @@ public class CalendarTool
         ct.setGregorianDate(Integer.valueOf(year),Integer.valueOf(month),Integer.valueOf(day));
              result=ct.getIranianDate();
 
-        year=result.substring(0,4);
+        /*year=result.substring(0,4);
         month=result.substring(5,6);
         day=result.substring(7,8);
 
@@ -587,9 +587,22 @@ public class CalendarTool
         if (_day<=9)
         {
             day="0"+day;
-        }
+        }*/
 
         result=(year+"/"+month+"/"+day);
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/mm/dd");
+        Date testDate1 = null;
+        try
+        {
+            testDate1 = sdf1.parse(result);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/mm/dd");
+        String newFormat1 = formatter1.format(testDate1);
+        System.out.println(".....Date..."+newFormat1);
+
+
 
 
         Log.i("MiladiToShamesi", result);
