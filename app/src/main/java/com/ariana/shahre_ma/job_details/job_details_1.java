@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -65,7 +67,7 @@ public class job_details_1 extends ActionBarActivity {
         SliderLayout slider;
         Query query;
         TextView name;
-        TextView tel;
+        Button tel;
         TextView web;
         TextView owner;
         TextView subset;
@@ -73,7 +75,6 @@ public class job_details_1 extends ActionBarActivity {
         TextView address;
         TextView des;
         TextView tv_distance;
-        TextView tv_rateCount;
         FieldClass fc=new FieldClass();
         NetState ns;
         RatingBar rate1;
@@ -106,7 +107,7 @@ public class job_details_1 extends ActionBarActivity {
             }
 
             name=(TextView) rootView.findViewById(R.id.market_name);
-            tel=(TextView) rootView.findViewById(R.id.market_tel);
+            tel=(Button) rootView.findViewById(R.id.market_tel);
             web=(TextView) rootView.findViewById(R.id.market_web);
             owner=(TextView) rootView.findViewById(R.id.market_owner);
             subset=(TextView) rootView.findViewById(R.id.market_subset);
@@ -117,13 +118,18 @@ public class job_details_1 extends ActionBarActivity {
             slider = (SliderLayout) rootView.findViewById(R.id.slider_jobs);
             tv_distance=(TextView)rootView.findViewById(R.id.market_distance);
             parent=(LinearLayout)rootView.findViewById(R.id.parent_jobs);
-            tv_rateCount=(TextView)rootView.findViewById(R.id.market_rateCount);
             display_detail();
             rates_change();
             display_Images();
             distance();
 
-
+            tel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + tel.getText().toString()));
+                    startActivity(intent);
+                }
+            });
 
             return rootView;
         }
@@ -321,6 +327,10 @@ public class job_details_1 extends ActionBarActivity {
 
 
 
+             }
+
+             if(tel.getText().length()<2){
+                 tel.setVisibility(View.GONE);
              }
        }
         catch (Exception e){

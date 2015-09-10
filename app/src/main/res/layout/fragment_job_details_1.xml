@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/market_name"
-            android:text=""
+            android:textSize="22sp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="10dp"/>
@@ -60,35 +60,22 @@
                 android:secondaryProgressTint="#ffff3013"
                 android:secondaryProgressTintMode="multiply"
                 />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="5dp"
-                android:text=""
-                android:id="@+id/market_rateCount"/>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:orientation="horizontal"
-            android:paddingTop="30dp"
-            >
 
-            <TextView
+
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:textColor="@color/secondary_text"
+                android:background="?android:attr/selectableItemBackground"
                 android:gravity="center_vertical"
                 android:id="@+id/market_tel"
                 android:drawableRight="@drawable/phone"
                 android:drawablePadding="10dp"
                 android:layout_gravity="end"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"/>
 
-        </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
