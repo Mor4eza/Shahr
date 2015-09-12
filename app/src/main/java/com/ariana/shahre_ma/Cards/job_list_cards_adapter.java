@@ -145,7 +145,7 @@ private  static Context context;
                                 nature.setName(allrows.getString(1));
                                 nature.setDes(allrows.getString(8));
                                 nature.setSubsetId(allrows.getInt(14));
-                               // nature.setDisCount(allrows.getInt(14));
+                                nature.setDisCount("");
                                 Log.i("Rate", String.valueOf(allrows.getDouble(30)));
                                 nature.setmRateCount(allrows.getInt(29));
                                 nature.setRate(allrows.getDouble(30));
