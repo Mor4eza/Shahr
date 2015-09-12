@@ -86,7 +86,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
                     nature.setName(fdb.GetMarketBusiness().get(i));
                     nature.setDes(fdb.GetAddressBusiness().get(i));
                     nature.setSubsetId(fdb.GetSubsetId().get(i));
-                    nature.setDisCount(String.valueOf(fdb.GetDisCountId().get(i)));
+                    nature.setDisCount(fdb.GetDisCountId().get(i));
                     nature.setRate(fdb.GetRateBusiness().get(i));
                     nature.setmId(fdb.GetIdBusiness().get(i));
                     nature.setmRateCount(fdb.GetRateCount().get(i));
