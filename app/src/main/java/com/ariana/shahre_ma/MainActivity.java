@@ -314,17 +314,15 @@ public class MainActivity extends ActionBarActivity {
                 .withSelectionListEnabledForSingleProfile(false)
                 .withHeightDp(150)
                 .withTranslucentStatusBar(true)
-
-                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
-
-
+                .withOnAccountHeaderSelectionViewClickListener(new AccountHeader.OnAccountHeaderSelectionViewClickListener() {
                     @Override
-                    public boolean onProfileChanged(View view, IProfile iProfile, boolean b) {
+                    public boolean onClick(View view, IProfile iProfile) {
+                        CityDialog cityDialog = new CityDialog(MainActivity.this);
+                        cityDialog.show();
                         return false;
                     }
                 })
 
-                        //.withSavedInstance( savedInstanceState)
                 .build();
         ////////////////////////
         result = new DrawerBuilder()

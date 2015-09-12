@@ -76,20 +76,16 @@ private  static Context context;
             allrows = mydb.select_SortRateBusiness(fc.GetBusiness_SubsetIdb());
             setting.saveSortBusiness("0"); //No Sort
             search=false;
-            Log.i("rate",setting.getSortBusiness());
         }  else if(setting.getSortBusiness().equals("name"))
         {
             allrows = mydb.select_SortNameBusiness(fc.GetBusiness_SubsetIdb());
             setting.saveSortBusiness("0"); //No Sort
             search=false;
-            Log.i("name", setting.getSortBusiness());
         }  else if(setting.getSortBusiness().equals("date")) {
              allrows = mydb.select_SortDateBusiness(fc.GetBusiness_SubsetIdb());
              setting.saveSortBusiness("0"); //No Sort
              search=false;
-            Log.i("date", setting.getSortBusiness());
         }
-        Log.i("job_list_cards_adapter","strat");
         //try {
 
                     if(ns.checkInternetConnection() && search)

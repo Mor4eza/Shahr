@@ -32,7 +32,7 @@
         android:id="@+id/img_null"
         android:visibility="gone"
         android:layout_marginBottom="37dp"
-        android:src="@android:drawable/btn_star_big_off"
+        android:src="@drawable/discount"
         android:layout_above="@+id/tv_null"
         android:layout_centerHorizontal="true" />
 
