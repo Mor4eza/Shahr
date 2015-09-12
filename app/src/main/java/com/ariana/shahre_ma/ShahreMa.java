@@ -2,6 +2,8 @@ package com.ariana.shahre_ma;
 
 import android.app.Application;
 
+import com.drivemode.android.typeface.TypefaceHelper;
+
 import jonathanfinerty.once.Once;
 
 /**
@@ -12,6 +14,12 @@ public class ShahreMa extends Application {
     public void onCreate() {
         super.onCreate();
         Once.initialise(this);
+        TypefaceHelper.initialize(this);
+    }
 
+    @Override
+    public void onTerminate() {
+        TypefaceHelper.destroy();
+        super.onTerminate();
     }
 }
