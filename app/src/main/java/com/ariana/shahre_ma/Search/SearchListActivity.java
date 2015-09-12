@@ -1,28 +1,48 @@
 package com.ariana.shahre_ma.Search;
 
+import android.app.AlertDialog;
+import android.app.SearchManager;
+import android.app.SearchableInfo;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.Fields.FieldDataBusiness;
+import com.ariana.shahre_ma.MapsActivity;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.Settings.KeySettings;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
+import java.util.List;
 
 import jp.wasabeef.recyclerview.animators.OvershootInLeftAnimator;
 import jp.wasabeef.recyclerview.animators.adapters.ScaleInAnimationAdapter;
 
-public class SearchListActivity extends ActionBarActivity {
+public class SearchListActivity extends ActionBarActivity implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
     RecyclerView mRecyclerView;
+    private SearchView mSearchView;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter Search_list_Adapter;
     FieldClass fc=new FieldClass();
     TextView tv_null;
     ImageView img_null;
     TextView tv_count;
-
+    KeySettings setting=new KeySettings(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,26 +95,162 @@ public class SearchListActivity extends ActionBarActivity {
         /*}
         catch (Exception e){}*/
     }
-
-   /* @Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search_list, menu);
-        return true;
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        mSearchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        setupSearchView();
+        if(Search_list_Adapter.getItemCount()==0)
+        {
+            return  false;
+        }
+        else
+        {
+            return true;
+        }
+
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
         int id = item.getItemId();
-
+        View btnsort=findViewById(R.id.sort);
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_Map) {
+
+
+            if(status== ConnectionResult.SUCCESS) {
+                Intent i = new Intent(this,MapsActivity.class);
+                startActivity(i);
+            }else{
+                int requestCode = 10;
+                AlertDialog alertDialog = new AlertDialog.Builder(SearchListActivity.this).create();
+                alertDialog.setTitle("هشدار");
+                alertDialog.setMessage("نسخه Google Play Service  شما قدیمی می باشد. لطفا بروز رسانی کنید");
+                alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog.show();
+            }
+
             return true;
+
+        }else if(id== R.id.sort){
+
+            final PopupMenu popupMenu=new PopupMenu(SearchListActivity.this,btnsort);
+            popupMenu.getMenuInflater().inflate(R.menu.job_list_popupmenu, popupMenu.getMenu());
+            popupMenu.show();
+            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    if (item.getTitle().equals("مرتب سازی بر اساس نام"))
+                    {
+                        Toast.makeText(getApplicationContext(), item.getItemId(), Toast.LENGTH_LONG).show();
+                        setting.saveSortBusiness("name");
+                        setCards();
+                    }
+                    else if(item.getTitle().equals("مرتب سازی بر اساس امتیاز"))
+                    {
+                        setting.saveSortBusiness("rate");
+
+                        setCards();
+                    } else if(item.getTitle().equals("مرتب سازی بر اساس جدیدترینها")){
+
+                        setting.saveSortBusiness("date");
+                        setCards();
+
+                    }
+
+                    return false;
+                }
+            });
+        }else if(id==android.R.id.home){
+            FieldDataBusiness fdb=new FieldDataBusiness();
+            fdb.ClearAll();
+            fc.SetSearchOffline(false);
+            fc.SetSearchOnline(false);
         }
 
+
         return super.onOptionsItemSelected(item);
-    }*/
+    }
+
+    private void setupSearchView() {
+
+        mSearchView.setIconifiedByDefault(true);
+        mSearchView.setQueryHint("جستجو");
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        if (searchManager != null) {
+            List<SearchableInfo> searchables = searchManager.getSearchablesInGlobalSearch();
+
+        }
+
+        mSearchView.setOnQueryTextListener(this);
+        mSearchView.setOnCloseListener(this);
+    }
+
+    /**
+     * Search Jobs_List
+     * Search to Business
+     * @return
+     */
+    @Override
+    public boolean onClose()
+    {
+        //Search stop Select Business All
+        KeySettings setting=new KeySettings(this);
+        setting.saveSearchBusiness(false);
+        setCards();
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query)
+    {
+        //Submit
+        // Search Sumbit To Business Parameters SubsetID and NameMarket
+
+        if(query.equals(""))
+        {
+            setting.saveSearchBusiness(false);
+            //setCardsforsearch();
+
+        }
+        else
+        {
+            setting.saveSearchBusiness(true);
+            fc.SetMarket_Business(query);
+           //setCardsforsearch();
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText)
+    {
+
+        //Online Type change
+        // Search Online To Business Parameters SubsetID and NameMarket
+
+        if(newText.equals("")) // Text Empty Select Business All
+        {
+            Log.i("textserch", "null");
+            setting.saveSearchBusiness(false);
+           // setCardsforsearch();
+        }
+        else // Text Not Empty  Search Business
+        {
+
+            setting.saveSearchBusiness(true);
+            fc.SetMarket_Business(newText);
+           // setCardsforsearch();
+
+        }
+        return false;
+    }
 }
