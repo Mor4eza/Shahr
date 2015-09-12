@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
-import com.drivemode.android.typeface.TypefaceHelper;
 
 public class UpdateActivity extends ActionBarActivity {
 
@@ -36,7 +35,6 @@ public class UpdateActivity extends ActionBarActivity {
         BtnUpdate=(Button)findViewById(R.id.btn_update_all);
         PgUpdate=(ProgressBar)findViewById(R.id.progressBar_update);
         PgUpdate.setVisibility(View.INVISIBLE);
-        TypefaceHelper.getInstance().setTypeface(this, "font/Yekan.ttf");
 
         BtnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override

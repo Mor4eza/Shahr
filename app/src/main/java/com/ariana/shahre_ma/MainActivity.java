@@ -38,7 +38,6 @@ import com.ariana.shahre_ma.Bookmarks.BookMark;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
-import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.MyBusiness.My_Business;
 import com.ariana.shahre_ma.MyCity.My_city;
@@ -71,6 +70,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.software.shell.fab.ActionButton;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import github.chenupt.dragtoplayout.DragTopLayout;
 import jonathanfinerty.once.Once;
@@ -790,7 +790,9 @@ public class MainActivity extends ActionBarActivity {
                 .setContentText("برای وارد شدن به برنامه یا ثبت نام از این دکمه استفاده کنید")
                 .setDelay(1000) // optional but starting animations immediately in onCreate can make them choppy
                 .show();
-
-
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

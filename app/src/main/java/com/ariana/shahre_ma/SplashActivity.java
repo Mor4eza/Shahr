@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCityJson;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -210,5 +211,8 @@ public class SplashActivity extends ActionBarActivity {
         catch (Exception e){}
 
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
 }
