@@ -1,7 +1,6 @@
 package com.ariana.shahre_ma.MyBusiness;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -33,6 +32,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.nhaarman.supertooltips.ToolTip;
 import com.nhaarman.supertooltips.ToolTipRelativeLayout;
 import com.nhaarman.supertooltips.ToolTipView;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -346,5 +346,8 @@ public class Add_New_Business extends ActionBarActivity  {
 
         }
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
 }

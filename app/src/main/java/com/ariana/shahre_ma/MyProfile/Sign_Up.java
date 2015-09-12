@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.MyProfile;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -13,13 +14,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberJson;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -219,6 +220,9 @@ Query query=new Query(this);
         super.onBackPressed();
         Intent i=new Intent(getApplicationContext(), Log_In.class);
         startActivity(i);
-
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

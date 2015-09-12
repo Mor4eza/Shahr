@@ -27,6 +27,7 @@ import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.util.List;
 
@@ -252,5 +253,9 @@ public class SearchListActivity extends ActionBarActivity implements SearchView.
 
         }
         return false;
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

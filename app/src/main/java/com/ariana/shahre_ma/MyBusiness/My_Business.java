@@ -37,6 +37,7 @@ import com.ariana.shahre_ma.WebServiceGet.HTTPGetFieldActivityJson;
 import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import jp.wasabeef.recyclerview.animators.OvershootInLeftAnimator;
 import jp.wasabeef.recyclerview.animators.adapters.ScaleInAnimationAdapter;
@@ -323,5 +324,9 @@ public class My_Business extends ActionBarActivity {
 
     };
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
 
 }

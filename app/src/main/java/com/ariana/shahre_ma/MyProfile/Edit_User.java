@@ -1,6 +1,7 @@
 package com.ariana.shahre_ma.MyProfile;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -14,13 +15,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostMemberEditJson;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -259,5 +260,8 @@ public class Edit_User extends ActionBarActivity {
 
     }
 
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
 }

@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.Settings;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.ariana.shahre_ma.R;
 import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
 import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -152,6 +154,10 @@ public class Setting extends ActionBarActivity implements TimePickerDialog.OnTim
             SwitchCash.setChecked(true);
         }
 
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }
 

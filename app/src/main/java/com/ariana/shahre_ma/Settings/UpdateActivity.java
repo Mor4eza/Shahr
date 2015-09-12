@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.Settings;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetCollectionJson;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 public class UpdateActivity extends ActionBarActivity {
 
@@ -48,5 +50,8 @@ public class UpdateActivity extends ActionBarActivity {
             }
         });
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
 }

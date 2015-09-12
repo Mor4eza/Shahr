@@ -1,10 +1,13 @@
 package com.ariana.shahre_ma;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.TextView;
+
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 
 public class AboutUs extends ActionBarActivity {
@@ -28,5 +31,9 @@ public class AboutUs extends ActionBarActivity {
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
         startActivity(Intent.createChooser(sharingIntent, "اشتراک گذاری با..."));
 
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

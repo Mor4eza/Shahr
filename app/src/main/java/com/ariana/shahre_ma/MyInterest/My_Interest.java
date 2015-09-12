@@ -1,6 +1,7 @@
 package com.ariana.shahre_ma.MyInterest;
 
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -21,6 +22,7 @@ import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostInterestJson;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import jonathanfinerty.once.Once;
 
@@ -128,5 +130,9 @@ public class My_Interest extends ActionBarActivity implements TotalListener {
         sv.setButtonText("خب");
         sv.setButtonPosition(lps);
 
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

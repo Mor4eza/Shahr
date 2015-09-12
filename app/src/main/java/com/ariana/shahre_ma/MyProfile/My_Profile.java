@@ -22,6 +22,7 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.MainActivity;
 import com.ariana.shahre_ma.R;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 public class My_Profile extends Activity {
 
@@ -138,4 +139,8 @@ public class My_Profile extends Activity {
             init_views();
         }
     };
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
 }

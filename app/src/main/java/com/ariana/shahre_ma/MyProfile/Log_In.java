@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.MyProfile;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -15,6 +16,7 @@ import com.ariana.shahre_ma.MainActivity;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetLoginJson;
 import com.dd.CircularProgressButton;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.net.URLEncoder;
 
@@ -109,6 +111,9 @@ public class Log_In extends ActionBarActivity {
                 startActivity(i);
                 }
                 return true;
-
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

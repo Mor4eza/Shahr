@@ -25,8 +25,6 @@ import android.widget.Toast;
 import com.androidmapsextensions.GoogleMap;
 import com.androidmapsextensions.Marker;
 import com.androidmapsextensions.MarkerOptions;
-
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
@@ -36,6 +34,7 @@ import com.ariana.shahre_ma.WebServiceSend.HTTPSendNearMeURL;
 import com.ariana.shahre_ma.job_details.Job_details;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import fr.quentinklein.slt.LocationTracker;
 import fr.quentinklein.slt.TrackerSettings;
@@ -289,7 +288,9 @@ public class NearMeActivity extends ActionBarActivity {
 
 
         }
-
-
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }
