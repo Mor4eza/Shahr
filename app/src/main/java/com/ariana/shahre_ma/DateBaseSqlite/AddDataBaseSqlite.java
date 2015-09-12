@@ -28,6 +28,11 @@ public class AddDataBaseSqlite extends DataBaseSqlite{
     }
 
     @Override
+    public void Add_Search(Integer id, String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid, Double latitude, Double longitude, Integer areaid, String area, String user, Integer cityid, Integer userid, Integer field1, Integer field2, Integer field3, Integer field4, Integer field5, Integer field6, Integer field7, Integer ratecount, Double ratevalue, String src) {
+        super.Add_Search(id, market, code, phone, mobile, fax, email, businessowner, address, description, startdate, expirationdate, inactive, subset, subsetid, latitude, longitude, areaid, area, user, cityid, userid, field1, field2, field3, field4, field5, field6, field7, ratecount, ratevalue, src);
+    }
+
+    @Override
     public void Add_DisCount(Integer id, String text, String image, String startdate, String expirationdate, String description, String percent, Integer businessid, Integer like, Integer dislike) {
         super.Add_DisCount(id, text, image, startdate, expirationdate, description, percent, businessid, like, dislike);
     }

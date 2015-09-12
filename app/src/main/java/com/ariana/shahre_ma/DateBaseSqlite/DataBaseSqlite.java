@@ -26,7 +26,8 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
 
 
-    public  DataBaseSqlite(Context context) {
+    public  DataBaseSqlite(Context context)
+    {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
 
         this.context=context;
@@ -42,6 +43,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Subset);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_Search);
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Subset_Prodcut);
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Collection);
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Collection_Product);
@@ -382,6 +384,56 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
 
 
+
+    public void Add_Search(Integer id,String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid,Double latitude,Double longitude, Integer areaid, String area, String user,Integer cityid, Integer userid,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7,Integer ratecount,Double ratevalue,String src) {
+
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put(InstructionsSqlite.ID_business, id);
+        values.put(InstructionsSqlite.MARKET_business, market);
+        values.put(InstructionsSqlite.CODE_business, code);
+        values.put(InstructionsSqlite.PHONE_business, phone);
+        values.put(InstructionsSqlite.MOBILE_business, mobile);
+        values.put(InstructionsSqlite.FAX_business, fax);
+        values.put(InstructionsSqlite.EMAIL_business, email);
+        values.put(InstructionsSqlite.BUSINESSOWNER_business, businessowner);
+        values.put(InstructionsSqlite.ADDRESS_business, address);
+        values.put(InstructionsSqlite.DESCRIPTION_business, description);
+        values.put(InstructionsSqlite.STARTDATE_business, startdate);
+        values.put(InstructionsSqlite.EXPIRATIONDATE_business, expirationdate);
+        values.put(InstructionsSqlite.INACTIVE_business, inactive);
+        values.put(InstructionsSqlite.SUBSET_business, subset);
+        values.put(InstructionsSqlite.SUBSETID_business, subsetid);
+        values.put(InstructionsSqlite.LATITUDE_business, latitude);
+        values.put(InstructionsSqlite.LONGITUDE_business, longitude);
+        values.put(InstructionsSqlite.SRC_business, src);
+        values.put(InstructionsSqlite.AREAID_business, areaid);
+        values.put(InstructionsSqlite.AREA_business, area);
+        values.put(InstructionsSqlite.USER_business, user);
+        values.put(InstructionsSqlite.CITYID_business, cityid);
+        values.put(InstructionsSqlite.USERID_business, userid);
+        values.put(InstructionsSqlite.FIELD1_business, field1);
+        values.put(InstructionsSqlite.FIELD2_business, field2);
+        values.put(InstructionsSqlite.FIELD3_business, field3);
+        values.put(InstructionsSqlite.FIELD4_business, field4);
+        values.put(InstructionsSqlite.FIELD5_business, field5);
+        values.put(InstructionsSqlite.FIELD6_business, field6);
+        values.put(InstructionsSqlite.FIELD7_business, field7);
+        values.put(InstructionsSqlite.RATECOUNT_business, ratecount);
+        values.put(InstructionsSqlite.RATEVALUE_business, ratevalue);
+
+
+        // 3. insert
+        db.insert(InstructionsSqlite.TABLE_NAME_Search, // table
+                null, //nullColumnHack
+                values); // key/value
+
+        // 4. close
+        db.close();
+    }
 
     public void Add_businessDisCount(Integer id,String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid,Double latitude,Double longitude, Integer areaid, String area, String user,Integer cityid, Integer userid,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7,Integer ratecount,Double ratevalue,String src) {
 
@@ -1151,22 +1203,22 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
     }
 
-    public Cursor select_SortRateBusiness(Integer subsetID)
+    public Cursor select_SortRateBusiness(Integer subsetID,Integer cityid)
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetID+" ORDER BY "+ InstructionsSqlite.RATEVALUE_business+" DESC", null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetID+" AND CityId="+cityid+" ORDER BY "+ InstructionsSqlite.RATEVALUE_business+" DESC", null);
     }
 
-    public Cursor select_SortNameBusiness(Integer subsetID)
+    public Cursor select_SortNameBusiness(Integer subsetID,Integer cityid)
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetID+" ORDER BY "+ InstructionsSqlite.MARKET_business +" ASC", null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetID+" AND CityId="+cityid+" ORDER BY "+ InstructionsSqlite.MARKET_business +" ASC", null);
     }
 
-    public Cursor select_SortDateBusiness(Integer subsetID)
+    public Cursor select_SortDateBusiness(Integer subsetID,Integer cityid)
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetID+" ORDER BY "+ InstructionsSqlite.ID_business +" DESC", null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetID+" AND CityId="+cityid+" ORDER BY "+ InstructionsSqlite.ID_business +" DESC", null);
     }
 
     public Cursor select_AllBusinessId(Integer id)
@@ -1265,16 +1317,49 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         return db.rawQuery("SELECT Activity FROM " + InstructionsSqlite.TABLE_NAME_FieldActivity +" WHERE Id="+id , null);
     }
 
-    public Cursor SearchBusiness(String nameMarket,Integer subsetId)
+    public Cursor SearchBusiness(String nameMarket,Integer subsetId,Integer cityid)
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetId+" AND Market LIKE '%"+nameMarket+"%'" , null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId=" +subsetId+" AND Market LIKE '%"+nameMarket+"%'" +" AND CityId="+cityid, null);
 
     }
+
     //End Select Business
 
 
+
+    public Cursor select_TableSearch(String market)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_Search + "  WHERE Market='%"+market+"%'", null);
+
+    }
+
+    public Cursor select_TableSearchSortRate()
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_Search + " ORDER BY RateValue  DESC", null);
+
+    }
+
+    public Cursor select_TableSearchSortName()
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_Search + " ORDER BY Market ASC", null);
+
+    }
+
+    public Cursor select_TableSearchSortId()
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_Search+ " ORDER BY Id  ASC", null);
+
+    }
 
 
     public Cursor select_SubsetId(String subsetname)
@@ -1763,6 +1848,15 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         SQLiteDatabase db=this.getWritableDatabase();
        // delete
         db.execSQL("DELETE FROM  " + InstructionsSqlite.TABLE_NAME_BUSINESS);
+        //close
+        db.close();
+    }
+
+    public  void delete_Search()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        // delete
+        db.execSQL("DELETE FROM  " + InstructionsSqlite.TABLE_NAME_Search);
         //close
         db.close();
     }

@@ -20,6 +20,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.Cards.job_list_cards_adapter;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.MapsActivity;
@@ -95,6 +96,29 @@ public class SearchListActivity extends ActionBarActivity implements SearchView.
             Search_list_Adapter.notifyDataSetChanged();
         /*}
         catch (Exception e){}*/
+    }
+    private void setCardsforsearch(){
+        try {
+
+
+            mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_Search);
+            mRecyclerView.setHasFixedSize(true);
+            mLayoutManager = new LinearLayoutManager(this);
+            mRecyclerView.setLayoutManager(mLayoutManager);
+            Search_list_Adapter = new SearchListAdapter(this);
+            mRecyclerView.setAdapter(Search_list_Adapter);
+
+            if(Search_list_Adapter.getItemCount()==0){
+                img_null.setVisibility(View.VISIBLE);
+                tv_null.setVisibility(View.VISIBLE);
+            }else {
+                img_null.setVisibility(View.INVISIBLE);
+                tv_null.setVisibility(View.INVISIBLE);
+
+            }
+
+        }
+        catch (Exception e){}
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -214,18 +238,18 @@ public class SearchListActivity extends ActionBarActivity implements SearchView.
     {
         //Submit
         // Search Sumbit To Business Parameters SubsetID and NameMarket
-
+        Log.i("GetMarket",query);
         if(query.equals(""))
         {
             setting.saveSearchBusiness(false);
-            //setCardsforsearch();
+            setCardsforsearch();
 
         }
         else
         {
             setting.saveSearchBusiness(true);
             fc.SetMarket_Business(query);
-           //setCardsforsearch();
+           setCardsforsearch();
         }
 
         return false;
@@ -234,9 +258,6 @@ public class SearchListActivity extends ActionBarActivity implements SearchView.
     @Override
     public boolean onQueryTextChange(String newText)
     {
-
-        //Online Type change
-        // Search Online To Business Parameters SubsetID and NameMarket
 
         if(newText.equals("")) // Text Empty Select Business All
         {

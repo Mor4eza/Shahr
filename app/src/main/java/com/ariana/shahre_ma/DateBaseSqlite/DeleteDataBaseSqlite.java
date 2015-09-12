@@ -17,6 +17,11 @@ public class DeleteDataBaseSqlite extends DataBaseSqlite
     }
 
     @Override
+    public void delete_Search() {
+        super.delete_Search();
+    }
+
+    @Override
     public void delete_bookmark(Integer businessid) {
         super.delete_bookmark(businessid);
     }

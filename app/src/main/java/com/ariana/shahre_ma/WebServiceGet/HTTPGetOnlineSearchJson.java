@@ -367,7 +367,7 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
                 Intent intent = new Intent(this.context, SearchListActivity.class);
                 this.context.startActivity(intent);
                 Log.i("Count Business : ", "دریافت ثبت شده ها");
-                pd.dismiss();
+
 
                 for (int i = 0; i <len; i++)
                 {
@@ -386,6 +386,14 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
                 }
 
                 fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
+
+                pd.dismiss();
+
+                ddb.delete_Search();//Delete All Search
+                for (int i = 0; i <len; i++)
+                {
+                    adb.Add_Search(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i],latitude[i], longitude[i], areaid[i], area1[i], user[i],cityid, userid[i], field1[i], field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i],src[i]);
+                }
             }
 
         } catch (Exception e) {
