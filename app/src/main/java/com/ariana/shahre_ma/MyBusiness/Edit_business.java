@@ -515,13 +515,10 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
 
         Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         pickIntent.setType("image/*");
-        pickIntent.putExtra("crop", "false");
         pickIntent.putExtra("outputX", 512);
         pickIntent.putExtra("outputY", 512);
         pickIntent.putExtra("aspectX", 1);
         pickIntent.putExtra("aspectY", 1);
-        pickIntent.putExtra("noFaceDetection", true);
-        pickIntent.putExtra("return-data", true);
         pickIntent.putExtra("scale", true);
 
         startActivityForResult(pickIntent, 1);

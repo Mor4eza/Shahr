@@ -43,7 +43,7 @@
         android:id="@+id/relative_advance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_below="@+id/btn_advanced"
         android:layout_margin="10dp"
         >
@@ -51,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/et_search_field"
-            android:hint="زیر  مجموعه"
+            android:hint="\u0020زمینه فعالیت"
             android:singleLine="true"
             android:imeOptions="actionNext"
             android:completionThreshold="1"/>

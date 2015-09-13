@@ -1,6 +1,5 @@
 package com.ariana.shahre_ma.WebServicePost;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -124,7 +123,7 @@ public class HTTPPostUploadImage extends AsyncTask<String,Integer,Integer>
             dos = new DataOutputStream(conn.getOutputStream());
 
 
-            Log.i("linedEnd+towhyphend",String.valueOf(twoHyphens + boundary + twoHyphens + lineEnd));
+            Log.i("linedEnd+towhyphend", String.valueOf(twoHyphens + boundary + twoHyphens + lineEnd));
             Log.i("linedEnd", String.valueOf(lineEnd));
 
 
@@ -149,10 +148,9 @@ public class HTTPPostUploadImage extends AsyncTask<String,Integer,Integer>
                 bytesAvailable = fileInputStream.available();
                 bufferSize = Math.min(bytesAvailable, maxBufferSize);
                 bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-                publishProgress((int) (bufferSize * 100 / fileSize));
 
             }
-            publishProgress((int) (bufferSize * 100 / fileSize));
+
 
            // publishProgress(bufferSize/100);
 
@@ -168,10 +166,10 @@ public class HTTPPostUploadImage extends AsyncTask<String,Integer,Integer>
                  Log.i("uploadFile", "HTTP Response is : " + serverResponseMessage + ": " + serverResponseCode);
             if(serverResponseCode == 200)
             {
+                publishProgress(100);
                 Log.i("File Upload ","Complete");
                 result=1;
             }
-
             //close the streams //
             fileInputStream.close();
             dos.flush();
