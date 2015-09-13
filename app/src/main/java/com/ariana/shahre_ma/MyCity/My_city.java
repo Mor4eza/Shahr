@@ -50,6 +50,7 @@ public class My_city extends ActionBarActivity{
     Spinner Sp_City ;
     String cityname="";
     public static Download_dialog myDialog;
+    public static HTTPGetBusinessJsonArray business;
     HTTPGetBusinessJson httpbusin;
     NetState ns;
     KeySettings setting =new KeySettings(this);
@@ -137,7 +138,7 @@ public class My_city extends ActionBarActivity{
                 }
                 else
                 {
-                    HTTPGetBusinessJsonArray business = new HTTPGetBusinessJsonArray(this);
+                    business = new HTTPGetBusinessJsonArray(this);
                     business.execute(url);
                     myDialog = new Download_dialog(this);
                     myDialog.show();

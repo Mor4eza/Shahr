@@ -178,7 +178,6 @@ public class MyListAdapter extends BaseExpandableListAdapter {
     public void filterData(String query){
 
         query = query.toLowerCase();
-        Log.v("MyListAdapter", String.valueOf(continentList.size()));
         continentList.clear();
         //originalList.clear();
 
@@ -203,8 +202,6 @@ public class MyListAdapter extends BaseExpandableListAdapter {
                 }
             }
         }
-
-        Log.v("MyListAdapter", String.valueOf(continentList.size()));
        notifyDataSetChanged();
 
     }

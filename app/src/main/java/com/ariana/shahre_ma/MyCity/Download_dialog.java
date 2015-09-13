@@ -22,7 +22,6 @@ import android.widget.ListView;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.R;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessJsonArray;
 import com.victor.loading.rotate.RotateLoading;
 
 import java.util.ArrayList;
@@ -54,8 +53,7 @@ public class Download_dialog extends Dialog {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HTTPGetBusinessJsonArray business = new HTTPGetBusinessJsonArray(getContext());
-                business.cancel(true);
+                My_city.business.cancel(true);
                 dismiss();
             }
         });
