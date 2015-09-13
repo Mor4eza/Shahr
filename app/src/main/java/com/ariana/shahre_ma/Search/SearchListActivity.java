@@ -18,11 +18,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
-import com.ariana.shahre_ma.MapsActivity;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.Settings.KeySettings;
 import com.google.android.gms.common.ConnectionResult;
@@ -146,7 +144,7 @@ public class SearchListActivity extends ActionBarActivity implements SearchView.
 
 
             if(status== ConnectionResult.SUCCESS) {
-                Intent i = new Intent(this,MapsActivity.class);
+                Intent i = new Intent(this,SearchMap.class);
                 startActivity(i);
             }else{
                 int requestCode = 10;

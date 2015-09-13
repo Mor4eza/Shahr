@@ -32,6 +32,11 @@ public class SelectDataBaseSqlite extends DataBaseSqlite {
     }
 
     @Override
+    public Cursor select_TableSearch() {
+        return super.select_TableSearch();
+    }
+
+    @Override
     public Cursor select_BusinessSearch(String namemarket, Integer cityid, Integer fieldactivity, Integer fieldactivity2) {
         return super.select_BusinessSearch(namemarket, cityid, fieldactivity, fieldactivity2);
     }

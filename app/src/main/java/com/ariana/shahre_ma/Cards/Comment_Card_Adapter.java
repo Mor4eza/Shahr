@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.R;
@@ -141,7 +140,6 @@ Query query;
                 if (query.getMemberId() > 0) {
                     if (v == btn_like)
                     {
-                        int Likes = 0;
                         HTTPSendLikeURL httplike = new HTTPSendLikeURL(context);
                         httplike.SetLike(true);
                         httplike.SetMemberid(query.getMemberId());

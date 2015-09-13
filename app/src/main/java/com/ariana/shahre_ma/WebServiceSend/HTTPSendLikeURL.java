@@ -3,7 +3,7 @@ package com.ariana.shahre_ma.WebServiceSend;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -57,8 +57,6 @@ public class  HTTPSendLikeURL extends AsyncTask<String, Void, Boolean> {
     public String GetURL()
     {
        String url="http://test.shahrma.com/api/ApiTakeLike?erjaId="+opinionid+"&erjaType=0&memberId="+memberid+"&value="+like;
-
-        Log.i("URL",url);
         return url;
 
     }
@@ -115,9 +113,10 @@ public class  HTTPSendLikeURL extends AsyncTask<String, Void, Boolean> {
 
         if (result == true) {
 
-            Log.i("JSONLike",mesage);
+            Toast.makeText(context,"ثبت شد",Toast.LENGTH_LONG).show();
             pd.dismiss();
         } else {
+            Toast.makeText(context,"ارسال نشد",Toast.LENGTH_LONG).show();
             pd.dismiss();
         }
     }
@@ -165,7 +164,6 @@ public class  HTTPSendLikeURL extends AsyncTask<String, Void, Boolean> {
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Log.i("JSONException",e.toString());
         }
     }
 }

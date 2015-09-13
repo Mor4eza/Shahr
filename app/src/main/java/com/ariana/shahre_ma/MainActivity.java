@@ -87,6 +87,7 @@ public class MainActivity extends ActionBarActivity {
     Query query = new Query(this);
 
     private Drawer result = null;
+    private AccountHeader headerResult=null;
     private WindowManager mWindowManager;
     private ImageView mImgFloatingView;
     KeySettings setting=new KeySettings(this);
@@ -101,15 +102,11 @@ public class MainActivity extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
 
-        Log.i("resume","true");
+        Log.i("resume", "true");
 
         HTTPGetAdvertismentJson httpGetAdvertismentJson=new HTTPGetAdvertismentJson(this);
         httpGetAdvertismentJson.SetAdvertisment(query.getCityId(setting.getCityName()));
         httpGetAdvertismentJson.execute();
-
-        HTTPGetTopsBusinessJson httpGetTopsBusinessJson=new HTTPGetTopsBusinessJson(this);
-        httpGetTopsBusinessJson.SetTopBusiness(query.getCityId(setting.getCityName()));
-        httpGetTopsBusinessJson.execute();
 
         navigation();
         try {
@@ -151,6 +148,7 @@ public class MainActivity extends ActionBarActivity {
 
         //setup();
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,new IntentFilter("custom-event-name"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mCityReceiver,new IntentFilter("City"));
 
         if (net.checkInternetConnection() == false) {
             Toast.makeText(getApplication(), "شبکه اینترنت قطع می باشد", Toast.LENGTH_LONG).show();
@@ -161,6 +159,10 @@ public class MainActivity extends ActionBarActivity {
             HTTPGetUpdate update=new HTTPGetUpdate(this);
             update.execute(url);
             */
+
+            HTTPGetTopsBusinessJson httpGetTopsBusinessJson=new HTTPGetTopsBusinessJson(this);
+            httpGetTopsBusinessJson.SetTopBusiness(query.getCityId(setting.getCityName()));
+            httpGetTopsBusinessJson.execute();
 
         }
 
@@ -304,9 +306,9 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-        final IProfile profile = new ProfileDrawerItem().withName(uName).withEmail(settings.getCityName());
+        IProfile profile = new ProfileDrawerItem().withName(uName).withEmail(settings.getCityName());
 
-        AccountHeader headerResult = new AccountHeaderBuilder()
+        headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withHeaderBackground(R.mipmap.header)
                 .addProfiles(profile)
@@ -319,6 +321,7 @@ public class MainActivity extends ActionBarActivity {
                     public boolean onClick(View view, IProfile iProfile) {
                         CityDialog cityDialog = new CityDialog(MainActivity.this);
                         cityDialog.show();
+                        result.closeDrawer();
                         return false;
                     }
                 })
@@ -684,6 +687,15 @@ public class MainActivity extends ActionBarActivity {
         }
 
     };
+    private BroadcastReceiver mCityReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Get extra data included in the Inte
+            navigation();
+        }
+
+    };
+
 
 
     public void help1(){

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.ContactsContract;
 import android.util.Log;
 
 /**
@@ -1334,6 +1333,14 @@ public class DataBaseSqlite extends SQLiteOpenHelper
 
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_Search + "  WHERE Market Like '%"+market+"%'", null);
+
+    }
+
+    public Cursor select_TableSearch()
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_Search , null);
 
     }
 

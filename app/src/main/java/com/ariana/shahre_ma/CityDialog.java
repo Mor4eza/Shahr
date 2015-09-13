@@ -12,9 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Settings.KeySettings;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetTopsBusinessJson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class CityDialog extends Dialog {
     Spinner Sp_City;
     List<String> list;
     ArrayAdapter<String> dataAdapter;
-
+    Query query = new Query(getContext());
     public CityDialog(Context context) {
         super(context);
     }
@@ -58,6 +59,10 @@ public class CityDialog extends Dialog {
                     Intent intent = new Intent("City");
                     intent.putExtra("received", "Cities");
                     LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
+
+                    HTTPGetTopsBusinessJson httpGetTopsBusinessJson=new HTTPGetTopsBusinessJson(getContext());
+                    httpGetTopsBusinessJson.SetTopBusiness(query.getCityId(settings.getCityName()));
+                    httpGetTopsBusinessJson.execute();
                     dismiss();
                 }
                 catch (Exception e)
