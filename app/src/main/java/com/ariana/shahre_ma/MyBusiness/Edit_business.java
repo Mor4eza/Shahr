@@ -181,7 +181,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
         }
         catch (Exception e)
         {
-            Log.i("Exception",e.toString());
+            Log.i("Exception", e.toString());
         }
        // Market_gharar.setText(rows.getString(8));
     }
@@ -515,6 +515,15 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
 
         Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         pickIntent.setType("image/*");
+        pickIntent.putExtra("crop", "false");
+        pickIntent.putExtra("outputX", 512);
+        pickIntent.putExtra("outputY", 512);
+        pickIntent.putExtra("aspectX", 1);
+        pickIntent.putExtra("aspectY", 1);
+        pickIntent.putExtra("noFaceDetection", true);
+        pickIntent.putExtra("return-data", true);
+        pickIntent.putExtra("scale", true);
+
         startActivityForResult(pickIntent, 1);
     }
 
@@ -585,7 +594,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
                 }else if(ViewId==image2.getId()){
                     image2.setImageBitmap(photo);
                     UploadImage();
-                }else if(ViewId==image3.getId()){
+                }else if (ViewId==image3.getId()){
                     image3.setImageBitmap(photo);
                     UploadImage();
                 }else if(ViewId==image4.getId()){

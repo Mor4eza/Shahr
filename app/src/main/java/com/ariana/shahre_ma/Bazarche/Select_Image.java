@@ -10,10 +10,10 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.PopupMenu;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MyBusiness.Edit_business;
@@ -71,7 +71,7 @@ public class Select_Image extends ActionBarActivity implements ImageView.OnClick
                     selectImageFromGallery();
 
                 else if (item.getTitle().equals("حذف"))
-                    Log.i("", "");
+                    Toast.makeText(getApplicationContext(),"در قسمت ویرایش کسب و کار میتوانید تصاویر را حذف کنید",Toast.LENGTH_LONG).show();
                 return true;
             }
         });
@@ -223,6 +223,5 @@ public class Select_Image extends ActionBarActivity implements ImageView.OnClick
             }
         });
         alertDialog.show();
-
     }
 }
