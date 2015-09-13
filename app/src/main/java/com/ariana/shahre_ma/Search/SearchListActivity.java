@@ -20,7 +20,6 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ariana.shahre_ma.Cards.job_list_cards_adapter;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.MapsActivity;
@@ -226,7 +225,7 @@ public class SearchListActivity extends ActionBarActivity implements SearchView.
     @Override
     public boolean onClose()
     {
-        //Search stop Select Business All
+        Log.i("Search","Close");
         KeySettings setting=new KeySettings(this);
         setting.saveSearchBusiness(false);
         setCards();
@@ -258,10 +257,9 @@ public class SearchListActivity extends ActionBarActivity implements SearchView.
     @Override
     public boolean onQueryTextChange(String newText)
     {
-
+        Log.i("textserch", newText);
         if(newText.equals("")) // Text Empty Select Business All
         {
-            Log.i("textserch", "null");
             setting.saveSearchBusiness(false);
            // setCardsforsearch();
         }
