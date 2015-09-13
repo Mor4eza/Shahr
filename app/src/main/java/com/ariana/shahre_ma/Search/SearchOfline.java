@@ -217,6 +217,12 @@ public class SearchOfline
                     Intent intent = new Intent(context, SearchListActivity.class);
                     context.startActivity(intent);
                 }
+                else
+                {
+                    fc.SetSearchOffline(true);
+                    Intent intent = new Intent(context, SearchListActivity.class);
+                    context.startActivity(intent);
+                }
             }
         }
         catch (Exception e){
@@ -290,6 +296,12 @@ public class SearchOfline
                     fdb.SetSrc(selectSrc);
 
                     Log.i("BusinessgetCount", String.valueOf(rows_Business.getCount()));
+                    fc.SetSearchOffline(true);
+                    Intent intent = new Intent(context, SearchListActivity.class);
+                    context.startActivity(intent);
+                }
+                else
+                {
                     fc.SetSearchOffline(true);
                     Intent intent = new Intent(context, SearchListActivity.class);
                     context.startActivity(intent);

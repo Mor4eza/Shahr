@@ -166,7 +166,7 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
                 Intent intent = new Intent("myCity_Download");
                 intent.putExtra("received", compareLen - 1);
                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
-                if(compareLen==URLLEN)
+                if(compareLen.equals(URLLEN))
                 {
                    // Toast.makeText(context.getApplicationContext(),"دانلود شد",Toast.LENGTH_LONG).show();
                     My_city.myDialog.dismiss();
@@ -206,7 +206,7 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
                 intent.putExtra("received", compareLen - 1);
                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
-                if(compareLen==URLLEN)
+                if(compareLen.equals(URLLEN))
                 {
                    // Toast.makeText(context.getApplicationContext(),"دانلود شد",Toast.LENGTH_LONG).show();
                     My_city.myDialog.dismiss();

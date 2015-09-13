@@ -241,7 +241,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
                 Market_subset.requestFocus();
                 Market_subset.setError("نام منطقه را وارد کنید");
 
-            } else if (Market_field.equals("") || Market_field.equals("null")) {
+            } else if (Fields_ID[0]==0) {
                 Market_field.setError("زمینه فعالیت خود را وارد کنید");
                 Market_field.requestFocus();
 
