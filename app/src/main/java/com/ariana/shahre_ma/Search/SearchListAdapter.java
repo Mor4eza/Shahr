@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.ariana.shahre_ma.Cards.Job_lists_card_item;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -46,7 +45,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
          sdb=new SelectDataBaseSqlite(context);
          query=new Query(context);
             mItems = new ArrayList<SearchItems>();
-        try {
+       try {
             SelectDataBaseSqlite sdb = new SelectDataBaseSqlite(context);
             Integer cityid=0;
             setting=new KeySettings(context);
@@ -124,7 +123,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
                         nature.setName(fdb.GetMarketBusiness().get(i));
                         nature.setDes(fdb.GetAddressBusiness().get(i));
                         nature.setSubsetId(fdb.GetSubsetId().get(i));
-                        // nature.setDisCount(fdb.GetDisCountId().get(i));
+                        nature.setDisCount("");
                         nature.setmRateCount(fdb.GetRateCount().get(i));
                         nature.setRate(fdb.GetRateBusiness().get(i));
                         nature.setmId(fdb.GetIdBusiness().get(i));
@@ -155,7 +154,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
                         nature.setName(fdb.GetMarketBusiness().get(i));
                         nature.setDes(fdb.GetAddressBusiness().get(i));
                         nature.setSubsetId(fdb.GetSubsetId().get(i));
-                        nature.setDisCount(fdb.GetDisCountId().get(i));
+                        nature.setDisCount(fdb.GetDisCountPercent().get(i));
                         nature.setRate(fdb.GetRateBusiness().get(i));
                         nature.setmId(fdb.GetIdBusiness().get(i));
                         nature.setmRateCount(fdb.GetRateCount().get(i));
@@ -169,6 +168,13 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
                         }
                         if (nature.getTell().length() < 2) {
                             nature.setTell("");
+                        }
+                        if (nature.getDisCount().equals("") || nature.getDisCount().equals(null) || nature.getDisCount().equals("null")){
+                            nature.setDisCount("");
+                        }
+                        else
+                        {
+                            nature.setDisCount("%"+ nature.getDisCount());
                         }
 
                         mItems.add(nature);
@@ -204,6 +210,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         viewHolder.rates.setTag(nature.getmId());
         viewHolder.tvTell.setText(nature.getTell());
         viewHolder.tvRateCount.setText("/" + nature.getmRateCount().toString());
+        viewHolder.tvDiscount.setText(nature.getDisCount());
         String image_url_1;
         if (nature.getNameImage().equals("null")||nature.getNameImage().equals("")||nature.getNameImage().equals(null)||nature.getNameImage()==null){
             Log.i("SubsetId",nature.getSubsetId().toString());
@@ -233,6 +240,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         public TextView tvTell;
         public CardView cards;
         public TextView tvRateCount;
+        public TextView tvDiscount;
         public ViewHolder(View itemView) {
             super(itemView);
 
@@ -243,6 +251,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
             rates = (RatingBar) itemView.findViewById(R.id.rates);
             tvTell = (TextView) itemView.findViewById(R.id.tv_tell);
             cards = (CardView) itemView.findViewById(R.id.cards);
+            tvDiscount = (TextView) itemView.findViewById(R.id.tv_discount);
             imgThumbnail.setOnClickListener(this);
             tvNature.setOnClickListener(this);
             cards.setOnClickListener(this);

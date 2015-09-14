@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MainActivity;
@@ -185,11 +184,13 @@ public class HTTPGetLoginJson extends AsyncTask<String, Void, Integer>{
                     if(errorCode==200) {
                         MessageDialog messageDialog=new MessageDialog(context);
                         messageDialog.ShowMessage("هشدار","رمز یا نام کاربری اشتباه است","باشه","false");
+                        Log_In.btn.setProgress(0);
                     }
                     else
                     {
                         MessageDialog messageDialog=new MessageDialog(context);
                         messageDialog.ShowMessage("هشدار","ارتباط با سرور برقرار نشد دوباره امتحان کنید","باشه","false");
+                        Log_In.btn.setProgress(0);
                     }
 
 

@@ -129,53 +129,20 @@ public class Edit_User extends ActionBarActivity {
               Integer cityid = query.getCityId(Acity);
 
               if (cityid <= 0) {
-                  AlertDialog alertDialog = new AlertDialog.Builder(Edit_User.this).create();
-                  alertDialog.setTitle("هشدار ");
-                  alertDialog.setMessage("شهر خود را انتخاب کنید");
-                  alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
-                      public void onClick(DialogInterface dialog, int which) {
-                          city.requestFocus();
+                  city.requestFocus();
+                  city.setError("شهر خود را انتخاب کنید");
 
-                      }
-                  });
+              } else if(Aname.length()<3)
+              {
+                  name.setError("بیش از 3 حرف وارد کنید");
+                  name.requestFocus();
 
-                  alertDialog.show();
-              } else if (Aname.length() == 0) {
-                  AlertDialog alertDialog = new AlertDialog.Builder(Edit_User.this).create();
-                  alertDialog.setTitle("هشدار ");
-                  alertDialog.setMessage("نام خود را وارد کنید");
-                  alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
-                      public void onClick(DialogInterface dialog, int which) {
-                          name.requestFocus();
-
-                      }
-                  });
-
-                  alertDialog.show();
-              } else if (Ausername.length() == 0) {
-                  AlertDialog alertDialog = new AlertDialog.Builder(Edit_User.this).create();
-                  alertDialog.setTitle("هشدار ");
-                  alertDialog.setMessage("نام کاربری را وارد کنید");
-                  alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
-                      public void onClick(DialogInterface dialog, int which) {
-
-
-                      }
-                  });
-
-                  alertDialog.show();
-              } else if (Apass.length() == 0) {
-                  AlertDialog alertDialog = new AlertDialog.Builder(Edit_User.this).create();
-                  alertDialog.setTitle("هشدار ");
-                  alertDialog.setMessage("رمز را وارد کنید");
-                  alertDialog.setButton("تایید", new DialogInterface.OnClickListener() {
-                      public void onClick(DialogInterface dialog, int which) {
-
-
-                      }
-                  });
-
-                  alertDialog.show();
+              } else if (Ausername.length()<5) {
+                  user.setError("نام کاربری باید حد اقل 5 حرف باشد");
+                  user.requestFocus();
+              } else if (Apass.length()<6) {
+                  pass.setError("رمز عبور باید حداقل 6 حرف باشد");
+                  pass.requestFocus();
               }
               else
               {

@@ -277,7 +277,7 @@ public class  InstructionsSqlite {
             "Percent TEXT," +
             "BusinessId INTEGER," +
             "Like INTEGER," +
-            "DisLike INTEGER," +
+            "DisLike INTEGER" +
             "Src TEXT" +
             ");";
 
@@ -290,7 +290,7 @@ public class  InstructionsSqlite {
             "ExpirationDate TEXT ," +
             "Description TEXT ," +
             "Percent TEXT," +
-            "BusinessId INTEGER," +
+            "BusinessId INTEGER" +
             "Src TEXT" +
             ");";
 

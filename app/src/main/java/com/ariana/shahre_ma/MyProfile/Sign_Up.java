@@ -125,7 +125,7 @@ Query query=new Query(this);
                         city.setError("شهر خود را انتخاب کنید");
 
             }
-            else if(Aname.length()<=3)
+            else if(Aname.length()<3)
             {
                         name.setError("بیش از 3 حرف وارد کنید");
                         name.requestFocus();

@@ -121,7 +121,7 @@ private  static Context context;
                             }
                             else
                             {
-                                nature.setDisCount(nature.getDisCount()+"%");
+                                nature.setDisCount("%"+ nature.getDisCount());
                             }
                             nature.setmRateCount(fdb.GetRateCount().get(i));
                             mItems.add(nature);
