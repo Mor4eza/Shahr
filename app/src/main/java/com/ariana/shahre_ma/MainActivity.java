@@ -92,8 +92,7 @@ public class MainActivity extends ActionBarActivity {
     private WindowManager mWindowManager;
     private ImageView mImgFloatingView;
     KeySettings setting=new KeySettings(this);
-    IntentFilter ii;
-    TimeSetReceiver tsr;
+
     Toolbar toolbar;
     SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(this);
     FieldDataBusiness fdb=new FieldDataBusiness();
@@ -143,8 +142,8 @@ public class MainActivity extends ActionBarActivity {
         top.setTouchMode(true);
         top.setOverDrag(false);
 
-        ii=new IntentFilter("android.intent.action.TIME_TICK");
-        tsr=new TimeSetReceiver();
+        IntentFilter ii=new IntentFilter("android.intent.action.TIME_TICK");
+        TimeSetReceiver  tsr=new TimeSetReceiver();
         registerReceiver(tsr, ii);
 
         //setup();

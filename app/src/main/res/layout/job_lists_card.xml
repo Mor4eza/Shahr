@@ -53,7 +53,7 @@
                 android:layout_gravity="top"
                 android:layout_marginRight="1dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:background="@color/common_signin_btn_default_background"
+                android:background="@color/primary"
                 android:alpha="0.9"
                 android:textColor="#fff"
                 android:textSize="20sp"
