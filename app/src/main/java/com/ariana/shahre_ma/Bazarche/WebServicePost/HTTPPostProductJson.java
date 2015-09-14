@@ -1,4 +1,4 @@
-package com.ariana.shahre_ma.WebServicePost;
+package com.ariana.shahre_ma.Bazarche.WebServicePost;
 
 import android.app.Activity;
 import android.app.AlertDialog;

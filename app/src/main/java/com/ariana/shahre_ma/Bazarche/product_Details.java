@@ -19,7 +19,7 @@ import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBase;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessImageJson;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetProductPropertyJson;
+import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductPropertyJson;
 import com.squareup.picasso.Picasso;
 
 public class product_Details extends ActionBarActivity {

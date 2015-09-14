@@ -1,4 +1,4 @@
-package com.ariana.shahre_ma.WebServiceGet;
+package com.ariana.shahre_ma.Bazarche.WebServiceGet;
 
 import android.app.ProgressDialog;
 import android.content.Context;
