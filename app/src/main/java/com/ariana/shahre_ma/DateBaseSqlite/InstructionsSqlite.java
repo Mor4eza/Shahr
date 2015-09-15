@@ -10,8 +10,8 @@ public class  InstructionsSqlite {
     public static final String TABLE_NAME_SUBSET= "subset";
     public static final String TABLE_NAME_SUBSET_PRODUCT= "subset_Product";
     public static final String TABLE_NAME_COLLECTION_PRODUCT = "collection_Product";
-    public static final String TABLE_NAME_PROPERTY_PRODUCT = "PROPERTY_Product";
-    public static final String TABLE_NAME_VALUE_PRODUCT = "VALUE_Product";
+    public static final String TABLE_NAME_PROPERTY_PRODUCT = "Property_Product";
+    public static final String TABLE_NAME_VALUE_PRODUCT = "Value_Product";
     public static final String TABLE_NAME_COLLECTION = "collection";
     public static final String TABLE_NAME_MEMBER = "member";
     public static final String TABLE_NAME_OPINION = "opinion";
@@ -264,7 +264,7 @@ public class  InstructionsSqlite {
     // SQL statement to create Value_Product table
     public static final String CREATE_TABLE_Property_Product = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_PROPERTY_PRODUCT + " (" +
             "Id INTEGER PRIMARY KEY ," +
-            "Name TEXT," +
+            "Name TEXT" +
             ");";
 
 
