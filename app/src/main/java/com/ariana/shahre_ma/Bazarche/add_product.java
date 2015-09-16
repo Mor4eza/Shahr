@@ -16,6 +16,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductPropertyJson;
+import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductSubsetPropertyJson;
 import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductValueJson;
 import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
@@ -121,6 +122,9 @@ public class add_product extends ActionBarActivity {
 
         HTTPGetProductValueJson httpGetProductValueJson=new HTTPGetProductValueJson(this);
         httpGetProductValueJson.execute();
+
+        HTTPGetProductSubsetPropertyJson httpGetProductSubsetPropertyJson=new HTTPGetProductSubsetPropertyJson(this);
+        httpGetProductSubsetPropertyJson.execute();
     }
 
     public void product_save(View view)

@@ -5,9 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
-import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -101,7 +99,7 @@ public class HTTPGetProductValueJson  extends AsyncTask<String,Void,Integer>
         try {
 
             JSONArray areas = new JSONArray(JSONString);
-            Log.i("JSONsubsetProduct", JSONString);
+            Log.i("JSONProductValue", JSONString);
 
             Id=new Integer[areas.length()];
             valuename=new String[areas.length()];

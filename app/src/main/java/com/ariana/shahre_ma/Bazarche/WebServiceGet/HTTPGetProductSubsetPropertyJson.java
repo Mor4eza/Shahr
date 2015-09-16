@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
-import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -96,7 +95,7 @@ public class HTTPGetProductSubsetPropertyJson extends AsyncTask<String,Void,Inte
         try {
 
             JSONArray areas = new JSONArray(JSONString);
-            Log.i("JSONsubsetProduct", JSONString);
+            Log.i("ProductSubsetProperty", JSONString);
 
             Id=new Integer[areas.length()];
             productsubsetid=new Integer[areas.length()];

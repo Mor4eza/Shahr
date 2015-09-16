@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
@@ -106,7 +105,7 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
         try {
 
             JSONArray areas = new JSONArray(JSONString);
-            Log.i("JSONsubsetProduct", JSONString);
+            Log.i("JSONProductProperty", JSONString);
 
             Id=new Integer[areas.length()];
             propertyname=new String[areas.length()];

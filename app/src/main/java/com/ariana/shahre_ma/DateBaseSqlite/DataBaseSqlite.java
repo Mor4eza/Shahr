@@ -45,6 +45,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Search);
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Subset_Prodcut);
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Collection_Product);
+        db.execSQL(InstructionsSqlite.CREATE_TABLE_SubsetProperty_Product);
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Value_Product);
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Property_Product);
         db.execSQL(InstructionsSqlite.CREATE_TABLE_Collection);
