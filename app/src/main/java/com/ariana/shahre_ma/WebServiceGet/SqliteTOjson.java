@@ -316,9 +316,12 @@ public class SqliteTOjson {
     public String ProductTOjson(Integer memberid,String name,String datetime, String property, Double price, Double latitude, Double longtiude, Boolean adaptive, String description,String phone,String mobile,String address,String email,Integer subsetid, Integer areaid) {
         String field_Json = "";
         try {
-            Query query=new Query(context);
+
             // JSONobject get key/value convert to json
             JSONObject rowObject = new JSONObject();
+            JSONObject json = new JSONObject();
+            JSONArray array=new JSONArray();
+
             rowObject.put("MemberId",memberid);
             rowObject.put("Name", name);
             rowObject.put("DateTime", datetime);
@@ -332,8 +335,18 @@ public class SqliteTOjson {
             rowObject.put("Mobile", mobile);
             rowObject.put("Address", address);
             rowObject.put("Email", email);
-            rowObject.put("SubsetId", subsetid);
+            rowObject.put("ProductSubsetId", subsetid);
             rowObject.put("AreaId", areaid);
+
+            json.put("PropertyId",2);
+            json.put("ProductId",0);
+            json.put("type",1);
+            json.put("Value",5);
+
+
+
+            //array.put("ProductProperties",json);
+            array.put(rowObject);
 
             field_Json = rowObject.toString();
 

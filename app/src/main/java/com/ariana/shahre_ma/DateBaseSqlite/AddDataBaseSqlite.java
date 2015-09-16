@@ -43,6 +43,21 @@ public class AddDataBaseSqlite extends DataBaseSqlite{
     }
 
     @Override
+    public void Add_Property_Product(Integer id, String propertyname) {
+        super.Add_Property_Product(id, propertyname);
+    }
+
+    @Override
+    public void Add_SubsetProperty(Integer id, Integer propertyid, Integer productsubsetid) {
+        super.Add_SubsetProperty(id, propertyid, productsubsetid);
+    }
+
+    @Override
+    public void Add_Value_Product(Integer id, String valuename, Integer idProperty) {
+        super.Add_Value_Product(id, valuename, idProperty);
+    }
+
+    @Override
     public void Add_ShowNotification(Integer id, Integer businessid, Boolean show) {
         super.Add_ShowNotification(id, businessid, show);
     }

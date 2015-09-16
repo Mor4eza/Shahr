@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
@@ -20,20 +19,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by ariana on 9/5/2015.
+ * Created by ariana on 9/6/2015.
  */
-public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
+public class HTTPGetProductSubsetPropertyJson extends AsyncTask<String,Void,Integer>
 {
+    private static final String url_subsetproduct="http://test.shahrma.com/api/ApiGiveProductSubsetProperties";
 
-    private static final String url_subsetproduct="http://test.shahrma.com/api/apigiveProperty";
-
-    /*   FieldDataBase fieldDataBase=new FieldDataBase();
-       List<Integer> selectId =new ArrayList<>();
-       List<String>  selectName =new ArrayList<>();
-       List<Integer>  selectCollectionId =new ArrayList<>();*/
     Integer errorCode=0;
     Integer Id[];
-    String propertyname[];
+    Integer productsubsetid[];
+    Integer propertyid[];
     Integer len;
 
 
@@ -42,7 +37,7 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
      *
      * @param c
      */
-    public HTTPGetProductPropertyJson(Context c) {
+    public HTTPGetProductSubsetPropertyJson(Context c) {
         context = c;
     }
 
@@ -53,9 +48,8 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
      */
     protected Integer doInBackground(String... args) {
         Integer result=0;
-        try {
-
-
+        try
+        {
             InputStream jsonStream = getStreamFromURL(url_subsetproduct, "GET");
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);
@@ -72,31 +66,27 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
     @Override
     protected void onPostExecute(Integer result) {
         try {
-            if(result==1) {
-
-                try {
-                    KeySettings setting=new KeySettings(context);
+            if(result==1)
+            {
                     if(len>0) {
 
                         AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
                         DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
-                        adb.delete_Property_Product();
+                        adb.delete_SubsetProperty_Product();
 
                         for (int i = 0; i < len; i++) {
-                            ddb.Add_Property_Product(Id[i], propertyname[i]);
+                            ddb.Add_SubsetProperty(Id[i], productsubsetid[i],propertyid[i]);
 
                         }
                     }
 
-                } catch (Exception e) {
-
-                }
             }
             else
             {
 
             }
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
 
         }
     }
@@ -109,14 +99,15 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
             Log.i("JSONsubsetProduct", JSONString);
 
             Id=new Integer[areas.length()];
-            propertyname=new String[areas.length()];
-
+            productsubsetid=new Integer[areas.length()];
+            propertyid=new Integer[areas.length()];
             len=areas.length();
             for (int i = 0; i < areas.length(); i++) {
 
                 JSONObject area = areas.getJSONObject(i);
                 Id[i]=area.getInt("Id");
-                propertyname[i]=area.getString("Name");
+                productsubsetid[i]=area.getInt("ProductSubsetId");
+                propertyid[i] = area.getInt("PropertyId");
 
 
                /*     selectId.add(area.getInt("Id"));

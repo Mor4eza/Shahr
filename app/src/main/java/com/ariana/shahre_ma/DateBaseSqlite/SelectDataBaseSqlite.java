@@ -162,6 +162,11 @@ public class SelectDataBaseSqlite extends DataBaseSqlite {
     }
 
     @Override
+    public Cursor select_SubsetProperty() {
+        return super.select_SubsetProperty();
+    }
+
+    @Override
     public Cursor select_SortDateBusiness(Integer subsetID, Integer cityid) {
         return super.select_SortDateBusiness(subsetID, cityid);
     }

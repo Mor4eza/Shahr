@@ -12,6 +12,7 @@ public class  InstructionsSqlite {
     public static final String TABLE_NAME_COLLECTION_PRODUCT = "collection_Product";
     public static final String TABLE_NAME_PROPERTY_PRODUCT = "Property_Product";
     public static final String TABLE_NAME_VALUE_PRODUCT = "Value_Product";
+    public static final String TABLE_NAME_SubsetProperty_PRODUCT = "SubsetProperty_Product";
     public static final String TABLE_NAME_COLLECTION = "collection";
     public static final String TABLE_NAME_MEMBER = "member";
     public static final String TABLE_NAME_OPINION = "opinion";
@@ -77,9 +78,15 @@ public class  InstructionsSqlite {
     public static final String NAME_VALUE_PRODUCT="Activity";
     public static final String IDPROPERTY_VALUE_PRODUCT="Activity";
 
+    // SubsetProperty_Product  Table Columns names
+    public static final String ID_SubsetProperty_PRODUCT="Id";
+    public static final String PRODUCTSUBSETID_SubsetProperty_PRODUCT="ProductSubsetId";
+    public static final String PROPERTYID_SubsetProperty_PRODUCT="PropertyId";
+
     //Propertiy Table Columns names
     public static final String ID_PROPERTY_PRODUCT="Id";
     public static final String NAME_PROPERTY_PRODUCT="Name";
+
 
 
     //FieldActivity Table Columns names
@@ -260,6 +267,14 @@ public class  InstructionsSqlite {
             "Name TEXT," +
             "IdProperty INTEGER" +
             ");";
+
+    // SQL statement to create SubsetProperty_Product table
+    public static final String CREATE_TABLE_SubsetProperty_Product = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_SubsetProperty_PRODUCT + " (" +
+            "Id INTEGER PRIMARY KEY ," +
+            "ProductSubsetId INTEGER," +
+            "PropertyId INTEGER" +
+            ");";
+
 
     // SQL statement to create Value_Product table
     public static final String CREATE_TABLE_Property_Product = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_PROPERTY_PRODUCT + " (" +
