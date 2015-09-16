@@ -13,6 +13,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductPropertyJson;
 import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductValueJson;
@@ -39,6 +40,8 @@ public class add_product extends ActionBarActivity {
     EditText tv_product_desc;
     EditText tv_product_property;
     EditText tv_product_address;
+    Spinner  Sp_collection;
+    Spinner  Sp_subset;
     AutoCompleteTextView tv_product_subset;
     AutoCompleteTextView tv_product_city;
     AutoCompleteTextView tv_product_area;
@@ -222,6 +225,8 @@ public class add_product extends ActionBarActivity {
         tv_product_subset=(AutoCompleteTextView)findViewById(R.id.ac_product_subset);
         tv_product_city=(AutoCompleteTextView)findViewById(R.id.ac_product_city);
         tv_product_area=(AutoCompleteTextView)findViewById(R.id.ac_product_area);
+        Sp_collection = (Spinner)findViewById(R.id.sp_collection);
+        Sp_collection = (Spinner)findViewById(R.id.sp_Subset);
        // cb_adaptive_product=(CheckBox)findViewById(R.id.chk_tavafoq);
         radioGroup=(RadioGroup)findViewById(R.id.radio_price);
 
