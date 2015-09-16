@@ -142,6 +142,8 @@
 
                 android:inputType="textPersonName" />
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+
         <LinearLayout
             android:id="@+id/linear_Tamas"
             android:visibility="gone"

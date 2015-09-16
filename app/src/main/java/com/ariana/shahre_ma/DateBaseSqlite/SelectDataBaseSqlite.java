@@ -367,6 +367,11 @@ public class SelectDataBaseSqlite extends DataBaseSqlite {
     }
 
     @Override
+    public Cursor select_Collection_Product(String namecollection) {
+        return super.select_Collection_Product(namecollection);
+    }
+
+    @Override
     public Cursor select_NotificatonId(Integer Id) {
         return super.select_NotificatonId(Id);
     }

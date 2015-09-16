@@ -1557,6 +1557,13 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         return  db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_COLLECTION_PRODUCT,null);
     }
 
+    public Cursor select_Collection_Product(String namecollection)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return  db.rawQuery("SELECT Id FROM "+ InstructionsSqlite.TABLE_NAME_COLLECTION_PRODUCT+" WHERE CollectionName='"+namecollection+"'",null);
+    }
+
+
 
     public Cursor select_Collection(String collectionname)
     {
@@ -1583,6 +1590,12 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         return  db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_SUBSET_PRODUCT,null);
     }
 
+    public Cursor select_Subset_Product(Integer collectionid)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return  db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_SUBSET_PRODUCT+" WHERE CollectionId="+collectionid,null);
+    }
+
     public Cursor select_SearchSubset(String subsetName)
     {
         SQLiteDatabase db=this.getReadableDatabase();
@@ -1595,6 +1608,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         return db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_NOTIFICATION,null);
 
     }
+
 
 
 

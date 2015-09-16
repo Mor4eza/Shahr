@@ -104,6 +104,17 @@ public class add_product extends ActionBarActivity {
             }
         });
 
+        Sp_collection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                GetNameSubset(Sp_collection.getSelectedItem().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         HTTPGetProductPropertyJson httpGetProductPropertyJson=new HTTPGetProductPropertyJson(this);
         httpGetProductPropertyJson.execute();
@@ -227,7 +238,7 @@ public class add_product extends ActionBarActivity {
         tv_product_city=(AutoCompleteTextView)findViewById(R.id.ac_product_city);
         tv_product_area=(AutoCompleteTextView)findViewById(R.id.ac_product_area);
         Sp_collection = (Spinner)findViewById(R.id.sp_collection);
-        Sp_collection = (Spinner)findViewById(R.id.sp_Subset);
+        Sp_subset = (Spinner)findViewById(R.id.sp_Subset);
        // cb_adaptive_product=(CheckBox)findViewById(R.id.chk_tavafoq);
         radioGroup=(RadioGroup)findViewById(R.id.radio_price);
 
@@ -358,6 +369,39 @@ public class add_product extends ActionBarActivity {
         DataBaseSqlite db=new DataBaseSqlite(this);
         List<String> studentList = new ArrayList<String>();
         Cursor allrows  = db.select_Collection_Product();
+        if (allrows.moveToFirst()) {
+            do {
+
+                studentList.add(allrows.getString(1));
+
+            } while (allrows.moveToNext());
+        }
+
+        return studentList;
+    }
+
+
+
+    public void GetNameSubset(String collectionproduct)
+    {
+        try {
+
+            Log.i("subsetProduct",String.valueOf(fieldDataBase.getName_Subset().size()));
+            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,getnamesubset( collectionproduct));
+            Sp_subset.setAdapter(adapter);
+        }
+        catch (Exception e)
+        {
+            Log.e("ExceptionSQL", e.toString());
+        }
+    }
+
+
+    public List<String> getnamesubset(String collectionproduct) {
+
+        DataBaseSqlite db=new DataBaseSqlite(this);
+        List<String> studentList = new ArrayList<String>();
+        Cursor allrows  = db.select_Subset_Product(query.getCollectionIdProduct(collectionproduct));
         if (allrows.moveToFirst()) {
             do {
 
