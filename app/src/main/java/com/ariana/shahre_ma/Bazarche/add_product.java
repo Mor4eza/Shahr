@@ -43,6 +43,14 @@ public class add_product extends ActionBarActivity {
     EditText tv_product_address;
     Spinner  Sp_collection;
     Spinner  Sp_subset;
+    Spinner  Sp_val1;
+    Spinner  Sp_val2;
+    Spinner  Sp_val3;
+    Spinner  Sp_val4;
+    EditText et_prop1;
+    EditText et_prop2;
+    EditText et_prop3;
+    EditText et_prop4;
     AutoCompleteTextView tv_product_subset;
     AutoCompleteTextView tv_product_city;
     AutoCompleteTextView tv_product_area;
@@ -230,7 +238,7 @@ public class add_product extends ActionBarActivity {
     }
 
     public void initViews(){
-        tv_product_name=(EditText)findViewById(R.id.add_product_name);
+
         tv_product_price=(EditText)findViewById(R.id.add_product_price);
         tv_product_tell=(EditText)findViewById(R.id.add_product_tell);
         tv_product_mobile=(EditText)findViewById(R.id.add_product_phone);
@@ -243,6 +251,15 @@ public class add_product extends ActionBarActivity {
         tv_product_area=(AutoCompleteTextView)findViewById(R.id.ac_product_area);
         Sp_collection = (Spinner)findViewById(R.id.sp_collection);
         Sp_subset = (Spinner)findViewById(R.id.sp_Subset);
+        Sp_val1 = (Spinner)findViewById(R.id.sp_val1);
+        Sp_val2 = (Spinner)findViewById(R.id.sp_val2);
+        Sp_val3 = (Spinner)findViewById(R.id.sp_val3);
+        Sp_val4 = (Spinner)findViewById(R.id.sp_val4);
+        et_prop1=(EditText)findViewById(R.id.et_prop1);
+        et_prop2=(EditText)findViewById(R.id.et_prop2);
+        et_prop3=(EditText)findViewById(R.id.et_prop3);
+        et_prop4=(EditText)findViewById(R.id.et_prop4);
+
        // cb_adaptive_product=(CheckBox)findViewById(R.id.chk_tavafoq);
         radioGroup=(RadioGroup)findViewById(R.id.radio_price);
 
