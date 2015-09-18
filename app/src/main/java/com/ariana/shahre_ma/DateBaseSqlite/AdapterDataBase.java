@@ -20,4 +20,25 @@ public class AdapterDataBase
         this.context=context;
     }
 
+
+
+
+    public ArrayAdapter getnamecollect(Cursor cursor,int idField) {
+        List<String> arrayList = new ArrayList<String>();
+        Cursor allrows  =cursor;
+        if (allrows.moveToFirst()) {
+            do
+            {
+                arrayList.add(allrows.getString(idField));
+
+            } while (allrows.moveToNext());
+        }
+
+        ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1,arrayList);
+        return adapter;
+    }
+
+
+
+
 }

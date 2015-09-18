@@ -43,6 +43,7 @@ public class add_product extends ActionBarActivity {
     EditText tv_product_address;
     Spinner  Sp_collection;
     Spinner  Sp_subset;
+
     Spinner  Sp_val1;
     Spinner  Sp_val2;
     Spinner  Sp_val3;
@@ -124,6 +125,20 @@ public class add_product extends ActionBarActivity {
 
             }
         });
+
+
+        Sp_subset.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         HTTPGetProductPropertyJson httpGetProductPropertyJson=new HTTPGetProductPropertyJson(this);
         httpGetProductPropertyJson.execute();
@@ -408,7 +423,7 @@ public class add_product extends ActionBarActivity {
         try {
 
             Log.i("subsetProduct",String.valueOf(fieldDataBase.getName_Subset().size()));
-            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,getnamesubset( collectionproduct));
+            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,getnamesubset(collectionproduct));
             Sp_subset.setAdapter(adapter);
         }
         catch (Exception e)
@@ -435,6 +450,99 @@ public class add_product extends ActionBarActivity {
     }
 
 
+    public void GetNameProperty(String namesubset)
+    {
+        try {
+
+            Log.i("subsetProduct",String.valueOf(fieldDataBase.getName_Subset().size()));
+            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,getnameproperty(namesubset));
+            Sp_subset.setAdapter(adapter);
+        }
+        catch (Exception e)
+        {
+            Log.e("ExceptionSQL", e.toString());
+        }
+    }
+
+
+    public List<String> getnameproperty(String namesubset) {
+
+        Integer j=0;
+        DataBaseSqlite db=new DataBaseSqlite(this);
+        List<Integer> propertyid = new ArrayList<Integer>();
+        List<String> nameProperty = new ArrayList<String>();
+       // List<String> namevalue = new ArrayList<String>(4);
+        String namevalue[][]=new String[100][5];
+        Cursor allrows  = db.select_SubsetProperty_Product(query.getsubsetProductID(namesubset));
+        if (allrows.moveToFirst()) {
+            do {
+
+                propertyid.add(allrows.getInt(2));
+
+            } while (allrows.moveToNext());
+        }
+
+        for(Integer id:propertyid)
+        {
+            Cursor rows  = db.select_Property_Product(id);
+            rows.moveToFirst();
+            nameProperty.add(rows.getString(0));
+        }
+
+        for(int i=0;i<propertyid.size();i++)
+        {
+            Cursor rows  = db.select_Value_Product(propertyid.get(i));
+            if(rows.moveToFirst())
+            {
+                do
+                {
+                  namevalue[j][i]=rows.getString(0);
+                }while (rows.moveToNext());
+            }
+
+        }
+        return nameProperty;
+    }
+
+
+    public void GetValue(String nameproperty)
+    {
+        try {
+
+            Log.i("subsetProduct",String.valueOf(fieldDataBase.getName_Subset().size()));
+            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,getvalue(nameproperty));
+            Sp_subset.setAdapter(adapter);
+        }
+        catch (Exception e)
+        {
+            Log.e("ExceptionSQL", e.toString());
+        }
+    }
+
+
+    public List<String> getvalue(String namesubset) {
+
+        DataBaseSqlite db=new DataBaseSqlite(this);
+        List<Integer> propertyid = new ArrayList<Integer>();
+        List<String> nameProperty = new ArrayList<String>();
+        Cursor allrows  = db.select_SubsetProperty_Product(query.getsubsetProductID(namesubset));
+        if (allrows.moveToFirst()) {
+            do {
+
+                propertyid.add(allrows.getInt(2));
+
+            } while (allrows.moveToNext());
+        }
+
+        for(Integer id:propertyid)
+        {
+            Cursor rows  = db.select_Property_Product(id);
+            rows.moveToFirst();
+            nameProperty.add(rows.getString(0));
+        }
+
+        return nameProperty;
+    }
 
 
 }

@@ -1683,10 +1683,41 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         return db.rawQuery("SELECT Id FROM "+ InstructionsSqlite.TABLE_NAME_City +" WHERE Name='"+cityname+"'",null);
     }
 
-    public  Cursor select_SubsetProperty()
+    public  Cursor select_SubsetProperty_Product()
     {
         SQLiteDatabase db=this.getReadableDatabase();
         return db.rawQuery("SELECT Id FROM "+ InstructionsSqlite.TABLE_NAME_SubsetProperty_PRODUCT,null);
+    }
+
+
+    public  Cursor select_SubsetProperty_Product(Integer subsetpropertyid)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return db.rawQuery("SELECT PropertyId FROM "+ InstructionsSqlite.TABLE_NAME_SubsetProperty_PRODUCT+" WHERE ProductSubsetId="+subsetpropertyid,null);
+    }
+
+    public  Cursor select_Property_Product(Integer propertyid)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return db.rawQuery("SELECT Name FROM "+ InstructionsSqlite.TABLE_NAME_PROPERTY_PRODUCT+" WHERE Id="+propertyid,null);
+    }
+
+    public  Cursor select_Property_Product()
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_PROPERTY_PRODUCT,null);
+    }
+
+    public  Cursor select_Value_Product()
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_VALUE_PRODUCT,null);
+    }
+
+    public  Cursor select_Value_Product(Integer propertyid)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return db.rawQuery("SELECT Name FROM "+ InstructionsSqlite.TABLE_NAME_VALUE_PRODUCT+" WHERE IdProperty="+propertyid,null);
     }
 
 
