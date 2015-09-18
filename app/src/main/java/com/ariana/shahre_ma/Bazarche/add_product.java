@@ -13,7 +13,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductPropertyJson;
 import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductSubsetPropertyJson;
@@ -43,6 +45,17 @@ public class add_product extends ActionBarActivity {
     EditText tv_product_address;
     Spinner  Sp_collection;
     Spinner  Sp_subset;
+
+    RelativeLayout rel_val1;
+    RelativeLayout rel_val2;
+    RelativeLayout rel_val3;
+    RelativeLayout rel_val4;
+
+    TextView tv_val1;
+    TextView tv_val2;
+    TextView tv_val3;
+    TextView tv_val4;
+
 
     Spinner  Sp_val1;
     Spinner  Sp_val2;
@@ -114,6 +127,8 @@ public class add_product extends ActionBarActivity {
             }
         });
 
+
+
         Sp_collection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -130,7 +145,8 @@ public class add_product extends ActionBarActivity {
         Sp_subset.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                Log.i("Sp_subset",Sp_subset.getSelectedItem().toString());
+               getnameproperty(Sp_subset.getSelectedItem().toString());
             }
 
             @Override
@@ -274,6 +290,14 @@ public class add_product extends ActionBarActivity {
         et_prop2=(EditText)findViewById(R.id.et_prop2);
         et_prop3=(EditText)findViewById(R.id.et_prop3);
         et_prop4=(EditText)findViewById(R.id.et_prop4);
+        rel_val1=(RelativeLayout)findViewById(R.id.rel_val1);
+        rel_val2=(RelativeLayout)findViewById(R.id.rel_val2);
+        rel_val3=(RelativeLayout)findViewById(R.id.rel_val3);
+        rel_val4=(RelativeLayout)findViewById(R.id.rel_val4);
+        tv_val1=(TextView)findViewById(R.id.tv_val1);
+        tv_val2=(TextView)findViewById(R.id.tv_val2);
+        tv_val3=(TextView)findViewById(R.id.tv_val3);
+        tv_val4=(TextView)findViewById(R.id.tv_val4);
 
        // cb_adaptive_product=(CheckBox)findViewById(R.id.chk_tavafoq);
         radioGroup=(RadioGroup)findViewById(R.id.radio_price);
@@ -324,15 +348,15 @@ public class add_product extends ActionBarActivity {
 
     public void GetNameCity()
     {
-        try {
+       // try {
 
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, getId2());
             tv_product_city.setAdapter(adapter);
-        }
+       /* }
         catch (Exception e)
         {
             Log.e("ExceptionSQL", e.toString());
-        }
+        }*/
     }
     public List<String> getId2() {
 
@@ -356,16 +380,16 @@ public class add_product extends ActionBarActivity {
 
     public void GetNameSubset()
     {
-        try {
+        //try {
 
             Log.i("subsetProduct",String.valueOf(fieldDataBase.getName_Subset().size()));
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,getId3());
             tv_product_subset.setAdapter(adapter);
-        }
+      /*  }
         catch (Exception e)
         {
             Log.e("ExceptionSQL", e.toString());
-        }
+        }*/
     }
 
 
@@ -387,16 +411,16 @@ public class add_product extends ActionBarActivity {
 
     public void GetNameCollection()
     {
-        try {
+       // try {
 
             Log.i("subsetProduct",String.valueOf(fieldDataBase.getName_Subset().size()));
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,getnamecollect());
             Sp_collection.setAdapter(adapter);
-        }
+      /*  }
         catch (Exception e)
         {
             Log.e("ExceptionSQL", e.toString());
-        }
+        }*/
     }
 
 
@@ -420,16 +444,16 @@ public class add_product extends ActionBarActivity {
 
     public void GetNameSubset(String collectionproduct)
     {
-        try {
+       // try {
 
             Log.i("subsetProduct",String.valueOf(fieldDataBase.getName_Subset().size()));
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,getnamesubset(collectionproduct));
             Sp_subset.setAdapter(adapter);
-        }
+        /*}
         catch (Exception e)
         {
             Log.e("ExceptionSQL", e.toString());
-        }
+        }*/
     }
 
 
@@ -452,32 +476,33 @@ public class add_product extends ActionBarActivity {
 
     public void GetNameProperty(String namesubset)
     {
-        try {
+      //  try {
 
             Log.i("subsetProduct",String.valueOf(fieldDataBase.getName_Subset().size()));
-            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,getnameproperty(namesubset));
-            Sp_subset.setAdapter(adapter);
-        }
-        catch (Exception e)
+
+        /* }
+       catch (Exception e)
         {
             Log.e("ExceptionSQL", e.toString());
-        }
+        }*/
     }
 
 
     public List<String> getnameproperty(String namesubset) {
 
         Integer j=0;
+        Integer h=0;
         DataBaseSqlite db=new DataBaseSqlite(this);
         List<Integer> propertyid = new ArrayList<Integer>();
         List<String> nameProperty = new ArrayList<String>();
-       // List<String> namevalue = new ArrayList<String>(4);
-        String namevalue[][]=new String[100][5];
+        List<String> namevalue = new ArrayList<String>();
+       // String namevalue[][]=new String[100][5];
         Cursor allrows  = db.select_SubsetProperty_Product(query.getsubsetProductID(namesubset));
         if (allrows.moveToFirst()) {
             do {
 
-                propertyid.add(allrows.getInt(2));
+                Log.i("SubsetProperty",String.valueOf(allrows.getInt(0)));
+                propertyid.add(allrows.getInt(0));
 
             } while (allrows.moveToNext());
         }
@@ -485,64 +510,78 @@ public class add_product extends ActionBarActivity {
         for(Integer id:propertyid)
         {
             Cursor rows  = db.select_Property_Product(id);
-            rows.moveToFirst();
-            nameProperty.add(rows.getString(0));
-        }
-
-        for(int i=0;i<propertyid.size();i++)
-        {
-            Cursor rows  = db.select_Value_Product(propertyid.get(i));
             if(rows.moveToFirst())
             {
-                do
-                {
-                  namevalue[j][i]=rows.getString(0);
+                do {
+                    nameProperty.add(rows.getString(0));
+                    Log.i("Property_Product", rows.getString(0));
+
                 }while (rows.moveToNext());
+
             }
 
         }
+
+        for(int i=0;i<propertyid.size();i++) {
+            try {
+            switch (i) {
+                case 0:
+                    rel_val1.setVisibility(View.VISIBLE);
+                    tv_val1.setText(nameProperty.get(i).toString());
+                    break;
+                case 1:
+                    rel_val2.setVisibility(View.VISIBLE);
+                    tv_val2.setText(nameProperty.get(i).toString());
+                    break;
+                case 2:
+                    rel_val3.setVisibility(View.VISIBLE);
+                    tv_val3.setText(nameProperty.get(i).toString());
+                    break;
+                case 3:
+                    rel_val4.setVisibility(View.VISIBLE);
+                    tv_val4.setText(nameProperty.get(i).toString());
+                    break;
+
+            }
+
+
+            Cursor rows = db.select_Value_Product(propertyid.get(i));
+            if (rows.moveToFirst()) {
+                namevalue.clear();
+                do
+                {
+                    namevalue.add(rows.getString(0));
+                    Log.i("Value_Product" + i, rows.getString(0));
+                   // j++;
+                } while (rows.moveToNext());
+            }
+                ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,namevalue);
+            Log.i("sizeList",String.valueOf(adapter.getCount()));
+                if (namevalue.size() > 0) {
+                    Log.i("sizeList", String.valueOf(namevalue.size()));
+                    switch (i) {
+                        case 0:
+                            Sp_val1.setAdapter(adapter);
+                            break;
+                        case 1:
+                            Sp_val2.setAdapter(adapter);
+                            break;
+                        case 2:
+                            Sp_val3.setAdapter(adapter);
+                            break;
+                        case 3:
+                           Sp_val4.setAdapter(adapter);
+                            break;
+                    }
+                }
+            }
+            catch (Exception e){}
+        }
+
         return nameProperty;
     }
 
 
-    public void GetValue(String nameproperty)
-    {
-        try {
-
-            Log.i("subsetProduct",String.valueOf(fieldDataBase.getName_Subset().size()));
-            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,getvalue(nameproperty));
-            Sp_subset.setAdapter(adapter);
-        }
-        catch (Exception e)
-        {
-            Log.e("ExceptionSQL", e.toString());
-        }
-    }
-
-
-    public List<String> getvalue(String namesubset) {
-
-        DataBaseSqlite db=new DataBaseSqlite(this);
-        List<Integer> propertyid = new ArrayList<Integer>();
-        List<String> nameProperty = new ArrayList<String>();
-        Cursor allrows  = db.select_SubsetProperty_Product(query.getsubsetProductID(namesubset));
-        if (allrows.moveToFirst()) {
-            do {
-
-                propertyid.add(allrows.getInt(2));
-
-            } while (allrows.moveToNext());
-        }
-
-        for(Integer id:propertyid)
-        {
-            Cursor rows  = db.select_Property_Product(id);
-            rows.moveToFirst();
-            nameProperty.add(rows.getString(0));
-        }
-
-        return nameProperty;
-    }
 
 
 }

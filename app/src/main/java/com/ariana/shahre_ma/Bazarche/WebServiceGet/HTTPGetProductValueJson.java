@@ -22,7 +22,7 @@ import java.net.URL;
  */
 public class HTTPGetProductValueJson  extends AsyncTask<String,Void,Integer>
 {
-    private static final String url_subsetproduct="http://test.shahrma.com/api/apigivePropertyValues";
+    private static final String url_subsetproduct="http://test.shahrma.com/api/ApiGivePropertyValue";
 
     /*   FieldDataBase fieldDataBase=new FieldDataBase();
        List<Integer> selectId =new ArrayList<>();
@@ -108,10 +108,9 @@ public class HTTPGetProductValueJson  extends AsyncTask<String,Void,Integer>
             for (int i = 0; i < areas.length(); i++) {
 
                 JSONObject area = areas.getJSONObject(i);
-                Idproperty[i]=area.getInt("PropertyId");
                 Id[i]=area.getInt("Id");
                 valuename[i]=area.getString("Name");
-
+                Idproperty[i]=area.getInt("PropertyId");
 
                /*     selectId.add(area.getInt("Id"));
                     selectName.add(area.getString("Name"));

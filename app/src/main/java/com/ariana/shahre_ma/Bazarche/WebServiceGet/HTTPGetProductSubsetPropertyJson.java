@@ -71,10 +71,10 @@ public class HTTPGetProductSubsetPropertyJson extends AsyncTask<String,Void,Inte
 
                         AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
                         DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
-                        adb.delete_SubsetProperty_Product();
+                        ddb.delete_SubsetProperty_Product();
 
                         for (int i = 0; i < len; i++) {
-                            ddb.Add_SubsetProperty(Id[i], productsubsetid[i],propertyid[i]);
+                            adb.Add_SubsetProperty(Id[i], productsubsetid[i],propertyid[i]);
 
                         }
                     }
@@ -154,6 +154,7 @@ public class HTTPGetProductSubsetPropertyJson extends AsyncTask<String,Void,Inte
      * @param is
      * @return
      */
+
     String streamToString(InputStream is) {
         String result = "";
         String line = null;

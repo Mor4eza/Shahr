@@ -835,7 +835,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     }
 
 
-    public void Add_SubsetProperty(Integer id,Integer propertyid,Integer productsubsetid) {
+    public void Add_SubsetProperty(Integer id,Integer productsubsetid,Integer propertyid) {
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -843,8 +843,8 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
         values.put(InstructionsSqlite.ID_SubsetProperty_PRODUCT,id);
-        values.put(InstructionsSqlite.PROPERTYID_SubsetProperty_PRODUCT,propertyid);
         values.put(InstructionsSqlite.PRODUCTSUBSETID_SubsetProperty_PRODUCT,productsubsetid);
+        values.put(InstructionsSqlite.PROPERTYID_SubsetProperty_PRODUCT,propertyid);
 
         // 3. insert
         db.insert(InstructionsSqlite.TABLE_NAME_SubsetProperty_PRODUCT, // table

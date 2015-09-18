@@ -2,6 +2,7 @@ package com.ariana.shahre_ma.DateBaseSqlite;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 /**
  * Created by ariana on 9/4/2015.
@@ -162,8 +163,43 @@ public class SelectDataBaseSqlite extends DataBaseSqlite {
     }
 
     @Override
-    public Cursor select_SubsetProperty() {
-        return super.select_SubsetProperty();
+    public void onCreate(SQLiteDatabase db) {
+        super.onCreate(db);
+    }
+
+    @Override
+    public Cursor select_Subset_Product(Integer collectionid) {
+        return super.select_Subset_Product(collectionid);
+    }
+
+    @Override
+    public Cursor select_SubsetProperty_Product() {
+        return super.select_SubsetProperty_Product();
+    }
+
+    @Override
+    public Cursor select_SubsetProperty_Product(Integer subsetpropertyid) {
+        return super.select_SubsetProperty_Product(subsetpropertyid);
+    }
+
+    @Override
+    public Cursor select_Property_Product(Integer propertyid) {
+        return super.select_Property_Product(propertyid);
+    }
+
+    @Override
+    public Cursor select_Property_Product() {
+        return super.select_Property_Product();
+    }
+
+    @Override
+    public Cursor select_Value_Product() {
+        return super.select_Value_Product();
+    }
+
+    @Override
+    public Cursor select_Value_Product(Integer propertyid) {
+        return super.select_Value_Product(propertyid);
     }
 
     @Override

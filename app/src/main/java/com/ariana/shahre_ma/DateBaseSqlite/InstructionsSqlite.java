@@ -75,8 +75,8 @@ public class  InstructionsSqlite {
 
     //Value Table Columns names
     public static final String ID_VALUE_PRODUCT="Id";
-    public static final String NAME_VALUE_PRODUCT="Activity";
-    public static final String IDPROPERTY_VALUE_PRODUCT="Activity";
+    public static final String NAME_VALUE_PRODUCT="Name";
+    public static final String IDPROPERTY_VALUE_PRODUCT="IdProperty";
 
     // SubsetProperty_Product  Table Columns names
     public static final String ID_SubsetProperty_PRODUCT="Id";
