@@ -47,6 +47,8 @@ public class HTTPGetProductpropertiesJson extends AsyncTask<String,Void,Integer>
     List<String>  selectEmail =new ArrayList<>();
     List<Integer> selectSubsetId =new ArrayList<>();
     List<Integer> selectAreaId =new ArrayList<>();
+    List<Integer> selectPropertyId =new ArrayList<>();
+    List<String>  selectValue =new ArrayList<>();
 
 
     Integer len;
@@ -115,7 +117,7 @@ public class HTTPGetProductpropertiesJson extends AsyncTask<String,Void,Integer>
     void parseJSON(String JSONString) {
         try {
 
-                Log.i("ProductProperty",JSONString);
+                Log.i("ProductProperty", JSONString);
                 JSONObject area =new JSONObject(JSONString);
                 selectId.add(area.getInt("Id"));
                 selectMemberId.add(area.getInt("MemberId"));
@@ -136,6 +138,15 @@ public class HTTPGetProductpropertiesJson extends AsyncTask<String,Void,Integer>
                 selectAreaId.add(area.getInt("AreaId"));
 
 
+            JSONArray array = area.getJSONArray("Properties");
+            for (int i=0; i<array.length(); i++)
+            {
+                JSONObject object = array.getJSONObject(i);
+                selectPropertyId.add(object.getInt("PropertyId"));
+                selectValue.add(object.getString("Value"));
+            }
+
+
 
             fdb.setId_Product(selectId);
             fdb.setMemberId_Product(selectMemberId);
@@ -154,6 +165,8 @@ public class HTTPGetProductpropertiesJson extends AsyncTask<String,Void,Integer>
             fdb.setEmail_Product(selectEmail);
             fdb.setSubsetId_Product(selectAreaId);
             fdb.setAreaId_Product(selectAreaId);
+            fdb.setPropertyId_Product(selectPropertyId);
+            fdb.setValue_Product(selectValue);
 
         } catch (JSONException e) {
             Log.i("JSONException",e.toString());
