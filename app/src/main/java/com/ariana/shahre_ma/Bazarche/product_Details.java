@@ -111,17 +111,15 @@ public class product_Details extends ActionBarActivity {
         try {
             for (int i = 0; i < fieldDataBase.getName_Product().size(); i++)
             {
-                phone.setText(fieldDataBase.getPhone__Product().get(i));
-                date.setText(fieldDataBase.getDate_Product().get(i));
-                description.setText(fieldDataBase.getDescription_Product().get(i));
-                property.setText(fieldDataBase.getProperty_Product().get(i));
-                email.setText(fieldDataBase.getEmail_Product().get(i));
-                address.setText(fieldDataBase.getAddress_Product().get(i));
-                name.setText(fieldDataBase.getName_Product().get(i));
-                price.setText(String.valueOf(fieldDataBase.getprice_Product().get(i)));
+                phone.setText("تلفن: "+fieldDataBase.getPhone__Product().get(i));
+                date.setText("تاریخ: "+fieldDataBase.getDate_Product().get(i));
+                description.setText("توضیحات: "+fieldDataBase.getDescription_Product().get(i));
+                property.setText("خصوصیات: "+fieldDataBase.getProperty_Product().get(i));
+                email.setText("ایمیل: "+fieldDataBase.getEmail_Product().get(i));
+                address.setText("آدرس: "+fieldDataBase.getAddress_Product().get(i));
+                name.setText("نام: "+fieldDataBase.getName_Product().get(i));
+                price.setText("قیمت: "+String.valueOf(fieldDataBase.getprice_Product().get(i)));
 
-
-                Picasso.with(this).load("http://www.shahrma.com/image/business/"+fieldDataBase.getImage_Product().get(i)).into(img1);
             }
         }
         catch (Exception e)

@@ -141,6 +141,15 @@ public class add_product extends ActionBarActivity {
         Sp_collection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                rel_val1.setVisibility(View.GONE);
+                rel_val2.setVisibility(View.GONE);
+                rel_val3.setVisibility(View.GONE);
+                rel_val4.setVisibility(View.GONE);
+                float1.setVisibility(View.GONE);
+                float2.setVisibility(View.GONE);
+                float3.setVisibility(View.GONE);
+                float4.setVisibility(View.GONE);
+
                 GetNameSubset(Sp_collection.getSelectedItem().toString());
             }
 
@@ -496,20 +505,16 @@ public class add_product extends ActionBarActivity {
             namevalue = new ArrayList<>();
             switch (i) {
                 case 0:
-                    rel_val1.setVisibility(View.VISIBLE);
-                    tv_val1.setText(nameProperty.get(i).toString());
+
                     break;
                 case 1:
-                    rel_val2.setVisibility(View.VISIBLE);
-                    tv_val2.setText(nameProperty.get(i).toString());
+
                     break;
                 case 2:
-                    rel_val3.setVisibility(View.VISIBLE);
-                    tv_val3.setText(nameProperty.get(i).toString());
+
                     break;
                 case 3:
-                    rel_val4.setVisibility(View.VISIBLE);
-                    tv_val4.setText(nameProperty.get(i).toString());
+
                     break;
 
             }
@@ -532,15 +537,23 @@ public class add_product extends ActionBarActivity {
                     Log.i("sizeListif", String.valueOf(namevalue.size()));
                     switch (i) {
                         case 0:
+                            rel_val1.setVisibility(View.VISIBLE);
+                            tv_val1.setText(nameProperty.get(i).toString());
                             Sp_val1.setAdapter(adapter);
                             break;
                         case 1:
+                            rel_val2.setVisibility(View.VISIBLE);
+                            tv_val2.setText(nameProperty.get(i).toString());
                             Sp_val2.setAdapter(adapter);
                             break;
                         case 2:
+                            rel_val3.setVisibility(View.VISIBLE);
+                            tv_val3.setText(nameProperty.get(i).toString());
                             Sp_val3.setAdapter(adapter);
                             break;
                         case 3:
+                            rel_val4.setVisibility(View.VISIBLE);
+                            tv_val4.setText(nameProperty.get(i).toString());
                             Sp_val4.setAdapter(adapter);
                             break;
                     }
