@@ -339,8 +339,10 @@ public class SqliteTOjson {
             rowObject.put("ProductSubsetId", subsetid);
             rowObject.put("AreaId", areaid);
 
-            for(int i=0;i<valueid.size();i++)
+            Log.i("valueSize",String.valueOf(valueid.size()));
+            for(int i=0;i<propertyid.size();i++)
             {
+                Log.i("valueSize",String.valueOf(propertyid.get(i)));
                 json.put("PropertyId", propertyid.get(i));
                 json.put("ProductId", 0);
                 json.put("type", 1);
@@ -350,7 +352,7 @@ public class SqliteTOjson {
                     json.put("Value", valueid.get(i));
             }
 
-
+            Log.i("valueSize","ssssssssss");
             array.put(json);
             rowObject.put("ProductProperties",array);
            // array.put(rowObject);

@@ -176,8 +176,8 @@ public class add_product extends ActionBarActivity {
 
     public void product_save(View view)
     {
-      try
-      {
+     /* try
+      {*/
            name=tv_product_name.getText().toString();
            price=Double.parseDouble(tv_product_price.getText().toString());
            tell=tv_product_tell.getText().toString();
@@ -196,29 +196,54 @@ public class add_product extends ActionBarActivity {
           if(net.checkInternetConnection())
           {
 
-              if(!Sp_val1.equals(null))
+              if(Sp_val1.getVisibility()!= View.VISIBLE)
                  valueid.add(query.getValueId(Sp_val1.getSelectedItem().toString()));// spineer 1
               else
                  valuetext.add(et_prop1.getText().toString()); // edit text 1
                  valueid.add(0);
 
-              if(!Sp_val2.equals(null))
+              if(Sp_val2.getVisibility()!= View.VISIBLE)
                   valueid.add(query.getValueId(Sp_val2.getSelectedItem().toString())); // spineer 2
               else
                   valuetext.add(et_prop2.getText().toString()); // edit text 2
                   valueid.add(0);
 
-              if(!Sp_val3.equals(null))
+              if(Sp_val3.getVisibility()!= View.VISIBLE)
                   valueid.add(query.getValueId(Sp_val3.getSelectedItem().toString())); // spineer 3
               else
                   valuetext.add(et_prop3.getText().toString()); // edit text 3
                   valueid.add(0);
 
-              if(!Sp_val4.equals(null))
+              if(Sp_val4.getVisibility()!= View.VISIBLE)
                   valueid.add(query.getValueId(Sp_val4.getSelectedItem().toString())); // spineer 4
               else
                   valuetext.add(et_prop4.getText().toString()); // edit text 4
                   valueid.add(0);
+
+
+              if(Sp_val5.getVisibility()!= View.VISIBLE)
+                  valueid.add(query.getValueId(Sp_val5.getSelectedItem().toString()));// spineer 5
+              else
+                  valuetext.add(et_prop5.getText().toString()); // edit text 5
+              valueid.add(0);
+
+              if(Sp_val6.getVisibility()!= View.VISIBLE)
+                  valueid.add(query.getValueId(Sp_val6.getSelectedItem().toString())); // spineer 6
+              else
+                  valuetext.add(et_prop6.getText().toString()); // edit text 6
+              valueid.add(0);
+
+              if(Sp_val7.getVisibility()!= View.VISIBLE)
+                  valueid.add(query.getValueId(Sp_val7.getSelectedItem().toString())); // spineer 7
+              else
+                  valuetext.add(et_prop7.getText().toString()); // edit text 7
+              valueid.add(0);
+
+              if(Sp_val8.getVisibility()!= View.VISIBLE)
+                  valueid.add(query.getValueId(Sp_val8.getSelectedItem().toString())); // spineer 8
+              else
+                  valuetext.add(et_prop8.getText().toString()); // edit text 8
+              valueid.add(0);
 
 
               json = sqliteTOjson.ProductTOjson(query.getMemberId(), name,dt.Now(), property, price, latitude, longtiude, adaptive, descripction, tell, mobile, address, email, subsetid, areaid,valuetext,valueid,propertyid);
@@ -241,15 +266,17 @@ public class add_product extends ActionBarActivity {
               alertDialog.show();
           }
 
-      }catch (Exception e)
+      /*}catch (Exception e)
       {
 
-      }
+      }*/
 
     }
 
     public void initViews(){
 
+        //
+        tv_product_name=(EditText)findViewById(R.id.add_product_name);
         tv_product_price=(EditText)findViewById(R.id.add_product_price);
         tv_product_tell=(EditText)findViewById(R.id.add_product_tell);
         tv_product_mobile=(EditText)findViewById(R.id.add_product_phone);

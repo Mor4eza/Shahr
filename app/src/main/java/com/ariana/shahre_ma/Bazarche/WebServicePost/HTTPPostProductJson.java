@@ -68,7 +68,7 @@ public class HTTPPostProductJson extends AsyncTask<String ,Long,Integer>
         pd = new ProgressDialog(context);
         pd.setMessage("در حال ثبت ...");
         pd.setCancelable(false);
-        pd.show();;
+        pd.show();
     }
 
     @Override
