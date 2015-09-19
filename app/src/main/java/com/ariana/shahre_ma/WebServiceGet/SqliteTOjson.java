@@ -350,10 +350,11 @@ public class SqliteTOjson {
                     json.put("Value",valuetext.get(i));
                 else
                     json.put("Value", valueid.get(i));
+                array.put(json);
+
             }
 
-            Log.i("valueSize","ssssssssss");
-            array.put(json);
+            Log.i("jsonSendProduct",array.toString());
             rowObject.put("ProductProperties",array);
            // array.put(rowObject);
 
