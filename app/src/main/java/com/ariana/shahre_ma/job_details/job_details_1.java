@@ -172,10 +172,15 @@ public class job_details_1 extends ActionBarActivity {
                  fc.SetBusiness_Id(allrows.getInt(0));//Id
                  fc.SetLatitude_Business(allrows.getDouble(15));//Latitude
                  fc.SetLongtiude_Business(allrows.getDouble(16));//Longtiude
-                 Log.i("Latitude", String.valueOf(allrows.getDouble(15)));
-                 Log.i("Longitude", String.valueOf(allrows.getDouble(16)));
                  name.setText(allrows.getString(1));//Market
-                 tel.setText(allrows.getString(3));//Phone
+
+
+                 //check phone
+                 if(allrows.getString(3).trim().equals("1") || allrows.getString(3).trim().equals("NULL"))
+                     tel.setText(allrows.getString(4));//Phone
+                 else if(allrows.getString(4).equals("") || allrows.getString(4).equals("1") || allrows.getString(4).equals("NULL"))
+                     parent.removeView((View) tel.getParent());
+
 
                  //check email
                  if(allrows.getString(6).equals("null") || allrows.getString(6).equals(null) || allrows.getString(6).equals("")) {
@@ -228,8 +233,16 @@ public class job_details_1 extends ActionBarActivity {
                  fc.SetLatitude_Business(allrows.getDouble(15));//Latitude
                  fc.SetLongtiude_Business(allrows.getDouble(16));//Longtiude
                  name.setText(allrows.getString(1));//Market
-                 tel.setText(allrows.getString(3));//Phone
+
                 // tv_rateCount.setText(allrows.getInt(30)); //rateCount
+
+
+                 //check phone
+                 if(allrows.getString(3).trim().equals("1") || allrows.getString(3).trim().equals("NULL"))
+                     tel.setText(allrows.getString(4));//Phone
+                 else if(allrows.getString(4).equals("") || allrows.getString(4).equals("1") || allrows.getString(4).equals("NULL"))
+                     parent.removeView((View) tel.getParent());
+
 
                  //check email
                  if(allrows.getString(6).equals("null") || allrows.getString(6).equals(null) || allrows.getString(6).equals("")){
@@ -282,11 +295,18 @@ public class job_details_1 extends ActionBarActivity {
                  fc.SetBusiness_Id(allrows.getInt(0));//Id
                  fc.SetLatitude_Business(allrows.getDouble(10));//Latitude
                  fc.SetLongtiude_Business(allrows.getDouble(11));//Longtiude
-                 Log.i("Latitude", String.valueOf(allrows.getDouble(10)));
-                 Log.i("Longitude", String.valueOf(allrows.getDouble(11)));
                  name.setText(allrows.getString(1));//Market
-                 tel.setText(allrows.getString(2));//Phone
-                // tv_rateCount.setText(allrows.getInt(30)); //rateCount
+
+
+
+                 //check phone
+                 if(allrows.getString(3).trim().equals("1") || allrows.getString(3).trim().equals("NULL"))
+                     tel.setText(allrows.getString(4));//Phone
+                 else if(allrows.getString(4).equals("") || allrows.getString(4).equals("1") || allrows.getString(4).equals("NULL"))
+                     parent.removeView((View) tel.getParent());
+
+
+
                  //check email
                  if(allrows.getString(5).equals("null") || allrows.getString(5).equals(null) || allrows.getString(5).equals("")){
                      web.setText("");//Email
@@ -332,7 +352,9 @@ public class job_details_1 extends ActionBarActivity {
                  tel.setVisibility(View.GONE);
              }
        }
-        catch (Exception e){}
+        catch (Exception e){
+
+        }
 
     }
 
@@ -346,7 +368,6 @@ public class job_details_1 extends ActionBarActivity {
 
                      if (rows.moveToFirst()) {
                          do {
-                             Log.i("image", rows.getString(2));
                               final TextSliderView textSliderView1 = new TextSliderView(getActivity());
                              textSliderView1.image("http://www.shahrma.com/image/business/" + rows.getString(2));
                              slider.addSlider(textSliderView1);
@@ -367,7 +388,6 @@ public class job_details_1 extends ActionBarActivity {
                      textSliderView.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
                          @Override
                          public void onSliderClick(BaseSliderView baseSliderView) {
-                             Log.i("clicked", slider.getCurrentSlider().getUrl());
                              Show_Image_Dialog dialog = new Show_Image_Dialog(getActivity(), baseSliderView.getUrl());
                              dialog.show();
                          }

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -173,19 +174,8 @@ private  static Context context;
 
 
 
-            if(setting.getCacheImage()==false)
-            {
-                //Delete image
-                File dir = new File(android.os.Environment.getExternalStorageDirectory(), "myFolder/image_folder");
-                if (dir.isDirectory()) {
-                    String[] children = dir.list();
-                    for (int i = 0; i < children.length; i++) {
-                        Log.i("NameImage", new File(dir, children[i]).getName());
-                        new File(dir, children[i]).delete();
-                    }
-                }
 
-            }
+
 
     /*        }
        catch(Exception e)

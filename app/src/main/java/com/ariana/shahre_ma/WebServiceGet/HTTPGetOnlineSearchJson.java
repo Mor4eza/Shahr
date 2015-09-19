@@ -363,10 +363,13 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
 
             if(len==0)
             {
-                //  Toast.makeText(get, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
-                Log.i("Count Business : ", "فروشگاه ثبت نشد");
                 pd.dismiss();
-                Toast.makeText(context,"نتیجه ای یافت نشد",Toast.LENGTH_LONG).show();
+             if(errorCode==200)
+                 Toast.makeText(context,"نتیجه ای یافت نشد",Toast.LENGTH_LONG).show();
+             else if (errorCode==504 || errorCode==502 || errorCode==404)
+                 Toast.makeText(context,"پیامی از سمت سرور دریافت نشد",Toast.LENGTH_LONG).show();
+             else if (errorCode==324 || errorCode==502 || errorCode==404)
+                 Toast.makeText(context,"داده نیست اینترنت خود را بررسی کنید",Toast.LENGTH_LONG).show();
             }
 
             else {
@@ -406,7 +409,7 @@ public class HTTPGetOnlineSearchJson extends AsyncTask<String,Void,Integer>
 
         } catch (Exception e) {
 
-            Log.e("ExceptionBusinessJson",e.toString());
+            Log.e("onlinesearchJson",e.toString());
         }
     }
 }

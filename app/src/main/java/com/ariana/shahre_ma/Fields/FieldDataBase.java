@@ -15,7 +15,7 @@ public class FieldDataBase
     static List<String> Name_Product =new ArrayList<>();
     static List<String> Date_Product =new ArrayList<>();
     static List<String> Property_Product =new ArrayList<>();
-    static List<Double>  Price_Product =new ArrayList<>();
+    static List<String>  Price_Product =new ArrayList<>();
     static List<Double>  Latitude_Product =new ArrayList<>();
     static List<Double>  Longtiude_Product =new ArrayList<>();
     static List<Boolean> Adaptive_Product =new ArrayList<>();
@@ -58,7 +58,7 @@ public class FieldDataBase
     public void setName_Product(List<String> name){this.Name_Product=name;}
     public void setProperty_Product(List<String> property){this.Property_Product=property;}
     public void setDate_Product(List<String> date){this.Date_Product=date;}
-    public void setPrice_Product(List<Double> price){this.Price_Product=price;}
+    public void setPrice_Product(List<String> price){this.Price_Product=price;}
     public void setLatitude_Product(List<Double> latitude){this.Latitude_Product=latitude;}
     public void setLongtiude_Product(List<Double> longtiude){this.Longtiude_Product=longtiude;}
     public void setAdaptive__Product(List<Boolean> adaptive){this.Adaptive_Product=adaptive;}
@@ -80,7 +80,7 @@ public class FieldDataBase
     public List<String> getName_Product(){return this.Name_Product;}
     public List<String> getDate_Product(){return this.Date_Product;}
     public List<String> getProperty_Product(){return this.Property_Product;}
-    public List<Double> getprice_Product(){return this.Price_Product;}
+    public List<String> getprice_Product(){return this.Price_Product;}
     public List<Double> getLatitude_Product(){return this.Latitude_Product;}
     public List<Double> getLongtiude_Product(){return this.Longtiude_Product;}
     public List<Boolean> getAdaptive_Product(){return this.Adaptive_Product;}

@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Cards.job_list_cards_adapter;
+import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
 import com.ariana.shahre_ma.Settings.KeySettings;
@@ -52,6 +53,7 @@ public class Jobs_List extends ActionBarActivity implements SearchView.OnQueryTe
     KeySettings setting = new KeySettings(this);
     FieldClass fc=new FieldClass();
     TextView tv_count;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

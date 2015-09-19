@@ -6,7 +6,7 @@ package com.ariana.shahre_ma.Bazarche;
 public class Product_List_Item {
 
     private String mName;
-    private Double mPrice;
+    private String mPrice;
     private int mThumbnail;
     private Integer Id;
     private String imageName;
@@ -14,7 +14,7 @@ public class Product_List_Item {
     public Product_List_Item() {
     }
 
-    public Product_List_Item(String name, Double price,String image_name,Integer Id) {
+    public Product_List_Item(String name, String price,String image_name,Integer Id) {
         this.mName = name;
         this.mPrice = price;
         this.imageName = image_name;
@@ -38,11 +38,11 @@ public class Product_List_Item {
         this.mName = name;
     }
 
-    public Double getmPrice() {
+    public String getmPrice() {
         return mPrice;
     }
 
-    public void setmPrice(Double Price) {
+    public void setmPrice(String Price) {
         this.mPrice = Price;
     }
 

@@ -32,7 +32,7 @@ public class HTTPGetAroundMeProduct extends AsyncTask<String,Void,Integer>
 
     List<Integer> selectId =new ArrayList<>();
     List<String>  selectName =new ArrayList<>();
-    List<Double>  selectPrice =new ArrayList<>();
+    List<String>  selectPrice =new ArrayList<>();
     List<Double>  selectLat =new ArrayList<>();
     List<Double>  selectLongt =new ArrayList<>();
     List<Boolean> selectAdaptive =new ArrayList<>();
@@ -115,7 +115,7 @@ public class HTTPGetAroundMeProduct extends AsyncTask<String,Void,Integer>
 
                 selectId.add(area.getInt("Id"));
                 selectName.add(area.getString("Name"));
-                selectPrice.add(area.getDouble("Price"));
+                selectPrice.add(area.getString("Price"));
                 selectAdaptive.add(area.getBoolean("Adaptive"));
                 selectImage.add(area.getString("Image"));
                 selectLat.add(area.getDouble("Latitude"));

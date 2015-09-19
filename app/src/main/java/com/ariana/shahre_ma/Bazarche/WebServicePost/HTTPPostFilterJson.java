@@ -47,7 +47,7 @@ public class HTTPPostFilterJson extends AsyncTask<String ,Long,Integer>
     FieldDataBase fdb=new FieldDataBase();
     List<Integer> selectId =new ArrayList<>();
     List<String>  selectName =new ArrayList<>();
-    List<Double>  selectPrice =new ArrayList<>();
+    List<String>  selectPrice =new ArrayList<>();
     List<Boolean> selectAdaptive =new ArrayList<>();
     List<String>  selectImage =new ArrayList<>();
     // get/set
@@ -169,7 +169,7 @@ public class HTTPPostFilterJson extends AsyncTask<String ,Long,Integer>
 
                 selectId.add(area.getInt("Id"));
                 selectName.add(area.getString("Name"));
-                selectPrice.add(area.getDouble("Price"));
+                selectPrice.add(area.getString("Price"));
                 selectAdaptive.add(area.getBoolean("Adaptive"));
                 selectImage.add(area.getString("Image"));
 

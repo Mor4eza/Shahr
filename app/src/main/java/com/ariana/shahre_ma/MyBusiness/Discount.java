@@ -51,7 +51,7 @@ public class Discount extends ActionBarActivity {
         listView.setAdapter(adapter);
         final int count = adapter.getCount();
 
- /*       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
@@ -62,7 +62,7 @@ public class Discount extends ActionBarActivity {
 
                 }
             }
-        });*/
+        });
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {

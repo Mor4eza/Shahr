@@ -35,7 +35,7 @@ public class HTTPGetProductpropertiesJson extends AsyncTask<String,Void,Integer>
     List<String>  selectName =new ArrayList<>();
     List<String>  selectDate =new ArrayList<>();
     List<String>  selectProperty =new ArrayList<>();
-    List<Double>  selectPrice =new ArrayList<>();
+    List<String>  selectPrice =new ArrayList<>();
     List<Double>  selectLatitude =new ArrayList<>();
     List<Double>  selectLongtiude =new ArrayList<>();
     List<Boolean> selectAdaptive =new ArrayList<>();
@@ -127,7 +127,7 @@ public class HTTPGetProductpropertiesJson extends AsyncTask<String,Void,Integer>
                 selectName.add(area.getString("Name"));
                 selectDate.add(area.getString("DateTime"));
                 selectProperty.add(area.getString("Property"));
-                selectPrice.add(area.getDouble("Price"));
+                selectPrice.add(area.getString("Price"));
                 selectLatitude.add(area.getDouble("Latitude"));
                 selectLongtiude.add(area.getDouble("Longtude"));
                 selectAdaptive.add(area.getBoolean("Adaptive"));
