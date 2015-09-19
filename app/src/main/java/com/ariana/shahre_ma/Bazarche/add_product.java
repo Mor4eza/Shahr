@@ -46,30 +46,11 @@ public class add_product extends ActionBarActivity {
     EditText tv_product_address;
     Spinner  Sp_collection;
     Spinner  Sp_subset;
-
-    RelativeLayout rel_val1;
-    RelativeLayout rel_val2;
-    RelativeLayout rel_val3;
-    RelativeLayout rel_val4;
-
-    TextView tv_val1;
-    TextView tv_val2;
-    TextView tv_val3;
-    TextView tv_val4;
-
-
-    Spinner  Sp_val1;
-    Spinner  Sp_val2;
-    Spinner  Sp_val3;
-    Spinner  Sp_val4;
-    FloatLabeledEditText float1;
-    FloatLabeledEditText float2;
-    FloatLabeledEditText float3;
-    FloatLabeledEditText float4;
-    EditText et_prop1;
-    EditText et_prop2;
-    EditText et_prop3;
-    EditText et_prop4;
+    RelativeLayout rel_val1,rel_val2,rel_val3,rel_val4,rel_val5,rel_val6,rel_val7,rel_val8;
+    TextView tv_val1,tv_val2,tv_val3,tv_val4,tv_val5,tv_val6,tv_val7,tv_val8;
+    Spinner  Sp_val1,Sp_val2,Sp_val3,Sp_val4,Sp_val5,Sp_val6,Sp_val7,Sp_val8;
+    FloatLabeledEditText float1,float2,float3,float4,float5,float6,float7,float8;
+    EditText et_prop1,et_prop2,et_prop3,et_prop4,et_prop5,et_prop6,et_prop7,et_prop8;
     AutoCompleteTextView tv_product_subset;
     AutoCompleteTextView tv_product_city;
     AutoCompleteTextView tv_product_area;
@@ -145,10 +126,19 @@ public class add_product extends ActionBarActivity {
                 rel_val2.setVisibility(View.GONE);
                 rel_val3.setVisibility(View.GONE);
                 rel_val4.setVisibility(View.GONE);
+                rel_val5.setVisibility(View.GONE);
+                rel_val6.setVisibility(View.GONE);
+                rel_val7.setVisibility(View.GONE);
+                rel_val8.setVisibility(View.GONE);
                 float1.setVisibility(View.GONE);
                 float2.setVisibility(View.GONE);
                 float3.setVisibility(View.GONE);
                 float4.setVisibility(View.GONE);
+                float5.setVisibility(View.GONE);
+                float6.setVisibility(View.GONE);
+                float7.setVisibility(View.GONE);
+                float8.setVisibility(View.GONE);
+
 
                 GetNameSubset(Sp_collection.getSelectedItem().toString());
             }
@@ -272,27 +262,52 @@ public class add_product extends ActionBarActivity {
         tv_product_area=(AutoCompleteTextView)findViewById(R.id.ac_product_area);
         Sp_collection = (Spinner)findViewById(R.id.sp_collection);
         Sp_subset = (Spinner)findViewById(R.id.sp_Subset);
+        /////
         Sp_val1 = (Spinner)findViewById(R.id.sp_val1);
         Sp_val2 = (Spinner)findViewById(R.id.sp_val2);
         Sp_val3 = (Spinner)findViewById(R.id.sp_val3);
         Sp_val4 = (Spinner)findViewById(R.id.sp_val4);
+        Sp_val5 = (Spinner)findViewById(R.id.sp_val5);
+        Sp_val6 = (Spinner)findViewById(R.id.sp_val6);
+        Sp_val7 = (Spinner)findViewById(R.id.sp_val7);
+        Sp_val8 = (Spinner)findViewById(R.id.sp_val8);
+        //////
         et_prop1=(EditText)findViewById(R.id.et_prop1);
         et_prop2=(EditText)findViewById(R.id.et_prop2);
         et_prop3=(EditText)findViewById(R.id.et_prop3);
         et_prop4=(EditText)findViewById(R.id.et_prop4);
+        et_prop5=(EditText)findViewById(R.id.et_prop5);
+        et_prop6=(EditText)findViewById(R.id.et_prop6);
+        et_prop7=(EditText)findViewById(R.id.et_prop7);
+        et_prop8=(EditText)findViewById(R.id.et_prop8);
+        //////
         rel_val1=(RelativeLayout)findViewById(R.id.rel_val1);
         rel_val2=(RelativeLayout)findViewById(R.id.rel_val2);
         rel_val3=(RelativeLayout)findViewById(R.id.rel_val3);
         rel_val4=(RelativeLayout)findViewById(R.id.rel_val4);
+        rel_val5=(RelativeLayout)findViewById(R.id.rel_val5);
+        rel_val6=(RelativeLayout)findViewById(R.id.rel_val6);
+        rel_val7=(RelativeLayout)findViewById(R.id.rel_val7);
+        rel_val8=(RelativeLayout)findViewById(R.id.rel_val8);
+
+        //////
         tv_val1=(TextView)findViewById(R.id.tv_val1);
         tv_val2=(TextView)findViewById(R.id.tv_val2);
         tv_val3=(TextView)findViewById(R.id.tv_val3);
         tv_val4=(TextView)findViewById(R.id.tv_val4);
-
+        tv_val5=(TextView)findViewById(R.id.tv_val5);
+        tv_val6=(TextView)findViewById(R.id.tv_val6);
+        tv_val7=(TextView)findViewById(R.id.tv_val7);
+        tv_val8=(TextView)findViewById(R.id.tv_val8);
+        /////
         float1= (FloatLabeledEditText) findViewById(R.id.float1);
         float2= (FloatLabeledEditText) findViewById(R.id.float2);
         float3= (FloatLabeledEditText) findViewById(R.id.float3);
         float4= (FloatLabeledEditText) findViewById(R.id.float4);
+        float5= (FloatLabeledEditText) findViewById(R.id.float5);
+        float6= (FloatLabeledEditText) findViewById(R.id.float6);
+        float7= (FloatLabeledEditText) findViewById(R.id.float7);
+        float8= (FloatLabeledEditText) findViewById(R.id.float8);
        // cb_adaptive_product=(CheckBox)findViewById(R.id.chk_tavafoq);
         radioGroup=(RadioGroup)findViewById(R.id.radio_price);
 
@@ -503,26 +518,10 @@ public class add_product extends ActionBarActivity {
 
         for(int i=0;i<propertyid.size();i++) {
             namevalue = new ArrayList<>();
-            switch (i) {
-                case 0:
-
-                    break;
-                case 1:
-
-                    break;
-                case 2:
-
-                    break;
-                case 3:
-
-                    break;
-
-            }
-
 
             Cursor rows = db.select_Value_Product(propertyid.get(i));
-            if (rows.moveToFirst()) {
-
+            if (rows.moveToFirst())
+            {
                 do
                 {
                     namevalue.add(rows.getString(1));
@@ -556,6 +555,26 @@ public class add_product extends ActionBarActivity {
                             tv_val4.setText(nameProperty.get(i).toString());
                             Sp_val4.setAdapter(adapter);
                             break;
+                        case 4:
+                            rel_val5.setVisibility(View.VISIBLE);
+                            tv_val5.setText(nameProperty.get(i).toString());
+                            Sp_val5.setAdapter(adapter);
+                            break;
+                        case 5:
+                            rel_val6.setVisibility(View.VISIBLE);
+                            tv_val6.setText(nameProperty.get(i).toString());
+                            Sp_val6.setAdapter(adapter);
+                            break;
+                        case 6:
+                            rel_val7.setVisibility(View.VISIBLE);
+                            tv_val7.setText(nameProperty.get(i).toString());
+                            Sp_val7.setAdapter(adapter);
+                            break;
+                        case 7:
+                            rel_val8.setVisibility(View.VISIBLE);
+                            tv_val8.setText(nameProperty.get(i).toString());
+                            Sp_val8.setAdapter(adapter);
+                            break;
                     }
                     //namevalue.clear();
                 }
@@ -564,7 +583,7 @@ public class add_product extends ActionBarActivity {
                     Log.i("sizeListelse", String.valueOf(namevalue.size()));
                     switch (i) {
                         case 0:
-                           float1.setVisibility(View.VISIBLE);
+                            float1.setVisibility(View.VISIBLE);
                             et_prop1.setHint(nameProperty.get(i));
                             break;
                         case 1:
@@ -579,6 +598,22 @@ public class add_product extends ActionBarActivity {
                             float4.setVisibility(View.VISIBLE);
                             et_prop4.setHint(nameProperty.get(i));
                             break;
+                        case 4:
+                            float5.setVisibility(View.VISIBLE);
+                            et_prop5.setHint(nameProperty.get(i));
+                            break;
+                        case 5:
+                            float6.setVisibility(View.VISIBLE);
+                            et_prop6.setHint(nameProperty.get(i));
+                            break;
+                        case 6:
+                            float7.setVisibility(View.VISIBLE);
+                            et_prop7.setHint(nameProperty.get(i));
+                            break;
+                        case 7:
+                            float8.setVisibility(View.VISIBLE);
+                            et_prop8.setHint(nameProperty.get(i));
+                            break;
                     }
                 }
 
@@ -588,11 +623,5 @@ public class add_product extends ActionBarActivity {
 
         return nameProperty;
     }
-
-
-  private void RefreshLayout()
-  {
-
-  }
 
 }
