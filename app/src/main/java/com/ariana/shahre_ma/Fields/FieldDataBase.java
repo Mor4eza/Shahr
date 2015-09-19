@@ -86,6 +86,8 @@ public class FieldDataBase
     public List<Integer> getSubsetId_Product(){return this.SubsetId_Product;}
     public List<Integer> getAreaId_Product(){return this.AreaId_Product;}
     public List<Integer> getMemberId_Product(){return this.MemberId_Product;}
+    public List<Integer> getPropertyId_Product(){return this.PropertyId_Product;}
+    public List<String> getValue_Product(){return this.Value_Product;}
 
 
 
