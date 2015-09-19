@@ -1432,7 +1432,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     public Cursor select_SubsetId(String subsetname)
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT Id FROM " + InstructionsSqlite.TABLE_NAME_SUBSET + "  WHERE SubsetName Like '%" + subsetname+"%'", null);
+        return db.rawQuery("SELECT Id FROM " + InstructionsSqlite.TABLE_NAME_SUBSET + "  WHERE SubsetName= '" + subsetname+"'", null);
     }
 
     public Cursor select_AdvanceSubsetId(String subsetname)

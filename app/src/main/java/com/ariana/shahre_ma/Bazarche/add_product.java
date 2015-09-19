@@ -73,6 +73,7 @@ public class add_product extends ActionBarActivity {
     Boolean adaptive=true;
 
 
+    Boolean _enable1=false,_enable2=false,_enable3=false,_enable4=false,_enable5=false,_enable6=false,_enable7=false,_enable8=false;
     SqliteTOjson sqliteTOjson=new SqliteTOjson(this);
     Query query=new Query(this);
     NetState net=new NetState(this);
@@ -196,54 +197,87 @@ public class add_product extends ActionBarActivity {
           if(net.checkInternetConnection())
           {
 
-              if(Sp_val1.getVisibility()!= View.VISIBLE)
-                 valueid.add(query.getValueId(Sp_val1.getSelectedItem().toString()));// spineer 1
-              else
-                 valuetext.add(et_prop1.getText().toString()); // edit text 1
-                 valueid.add(0);
+              if(_enable1)
+              {
+                  valuetext.add("");
+                  Log.i("vlaueID",String.valueOf(query.getValueId(Sp_val1.getSelectedItem().toString())));
+                  valueid.add(query.getValueId(Sp_val1.getSelectedItem().toString()));// spineer 1
+              }
+              else {
 
-              if(Sp_val2.getVisibility()!= View.VISIBLE)
+                  valuetext.add(et_prop1.getText().toString()); // edit text 1
+                  valueid.add(0);
+              }
+
+              if(_enable2) {
+                  valuetext.add("");
+                  Log.i("vlaueID",String.valueOf(query.getValueId(Sp_val2.getSelectedItem().toString())));
                   valueid.add(query.getValueId(Sp_val2.getSelectedItem().toString())); // spineer 2
-              else
+              }
+              else{
                   valuetext.add(et_prop2.getText().toString()); // edit text 2
                   valueid.add(0);
+                 }
 
-              if(Sp_val3.getVisibility()!= View.VISIBLE)
+
+              if(_enable3) {
+                  valuetext.add("");
+                  Log.i("vlaueID",String.valueOf(query.getValueId(Sp_val3.getSelectedItem().toString())));
                   valueid.add(query.getValueId(Sp_val3.getSelectedItem().toString())); // spineer 3
-              else
+              }
+              else {
+
                   valuetext.add(et_prop3.getText().toString()); // edit text 3
                   valueid.add(0);
+              }
 
-              if(Sp_val4.getVisibility()!= View.VISIBLE)
+              if(_enable4) {
+                  valuetext.add("");
+                  Log.i("vlaueID",String.valueOf(query.getValueId(Sp_val4.getSelectedItem().toString())));
                   valueid.add(query.getValueId(Sp_val4.getSelectedItem().toString())); // spineer 4
-              else
+              }
+              else {
                   valuetext.add(et_prop4.getText().toString()); // edit text 4
                   valueid.add(0);
+              }
 
 
-              if(Sp_val5.getVisibility()!= View.VISIBLE)
+              if(_enable5) {
+                  valuetext.add("");
+                  Log.i("vlaueID",String.valueOf(query.getValueId(Sp_val5.getSelectedItem().toString())));
                   valueid.add(query.getValueId(Sp_val5.getSelectedItem().toString()));// spineer 5
-              else
+              }
+              else{
                   valuetext.add(et_prop5.getText().toString()); // edit text 5
-              valueid.add(0);
+                  valueid.add(0);}
 
-              if(Sp_val6.getVisibility()!= View.VISIBLE)
+              if(_enable6) {
+                  valuetext.add("");
+                  Log.i("vlaueID",String.valueOf(query.getValueId(Sp_val6.getSelectedItem().toString())));
                   valueid.add(query.getValueId(Sp_val6.getSelectedItem().toString())); // spineer 6
-              else
+              }
+              else{
                   valuetext.add(et_prop6.getText().toString()); // edit text 6
-              valueid.add(0);
+                  valueid.add(0);}
 
-              if(Sp_val7.getVisibility()!= View.VISIBLE)
+              if(_enable7) {
+                  valuetext.add("");
+                  Log.i("vlaueID",String.valueOf(query.getValueId(Sp_val7.getSelectedItem().toString())));
                   valueid.add(query.getValueId(Sp_val7.getSelectedItem().toString())); // spineer 7
-              else
+              }
+              else{
                   valuetext.add(et_prop7.getText().toString()); // edit text 7
-              valueid.add(0);
+                  valueid.add(0);}
 
-              if(Sp_val8.getVisibility()!= View.VISIBLE)
+              if(_enable8) {
+                  valuetext.add("");
+                  Log.i("vlaueID",String.valueOf(query.getValueId(Sp_val8.getSelectedItem().toString())));
                   valueid.add(query.getValueId(Sp_val8.getSelectedItem().toString())); // spineer 8
-              else
+              }
+              else{
                   valuetext.add(et_prop8.getText().toString()); // edit text 8
-              valueid.add(0);
+                  valueid.add(0);
+              }
 
 
               json = sqliteTOjson.ProductTOjson(query.getMemberId(), name,dt.Now(), property, price, latitude, longtiude, adaptive, descripction, tell, mobile, address, email, subsetid, areaid,valuetext,valueid,propertyid);
@@ -511,6 +545,15 @@ public class add_product extends ActionBarActivity {
 
     public List<String> getnameproperty(String namesubset) {
 
+        _enable1=false;
+        _enable2=false;
+        _enable3=false;
+        _enable4=false;
+        _enable5=false;
+        _enable6=false;
+        _enable7=false;
+        _enable8=false;
+
         Integer j=0;
         Integer h=0;
         DataBaseSqlite db=new DataBaseSqlite(this);
@@ -566,41 +609,49 @@ public class add_product extends ActionBarActivity {
                             rel_val1.setVisibility(View.VISIBLE);
                             tv_val1.setText(nameProperty.get(i).toString());
                             Sp_val1.setAdapter(adapter);
+                            _enable1 =true;
                             break;
                         case 1:
                             rel_val2.setVisibility(View.VISIBLE);
                             tv_val2.setText(nameProperty.get(i).toString());
                             Sp_val2.setAdapter(adapter);
+                            _enable2=true;
                             break;
                         case 2:
                             rel_val3.setVisibility(View.VISIBLE);
                             tv_val3.setText(nameProperty.get(i).toString());
                             Sp_val3.setAdapter(adapter);
+                            _enable3=true;
                             break;
                         case 3:
                             rel_val4.setVisibility(View.VISIBLE);
                             tv_val4.setText(nameProperty.get(i).toString());
                             Sp_val4.setAdapter(adapter);
+                            _enable4=true;
                             break;
                         case 4:
                             rel_val5.setVisibility(View.VISIBLE);
                             tv_val5.setText(nameProperty.get(i).toString());
                             Sp_val5.setAdapter(adapter);
+                            _enable5=true;
                             break;
                         case 5:
                             rel_val6.setVisibility(View.VISIBLE);
                             tv_val6.setText(nameProperty.get(i).toString());
                             Sp_val6.setAdapter(adapter);
+                            _enable6=true;
                             break;
                         case 6:
                             rel_val7.setVisibility(View.VISIBLE);
                             tv_val7.setText(nameProperty.get(i).toString());
                             Sp_val7.setAdapter(adapter);
+                            _enable7=true;
                             break;
                         case 7:
                             rel_val8.setVisibility(View.VISIBLE);
                             tv_val8.setText(nameProperty.get(i).toString());
                             Sp_val8.setAdapter(adapter);
+                            _enable8=true;
                             break;
                     }
                     //namevalue.clear();

@@ -320,7 +320,7 @@ public class SqliteTOjson {
 
             // JSONobject get key/value convert to json
             JSONObject rowObject = new JSONObject();
-            JSONObject json = new JSONObject();
+
             JSONArray array=new JSONArray();
 
             rowObject.put("MemberId",memberid);
@@ -339,21 +339,25 @@ public class SqliteTOjson {
             rowObject.put("ProductSubsetId", subsetid);
             rowObject.put("AreaId", areaid);
 
-            Log.i("valueSize",String.valueOf(valueid.size()));
+            Log.i("valueSize", String.valueOf(valueid.size()));
+            Log.i("valuestextsize", String.valueOf(valuetext.size()));
             for(int i=0;i<propertyid.size();i++)
             {
-                Log.i("valueSize",String.valueOf(propertyid.get(i)));
+                JSONObject json = new JSONObject();
                 json.put("PropertyId", propertyid.get(i));
                 json.put("ProductId", 0);
                 json.put("type", 1);
-                if(valueid.get(i)==0)
-                    json.put("Value",valuetext.get(i));
-                else
+
+                if(valueid.get(i).equals(0)) {
+                    json.put("Value", valuetext.get(i));
+                    Log.i("valuetext", String.valueOf(valuetext.get(i)));
+                }
+                else {
                     json.put("Value", valueid.get(i));
+                }
                 array.put(json);
 
             }
-
             Log.i("jsonSendProduct",array.toString());
             rowObject.put("ProductProperties",array);
            // array.put(rowObject);
