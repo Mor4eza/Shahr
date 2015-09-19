@@ -453,12 +453,12 @@
 
         <LinearLayout
             android:id="@+id/linear_Tamas"
-
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
         <RelativeLayout
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -468,6 +468,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="right"
+                android:textColor="@color/md_red_400"
                 android:text="اطلاعات تماس"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
@@ -544,8 +545,6 @@
                 />
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
-
-
         <com.wrapp.floatlabelededittext.FloatLabeledEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
@@ -560,8 +559,6 @@
                 android:completionThreshold="1"
                 android:imeOptions="actionNext"/>
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
-
-
 
 
         <com.wrapp.floatlabelededittext.FloatLabeledEditText
