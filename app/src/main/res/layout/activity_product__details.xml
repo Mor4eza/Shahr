@@ -132,6 +132,32 @@
             android:layout_alignParentRight="true"
             android:text="ویژگی"/>
 
+        <TextView
+            android:id="@+id/product_details1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/product_property"
+            android:layout_alignParentRight="true"
+            android:text="خصوصیات 1"/>
+
+        <TextView
+            android:id="@+id/product_details2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/product_details1"
+            android:layout_alignParentRight="true"
+            android:text="خصوصیات 1"/>
+        <TextView
+            android:id="@+id/product_details3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/product_details2"
+            android:layout_alignParentRight="true"
+            android:text="خصوصیات 1"/>
+
 
     </RelativeLayout>
 
