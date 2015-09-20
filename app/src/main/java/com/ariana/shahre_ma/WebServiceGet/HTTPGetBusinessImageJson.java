@@ -7,9 +7,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
@@ -40,9 +38,9 @@ public class HTTPGetBusinessImageJson extends AsyncTask<String,Void,Integer>
 
     FieldClass fc=new FieldClass();
 
-    public void SetBusinessId(Integer BusinessId)
+    public void SetBusinessId(Integer productId)
     {
-        url_businessimage=url_businessimage+BusinessId;
+        url_businessimage=url_businessimage+productId;
     }
 
     private String GetURL()

@@ -1,32 +1,36 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rel_product"
+    android:visibility="visible"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    tools:context="com.ariana.shahre_ma.Bazarche.product_Details">
 
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:scrollbars="none"
+    android:layout_marginBottom="8dp"
+    >
     <RelativeLayout android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-        tools:context="com.ariana.shahre_ma.Bazarche.product_Details">
 
-
+        >
     <HorizontalScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingRight="5dp"
         android:paddingLeft="5dp"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/horizontalScrollView">
 
+        android:layout_centerHorizontal="true"
+        android:id="@+id/horizontalScrollView"
+        >
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             >
-
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -55,8 +59,6 @@
             android:layout_toRightOf="@+id/image2"
             android:layout_toEndOf="@+id/image2"
             android:layout_marginLeft="1dp" />
-
-
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -66,17 +68,17 @@
                 android:layout_toRightOf="@+id/image3"
                 android:layout_toEndOf="@+id/image3"
                 android:layout_marginLeft="1dp" />
-
         </RelativeLayout>
     </HorizontalScrollView>
 
     <RelativeLayout
         android:id="@+id/rel_desc"
         android:layout_marginRight="10dp"
+        android:visibility="gone"
         android:layout_marginLeft="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/horizontalScrollView"
+        android:layout_below="@+id/product_name"
         android:layout_marginTop="20dp"
         android:gravity="right"
        >
@@ -97,8 +99,6 @@
                 android:layout_marginTop="7dp"
                 android:layout_marginRight="3dp"
                />
-
-
         <TextView
             android:id="@+id/product_date"
             android:layout_width="wrap_content"
@@ -106,59 +106,30 @@
             android:layout_marginTop="30dp"
             android:layout_alignParentRight="true"
             android:text="تاریخ"/>
-
         <TextView
-            android:id="@+id/product_name"
+            android:id="@+id/product_details1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="0dp"
             android:layout_below="@id/product_date"
             android:layout_alignParentRight="true"
-            android:text="نام"/>
+            android:text=""/>
         <TextView
             android:id="@+id/product_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_below="@id/product_name"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/product_details1"
             android:layout_alignParentRight="true"
             android:text="توضیحات"/>
         <TextView
             android:id="@+id/product_property"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:layout_below="@id/product_desc"
             android:layout_alignParentRight="true"
-            android:text="ویژگی"/>
-
-        <TextView
-            android:id="@+id/product_details1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_below="@id/product_property"
-            android:layout_alignParentRight="true"
-            android:text="خصوصیات 1"/>
-
-        <TextView
-            android:id="@+id/product_details2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_below="@id/product_details1"
-            android:layout_alignParentRight="true"
-            android:text="خصوصیات 1"/>
-        <TextView
-            android:id="@+id/product_details3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_below="@id/product_details2"
-            android:layout_alignParentRight="true"
-            android:text="خصوصیات 1"/>
-
-
+            android:text=""/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -169,7 +140,9 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="20dp"
         android:gravity="right"
-        >
+        android:visibility="gone"
+        android:animateLayoutChanges="true"
+        android:id="@+id/rel_com">
         <TextView
             android:id="@+id/hint2"
             android:layout_width="wrap_content"
@@ -215,20 +188,35 @@
 
     </RelativeLayout>
 
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text=""
 
+            android:layout_below="@+id/horizontalScrollView"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="19sp"
+            android:textColor="@color/md_white_1000"
+            android:background="@color/accent"
+            android:text=""
+            android:layout_below="@+id/rel_desc"
+            android:layout_alignLeft="@+id/rel_com"
+            android:layout_alignStart="@+id/rel_com" />
     </RelativeLayout>
         </ScrollView>
 
-    <TextView
-        android:id="@+id/product_price"
+    <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="19sp"
-        android:textColor="@color/md_white_1000"
-        android:background="@color/accent"
-        android:layout_marginBottom="10dp"
-        android:text="25000 ریال"/>
+        android:id="@+id/progress_product"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

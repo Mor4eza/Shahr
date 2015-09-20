@@ -33,6 +33,7 @@
         android:layout_below="@+id/textView8"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:scrollbars="none"
         android:layout_above="@+id/textView10">
         <TextView
             android:layout_width="wrap_content"

@@ -39,9 +39,9 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
 
 
 
-        public  void setUrl_product(Integer cityid,Integer pagesize,Integer page,Integer subsetid,Integer sort)
+        public  void setUrl_product(Integer cityid,Integer pagesize,Integer page,Integer sort)
         {
-            url_product="http://test.shahrma.com/api/ApiGiveProductList?page="+page+"&pageSize="+pagesize+"&cityId="+cityid+"&subsetId="+subsetid+"&sort="+sort;
+            url_product="http://test.shahrma.com/api/ApiGiveProductList?page="+page+"&pageSize="+pagesize+"&cityId="+cityid+"&sort="+sort;
             Log.i("url",url_product);
         }
 

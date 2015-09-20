@@ -31,7 +31,7 @@ public class Product_List extends ActionBarActivity {
         pg=(ProgressBar)findViewById(R.id.pg_product_list);
         retry=(Button)findViewById(R.id.pl_retry);
         HTTPGetProductJson httpGetProductJson=new HTTPGetProductJson(this);
-        httpGetProductJson.setUrl_product(68,0,0,1,1);
+        httpGetProductJson.setUrl_product(68,0,0,1);
         httpGetProductJson.execute();
         setCards();
 
@@ -85,7 +85,7 @@ public class Product_List extends ActionBarActivity {
 
     public void retry(View view) {
         HTTPGetProductJson httpGetProductJson=new HTTPGetProductJson(this);
-        httpGetProductJson.setUrl_product(68,0,0,1,1);
+        httpGetProductJson.setUrl_product(68,0,0,1);
         httpGetProductJson.execute();
     }
 }

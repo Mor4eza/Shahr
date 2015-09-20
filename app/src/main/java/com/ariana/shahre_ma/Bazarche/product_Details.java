@@ -11,7 +11,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
@@ -35,12 +38,13 @@ public class product_Details extends ActionBarActivity {
     TextView address;
     TextView name;
     TextView price;
-    TextView details1,details2,details3;
+    TextView details1;
     ImageView img1;
     ImageView img2;
     ImageView img3;
     ImageView img4;
-
+    RelativeLayout rel_desc,Rel_com;
+    ProgressBar progressBar_product;
     String urlImage[]=new String[2];
 
     DataBaseSqlite db=new DataBaseSqlite(this);
@@ -53,8 +57,6 @@ public class product_Details extends ActionBarActivity {
         setContentView(R.layout.activity_product__details);
         Initilize();
         LocalBroadcastManager.getInstance(this).registerReceiver(mProductReceiver, new IntentFilter("Product_property"));
-
-
 
         HTTPGetProductpropertiesJson httpGetProductPropertyJson=new HTTPGetProductpropertiesJson(this);
         httpGetProductPropertyJson.setProductId(fc.GetProductId());
@@ -101,9 +103,9 @@ public class product_Details extends ActionBarActivity {
         name=(TextView) findViewById(R.id.product_name);
         price=(TextView) findViewById(R.id.product_price);
         details1=(TextView)findViewById(R.id.product_details1);
-        details2=(TextView)findViewById(R.id.product_details2);
-        details3=(TextView)findViewById(R.id.product_details3);
-
+        Rel_com=(RelativeLayout) findViewById(R.id.rel_com);
+        rel_desc=(RelativeLayout) findViewById(R.id.rel_desc);
+        progressBar_product=(ProgressBar)findViewById(R.id.progress_product);
         img1=(ImageView) findViewById(R.id.image1);
         img2=(ImageView) findViewById(R.id.image2);
         img3=(ImageView) findViewById(R.id.image3);
@@ -121,16 +123,16 @@ public class product_Details extends ActionBarActivity {
                 property.setText("خصوصیات: "+fieldDataBase.getProperty_Product().get(i));
                 email.setText("ایمیل: "+fieldDataBase.getEmail_Product().get(i));
                 address.setText("آدرس: " + fieldDataBase.getAddress_Product().get(i));
-                name.setText("نام: "+fieldDataBase.getName_Product().get(i));
+                name.setText(fieldDataBase.getName_Product().get(i));
                 price.setText("قیمت: "+String.valueOf(fieldDataBase.getprice_Product().get(i)));
                 for (int h= 0; h < fieldDataBase.getPropertyId_Product().size(); h++) {
                     String namevalue ="";
                     namevalue=query.getValueName(Integer.parseInt(fieldDataBase.getValue_Product().get(h).replaceAll("[\\D]","0")));
 
                     if(namevalue.equals("") || namevalue.equals("null") || namevalue.equals(null))
-                        details1.setText(details1.getText() + "\n" + query.getPropertyName(fieldDataBase.getPropertyId_Product().get(h)) + " : " + (fieldDataBase.getValue_Product().get(h)));
+                        details1.setText(details1.getText() + "\n\n" + query.getPropertyName(fieldDataBase.getPropertyId_Product().get(h)) + " : " + (fieldDataBase.getValue_Product().get(h)));
                     else
-                        details1.setText(details1.getText() + "\n" + query.getPropertyName(fieldDataBase.getPropertyId_Product().get(h)) + " : " +namevalue);
+                        details1.setText(details1.getText() + "\n\n" + query.getPropertyName(fieldDataBase.getPropertyId_Product().get(h)) + " : " +namevalue);
 
                 }
             }
@@ -177,11 +179,12 @@ public class product_Details extends ActionBarActivity {
             if(fc.GetProductReceiver()) {
                 LoadImage();
                 fc.SetProductReceiver(false);
-                Log.i("ProductReceiver","image");
             }
             else {
                 LoadData();
-                Log.i("ProductReceiver", "date");
+                progressBar_product.setVisibility(View.GONE);
+                rel_desc.setVisibility(View.VISIBLE);
+                Rel_com.setVisibility(View.VISIBLE);
             }
         }
 
