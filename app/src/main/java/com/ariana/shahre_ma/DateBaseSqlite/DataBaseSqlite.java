@@ -1717,9 +1717,14 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     public  Cursor select_Value_Product(Integer propertyid)
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        return db.rawQuery("SELECT Name FROM "+ InstructionsSqlite.TABLE_NAME_VALUE_PRODUCT+" WHERE IdProperty="+propertyid,null);
+        return db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_VALUE_PRODUCT+" WHERE IdProperty="+propertyid,null);
     }
 
+    public  Cursor select_Value_Product(String namevalue)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return db.rawQuery("SELECT Id FROM "+ InstructionsSqlite.TABLE_NAME_VALUE_PRODUCT+" WHERE Name='"+namevalue+"'",null);
+    }
 
     // Deleting Opinion
     public void delete_Opinion() {

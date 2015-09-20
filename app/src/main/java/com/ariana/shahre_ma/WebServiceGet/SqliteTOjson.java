@@ -19,6 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.DatagramPacket;
+import java.util.List;
 
 /**
  * Created by ariana2 on 6/5/2015.
@@ -313,7 +314,7 @@ public class SqliteTOjson {
     }
 
     // convert Member to json
-    public String ProductTOjson(Integer memberid,String name,String datetime, String property, Double price, Double latitude, Double longtiude, Boolean adaptive, String description,String phone,String mobile,String address,String email,Integer subsetid, Integer areaid) {
+    public String ProductTOjson(Integer memberid,String name,String datetime, String property, Double price, Double latitude, Double longtiude, Boolean adaptive, String description,String phone,String mobile,String address,String email,Integer subsetid, Integer areaid,List<String> valuetext,List<Integer> valueid,List<Integer> propertyid) {
         String field_Json = "";
         try {
 
@@ -338,10 +339,16 @@ public class SqliteTOjson {
             rowObject.put("ProductSubsetId", subsetid);
             rowObject.put("AreaId", areaid);
 
-            json.put("PropertyId",2);
-            json.put("ProductId",0);
-            json.put("type",1);
-            json.put("Value",5);
+            for(int i=0;i<valueid.size();i++)
+            {
+                json.put("PropertyId", propertyid.get(i));
+                json.put("ProductId", 0);
+                json.put("type", 1);
+                if(valueid.get(i)==0)
+                    json.put("Value",valuetext.get(i));
+                else
+                    json.put("Value", valueid.get(i));
+            }
 
 
             array.put(json);

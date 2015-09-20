@@ -28,6 +28,7 @@ import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.ariana.shahre_ma.Bazarche.WebServicePost.HTTPPostProductJson;
+import com.wrapp.floatlabelededittext.FloatLabeledEditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +62,10 @@ public class add_product extends ActionBarActivity {
     Spinner  Sp_val2;
     Spinner  Sp_val3;
     Spinner  Sp_val4;
+    FloatLabeledEditText float1;
+    FloatLabeledEditText float2;
+    FloatLabeledEditText float3;
+    FloatLabeledEditText float4;
     EditText et_prop1;
     EditText et_prop2;
     EditText et_prop3;
@@ -92,7 +97,11 @@ public class add_product extends ActionBarActivity {
     NetState net=new NetState(this);
     FieldDataBase fieldDataBase=new FieldDataBase();
     DateTime dt=new DateTime();
-
+    List<Integer> valueid = new ArrayList<>();
+    List<String> valuetext=new ArrayList<>();
+    List<Integer> propertyid;
+    List<String> namevalue;
+    List<String> nameProperty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,65 +196,37 @@ public class add_product extends ActionBarActivity {
 
           if(net.checkInternetConnection())
           {
-             /* if(name.equals(""))
-              {
-                  AlertDialog alertDialog = new AlertDialog.Builder(add_product.this).create();
-                  alertDialog.setTitle("هشدار");
-                  alertDialog.setMessage("نام کالا را وارد کنید");
-                  alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                      public void onClick(DialogInterface dialog, int which) {
+
+              if(!Sp_val1.equals(null))
+                 valueid.add(query.getValueId(Sp_val1.getSelectedItem().toString()));// spineer 1
+              else
+                 valuetext.add(et_prop1.getText().toString()); // edit text 1
+                 valueid.add(0);
+
+              if(!Sp_val2.equals(null))
+                  valueid.add(query.getValueId(Sp_val2.getSelectedItem().toString())); // spineer 2
+              else
+                  valuetext.add(et_prop2.getText().toString()); // edit text 2
+                  valueid.add(0);
+
+              if(!Sp_val3.equals(null))
+                  valueid.add(query.getValueId(Sp_val3.getSelectedItem().toString())); // spineer 3
+              else
+                  valuetext.add(et_prop3.getText().toString()); // edit text 3
+                  valueid.add(0);
+
+              if(!Sp_val4.equals(null))
+                  valueid.add(query.getValueId(Sp_val4.getSelectedItem().toString())); // spineer 4
+              else
+                  valuetext.add(et_prop4.getText().toString()); // edit text 4
+                  valueid.add(0);
 
 
-                      }
-                  });
-                  alertDialog.show();
-              }
-              else if(price.equals("") || adaptive==false)
-              {
-                  AlertDialog alertDialog = new AlertDialog.Builder(add_product.this).create();
-                  alertDialog.setTitle("هشدار");
-                  alertDialog.setMessage("قیمت را وارد کنید .");
-                  alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                      public void onClick(DialogInterface dialog, int which) {
+              json = sqliteTOjson.ProductTOjson(query.getMemberId(), name,dt.Now(), property, price, latitude, longtiude, adaptive, descripction, tell, mobile, address, email, subsetid, areaid,valuetext,valueid,propertyid);
+              HTTPPostProductJson httpPostProductJson = new HTTPPostProductJson(this);
+              httpPostProductJson.SetProduct_Json(json);
+              httpPostProductJson.execute();
 
-
-                      }
-                  });
-                  alertDialog.show();
-              }
-              else  if(tell.equals("") || mobile.equals(""))
-              {
-                  AlertDialog alertDialog = new AlertDialog.Builder(add_product.this).create();
-                  alertDialog.setTitle("هشدار");
-                  alertDialog.setMessage("شماره تلفن یا موبایل خود را وارد کنید.");
-                  alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                      public void onClick(DialogInterface dialog, int which) {
-
-
-                      }
-                  });
-                  alertDialog.show();
-              }
-              else if(areaid==0)
-              {
-                  AlertDialog alertDialog = new AlertDialog.Builder(add_product.this).create();
-                  alertDialog.setTitle("هشدار");
-                  alertDialog.setMessage("نام منتطه را وارد کنید");
-                  alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                      public void onClick(DialogInterface dialog, int which) {
-
-
-                      }
-                  });
-                  alertDialog.show();
-              }*/
-             /* else
-              {*/
-                  json = sqliteTOjson.ProductTOjson(query.getMemberId(), name,dt.Now(), property, price, latitude, longtiude, adaptive, descripction, tell, mobile, address, email, subsetid, areaid);
-                  HTTPPostProductJson httpPostProductJson = new HTTPPostProductJson(this);
-                  httpPostProductJson.SetProduct_Json(json);
-                  httpPostProductJson.execute();
-             // }
           }
           else
           {
@@ -299,6 +280,10 @@ public class add_product extends ActionBarActivity {
         tv_val3=(TextView)findViewById(R.id.tv_val3);
         tv_val4=(TextView)findViewById(R.id.tv_val4);
 
+        float1= (FloatLabeledEditText) findViewById(R.id.float1);
+        float2= (FloatLabeledEditText) findViewById(R.id.float2);
+        float3= (FloatLabeledEditText) findViewById(R.id.float3);
+        float4= (FloatLabeledEditText) findViewById(R.id.float4);
        // cb_adaptive_product=(CheckBox)findViewById(R.id.chk_tavafoq);
         radioGroup=(RadioGroup)findViewById(R.id.radio_price);
 
@@ -473,30 +458,15 @@ public class add_product extends ActionBarActivity {
         return studentList;
     }
 
-
-    public void GetNameProperty(String namesubset)
-    {
-      //  try {
-
-            Log.i("subsetProduct",String.valueOf(fieldDataBase.getName_Subset().size()));
-
-        /* }
-       catch (Exception e)
-        {
-            Log.e("ExceptionSQL", e.toString());
-        }*/
-    }
-
-
     public List<String> getnameproperty(String namesubset) {
 
         Integer j=0;
         Integer h=0;
         DataBaseSqlite db=new DataBaseSqlite(this);
-        List<Integer> propertyid = new ArrayList<Integer>();
-        List<String> nameProperty = new ArrayList<String>();
-        List<String> namevalue = new ArrayList<String>();
-       // String namevalue[][]=new String[100][5];
+        propertyid = new ArrayList<Integer>();
+       nameProperty = new ArrayList<>();
+
+        try {
         Cursor allrows  = db.select_SubsetProperty_Product(query.getsubsetProductID(namesubset));
         if (allrows.moveToFirst()) {
             do {
@@ -523,7 +493,7 @@ public class add_product extends ActionBarActivity {
         }
 
         for(int i=0;i<propertyid.size();i++) {
-            try {
+            namevalue = new ArrayList<>();
             switch (i) {
                 case 0:
                     rel_val1.setVisibility(View.VISIBLE);
@@ -547,18 +517,19 @@ public class add_product extends ActionBarActivity {
 
             Cursor rows = db.select_Value_Product(propertyid.get(i));
             if (rows.moveToFirst()) {
-                namevalue.clear();
+
                 do
                 {
-                    namevalue.add(rows.getString(0));
-                    Log.i("Value_Product" + i, rows.getString(0));
+                    namevalue.add(rows.getString(1));
+                    Log.i("Value_Product" + i, rows.getString(1));
                    // j++;
                 } while (rows.moveToNext());
             }
                 ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,namevalue);
-            Log.i("sizeList",String.valueOf(adapter.getCount()));
-                if (namevalue.size() > 0) {
-                    Log.i("sizeList", String.valueOf(namevalue.size()));
+            //Log.i("sizeList", String.valueOf(adapter.getCount()));
+                if (namevalue.size() > 0)
+                {
+                    Log.i("sizeListif", String.valueOf(namevalue.size()));
                     switch (i) {
                         case 0:
                             Sp_val1.setAdapter(adapter);
@@ -570,18 +541,45 @@ public class add_product extends ActionBarActivity {
                             Sp_val3.setAdapter(adapter);
                             break;
                         case 3:
-                           Sp_val4.setAdapter(adapter);
+                            Sp_val4.setAdapter(adapter);
+                            break;
+                    }
+                    //namevalue.clear();
+                }
+                else
+                {
+                    Log.i("sizeListelse", String.valueOf(namevalue.size()));
+                    switch (i) {
+                        case 0:
+                           float1.setVisibility(View.VISIBLE);
+                            et_prop1.setHint(nameProperty.get(i));
+                            break;
+                        case 1:
+                            float2.setVisibility(View.VISIBLE);
+                            et_prop2.setHint(nameProperty.get(i));
+                            break;
+                        case 2:
+                            float3.setVisibility(View.VISIBLE);
+                            et_prop3.setHint(nameProperty.get(i));
+                            break;
+                        case 3:
+                            float4.setVisibility(View.VISIBLE);
+                            et_prop4.setHint(nameProperty.get(i));
                             break;
                     }
                 }
+
             }
-            catch (Exception e){}
         }
+        catch (Exception e){}
 
         return nameProperty;
     }
 
 
+  private void RefreshLayout()
+  {
 
+  }
 
 }
