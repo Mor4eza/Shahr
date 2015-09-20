@@ -33,7 +33,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.ariana.shahre_ma.Bazarche.Bazarche;
+import com.ariana.shahre_ma.Bazarche.Product_List;
 import com.ariana.shahre_ma.Bookmarks.BookMark;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
@@ -415,7 +415,7 @@ public class MainActivity extends ActionBarActivity {
 
                         if (position == 2) {
 
-                            Intent i = new Intent(getApplicationContext(), Bazarche.class);
+                            Intent i = new Intent(getApplicationContext(), Product_List.class);
                             startActivity(i);
 
                         }

@@ -33,16 +33,6 @@ public class Product_List_Adapter extends RecyclerView.Adapter<Product_List_Adap
         mItems = new ArrayList<Product_List_Item>();
 
 
-         /*   for (int i =0;i<11;i++) {
-                nature = new Product_List_Item();
-                nature.setName("محصول"+i);
-                nature.setmPrice((double)i);
-                nature.setId(i);
-                nature.setThumbnail(R.drawable.img_not_found);
-                mItems.add(nature);
-
-            }*/
-
         Log.i("size",String.valueOf(fieldDataBase.getName_Product().size()));
              for(int i=0;i<fieldDataBase.getName_Product().size();i++)
              {

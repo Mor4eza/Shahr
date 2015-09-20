@@ -330,6 +330,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.Search.SearchListActivity" />
         </activity>
+        <activity
+            android:name=".Bazarche.FilterActivity"
+            android:label="@string/title_activity_filter"
+            android:parentActivityName=".Bazarche.Product_List" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ariana.shahre_ma.Bazarche.Product_List" />
+        </activity>
     </application>
 
 </manifest>

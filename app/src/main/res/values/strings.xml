@@ -67,5 +67,6 @@
     <string name="title_activity_select__image">انتخاب تصاویر</string>
     <string name="title_activity_search_list">نتایج جستجو…</string>
     <string name="title_activity_search_map">نتایج جستجو…</string>
-
+    <string name="ac_action_filter">فیلتر</string>
+    <string name="title_activity_filter">فیلتر</string>
 </resources>

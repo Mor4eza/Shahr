@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.Bazarche;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -73,7 +74,9 @@ public class Product_List extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.ac_filter) {
+            Intent i = new Intent(this.getApplicationContext(),FilterActivity.class);
+            startActivity(i);
             return true;
         }
 
