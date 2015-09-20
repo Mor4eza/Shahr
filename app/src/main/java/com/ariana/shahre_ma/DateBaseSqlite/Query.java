@@ -120,6 +120,41 @@ public class Query {
         return  Result;
     }
 
+    public String getPropertyName(Integer propertyid)
+    {
+        String Result="";
+        try {
+
+            SelectDataBaseSqlite db=new SelectDataBaseSqlite(context);
+            Cursor allrows = db.select_Property_Product(propertyid);
+            allrows.moveToFirst();
+            Result = allrows.getString(0);
+            allrows.close();
+        }
+        catch (Exception e)
+        {
+            // Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+        }
+        return  Result;
+    }
+
+    public String getValueName(Integer valueid)
+    {
+        String Result="";
+        try {
+
+            SelectDataBaseSqlite db=new SelectDataBaseSqlite(context);
+            Cursor allrows = db.select_ValueName_Product(valueid);
+            allrows.moveToFirst();
+            Result = allrows.getString(0);
+            allrows.close();
+        }
+        catch (Exception e)
+        {
+            // Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+        }
+        return  Result;
+    }
     /**
      *
      * @param id

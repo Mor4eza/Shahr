@@ -208,6 +208,16 @@ public class SelectDataBaseSqlite extends DataBaseSqlite {
     }
 
     @Override
+    public Cursor select_Value_Product(String namevalue) {
+        return super.select_Value_Product(namevalue);
+    }
+
+    @Override
+    public Cursor select_ValueName_Product(Integer valueid) {
+        return super.select_ValueName_Product(valueid);
+    }
+
+    @Override
     public Cursor select_AllBusinessId(Integer id) {
         return super.select_AllBusinessId(id);
     }

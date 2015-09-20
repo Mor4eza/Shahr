@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBase;
 import com.ariana.shahre_ma.R;
@@ -34,7 +35,7 @@ public class product_Details extends ActionBarActivity {
     TextView address;
     TextView name;
     TextView price;
-
+    TextView details1,details2,details3;
     ImageView img1;
     ImageView img2;
     ImageView img3;
@@ -44,6 +45,7 @@ public class product_Details extends ActionBarActivity {
 
     DataBaseSqlite db=new DataBaseSqlite(this);
     FieldDataBase fieldDataBase=new FieldDataBase();
+    Query query=new Query(this);
     FieldClass fc=new FieldClass();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +100,9 @@ public class product_Details extends ActionBarActivity {
         address=(TextView) findViewById(R.id.product_address);
         name=(TextView) findViewById(R.id.product_name);
         price=(TextView) findViewById(R.id.product_price);
-
+        details1=(TextView)findViewById(R.id.product_details1);
+        details2=(TextView)findViewById(R.id.product_details2);
+        details3=(TextView)findViewById(R.id.product_details3);
 
         img1=(ImageView) findViewById(R.id.image1);
         img2=(ImageView) findViewById(R.id.image2);
@@ -108,24 +112,33 @@ public class product_Details extends ActionBarActivity {
 
     private void LoadData()
     {
-        try {
+       // try {
             for (int i = 0; i < fieldDataBase.getName_Product().size(); i++)
             {
-                phone.setText("تلفن: "+fieldDataBase.getPhone__Product().get(i));
+                phone.setText("تلفن: "+fieldDataBase.getMobile_Product().get(i));
                 date.setText("تاریخ: "+fieldDataBase.getDate_Product().get(i));
                 description.setText("توضیحات: "+fieldDataBase.getDescription_Product().get(i));
                 property.setText("خصوصیات: "+fieldDataBase.getProperty_Product().get(i));
                 email.setText("ایمیل: "+fieldDataBase.getEmail_Product().get(i));
-                address.setText("آدرس: "+fieldDataBase.getAddress_Product().get(i));
+                address.setText("آدرس: " + fieldDataBase.getAddress_Product().get(i));
                 name.setText("نام: "+fieldDataBase.getName_Product().get(i));
                 price.setText("قیمت: "+String.valueOf(fieldDataBase.getprice_Product().get(i)));
+                for (int h= 0; h < fieldDataBase.getPropertyId_Product().size(); h++) {
+                    String namevalue ="";
+                    namevalue=query.getValueName(Integer.parseInt(fieldDataBase.getValue_Product().get(h).replaceAll("[\\D]","0")));
 
+                    if(namevalue.equals("") || namevalue.equals("null") || namevalue.equals(null))
+                        details1.setText(details1.getText() + "\n" + query.getPropertyName(fieldDataBase.getPropertyId_Product().get(h)) + " : " + (fieldDataBase.getValue_Product().get(h)));
+                    else
+                        details1.setText(details1.getText() + "\n" + query.getPropertyName(fieldDataBase.getPropertyId_Product().get(h)) + " : " +namevalue);
+
+                }
             }
-        }
-        catch (Exception e)
+        //}
+      /*  catch (Exception e)
         {
 
-        }
+        }*/
 
     }
 

@@ -27,6 +27,9 @@ public class FieldDataBase
     static List<String> Email_Product =new ArrayList<>();
     static List<Integer> SubsetId_Product =new ArrayList<>();
     static List<Integer> AreaId_Product =new ArrayList<>();
+    static List<Integer> PropertyId_Product =new ArrayList<>();
+    static List<String> Value_Product =new ArrayList<>();
+
 
     //Fields of the Subset
     static List<Integer> Id_Subset =new ArrayList<>();
@@ -63,6 +66,8 @@ public class FieldDataBase
     public void setEmail_Product(List<String> email){this.Email_Product=email;}
     public void setSubsetId_Product(List<Integer> subsetid){this.SubsetId_Product=subsetid;}
     public void setAreaId_Product(List<Integer> areaid){this.AreaId_Product=areaid;}
+    public void setPropertyId_Product(List<Integer> propertyIdProduct){this.PropertyId_Product=propertyIdProduct;}
+    public void setValue_Product(List<String> valueProduct){this.Value_Product=valueProduct;}
     //Fields set the table Product
     public List<Integer> getId_Product(){return this.Id_Product;}
     public List<String> getName_Product(){return this.Name_Product;}
@@ -81,6 +86,8 @@ public class FieldDataBase
     public List<Integer> getSubsetId_Product(){return this.SubsetId_Product;}
     public List<Integer> getAreaId_Product(){return this.AreaId_Product;}
     public List<Integer> getMemberId_Product(){return this.MemberId_Product;}
+    public List<Integer> getPropertyId_Product(){return this.PropertyId_Product;}
+    public List<String> getValue_Product(){return this.Value_Product;}
 
 
 

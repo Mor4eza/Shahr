@@ -1720,6 +1720,12 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         return db.rawQuery("SELECT * FROM "+ InstructionsSqlite.TABLE_NAME_VALUE_PRODUCT+" WHERE IdProperty="+propertyid,null);
     }
 
+    public  Cursor select_ValueName_Product(Integer valueid)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        return db.rawQuery("SELECT Name FROM "+ InstructionsSqlite.TABLE_NAME_VALUE_PRODUCT+" WHERE Id="+valueid,null);
+    }
+
     public  Cursor select_Value_Product(String namevalue)
     {
         SQLiteDatabase db=this.getReadableDatabase();
