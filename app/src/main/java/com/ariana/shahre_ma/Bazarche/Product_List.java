@@ -88,4 +88,10 @@ public class Product_List extends ActionBarActivity {
         httpGetProductJson.setUrl_product(68,0,0,1);
         httpGetProductJson.execute();
     }
+
+    public void products(View view) {
+
+        Intent i = new Intent(getApplicationContext(),My_products.class);
+        startActivity(i);
+    }
 }
