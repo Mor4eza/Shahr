@@ -9,6 +9,7 @@ public class Product_List_Item {
     private Double mPrice;
     private int mThumbnail;
     private Integer Id;
+    private String imageName;
 
 
     public Integer getId() {
@@ -43,4 +44,13 @@ public class Product_List_Item {
     public void setThumbnail(int thumbnail) {
         this.mThumbnail = thumbnail;
     }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String image) {
+        this.imageName = image;
+    }
+
 }
