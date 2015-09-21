@@ -112,6 +112,7 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
                 JSONObject area = areas.getJSONObject(i);
                 Id[i]=area.getInt("Id");
                 propertyname[i]=area.getString("Name");
+               /// type[i]=area.getInt("Type");
 
             }
 

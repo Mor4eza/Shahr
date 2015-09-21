@@ -159,7 +159,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         ContentValues values = new ContentValues();
         values.put(InstructionsSqlite.ID_PROPERTY_PRODUCT, id);
         values.put(InstructionsSqlite.NAME_PROPERTY_PRODUCT, propertyname);
-        values.put(InstructionsSqlite.Type_PROPERTY_PRODUCT, propertyname);
+        values.put(InstructionsSqlite.Type_PROPERTY_PRODUCT, type);
 
         // 3. insert
         db.insert(InstructionsSqlite.TABLE_NAME_PROPERTY_PRODUCT,null,values);

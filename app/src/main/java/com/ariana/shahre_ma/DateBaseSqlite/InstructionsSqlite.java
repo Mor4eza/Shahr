@@ -281,7 +281,7 @@ public class  InstructionsSqlite {
     public static final String CREATE_TABLE_Property_Product = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_PROPERTY_PRODUCT + " (" +
             "Id INTEGER PRIMARY KEY ," +
             "Name TEXT," +
-            "Name INTEGER" +
+            "Type INTEGER" +
             ");";
 
 
