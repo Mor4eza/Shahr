@@ -27,7 +27,7 @@ public class HTTPGetProductpropertiesJson extends AsyncTask<String,Void,Integer>
 {
     private static Context context;
     FieldDataBase fdb=new FieldDataBase();
-    private static String url_productproperty="http://test.shahrma.com/api/ApiGiveProduct?Id=";
+    private static String url_productproperty="";
     Integer errorCode=0;
 
     List<Integer> selectMemberId =new ArrayList<>();
@@ -64,7 +64,7 @@ public class HTTPGetProductpropertiesJson extends AsyncTask<String,Void,Integer>
 
     public void setProductId(Integer productId)
     {
-        url_productproperty=url_productproperty+productId;
+        url_productproperty="http://test.shahrma.com/api/ApiGiveProduct?Id="+productId;
     }
 
     private String getUrl_productproperty()
