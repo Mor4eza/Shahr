@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBase;
 import com.ariana.shahre_ma.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,7 @@ public class Product_List_Adapter extends RecyclerView.Adapter<Product_List_Adap
                  nature.setName(fieldDataBase.getName_Product().get(i));
                  nature.setmPrice(fieldDataBase.getprice_Product().get(i));
                  nature.setId(fieldDataBase.getId_Product().get(i));
+                 nature.setImageName(fieldDataBase.getImage_Product().get(i));
                  nature.setThumbnail(R.drawable.img_not_found);
                  mItems.add(nature);
              }
@@ -61,6 +63,9 @@ public class Product_List_Adapter extends RecyclerView.Adapter<Product_List_Adap
         viewHolder.tvDesNature.setText(nature.getmPrice().toString());
         viewHolder.tvDesNature.setTag(nature.getId());
         viewHolder.imgThumbnail.setImageResource(nature.getThumbnail());
+        String image_url_1;
+        image_url_1 = "http://www.shahrma.com/image/business/" + nature.getImageName();
+        Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(viewHolder.imgThumbnail);
     }
 
     @Override

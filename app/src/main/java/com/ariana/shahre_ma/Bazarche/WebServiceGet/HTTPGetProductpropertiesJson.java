@@ -41,6 +41,9 @@ public class HTTPGetProductpropertiesJson extends AsyncTask<String,Void,Integer>
     List<Boolean> selectAdaptive =new ArrayList<>();
     List<String>  selectDescription =new ArrayList<>();
     List<String>  selectImage =new ArrayList<>();
+    List<String>  selectImage2 =new ArrayList<>();
+    List<String>  selectImage3=new ArrayList<>();
+    List<String>  selectImage4=new ArrayList<>();
     List<String>  selectPhone =new ArrayList<>();
     List<String>  selectMobile =new ArrayList<>();
     List<String>  selectAddress =new ArrayList<>();
@@ -130,6 +133,9 @@ public class HTTPGetProductpropertiesJson extends AsyncTask<String,Void,Integer>
                 selectAdaptive.add(area.getBoolean("Adaptive"));
                 selectDescription.add(area.getString("Description"));
                 selectImage.add(area.getString("Image"));
+                selectImage2.add(area.getString("Image2"));
+                selectImage3.add(area.getString("Image3"));
+                selectImage4.add(area.getString("Image4"));
                 selectPhone.add(area.getString("Phone"));
                 selectMobile.add(area.getString("Mobile"));
                 selectAddress.add(area.getString("Address"));
@@ -159,6 +165,9 @@ public class HTTPGetProductpropertiesJson extends AsyncTask<String,Void,Integer>
             fdb.setAdaptive__Product(selectAdaptive);
             fdb.setDescription_Product(selectDescription);
             fdb.setImage_Product(selectImage);
+            fdb.setImage_Product2(selectImage2);
+            fdb.setImage_Product3(selectImage3);
+            fdb.setImage_Product4(selectImage4);
             fdb.setPhone__Product(selectPhone);
             fdb.setMobile_Product(selectMobile);
             fdb.setAddress_Product(selectAddress);

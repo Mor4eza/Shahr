@@ -1,10 +1,8 @@
 package com.ariana.shahre_ma.Bazarche.WebServicePost;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -119,6 +117,7 @@ public class HTTPPostProductJson extends AsyncTask<String ,Long,Integer>
             if(integer==1)
             {
                     fc.SetBusiness_Id(response_message);
+                    Log.i("response_message",fc.GetBusiness_Id().toString());
                     fc.SetType(2);
                     pd.dismiss();
 

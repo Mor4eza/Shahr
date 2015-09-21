@@ -21,6 +21,9 @@ public class FieldDataBase
     static List<Boolean> Adaptive_Product =new ArrayList<>();
     static List<String> Description_Product =new ArrayList<>();
     static List<String> Image_Product =new ArrayList<>();
+    static List<String> Image_Product2 =new ArrayList<>();
+    static List<String> Image_Product3=new ArrayList<>();
+    static List<String> Image_Product4=new ArrayList<>();
     static List<String> Phone__Product =new ArrayList<>();
     static List<String> Mobile_Product =new ArrayList<>();
     static List<String> Address_Product =new ArrayList<>();
@@ -60,6 +63,9 @@ public class FieldDataBase
     public void setAdaptive__Product(List<Boolean> adaptive){this.Adaptive_Product=adaptive;}
     public void setDescription_Product(List<String> description){this.Description_Product=description;}
     public void setImage_Product(List<String> image){this.Image_Product=image;}
+    public void setImage_Product2(List<String> image2){this.Image_Product2=image2;}
+    public void setImage_Product3(List<String> image3){this.Image_Product3=image3;}
+    public void setImage_Product4(List<String> image4){this.Image_Product4=image4;}
     public void setPhone__Product(List<String> phone){this.Phone__Product=phone;}
     public void setMobile_Product(List<String> mobile){this.Mobile_Product=mobile;}
     public void setAddress_Product(List<String> address){this.Address_Product=address;}
@@ -79,6 +85,9 @@ public class FieldDataBase
     public List<Boolean> getAdaptive_Product(){return this.Adaptive_Product;}
     public List<String> getDescription_Product(){return this.Description_Product;}
     public List<String> getImage_Product(){return this.Image_Product;}
+    public List<String> getImage_Product2(){return this.Image_Product2;}
+    public List<String> getImage_Product3(){return this.Image_Product3;}
+    public List<String> getImage_Product4(){return this.Image_Product4;}
     public List<String> getPhone_Product(){return this.Phone__Product;}
     public List<String> getMobile_Product(){return this.Mobile_Product;}
     public List<String> getAddress_Product(){return this.Address_Product;}

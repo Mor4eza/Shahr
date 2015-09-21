@@ -4,11 +4,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.Cursor;
+import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,13 +15,13 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductpropertiesJson;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBase;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessImageJson;
-import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductpropertiesJson;
 import com.squareup.picasso.Picasso;
 
 public class product_Details extends ActionBarActivity {
@@ -45,7 +43,7 @@ public class product_Details extends ActionBarActivity {
     ImageView img4;
     RelativeLayout rel_desc,Rel_com;
     ProgressBar progressBar_product;
-    String urlImage[]=new String[2];
+    String urlImage[]=new String[4];
 
     DataBaseSqlite db=new DataBaseSqlite(this);
     FieldDataBase fieldDataBase=new FieldDataBase();
@@ -114,7 +112,7 @@ public class product_Details extends ActionBarActivity {
 
     private void LoadData()
     {
-       try {
+
             String adaptive="";
             for (int i = 0; i < fieldDataBase.getName_Product().size(); i++)
             {
@@ -125,6 +123,11 @@ public class product_Details extends ActionBarActivity {
                 email.setText("ایمیل: "+fieldDataBase.getEmail_Product().get(i));
                 address.setText("آدرس: " + fieldDataBase.getAddress_Product().get(i));
                 name.setText(fieldDataBase.getName_Product().get(i));
+                ///images
+                urlImage[0]=fieldDataBase.getImage_Product().get(i);
+                urlImage[1]=fieldDataBase.getImage_Product2().get(i);
+                urlImage[2]=fieldDataBase.getImage_Product3().get(i);
+                urlImage[3]=fieldDataBase.getImage_Product4().get(i);
 
                 if (fieldDataBase.getAdaptive_Product().get(i)){
                     adaptive="(توافقی)";
@@ -143,10 +146,10 @@ public class product_Details extends ActionBarActivity {
                         details1.setText(details1.getText() + "\n\n" + query.getPropertyName(fieldDataBase.getPropertyId_Product().get(h)) + " : " + (fieldDataBase.getValue_Product().get(h)));
                     else
                         details1.setText(details1.getText() + "\n\n" + query.getPropertyName(fieldDataBase.getPropertyId_Product().get(h)) + " : " +namevalue);
-
+                LoadImage();
                 }
             }
-        } catch (Exception e) {}
+
 
     }
 
@@ -154,24 +157,10 @@ public class product_Details extends ActionBarActivity {
     {
         try
         {
-            int i=0;
-            Cursor rows=db.select_BusinessImage(fc.GetProductId());
-            if(rows.moveToFirst())
-            {
-                do
-                {
-                    urlImage[i]="http://www.shahrma.com/image/business/"+rows.getString(2);
-                    Log.i("AddressImage",urlImage[i]);
-                    i++;
-
-                }while (rows.moveToNext());
-            }
-
-
-            Picasso.with(this).load(urlImage[0]).into(img2);
-            Picasso.with(this).load(urlImage[1]).into(img3);
-            Picasso.with(this).load(urlImage[2]).into(img4);
-
+            Picasso.with(this).load("http://www.shahrma.com/image/business/" + urlImage[0]).placeholder(R.drawable.pooshak).into(img1);
+            Picasso.with(this).load("http://www.shahrma.com/image/business/" + urlImage[1]).placeholder(R.drawable.img_not_found).into(img2);
+            Picasso.with(this).load("http://www.shahrma.com/image/business/" + urlImage[2]).placeholder(R.drawable.img_not_found).into(img3);
+            Picasso.with(this).load("http://www.shahrma.com/image/business/" + urlImage[3]).placeholder(R.drawable.img_not_found).into(img4);
         }
         catch (Exception e)
         {
