@@ -66,7 +66,8 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="قیمت"
+                android:hint="قیمت(تومان)"
+                android:digits="0123456789-"
                 android:id="@+id/add_product_price"
                 android:inputType="numberDecimal" />
 

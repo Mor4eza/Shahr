@@ -114,7 +114,8 @@ public class product_Details extends ActionBarActivity {
 
     private void LoadData()
     {
-       // try {
+       try {
+            String adaptive="";
             for (int i = 0; i < fieldDataBase.getName_Product().size(); i++)
             {
                 phone.setText("تلفن: "+fieldDataBase.getMobile_Product().get(i));
@@ -124,7 +125,13 @@ public class product_Details extends ActionBarActivity {
                 email.setText("ایمیل: "+fieldDataBase.getEmail_Product().get(i));
                 address.setText("آدرس: " + fieldDataBase.getAddress_Product().get(i));
                 name.setText(fieldDataBase.getName_Product().get(i));
-                price.setText("قیمت: "+String.valueOf(fieldDataBase.getprice_Product().get(i)));
+
+                if (fieldDataBase.getAdaptive_Product().get(i)){
+                    adaptive="(توافقی)";
+                }else{
+                    adaptive="(مقطوع)";
+                }
+                price.setText(String.valueOf(fieldDataBase.getprice_Product().get(i))+adaptive);
                 for (int h= 0; h < fieldDataBase.getPropertyId_Product().size(); h++) {
                     String namevalue ="";
                     namevalue=query.getValueName(Integer.parseInt(fieldDataBase.getValue_Product().get(h).replaceAll("[\\D]","0")));
@@ -136,11 +143,7 @@ public class product_Details extends ActionBarActivity {
 
                 }
             }
-        //}
-      /*  catch (Exception e)
-        {
-
-        }*/
+        } catch (Exception e) {}
 
     }
 
