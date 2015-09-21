@@ -96,6 +96,7 @@ public class add_product extends ActionBarActivity {
 
         //Radio Group
 
+        //tv_product_price.addTextChangedListener(new MoneyTextWatcher(tv_product_price));
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
