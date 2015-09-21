@@ -85,10 +85,15 @@ public class Product_List_Adapter extends RecyclerView.Adapter<Product_List_Adap
 
                 @Override
                 public void onClick(View v) {
+                    fc.SetProductId(Integer.valueOf(String.valueOf(tvDesNature.getTag())));
+                    Intent i=new Intent(context, product_Details.class);
+                    context.startActivity(i);
 
-                    Log.i("ON_______CLICK", tvDesNature.getTag().toString());
-
-
+                }
+            });
+            imgThumbnail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     fc.SetProductId(Integer.valueOf(String.valueOf(tvDesNature.getTag())));
                     Intent i=new Intent(context, product_Details.class);
                     context.startActivity(i);
