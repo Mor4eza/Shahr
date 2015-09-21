@@ -3,10 +3,11 @@ package com.ariana.shahre_ma.Bazarche.WebServiceGet;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 
-import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
-import com.ariana.shahre_ma.Settings.KeySettings;
+import com.ariana.shahre_ma.Bazarche.Product_List;
+import com.ariana.shahre_ma.Bazarche.Product_List_Adapter;
+import com.ariana.shahre_ma.Fields.FieldDataBase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,31 +18,44 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by ariana on 9/5/2015.
+ * Created by ariana on 9/20/2015.
  */
-public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
+public class HTTPGetFilterProductJson  extends AsyncTask<String,Void,Integer>
 {
-    private static final String url_subsetproduct="http://test.shahrma.com/api/apigiveProperty";
-
-    /*   FieldDataBase fieldDataBase=new FieldDataBase();
-       List<Integer> selectId =new ArrayList<>();
-       List<String>  selectName =new ArrayList<>();
-       List<Integer>  selectCollectionId =new ArrayList<>();*/
+    private static Context context;
+    FieldDataBase fdb=new FieldDataBase();
+    private String url_filter_product="";
     Integer errorCode=0;
-    Integer Id[];
-    String propertyname[];
-    Integer type[];
+
+    List<Integer> selectId =new ArrayList<>();
+    List<String>  selectName =new ArrayList<>();
+    List<Double>  selectPrice =new ArrayList<>();
+    List<Boolean> selectAdaptive =new ArrayList<>();
+    List<String>  selectImage =new ArrayList<>();
+
+
+
+    public  void setUrl_filter_product()
+    {
+        url_filter_product="";
+        Log.i("url", url_filter_product);
+    }
+
+    private String getUrl_product()
+    {
+        return  url_filter_product;
+    }
     Integer len;
 
-
-    private static Context context;
     /**
      *
      * @param c
      */
-    public HTTPGetProductPropertyJson(Context c) {
+    public HTTPGetFilterProductJson(Context c) {
         context = c;
     }
 
@@ -53,9 +67,7 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
     protected Integer doInBackground(String... args) {
         Integer result=0;
         try {
-
-
-            InputStream jsonStream = getStreamFromURL(url_subsetproduct, "GET");
+            InputStream jsonStream = getStreamFromURL(getUrl_product(), "GET");
             String jsonString = streamToString(jsonStream);
             parseJSON(jsonString);
             result=1;
@@ -70,22 +82,11 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
 
     @Override
     protected void onPostExecute(Integer result) {
-        try {
-            if(result==1) {
+        try
+        {
+            if(result==1)
+            {
 
-                    KeySettings setting=new KeySettings(context);
-                    if(len>0)
-                    {
-                        AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
-                        DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
-                        adb.delete_Property_Product();
-
-                        for (int i = 0; i < len; i++)
-                        {
-                            ddb.Add_Property_Product(Id[i], propertyname[i],type[i]);
-
-                        }
-                    }
             }
             else
             {
@@ -98,24 +99,33 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
 
 
     void parseJSON(String JSONString) {
+
+        Integer ii = 0;
         try {
 
             JSONArray areas = new JSONArray(JSONString);
-            Log.i("JSONProductProperty", JSONString);
-
-            Id=new Integer[areas.length()];
-            propertyname=new String[areas.length()];
-            type=new Integer[areas.length()];
+            Log.i("JSONProduct", JSONString);
             len=areas.length();
             for (int i = 0; i < areas.length(); i++) {
 
                 JSONObject area = areas.getJSONObject(i);
-                Id[i]=area.getInt("Id");
-                propertyname[i]=area.getString("Name");
+
+                selectId.add(area.getInt("Id"));
+                selectName.add(area.getString("Name"));
+                selectPrice.add(area.getDouble("Price"));
+                selectAdaptive.add(area.getBoolean("Adaptive"));
+                selectImage.add(area.getString("Image"));
 
             }
 
+            fdb.setId_Product(selectId);
+            fdb.setName_Product(selectName);
+            fdb.setPrice_Product(selectPrice);
+            fdb.setAdaptive__Product(selectAdaptive);
+            fdb.setImage_Product(selectImage);
+
         } catch (JSONException e) {
+
         }
     }
 
@@ -165,4 +175,5 @@ public class HTTPGetProductPropertyJson extends AsyncTask<String,Void,Integer>
 
         return result;
     }
+
 }

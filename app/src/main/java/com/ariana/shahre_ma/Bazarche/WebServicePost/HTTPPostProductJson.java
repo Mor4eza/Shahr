@@ -119,6 +119,7 @@ public class HTTPPostProductJson extends AsyncTask<String ,Long,Integer>
             if(integer==1)
             {
                     fc.SetBusiness_Id(response_message);
+                    fc.SetType(2);
                     pd.dismiss();
 
                   ((Activity)context).finish();

@@ -346,8 +346,6 @@ public class SqliteTOjson {
                 JSONObject json = new JSONObject();
                 json.put("PropertyId", propertyid.get(i));
                 json.put("ProductId", 0);
-                json.put("type", 1);
-
                 if(valueid.get(i).equals(0)) {
                     json.put("Value", valuetext.get(i));
                     Log.i("valuetext", String.valueOf(valuetext.get(i)));

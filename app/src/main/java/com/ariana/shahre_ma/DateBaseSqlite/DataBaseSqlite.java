@@ -150,7 +150,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.close();
     }
 
-    public void Add_Property_Product(Integer id, String propertyname) {
+    public void Add_Property_Product(Integer id, String propertyname,Integer type) {
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -159,6 +159,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         ContentValues values = new ContentValues();
         values.put(InstructionsSqlite.ID_PROPERTY_PRODUCT, id);
         values.put(InstructionsSqlite.NAME_PROPERTY_PRODUCT, propertyname);
+        values.put(InstructionsSqlite.Type_PROPERTY_PRODUCT, propertyname);
 
         // 3. insert
         db.insert(InstructionsSqlite.TABLE_NAME_PROPERTY_PRODUCT,null,values);

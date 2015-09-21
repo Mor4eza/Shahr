@@ -435,22 +435,6 @@
                 android:inputType="textPersonName" />
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
-
-        <com.wrapp.floatlabelededittext.FloatLabeledEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            >
-            <EditText
-                android:id="@+id/add_product_property"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="خصوصیات کالا"
-
-                android:inputType="textPersonName" />
-        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
-
-
         <LinearLayout
             android:id="@+id/linear_Tamas"
             android:layout_marginTop="10dp"
@@ -504,21 +488,6 @@
             android:gravity="right"
             >
             <EditText
-                android:id="@+id/add_product_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="موبایل"
-                android:singleLine="true"
-                android:inputType="phone"
-                />
-        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
-
-        <com.wrapp.floatlabelededittext.FloatLabeledEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            >
-            <EditText
                 android:id="@+id/add_product_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -544,22 +513,6 @@
                 android:inputType="textPersonName"
                 />
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
-
-        <com.wrapp.floatlabelededittext.FloatLabeledEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <AutoCompleteTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="زیر گروه"
-                android:id="@+id/ac_product_subset"
-                android:inputType="textPersonName"
-                android:singleLine="true"
-                android:completionThreshold="1"
-                android:imeOptions="actionNext"/>
-        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
-
 
         <com.wrapp.floatlabelededittext.FloatLabeledEditText
             android:layout_width="match_parent"

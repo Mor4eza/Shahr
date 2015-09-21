@@ -117,7 +117,7 @@ public class product_Details extends ActionBarActivity {
        // try {
             for (int i = 0; i < fieldDataBase.getName_Product().size(); i++)
             {
-                phone.setText("تلفن: "+fieldDataBase.getMobile_Product().get(i));
+                phone.setText("تلفن: "+fieldDataBase.getPhone_Product().get(i));
                 date.setText("تاریخ: "+fieldDataBase.getDate_Product().get(i));
                 description.setText("توضیحات: "+fieldDataBase.getDescription_Product().get(i));
                 property.setText("خصوصیات: "+fieldDataBase.getProperty_Product().get(i));
@@ -127,6 +127,9 @@ public class product_Details extends ActionBarActivity {
                 price.setText("قیمت: "+String.valueOf(fieldDataBase.getprice_Product().get(i)));
                 for (int h= 0; h < fieldDataBase.getPropertyId_Product().size(); h++) {
                     String namevalue ="";
+                    if(fieldDataBase.getValue_Product().get(h).equals(""))
+                        namevalue="وارد نشده";
+                        else
                     namevalue=query.getValueName(Integer.parseInt(fieldDataBase.getValue_Product().get(h).replaceAll("[\\D]","0")));
 
                     if(namevalue.equals("") || namevalue.equals("null") || namevalue.equals(null))

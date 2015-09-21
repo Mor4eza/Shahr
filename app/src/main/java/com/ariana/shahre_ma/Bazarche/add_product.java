@@ -24,6 +24,7 @@ import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldDataBase;
+import com.ariana.shahre_ma.MessageDialog;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
@@ -39,10 +40,8 @@ public class add_product extends ActionBarActivity {
     EditText tv_product_name;
     EditText tv_product_price;
     EditText tv_product_tell;
-    EditText tv_product_mobile;
     EditText tv_product_email;
     EditText tv_product_desc;
-    EditText tv_product_property;
     EditText tv_product_address;
     Spinner  Sp_collection;
     Spinner  Sp_subset;
@@ -51,7 +50,6 @@ public class add_product extends ActionBarActivity {
     Spinner  Sp_val1,Sp_val2,Sp_val3,Sp_val4,Sp_val5,Sp_val6,Sp_val7,Sp_val8;
     FloatLabeledEditText float1,float2,float3,float4,float5,float6,float7,float8;
     EditText et_prop1,et_prop2,et_prop3,et_prop4,et_prop5,et_prop6,et_prop7,et_prop8;
-    AutoCompleteTextView tv_product_subset;
     AutoCompleteTextView tv_product_city;
     AutoCompleteTextView tv_product_area;
     CheckBox cb_adaptive_product;
@@ -85,6 +83,8 @@ public class add_product extends ActionBarActivity {
     List<String> namevalue;
     List<String> nameProperty;
 
+    MessageDialog messageDialog=new MessageDialog(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,7 +92,6 @@ public class add_product extends ActionBarActivity {
         initViews();
 
         GetNameCity();
-        GetNameSubset();
         GetNameCollection();
 
         //Radio Group
@@ -182,12 +181,10 @@ public class add_product extends ActionBarActivity {
            name=tv_product_name.getText().toString();
            price=Double.parseDouble(tv_product_price.getText().toString());
            tell=tv_product_tell.getText().toString();
-           mobile=tv_product_mobile.getText().toString();
            email=tv_product_email.getText().toString();
            descripction=tv_product_desc.getText().toString();
-           property=tv_product_property.getText().toString();
            address=tv_product_address.getText().toString();
-           subsetid=query.getsubsetProductID(tv_product_subset.getText().toString());
+           subsetid=query.getsubsetProductID(Sp_subset.getSelectedItem().toString());
            areaid= query.getAreaID(tv_product_area.getText().toString());
            Log.i("areaid",String.valueOf(query.getAreaID(tv_product_area.getText().toString())));
            Log.i("areaname",String.valueOf(tv_product_area.getText().toString()));
@@ -197,107 +194,115 @@ public class add_product extends ActionBarActivity {
           if(net.checkInternetConnection())
           {
 
-              if(_enable1)
+              if(tv_product_name.getText().length()==0)
               {
-                  valuetext.add("");
-                  Log.i("vlaueID",String.valueOf(query.getValueId(Sp_val1.getSelectedItem().toString())));
-                  valueid.add(query.getValueId(Sp_val1.getSelectedItem().toString()));// spineer 1
+                  messageDialog.ShowMessage("پیام","نام کالا را وارد کنید","باشه","false");
               }
-              else {
-
-                  valuetext.add(et_prop1.getText().toString()); // edit text 1
-                  valueid.add(0);
+              else if(tv_product_price.getText().length()==0){
+                  messageDialog.ShowMessage("پیام","قیمت را وارد کنید","باشه","false");
               }
-
-              if(_enable2) {
-                  valuetext.add("");
-                  Log.i("vlaueID",String.valueOf(query.getValueId(Sp_val2.getSelectedItem().toString())));
-                  valueid.add(query.getValueId(Sp_val2.getSelectedItem().toString())); // spineer 2
+              else if(tv_product_price.getText().toString().substring(0,1).equals("0")){
+                  messageDialog.ShowMessage("پیام","قیمت وارد شده صحیح نیست","باشه","false");
               }
-              else{
-                  valuetext.add(et_prop2.getText().toString()); // edit text 2
-                  valueid.add(0);
-                 }
-
-
-              if(_enable3) {
-                  valuetext.add("");
-                  Log.i("vlaueID",String.valueOf(query.getValueId(Sp_val3.getSelectedItem().toString())));
-                  valueid.add(query.getValueId(Sp_val3.getSelectedItem().toString())); // spineer 3
+              else if(subsetid==0){
+                  messageDialog.ShowMessage("پیام","زیر گروه را انتخاب کنید","باشه","false");
               }
-              else {
-
-                  valuetext.add(et_prop3.getText().toString()); // edit text 3
-                  valueid.add(0);
+              else if(tv_product_email.getText().equals("") && tv_product_tell.getText().equals("")){
+                  messageDialog.ShowMessage("پیام","ایمیل یا شماره تلفن را وارد کنید","باشه","false");
+              }
+              else  if(areaid==0){
+                  messageDialog.ShowMessage("پیام","منطقه و شهر خود را انتخاب کنید","باشه","false");
               }
 
-              if(_enable4) {
-                  valuetext.add("");
-                  Log.i("vlaueID",String.valueOf(query.getValueId(Sp_val4.getSelectedItem().toString())));
-                  valueid.add(query.getValueId(Sp_val4.getSelectedItem().toString())); // spineer 4
-              }
-              else {
-                  valuetext.add(et_prop4.getText().toString()); // edit text 4
-                  valueid.add(0);
-              }
+              else
+              {
+                  if (_enable1) {
+                      valuetext.add("");
+                      Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val1.getSelectedItem().toString())));
+                      valueid.add(query.getValueId(Sp_val1.getSelectedItem().toString()));// spineer 1
+                  } else {
+
+                      valuetext.add(et_prop1.getText().toString()); // edit text 1
+                      valueid.add(0);
+                  }
+
+                  if (_enable2) {
+                      valuetext.add("");
+                      Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val2.getSelectedItem().toString())));
+                      valueid.add(query.getValueId(Sp_val2.getSelectedItem().toString())); // spineer 2
+                  } else {
+                      valuetext.add(et_prop2.getText().toString()); // edit text 2
+                      valueid.add(0);
+                  }
 
 
-              if(_enable5) {
-                  valuetext.add("");
-                  Log.i("vlaueID",String.valueOf(query.getValueId(Sp_val5.getSelectedItem().toString())));
-                  valueid.add(query.getValueId(Sp_val5.getSelectedItem().toString()));// spineer 5
-              }
-              else{
-                  valuetext.add(et_prop5.getText().toString()); // edit text 5
-                  valueid.add(0);}
+                  if (_enable3) {
+                      valuetext.add("");
+                      Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val3.getSelectedItem().toString())));
+                      valueid.add(query.getValueId(Sp_val3.getSelectedItem().toString())); // spineer 3
+                  } else {
 
-              if(_enable6) {
-                  valuetext.add("");
-                  Log.i("vlaueID",String.valueOf(query.getValueId(Sp_val6.getSelectedItem().toString())));
-                  valueid.add(query.getValueId(Sp_val6.getSelectedItem().toString())); // spineer 6
-              }
-              else{
-                  valuetext.add(et_prop6.getText().toString()); // edit text 6
-                  valueid.add(0);}
+                      valuetext.add(et_prop3.getText().toString()); // edit text 3
+                      valueid.add(0);
+                  }
 
-              if(_enable7) {
-                  valuetext.add("");
-                  Log.i("vlaueID",String.valueOf(query.getValueId(Sp_val7.getSelectedItem().toString())));
-                  valueid.add(query.getValueId(Sp_val7.getSelectedItem().toString())); // spineer 7
-              }
-              else{
-                  valuetext.add(et_prop7.getText().toString()); // edit text 7
-                  valueid.add(0);}
-
-              if(_enable8) {
-                  valuetext.add("");
-                  Log.i("vlaueID",String.valueOf(query.getValueId(Sp_val8.getSelectedItem().toString())));
-                  valueid.add(query.getValueId(Sp_val8.getSelectedItem().toString())); // spineer 8
-              }
-              else{
-                  valuetext.add(et_prop8.getText().toString()); // edit text 8
-                  valueid.add(0);
-              }
+                  if (_enable4) {
+                      valuetext.add("");
+                      Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val4.getSelectedItem().toString())));
+                      valueid.add(query.getValueId(Sp_val4.getSelectedItem().toString())); // spineer 4
+                  } else {
+                      valuetext.add(et_prop4.getText().toString()); // edit text 4
+                      valueid.add(0);
+                  }
 
 
-              json = sqliteTOjson.ProductTOjson(query.getMemberId(), name,dt.Now(), property, price, latitude, longtiude, adaptive, descripction, tell, mobile, address, email, subsetid, areaid,valuetext,valueid,propertyid);
-              HTTPPostProductJson httpPostProductJson = new HTTPPostProductJson(this);
-              httpPostProductJson.SetProduct_Json(json);
-              httpPostProductJson.execute();
+                  if (_enable5) {
+                      valuetext.add("");
+                      Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val5.getSelectedItem().toString())));
+                      valueid.add(query.getValueId(Sp_val5.getSelectedItem().toString()));// spineer 5
+                  } else {
+                      valuetext.add(et_prop5.getText().toString()); // edit text 5
+                      valueid.add(0);
+                  }
+
+                  if (_enable6) {
+                      valuetext.add("");
+                      Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val6.getSelectedItem().toString())));
+                      valueid.add(query.getValueId(Sp_val6.getSelectedItem().toString())); // spineer 6
+                  } else {
+                      valuetext.add(et_prop6.getText().toString()); // edit text 6
+                      valueid.add(0);
+                  }
+
+                  if (_enable7) {
+                      valuetext.add("");
+                      Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val7.getSelectedItem().toString())));
+                      valueid.add(query.getValueId(Sp_val7.getSelectedItem().toString())); // spineer 7
+                  } else {
+                      valuetext.add(et_prop7.getText().toString()); // edit text 7
+                      valueid.add(0);
+                  }
+
+                  if (_enable8) {
+                      valuetext.add("");
+                      Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val8.getSelectedItem().toString())));
+                      valueid.add(query.getValueId(Sp_val8.getSelectedItem().toString())); // spineer 8
+                  } else {
+                      valuetext.add(et_prop8.getText().toString()); // edit text 8
+                      valueid.add(0);
+                  }
+
+
+                  json = sqliteTOjson.ProductTOjson(query.getMemberId(), name, dt.Now(), property, price, latitude, longtiude, adaptive, descripction, tell, mobile, address, email, subsetid, areaid, valuetext, valueid, propertyid);
+                  HTTPPostProductJson httpPostProductJson = new HTTPPostProductJson(this);
+                  httpPostProductJson.SetProduct_Json(json);
+                  httpPostProductJson.execute();
+              }
 
           }
           else
           {
-              AlertDialog alertDialog = new AlertDialog.Builder(add_product.this).create();
-              alertDialog.setTitle("اینترنت");
-              alertDialog.setMessage("اینترنت قطع می باشد .");
-              alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
-                  public void onClick(DialogInterface dialog, int which) {
-
-
-                  }
-              });
-              alertDialog.show();
+             messageDialog.ShowMessage("پیام","اینترنت قطع می باشد","باشه","false");
           }
 
       /*}catch (Exception e)
@@ -313,12 +318,9 @@ public class add_product extends ActionBarActivity {
         tv_product_name=(EditText)findViewById(R.id.add_product_name);
         tv_product_price=(EditText)findViewById(R.id.add_product_price);
         tv_product_tell=(EditText)findViewById(R.id.add_product_tell);
-        tv_product_mobile=(EditText)findViewById(R.id.add_product_phone);
         tv_product_email=(EditText)findViewById(R.id.add_product_email);
         tv_product_desc=(EditText)findViewById(R.id.add_product_desc);
-        tv_product_property=(EditText)findViewById(R.id.add_product_property);
         tv_product_address=(EditText)findViewById(R.id.add_product_address);
-        tv_product_subset=(AutoCompleteTextView)findViewById(R.id.ac_product_subset);
         tv_product_city=(AutoCompleteTextView)findViewById(R.id.ac_product_city);
         tv_product_area=(AutoCompleteTextView)findViewById(R.id.ac_product_area);
         Sp_collection = (Spinner)findViewById(R.id.sp_collection);
@@ -375,11 +377,6 @@ public class add_product extends ActionBarActivity {
 
     }
 
-
-    public void select_map(View view) {
-    }
-
-
     public void GetNameArea(String namecity)
     {
         try {
@@ -418,15 +415,15 @@ public class add_product extends ActionBarActivity {
 
     public void GetNameCity()
     {
-       // try {
+        try {
 
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, getId2());
             tv_product_city.setAdapter(adapter);
-       /* }
+        }
         catch (Exception e)
         {
-            Log.e("ExceptionSQL", e.toString());
-        }*/
+            Log.e("ExceptionCity", e.toString());
+        }
     }
     public List<String> getId2() {
 
@@ -447,37 +444,6 @@ public class add_product extends ActionBarActivity {
     }
 
 
-
-    public void GetNameSubset()
-    {
-        //try {
-
-            Log.i("subsetProduct",String.valueOf(fieldDataBase.getName_Subset().size()));
-            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,getId3());
-            tv_product_subset.setAdapter(adapter);
-      /*  }
-        catch (Exception e)
-        {
-            Log.e("ExceptionSQL", e.toString());
-        }*/
-    }
-
-
-    public List<String> getId3() {
-
-        DataBaseSqlite db=new DataBaseSqlite(this);
-        List<String> studentList = new ArrayList<String>();
-        Cursor allrows  = db.select_Subset_Product();
-        if (allrows.moveToFirst()) {
-            do {
-
-                studentList.add(allrows.getString(1));
-
-            } while (allrows.moveToNext());
-        }
-
-        return studentList;
-    }
 
     public void GetNameCollection()
     {

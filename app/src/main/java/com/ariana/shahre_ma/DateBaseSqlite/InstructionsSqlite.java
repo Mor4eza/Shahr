@@ -86,6 +86,7 @@ public class  InstructionsSqlite {
     //Propertiy Table Columns names
     public static final String ID_PROPERTY_PRODUCT="Id";
     public static final String NAME_PROPERTY_PRODUCT="Name";
+    public static final String Type_PROPERTY_PRODUCT="Type";
 
 
 
@@ -276,10 +277,11 @@ public class  InstructionsSqlite {
             ");";
 
 
-    // SQL statement to create Value_Product table
+    // SQL statement to create Property_Product table
     public static final String CREATE_TABLE_Property_Product = "CREATE TABLE  IF  NOT EXISTS " + TABLE_NAME_PROPERTY_PRODUCT + " (" +
             "Id INTEGER PRIMARY KEY ," +
-            "Name TEXT" +
+            "Name TEXT," +
+            "Name INTEGER" +
             ");";
 
 

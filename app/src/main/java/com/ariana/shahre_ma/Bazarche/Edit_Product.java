@@ -79,7 +79,7 @@ public class Edit_Product extends ActionBarActivity implements ImageView.OnClick
     {
 
         Integer i=fc.GetNumber();
-        tv_product_tell.setText(fieldDataBase.getPhone__Product().get(i));
+        tv_product_tell.setText(fieldDataBase.getPhone_Product().get(i));
         tv_product_mobile.setText(fieldDataBase.getMobile_Product().get(i));
         tv_product_desc.setText(fieldDataBase.getDescription_Product().get(i));
         tv_product_property.setText(fieldDataBase.getProperty_Product().get(i));

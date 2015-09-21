@@ -79,7 +79,7 @@ public class FieldDataBase
     public List<Boolean> getAdaptive_Product(){return this.Adaptive_Product;}
     public List<String> getDescription_Product(){return this.Description_Product;}
     public List<String> getImage_Product(){return this.Image_Product;}
-    public List<String> getPhone__Product(){return this.Phone__Product;}
+    public List<String> getPhone_Product(){return this.Phone__Product;}
     public List<String> getMobile_Product(){return this.Mobile_Product;}
     public List<String> getAddress_Product(){return this.Address_Product;}
     public List<String> getEmail_Product(){return this. Email_Product;}

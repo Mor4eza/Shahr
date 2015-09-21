@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetCollectionProductJson;
+import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetSubsetProductJson;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductJson;
 
@@ -34,6 +36,12 @@ public class Product_List extends ActionBarActivity {
         httpGetProductJson.setUrl_product(68,0,0,1);
         httpGetProductJson.execute();
         setCards();
+
+        HTTPGetSubsetProductJson httpGetSubsetProductJson=new HTTPGetSubsetProductJson(this);
+        httpGetSubsetProductJson.execute();
+
+        HTTPGetCollectionProductJson httpGetCollectionProductJson=new HTTPGetCollectionProductJson(this);
+        httpGetCollectionProductJson.execute();
 
 
     }

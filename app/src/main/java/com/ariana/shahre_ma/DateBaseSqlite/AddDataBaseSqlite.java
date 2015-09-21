@@ -43,8 +43,8 @@ public class AddDataBaseSqlite extends DataBaseSqlite{
     }
 
     @Override
-    public void Add_Property_Product(Integer id, String propertyname) {
-        super.Add_Property_Product(id, propertyname);
+    public void Add_Property_Product(Integer id, String propertyname, Integer type) {
+        super.Add_Property_Product(id, propertyname, type);
     }
 
     @Override
