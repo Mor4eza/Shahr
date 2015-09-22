@@ -1700,7 +1700,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     public  Cursor select_Property_Product(Integer propertyid)
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        return db.rawQuery("SELECT Name FROM "+ InstructionsSqlite.TABLE_NAME_PROPERTY_PRODUCT+" WHERE Id="+propertyid,null);
+        return db.rawQuery("SELECT Name,Type FROM "+ InstructionsSqlite.TABLE_NAME_PROPERTY_PRODUCT+" WHERE Id="+propertyid,null);
     }
 
     public  Cursor select_Property_Product()

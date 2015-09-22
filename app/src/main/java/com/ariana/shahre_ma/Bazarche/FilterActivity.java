@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -32,7 +33,8 @@ public class FilterActivity extends ActionBarActivity {
     Spinner  Sp_collection;
     Spinner  Sp_subset;
     EditText tv_product_name;
-    EditText et_Price;
+    EditText et_Price1;
+    EditText et_Price2;
     List<String> nameProperty;
     List<Integer> propertyid;
     List<String> namevalue;
@@ -40,12 +42,7 @@ public class FilterActivity extends ActionBarActivity {
     String json="";
     String Search="";
     Double price=0.0;
-    String tell="";
-    String mobile="";
-    String email="";
-    String descripction="";
-    String property="";
-    String address="";
+    Double price2=0.0;
     Integer subsetid=0;
     Integer cityid=0;
     Integer areaid=0;
@@ -64,13 +61,24 @@ public class FilterActivity extends ActionBarActivity {
     FloatLabeledEditText float1,float2,float3,float4,float5,float6,float7,float8;
     EditText et_prop1,et_prop2,et_prop3,et_prop4,et_prop5,et_prop6,et_prop7,et_prop8;
     Boolean _enable1=false,_enable2=false,_enable3=false,_enable4=false,_enable5=false,_enable6=false,_enable7=false,_enable8=false;
-
+    RadioGroup radioGroup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter);
         initViews();
         GetNameCollection();
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.tavafoq) {
+                    adaptive = false;
+                } else {
+                    adaptive = true;
+                }
+            }
+        });
 
         Sp_collection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -125,7 +133,9 @@ public class FilterActivity extends ActionBarActivity {
         tv_product_name=(EditText)findViewById(R.id.filter_product_name);
         Sp_collection = (Spinner)findViewById(R.id.sp_collection);
         Sp_subset = (Spinner)findViewById(R.id.sp_Subset);
-        et_Price=(EditText)findViewById(R.id.et_price1);
+        et_Price1=(EditText)findViewById(R.id.et_price1);
+        et_Price2=(EditText)findViewById(R.id.et_price2);
+        radioGroup=(RadioGroup)findViewById(R.id.radio_price);
         /////
         Sp_val1 = (Spinner)findViewById(R.id.sp_val1);
         Sp_val2 = (Spinner)findViewById(R.id.sp_val2);
@@ -179,7 +189,8 @@ public class FilterActivity extends ActionBarActivity {
      /* try
       {*/
         Search=tv_product_name.getText().toString();
-        price=Double.parseDouble(et_Price.getText().toString());
+        price=Double.parseDouble(et_Price1.getText().toString());
+        price2=Double.parseDouble(et_Price2.getText().toString());
         subsetid=query.getsubsetProductID(Sp_subset.getSelectedItem().toString());
         areaid= 165;
 
@@ -190,10 +201,10 @@ public class FilterActivity extends ActionBarActivity {
             {
                 messageDialog.ShowMessage("پیام","نام کالا را وارد کنید","باشه","false");
             }
-            else if(et_Price.getText().length()==0){
+            else if(et_Price1.getText().length()==0){
                 messageDialog.ShowMessage("پیام","قیمت را وارد کنید","باشه","false");
             }
-            else if(et_Price.getText().toString().substring(0,1).equals("0")){
+            else if(et_Price1.getText().toString().substring(0,1).equals("0")){
                 messageDialog.ShowMessage("پیام","قیمت وارد شده صحیح نیست","باشه","false");
             }
            /* else if(subsetid==0){
@@ -282,7 +293,7 @@ public class FilterActivity extends ActionBarActivity {
                 }
 
 
-                json = sqliteTOjson.FilterTOjson(Search,68, price, 1000000.0, false, subsetid,165, valuetext, valueid, propertyid);
+                json = sqliteTOjson.FilterTOjson(Search,68, price, price2, adaptive, subsetid,165, valuetext, valueid, propertyid);
                 HTTPPostFilterJson httpPostFilterJson = new HTTPPostFilterJson(this);
                 httpPostFilterJson.SetProduct_Json(json);
                 httpPostFilterJson.execute();

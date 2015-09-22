@@ -1,10 +1,9 @@
 package com.ariana.shahre_ma.Bazarche;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +19,7 @@ import android.widget.TextView;
 import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductPropertyJson;
 import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductSubsetPropertyJson;
 import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductValueJson;
+import com.ariana.shahre_ma.Bazarche.WebServicePost.HTTPPostProductJson;
 import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
@@ -28,7 +28,6 @@ import com.ariana.shahre_ma.MessageDialog;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
-import com.ariana.shahre_ma.Bazarche.WebServicePost.HTTPPostProductJson;
 import com.wrapp.floatlabelededittext.FloatLabeledEditText;
 
 import java.util.ArrayList;
@@ -82,6 +81,7 @@ public class add_product extends ActionBarActivity {
     List<Integer> propertyid;
     List<String> namevalue;
     List<String> nameProperty;
+    List<Integer> typeProperty;
 
     MessageDialog messageDialog=new MessageDialog(this);
 
@@ -449,8 +449,6 @@ public class add_product extends ActionBarActivity {
     public void GetNameCollection()
     {
        // try {
-
-            Log.i("subsetProduct",String.valueOf(fieldDataBase.getName_Subset().size()));
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,getnamecollect());
             Sp_collection.setAdapter(adapter);
       /*  }
@@ -483,7 +481,6 @@ public class add_product extends ActionBarActivity {
     {
        // try {
 
-            Log.i("subsetProduct",String.valueOf(fieldDataBase.getName_Subset().size()));
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,getnamesubset(collectionproduct));
             Sp_subset.setAdapter(adapter);
         /*}
@@ -525,14 +522,13 @@ public class add_product extends ActionBarActivity {
         Integer h=0;
         DataBaseSqlite db=new DataBaseSqlite(this);
         propertyid = new ArrayList<Integer>();
-       nameProperty = new ArrayList<>();
+        nameProperty = new ArrayList<>();
+        typeProperty=new ArrayList<Integer>();
 
         try {
         Cursor allrows  = db.select_SubsetProperty_Product(query.getsubsetProductID(namesubset));
         if (allrows.moveToFirst()) {
             do {
-
-                Log.i("SubsetProperty",String.valueOf(allrows.getInt(0)));
                 propertyid.add(allrows.getInt(0));
 
             } while (allrows.moveToNext());
@@ -545,8 +541,7 @@ public class add_product extends ActionBarActivity {
             {
                 do {
                     nameProperty.add(rows.getString(0));
-                    Log.i("Property_Product", rows.getString(0));
-
+                    typeProperty.add(rows.getInt(1));
                 }while (rows.moveToNext());
 
             }
@@ -630,34 +625,58 @@ public class add_product extends ActionBarActivity {
                         case 0:
                             float1.setVisibility(View.VISIBLE);
                             et_prop1.setHint(nameProperty.get(i));
+                            if (typeProperty.get(i)==2){
+                                et_prop1.setInputType(InputType.TYPE_CLASS_NUMBER);
+                            }
                             break;
                         case 1:
                             float2.setVisibility(View.VISIBLE);
                             et_prop2.setHint(nameProperty.get(i));
+                            if (typeProperty.get(i)==2){
+                                et_prop2.setInputType(InputType.TYPE_CLASS_NUMBER);
+                            }
                             break;
                         case 2:
                             float3.setVisibility(View.VISIBLE);
                             et_prop3.setHint(nameProperty.get(i));
+                            if (typeProperty.get(i)==2){
+                                et_prop3.setInputType(InputType.TYPE_CLASS_NUMBER);
+                            }
                             break;
                         case 3:
                             float4.setVisibility(View.VISIBLE);
                             et_prop4.setHint(nameProperty.get(i));
+                            if (typeProperty.get(i)==2){
+                                et_prop4.setInputType(InputType.TYPE_CLASS_NUMBER);
+                            }
                             break;
                         case 4:
                             float5.setVisibility(View.VISIBLE);
                             et_prop5.setHint(nameProperty.get(i));
+                            if (typeProperty.get(i)==2){
+                                et_prop5.setInputType(InputType.TYPE_CLASS_NUMBER);
+                            }
                             break;
                         case 5:
                             float6.setVisibility(View.VISIBLE);
                             et_prop6.setHint(nameProperty.get(i));
+                            if (typeProperty.get(i)==2){
+                                et_prop6.setInputType(InputType.TYPE_CLASS_NUMBER);
+                            }
                             break;
                         case 6:
                             float7.setVisibility(View.VISIBLE);
                             et_prop7.setHint(nameProperty.get(i));
+                            if (typeProperty.get(i)==2){
+                                et_prop7.setInputType(InputType.TYPE_CLASS_NUMBER);
+                            }
                             break;
                         case 7:
                             float8.setVisibility(View.VISIBLE);
                             et_prop8.setHint(nameProperty.get(i));
+                            if (typeProperty.get(i)==2){
+                                et_prop8.setInputType(InputType.TYPE_CLASS_NUMBER);
+                            }
                             break;
                     }
                 }
