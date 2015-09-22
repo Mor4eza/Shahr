@@ -18,7 +18,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.DatagramPacket;
 import java.util.List;
 
 /**
@@ -313,7 +312,7 @@ public class SqliteTOjson {
         return Sqlite_Json;
     }
 
-    // convert Member to json
+    // convert Prooduct to json
     public String ProductTOjson(Integer memberid,String name,String datetime, String property, Double price, Double latitude, Double longtiude, Boolean adaptive, String description,String phone,String mobile,String address,String email,Integer subsetid, Integer areaid,List<String> valuetext,List<Integer> valueid,List<Integer> propertyid) {
         String field_Json = "";
         try {
@@ -368,6 +367,54 @@ public class SqliteTOjson {
         return field_Json;
 
     }
+    //Filter TO JSon
+    public String FilterTOjson(String search,Integer CityId, Double price1,Double price2, Boolean adaptive,Integer subsetid, Integer areaid,List<String> valuetext,List<Integer> valueid,List<Integer> propertyid) {
+        String field_Json = "";
+        try {
+
+            // JSONobject get key/value convert to json
+            JSONObject rowObject = new JSONObject();
+
+            JSONArray array=new JSONArray();
+
+            rowObject.put("Search", search);
+            rowObject.put("Price1", price1);
+            rowObject.put("Price2", price2);
+            rowObject.put("Adaptive", adaptive);
+            rowObject.put("ProductSubsetId", subsetid);
+            rowObject.put("AreaId", areaid);
+            rowObject.put("CityId", CityId);
+            Log.i("valueSize", String.valueOf(valueid.size()));
+            Log.i("valuestextsize", String.valueOf(valuetext.size()));
+            for(int i=0;i<propertyid.size();i++)
+            {
+                JSONObject json = new JSONObject();
+                json.put("PropertyId", propertyid.get(i));
+                json.put("ProductId", 0);
+                if(valueid.get(i).equals(0)) {
+                    json.put("Value", valuetext.get(i));
+                    Log.i("valuetext", String.valueOf(valuetext.get(i)));
+                }
+                else {
+                    json.put("Value", valueid.get(i));
+                }
+                array.put(json);
+
+            }
+            Log.i("jsonSendProduct",array.toString());
+            rowObject.put("ProductProperties",array);
+            // array.put(rowObject);
+
+            field_Json = rowObject.toString();
+
+        } catch (Exception e) {
+            Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
+        }
+        return field_Json;
+
+    }
+
+
 
 
     private void writeToFile(String Json) {

@@ -93,6 +93,7 @@ public class FieldClass
     private static Boolean ShowNotification=false;
     private static Boolean SearchOffline=false;
     private static Boolean SearchOnlinee=false;
+    private static Boolean FilterProduct=false;
     private static Integer ShowNotificationId;
 
     private static Double curLatitude=0.0;
@@ -620,6 +621,13 @@ public class FieldClass
     }
     public Boolean GetSearchOnline(){
         return  SearchOnlinee;
+    }
+
+    public void SetFilterProduct(Boolean filter){
+        FilterProduct=filter;
+    }
+    public Boolean GetFilterProduct(){
+        return  FilterProduct;
     }
 
     public void SetcurLatitude(Double lat){

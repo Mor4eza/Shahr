@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.Bazarche;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -12,11 +13,14 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.ariana.shahre_ma.Bazarche.WebServicePost.HTTPPostFilterJson;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldDataBase;
+import com.ariana.shahre_ma.MessageDialog;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
+import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
 import com.wrapp.floatlabelededittext.FloatLabeledEditText;
 
 import java.util.ArrayList;
@@ -28,10 +32,29 @@ public class FilterActivity extends ActionBarActivity {
     Spinner  Sp_collection;
     Spinner  Sp_subset;
     EditText tv_product_name;
+    EditText et_Price;
     List<String> nameProperty;
     List<Integer> propertyid;
     List<String> namevalue;
-
+    SqliteTOjson sqliteTOjson=new SqliteTOjson(this);
+    String json="";
+    String Search="";
+    Double price=0.0;
+    String tell="";
+    String mobile="";
+    String email="";
+    String descripction="";
+    String property="";
+    String address="";
+    Integer subsetid=0;
+    Integer cityid=0;
+    Integer areaid=0;
+    Double latitude=0.0;
+    Double longtiude=0.0;
+    Boolean adaptive=true;
+    List<Integer> valueid = new ArrayList<>();
+    List<String> valuetext=new ArrayList<>();
+    MessageDialog messageDialog=new MessageDialog(this);
     Query query=new Query(this);
     NetState net=new NetState(this);
     FieldDataBase fieldDataBase=new FieldDataBase();
@@ -99,9 +122,10 @@ public class FilterActivity extends ActionBarActivity {
     public void initViews(){
 
         /////
-        tv_product_name=(EditText)findViewById(R.id.add_product_name);
+        tv_product_name=(EditText)findViewById(R.id.filter_product_name);
         Sp_collection = (Spinner)findViewById(R.id.sp_collection);
         Sp_subset = (Spinner)findViewById(R.id.sp_Subset);
+        et_Price=(EditText)findViewById(R.id.et_price1);
         /////
         Sp_val1 = (Spinner)findViewById(R.id.sp_val1);
         Sp_val2 = (Spinner)findViewById(R.id.sp_val2);
@@ -148,12 +172,134 @@ public class FilterActivity extends ActionBarActivity {
         float6= (FloatLabeledEditText) findViewById(R.id.float6);
         float7= (FloatLabeledEditText) findViewById(R.id.float7);
         float8= (FloatLabeledEditText) findViewById(R.id.float8);
-
-
-
     }
 
 
+    public void filter(View view) {
+     /* try
+      {*/
+        Search=tv_product_name.getText().toString();
+        price=Double.parseDouble(et_Price.getText().toString());
+        subsetid=query.getsubsetProductID(Sp_subset.getSelectedItem().toString());
+        areaid= 165;
+
+        if(net.checkInternetConnection())
+        {
+
+            if(tv_product_name.getText().length()==0)
+            {
+                messageDialog.ShowMessage("پیام","نام کالا را وارد کنید","باشه","false");
+            }
+            else if(et_Price.getText().length()==0){
+                messageDialog.ShowMessage("پیام","قیمت را وارد کنید","باشه","false");
+            }
+            else if(et_Price.getText().toString().substring(0,1).equals("0")){
+                messageDialog.ShowMessage("پیام","قیمت وارد شده صحیح نیست","باشه","false");
+            }
+           /* else if(subsetid==0){
+                messageDialog.ShowMessage("پیام","زیر گروه را انتخاب کنید","باشه","false");
+            }
+            else  if(areaid==0){
+                messageDialog.ShowMessage("پیام","منطقه و شهر خود را انتخاب کنید","باشه","false");
+            }*/
+
+            else
+            {
+                if (_enable1) {
+                    valuetext.add("");
+                    Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val1.getSelectedItem().toString())));
+                    valueid.add(query.getValueId(Sp_val1.getSelectedItem().toString()));// spineer 1
+                } else {
+
+                    valuetext.add(et_prop1.getText().toString()); // edit text 1
+                    valueid.add(0);
+                }
+
+                if (_enable2) {
+                    valuetext.add("");
+                    Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val2.getSelectedItem().toString())));
+                    valueid.add(query.getValueId(Sp_val2.getSelectedItem().toString())); // spineer 2
+                } else {
+                    valuetext.add(et_prop2.getText().toString()); // edit text 2
+                    valueid.add(0);
+                }
+
+
+                if (_enable3) {
+                    valuetext.add("");
+                    Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val3.getSelectedItem().toString())));
+                    valueid.add(query.getValueId(Sp_val3.getSelectedItem().toString())); // spineer 3
+                } else {
+
+                    valuetext.add(et_prop3.getText().toString()); // edit text 3
+                    valueid.add(0);
+                }
+
+                if (_enable4) {
+                    valuetext.add("");
+                    Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val4.getSelectedItem().toString())));
+                    valueid.add(query.getValueId(Sp_val4.getSelectedItem().toString())); // spineer 4
+                } else {
+                    valuetext.add(et_prop4.getText().toString()); // edit text 4
+                    valueid.add(0);
+                }
+
+
+                if (_enable5) {
+                    valuetext.add("");
+                    Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val5.getSelectedItem().toString())));
+                    valueid.add(query.getValueId(Sp_val5.getSelectedItem().toString()));// spineer 5
+                } else {
+                    valuetext.add(et_prop5.getText().toString()); // edit text 5
+                    valueid.add(0);
+                }
+
+                if (_enable6) {
+                    valuetext.add("");
+                    Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val6.getSelectedItem().toString())));
+                    valueid.add(query.getValueId(Sp_val6.getSelectedItem().toString())); // spineer 6
+                } else {
+                    valuetext.add(et_prop6.getText().toString()); // edit text 6
+                    valueid.add(0);
+                }
+
+                if (_enable7) {
+                    valuetext.add("");
+                    Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val7.getSelectedItem().toString())));
+                    valueid.add(query.getValueId(Sp_val7.getSelectedItem().toString())); // spineer 7
+                } else {
+                    valuetext.add(et_prop7.getText().toString()); // edit text 7
+                    valueid.add(0);
+                }
+
+                if (_enable8) {
+                    valuetext.add("");
+                    Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val8.getSelectedItem().toString())));
+                    valueid.add(query.getValueId(Sp_val8.getSelectedItem().toString())); // spineer 8
+                } else {
+                    valuetext.add(et_prop8.getText().toString()); // edit text 8
+                    valueid.add(0);
+                }
+
+
+                json = sqliteTOjson.FilterTOjson(Search,68, price, 1000000.0, false, subsetid,165, valuetext, valueid, propertyid);
+                HTTPPostFilterJson httpPostFilterJson = new HTTPPostFilterJson(this);
+                httpPostFilterJson.SetProduct_Json(json);
+                httpPostFilterJson.execute();
+            }
+
+        }
+        else
+        {
+            messageDialog.ShowMessage("پیام","اینترنت قطع می باشد","باشه","false");
+        }
+
+      /*}catch (Exception e)
+      {
+
+      }*/
+
+    }
 
     public void GetNameCollection()
     {
@@ -376,5 +522,12 @@ public class FilterActivity extends ActionBarActivity {
         catch (Exception e){}
 
         return nameProperty;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i=new Intent(this,Product_List.class);
+        startActivity(i);
+        super.onBackPressed();
     }
 }

@@ -22,7 +22,11 @@
              android:singleLine="true"
              android:inputType="textPersonName" />
 
-
+            <EditText
+                android:id="@+id/et_price1"
+                android:hint="قیمت"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
 
         <RelativeLayout
@@ -385,7 +389,7 @@
             app:cpb_textComplete="انجام شد"
             app:cpb_textError="ثبت نشد،دوباره امتحان کنید"
             app:cpb_textIdle="فیلتر"
-            android:onClick="product_save" />
+            android:onClick="filter" />
     </LinearLayout>
 
 

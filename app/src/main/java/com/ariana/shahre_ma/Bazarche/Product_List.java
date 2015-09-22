@@ -12,9 +12,10 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetCollectionProductJson;
-import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetSubsetProductJson;
-import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductJson;
+import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetSubsetProductJson;
+import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.R;
 
 import jp.wasabeef.recyclerview.animators.OvershootInLeftAnimator;
 import jp.wasabeef.recyclerview.animators.adapters.ScaleInAnimationAdapter;
@@ -25,6 +26,7 @@ public class Product_List extends ActionBarActivity {
     public static RecyclerView.Adapter Product_Adapter;
     public static ProgressBar pg;
     public static Button retry;
+    FieldClass fc=new FieldClass();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +34,15 @@ public class Product_List extends ActionBarActivity {
 
         pg=(ProgressBar)findViewById(R.id.pg_product_list);
         retry=(Button)findViewById(R.id.pl_retry);
-        HTTPGetProductJson httpGetProductJson=new HTTPGetProductJson(this);
-        httpGetProductJson.setUrl_product(68,0,0,1);
-        httpGetProductJson.execute();
+
+        if(!fc.GetFilterProduct()) {
+            HTTPGetProductJson httpGetProductJson = new HTTPGetProductJson(this);
+            httpGetProductJson.setUrl_product(68, 0, 0, 1);
+            httpGetProductJson.execute();
+        }else{
+            pg.setVisibility(View.GONE);
+            fc.SetFilterProduct(false);
+        }
         setCards();
 
         HTTPGetSubsetProductJson httpGetSubsetProductJson=new HTTPGetSubsetProductJson(this);
@@ -85,6 +93,7 @@ public class Product_List extends ActionBarActivity {
         if (id == R.id.ac_filter) {
             Intent i = new Intent(this.getApplicationContext(),FilterActivity.class);
             startActivity(i);
+            finish();
             return true;
         }
 
