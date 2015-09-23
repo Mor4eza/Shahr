@@ -368,7 +368,7 @@ public class SqliteTOjson {
 
     }
     //Filter TO JSon
-    public String FilterTOjson(String search,Integer CityId, Double price1,Double price2, Boolean adaptive,Integer subsetid, Integer areaid,List<String> valuetext,List<Integer> valueid,List<Integer> propertyid) {
+    public String FilterTOjson(String search,Integer CityId, Double price1,Double price2, Boolean adaptive,Integer subsetid, Integer areaid,List<String> valuetext,List<String> valuetext2,List<Integer> valueid,List<Integer> propertyid) {
         String field_Json = "";
         try {
 
@@ -393,7 +393,8 @@ public class SqliteTOjson {
                 json.put("ProductId", 0);
                 if(valueid.get(i).equals(0)) {
                     json.put("Value", valuetext.get(i));
-                    Log.i("valuetext", String.valueOf(valuetext.get(i)));
+                    json.put("Value2", valuetext2.get(i));
+                    Log.i("valuetext2", String.valueOf(valuetext2.get(i)));
                 }
                 else {
                     json.put("Value", valueid.get(i));

@@ -295,131 +295,265 @@
                 android:layout_marginTop="15dp"
                 />
         </RelativeLayout>
-        <com.wrapp.floatlabelededittext.FloatLabeledEditText
-            android:id="@+id/float1"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            >
+
+
+        <RelativeLayout
+        android:id="@+id/float1"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        >
+        <TextView
+            android:text="تست"
+            android:layout_alignParentRight="true"
+            android:id="@+id/tv_prop1"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/et_prop1"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint=""
+                android:layout_toLeftOf="@id/tv_prop1"
+                android:inputType="textPersonName" />
+            <EditText
+                android:id="@+id/et_prop11"
+                android:layout_marginRight="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint=""
-
+                android:layout_toLeftOf="@id/et_prop1"
                 android:inputType="textPersonName" />
-        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
-        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/float2"
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
             >
+            <TextView
+                android:text="تست"
+                android:layout_alignParentRight="true"
+                android:id="@+id/tv_prop2"
+                android:layout_marginLeft="5dp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/et_prop2"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint=""
+                android:layout_toLeftOf="@id/tv_prop2"
+                android:inputType="textPersonName" />
+            <EditText
+                android:id="@+id/et_prop22"
+                android:layout_marginRight="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint=""
-
+                android:layout_toLeftOf="@id/et_prop2"
                 android:inputType="textPersonName" />
-        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+        </RelativeLayout>
 
-        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+        <RelativeLayout
             android:id="@+id/float3"
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
             >
+            <TextView
+                android:text="تست"
+                android:layout_alignParentRight="true"
+                android:id="@+id/tv_prop3"
+                android:layout_marginLeft="5dp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/et_prop3"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint=""
+                android:layout_toLeftOf="@id/tv_prop3"
+                android:inputType="textPersonName" />
+            <EditText
+                android:id="@+id/et_prop33"
+                android:layout_marginRight="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint=""
-
+                android:layout_toLeftOf="@id/et_prop3"
                 android:inputType="textPersonName" />
-        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+        </RelativeLayout>
 
 
-        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+        <RelativeLayout
             android:id="@+id/float4"
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
             >
+            <TextView
+                android:text="تست"
+                android:layout_alignParentRight="true"
+                android:id="@+id/tv_prop4"
+                android:layout_marginLeft="5dp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/et_prop4"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint=""
+                android:layout_toLeftOf="@id/tv_prop4"
+                android:inputType="textPersonName" />
+            <EditText
+                android:id="@+id/et_prop44"
+                android:layout_marginRight="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint=""
-
+                android:layout_toLeftOf="@id/et_prop4"
                 android:inputType="textPersonName" />
-        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+        </RelativeLayout>
 
-        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+        <RelativeLayout
             android:id="@+id/float5"
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
             >
+            <TextView
+                android:text="تست"
+                android:layout_alignParentRight="true"
+                android:id="@+id/tv_prop5"
+                android:layout_marginLeft="5dp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/et_prop5"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint=""
+                android:layout_toLeftOf="@id/tv_prop5"
+                android:inputType="textPersonName" />
+            <EditText
+                android:id="@+id/et_prop55"
+                android:layout_marginRight="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint=""
+                android:layout_toLeftOf="@id/et_prop5"
                 android:inputType="textPersonName" />
-        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
-        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/float6"
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
             >
+            <TextView
+                android:text="تست"
+                android:layout_alignParentRight="true"
+                android:id="@+id/tv_prop6"
+                android:layout_marginLeft="5dp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/et_prop6"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint=""
+                android:layout_toLeftOf="@id/tv_prop6"
+                android:inputType="textPersonName" />
+            <EditText
+                android:id="@+id/et_prop66"
+                android:layout_marginRight="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint=""
-
+                android:layout_toLeftOf="@id/et_prop6"
                 android:inputType="textPersonName" />
-        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+        </RelativeLayout>
 
-        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+        <RelativeLayout
             android:id="@+id/float7"
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
             >
+            <TextView
+                android:text="تست"
+                android:layout_alignParentRight="true"
+                android:id="@+id/tv_prop7"
+                android:layout_marginLeft="5dp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/et_prop7"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint=""
+                android:layout_toLeftOf="@id/tv_prop7"
+                android:inputType="textPersonName" />
+            <EditText
+                android:id="@+id/et_prop77"
+                android:layout_marginRight="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint=""
-
+                android:layout_toLeftOf="@id/et_prop7"
                 android:inputType="textPersonName" />
-        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+        </RelativeLayout>
 
-        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+        <RelativeLayout
             android:id="@+id/float8"
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
             >
+            <TextView
+                android:text="تست"
+                android:layout_alignParentRight="true"
+                android:id="@+id/tv_prop8"
+                android:layout_marginLeft="5dp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/et_prop8"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint=""
+                android:layout_toLeftOf="@id/tv_prop8"
+                android:inputType="textPersonName" />
+            <EditText
+                android:id="@+id/et_prop88"
+                android:layout_marginRight="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint=""
+                android:layout_toLeftOf="@id/et_prop8"
                 android:inputType="textPersonName" />
-        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+        </RelativeLayout>
 
         <com.dd.CircularProgressButton
             android:id="@+id/btn_product_save"

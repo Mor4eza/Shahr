@@ -16,7 +16,6 @@ import android.widget.ProgressBar;
 import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetCollectionProductJson;
 import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductJson;
 import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetSubsetProductJson;
-import com.ariana.shahre_ma.Bazarche.WebServicePost.ProductMapsActivity;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MyProfile.Log_In;

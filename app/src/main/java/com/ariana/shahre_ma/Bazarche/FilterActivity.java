@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,7 +23,6 @@ import com.ariana.shahre_ma.MessageDialog;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
-import com.wrapp.floatlabelededittext.FloatLabeledEditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +51,8 @@ public class FilterActivity extends ActionBarActivity {
     Boolean adaptive=true;
     List<Integer> valueid = new ArrayList<>();
     List<String> valuetext=new ArrayList<>();
+    List<String> valuetext2=new ArrayList<>();
+    List<Integer> typeProperty;
     MessageDialog messageDialog=new MessageDialog(this);
     Query query=new Query(this);
     NetState net=new NetState(this);
@@ -58,8 +60,10 @@ public class FilterActivity extends ActionBarActivity {
     RelativeLayout rel_val1,rel_val2,rel_val3,rel_val4,rel_val5,rel_val6,rel_val7,rel_val8;
     TextView tv_val1,tv_val2,tv_val3,tv_val4,tv_val5,tv_val6,tv_val7,tv_val8;
     Spinner Sp_val1,Sp_val2,Sp_val3,Sp_val4,Sp_val5,Sp_val6,Sp_val7,Sp_val8;
-    FloatLabeledEditText float1,float2,float3,float4,float5,float6,float7,float8;
+    TextView tv_prop1,tv_prop2,tv_prop3,tv_prop4,tv_prop5,tv_prop6,tv_prop7,tv_prop8;
+    RelativeLayout float1,float2,float3,float4,float5,float6,float7,float8;
     EditText et_prop1,et_prop2,et_prop3,et_prop4,et_prop5,et_prop6,et_prop7,et_prop8;
+    EditText et_prop11,et_prop22,et_prop33,et_prop44,et_prop55,et_prop66,et_prop77,et_prop88;
     Boolean _enable1=false,_enable2=false,_enable3=false,_enable4=false,_enable5=false,_enable6=false,_enable7=false,_enable8=false;
     RadioGroup radioGroup;
     @Override
@@ -154,6 +158,15 @@ public class FilterActivity extends ActionBarActivity {
         et_prop6=(EditText)findViewById(R.id.et_prop6);
         et_prop7=(EditText)findViewById(R.id.et_prop7);
         et_prop8=(EditText)findViewById(R.id.et_prop8);
+        /////
+        et_prop11=(EditText)findViewById(R.id.et_prop11);
+        et_prop22=(EditText)findViewById(R.id.et_prop22);
+        et_prop33=(EditText)findViewById(R.id.et_prop33);
+        et_prop44=(EditText)findViewById(R.id.et_prop44);
+        et_prop55=(EditText)findViewById(R.id.et_prop55);
+        et_prop66=(EditText)findViewById(R.id.et_prop66);
+        et_prop77=(EditText)findViewById(R.id.et_prop77);
+        et_prop88=(EditText)findViewById(R.id.et_prop88);
         //////
         rel_val1=(RelativeLayout)findViewById(R.id.rel_val1);
         rel_val2=(RelativeLayout)findViewById(R.id.rel_val2);
@@ -174,14 +187,23 @@ public class FilterActivity extends ActionBarActivity {
         tv_val7=(TextView)findViewById(R.id.tv_val7);
         tv_val8=(TextView)findViewById(R.id.tv_val8);
         /////
-        float1= (FloatLabeledEditText) findViewById(R.id.float1);
-        float2= (FloatLabeledEditText) findViewById(R.id.float2);
-        float3= (FloatLabeledEditText) findViewById(R.id.float3);
-        float4= (FloatLabeledEditText) findViewById(R.id.float4);
-        float5= (FloatLabeledEditText) findViewById(R.id.float5);
-        float6= (FloatLabeledEditText) findViewById(R.id.float6);
-        float7= (FloatLabeledEditText) findViewById(R.id.float7);
-        float8= (FloatLabeledEditText) findViewById(R.id.float8);
+        tv_prop1=(TextView)findViewById(R.id.tv_prop1);
+        tv_prop2=(TextView)findViewById(R.id.tv_prop2);
+        tv_prop3=(TextView)findViewById(R.id.tv_prop3);
+        tv_prop4=(TextView)findViewById(R.id.tv_prop4);
+        tv_prop5=(TextView)findViewById(R.id.tv_prop5);
+        tv_prop6=(TextView)findViewById(R.id.tv_prop6);
+        tv_prop7=(TextView)findViewById(R.id.tv_prop7);
+        tv_prop8=(TextView)findViewById(R.id.tv_prop8);
+        /////
+        float1= (RelativeLayout) findViewById(R.id.float1);
+        float2= (RelativeLayout) findViewById(R.id.float2);
+        float3= (RelativeLayout) findViewById(R.id.float3);
+        float4= (RelativeLayout) findViewById(R.id.float4);
+        float5= (RelativeLayout) findViewById(R.id.float5);
+        float6= (RelativeLayout) findViewById(R.id.float6);
+        float7= (RelativeLayout) findViewById(R.id.float7);
+        float8= (RelativeLayout) findViewById(R.id.float8);
     }
 
 
@@ -219,82 +241,129 @@ public class FilterActivity extends ActionBarActivity {
 
                 if (_enable1) {
                     valuetext.add("");
+                    valuetext2.add("");
                     Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val1.getSelectedItem().toString())));
                     valueid.add(query.getValueId(Sp_val1.getSelectedItem().toString()));// spineer 1
                 } else {
-
                     valuetext.add(et_prop1.getText().toString()); // edit text 1
+                    if(et_prop11.getText().length()>0){
+                        valuetext2.add(et_prop11.getText().toString());
+                    }else{
+                        valuetext2.add("");
+                    }
                     valueid.add(0);
                 }
 
                 if (_enable2) {
                     valuetext.add("");
+                    valuetext2.add("");
                     Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val2.getSelectedItem().toString())));
                     valueid.add(query.getValueId(Sp_val2.getSelectedItem().toString())); // spineer 2
                 } else {
                     valuetext.add(et_prop2.getText().toString()); // edit text 2
+                    if(et_prop22.getText().length()>0){
+                        valuetext2.add(et_prop2.getText().toString());
+                    }else {
+                        valuetext2.add("");
+                    }
                     valueid.add(0);
                 }
 
 
                 if (_enable3) {
                     valuetext.add("");
+                    valuetext2.add("");
                     Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val3.getSelectedItem().toString())));
                     valueid.add(query.getValueId(Sp_val3.getSelectedItem().toString())); // spineer 3
                 } else {
 
                     valuetext.add(et_prop3.getText().toString()); // edit text 3
+                    if(et_prop33.getText().length()>0){
+                        valuetext2.add(et_prop33.getText().toString());
+                    }else {
+                        valuetext2.add("");
+                    }
                     valueid.add(0);
                 }
 
                 if (_enable4) {
                     valuetext.add("");
+                    valuetext2.add("");
                     Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val4.getSelectedItem().toString())));
                     valueid.add(query.getValueId(Sp_val4.getSelectedItem().toString())); // spineer 4
                 } else {
                     valuetext.add(et_prop4.getText().toString()); // edit text 4
+                    if(et_prop44.getText().length()>0){
+                        valuetext2.add(et_prop44.getText().toString());
+                    }else {
+                        valuetext2.add("");
+                    }
                     valueid.add(0);
                 }
 
 
                 if (_enable5) {
                     valuetext.add("");
+                    valuetext2.add("");
                     Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val5.getSelectedItem().toString())));
                     valueid.add(query.getValueId(Sp_val5.getSelectedItem().toString()));// spineer 5
                 } else {
                     valuetext.add(et_prop5.getText().toString()); // edit text 5
+                    if(et_prop55.getText().length()>0){
+                        valuetext2.add(et_prop55.getText().toString());
+                    }else {
+                        valuetext2.add("");
+                    }
                     valueid.add(0);
                 }
 
                 if (_enable6) {
                     valuetext.add("");
+                    valuetext2.add("");
                     Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val6.getSelectedItem().toString())));
                     valueid.add(query.getValueId(Sp_val6.getSelectedItem().toString())); // spineer 6
                 } else {
                     valuetext.add(et_prop6.getText().toString()); // edit text 6
+                    if(et_prop66.getText().length()>0){
+                        valuetext2.add(et_prop66.getText().toString());
+                    }else {
+                        valuetext2.add("");
+                    }
                     valueid.add(0);
                 }
 
                 if (_enable7) {
                     valuetext.add("");
+                    valuetext2.add("");
                     Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val7.getSelectedItem().toString())));
                     valueid.add(query.getValueId(Sp_val7.getSelectedItem().toString())); // spineer 7
                 } else {
                     valuetext.add(et_prop7.getText().toString()); // edit text 7
+                    if(et_prop77.getText().length()>0){
+                        valuetext2.add(et_prop77.getText().toString());
+                    }else {
+                        valuetext2.add("");
+                    }
                     valueid.add(0);
                 }
 
                 if (_enable8) {
                     valuetext.add("");
+                    valuetext2.add("");
                     Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val8.getSelectedItem().toString())));
                     valueid.add(query.getValueId(Sp_val8.getSelectedItem().toString())); // spineer 8
                 } else {
                     valuetext.add(et_prop8.getText().toString()); // edit text 8
+                    if(et_prop88.getText().length()>0){
+                        valuetext2.add(et_prop88.getText().toString());
+                    }else {
+                        valuetext2.add("");
+                    }
                     valueid.add(0);
                 }
 
 
-                json = sqliteTOjson.FilterTOjson(Search,68, price, price2, adaptive, subsetid,165, valuetext, valueid, propertyid);
+                json = sqliteTOjson.FilterTOjson(Search,68, price, price2, adaptive, subsetid,165, valuetext,valuetext2, valueid, propertyid);
                 HTTPPostFilterJson httpPostFilterJson = new HTTPPostFilterJson(this);
                 httpPostFilterJson.SetProduct_Json(json);
                 httpPostFilterJson.execute();
@@ -393,6 +462,7 @@ public class FilterActivity extends ActionBarActivity {
         DataBaseSqlite db=new DataBaseSqlite(this);
         propertyid = new ArrayList<Integer>();
         nameProperty = new ArrayList<>();
+        typeProperty=new ArrayList<Integer>();
 
         try {
             Cursor allrows  = db.select_SubsetProperty_Product(query.getsubsetProductID(namesubset));
@@ -412,6 +482,7 @@ public class FilterActivity extends ActionBarActivity {
                 {
                     do {
                         nameProperty.add(rows.getString(0));
+                        typeProperty.add(rows.getInt(1));
                         Log.i("Property_Product", rows.getString(0));
 
                     }while (rows.moveToNext());
@@ -496,35 +567,91 @@ public class FilterActivity extends ActionBarActivity {
                     switch (i) {
                         case 0:
                             float1.setVisibility(View.VISIBLE);
-                            et_prop1.setHint(nameProperty.get(i));
+                            tv_prop1.setText(nameProperty.get(i)+": ");
+                            if (typeProperty.get(i)==2){
+                                et_prop1.setInputType(InputType.TYPE_CLASS_NUMBER);
+                                et_prop1.setHint("از");
+                                et_prop11.setHint("تا");
+                            }else{
+                                et_prop11.setVisibility(View.GONE);
+                            }
                             break;
                         case 1:
                             float2.setVisibility(View.VISIBLE);
-                            et_prop2.setHint(nameProperty.get(i));
+                            tv_prop2.setText(nameProperty.get(i) + ": ");
+                            if (typeProperty.get(i)==2){
+                                et_prop2.setInputType(InputType.TYPE_CLASS_NUMBER);
+                                et_prop2.setHint("از");
+                                et_prop22.setHint("تا");
+                            }else{
+                                et_prop22.setVisibility(View.GONE);
+                            }
                             break;
                         case 2:
                             float3.setVisibility(View.VISIBLE);
-                            et_prop3.setHint(nameProperty.get(i));
+                            tv_prop3.setText(nameProperty.get(i) + ": ");
+                            if (typeProperty.get(i)==2){
+                                et_prop3.setInputType(InputType.TYPE_CLASS_NUMBER);
+                                et_prop3.setHint("از");
+                                et_prop33.setHint("تا");
+                            }else{
+                                et_prop33.setVisibility(View.GONE);
+                            }
                             break;
                         case 3:
                             float4.setVisibility(View.VISIBLE);
-                            et_prop4.setHint(nameProperty.get(i));
+                            tv_prop4.setText(nameProperty.get(i) + ": ");
+                            if (typeProperty.get(i)==2){
+                                et_prop4.setInputType(InputType.TYPE_CLASS_NUMBER);
+                                et_prop4.setHint("از");
+                                et_prop44.setHint("تا");
+                            }else{
+                                et_prop44.setVisibility(View.GONE);
+                            }
                             break;
                         case 4:
                             float5.setVisibility(View.VISIBLE);
-                            et_prop5.setHint(nameProperty.get(i));
+                            tv_prop5.setText(nameProperty.get(i) + ": ");
+                            if (typeProperty.get(i)==2){
+                                et_prop5.setInputType(InputType.TYPE_CLASS_NUMBER);
+                                et_prop5.setHint("از");
+                                et_prop55.setHint("تا");
+                            }else{
+                                et_prop55.setVisibility(View.GONE);
+                            }
                             break;
                         case 5:
                             float6.setVisibility(View.VISIBLE);
-                            et_prop6.setHint(nameProperty.get(i));
+                            tv_prop6.setText(nameProperty.get(i) + ": ");
+                            if (typeProperty.get(i)==2){
+                                et_prop6.setInputType(InputType.TYPE_CLASS_NUMBER);
+                                et_prop6.setHint("از");
+                                et_prop66.setHint("تا");
+                            }else{
+                                et_prop66.setVisibility(View.GONE);
+                            }
                             break;
                         case 6:
                             float7.setVisibility(View.VISIBLE);
-                            et_prop7.setHint(nameProperty.get(i));
+                            tv_prop7.setText(nameProperty.get(i) + ": ");
+                            if (typeProperty.get(i)==2){
+                                et_prop7.setInputType(InputType.TYPE_CLASS_NUMBER);
+                                et_prop7.setHint("از");
+                                et_prop77.setHint("تا");
+                            }else{
+                                et_prop77.setVisibility(View.GONE);
+                            }
                             break;
                         case 7:
                             float8.setVisibility(View.VISIBLE);
-                            et_prop8.setHint(nameProperty.get(i));
+                            tv_prop8.setText(nameProperty.get(i) + ": ");
+                            if (typeProperty.get(i)==2){
+                                et_prop8.setInputType(InputType.TYPE_CLASS_NUMBER);
+                                et_prop8.setHint("از");
+                                et_prop88.setHint("تا");
+                            }else{
+                                et_prop88.setVisibility(View.GONE);
+                            }
                             break;
                     }
                 }

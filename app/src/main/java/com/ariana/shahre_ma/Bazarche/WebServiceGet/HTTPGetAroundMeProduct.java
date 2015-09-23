@@ -1,12 +1,11 @@
 package com.ariana.shahre_ma.Bazarche.WebServiceGet;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
-import android.view.View;
 
-import com.ariana.shahre_ma.Bazarche.Product_List;
-import com.ariana.shahre_ma.Bazarche.Product_List_Adapter;
 import com.ariana.shahre_ma.Fields.FieldDataBase;
 
 import org.json.JSONArray;
@@ -28,20 +27,22 @@ public class HTTPGetAroundMeProduct extends AsyncTask<String,Void,Integer>
 {
     private static Context context;
     FieldDataBase fdb=new FieldDataBase();
-    private String url_product="http://test.shahrma.com/api/ApiGiveListProduct";
+    private String url_product="http://test.shahrma.com/api/ApiGiveNearProduct";
     Integer errorCode=0;
 
     List<Integer> selectId =new ArrayList<>();
     List<String>  selectName =new ArrayList<>();
     List<Double>  selectPrice =new ArrayList<>();
+    List<Double>  selectLat =new ArrayList<>();
+    List<Double>  selectLongt =new ArrayList<>();
     List<Boolean> selectAdaptive =new ArrayList<>();
     List<String>  selectImage =new ArrayList<>();
 
 
 
-    public  void setUrl_product(Double Lat,Double Longt)
+    public  void setUrl_product(Double Lat,Double Longt,Double distance)
     {
-        url_product="http://test.shahrma.com/api/ApiGiveProductList?page=";
+        url_product="http://test.shahrma.com/api/ApiGiveNearProduct?latitude="+Lat+"&longitude="+Longt+"&distance="+distance;
         Log.i("url", url_product);
     }
 
@@ -86,29 +87,13 @@ public class HTTPGetAroundMeProduct extends AsyncTask<String,Void,Integer>
         {
             if(result==1)
             {
-                Log.i("get", "Products");
 
-                Product_List.mRecyclerView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        Product_List_Adapter adapter = new Product_List_Adapter(context);
-                        Product_List.mRecyclerView.setAdapter(adapter);
-                        Product_List.Product_Adapter.notifyDataSetChanged();
-                        Product_List.pg.setVisibility(View.GONE);
-
-                    }
-                });
+                Intent intent = new Intent("product-near");
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
             }
             else
             {
-                Product_List.retry.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (Product_List.retry.getVisibility()==View.INVISIBLE){
-                            Product_List.retry.setVisibility(View.VISIBLE);
-                        }
-                    }
-                });
+
             }
         } catch (Exception e) {
 
@@ -133,6 +118,8 @@ public class HTTPGetAroundMeProduct extends AsyncTask<String,Void,Integer>
                 selectPrice.add(area.getDouble("Price"));
                 selectAdaptive.add(area.getBoolean("Adaptive"));
                 selectImage.add(area.getString("Image"));
+                selectLat.add(area.getDouble("Latitude"));
+                selectLongt.add(area.getDouble("Longtude"));
 
             }
 
@@ -141,6 +128,8 @@ public class HTTPGetAroundMeProduct extends AsyncTask<String,Void,Integer>
             fdb.setPrice_Product(selectPrice);
             fdb.setAdaptive__Product(selectAdaptive);
             fdb.setImage_Product(selectImage);
+            fdb.setLongtiude_Product(selectLongt);
+            fdb.setLatitude_Product(selectLat);
 
         } catch (JSONException e) {
 
