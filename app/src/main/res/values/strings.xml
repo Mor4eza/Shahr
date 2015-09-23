@@ -69,4 +69,5 @@
     <string name="title_activity_search_map">نتایج جستجو…</string>
     <string name="ac_action_filter">فیلتر</string>
     <string name="title_activity_filter">فیلتر</string>
+    <string name="title_activity_product_maps">Map</string>
 </resources>

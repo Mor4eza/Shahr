@@ -8,4 +8,10 @@
         android:id="@+id/ac_filter"
         android:title="@string/ac_action_filter"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/ac_map"
+        android:icon="@android:drawable/ic_dialog_map"
+        android:title="@string/Map"
+        app:showAsAction="always"
+        />
 </menu>

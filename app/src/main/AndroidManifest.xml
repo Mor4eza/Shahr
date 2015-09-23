@@ -338,6 +338,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ariana.shahre_ma.Bazarche.Product_List" />
         </activity>
+        <activity
+            android:name=".Bazarche.WebServicePost.ProductMapsActivity"
+            android:label="@string/title_activity_product_maps" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ariana.shahre_ma.Bazarche.Product_List" />
+        </activity>
     </application>
 
 </manifest>

@@ -186,13 +186,8 @@ public class FilterActivity extends ActionBarActivity {
 
 
     public void filter(View view) {
-     /* try
-      {*/
-        Search=tv_product_name.getText().toString();
-        price=Double.parseDouble(et_Price1.getText().toString());
-        price2=Double.parseDouble(et_Price2.getText().toString());
-        subsetid=query.getsubsetProductID(Sp_subset.getSelectedItem().toString());
-        areaid= 165;
+      try
+      {
 
         if(net.checkInternetConnection())
         {
@@ -216,6 +211,12 @@ public class FilterActivity extends ActionBarActivity {
 
             else
             {
+                Search=tv_product_name.getText().toString();
+                price=Double.parseDouble(et_Price1.getText().toString());
+                price2=Double.parseDouble(et_Price2.getText().toString());
+                subsetid=query.getsubsetProductID(Sp_subset.getSelectedItem().toString());
+                areaid= 165;
+
                 if (_enable1) {
                     valuetext.add("");
                     Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val1.getSelectedItem().toString())));
@@ -305,10 +306,10 @@ public class FilterActivity extends ActionBarActivity {
             messageDialog.ShowMessage("پیام","اینترنت قطع می باشد","باشه","false");
         }
 
-      /*}catch (Exception e)
+      }catch (Exception e)
       {
 
-      }*/
+      }
 
     }
 

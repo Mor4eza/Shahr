@@ -21,7 +21,6 @@ import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBase;
 import com.ariana.shahre_ma.R;
-import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessImageJson;
 import com.squareup.picasso.Picasso;
 
 public class product_Details extends ActionBarActivity {
@@ -59,11 +58,6 @@ public class product_Details extends ActionBarActivity {
         HTTPGetProductpropertiesJson httpGetProductPropertyJson=new HTTPGetProductpropertiesJson(this);
         httpGetProductPropertyJson.setProductId(fc.GetProductId());
         httpGetProductPropertyJson.execute();
-
-
-        HTTPGetBusinessImageJson httpGetBusinessImageJson=new HTTPGetBusinessImageJson(this);
-        httpGetBusinessImageJson.SetBusinessId(fc.GetProductId());
-        httpGetBusinessImageJson.execute();
 
 
     }
@@ -113,43 +107,46 @@ public class product_Details extends ActionBarActivity {
     private void LoadData()
     {
 
-            String adaptive="";
-            for (int i = 0; i < fieldDataBase.getName_Product().size(); i++)
-            {
-                phone.setText("تلفن: "+fieldDataBase.getPhone_Product().get(i));
-                date.setText("تاریخ: "+fieldDataBase.getDate_Product().get(i));
-                description.setText("توضیحات: "+fieldDataBase.getDescription_Product().get(i));
-                property.setText("خصوصیات: "+fieldDataBase.getProperty_Product().get(i));
-                email.setText("ایمیل: "+fieldDataBase.getEmail_Product().get(i));
+        try {
+
+            String adaptive = "";
+            for (int i = 0; i < fieldDataBase.getName_Product().size(); i++) {
+                phone.setText("تلفن: " + fieldDataBase.getPhone_Product().get(i));
+                date.setText("تاریخ: " + fieldDataBase.getDate_Product().get(i));
+                description.setText("توضیحات: " + fieldDataBase.getDescription_Product().get(i));
+                property.setText("خصوصیات: " + fieldDataBase.getProperty_Product().get(i));
+                email.setText("ایمیل: " + fieldDataBase.getEmail_Product().get(i));
                 address.setText("آدرس: " + fieldDataBase.getAddress_Product().get(i));
                 name.setText(fieldDataBase.getName_Product().get(i));
                 ///images
-                urlImage[0]=fieldDataBase.getImage_Product().get(i);
-                urlImage[1]=fieldDataBase.getImage_Product2().get(i);
-                urlImage[2]=fieldDataBase.getImage_Product3().get(i);
-                urlImage[3]=fieldDataBase.getImage_Product4().get(i);
+                urlImage[0] = fieldDataBase.getImage_Product().get(i);
+                urlImage[1] = fieldDataBase.getImage_Product2().get(i);
+                urlImage[2] = fieldDataBase.getImage_Product3().get(i);
+                urlImage[3] = fieldDataBase.getImage_Product4().get(i);
 
-                if (fieldDataBase.getAdaptive_Product().get(i)){
-                    adaptive="(توافقی)";
-                }else{
-                    adaptive="(مقطوع)";
+                if (fieldDataBase.getAdaptive_Product().get(i)) {
+                    adaptive = "(توافقی)";
+                } else {
+                    adaptive = "(مقطوع)";
                 }
-                price.setText(String.valueOf(fieldDataBase.getprice_Product().get(i))+adaptive);
-                for (int h= 0; h < fieldDataBase.getPropertyId_Product().size(); h++) {
-                    String namevalue ="";
-                    if(fieldDataBase.getValue_Product().get(h).equals(""))
-                        namevalue="وارد نشده";
-                        else
-                    namevalue=query.getValueName(Integer.parseInt(fieldDataBase.getValue_Product().get(h).replaceAll("[\\D]","0")));
+                price.setText(String.valueOf(fieldDataBase.getprice_Product().get(i)) + adaptive);
+                for (int h = 0; h < fieldDataBase.getPropertyId_Product().size(); h++) {
+                    String namevalue = "";
+                    if (fieldDataBase.getValue_Product().get(h).equals(""))
+                        namevalue = "وارد نشده";
+                    else
+                        namevalue = query.getValueName(Integer.parseInt(fieldDataBase.getValue_Product().get(h).replaceAll("[\\D]", "0")));
 
-                    if(namevalue.equals("") || namevalue.equals("null") || namevalue.equals(null))
+                    if (namevalue.equals("") || namevalue.equals("null") || namevalue.equals(null))
                         details1.setText(details1.getText() + "\n\n" + query.getPropertyName(fieldDataBase.getPropertyId_Product().get(h)) + " : " + (fieldDataBase.getValue_Product().get(h)));
                     else
-                        details1.setText(details1.getText() + "\n\n" + query.getPropertyName(fieldDataBase.getPropertyId_Product().get(h)) + " : " +namevalue);
-                LoadImage();
+                        details1.setText(details1.getText() + "\n\n" + query.getPropertyName(fieldDataBase.getPropertyId_Product().get(h)) + " : " + namevalue);
+                    LoadImage();
                 }
             }
+        }catch (Exception e){
 
+        }
 
     }
 
@@ -157,7 +154,7 @@ public class product_Details extends ActionBarActivity {
     {
         try
         {
-            Picasso.with(this).load("http://www.shahrma.com/image/business/" + urlImage[0]).placeholder(R.drawable.pooshak).into(img1);
+            Picasso.with(this).load("http://www.shahrma.com/image/business/" + urlImage[0]).placeholder(R.drawable.img_not_found).into(img1);
             Picasso.with(this).load("http://www.shahrma.com/image/business/" + urlImage[1]).placeholder(R.drawable.img_not_found).into(img2);
             Picasso.with(this).load("http://www.shahrma.com/image/business/" + urlImage[2]).placeholder(R.drawable.img_not_found).into(img3);
             Picasso.with(this).load("http://www.shahrma.com/image/business/" + urlImage[3]).placeholder(R.drawable.img_not_found).into(img4);

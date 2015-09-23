@@ -1,5 +1,7 @@
 package com.ariana.shahre_ma.Bazarche;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -14,7 +16,10 @@ import android.widget.ProgressBar;
 import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetCollectionProductJson;
 import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductJson;
 import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetSubsetProductJson;
+import com.ariana.shahre_ma.Bazarche.WebServicePost.ProductMapsActivity;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.MyProfile.Log_In;
 import com.ariana.shahre_ma.R;
 
 import jp.wasabeef.recyclerview.animators.OvershootInLeftAnimator;
@@ -95,6 +100,9 @@ public class Product_List extends ActionBarActivity {
             startActivity(i);
             finish();
             return true;
+        }else if(id==R.id.ac_map){
+            Intent i = new Intent(this.getApplicationContext(),ProductMapsActivity.class);
+            startActivity(i);
         }
 
         return super.onOptionsItemSelected(item);
@@ -107,8 +115,30 @@ public class Product_List extends ActionBarActivity {
     }
 
     public void products(View view) {
+        Query query = new Query(this);
 
-        Intent i = new Intent(getApplicationContext(),My_products.class);
-        startActivity(i);
+        if (query.getMemberId() > 0) // get member
+        {
+            Intent i = new Intent(getApplicationContext(), My_products.class);
+            startActivity(i);
+
+        } else {
+            AlertDialog alertDialog = new AlertDialog.Builder(Product_List.this).create();
+            alertDialog.setTitle("وارد شوید");
+            alertDialog.setMessage("وارد حساب کاربری خود شوید و از تمامی امکانات برنامه استفاده کنید.");
+            alertDialog.setButton("باشه", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent i = new Intent(getApplicationContext(), Log_In.class);
+                    startActivity(i);
+                    finish();
+                }
+            });
+            alertDialog.setButton2("بعدا", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            alertDialog.show();
+        }
     }
 }
