@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +32,7 @@ public class Product_List extends ActionBarActivity {
     public static RecyclerView.Adapter Product_Adapter;
     public static ProgressBar pg;
     public static Button retry;
+    int page=1;
     FieldClass fc=new FieldClass();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,15 +42,37 @@ public class Product_List extends ActionBarActivity {
         pg=(ProgressBar)findViewById(R.id.pg_product_list);
         retry=(Button)findViewById(R.id.pl_retry);
 
+
         if(!fc.GetFilterProduct()) {
             HTTPGetProductJson httpGetProductJson = new HTTPGetProductJson(this);
-            httpGetProductJson.setUrl_product(68, 0, 0, 1);
+            httpGetProductJson.setUrl_product(68, 8,page, 1);
             httpGetProductJson.execute();
         }else{
             pg.setVisibility(View.GONE);
             fc.SetFilterProduct(false);
         }
         setCards();
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                final LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView
+                        .getLayoutManager();
+                int size=linearLayoutManager.getItemCount();
+                int last = linearLayoutManager.findLastVisibleItemPosition();
+                if (last +1 >= size){
+                    HTTPGetProductJson httpGetProductJson = new HTTPGetProductJson(Product_List.this);
+                    httpGetProductJson.setUrl_product(68, 8,page, 1);
+                    httpGetProductJson.execute();
+                    page++;
+                    Log.i("size", String.valueOf(linearLayoutManager.getItemCount()));
+                    Log.i("Last", String.valueOf(last));
+                }
+
+
+            }
+        });
 
         HTTPGetSubsetProductJson httpGetSubsetProductJson=new HTTPGetSubsetProductJson(this);
         httpGetSubsetProductJson.execute();
