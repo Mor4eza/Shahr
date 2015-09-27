@@ -1,12 +1,13 @@
 package com.ariana.shahre_ma.Bazarche.WebServiceGet;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 
 import com.ariana.shahre_ma.Bazarche.Product_List;
-import com.ariana.shahre_ma.Bazarche.Product_List_Adapter;
 import com.ariana.shahre_ma.Fields.FieldDataBase;
 
 import org.json.JSONArray;
@@ -66,6 +67,7 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
          */
         protected Integer doInBackground(String... args) {
             Integer result=0;
+            Product_List.Loading=true;
             try {
                 InputStream jsonStream = getStreamFromURL(getUrl_product(), "GET");
                 String jsonString = streamToString(jsonStream);
@@ -88,7 +90,7 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
                 {
                     Log.i("get", "Products");
 
-                    Product_List.mRecyclerView.post(new Runnable() {
+                /*    Product_List.mRecyclerView.post(new Runnable() {
                         @Override
                         public void run() {
                             Product_List_Adapter adapter = new Product_List_Adapter(context);
@@ -97,7 +99,9 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
                             Product_List.pg.setVisibility(View.GONE);
 
                         }
-                    });
+                    });*/
+                    Intent intent = new Intent("productList");
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                 }
                 else
                 {

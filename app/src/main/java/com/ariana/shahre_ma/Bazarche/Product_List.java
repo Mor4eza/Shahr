@@ -1,11 +1,16 @@
 package com.ariana.shahre_ma.Bazarche;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,30 +23,39 @@ import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductJson;
 import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetSubsetProductJson;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.Fields.FieldDataBase;
 import com.ariana.shahre_ma.MyProfile.Log_In;
 import com.ariana.shahre_ma.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jp.wasabeef.recyclerview.animators.OvershootInLeftAnimator;
-import jp.wasabeef.recyclerview.animators.adapters.ScaleInAnimationAdapter;
 
 public class Product_List extends ActionBarActivity {
     public static RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    public static RecyclerView.Adapter Product_Adapter;
+    public static DataAdapter Product_Adapter;
     public static ProgressBar pg;
     public static Button retry;
+    private List<Product_List_Item> ProductList;
+    public static Boolean Loading=false;
+    protected Handler handler;
+    int page=1;
+    FieldDataBase fdb=new FieldDataBase();
     FieldClass fc=new FieldClass();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product__list);
-
+        ProductList = new ArrayList<Product_List_Item>();
+        handler=new Handler();
         pg=(ProgressBar)findViewById(R.id.pg_product_list);
         retry=(Button)findViewById(R.id.pl_retry);
-
+        LocalBroadcastManager.getInstance(this).registerReceiver(productReciver, new IntentFilter("productList"));
         if(!fc.GetFilterProduct()) {
             HTTPGetProductJson httpGetProductJson = new HTTPGetProductJson(this);
-            httpGetProductJson.setUrl_product(68,5,1,1);
+            httpGetProductJson.setUrl_product(68,8,page,1);
             httpGetProductJson.execute();
         }else{
             pg.setVisibility(View.GONE);
@@ -49,13 +63,17 @@ public class Product_List extends ActionBarActivity {
         }
         setCards();
 
+
         HTTPGetSubsetProductJson httpGetSubsetProductJson=new HTTPGetSubsetProductJson(this);
         httpGetSubsetProductJson.execute();
 
         HTTPGetCollectionProductJson httpGetCollectionProductJson=new HTTPGetCollectionProductJson(this);
         httpGetCollectionProductJson.execute();
 
+        for (int i = 1; i <= 20; i++) {
+            ProductList.add(new Product_List_Item("Student " + i, 20000.0 ,"name",1));
 
+        }
     }
 
     private void setCards(){
@@ -67,14 +85,49 @@ public class Product_List extends ActionBarActivity {
             mRecyclerView.getItemAnimator().setAddDuration(1000);
             mRecyclerView.getItemAnimator().setChangeDuration(1000);
             mRecyclerView.setHasFixedSize(true);
-            mLayoutManager = new GridLayoutManager(this,2);
+            mLayoutManager = new LinearLayoutManager(this);
             mRecyclerView.setLayoutManager(mLayoutManager);
-            Product_Adapter = new Product_List_Adapter(this);
-            ScaleInAnimationAdapter alphaAdapter = new ScaleInAnimationAdapter(Product_Adapter);
-            alphaAdapter.setDuration(400);
-            mRecyclerView.setAdapter(alphaAdapter);
+            Product_Adapter = new DataAdapter(this,ProductList,mRecyclerView);
+
+            mRecyclerView.setAdapter(Product_Adapter);
             Product_Adapter.notifyItemChanged(0);
             Product_Adapter.notifyDataSetChanged();
+
+
+            Product_Adapter.setOnLoadMoreListener(new OnLoadMoreListener() {
+                @Override
+                public void onLoadMore() {
+                    //add null , so the adapter will check view_type and show progress bar at bottom
+                    ProductList.add(null);
+                    Product_Adapter.notifyItemInserted(ProductList.size() - 1);
+
+                    //   remove progress item
+                    ProductList.remove(ProductList.size() - 1);
+                    Product_Adapter.notifyItemRemoved(ProductList.size());
+                    //add items one by one
+                    int start = ProductList.size();
+                    int end = start + 20;
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            //   remove progress item
+                            ProductList.remove(ProductList.size() - 1);
+                            Product_Adapter.notifyItemRemoved(ProductList.size());
+                            //add items one by one
+                            int start = ProductList.size();
+                            int end = start + 20;
+                            HTTPGetProductJson httpGetProductJson = new HTTPGetProductJson(Product_List.this);
+                            httpGetProductJson.setUrl_product(68,8,++page,1);
+                            httpGetProductJson.execute();
+                            Product_Adapter.setLoaded();
+                            //or you can add all at once but do not forget to call mAdapter.notifyDataSetChanged();
+                        }
+                    }, 2000);
+                    //or you can add all at once but do not forget to call mAdapter.notifyDataSetChanged();
+
+                }
+            });
+
         }
         catch (Exception e){}
     }
@@ -140,4 +193,15 @@ public class Product_List extends ActionBarActivity {
             alertDialog.show();
         }
     }
+    private BroadcastReceiver productReciver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            pg.setVisibility(View.INVISIBLE);
+            for(int i =0;i<fdb.getName_Product().size();i++) {
+                ProductList.add(new Product_List_Item(fdb.getName_Product().get(i),fdb.getprice_Product().get(i),fdb.getImage_Product().get(i),fdb.getId_Product().get(i)));
+                Product_Adapter.notifyItemInserted(ProductList.size());
+            }
+        }
+
+    };
 }

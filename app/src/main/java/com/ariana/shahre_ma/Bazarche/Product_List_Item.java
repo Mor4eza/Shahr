@@ -11,6 +11,15 @@ public class Product_List_Item {
     private Integer Id;
     private String imageName;
 
+    public Product_List_Item() {
+    }
+
+    public Product_List_Item(String name, Double price,String image_name,Integer Id) {
+        this.mName = name;
+        this.mPrice = price;
+        this.imageName = image_name;
+        this.Id = Id;
+    }
 
     public Integer getId() {
         return Id;
