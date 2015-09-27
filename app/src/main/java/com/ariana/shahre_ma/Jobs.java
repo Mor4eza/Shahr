@@ -102,18 +102,12 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
                 @Override
                 public void onGroupExpand(int groupPosition) {
                     expand=true;
+                    Log.i("onGroupExpand",String.valueOf(expand));
                     if (lastExpandedPosition != -1
                             && groupPosition != lastExpandedPosition) {
                             myList.collapseGroup(lastExpandedPosition);
                     }
                     lastExpandedPosition = groupPosition;
-                }
-            });
-
-            myList.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-                @Override
-                public void onGroupCollapse(int groupPosition) {
-                    expand=false;
                 }
             });
 
@@ -378,6 +372,7 @@ public class Jobs extends ActionBarActivity implements SearchView.OnQueryTextLis
     @Override
     public void onBackPressed() {
 
+        Log.i("onBackPressed",String.valueOf(expand));
         if (expand) {
             myList.collapseGroup(lastExpandedPosition);
             expand=false;
