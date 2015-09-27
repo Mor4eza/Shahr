@@ -28,7 +28,7 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
     {
         private static Context context;
         FieldDataBase fdb=new FieldDataBase();
-        private String url_product="http://test.shahrma.com/api/ApiGiveListProduct";
+        private String url_product="";
         Integer errorCode=0;
 
         List<Integer> selectId =new ArrayList<>();
@@ -111,21 +111,21 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
                     });
                 }
             } catch (Exception e) {
-
+                Log.i("onPostExecuteProdutjson", e.toString());
             }
         }
 
 
         void parseJSON(String JSONString) {
-
-            Integer ii = 0;
             try {
 
-                JSONArray areas = new JSONArray(JSONString);
+
                 Log.i("JSONProduct", JSONString);
-                len=areas.length();
+
                 JSONObject json=new JSONObject(JSONString);
                 fdb.setCountProduct(json.getInt("Count"));
+                JSONArray areas = json.getJSONArray("Prooducts");
+                len=areas.length();
                 for (int i = 0; i < areas.length(); i++) {
 
                     JSONObject area = areas.getJSONObject(i);
@@ -145,7 +145,7 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
                 fdb.setImage_Product(selectImage);
 
             } catch (JSONException e) {
-
+                Log.i("JSONExceptionProduct", e.toString());
             }
         }
 
@@ -170,6 +170,7 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
                 errorCode=huc.getResponseCode();
                 return huc.getInputStream();
             } catch (Exception e) {
+                Log.i("TimeOutProdutjson", e.toString());
                 return null;
             }
 
@@ -190,6 +191,7 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
                     result = line + "\n";
                 }
             } catch (Exception e) {
+                Log.i("streamToString", e.toString());
             }
 
 

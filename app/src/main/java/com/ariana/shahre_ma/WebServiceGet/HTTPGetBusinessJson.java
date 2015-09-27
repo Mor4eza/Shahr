@@ -225,7 +225,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
                     Log.i("Count Business : ", "دریافت ثبت شده ها");
 
 
-                    for (int i = 0; i < len; i++) {
+                   for (int i = 0; i < len; i++) {
                         ddb.delete_DisCount(discountid[i]);
                         if (discountid[i] == 0)
                         {
