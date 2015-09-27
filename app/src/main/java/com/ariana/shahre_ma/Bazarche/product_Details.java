@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductpropertiesJson;
+import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -44,6 +45,7 @@ public class product_Details extends ActionBarActivity {
     ProgressBar progressBar_product;
     String urlImage[]=new String[4];
 
+    CalendarTool ct=new CalendarTool ();
     DataBaseSqlite db=new DataBaseSqlite(this);
     FieldDataBase fieldDataBase=new FieldDataBase();
     Query query=new Query(this);
@@ -112,7 +114,7 @@ public class product_Details extends ActionBarActivity {
             String adaptive = "";
             for (int i = 0; i < fieldDataBase.getName_Product().size(); i++) {
                 phone.setText("تلفن: " + fieldDataBase.getPhone_Product().get(i));
-                date.setText("تاریخ: " + fieldDataBase.getDate_Product().get(i));
+                date.setText("تاریخ: " + (fieldDataBase.getDate_Product().get(i)));
                 description.setText("توضیحات: " + fieldDataBase.getDescription_Product().get(i));
                 property.setText("خصوصیات: " + fieldDataBase.getProperty_Product().get(i));
                 email.setText("ایمیل: " + fieldDataBase.getEmail_Product().get(i));
@@ -130,12 +132,15 @@ public class product_Details extends ActionBarActivity {
                     adaptive = "(مقطوع)";
                 }
                 price.setText(String.valueOf(fieldDataBase.getprice_Product().get(i)) + adaptive);
-                for (int h = 0; h < fieldDataBase.getPropertyId_Product().size(); h++) {
+                for (int h = 0; h < fieldDataBase.getPropertyId_Product().size(); h++)
+                {
+
                     String namevalue = "";
                     if (fieldDataBase.getValue_Product().get(h).equals(""))
                         namevalue = "وارد نشده";
-                    else
+                    if (query.getPropertyType(fieldDataBase.getPropertyId_Product().get(h))==0)
                         namevalue = query.getValueName(Integer.parseInt(fieldDataBase.getValue_Product().get(h).replaceAll("[\\D]", "0")));
+
 
                     if (namevalue.equals("") || namevalue.equals("null") || namevalue.equals(null))
                         details1.setText(details1.getText() + "\n\n" + query.getPropertyName(fieldDataBase.getPropertyId_Product().get(h)) + " : " + (fieldDataBase.getValue_Product().get(h)));

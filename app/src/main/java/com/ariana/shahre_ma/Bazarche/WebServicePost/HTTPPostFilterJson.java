@@ -36,7 +36,7 @@ import java.util.List;
 public class HTTPPostFilterJson extends AsyncTask<String ,Long,Integer>
 {
 
-    private static  final  String url_product="http://test.shahrma.com/api/ApiProductFilter";
+    private static  final  String url_product="http://test.shahrma.com/api/ApiGiveProductFilter";
 
     private static String data_json;// variable get json
     private  String response_message;// variable response

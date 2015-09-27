@@ -41,7 +41,7 @@ public class Product_List extends ActionBarActivity {
 
         if(!fc.GetFilterProduct()) {
             HTTPGetProductJson httpGetProductJson = new HTTPGetProductJson(this);
-            httpGetProductJson.setUrl_product(68, 0, 0, 1);
+            httpGetProductJson.setUrl_product(68,5,1,1);
             httpGetProductJson.execute();
         }else{
             pg.setVisibility(View.GONE);

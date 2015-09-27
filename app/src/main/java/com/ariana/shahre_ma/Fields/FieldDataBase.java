@@ -44,7 +44,8 @@ public class FieldDataBase
     static List<String>  Name_Collection =new ArrayList<>();
 
 
-
+    //Keep total products
+    static Integer _CountProduct=0;
 
 
 
@@ -121,6 +122,9 @@ public class FieldDataBase
     public List<String> getName_Collection(){return this.Name_Collection;}
 
 
+    //set and get count product
+    public void setCountProduct(Integer countProduct){this._CountProduct=countProduct;}
+    public Integer getCountProduct(){return  this._CountProduct;}
 
 
 }

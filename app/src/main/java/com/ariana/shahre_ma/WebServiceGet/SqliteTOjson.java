@@ -388,18 +388,25 @@ public class SqliteTOjson {
             Log.i("valuestextsize", String.valueOf(valuetext.size()));
             for(int i=0;i<propertyid.size();i++)
             {
-                JSONObject json = new JSONObject();
-                json.put("PropertyId", propertyid.get(i));
-                json.put("ProductId", 0);
-                if(valueid.get(i).equals(0)) {
-                    json.put("Value", valuetext.get(i));
-                    json.put("Value2", valuetext2.get(i));
-                    Log.i("valuetext2", String.valueOf(valuetext2.get(i)));
+                if(valuetext.get(i).equals("") || valuetext.get(i).equals(null) || valuetext.get(i).equals("null")) {
                 }
-                else {
-                    json.put("Value", valueid.get(i));
+                else
+                {
+                    Log.i("valuetext2","ss");
+                    JSONObject json = new JSONObject();
+                    json.put("PropertyId", propertyid.get(i));
+                    if (valueid.get(i).equals(0)) {
+                        json.put("Value1", valuetext.get(i));
+                        if(valuetext2.get(i).equals("")){}
+                        else
+                            json.put("Value2", valuetext2.get(i));
+
+                        Log.i("valuetext2", String.valueOf(valuetext2.get(i)));
+                    } else {
+                        json.put("Value1", valueid.get(i));
+                    }
+                    array.put(json);
                 }
-                array.put(json);
 
             }
             Log.i("jsonSendProduct",array.toString());

@@ -124,6 +124,8 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
                 JSONArray areas = new JSONArray(JSONString);
                 Log.i("JSONProduct", JSONString);
                 len=areas.length();
+                JSONObject json=new JSONObject(JSONString);
+                fdb.setCountProduct(json.getInt("Count"));
                 for (int i = 0; i < areas.length(); i++) {
 
                     JSONObject area = areas.getJSONObject(i);

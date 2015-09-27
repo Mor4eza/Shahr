@@ -138,6 +138,23 @@ public class Query {
         return  Result;
     }
 
+    public Integer getPropertyType(Integer propertyid)
+    {
+        Integer Result=0;
+        try {
+
+            SelectDataBaseSqlite db=new SelectDataBaseSqlite(context);
+            Cursor allrows = db.select_Property_Product(propertyid);
+            allrows.moveToFirst();
+            Result = allrows.getInt(1);
+            allrows.close();
+        }
+        catch (Exception e)
+        {
+        }
+        return  Result;
+    }
+
     public String getValueName(Integer valueid)
     {
         String Result="";

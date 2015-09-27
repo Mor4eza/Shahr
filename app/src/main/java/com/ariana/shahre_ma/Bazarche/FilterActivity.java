@@ -218,9 +218,6 @@ public class FilterActivity extends ActionBarActivity {
             {
                 messageDialog.ShowMessage("پیام","نام کالا را وارد کنید","باشه","false");
             }
-            else if(et_Price1.getText().length()==0){
-                messageDialog.ShowMessage("پیام","قیمت را وارد کنید","باشه","false");
-            }
             else if(et_Price1.getText().toString().substring(0,1).equals("0")){
                 messageDialog.ShowMessage("پیام","قیمت وارد شده صحیح نیست","باشه","false");
             }
@@ -234,9 +231,18 @@ public class FilterActivity extends ActionBarActivity {
             else
             {
                 Search=tv_product_name.getText().toString();
+                if(et_Price1.getText().equals(""))
+                    price=1.0;
+                else
                 price=Double.parseDouble(et_Price1.getText().toString());
+
+                if(et_Price2.getText().equals(""))
+                    price2=123000000.0;
+                else
                 price2=Double.parseDouble(et_Price2.getText().toString());
+
                 subsetid=query.getsubsetProductID(Sp_subset.getSelectedItem().toString());
+
                 areaid= 165;
 
                 if (_enable1) {
