@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -96,6 +97,7 @@ public class DataAdapter extends RecyclerView.Adapter {
 			((ProductViewHolder) holder).tvDesNature.setText(Product.getmPrice().toString());
 			((ProductViewHolder) holder).tvDesNature.setTag(Product.getId());
 			((ProductViewHolder) holder).imgThumbnail.setImageResource(Product.getThumbnail());
+
 			String image_url_1;
 			image_url_1 = "http://www.shahrma.com/image/business/" + Product.getImageName();
 			Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(((ProductViewHolder) holder).imgThumbnail);

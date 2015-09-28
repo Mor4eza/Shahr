@@ -328,7 +328,7 @@ public class SqliteTOjson {
             rowObject.put("Property", property);
             rowObject.put("Price", price);
             rowObject.put("Latitude", latitude);
-            rowObject.put("Longtiude", longtiude);
+            rowObject.put("Longtude", longtiude);
             rowObject.put("Adaptive", adaptive);
             rowObject.put("Description", description);
             rowObject.put("Phone", phone);

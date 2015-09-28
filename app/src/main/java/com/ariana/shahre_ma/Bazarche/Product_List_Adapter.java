@@ -39,6 +39,7 @@ public class Product_List_Adapter extends RecyclerView.Adapter<Product_List_Adap
              {
                  nature = new Product_List_Item();
                  nature.setName(fieldDataBase.getName_Product().get(i));
+
                  nature.setmPrice(fieldDataBase.getprice_Product().get(i));
                  nature.setId(fieldDataBase.getId_Product().get(i));
                  nature.setImageName(fieldDataBase.getImage_Product().get(i));

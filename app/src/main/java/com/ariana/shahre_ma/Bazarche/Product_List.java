@@ -187,6 +187,7 @@ public class Product_List extends ActionBarActivity {
         public void onReceive(Context context, Intent intent) {
             pg.setVisibility(View.INVISIBLE);
             for(int i =0;i<fdb.getName_Product().size();i++) {
+
                 ProductList.add(new Product_List_Item(fdb.getName_Product().get(i), fdb.getprice_Product().get(i), fdb.getImage_Product().get(i), fdb.getId_Product().get(i)));
                 Product_Adapter.notifyItemInserted(ProductList.size());
             }

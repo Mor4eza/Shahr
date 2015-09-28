@@ -136,6 +136,7 @@ public class HTTPGetProductJson extends AsyncTask<String,Void,Integer>
 
                     selectId.add(area.getInt("Id"));
                     selectName.add(area.getString("Name"));
+                    Log.i("price",area.getString("Price"));
                     selectPrice.add(area.getString("Price"));
                     selectAdaptive.add(area.getBoolean("Adaptive"));
                     selectImage.add(area.getString("Image"));
