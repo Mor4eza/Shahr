@@ -10,13 +10,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetCollectionProductJson;
 import com.ariana.shahre_ma.Bazarche.WebServiceGet.HTTPGetProductJson;
@@ -55,7 +57,7 @@ public class Product_List extends ActionBarActivity {
         LocalBroadcastManager.getInstance(this).registerReceiver(productReciver, new IntentFilter("productList"));
         if(!fc.GetFilterProduct()) {
             HTTPGetProductJson httpGetProductJson = new HTTPGetProductJson(this);
-            httpGetProductJson.setUrl_product(68,8,page,1);
+            httpGetProductJson.setUrl_product(68,10,page,1);
             httpGetProductJson.execute();
         }else{
             pg.setVisibility(View.GONE);
@@ -70,10 +72,6 @@ public class Product_List extends ActionBarActivity {
         HTTPGetCollectionProductJson httpGetCollectionProductJson=new HTTPGetCollectionProductJson(this);
         httpGetCollectionProductJson.execute();
 
-        for (int i = 1; i <= 20; i++) {
-            ProductList.add(new Product_List_Item("Student " + i, 20000.0 ,"name",1));
-
-        }
     }
 
     private void setCards(){
@@ -85,49 +83,39 @@ public class Product_List extends ActionBarActivity {
             mRecyclerView.getItemAnimator().setAddDuration(1000);
             mRecyclerView.getItemAnimator().setChangeDuration(1000);
             mRecyclerView.setHasFixedSize(true);
-            mLayoutManager = new LinearLayoutManager(this);
+            mLayoutManager = new GridLayoutManager(this,2);
             mRecyclerView.setLayoutManager(mLayoutManager);
             Product_Adapter = new DataAdapter(this,ProductList,mRecyclerView);
-
             mRecyclerView.setAdapter(Product_Adapter);
-            Product_Adapter.notifyItemChanged(0);
-            Product_Adapter.notifyDataSetChanged();
-
-
             Product_Adapter.setOnLoadMoreListener(new OnLoadMoreListener() {
                 @Override
                 public void onLoadMore() {
-                    //add null , so the adapter will check view_type and show progress bar at bottom
+                    int start = ProductList.size();
+                    if(start>=fdb.getCountProduct()) {
+                        Toast.makeText(getApplicationContext(),"موارد بیشتر موجود نمی باشد!",Toast.LENGTH_LONG).show();
+                    }else{
                     ProductList.add(null);
                     Product_Adapter.notifyItemInserted(ProductList.size() - 1);
 
-                    //   remove progress item
-                    ProductList.remove(ProductList.size() - 1);
-                    Product_Adapter.notifyItemRemoved(ProductList.size());
-                    //add items one by one
-                    int start = ProductList.size();
-                    int end = start + 20;
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            //   remove progress item
-                            ProductList.remove(ProductList.size() - 1);
-                            Product_Adapter.notifyItemRemoved(ProductList.size());
-                            //add items one by one
-                            int start = ProductList.size();
-                            int end = start + 20;
-                            HTTPGetProductJson httpGetProductJson = new HTTPGetProductJson(Product_List.this);
-                            httpGetProductJson.setUrl_product(68,8,++page,1);
-                            httpGetProductJson.execute();
-                            Product_Adapter.setLoaded();
-                            //or you can add all at once but do not forget to call mAdapter.notifyDataSetChanged();
-                        }
-                    }, 2000);
-                    //or you can add all at once but do not forget to call mAdapter.notifyDataSetChanged();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                //   remove progress item
+                                ProductList.remove(ProductList.size() - 1);
+                                Product_Adapter.notifyItemRemoved(ProductList.size());
 
+                                HTTPGetProductJson httpGetProductJson = new HTTPGetProductJson(Product_List.this);
+                                httpGetProductJson.setUrl_product(68, 10, page, 1);
+                                httpGetProductJson.execute();
+
+                                Product_Adapter.setLoaded();
+                                //or you can add all at once but do not forget to call Product_Adapter.notifyDataSetChanged();
+                            }
+                        }, 1000);
+                    }
                 }
-            });
 
+        });
         }
         catch (Exception e){}
     }
@@ -198,9 +186,12 @@ public class Product_List extends ActionBarActivity {
         public void onReceive(Context context, Intent intent) {
             pg.setVisibility(View.INVISIBLE);
             for(int i =0;i<fdb.getName_Product().size();i++) {
-                ProductList.add(new Product_List_Item(fdb.getName_Product().get(i),fdb.getprice_Product().get(i),fdb.getImage_Product().get(i),fdb.getId_Product().get(i)));
+                ProductList.add(new Product_List_Item(fdb.getName_Product().get(i), fdb.getprice_Product().get(i), fdb.getImage_Product().get(i), fdb.getId_Product().get(i)));
                 Product_Adapter.notifyItemInserted(ProductList.size());
             }
+            Product_Adapter.notifyDataSetChanged();
+            page++;
+            Log.i("Page", String.valueOf(page));
         }
 
     };
