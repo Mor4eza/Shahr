@@ -60,8 +60,14 @@ public class Product_List extends ActionBarActivity {
             httpGetProductJson.setUrl_product(68,10,page,1);
             httpGetProductJson.execute();
         }else{
+            for(int i =0;i<fdb.getName_Product().size();i++) {
+
+                ProductList.add(new Product_List_Item(fdb.getName_Product().get(i), fdb.getprice_Product().get(i), fdb.getImage_Product().get(i), fdb.getId_Product().get(i)));
+                Product_Adapter.notifyItemInserted(ProductList.size());
+            }
             pg.setVisibility(View.GONE);
             fc.SetFilterProduct(false);
+
         }
         setCards();
 
