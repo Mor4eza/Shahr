@@ -141,7 +141,7 @@ public class HTTPPostFilterJson extends AsyncTask<String ,Long,Integer>
             {
                 pd.dismiss();
                 MessageDialog messageDialog=new MessageDialog(context);
-                messageDialog.ShowMessage("پیام","ثبت نشد . دوباره امتحان کنید","باشه","false");
+                messageDialog.ShowMessage("پیام","دوباره امتحان کنید","باشه","false");
             }
 
 
@@ -150,7 +150,7 @@ public class HTTPPostFilterJson extends AsyncTask<String ,Long,Integer>
         {
             pd.dismiss();
             MessageDialog messageDialog=new MessageDialog(context);
-            messageDialog.ShowMessage("2پیام", "ثبت نشد . دوباره امتحان کنید", "باشه", "false");
+            messageDialog.ShowMessage("پیام", "دوباره امتحان کنید", "باشه", "false");
 
         }
 

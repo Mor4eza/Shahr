@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.Bazarche;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -23,8 +24,10 @@ import com.ariana.shahre_ma.Bazarche.WebServicePost.HTTPPostProductJson;
 import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
+import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBase;
 import com.ariana.shahre_ma.MessageDialog;
+import com.ariana.shahre_ma.MyBusiness.My_Business_Map;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.SqliteTOjson;
@@ -75,6 +78,7 @@ public class add_product extends ActionBarActivity {
     Query query=new Query(this);
     NetState net=new NetState(this);
     FieldDataBase fieldDataBase=new FieldDataBase();
+    FieldClass fc= new FieldClass();
     DateTime dt=new DateTime();
     List<Integer> valueid = new ArrayList<>();
     List<String> valuetext=new ArrayList<>();
@@ -113,7 +117,6 @@ public class add_product extends ActionBarActivity {
         tv_product_city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("onItemClick", tv_product_city.getText().toString());
                 GetNameArea(tv_product_city.getText().toString());
             }
         });
@@ -154,7 +157,6 @@ public class add_product extends ActionBarActivity {
         Sp_subset.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("Sp_subset",Sp_subset.getSelectedItem().toString());
                getnameproperty(Sp_subset.getSelectedItem().toString());
             }
 
@@ -187,9 +189,6 @@ public class add_product extends ActionBarActivity {
            address=tv_product_address.getText().toString();
            subsetid=query.getsubsetProductID(Sp_subset.getSelectedItem().toString());
            areaid= query.getAreaID(tv_product_area.getText().toString());
-           Log.i("areaid",String.valueOf(query.getAreaID(tv_product_area.getText().toString())));
-           Log.i("areaname",String.valueOf(tv_product_area.getText().toString()));
-
 
 
           if(net.checkInternetConnection())
@@ -219,7 +218,6 @@ public class add_product extends ActionBarActivity {
               {
                   if (_enable1) {
                       valuetext.add("");
-                      Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val1.getSelectedItem().toString())));
                       valueid.add(query.getValueId(Sp_val1.getSelectedItem().toString()));// spineer 1
                   } else {
 
@@ -229,7 +227,6 @@ public class add_product extends ActionBarActivity {
 
                   if (_enable2) {
                       valuetext.add("");
-                      Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val2.getSelectedItem().toString())));
                       valueid.add(query.getValueId(Sp_val2.getSelectedItem().toString())); // spineer 2
                   } else {
                       valuetext.add(et_prop2.getText().toString()); // edit text 2
@@ -239,7 +236,6 @@ public class add_product extends ActionBarActivity {
 
                   if (_enable3) {
                       valuetext.add("");
-                      Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val3.getSelectedItem().toString())));
                       valueid.add(query.getValueId(Sp_val3.getSelectedItem().toString())); // spineer 3
                   } else {
 
@@ -249,7 +245,6 @@ public class add_product extends ActionBarActivity {
 
                   if (_enable4) {
                       valuetext.add("");
-                      Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val4.getSelectedItem().toString())));
                       valueid.add(query.getValueId(Sp_val4.getSelectedItem().toString())); // spineer 4
                   } else {
                       valuetext.add(et_prop4.getText().toString()); // edit text 4
@@ -259,7 +254,6 @@ public class add_product extends ActionBarActivity {
 
                   if (_enable5) {
                       valuetext.add("");
-                      Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val5.getSelectedItem().toString())));
                       valueid.add(query.getValueId(Sp_val5.getSelectedItem().toString()));// spineer 5
                   } else {
                       valuetext.add(et_prop5.getText().toString()); // edit text 5
@@ -268,7 +262,6 @@ public class add_product extends ActionBarActivity {
 
                   if (_enable6) {
                       valuetext.add("");
-                      Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val6.getSelectedItem().toString())));
                       valueid.add(query.getValueId(Sp_val6.getSelectedItem().toString())); // spineer 6
                   } else {
                       valuetext.add(et_prop6.getText().toString()); // edit text 6
@@ -277,7 +270,6 @@ public class add_product extends ActionBarActivity {
 
                   if (_enable7) {
                       valuetext.add("");
-                      Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val7.getSelectedItem().toString())));
                       valueid.add(query.getValueId(Sp_val7.getSelectedItem().toString())); // spineer 7
                   } else {
                       valuetext.add(et_prop7.getText().toString()); // edit text 7
@@ -286,15 +278,15 @@ public class add_product extends ActionBarActivity {
 
                   if (_enable8) {
                       valuetext.add("");
-                      Log.i("vlaueID", String.valueOf(query.getValueId(Sp_val8.getSelectedItem().toString())));
+
                       valueid.add(query.getValueId(Sp_val8.getSelectedItem().toString())); // spineer 8
                   } else {
                       valuetext.add(et_prop8.getText().toString()); // edit text 8
                       valueid.add(0);
                   }
 
-
-                  json = sqliteTOjson.ProductTOjson(query.getMemberId(), name, dt.Now(), property, price, latitude, longtiude, adaptive, descripction, tell, mobile, address, email, subsetid, areaid, valuetext, valueid, propertyid);
+                Log.i("LATlong",fc.GetLatitude_Business().toString()+"  " +fc.GetLongtiude_Business().toString());
+                  json = sqliteTOjson.ProductTOjson(query.getMemberId(), name, dt.Now(), property, price, fc.GetLatitude_Business(), fc.GetLongtiude_Business(), adaptive, descripction, tell, mobile, address, email, subsetid, areaid, valuetext, valueid, propertyid);
                   HTTPPostProductJson httpPostProductJson = new HTTPPostProductJson(this);
                   httpPostProductJson.SetProduct_Json(json);
                   httpPostProductJson.execute();
@@ -402,7 +394,6 @@ public class add_product extends ActionBarActivity {
         if (allrows.moveToFirst()) {
             do {
 
-                Log.i("area",allrows.getString(1));
                 studentList.add(allrows.getString(1));
 
 
@@ -434,7 +425,6 @@ public class add_product extends ActionBarActivity {
         if (allrows.moveToFirst()) {
             do {
 
-                Log.i("city",allrows.getString(1));
                 studentList.add(allrows.getString(1));
 
 
@@ -448,14 +438,14 @@ public class add_product extends ActionBarActivity {
 
     public void GetNameCollection()
     {
-       // try {
+        try {
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,getnamecollect());
             Sp_collection.setAdapter(adapter);
-      /*  }
+       }
         catch (Exception e)
         {
             Log.e("ExceptionSQL", e.toString());
-        }*/
+        }
     }
 
 
@@ -557,15 +547,11 @@ public class add_product extends ActionBarActivity {
                 do
                 {
                     namevalue.add(rows.getString(1));
-                    Log.i("Value_Product" + i, rows.getString(1));
-                   // j++;
                 } while (rows.moveToNext());
             }
                 ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,namevalue);
-            //Log.i("sizeList", String.valueOf(adapter.getCount()));
                 if (namevalue.size() > 0)
                 {
-                    Log.i("sizeListif", String.valueOf(namevalue.size()));
                     switch (i) {
                         case 0:
                             rel_val1.setVisibility(View.VISIBLE);
@@ -620,7 +606,6 @@ public class add_product extends ActionBarActivity {
                 }
                 else
                 {
-                    Log.i("sizeListelse", String.valueOf(namevalue.size()));
                     switch (i) {
                         case 0:
                             float1.setVisibility(View.VISIBLE);
@@ -688,4 +673,8 @@ public class add_product extends ActionBarActivity {
         return nameProperty;
     }
 
+    public void select_map(View view) {
+        Intent i =new Intent(add_product.this, My_Business_Map.class);
+        startActivity(i);
+    }
 }

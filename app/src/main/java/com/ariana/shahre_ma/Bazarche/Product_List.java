@@ -77,45 +77,46 @@ public class Product_List extends ActionBarActivity {
     private void setCards(){
         try {
 
-
             mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_products);
             mRecyclerView.setItemAnimator(new OvershootInLeftAnimator());
             mRecyclerView.getItemAnimator().setAddDuration(1000);
             mRecyclerView.getItemAnimator().setChangeDuration(1000);
             mRecyclerView.setHasFixedSize(true);
-            mLayoutManager = new GridLayoutManager(this,2);
+            mLayoutManager = new GridLayoutManager(this, 2);
             mRecyclerView.setLayoutManager(mLayoutManager);
-            Product_Adapter = new DataAdapter(this,ProductList,mRecyclerView);
+            Product_Adapter = new DataAdapter(this, ProductList, mRecyclerView);
             mRecyclerView.setAdapter(Product_Adapter);
-            Product_Adapter.setOnLoadMoreListener(new OnLoadMoreListener() {
-                @Override
-                public void onLoadMore() {
-                    int start = ProductList.size();
-                    if(start>=fdb.getCountProduct()) {
-                        Toast.makeText(getApplicationContext(),"موارد بیشتر موجود نمی باشد!",Toast.LENGTH_LONG).show();
-                    }else{
-                    ProductList.add(null);
-                    Product_Adapter.notifyItemInserted(ProductList.size() - 1);
+            if (!fc.GetFilterProduct()) {
+                Product_Adapter.setOnLoadMoreListener(new OnLoadMoreListener() {
+                    @Override
+                    public void onLoadMore() {
+                        int start = ProductList.size();
+                        if (start >= fdb.getCountProduct()) {
+                            Toast.makeText(getApplicationContext(), "موارد بیشتر موجود نمی باشد!", Toast.LENGTH_LONG).show();
+                        } else {
+                            ProductList.add(null);
+                            Product_Adapter.notifyItemInserted(ProductList.size() - 1);
 
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                //   remove progress item
-                                ProductList.remove(ProductList.size() - 1);
-                                Product_Adapter.notifyItemRemoved(ProductList.size());
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    //   remove progress item
+                                    ProductList.remove(ProductList.size() - 1);
+                                    Product_Adapter.notifyItemRemoved(ProductList.size());
 
-                                HTTPGetProductJson httpGetProductJson = new HTTPGetProductJson(Product_List.this);
-                                httpGetProductJson.setUrl_product(68, 10, page, 1);
-                                httpGetProductJson.execute();
+                                    HTTPGetProductJson httpGetProductJson = new HTTPGetProductJson(Product_List.this);
+                                    httpGetProductJson.setUrl_product(68, 10, page, 1);
+                                    httpGetProductJson.execute();
 
-                                Product_Adapter.setLoaded();
-                                //or you can add all at once but do not forget to call Product_Adapter.notifyDataSetChanged();
-                            }
-                        }, 1000);
+                                    Product_Adapter.setLoaded();
+                                    //or you can add all at once but do not forget to call Product_Adapter.notifyDataSetChanged();
+                                }
+                            }, 1000);
+                        }
                     }
-                }
 
-        });
+                });
+            }
         }
         catch (Exception e){}
     }
