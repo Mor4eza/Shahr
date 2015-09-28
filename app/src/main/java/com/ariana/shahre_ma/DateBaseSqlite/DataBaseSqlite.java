@@ -623,6 +623,16 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         db.close();
     }
 
+
+    public void Add_business(String queryInsert) {
+
+        //Integer id,String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid, Double latitude,Double longitude, Integer areaid, String area, String user,Integer cityid, Integer userid,Integer field1,Integer field2,Integer field3,Integer field4,Integer field5,Integer field6,Integer field7,Integer ratecount,Double ratevalue,String src
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("INSERT INTO  "+instructionsSqlite.TABLE_NAME_BUSINESS+"  Values "+queryInsert);
+        // 4. close
+        db.close();
+    }
     public void Add_BusinessImage(Integer id, Integer businessid, String src) {
 
         // 1. get reference to writable DB

@@ -64,7 +64,7 @@ public class My_Product_Adapter extends RecyclerView.Adapter<My_Product_Adapter.
         My_Product_Items nature = mItems.get(i);
         viewHolder.tvNature.setText(nature.getName());
         viewHolder.tvNature.setTag(nature.getId());
-        viewHolder.Price.setText(String.valueOf(nature.getmPrice()));
+        viewHolder.Price.setText(nature.getmPrice());
         viewHolder.Price.setTag(nature.getmI());
        // viewHolder.tvDesNature.setText(nature.getmAddress());
         viewHolder.img1.setImageResource(nature.getThumbnail());

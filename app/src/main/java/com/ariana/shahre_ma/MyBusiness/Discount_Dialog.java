@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.appyvet.rangebar.RangeBar;
 import com.ariana.shahre_ma.Date.CalendarTool;
@@ -40,6 +41,8 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
     EditText tv_desc;
     Button tv_date;
     EditText tv_title;
+    TextView statdate;
+    TextView enddate;
     Button btn_save;
     RangeBar rangeBar;
     FieldClass fc=new FieldClass();
@@ -73,7 +76,7 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
 
         setTitle("ثبت تخفیف جدید");
         InitViews();
-        //ShowEditDisCount();
+        ShowEditDisCount();
         rangeBar.setRight(20);
         rangeBar.setOnRangeBarChangeListener(new RangeBar.OnRangeBarChangeListener() {
             @Override
@@ -98,24 +101,14 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
                             messageDialog.ShowMessage("پیام", "متن تخفیف را وارد کنید", "باشه", "false");
                         } else if (tv_desc.getText().equals("")) {
                             messageDialog.ShowMessage("پیام", "توضیحات برای تحفیف را وارد کنید", "باشه", "false");
-                        } else if (Integer.parseInt(percent)== 0) {
+                        } else if (percent.equals("") || Integer.parseInt(percent)== 0) {
                             messageDialog.ShowMessage("پیام", "درصد تخفیف را وارد کنید", "باشه", "false");
-                        } else if (tv_date.getText().equals("") || tv_date.getText().equals(null) || tv_date.getText().length() == 0) {
-                            messageDialog.ShowMessage("پیام", "تاریخ شروع را وارد کنید", "باشه", "false");
-                        } else if (Expire.getText().equals("") || Expire.getText().equals(null) || Expire.getText().length() == 0) {
-                            messageDialog.ShowMessage("پیام", "تاریخ اتمام را وارد کنید", "باشه", "false");
+
                         } else {
                             Log.i("Edit", "true");
                             fc.SetId_DisCount(fc.GetId_DisCount());
                             fc.SetText_DisCount(tv_title.getText().toString());
                             fc.SetImage_DisCount("");
-
-                            ct.setIranianDate(Integer.parseInt(tv_date.getText().toString().substring(0, 4)), Integer.parseInt(tv_date.getText().toString().substring(5, 7)), Integer.parseInt(tv_date.getText().toString().substring(8, 10)));
-                            Log.i("startDateEdit", ct.getGregorianDate());
-                            fc.SetStartDate_DisCount(ct.getGregorianDate());
-                            ct1.setIranianDate(Integer.parseInt(Expire.getText().toString().substring(0, 4)), Integer.parseInt(Expire.getText().toString().substring(5, 7)), Integer.parseInt(Expire.getText().toString().substring(8, 10)));
-                            Log.i("ExpireDateEdit", ct1.getGregorianDate());
-                            fc.SetExpirationDate_DisCount(ct1.getGregorianDate());
                             fc.SetDescription_DisCount(tv_desc.getText().toString());
                             fc.SetPercent_DisCount(percent);
                             fc.SetBusinessId_DisCount(fc.GetBusiness_Id());
@@ -218,6 +211,8 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
         rangeBar=(RangeBar)findViewById(R.id.rangebar);
         tv_title=(EditText)findViewById(R.id.et_discount_title);
         Expire=(Button)findViewById(R.id.btn_discount_expire);
+        statdate=(TextView)findViewById(R.id.lblstartdate);
+        enddate=(TextView)findViewById(R.id.lblenddate);
 
     }
 
@@ -232,16 +227,21 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
             SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(getContext());
             Cursor rows = sdb.select_AllDisCountMember(fc.GetId_DisCount());
             rows.moveToFirst();
+            if(rows.getCount()>0)
+            {
+                setTitle("ویرایش تخفیف");
+                tv_date.setVisibility(View.GONE);
+                Expire.setVisibility(View.GONE);
+                statdate.setVisibility(View.GONE);
+                enddate.setVisibility(View.GONE);
 
-            tv_title.setText(rows.getString(1));
-            tv_desc.setText(rows.getString(5));
-           // ct.setGregorianDate(Integer.valueOf(rows.getString(3).substring(0, 4)), Integer.valueOf(rows.getString(3).substring(5, 7)), Integer.valueOf(rows.getString(3).substring(8, 10)));
-            //ct1.setGregorianDate(Integer.valueOf(rows.getString(4).substring(0, 4)), Integer.valueOf(rows.getString(4).substring(5, 7)), Integer.valueOf(rows.getString(4).substring(8, 10)));
-//            tv_date.setText(ct.MiladiToShamesi(rows.getString(3)));
-//            Expire.setText(ct1.MiladiToShamesi(rows.getString(4)));
-            rangeBar.setSeekPinByValue(Float.valueOf(rows.getString(6)));
-
-
+                tv_title.setText(rows.getString(1));
+                tv_desc.setText(rows.getString(5));
+                fc.SetStartDate_DisCount(rows.getString(3));
+                fc.SetExpirationDate_DisCount(rows.getString(3));
+                rangeBar.setSeekPinByValue(Float.valueOf(rows.getString(6)));
+                percent=rows.getString(6);
+            }
 
             if(fc.GetId_DisCount()>0) {
                 SaveEdit = true;

@@ -40,6 +40,7 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
     private  String url_Business;
     ProgressDialog pd;
     Integer errorCode=0;
+    String querysqlite="";
 
     private  AsyncTask<String,Void,Integer> updateTask = null;
 
@@ -237,10 +238,27 @@ public class HTTPGetBusinessJson extends AsyncTask<String,Void,Integer>
                             adb.Add_DisCount(discountid[i], discounttext[i], discountimage[i], discountstartdate[i], discountexpirationdate[i], discountdescription[i], discountpercent[i], discountbusinessid[i], likediscount[i], dislikediscount[i]);
                         }
 
+             /*          if(i==0) {
+                           if (String.valueOf(ratevalue[i]).equals("NaN"))
+                               querysqlite = querysqlite + ("(" + Id[i] + ",'" + market[i] + "','" + code[i] + "','" + phone[i] + "','" + mobile[i] + "','" + fax[i] + "','" + email[i] + "','" + businessowner[i] + "','" + address[i] + "','" + description[i] + "','" + startdate[i] + "','" + expirationdate[i] + "','" + inactive[i] + "','" + subset[i] + "'," + subsetid[i] + "," + latitude[i] + "," + longitude[i] + "," + areaid[i] + ",'" + area1[i] + "','" + user[i] + "'," + cityid + "," + userid[i] + "," + field1[i] + "," + field2[i] + "," + field3[i] + "," + field4[i] + "," + field5[i] + "," + field6[i] + "," + field7[i] + "," + ratecount[i] + "," + 0.0 + ",'" + src[i] + "')");
+                           else
+                               querysqlite = querysqlite + ("(" + Id[i] + ",'" + market[i] + "','" + code[i] + "','" + phone[i] + "','" + mobile[i] + "','" + fax[i] + "','" + email[i] + "','" + businessowner[i] + "','" + address[i] + "','" + description[i] + "','" + startdate[i] + "','" + expirationdate[i] + "','" + inactive[i] + "','" + subset[i] + "'," + subsetid[i] + "," + latitude[i] + "," + longitude[i] + "," + areaid[i] + ",'" + area1[i] + "','" + user[i] + "'," + cityid + "," + userid[i] + "," + field1[i] + "," + field2[i] + "," + field3[i] + "," + field4[i] + "," + field5[i] + "," + field6[i] + "," + field7[i] + "," + ratecount[i] + "," + ratevalue[i] + ",'" + src[i] + "')");
+                       }
+                       else
+                       {
+                           if (String.valueOf(ratevalue[i]).equals("NaN"))
+                               querysqlite = querysqlite + (",(" + Id[i] + ",'" + market[i] + "','" + code[i] + "','" + phone[i] + "','" + mobile[i] + "','" + fax[i] + "','" + email[i] + "','" + businessowner[i] + "','" + address[i] + "','" + description[i] + "','" + startdate[i] + "','" + expirationdate[i] + "','" + inactive[i] + "','" + subset[i] + "'," + subsetid[i] + "," + latitude[i] + "," + longitude[i] + "," + areaid[i] + ",'" + area1[i] + "','" + user[i] + "'," + cityid + "," + userid[i] + "," + field1[i] + "," + field2[i] + "," + field3[i] + "," + field4[i] + "," + field5[i] + "," + field6[i] + "," + field7[i] + "," + ratecount[i] + "," + 0.0 + ",'" + src[i] + "')");
+                           else
+                               querysqlite = querysqlite + (",(" + Id[i] + ",'" + market[i] + "','" + code[i] + "','" + phone[i] + "','" + mobile[i] + "','" + fax[i] + "','" + email[i] + "','" + businessowner[i] + "','" + address[i] + "','" + description[i] + "','" + startdate[i] + "','" + expirationdate[i] + "','" + inactive[i] + "','" + subset[i] + "'," + subsetid[i] + "," + latitude[i] + "," + longitude[i] + "," + areaid[i] + ",'" + area1[i] + "','" + user[i] + "'," + cityid + "," + userid[i] + "," + field1[i] + "," + field2[i] + "," + field3[i] + "," + field4[i] + "," + field5[i] + "," + field6[i] + "," + field7[i] + "," + ratecount[i] + "," + ratevalue[i] + ",'" + src[i] + "')");
 
+                       }*/
                         adb.Add_business(Id[i], market[i], code[i], phone[i], mobile[i], fax[i], email[i], businessowner[i], address[i], description[i], startdate[i], expirationdate[i], inactive[i], subset[i], subsetid[i], latitude[i], longitude[i], areaid[i], area1[i], user[i], cityid, userid[i],field1[i],field2[i], field3[i], field4[i], field5[i], field6[i], field7[i], ratecount[i], ratevalue[i], src[i]);
 
+
                     }
+                   // Log.i("query",querysqlite);
+
+                   // adb.Add_business(querysqlite);
 
                     fc.SetCount_Business(query.getCountBusiness(query.getsubsetID(fc.GetSelected_job())));
                     pd.dismiss();

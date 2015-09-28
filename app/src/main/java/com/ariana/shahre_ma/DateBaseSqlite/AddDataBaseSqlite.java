@@ -148,7 +148,12 @@ public class AddDataBaseSqlite extends DataBaseSqlite{
     }
 
     @Override
-    public void Add_business(Integer id, String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid, Double latitude, Double longitude, Integer areaid, String area, String user, Integer cityid, Integer userid, Integer field1, Integer field2, Integer field3, Integer field4, Integer field5, Integer field6, Integer field7, Integer ratecount, Double ratevalue, String src) {
+      public void Add_business(Integer id, String market, String code, String phone, String mobile, String fax, String email, String businessowner, String address, String description, String startdate, String expirationdate, String inactive, String subset, Integer subsetid, Double latitude, Double longitude, Integer areaid, String area, String user, Integer cityid, Integer userid, Integer field1, Integer field2, Integer field3, Integer field4, Integer field5, Integer field6, Integer field7, Integer ratecount, Double ratevalue, String src) {
         super.Add_business(id, market, code, phone, mobile, fax, email, businessowner, address, description, startdate, expirationdate, inactive, subset, subsetid, latitude, longitude, areaid, area, user, cityid, userid, field1, field2, field3, field4, field5, field6, field7, ratecount, ratevalue, src);
+    }
+
+    @Override
+    public void Add_business(String queryInsert) {
+        super.Add_business(queryInsert);
     }
 }
