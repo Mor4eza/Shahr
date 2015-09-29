@@ -265,6 +265,36 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    public void btn_nearme(View view) {
+        try {
+            int v = getPackageManager().getPackageInfo("com.google.android.gms", 0).versionCode;
+            // Showing status
+            if (v >=6587000) {
+                Intent i = new Intent(getApplicationContext(), NearMeActivity.class);
+                startActivity(i);
+            } else {
+                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                alertDialog.setTitle("هشدار");
+                alertDialog.setMessage("نسخه Google Play Service  شما قدیمی می باشد. لطفا بروز رسانی کنید");
+                alertDialog.setButton("خب", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog.show();
+            }
+
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void btn_jobs(View view) {
+        Intent i = new Intent(getApplicationContext(), Jobs.class);
+        startActivity(i);
+    }
+
 
     public static class MyPagerAdapter extends FragmentPagerAdapter {
         private static int NUM_ITEMS = 3;

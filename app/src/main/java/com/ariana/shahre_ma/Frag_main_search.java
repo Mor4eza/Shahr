@@ -113,8 +113,8 @@ public class Frag_main_search extends Fragment {
                                     btnAdvance.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(android.R.drawable.arrow_up_float), null, null, null);
                                 }
                             });
-                    visable=true;
-                }else {
+                    visable = true;
+                } else {
                     frame.setAlpha(0.0f);
                     advance.animate()
                             .translationY(0)
@@ -126,29 +126,33 @@ public class Frag_main_search extends Fragment {
                                     super.onAnimationEnd(animation);
                                     advance.setVisibility(View.GONE);
                                     frame.animate().alpha(1.0f).setDuration(10);
-                                    btnAdvance.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(android.R.drawable.arrow_down_float),null,null,null);
+                                    btnAdvance.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(android.R.drawable.arrow_down_float), null, null, null);
                                 }
                             });
-                    visable=false;
+                    visable = false;
                 }
 
             }
         });
 
-
-
+        txtWhere.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.top.closeTopView(true);
+            }
+        });
 
         txtWhat.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                    boolean isValidKey = event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER;
-                    boolean isValidAction = actionId == EditorInfo.IME_ACTION_DONE;
-                    if (isValidKey || isValidAction) {
-                        btnSearch.performClick();
-                    }
+                boolean isValidKey = event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER;
+                boolean isValidAction = actionId == EditorInfo.IME_ACTION_DONE;
+                if (isValidKey || isValidAction) {
+                    btnSearch.performClick();
+                }
                 return false;
-        }
-    });
+            }
+        });
 
         GetNameActivity();
         GetNameSubset();
@@ -158,10 +162,10 @@ public class Frag_main_search extends Fragment {
         @Override
         public void onClick(View v) {
 
-            DeleteDataBaseSqlite dda=new DeleteDataBaseSqlite(getActivity());
+            DeleteDataBaseSqlite dda = new DeleteDataBaseSqlite(getActivity());
             dda.delete_Search();
             Query query = new Query(getActivity());
-            fieldactivity=query.getFieldActivityId(txtField.getText().toString());
+            fieldactivity = query.getFieldActivityId(txtField.getText().toString());
             Cityid = query.getCityId(txtWhere.getText().toString());
             subsetid = query.getAdvancesubsetID(txtField.getText().toString());
             fdb.ClearAll();
@@ -169,77 +173,54 @@ public class Frag_main_search extends Fragment {
             Log.i("subsetid", String.valueOf(subsetid));
             Log.i("Cityid", String.valueOf(Cityid));
 
-            if (txtField.getText().equals(null) || txtField.getText().equals("") || txtField.getText().length()==0)
-            {
-                if(txtWhat.getText().length()==0 || txtWhat.getText().equals(" ") || txtWhat.getText().equals("")) {
+            if (txtField.getText().equals(null) || txtField.getText().equals("") || txtField.getText().length() == 0) {
+                if (txtWhat.getText().length() == 0 || txtWhat.getText().equals(" ") || txtWhat.getText().equals("")) {
                     txtWhat.setError("یه چیز بنویس  ، مثلا نام فروشگاه یا مشاغل");
                     txtWhat.requestFocus();
-                }
-                else
-                {
-                    if(txtWhat.getText().toString().trim().length()<=2)
-                    {
+                } else {
+                    if (txtWhat.getText().toString().trim().length() <= 2) {
                         txtWhat.setError("تعداد حروف باید حداقل سه حرف باشه");
                         txtWhat.requestFocus();
-                    }
-                    else
-                    {
+                    } else {
                         SearchOfline searchOfline = new SearchOfline(getActivity());
                         searchOfline.TextSearch(txtWhere.getText().toString(), txtWhat.getText().toString());
                     }
                 }
-            }
-            else
-            {
-                if(subsetid>0 || fieldactivity>0)
-                {
-                    if(Cityid<=0)
-                    {
-                        MessageDialog messageDialog=new MessageDialog(getActivity());
-                        messageDialog.ShowMessage("هشدار","شهر مورد نظر یافت نشد","باشه","false");
-                    }
-                    else
-                    {
-                        if(txtAddress.getText().length()==0 || txtAddress.getText().equals(null) || txtAddress.getText().equals(""))
-                        {
-                            if(subsetid>0) {
+            } else {
+                if (subsetid > 0 || fieldactivity > 0) {
+                    if (Cityid <= 0) {
+                        MessageDialog messageDialog = new MessageDialog(getActivity());
+                        messageDialog.ShowMessage("هشدار", "شهر مورد نظر یافت نشد", "باشه", "false");
+                    } else {
+                        if (txtAddress.getText().length() == 0 || txtAddress.getText().equals(null) || txtAddress.getText().equals("")) {
+                            if (subsetid > 0) {
                                 Log.i("address", "spaceSubset");
                                 SearchOfline searchOfline = new SearchOfline(getActivity());
                                 searchOfline.TextAdvancedSearch(Cityid, txtWhat.getText().toString(), " ", txtField.getText().toString());
-                            }
-                            else
-                            {
+                            } else {
                                 Log.i("address", "spaceField");
                                 SearchOfline searchOfline = new SearchOfline(getActivity());
                                 searchOfline.TextAdvancedSearch2(Cityid, txtWhat.getText().toString(), " ", txtField.getText().toString());
                             }
-                        }
-                        else if(subsetid>0)
-                        {
+                        } else if (subsetid > 0) {
                             SearchOfline searchOfline = new SearchOfline(getActivity());
                             searchOfline.TextAdvancedSearch(Cityid, txtWhat.getText().toString(), txtAddress.getText().toString(), txtField.getText().toString());
-                        }
-                        else if(fieldactivity>0)
-                        {
+                        } else if (fieldactivity > 0) {
                             SearchOfline searchOfline = new SearchOfline(getActivity());
                             searchOfline.TextAdvancedSearch2(Cityid, txtWhat.getText().toString(), txtAddress.getText().toString(), txtField.getText().toString());
-                        }
-                        else
-                        {
+                        } else {
                             SearchOfline searchOfline = new SearchOfline(getActivity());
                             searchOfline.TextAdvancedSearch(Cityid, txtWhat.getText().toString(), txtAddress.getText().toString(), txtField.getText().toString());
                         }
 
                     }
-                }
-                else
-                {
-                    MessageDialog messageDialog=new MessageDialog(getActivity());
-                    messageDialog.ShowMessage("هشدار","زیر مجموعه مورد نظر یافت نشد","باشه","false");
+                } else {
+                    MessageDialog messageDialog = new MessageDialog(getActivity());
+                    messageDialog.ShowMessage("هشدار", "زیر مجموعه مورد نظر یافت نشد", "باشه", "false");
                 }
 
             }
-            }
+        }
 
     });
 

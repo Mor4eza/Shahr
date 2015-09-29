@@ -31,14 +31,55 @@
             android:gravity="center"
             android:orientation="vertical">
 
+
             <com.daimajia.slider.library.SliderLayout
                 android:id="@+id/slider"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:weightSum="2"
+                android:background="@color/primary_dark"
+                >
 
+            <Button
+                android:layout_alignParentRight="true"
+                android:id="@+id/near_me"
+                android:text="اطراف من"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:onClick="btn_nearme"
+                android:textSize="17sp"
+                android:textColor="@color/md_white_1000"
+                android:drawableRight="@drawable/near_me_filled_50"
+                android:background="?android:attr/selectableItemBackground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
 
+              />
+            <Button
 
+                android:id="@+id/jobs"
+                android:text="لیست مشاغل"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textColor="@color/md_white_1000"
+                android:layout_marginLeft="10dp"
+                android:onClick="btn_jobs"
+                android:textSize="17sp"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableRight="@drawable/us_dollar_50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            </LinearLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:background="@color/md_white_1000"
+                android:layout_height="0.5dp"/>
         </LinearLayout>
 
         <!--content view-->
@@ -46,6 +87,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
 
             <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/viewPager"
