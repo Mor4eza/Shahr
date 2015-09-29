@@ -44,10 +44,9 @@ public class My_products extends ActionBarActivity {
 
    public void add_product(View v){
 
-     /*  Intent i = new Intent(getApplicationContext(),add_product.class);
-       startActivity(i);*/
        Intent i = new Intent(getApplicationContext(),add_product.class);
        startActivity(i);
+
 
    }
 

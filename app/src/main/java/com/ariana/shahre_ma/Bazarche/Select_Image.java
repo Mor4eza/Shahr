@@ -1,5 +1,6 @@
 package com.ariana.shahre_ma.Bazarche;
 
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
@@ -27,6 +28,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Select_Image extends ActionBarActivity implements ImageView.OnClickListener {
@@ -105,17 +107,10 @@ public class Select_Image extends ActionBarActivity implements ImageView.OnClick
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == GALLERY_CODE && resultCode == RESULT_OK && null != data) {
-
             mImageCaptureUri = data.getData();
-            System.out.println("Gallery Image URI : "+mImageCaptureUri);
-            Path= getRealPathFromURI(mImageCaptureUri);
-
             CropingIMG();
 
         } else if (requestCode == CAMERA_CODE && resultCode == Activity.RESULT_OK) {
-
-            System.out.println("Camera Image URI : " + mImageCaptureUri);
-
             CropingIMG();
         } else if (requestCode == CROPING_CODE) {
             try {
@@ -137,7 +132,7 @@ public class Select_Image extends ActionBarActivity implements ImageView.OnClick
                     }
                 }
                 else {
-                    Toast.makeText(getApplicationContext(), "Error while save image", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "خطایی رخ داد! دوباره امتحان کنید", Toast.LENGTH_SHORT).show();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -180,75 +175,70 @@ public class Select_Image extends ActionBarActivity implements ImageView.OnClick
     }
 
 
-    private void CropingIMG() {
-
-        final ArrayList cropOptions = new ArrayList();
-
-        Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setType("image/*");
-
-        List list = getPackageManager().queryIntentActivities( intent, 0 );
-        int size = list.size();
-        if (size == 0) {
-            Toast.makeText(this, "Cann't find image croping app", Toast.LENGTH_SHORT).show();
+    private void CropingIMG()
+    {
+        final ArrayList localArrayList = new ArrayList();
+        Intent localIntent1 = new Intent("com.android.camera.action.CROP");
+        localIntent1.setType("image/*");
+        List localList = getPackageManager().queryIntentActivities(localIntent1, 0);
+        int i = localList.size();
+        if (i == 0)
+        {
+            Toast.makeText(this, "برنامه ای برای ویرایش عکس پیدا نشد...!", Toast.LENGTH_LONG).show();
             return;
-        } else {
-            intent.setData(mImageCaptureUri);
-            intent.putExtra("outputX", 400);
-            intent.putExtra("outputY", 600);
-            intent.putExtra("aspectX", 1);
-            intent.putExtra("aspectY", 1);
-            intent.putExtra("scale", true);
-
-            //TODO: don't use return-data tag because it's not return large image data and crash not given any message
-            //intent.putExtra("return-data", true);
-
-            //Create output file here
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(outPutFile));
-
-            if (size == 1) {
-                Intent i = new Intent(intent);
-                ResolveInfo res = (ResolveInfo) list.get(0);
-
-                i.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
-
-                startActivityForResult(i, CROPING_CODE);
-            } /*else {
-                for (ResolveInfo res : list) {
-                    final CropingOption co = new CropingOption();
-
-                    co.title  = getPackageManager().getApplicationLabel(res.activityInfo.applicationInfo);
-                    co.icon  = getPackageManager().getApplicationIcon(res.activityInfo.applicationInfo);
-                    co.appIntent= new Intent(intent);
-                    co.appIntent.setComponent( new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
-                    cropOptions.add(co);
-                }*/
-
-             /*   CropingOptionAdapter adapter = new CropingOptionAdapter(getApplicationContext(), cropOptions);
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Choose Croping App");
-                builder.setCancelable(false);
-                builder.setAdapter( adapter, new DialogInterface.OnClickListener() {
-                    public void onClick( DialogInterface dialog, int item ) {
-                        startActivityForResult((Intent) cropOptions.get(item), CROPING_CODE);
+        }
+        localIntent1.setData(this.mImageCaptureUri);
+        localIntent1.putExtra("outputX", 512);
+        localIntent1.putExtra("outputY", 512);
+        localIntent1.putExtra("aspectX", 1);
+        localIntent1.putExtra("aspectY", 1);
+        localIntent1.putExtra("scale", true);
+        localIntent1.putExtra("output", Uri.fromFile(this.outPutFile));
+        if (i == 1)
+        {
+            Intent localIntent2 = new Intent(localIntent1);
+            ResolveInfo localResolveInfo1 = (ResolveInfo)localList.get(0);
+            localIntent2.setComponent(new ComponentName(localResolveInfo1.activityInfo.packageName, localResolveInfo1.activityInfo.name));
+            startActivityForResult(localIntent2, 301);
+            return;
+        }
+        Iterator localIterator = localList.iterator();
+        for (;;)
+        {
+            if (!localIterator.hasNext())
+            {
+                CropingOptionAdapter localCropingOptionAdapter = new CropingOptionAdapter(getApplicationContext(), localArrayList);
+                AlertDialog.Builder localBuilder = new AlertDialog.Builder(this);
+                localBuilder.setTitle("برش عکس با:");
+                localBuilder.setCancelable(false);
+                localBuilder.setAdapter(localCropingOptionAdapter, new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt)
+                    {
+                       startActivityForResult(((CropingOption)localArrayList.get(paramAnonymousInt)).appIntent, 301);
                     }
                 });
-
-                builder.setOnCancelListener( new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel( DialogInterface dialog ) {
-
-                        if (mImageCaptureUri != null ) {
-                            getContentResolver().delete(mImageCaptureUri, null, null );
-                            mImageCaptureUri = null;
+                localBuilder.setOnCancelListener(new DialogInterface.OnCancelListener()
+                {
+                    public void onCancel(DialogInterface paramAnonymousDialogInterface)
+                    {
+                        if (mImageCaptureUri != null)
+                        {
+                            getContentResolver().delete(mImageCaptureUri, null, null);
+                           mImageCaptureUri = null;
                         }
                     }
-                } );
-
-                AlertDialog alert = builder.create();
-                alert.show();
-            }*/
+                });
+                localBuilder.create().show();
+                return;
+            }
+            ResolveInfo localResolveInfo2 = (ResolveInfo)localIterator.next();
+            CropingOption localCropingOption = new CropingOption();
+            localCropingOption.title = getPackageManager().getApplicationLabel(localResolveInfo2.activityInfo.applicationInfo);
+            localCropingOption.icon = getPackageManager().getApplicationIcon(localResolveInfo2.activityInfo.applicationInfo);
+            localCropingOption.appIntent = new Intent(localIntent1);
+            localCropingOption.appIntent.setComponent(new ComponentName(localResolveInfo2.activityInfo.packageName, localResolveInfo2.activityInfo.name));
+            localArrayList.add(localCropingOption);
         }
     }
 
