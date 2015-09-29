@@ -1,10 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-   <!-- <item
+   <item
         android:id="@+id/img_pop_cam"
         android:title="دوربین"
         android:icon="@android:drawable/ic_menu_camera"/>
--->
+
     <item
         android:id="@+id/img_pop_gal"
         android:title="گالری"
