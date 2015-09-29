@@ -1,11 +1,14 @@
 package com.ariana.shahre_ma.MyBusiness;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,6 +29,8 @@ import android.widget.ImageView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Toast;
 
+import com.ariana.shahre_ma.Bazarche.CropingOption;
+import com.ariana.shahre_ma.Bazarche.CropingOptionAdapter;
 import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.Date.DateTime;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
@@ -45,12 +50,11 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.squareup.picasso.Picasso;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Edit_business extends ActionBarActivity implements ImageView.OnClickListener{
@@ -77,7 +81,11 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
     Query query=new Query(Edit_business.this);
     CalendarTool ct=new CalendarTool();
     NetState net=new NetState(this);
-    Uri currImageURI;
+
+    private Uri mImageCaptureUri;
+    private File outPutFile = null;
+    private static final int CAMERA_CODE = 101, GALLERY_CODE = 201, CROPING_CODE = 301;
+
     String picturePath;
     String Path="";
     Integer ViewId=0;
@@ -95,6 +103,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
         setContentView(R.layout.activity_edit_business);
 
         Initialize_Views();
+        outPutFile = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
 
         GetSubSet();
         GetNameCity();
@@ -507,97 +516,50 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
     public void openCamera() {
 
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // intent.putExtra(MediaStore.EXTRA_OUTPUT, currImageURI);
-        startActivityForResult(intent, 100);
-
+        File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp1.jpg");
+        mImageCaptureUri = Uri.fromFile(f);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
+        startActivityForResult(intent, CAMERA_CODE);
     }
     public void selectImageFromGallery() {
-
-        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        pickIntent.setType("image/*");
-        pickIntent.putExtra("outputX", 512);
-        pickIntent.putExtra("outputY", 512);
-        pickIntent.putExtra("aspectX", 1);
-        pickIntent.putExtra("aspectY", 1);
-        pickIntent.putExtra("scale", true);
-
-        startActivityForResult(pickIntent, 1);
+        Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(i, GALLERY_CODE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == GALLERY_CODE && resultCode == RESULT_OK && null != data) {
+            mImageCaptureUri = data.getData();
+            CropingIMG();
 
-        if (resultCode == RESULT_OK && data!=null) {
-            if (requestCode == 1) {
-                // currImageURI is the global variable I’m using to hold the content:
-                currImageURI = data.getData();
-                System.out.println("Current image Path is —--->" + getRealPathFromURI(currImageURI));
-                BufferedOutputStream out = null;
-                Path=getRealPathFromURI(currImageURI);
-                Bitmap myBitmap = BitmapFactory.decodeFile(Path);
-
-                try {
-                    File dump = new File(Path);
-                    out = new BufferedOutputStream(new FileOutputStream(dump));
-                    myBitmap.compress(Bitmap.CompressFormat.JPEG, 55, out);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } finally {
-                    if (out != null) try {
-                        out.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+        } else if (requestCode == CAMERA_CODE && resultCode == Activity.RESULT_OK) {
+            CropingIMG();
+        } else if (requestCode == CROPING_CODE) {
+            try {
+                if(outPutFile.exists()){
+                    Bitmap photo = decodeFile(outPutFile);
+                    Path= outPutFile.toString();
                     if(ViewId==image1.getId()){
-                    image1.setImageBitmap(myBitmap);
-                    UploadImage();
-                }else if(ViewId==image2.getId()){
-                    image2.setImageBitmap(myBitmap);
-                    UploadImage();
-                }else if(ViewId==image3.getId()){
-                    image3.setImageBitmap(myBitmap);
-                    UploadImage();
-                }else if(ViewId==image4.getId()){
-                    image4.setImageBitmap(myBitmap);
-                    UploadImage();
-                }
-
-
-            }else if(requestCode == 100 && data!=null ){
-                BufferedOutputStream out = null;
-                currImageURI = data.getData();
-                Path=getRealPathFromURI(currImageURI);
-                Bitmap photo = (Bitmap) data.getExtras().get("data");
-
-                try {
-                    File dump = new File(Path);
-                    out = new BufferedOutputStream(new FileOutputStream(dump));
-                    photo.compress(Bitmap.CompressFormat.JPEG, 100, out);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } finally {
-                    if (out != null) try {
-                        out.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        image1.setImageBitmap(photo);
+                        UploadImage();
+                    }else if(ViewId==image2.getId()){
+                        image2.setImageBitmap(photo);
+                        UploadImage();
+                    }else if(ViewId==image3.getId()){
+                        image3.setImageBitmap(photo);
+                        UploadImage();
+                    }else if(ViewId==image4.getId()){
+                        image4.setImageBitmap(photo);
+                        UploadImage();
                     }
                 }
-                if(ViewId==image1.getId()){
-                    image1.setImageBitmap(photo);
-                    UploadImage();
-                }else if(ViewId==image2.getId()){
-                    image2.setImageBitmap(photo);
-                    UploadImage();
-                }else if (ViewId==image3.getId()){
-                    image3.setImageBitmap(photo);
-                    UploadImage();
-                }else if(ViewId==image4.getId()){
-                    image4.setImageBitmap(photo);
-                    UploadImage();
+                else {
+                    Toast.makeText(getApplicationContext(), "خطایی رخ داد! دوباره امتحان کنید", Toast.LENGTH_SHORT).show();
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
@@ -677,5 +639,100 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
+    private void CropingIMG()
+    {
+        final ArrayList localArrayList = new ArrayList();
+        Intent localIntent1 = new Intent("com.android.camera.action.CROP");
+        localIntent1.setType("image/*");
+        List localList = getPackageManager().queryIntentActivities(localIntent1, 0);
+        int i = localList.size();
+        if (i == 0)
+        {
+            Toast.makeText(this, "برنامه ای برای ویرایش عکس پیدا نشد...!", Toast.LENGTH_LONG).show();
+            return;
+        }
+        localIntent1.setData(this.mImageCaptureUri);
+        localIntent1.putExtra("outputX", 800);
+        localIntent1.putExtra("outputY", 600);
+        localIntent1.putExtra("aspectX", 1);
+        localIntent1.putExtra("aspectY", 1);
+        localIntent1.putExtra("scale", true);
+        localIntent1.putExtra("output", Uri.fromFile(this.outPutFile));
+        if (i == 1)
+        {
+            Intent localIntent2 = new Intent(localIntent1);
+            ResolveInfo localResolveInfo1 = (ResolveInfo)localList.get(0);
+            localIntent2.setComponent(new ComponentName(localResolveInfo1.activityInfo.packageName, localResolveInfo1.activityInfo.name));
+            startActivityForResult(localIntent2, 301);
+            return;
+        }
+        Iterator localIterator = localList.iterator();
+        for (;;)
+        {
+            if (!localIterator.hasNext())
+            {
+                CropingOptionAdapter localCropingOptionAdapter = new CropingOptionAdapter(getApplicationContext(), localArrayList);
+                AlertDialog.Builder localBuilder = new AlertDialog.Builder(this);
+                localBuilder.setTitle("برش عکس با:");
+                localBuilder.setCancelable(false);
+                localBuilder.setAdapter(localCropingOptionAdapter, new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt)
+                    {
+                        startActivityForResult(((CropingOption)localArrayList.get(paramAnonymousInt)).appIntent, 301);
+                    }
+                });
+                localBuilder.setOnCancelListener(new DialogInterface.OnCancelListener()
+                {
+                    public void onCancel(DialogInterface paramAnonymousDialogInterface)
+                    {
+                        if (mImageCaptureUri != null)
+                        {
+                            getContentResolver().delete(mImageCaptureUri, null, null);
+                            mImageCaptureUri = null;
+                        }
+                    }
+                });
+                localBuilder.create().show();
+                return;
+            }
+            ResolveInfo localResolveInfo2 = (ResolveInfo)localIterator.next();
+            CropingOption localCropingOption = new CropingOption();
+            localCropingOption.title = getPackageManager().getApplicationLabel(localResolveInfo2.activityInfo.applicationInfo);
+            localCropingOption.icon = getPackageManager().getApplicationIcon(localResolveInfo2.activityInfo.applicationInfo);
+            localCropingOption.appIntent = new Intent(localIntent1);
+            localCropingOption.appIntent.setComponent(new ComponentName(localResolveInfo2.activityInfo.packageName, localResolveInfo2.activityInfo.name));
+            localArrayList.add(localCropingOption);
+        }
+    }
+
+
+    private Bitmap decodeFile(File f) {
+        try {
+            // decode image size
+            BitmapFactory.Options o = new BitmapFactory.Options();
+            o.inJustDecodeBounds = true;
+            BitmapFactory.decodeStream(new FileInputStream(f), null, o);
+
+            // Find the correct scale value. It should be the power of 2.
+            final int REQUIRED_SIZE = 512;
+            int width_tmp = o.outWidth, height_tmp = o.outHeight;
+            int scale = 1;
+            while (true) {
+                if (width_tmp / 2 < REQUIRED_SIZE || height_tmp / 2 < REQUIRED_SIZE)
+                    break;
+                width_tmp /= 2;
+                height_tmp /= 2;
+                scale *= 2;
+            }
+
+            // decode with inSampleSize
+            BitmapFactory.Options o2 = new BitmapFactory.Options();
+            o2.inSampleSize = scale;
+            return BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
+        } catch (FileNotFoundException e) {
+        }
+        return null;
     }
 }

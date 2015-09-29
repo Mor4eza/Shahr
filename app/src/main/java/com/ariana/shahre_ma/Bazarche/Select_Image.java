@@ -20,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Fields.FieldClass;
-import com.ariana.shahre_ma.MyBusiness.Edit_business;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServicePost.HTTPPostUploadImage;
 
@@ -37,7 +36,7 @@ public class Select_Image extends ActionBarActivity implements ImageView.OnClick
     ImageView image2;
     ImageView image3;
     ImageView image4;
-    Uri currImageURI;
+
     String picturePath;
     Integer ViewId=0;
     String Path="";
@@ -45,7 +44,6 @@ public class Select_Image extends ActionBarActivity implements ImageView.OnClick
     private File outPutFile = null;
     private static final int CAMERA_CODE = 101, GALLERY_CODE = 201, CROPING_CODE = 301;
     FieldClass fc=new FieldClass();
-    Edit_business edit_business=new Edit_business();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
