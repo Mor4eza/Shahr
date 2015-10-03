@@ -125,6 +125,10 @@ Query query=new Query(this);
                         city.setError("شهر خود را انتخاب کنید");
 
             }
+            else if(Aemail.length()>0 && !isValidEmail(Aemail)){
+
+                    email.setError("ایمیل نا معتبر است.");
+            }
             else if(Aname.length()<3)
             {
                         name.setError("بیش از 3 حرف وارد کنید");
@@ -224,5 +228,13 @@ Query query=new Query(this);
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
+
+    public final static boolean isValidEmail(CharSequence target) {
+        if (target == null) {
+            return false;
+        } else {
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+        }
     }
 }
