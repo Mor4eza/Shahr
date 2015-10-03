@@ -162,7 +162,7 @@ public class job_details_1 extends ActionBarActivity {
         private  void display_detail() {
 
              SelectDataBaseSqlite db = new SelectDataBaseSqlite(getActivity());
-             try {
+         //   try {
              if(fc.GetBusinessTops())
              {
 
@@ -178,14 +178,14 @@ public class job_details_1 extends ActionBarActivity {
                  //check phone
                  tel.setText(allrows.getString(3));//Phone
                  Log.i("Tell",allrows.getString(3));
-                 if(allrows.getString(3).equals("1") || allrows.getString(3).equals(null) || allrows.getString(3).equals("null") || allrows.getString(3).equals(""))
+                 if(allrows.getString(3).equals("1") || allrows.getString(3).equals(null) || allrows.getString(3).equals("null") || allrows.getString(3).equals("")) {
                      tel.setText(allrows.getString(4));//Mobile
-                 Log.i("Mobile",tel.getText().toString());
-
-                 if (tel.getText().equals("1") || tel.getText().equals(null) || tel.getText().equals("null") || tel.getText().equals(""))
-                    tel.setVisibility(View.GONE);
-                 Log.i("ifMobile",allrows.getString(4));
-
+                     Log.i("Mobile", tel.getText().toString());
+                 }
+                 if (tel.getText().equals("1") || tel.getText().equals(null) || tel.getText().equals("null") || tel.getText().equals("")) {
+                     tel.setVisibility(View.GONE);
+                     Log.i("ifMobile", allrows.getString(4));
+                 }
                  //check email
                  if(allrows.getString(6).equals("null") || allrows.getString(6).equals(null) || allrows.getString(6).equals("")) {
                      web.setText("");//Email
@@ -225,7 +225,7 @@ public class job_details_1 extends ActionBarActivity {
                          zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");
                      }
                  }
-                 Log.i("Rate---Tops", String.valueOf(allrows.getDouble(30)));
+
 
              }
              else if(fc.GetBusinessDisCountTops())
@@ -243,12 +243,15 @@ public class job_details_1 extends ActionBarActivity {
 
                  //check phone
                  tel.setText(allrows.getString(3));//Phone
-                 if(allrows.getString(3).equals("1") || allrows.getString(3).equals(null) || allrows.getString(3).equals("null") || allrows.getString(3).equals(""))
-                     tel.setText(allrows.getString(4));//Phone
-
-                 if (tel.getText().equals("1") || tel.getText().equals(null) || tel.getText().equals("null") || tel.getText().equals(""))
-                 tel.setVisibility(View.GONE);
-
+                 Log.i("Tell", allrows.getString(3));
+                 if(allrows.getString(3).equals("1") || allrows.getString(3).equals(null) || allrows.getString(3).equals("null") || allrows.getString(3).equals("")) {
+                     tel.setText(allrows.getString(4));//Mobile
+                     Log.i("Mobile", tel.getText().toString());
+                 }
+                 if (tel.getText().equals("1") || tel.getText().equals(null) || tel.getText().equals("null") || tel.getText().equals("")) {
+                     tel.setVisibility(View.GONE);
+                     Log.i("ifMobile", allrows.getString(4));
+                 }
                  //check email
                  if(allrows.getString(6).equals("null") || allrows.getString(6).equals(null) || allrows.getString(6).equals("")){
                      web.setText("");//Email
@@ -288,8 +291,7 @@ public class job_details_1 extends ActionBarActivity {
                          zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");
                      }
                  }
-                 Log.i("Rate---Discount", String.valueOf(allrows.getDouble(30)));
-                 //rate1.setRating((float)allrows.getDouble(30));
+
              }
              else
              {
@@ -303,15 +305,17 @@ public class job_details_1 extends ActionBarActivity {
                  name.setText(allrows.getString(1));//Market
 
 
-
                  //check phone
-                 tel.setText(allrows.getString(3));//Phone
-                 if(allrows.getString(3).equals("1") || allrows.getString(3).equals(null) || allrows.getString(3).equals("null") || allrows.getString(3).equals(""))
-                     tel.setText(allrows.getString(4));//Phone
-
-                 if (tel.getText().equals("1") || tel.getText().equals(null) || tel.getText().equals("null") || tel.getText().equals(""))
-                 tel.setVisibility(View.GONE);
-
+                 tel.setText(allrows.getString(2));//Phone
+                 Log.i("Tell", allrows.getString(2));
+                 if(allrows.getString(2).equals("1") || allrows.getString(2).equals(null) || allrows.getString(2).equals("null") || allrows.getString(2).equals("")) {
+                     tel.setText(allrows.getString(3));//Mobile
+                     Log.i("Mobile", tel.getText().toString());
+                 }
+                 if (tel.getText().equals("1") || tel.getText().equals(null) || tel.getText().equals("null") || tel.getText().equals("")) {
+                     tel.setVisibility(View.GONE);
+                     Log.i("ifMobile", allrows.getString(3));
+                 }
                  //check email
                  if(allrows.getString(5).equals("null") || allrows.getString(5).equals(null) || allrows.getString(5).equals("")){
                      web.setText("");//Email
@@ -349,17 +353,14 @@ public class job_details_1 extends ActionBarActivity {
                          zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");
                      }
                  }
-                 Log.i("Rate---", String.valueOf(allrows.getDouble(23)));
+
 
              }
 
-             if(tel.getText().length()<2){
-                 tel.setVisibility(View.GONE);
-             }
-       }
+     /*  }
         catch (Exception e){
 
-        }
+        }*/
 
     }
 
