@@ -10,10 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -31,13 +31,14 @@ public class FilterDialog extends Dialog {
     ListView listView;
     FieldDataBusiness fdb=new FieldDataBusiness();
     Button filter;
+    public static CheckBox checkfilter;
     FieldClass fc=new FieldClass();
     public FilterDialog(Context context) {
         super(context);
     }
 
 
-    private List<Integer> selectId=new ArrayList<>();
+    private  List<Integer>  selectId=new ArrayList<>();
     private  List<Double>  selectLongtiude=new ArrayList<>();
     private  List<Double>  selectLatitude=new ArrayList<>();
     private  List<Double>  selectRate=new ArrayList<>();
@@ -46,15 +47,34 @@ public class FilterDialog extends Dialog {
     private  List<String>  selectAddress=new ArrayList<>();
     private  List<String>  selectMarketName=new ArrayList<String>();
 
+    private static Integer _SIZE=0;
 
+
+    private static List<Integer> keepId=new ArrayList<>();
+    private static List<Double>  keepLongtiude=new ArrayList<>();
+    private static List<Double>  keepLatitude=new ArrayList<>();
+    private static List<Double>  keepRate=new ArrayList<>();
+    private static List<String>  keepPhone=new ArrayList<>();
+    private static List<String>  keepMobile=new ArrayList<String>();
+    private static List<String>  keepAddress=new ArrayList<>();
+    private static List<String>  keepMarketName=new ArrayList<>();
+    private static List<Integer> keepSubsetId=new ArrayList<>();
+    public static List<Integer>  subsetId = new ArrayList<>();
+    FilterAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.filter_dialog_layout);
+
+        if(_SIZE==0)
+        MoveData();
+
+
         setTitle("فیلتر کردن");
-        FilterAdapter adapter = new FilterAdapter(getContext(), generateData());
+         adapter = new FilterAdapter(getContext(), generateData());
         listView = (ListView) findViewById(R.id.filter_list);
         filter=(Button)findViewById(R.id.btn_filter);
+        checkfilter=(CheckBox) findViewById(R.id.checkFilterAll);
         listView.setAdapter(adapter);
         FilterAdapter.selectedsubset.clear();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -62,8 +82,6 @@ public class FilterDialog extends Dialog {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 String selected = (String) listView.getItemAtPosition(position);
-
-                Log.i("selected", selected);
             }
         });
 
@@ -73,8 +91,8 @@ public class FilterDialog extends Dialog {
             public void onClick(View v) {
                 SelectDataBaseSqlite sdb = new SelectDataBaseSqlite(getContext());
                 Query query = new Query(getContext());
-                Log.i("Filter", "start");
-                Log.i("Filter", String.valueOf(FilterAdapter.selectedsubset.size()));
+
+                fdb.ClearAll();
                 for (int i = 0; i < FilterAdapter.selectedsubset.size(); i++) {
                     Cursor rows = sdb.select_BusinessSearchNearMe(fc.GetcurLatitude(), fc.GetcurLongitude(), 0.001, query.getsubsetID(FilterAdapter.selectedsubset.get(i)));
                     if (rows.moveToFirst()) {
@@ -111,38 +129,48 @@ public class FilterDialog extends Dialog {
 
         });
 
+
+
     }
 
     public ArrayList<FilterItems> generateData(){
         Query query=new Query(getContext());
         java.util.ArrayList<FilterItems> items = new ArrayList<FilterItems>();
-        List<Integer> subsetId = new ArrayList<>();
 
-        for (int i = 0; i < fdb.GetMarketBusiness().size(); i++) {
 
-            Log.i("for1",String.valueOf(fdb.GetSubsetId().get(i)));
-                subsetId.add(fdb.GetSubsetId().get(i));
+        _SIZE=keepMarketName.size();
+
+        for (int i = 0; i < keepMarketName.size(); i++) {
+
+            Log.i("for1",String.valueOf(keepSubsetId.get(i)));
+                if(!subsetId.contains(keepSubsetId.get(i))) {
+                    subsetId.add(keepSubsetId.get(i));
+
+                }
 
         }
-
-
-        for (int i = 0; i < subsetId.size(); i++)
-            for(int j = i+1; j <subsetId.size(); j++)
-            {
-                if(subsetId.get(i)==subsetId.get(j))
-                {
-
-                  subsetId.remove(i);
-                }
-            }
-
 
         for (int i = 0; i < subsetId.size(); i++) {
 
-            Log.i("for2",String.valueOf(subsetId.get(i)));
-            items.add(new FilterItems(query.getsubsetName(subsetId.get(i)),subsetId.get(i)));
+            items.add(new FilterItems(query.getsubsetName(subsetId.get(i)), subsetId.get(i)));
         }
 
         return items;
+    }
+
+    private void MoveData()
+    {
+
+        for(int i=0; i<fdb.GetMarketBusiness().size();i++){
+            keepAddress.add(fdb.GetAddressBusiness().get(i));
+            keepMarketName.add(fdb.GetMarketBusiness().get(i));
+            keepPhone.add(fdb.GetPhoneBusiness().get(i));
+            keepMobile.add(fdb.GetMobileBusiness().get(i));
+            keepId.add(fdb.GetIdBusiness().get(i));
+            keepLatitude.add(fdb.GetLatitudeBusiness().get(i));
+            keepLongtiude.add(fdb.GetLongtiudeBusiness().get(i));
+            keepSubsetId.add(fdb.GetSubsetId().get(i));
+            keepRate.add(fdb.GetRateBusiness().get(i));}
+
     }
 }

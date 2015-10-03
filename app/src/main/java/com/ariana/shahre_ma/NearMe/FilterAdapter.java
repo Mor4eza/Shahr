@@ -69,8 +69,30 @@ public class FilterAdapter extends ArrayAdapter<FilterItems> {
                 }
             }
         });
+
+
+        FilterDialog.checkfilter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    for (int i = 0; i < FilterDialog.subsetId.size(); i++) {
+                        mCheckedState[i] = true;
+                        notifyDataSetChanged();
+                    }
+                } else {
+                    for (int i = 0; i < FilterDialog.subsetId.size(); i++) {
+                        mCheckedState[i] = false;
+                        notifyDataSetChanged();
+                    }
+                    selectedsubset.clear();
+                    Log.i("selectedsubsetSize", String.valueOf(selectedsubset.size()));
+                }
+            }
+        });
         labelView.setChecked(mCheckedState[position]);
 
         return rowView;
     }
+
+
 }

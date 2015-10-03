@@ -174,12 +174,10 @@ public class job_details_1 extends ActionBarActivity {
                  fc.SetLongtiude_Business(allrows.getDouble(16));//Longtiude
                  name.setText(allrows.getString(1));//Market
 
-
+                 tel.setText(allrows.getString(3));//Phone
                  //check phone
-                 if(allrows.getString(3).trim().equals("1") || allrows.getString(3).trim().equals("NULL"))
-                     tel.setText(allrows.getString(4));//Phone
-                 else if(allrows.getString(4).equals("") || allrows.getString(4).equals("1") || allrows.getString(4).equals("NULL"))
-                     parent.removeView((View) tel.getParent());
+                 if(allrows.getString(3).equals("1") || allrows.getString(3).equals(null) || allrows.getString(3).equals("null") || allrows.getString(3).equals(""))
+                     tel.setVisibility(View.GONE);
 
 
                  //check email
@@ -236,12 +234,10 @@ public class job_details_1 extends ActionBarActivity {
 
                 // tv_rateCount.setText(allrows.getInt(30)); //rateCount
 
-
+                 tel.setText(allrows.getString(3));//Phone
                  //check phone
-                 if(allrows.getString(3).trim().equals("1") || allrows.getString(3).trim().equals("NULL"))
-                     tel.setText(allrows.getString(4));//Phone
-                 else if(allrows.getString(4).equals("") || allrows.getString(4).equals("1") || allrows.getString(4).equals("NULL"))
-                     parent.removeView((View) tel.getParent());
+                 if(allrows.getString(3).equals("1") || allrows.getString(3).equals(null) || allrows.getString(3).equals("null") || allrows.getString(3).equals(""))
+                     tel.setVisibility(View.GONE);
 
 
                  //check email
@@ -298,12 +294,10 @@ public class job_details_1 extends ActionBarActivity {
                  name.setText(allrows.getString(1));//Market
 
 
-
+                 tel.setText(allrows.getString(3));//Phone
                  //check phone
-                 if(allrows.getString(3).trim().equals("1") || allrows.getString(3).trim().equals("NULL"))
-                     tel.setText(allrows.getString(4));//Phone
-                 else if(allrows.getString(4).equals("") || allrows.getString(4).equals("1") || allrows.getString(4).equals("NULL"))
-                     parent.removeView((View) tel.getParent());
+                 if(allrows.getString(3).equals("1") || allrows.getString(3).equals(null) || allrows.getString(3).equals("null") || allrows.getString(3).equals(""))
+                     tel.setVisibility(View.GONE);
 
 
 

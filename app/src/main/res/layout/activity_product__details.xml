@@ -16,14 +16,12 @@
     <RelativeLayout android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-
         >
     <HorizontalScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingRight="5dp"
         android:paddingLeft="5dp"
-
         android:layout_centerHorizontal="true"
         android:id="@+id/horizontalScrollView"
         >
@@ -38,7 +36,6 @@
                 android:id="@+id/image1"
                 android:layout_alignParentTop="true"
                 />
-
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -48,7 +45,6 @@
                 android:layout_toRightOf="@+id/image1"
                 android:layout_toEndOf="@+id/image1"
                 android:layout_marginLeft="1dp" />
-
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -69,8 +65,7 @@
                 android:layout_marginLeft="1dp" />
         </RelativeLayout>
     </HorizontalScrollView>
-
-    <RelativeLayout
+        <RelativeLayout
         android:id="@+id/rel_desc"
         android:layout_marginRight="10dp"
         android:visibility="gone"
@@ -104,7 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_alignParentRight="true"
-            android:text="تاریخ"/>
+            android:text=""/>
         <TextView
             android:id="@+id/product_details1"
             android:layout_width="wrap_content"
@@ -120,7 +115,7 @@
             android:layout_marginTop="15dp"
             android:layout_below="@id/product_details1"
             android:layout_alignParentRight="true"
-            android:text="توضیحات"/>
+            android:text=""/>
         <TextView
             android:id="@+id/product_property"
             android:layout_width="wrap_content"
@@ -136,7 +131,7 @@
             android:layout_height="wrap_content"
             android:textSize="19sp"
             android:textColor="@color/md_green_500"
-            android:text="wewewe"
+            android:text=""
             android:layout_below="@+id/hint1"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -178,7 +173,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_alignParentRight="true"
-            android:text="تلفن"/>
+            android:text=""/>
         <TextView
             android:id="@+id/product_email"
             android:layout_width="wrap_content"
@@ -186,7 +181,7 @@
             android:layout_marginTop="30dp"
             android:layout_below="@id/product_tell"
             android:layout_alignParentRight="true"
-            android:text="ایمیل"/>
+            android:text=""/>
         <TextView
             android:id="@+id/product_address"
             android:layout_width="wrap_content"
@@ -194,7 +189,7 @@
             android:layout_marginTop="30dp"
             android:layout_below="@id/product_email"
             android:layout_alignParentRight="true"
-            android:text="آدرس"/>
+            android:text=""/>
 
     </RelativeLayout>
 
@@ -206,7 +201,6 @@
             android:textSize="18sp"
             android:layout_marginTop="5dp"
             android:text=""
-
             android:layout_below="@+id/horizontalScrollView"
             android:layout_centerHorizontal="true" />
 

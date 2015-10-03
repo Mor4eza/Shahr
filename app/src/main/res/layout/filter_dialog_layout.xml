@@ -7,7 +7,7 @@
 
   <ListView
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
+      android:layout_height="410dp"
       android:id="@+id/filter_list"
       android:layout_above="@+id/btn_filter"
       android:divider="@color/colorPrimary">
@@ -21,5 +21,18 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/btn_filter" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="انتخاب همه"
+        android:id="@+id/checkFilterAll"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/primary"
+        android:textColor="@color/md_white_1000"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

@@ -7,11 +7,12 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
+import com.ariana.shahre_ma.MessageDialog;
+import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
 import org.json.JSONArray;
@@ -38,7 +39,7 @@ public class HTTPSendNearMeURL extends AsyncTask<String,Void,Integer >
     FieldClass fc=new FieldClass();
     Query query;
     FieldDataBusiness fdb=new FieldDataBusiness();
-
+    MessageDialog messageDialog;
     private List<Integer> selectId=new ArrayList<>();
     private  List<Integer> selectDiscountId=new ArrayList<>();
     private List<Integer> selectsubsetId=new ArrayList<>();
@@ -104,6 +105,7 @@ public class HTTPSendNearMeURL extends AsyncTask<String,Void,Integer >
     public HTTPSendNearMeURL(Context context)
     {
         this.context=context;
+        messageDialog=new MessageDialog(context);
 
     }
 
@@ -149,6 +151,7 @@ public class HTTPSendNearMeURL extends AsyncTask<String,Void,Integer >
             try {
 
                 KeySettings setting = new KeySettings(context);
+                NetState ns=new NetState(context);
                 query = new Query(context);
 
 
@@ -166,8 +169,18 @@ public class HTTPSendNearMeURL extends AsyncTask<String,Void,Integer >
                 if (len == 0) {
                     //  Toast.makeText(get, "فروشگاه ثبت نشده", Toast.LENGTH_LONG).show();
                     Log.i("Count Business : ", "فروشگاه ثبت نشد");
+                    if (len == 0 && errorCode==200)
+                        messageDialog.ShowMessage("پیام", "ارتباط با سرور برقرار نشد دوباره امتحان کنید", "باشه", "false");
+                    else if(len==0 && errorCode==404 || errorCode==402 || errorCode==502 ||  errorCode==504 ||errorCode==619 )
+                        messageDialog.ShowMessage("پیام", "ارتباط با سرور برقرار نشد دوباره امتحان کنید", "باشه", "false");
+                    else if(!ns.checkInternetConnection())
+                        messageDialog.ShowMessage("پیام", "اینترنت قطع می باشد", "باشه", "false");
+                    else if(len==0 || errorCode!=200)
+                         messageDialog.ShowMessage("پیام", "ارتباط برقرار نشد . دوباره امتحان کنید", "باشه", "false");
 
-                } else {
+                }
+                else
+                {
 
 
 
@@ -175,7 +188,8 @@ public class HTTPSendNearMeURL extends AsyncTask<String,Void,Integer >
                     {
                         ddb.delete_BusinessId(Id[i]);
                         ddb.delete_DisCount(discountid[i]);
-                        if (discountid[i] == 0) {
+                        if (discountid[i] == 0)
+                        {
                             Log.i("ifbusiness", "0");
                         } else {
                             Log.i("elsebusiness", "i>0");

@@ -71,6 +71,7 @@ public class NearMeActivity extends ActionBarActivity {
                 final View window = getLayoutInflater().inflate(
                         R.layout.jobs_info_windows, null);
 
+               // fdb.ClearAll();
 
                 String title = marker.getTitle();
                 double rate = Double.parseDouble(marker.getSnippet());

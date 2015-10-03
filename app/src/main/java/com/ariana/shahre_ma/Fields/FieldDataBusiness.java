@@ -199,5 +199,8 @@ public class FieldDataBusiness
         DisCountId.clear();
         Src.clear();
         SubsetId.clear();
+
+        DisCountPercent.clear();
+        RateCount.clear();
     }
 }
