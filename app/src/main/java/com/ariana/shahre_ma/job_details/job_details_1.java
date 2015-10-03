@@ -174,11 +174,17 @@ public class job_details_1 extends ActionBarActivity {
                  fc.SetLongtiude_Business(allrows.getDouble(16));//Longtiude
                  name.setText(allrows.getString(1));//Market
 
-                 tel.setText(allrows.getString(3));//Phone
-                 //check phone
-                 if(allrows.getString(3).equals("1") || allrows.getString(3).equals(null) || allrows.getString(3).equals("null") || allrows.getString(3).equals(""))
-                     tel.setVisibility(View.GONE);
 
+                 //check phone
+                 tel.setText(allrows.getString(3));//Phone
+                 Log.i("Tell",allrows.getString(3));
+                 if(allrows.getString(3).equals("1") || allrows.getString(3).equals(null) || allrows.getString(3).equals("null") || allrows.getString(3).equals(""))
+                     tel.setText(allrows.getString(4));//Mobile
+                 Log.i("Mobile",tel.getText().toString());
+
+                 if (tel.getText().equals("1") || tel.getText().equals(null) || tel.getText().equals("null") || tel.getText().equals(""))
+                    tel.setVisibility(View.GONE);
+                 Log.i("ifMobile",allrows.getString(4));
 
                  //check email
                  if(allrows.getString(6).equals("null") || allrows.getString(6).equals(null) || allrows.getString(6).equals("")) {
@@ -234,11 +240,14 @@ public class job_details_1 extends ActionBarActivity {
 
                 // tv_rateCount.setText(allrows.getInt(30)); //rateCount
 
-                 tel.setText(allrows.getString(3));//Phone
-                 //check phone
-                 if(allrows.getString(3).equals("1") || allrows.getString(3).equals(null) || allrows.getString(3).equals("null") || allrows.getString(3).equals(""))
-                     tel.setVisibility(View.GONE);
 
+                 //check phone
+                 tel.setText(allrows.getString(3));//Phone
+                 if(allrows.getString(3).equals("1") || allrows.getString(3).equals(null) || allrows.getString(3).equals("null") || allrows.getString(3).equals(""))
+                     tel.setText(allrows.getString(4));//Phone
+
+                 if (tel.getText().equals("1") || tel.getText().equals(null) || tel.getText().equals("null") || tel.getText().equals(""))
+                 tel.setVisibility(View.GONE);
 
                  //check email
                  if(allrows.getString(6).equals("null") || allrows.getString(6).equals(null) || allrows.getString(6).equals("")){
@@ -294,12 +303,14 @@ public class job_details_1 extends ActionBarActivity {
                  name.setText(allrows.getString(1));//Market
 
 
-                 tel.setText(allrows.getString(3));//Phone
+
                  //check phone
+                 tel.setText(allrows.getString(3));//Phone
                  if(allrows.getString(3).equals("1") || allrows.getString(3).equals(null) || allrows.getString(3).equals("null") || allrows.getString(3).equals(""))
-                     tel.setVisibility(View.GONE);
+                     tel.setText(allrows.getString(4));//Phone
 
-
+                 if (tel.getText().equals("1") || tel.getText().equals(null) || tel.getText().equals("null") || tel.getText().equals(""))
+                 tel.setVisibility(View.GONE);
 
                  //check email
                  if(allrows.getString(5).equals("null") || allrows.getString(5).equals(null) || allrows.getString(5).equals("")){
