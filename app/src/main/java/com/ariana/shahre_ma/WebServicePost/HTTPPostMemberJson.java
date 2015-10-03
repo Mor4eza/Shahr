@@ -151,8 +151,17 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
                     Log.i("fc.GetMember_Name()", fc.GetMember_Name());
                     dbs.Add_member(ID, fc.GetMember_Name(), fc.GetMember_Email(), fc.GetMember_Mobile(), fc.GetMember_Age(), fc.GetMember_Sex(), fc.GetMember_UserName(), fc.GetMember_Password(), fc.GetMember_CityId());
                     pd.dismiss();
-
-                    messageDialog.ShowMessage("هشدار","ورود شما را به خانواده بزرگ شهر ما تبریک می گوییم .","باشه","false");
+                        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                        alertDialog.setTitle("پیام");
+                        alertDialog.setMessage("ورود شما را به خانواده بزرگ شهر ما تبریک می گوییم .");
+                        alertDialog.setButton("خب", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                ((Activity)context).finish();
+                                Intent i =new Intent(context, MainActivity.class);
+                                context.startActivity(i);
+                            }
+                        });
+                        alertDialog.show();
                 }
                 else
                 {
@@ -165,7 +174,7 @@ private static  final  String url_Member="http://test.shahrma.com/api/ApiTakeMem
             else
             {
                 pd.dismiss();
-               messageDialog.ShowMessage("هشدار","پاسخی از سمت سرور دریافت نشد . دوباره امتحان کنید","باشه","false");
+                messageDialog.ShowMessage("هشدار", "پاسخی از سمت سرور دریافت نشد . دوباره امتحان کنید","باشه","false");
             }
 
         }
