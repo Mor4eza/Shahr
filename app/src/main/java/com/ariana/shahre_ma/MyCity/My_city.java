@@ -68,8 +68,6 @@ public class My_city extends ActionBarActivity{
         myList = (ListView) findViewById(R.id.my_city_list);
         My_City_Adapter adapter = new My_City_Adapter(this, generateData());
         myList.setAdapter(adapter);
-
-
         Sp_City.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -109,6 +107,8 @@ public class My_city extends ActionBarActivity{
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Sp_City.setAdapter(dataAdapter);
+        int spinnerPosition = dataAdapter.getPosition(setting.getCityName());
+        Sp_City.setSelection(spinnerPosition,true);
 
     }
 

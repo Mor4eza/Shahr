@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="در حال دانلود..."
-        android:id="@+id/textView3"
+        android:id="@+id/tv_download_count"
         android:textColor="#fff4eff9"
         android:layout_marginTop="10dp"
         android:textStyle="bold"
@@ -39,9 +39,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/dialog_listview"
         android:layout_marginBottom="5dp"
-        android:layout_below="@+id/textView3"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/cancel" />
+        android:layout_above="@+id/cancel"
+        android:layout_below="@+id/tv_download_count" />
 
 
 </RelativeLayout>

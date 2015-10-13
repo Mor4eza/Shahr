@@ -42,23 +42,24 @@
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
                 android:weightSum="2"
-                android:background="@color/primary_dark"
+                android:padding="2dp"
+                android:background="#ff00c4d4"
                 >
 
             <Button
-                android:layout_alignParentRight="true"
                 android:id="@+id/near_me"
                 android:text="اطراف من"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:onClick="btn_nearme"
                 android:textSize="17sp"
+                android:layout_margin="1dp"
                 android:textColor="@color/md_white_1000"
                 android:drawableRight="@drawable/near_me_filled_50"
-                android:background="?android:attr/selectableItemBackground"
+                android:background="@drawable/oval_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="5dp"
 
               />
             <Button
@@ -70,8 +71,9 @@
                 android:textColor="@color/md_white_1000"
                 android:layout_marginLeft="10dp"
                 android:onClick="btn_jobs"
+                android:layout_margin="1dp"
                 android:textSize="17sp"
-                android:background="?android:attr/selectableItemBackground"
+                android:background="@drawable/oval_button"
                 android:drawableRight="@drawable/us_dollar_50"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
