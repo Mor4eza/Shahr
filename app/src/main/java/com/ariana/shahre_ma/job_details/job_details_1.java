@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.MessageDialog;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetBusinessImageJson;
@@ -162,7 +164,7 @@ public class job_details_1 extends ActionBarActivity {
         private  void display_detail() {
 
              SelectDataBaseSqlite db = new SelectDataBaseSqlite(getActivity());
-         //   try {
+            try {
              if(fc.GetBusinessTops())
              {
 
@@ -290,72 +292,79 @@ public class job_details_1 extends ActionBarActivity {
                  }
 
              }
-             else
-             {
+             else {
 
+                 Log.i("business Id", String.valueOf(fc.GetBusiness_Id()));
                  Cursor allrows = db.select_AllBusinessId(fc.GetBusiness_Id());
-                 allrows.moveToNext();
+                 if (allrows.getCount() > 0) {
+                     allrows.moveToNext();
 
-                 fc.SetBusiness_Id(allrows.getInt(0));//Id
-                 fc.SetLatitude_Business(allrows.getDouble(10));//Latitude
-                 fc.SetLongtiude_Business(allrows.getDouble(11));//Longtiude
-                 name.setText(allrows.getString(1));//Market
-
-
-                 //check phone
-                 tel.setText(allrows.getString(2));//Phone
-                 if(allrows.getString(2).equals("1") || allrows.getString(2).equals(null) || allrows.getString(2).equals("null") || allrows.getString(2).equals("")) {
-                     tel.setText(allrows.getString(3));//Mobile
-                 }
-                 if (tel.getText().equals("1") || tel.getText().equals(null) || tel.getText().equals("null") || tel.getText().equals("")) {
-                     tel.setVisibility(View.GONE);
-                 }
-                 //check email
-                 if(allrows.getString(5).equals("null") || allrows.getString(5).equals(null) || allrows.getString(5).equals("")){
-                     web.setText("");//Email
-                     parent.removeView((View) web.getParent());
-                 } else
-                     web.setText(allrows.getString(5));//Email
-
-                 //check businessOwner
-                 if(allrows.getString(6).equals("") || allrows.getString(6).equals("نن")) {
-                     owner.setText("");//BusinessOwner
-                     parent.removeView((View) owner.getParent());
-                 }else
-                     owner.setText(allrows.getString(6));//BusinessOwner
+                     fc.SetBusiness_Id(allrows.getInt(0));//Id
+                     Log.i("business Id", String.valueOf(allrows.getDouble(10)));
+                     fc.SetLatitude_Business(allrows.getDouble(10));//Latitude
+                     fc.SetLongtiude_Business(allrows.getDouble(11));//Longtiude
+                     name.setText(allrows.getString(1));//Market
 
 
-                 address.setText(allrows.getString(7));//Address
+                     //check phone
+                     tel.setText(allrows.getString(2));//Phone
+                     if (allrows.getString(2).equals("1") || allrows.getString(2).equals(null) || allrows.getString(2).equals("null") || allrows.getString(2).equals("")) {
+                         tel.setText(allrows.getString(3));//Mobile
+                     }
+                     if (tel.getText().equals("1") || tel.getText().equals(null) || tel.getText().equals("null") || tel.getText().equals("")) {
+                         tel.setVisibility(View.GONE);
+                     }
+                     //check email
+                     if (allrows.getString(5).equals("null") || allrows.getString(5).equals(null) || allrows.getString(5).equals("")) {
+                         web.setText("");//Email
+                         parent.removeView((View) web.getParent());
+                     } else
+                         web.setText(allrows.getString(5));//Email
+
+                     //check businessOwner
+                     if (allrows.getString(6).equals("") || allrows.getString(6).equals("نن")) {
+                         owner.setText("");//BusinessOwner
+                         parent.removeView((View) owner.getParent());
+                     } else
+                         owner.setText(allrows.getString(6));//BusinessOwner
 
 
-                 //check description
-                 if(allrows.getString(8).equals("") || allrows.getString(8).equals("null") || allrows.getString(8).equals(null)) {
-                     des.setText("");//Description
-                     parent.removeView((View) des.getParent());
-                 }else
-                     des.setText(allrows.getString(8));//Description
+                     address.setText(allrows.getString(7));//Address
 
-                 subset.setText(query.getsubsetName(allrows.getInt(9)));//Subset
 
-                 for (int i = 0; i < 7; i++) {
-                     if (allrows.getInt((12) + (i)) > 0) {
+                     //check description
+                     if (allrows.getString(8).equals("") || allrows.getString(8).equals("null") || allrows.getString(8).equals(null)) {
+                         des.setText("");//Description
+                         parent.removeView((View) des.getParent());
+                     } else
+                         des.setText(allrows.getString(8));//Description
 
-                         Cursor rows3 = db.select_FieldActivityName(allrows.getInt((12) + (i)));
-                         if(rows3.getCount()>0) {
-                             rows3.moveToFirst();
+                     subset.setText(query.getsubsetName(allrows.getInt(9)));//Subset
 
-                             zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");
+                     for (int i = 0; i < 7; i++) {
+                         if (allrows.getInt((12) + (i)) > 0) {
+
+                             Cursor rows3 = db.select_FieldActivityName(allrows.getInt((12) + (i)));
+                             if (rows3.getCount() > 0) {
+                                 rows3.moveToFirst();
+
+                                 zamine.setText(zamine.getText().toString() + rows3.getString(0) + ", ");
+                             }
                          }
                      }
+
+
+                 }else {
+                     MessageDialog messageDialog = new MessageDialog(getActivity());
+                     messageDialog.ShowMessage("پیام","لطفا برگردید و صفحه کسب کار خود را بروزرسانی کنید","باشه","false");
                  }
-
-
              }
 
-     /*  }
+
+       }
         catch (Exception e){
 
-        }*/
+        }
 
     }
 
