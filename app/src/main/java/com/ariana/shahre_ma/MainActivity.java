@@ -154,7 +154,7 @@ public class MainActivity extends ActionBarActivity {
         }
         else
         {
-            String url= "http://uplod.ir/tpy6oft0407u/app-debug.apk.htm";
+          String url= "http://www.shahrma.com/app/apk_update/text.txt";
             HTTPGetUpdate update=new HTTPGetUpdate(this);
             update.execute(url);
 

@@ -1,9 +1,13 @@
 package com.ariana.shahre_ma.WebServiceGet;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
-import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 
 import com.ariana.shahre_ma.BuildConfig;
@@ -80,20 +84,33 @@ import java.net.URLConnection;
     @Override
     protected void onPostExecute(String file_url) {
         // Dismiss the dialog after the Music file was downloaded
+    try {
+
 
         int versionCode = BuildConfig.VERSION_CODE;
-       if  (Integer.valueOf(readLast())>versionCode){
-           /*HTTPGetUpdateApk apk = new HTTPGetUpdateApk(context);
-           apk.execute("http://shahrma.com/app/apk_update/app-debug.zip");*/
-           NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
-           mBuilder.setSmallIcon(R.mipmap.ic_launcher);
-           mBuilder.setContentTitle("آپدیت جدید!");
-           mBuilder.setContentText("برای دانلود نسخه جدید شهر ما"+"\n"+"کلیک کنید!");
+        if (Integer.valueOf(readLast()) > versionCode) {
 
-           Log.i("Downloaded",readLast());
+            NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            Notification notify = new Notification(R.mipmap.ic_launcher, "آپدیت جدید!", System.currentTimeMillis());
+            notify.flags |= Notification.FLAG_AUTO_CANCEL;
+            notify.flags |= Notification.FLAG_SHOW_LIGHTS;
+            notify.defaults |= Notification.DEFAULT_LIGHTS;
+            notify.defaults |= Notification.DEFAULT_SOUND;
+            CharSequence title = "آپدیت جدید!";
+            CharSequence detils = "برای دانلود نسخه جدید شهر ما " + "کلیک کنید!";
 
-       }
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("bazaar://details?id=" + "com.ariana.shahre_ma"));
+            //intent.setPackage("com.farsitel.bazaar");
+            PendingIntent pend = PendingIntent.getActivity(context, 0, intent, 0);
+            notify.setLatestEventInfo(context, title, detils, pend);
+            nm.notify(0, notify);
+            Log.i("Downloaded", readLast());
 
+        }
+    }catch (Exception e){
+
+    }
 
 
     }
@@ -101,7 +118,7 @@ import java.net.URLConnection;
     public String readLast(){
         String ret = "";
         File root = android.os.Environment.getExternalStorageDirectory();
-        File dir = new File(root.getAbsolutePath() + "/myFolder");
+        File dir = new File(root.getAbsolutePath() + "/Shahre_ma");
         File file = new File(dir, "ls.cfg");
 
         try {
