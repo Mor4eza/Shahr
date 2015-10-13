@@ -135,24 +135,28 @@ public class job_details_1 extends ActionBarActivity {
         }
 
          private  void rates_change(){
-
+             ns=new NetState(getActivity());
             rate1.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
                 @Override
                 public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                     if (!sended) {
-                        if (query.getMemberId() > 0) {
-                            HTTPSendRateURL httprate = new HTTPSendRateURL(getActivity());
-                            httprate.SetBusinessId(fc.GetBusiness_Id());
-                            Log.i("SetBusinessId", String.valueOf(fc.GetBusiness_Id()));
-                            httprate.SetMemberId(query.getMemberId());
-                            Log.i("SetMemberId", String.valueOf(query.getMemberId()));
-                            httprate.SetRate(Double.valueOf(rating));
-                            Log.i("SetRate", String.valueOf(Double.valueOf(rating)));
-                            httprate.execute();
-                            rate1.setEnabled(false);
-                            sended=true;
-                        } else {
-                            Toast.makeText(getActivity(), "ابتدا وارد حساب خود شوید", Toast.LENGTH_LONG).show();
+                        if (ns.checkInternetConnection() == true) {
+                            if (query.getMemberId() > 0) {
+                                HTTPSendRateURL httprate = new HTTPSendRateURL(getActivity());
+                                httprate.SetBusinessId(fc.GetBusiness_Id());
+                                Log.i("SetBusinessId", String.valueOf(fc.GetBusiness_Id()));
+                                httprate.SetMemberId(query.getMemberId());
+                                Log.i("SetMemberId", String.valueOf(query.getMemberId()));
+                                httprate.SetRate(Double.valueOf(rating));
+                                Log.i("SetRate", String.valueOf(Double.valueOf(rating)));
+                                httprate.execute();
+                                rate1.setEnabled(false);
+                                sended = true;
+                            } else {
+                                Toast.makeText(getActivity(), "ابتدا وارد حساب خود شوید", Toast.LENGTH_LONG).show();
+                            }
+                        }else{
+                            Toast.makeText(getActivity(), "اینترنت قطع می باشد", Toast.LENGTH_LONG).show();
                         }
                     }
                 }

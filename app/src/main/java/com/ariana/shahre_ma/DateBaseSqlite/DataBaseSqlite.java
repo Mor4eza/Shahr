@@ -915,7 +915,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
                 " Market like'%" + market +"%'" +
                 " or Market like'%" + market +"%'" +
                 " or Address like '%" + namemarket +
-                "%'"+" ) AND (CityId="+cityid+")";
+                "%'"+" ) AND (CityId="+cityid+") " +" ORDER BY (RateValue * RateCount) DESC";
 
         Log.i("select_BusinessSearch",query);
         SQLiteDatabase db = this.getReadableDatabase();
@@ -933,7 +933,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
                     " or Field3="+fieldactivty+
                     " or Market like'%" + namemarket +"%'" +
                     " or Address like '%" + namemarket +
-                    "%'"+" ) AND (CityId="+cityid+")";
+                    "%'"+" ) AND (CityId="+cityid+") " +" ORDER BY (RateValue * RateCount) DESC";
 
         Log.i("select_BusinessSearch",query);
         SQLiteDatabase db = this.getReadableDatabase();
@@ -953,7 +953,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
                 " or Field3="+fieldactivity2+
                 " or Market like'%" + namemarket +
                 "%' or Address like '%" + namemarket +
-                "%'"+ " ) AND (CityId="+cityid+")";
+                "%'"+ " ) AND (CityId="+cityid+") " +" ORDER BY (RateValue * RateCount) DESC" ;
 
         Log.i("select_BusinessSearch",query);
         SQLiteDatabase db = this.getReadableDatabase();
@@ -976,7 +976,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
                 " or Field3="+fieldactivity3+
                 " or Market like'%" + namemarket +
                 "%' or Address like '%" + namemarket +
-                "%' "+" ) AND (CityId="+cityid+")";
+                "%' "+" ) AND (CityId="+cityid+") " +" ORDER BY (RateValue * RateCount) DESC";
 
         Log.i("select_BusinessSearch",query);
         SQLiteDatabase db = this.getReadableDatabase();
@@ -991,7 +991,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
                 " SubsetId="+subsetId+
                 ") and (Market like'%" + namemarket +
                 "%') and ( Address like '%" + address +
-                "%') AND (CityId="+cityid+")";
+                "%') AND (CityId="+cityid+") " +" ORDER BY (RateValue * RateCount) DESC";
         Log.i("select_BusinessSearch",query);
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(query, null);
@@ -1013,7 +1013,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
                 "%' AND Address like '%" + address +
                 "%') AND (Field1="+Field+" OR Field2="+Field+
                 " OR Field3="+Field+" OR Field4="+Field+" OR Field5="+Field+
-                " OR Field6="+Field+" OR Field7="+Field+") AND (CityId="+cityid+")";
+                " OR Field6="+Field+" OR Field7="+Field+") AND (CityId="+cityid+") " +" ORDER BY (RateValue * RateCount) DESC";
         Log.i("select_BusinessSearch",query);
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(query, null);
@@ -1139,7 +1139,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
                     "%' or Address like '%" + namemarket3 +
                     "%' or Address like '%" + namemarket4 +
                     "%' or Address like '%" + namemarket5 +
-                    "%') AND (SubsetId="+SubsetId+" or Field1="+fieldactivity+ ") AND (CityId="+cityid+")";
+                    "%') AND (SubsetId="+SubsetId+" or Field1="+fieldactivity+ ") AND (CityId="+cityid+") "+" ORDER BY (RateValue * RateCount) DESC";
         }
         else if(namemarket1.length()>0 && namemarket2.length()>0 && namemarket3.length()>0 && namemarket4.length()>0 && fieldactivity>0)
         {
@@ -1156,7 +1156,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
                     "%' or Address like '%" + namemarket2 +
                     "%' or Address like '%" + namemarket3 +
                     "%' or Address like '%" + namemarket4 +
-                    "%') AND (SubsetId="+SubsetId+ " or Field1="+fieldactivity+ ") AND (CityId="+cityid+")";
+                    "%') AND (SubsetId="+SubsetId+ " or Field1="+fieldactivity+ ") AND (CityId="+cityid+") "+" ORDER BY (RateValue * RateCount) DESC";
         }
         else if(namemarket1.length()>0 && namemarket2.length()>0 && namemarket3.length()>0  && fieldactivity>0 )
         {
@@ -1171,7 +1171,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
                     "%') or (Address like '%" + namemarket1 +
                     "%' or Address like '%" + namemarket2 +
                     "%' or Address like '%" + namemarket3 +
-                    "%') AND (SubsetId="+SubsetId+ " or Field1="+fieldactivity+ ") AND (CityId="+cityid+")";
+                    "%') AND (SubsetId="+SubsetId+ " or Field1="+fieldactivity+ ") AND (CityId="+cityid+") "+" ORDER BY (RateValue * RateCount) DESC";
         }
         else if(namemarket1.length()>0 && namemarket2.length()>0 && fieldactivity>0 )
         {
@@ -1184,7 +1184,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
                     "%' or Market like '%" + namemarket2 +
                     "%') or (Address like '%" + namemarket1 +
                     "%' or Address like '%" + namemarket2 +
-                    "%') AND (SubsetId="+SubsetId+ " or Field1="+fieldactivity+ " ) AND (CityId="+cityid+")";
+                    "%') AND (SubsetId="+SubsetId+ " or Field1="+fieldactivity+ " ) AND (CityId="+cityid+") " +" ORDER BY (RateValue * RateCount) DESC";
         }
         else if(namemarket1.length()>0 && fieldactivity>0)
         {
@@ -1193,15 +1193,14 @@ public class DataBaseSqlite extends SQLiteOpenHelper
                     " Field1="+fieldactivity+
                     " or Market like'%" + namemarket1 +"%') " +
                     " or (Address like '%" + namemarket1 +"%') " +
-                    " AND (SubsetId="+SubsetId+ " or Field1="+fieldactivity+") AND (CityId="+cityid+")";
+                    " AND (SubsetId="+SubsetId+ " or Field1="+fieldactivity+") AND (CityId="+cityid+") " +" ORDER BY (RateValue * RateCount) DESC";
         }
-        else if(fieldactivity<=0)
-        {
+        else if(fieldactivity <= 0) {
             Log.i("fieldactivity",String.valueOf(fieldactivity));
             query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
                     " Market like'%" + namemarket1 +"%') " +
                     " or (Address like '%" + namemarket1 +"%') " +
-                    " AND (SubsetId="+SubsetId+ " or Field1="+fieldactivity+") AND (CityId="+cityid+")";
+                    " AND (SubsetId="+SubsetId+ ") AND (CityId="+cityid+") " +" ORDER BY (RateValue * RateCount) DESC";
         }
 
         Log.i("namemarket[0]",namemarket1);
@@ -1276,7 +1275,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId="+subsetID+" AND CityId=" +cityid , null);
+        return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS + "  WHERE SubsetId="+subsetID+" AND CityId=" +cityid+" ORDER BY (RateValue * RateCount) DESC" , null);
 
     }
 
@@ -1459,6 +1458,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     public Cursor select_SubsetId(String subsetname)
     {
         SQLiteDatabase db = this.getReadableDatabase();
+        Log.i("query subset threesearch","SELECT Id FROM " + InstructionsSqlite.TABLE_NAME_SUBSET + "  WHERE SubsetName= '" + subsetname+"'");
         return db.rawQuery("SELECT Id FROM " + InstructionsSqlite.TABLE_NAME_SUBSET + "  WHERE SubsetName= '" + subsetname+"'", null);
     }
 
@@ -1480,6 +1480,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
+        Log.i("query Subset","SELECT Id FROM " + instructionsSqlite.TABLE_NAME_SUBSET + "  WHERE CollectionId=" + String.valueOf(CollectionId));
         return db.rawQuery("SELECT Id FROM " + instructionsSqlite.TABLE_NAME_SUBSET + "  WHERE CollectionId=" +CollectionId, null);
 
     }
@@ -1596,6 +1597,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     public Cursor select_Collection(String collectionname)
     {
         SQLiteDatabase db=this.getReadableDatabase();
+        Log.i("query collection","SELECT Id FROM "+instructionsSqlite.TABLE_NAME_COLLECTION+" WHERE CollectionName like '%"+collectionname+"%'");
         return  db.rawQuery("SELECT Id FROM "+instructionsSqlite.TABLE_NAME_COLLECTION+" WHERE CollectionName like '%"+collectionname+"%'",null);
     }
 

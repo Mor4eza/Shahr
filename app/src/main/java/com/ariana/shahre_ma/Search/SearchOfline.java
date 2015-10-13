@@ -1,8 +1,10 @@
 package com.ariana.shahre_ma.Search;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.util.Log;
@@ -46,6 +48,7 @@ public class SearchOfline
     Integer LenWord=0;
     Integer threesearch=0;
     Integer SubsetCount=0;
+    ProgressDialog pd;
 
     int length = 0;
 
@@ -84,7 +87,7 @@ public class SearchOfline
     }
 
      public void TextSearch(String cityname,String textSearch) {
-       //  try {
+        try {
              int i = 0;
              String selectedWord[] = new String[]{"", "", "", "", ""};
              selectedWord[0] = "";
@@ -127,58 +130,46 @@ public class SearchOfline
 
                  i = 0;
                  //Search FieldActivity
+                 pd = new ProgressDialog(context);
+                 pd.setMessage("جستجو آفلاین  . لطفا منتظر بمانید .");
+                 pd.setCancelable(false);
+                 pd.show();
+
                  SearchFieldActivity(textSearch.toString());
                  Log.i("size len word", String.valueOf(LenWord));
                 // if(LenWord==1) {
-                     OneSearch(textSearch.toString().trim(),selectedWord[0], cityid, _FieldActivityId[0], _FieldActivityId[1], _FieldActivityId[2]);
+                     OneSearch(textSearch.toString().trim(), selectedWord[0], cityid, _FieldActivityId[0], _FieldActivityId[1], _FieldActivityId[2]);
                      if (onesearch > 0)//One Search
                      {
 
                      } else {
 
-                         TwoSearch(selectedWord[0], selectedWord[1], selectedWord[2], selectedWord[3], selectedWord[4], cityid);
+                         TwoSearch(textSearch.toString().trim(), selectedWord[0], selectedWord[1], selectedWord[2], selectedWord[3], selectedWord[4], cityid);
                          if (twosearch > 0) //Two Search
                          {
 
                          } else {
-                             ThreeSearch(selectedWord[0], selectedWord[1], selectedWord[2], selectedWord[3], selectedWord[4], cityid);
+                             ThreeSearch(textSearch.toString().trim(),selectedWord[0], selectedWord[1], selectedWord[2], selectedWord[3], selectedWord[4], cityid);
                          }
                      }
-                /* }
-                 else
-                 {
-                     Log.i("size len word >=1", String.valueOf(LenWord));
-                     TwoSearch(selectedWord[0], selectedWord[1], selectedWord[2], selectedWord[3], selectedWord[4], cityid);
-                     if (onesearch > 0)//One Search
-                     {
 
-                     } else {
-
-                         TwoSearch(selectedWord[0], selectedWord[1], selectedWord[2], selectedWord[3], selectedWord[4], cityid);
-                         if (twosearch > 0) //Two Search
-                         {
-
-                         } else {
-                             ThreeSearch(selectedWord[0], selectedWord[1], selectedWord[2], selectedWord[3], selectedWord[4], cityid);
-                         }
-                     }
-                 }
-*/
 
              }
-        /* }
+        }
          catch (Exception e){
              fc.SetSearchOffline(true);
              Intent intent = new Intent(context, SearchListActivity.class);
              context.startActivity(intent);
-         }*/
+         }
      }
 
 
 
     public void TextAdvancedSearch(Integer cityId,String Market,String address,String subset) {
         Cursor rows_Business;
-        //try {
+        try {
+
+
             if (ns.checkInternetConnection()) {
                 try {
                     String MARKET = URLEncoder.encode(Market.toString().trim(), "UTF-8");
@@ -247,12 +238,12 @@ public class SearchOfline
                     context.startActivity(intent);
                 }
             }
-        /*}
+        }
         catch (Exception e){
             fc.SetSearchOffline(true);
             Intent intent = new Intent(context, SearchListActivity.class);
             context.startActivity(intent);
-        }*/
+        }
 
     }
 
@@ -260,6 +251,8 @@ public class SearchOfline
     public void TextAdvancedSearch2(Integer cityId,String Market,String address,String subset) {
         Cursor rows_Business;
         try {
+
+
             if (ns.checkInternetConnection()) {
                 try {
                     String MARKET = URLEncoder.encode(Market.toString().trim(), "UTF-8");
@@ -371,7 +364,8 @@ public class SearchOfline
     private void OneSearch(String market,String textSearch,Integer cityid,Integer fieldActivity1,Integer fieldActivity2,Integer fieldActivity3)
     {
         Cursor rows_Business=null;
-        //try {
+        try {
+
             if (fieldActivity1 > 0 && fieldActivity2 > 0 && fieldActivity3 > 0)
                 rows_Business = sdb.select_BusinessSearch(textSearch.toString(), cityid, fieldActivity1, fieldActivity2, fieldActivity3);
             else if (fieldActivity1 > 0 && fieldActivity2 > 0)
@@ -426,24 +420,33 @@ public class SearchOfline
                 fdb.SetSrc(selectSrc);
 
                 fc.SetSearchOffline(true);
+                pd.dismiss();
                 Intent intent = new Intent(context, SearchListActivity.class);
                 context.startActivity(intent);
             } else {
                 onesearch = 0;
             }
-     /*   }
+        }
         catch (Exception e){
             onesearch = 0;
-        }*/
+        }
     }
 
-    private void TwoSearch(String word1,String word2,String word3,String word4,String word5,Integer cityid)
+    private void TwoSearch(String textsearch,String word1,String word2,String word3,String word4,String word5,Integer cityid)
     {
         Cursor rows_Business;
-       // try {
+        try {
 
             SearchFieldActivity(word1);
-            rows_Collection = sdb.select_Collection(word2);
+
+            // search text to collection
+
+
+            rows_Collection = sdb.select_Collection(textsearch);
+            if( rows_Collection.getCount()== 0)
+               if(word1.length()>0)
+                   rows_Collection = sdb.select_Collection(word1);
+
             Log.i("CollectiongetCount", String.valueOf(rows_Collection.getCount()));
             if (rows_Collection.getCount() > 0) {
                 rows_Collection.moveToFirst();
@@ -538,24 +541,40 @@ public class SearchOfline
                 fdb.SetMobileBusiness(selectMobile);
                 fdb.SetSrc(selectSrc);
                 fdb.SetRateCount(selectRateCount);
+
                 fc.SetSearchOffline(true);
+                pd.dismiss();
                 Intent intent = new Intent(context, SearchListActivity.class);
                 context.startActivity(intent);
             } else {
                 twosearch = 0;
             }
-        /*}
+        }
         catch (Exception e){
             twosearch = 0;
-        }*/
+        }
     }
 
-    private  void ThreeSearch(String word1,String word2,String word3,String word4,String word5,Integer cityid)
+    private  void ThreeSearch(String textsearch,String word1,String word2,String word3,String word4,String word5,Integer cityid)
     {
         Cursor rows_Business;
         try {
+
+            Log.i("threeSearch :","true true true");
+
+
+
             SearchFieldActivity(word1);
-            rows_Subset = sdb.select_SubsetId(word1);
+
+            rows_Subset = sdb.select_SubsetId(textsearch);
+            if( rows_Subset.getCount()== 0)
+                if(word1.length()>0)
+                    rows_Subset = sdb.select_SubsetId(word1);
+                   if(rows_Subset.getCount() == 0)
+                       if(word2.length() > 0)
+                           rows_Subset = sdb.select_SubsetId(word1);
+
+
             Log.i("SubsetgetCount", String.valueOf(rows_Subset.getCount()));
             if (rows_Subset.getCount() > 0 || _FieldActivityId[0] > 0) {
                 Log.i("Subsetget", "on");
@@ -602,10 +621,12 @@ public class SearchOfline
                 fdb.SetRateCount(selectRateCount);
 
                 fc.SetSearchOffline(true);
+                pd.dismiss();
                 Intent intent = new Intent(context, SearchListActivity.class);
                 context.startActivity(intent);
             } else {
                 fc.SetSearchOffline(true);
+                pd.dismiss();
                 Intent intent = new Intent(context, SearchListActivity.class);
                 context.startActivity(intent);
             }
@@ -613,6 +634,7 @@ public class SearchOfline
         catch (Exception e)
         {
             fc.SetSearchOffline(true);
+            pd.dismiss();
             Intent intent = new Intent(context, SearchListActivity.class);
             context.startActivity(intent);
         }
