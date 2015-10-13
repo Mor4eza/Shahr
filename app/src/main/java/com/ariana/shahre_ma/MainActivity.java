@@ -314,10 +314,9 @@ public class MainActivity extends ActionBarActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0: // Fragment # 0 - This will show FirstFragment
-
-                    return Frag_main_Top_Business.newInstance(1, "new");
-                case 1: // Fragment # 0 - This will show FirstFragment different title
                     return Frag_main_Top_discount.newInstance(2, "Page # 2");
+                case 1: // Fragment # 0 - This will show FirstFragment different title
+                    return Frag_main_Top_Business.newInstance(1, "new");
                 case 2: // Fragment # 1 - This will show SecondFragment
                     return Frag_main_search.newInstance(3, "Page # 3");
                 default:
@@ -330,9 +329,9 @@ public class MainActivity extends ActionBarActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "مشاغل برتر";
-                case 1:
                     return "تخفیف های برتر";
+                case 1:
+                    return "مشاغل برتر";
                 case 2:
                     return "جستجو";
 
