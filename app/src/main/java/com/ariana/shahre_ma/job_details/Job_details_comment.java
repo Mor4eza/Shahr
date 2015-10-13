@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,7 +85,6 @@ public class Job_details_comment extends ActionBarActivity {
                              } else {
                                   try {
                                      if (query.getMemberId() > 0) {
-                                        Log.i("getMemberId", String.valueOf(query.getMemberId()));
                                         _json = (json.getOpinionTOjson(txtComm.getText().toString(), ct.getGregorianDate() + dt.Time(), query.getMemberId(), fc.GetBusiness_Id()));
                                         fc.SetOpinion_Description(txtComm.getText().toString());
                                         fc.SetOpinion_Date(ct.getGregorianDate() + dt.Time());

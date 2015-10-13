@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -26,7 +24,6 @@ import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.job_details.Job_details;
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,7 +88,6 @@ private  static Context context;
 
                     if(ns.checkInternetConnection() && search)
                     {
-                        Log.i("checkInternetConnection","strat");
                         mItems = new ArrayList<Job_lists_card_item>();
 
                         for (int i = 0; i < fdb.GetMarketBusiness().size(); i++)
@@ -132,7 +128,6 @@ private  static Context context;
                     else
                     {
 
-                        Log.i("else","strat");
                         if (allrows.moveToFirst())
                         {
                             mItems = new ArrayList<Job_lists_card_item>();
@@ -143,7 +138,6 @@ private  static Context context;
                                 nature.setDes(allrows.getString(8));
                                 nature.setSubsetId(allrows.getInt(14));
                                 nature.setDisCount("");
-                                Log.i("Rate", String.valueOf(allrows.getDouble(30)));
                                 nature.setmRateCount(allrows.getInt(29));
                                 nature.setRate(allrows.getDouble(30));
                                 nature.setmId(allrows.getInt(0));
@@ -210,7 +204,6 @@ private  static Context context;
 
 
             if (nature.getNameImage().equals("null")||nature.getNameImage().equals("")||nature.getNameImage().equals(null)||nature.getNameImage()==null){
-                Log.i("SubsetId",nature.getSubsetId().toString());
                 image_url_1 = "http://www.shahrma.com/image/business/" +nature.getSubsetId()+".jpg";
                 Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(viewHolder.imgThumbnail);
 

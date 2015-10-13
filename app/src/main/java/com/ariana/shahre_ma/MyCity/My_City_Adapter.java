@@ -2,7 +2,6 @@ package com.ariana.shahre_ma.MyCity;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +29,6 @@ public class My_City_Adapter extends ArrayAdapter<My_City_Items> {
             this.context = context;
             this.itemsArrayList = itemsArrayList;
             mCheckedState = new boolean[itemsArrayList.size()];
-            Log.i("Size", String.valueOf(itemsArrayList.size()));
         }
 
     @Override
@@ -59,7 +57,6 @@ public class My_City_Adapter extends ArrayAdapter<My_City_Items> {
                         mCheckedState[position] = true;
                         do{
                             selectedsubset.add(String.valueOf(rows.getInt(0)));
-                            Log.i("selectedsubset", selectedsubset.toString());
 
                         }while (rows.moveToNext());
 
@@ -69,7 +66,6 @@ public class My_City_Adapter extends ArrayAdapter<My_City_Items> {
                         do{
                             selectedsubset.remove(String.valueOf(rows.getInt(0)));
 
-                            Log.i("selectedsubset", selectedsubset.toString());
                         }while (rows.moveToNext());
                         fc.SetNameSubset(selectedsubset);
                     }

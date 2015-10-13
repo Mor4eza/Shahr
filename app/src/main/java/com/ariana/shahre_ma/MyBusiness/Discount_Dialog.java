@@ -1,10 +1,8 @@
 package com.ariana.shahre_ma.MyBusiness;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -17,9 +15,6 @@ import android.widget.TextView;
 import com.appyvet.rangebar.RangeBar;
 import com.ariana.shahre_ma.Date.CalendarTool;
 import com.ariana.shahre_ma.Date.DateTime;
-import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
-import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MessageDialog;
@@ -81,7 +76,6 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
         rangeBar.setOnRangeBarChangeListener(new RangeBar.OnRangeBarChangeListener() {
             @Override
             public void onRangeChangeListener(RangeBar rangeBar, int i, int i1, String s, String s1) {
-                Log.i("RangeBar", s1);
                 percent = s1;
             }
         });
@@ -105,7 +99,6 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
                             messageDialog.ShowMessage("پیام", "درصد تخفیف را وارد کنید", "باشه", "false");
 
                         } else {
-                            Log.i("Edit", "true");
                             fc.SetId_DisCount(fc.GetId_DisCount());
                             fc.SetText_DisCount(tv_title.getText().toString());
                             fc.SetImage_DisCount("");
@@ -135,15 +128,13 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
                             messageDialog.ShowMessage("پیام", "تاریخ اتمام را وارد کنید", "باشه", "false");
                         }  else {
 
-                            Log.i("Save", "false");
+
                             fc.SetId_DisCount(1);
                             fc.SetText_DisCount(tv_title.getText().toString());
                             fc.SetImage_DisCount("");
                             ct.setIranianDate(Integer.parseInt(tv_date.getText().toString().substring(0, 4)), Integer.parseInt(tv_date.getText().toString().substring(5, 7)), Integer.parseInt(tv_date.getText().toString().substring(8, 10)));
-                            Log.i("startDateEdit", ct.getGregorianDate());
                             fc.SetStartDate_DisCount(ct.getGregorianDate());
                             ct1.setIranianDate(Integer.parseInt(Expire.getText().toString().substring(0, 4)), Integer.parseInt(Expire.getText().toString().substring(5, 7)), Integer.parseInt(Expire.getText().toString().substring(8, 10)));
-                            Log.i("ExpireDateEdit", ct1.getGregorianDate());
                             fc.SetExpirationDate_DisCount(ct1.getGregorianDate());
                             fc.SetDescription_DisCount(tv_desc.getText().toString());
                             fc.SetPercent_DisCount(percent);
@@ -258,7 +249,6 @@ public class Discount_Dialog extends Dialog implements   DatePickerDialog.OnDate
         String Day=String.valueOf(day);
         String Year=String.valueOf(year);
 
-       Log.i("date",String.valueOf(year)+String.valueOf(month)+String.valueOf(day));
         if (month <= 9)
         {
             Month="0"+(Month);

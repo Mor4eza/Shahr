@@ -2,7 +2,6 @@ package com.ariana.shahre_ma.ListExpand;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,7 +92,6 @@ public class MyListAdapter extends BaseExpandableListAdapter {
                         httpbusin = new HTTPGetBusinessJson(context);
                         httpbusin.SetUrl_business(query.getsubsetID(country.getName()),query.getCityId(setting.getCityName()));
                         httpbusin.execute();
-                        Log.i("Count<", "0");
 
                 }
 

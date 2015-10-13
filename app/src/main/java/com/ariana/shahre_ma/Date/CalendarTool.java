@@ -1,7 +1,5 @@
 package com.ariana.shahre_ma.Date;
 
-import android.util.Log;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -605,7 +603,6 @@ public class CalendarTool
 
 
 
-        Log.i("MiladiToShamesi", result);
         return   result;
     }
 
@@ -654,7 +651,6 @@ public class CalendarTool
         String newFormat1 = formatter1.format(testDate);
         System.out.println(".....Date..."+newFormat1);
 
-        Log.i("MiladiToShamesi", result);
         return   result;
     }
 
@@ -673,7 +669,6 @@ public class CalendarTool
 
 
         clock=date.substring(11,14);
-        Log.i("clock", clock);
        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/ddHH:MM");
         Date testDate = null;
         try {
@@ -683,14 +678,10 @@ public class CalendarTool
         }
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/mm/ddHH:MM");
         String newFormat = formatter.format(testDate);
-        System.out.println(".....Date..."+newFormat);
 
         year=newFormat.substring(0,4);
         month=newFormat.substring(5,7);
         day=newFormat.substring(8,10);
-        Log.i("year", year);
-        Log.i("month", month);
-        Log.i("day", day);
 
         ct.setGregorianDate(Integer.valueOf(year),Integer.valueOf(month),Integer.valueOf(day));
         result=ct.getIranianDate();
@@ -736,7 +727,6 @@ public class CalendarTool
 
 
         result=year+"/"+month+"/"+day;
-        Log.i("SubToMiladi", result);
         return   result;
     }
 

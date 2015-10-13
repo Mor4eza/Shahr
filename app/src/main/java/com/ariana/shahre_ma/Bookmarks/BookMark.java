@@ -108,11 +108,9 @@ public class BookMark extends ActionBarActivity {
         {
             do
             {
-                Log.i("BusinessIdBookmark",String.valueOf(allrows.getInt(1)));
                 Cursor row = db.select_business_NameMarket(allrows.getInt(1));
                 row.moveToNext();
                 item.add(row.getString(0));
-                Log.i("nameBookmark", row.getString(0));
 
             }while (allrows.moveToNext());
 

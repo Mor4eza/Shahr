@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -159,7 +158,6 @@ public class Edit_User extends ActionBarActivity {
 
                       sendPost = new HTTPPostMemberEditJson(this);
                       sendPost.SetMember_Json(_json);
-                      Log.i("MemberJson", _json);
                       sendPost.execute();
 
               }

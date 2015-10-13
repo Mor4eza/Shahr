@@ -136,7 +136,6 @@ Query query;
 
 
             if ((Integer.parseInt((String) tvcomm.getTag()) != 0)) {
-                Log.i("query", String.valueOf(query.getMemberId()));
                 if (query.getMemberId() > 0) {
                     if (v == btn_like)
                     {

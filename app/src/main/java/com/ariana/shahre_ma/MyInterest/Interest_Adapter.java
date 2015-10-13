@@ -2,7 +2,6 @@ package com.ariana.shahre_ma.MyInterest;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +12,10 @@ import android.widget.TextView;
 import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
-import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.MyCity.TotalListener;
 import com.ariana.shahre_ma.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Interest_Adapter extends BaseExpandableListAdapter {
 
@@ -200,7 +197,7 @@ public class Interest_Adapter extends BaseExpandableListAdapter {
                     mListener.expandGroupEvent(groupPosition, isExpanded);
 
                 boolean state = selectedParentCheckBoxesState.get(groupPosition);
-                Log.d("TAG", "STATE = " + state);
+
                 selectedParentCheckBoxesState.remove(groupPosition);
                 selectedParentCheckBoxesState.add(groupPosition, state ? false : true);
 

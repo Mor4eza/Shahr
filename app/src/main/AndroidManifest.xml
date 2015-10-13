@@ -131,11 +131,6 @@
                 android:value="com.ariana.shahre_ma.MainActivity" />
         </activity>
         <activity
-            android:name=".ListExpand.ListActivity"
-            android:label="@string/title_activity_list"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name=".MyCity.My_city"
             android:label="@string/title_activity_my_city"
             android:parentActivityName=".MainActivity"

@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -144,11 +143,8 @@ public class job_details_1 extends ActionBarActivity {
                             if (query.getMemberId() > 0) {
                                 HTTPSendRateURL httprate = new HTTPSendRateURL(getActivity());
                                 httprate.SetBusinessId(fc.GetBusiness_Id());
-                                Log.i("SetBusinessId", String.valueOf(fc.GetBusiness_Id()));
                                 httprate.SetMemberId(query.getMemberId());
-                                Log.i("SetMemberId", String.valueOf(query.getMemberId()));
                                 httprate.SetRate(Double.valueOf(rating));
-                                Log.i("SetRate", String.valueOf(Double.valueOf(rating)));
                                 httprate.execute();
                                 rate1.setEnabled(false);
                                 sended = true;
@@ -181,14 +177,11 @@ public class job_details_1 extends ActionBarActivity {
 
                  //check phone
                  tel.setText(allrows.getString(3));//Phone
-                 Log.i("Tell",allrows.getString(3));
                  if(allrows.getString(3).equals("1") || allrows.getString(3).equals(null) || allrows.getString(3).equals("null") || allrows.getString(3).equals("")) {
                      tel.setText(allrows.getString(4));//Mobile
-                     Log.i("Mobile", tel.getText().toString());
                  }
                  if (tel.getText().equals("1") || tel.getText().equals(null) || tel.getText().equals("null") || tel.getText().equals("")) {
                      tel.setVisibility(View.GONE);
-                     Log.i("ifMobile", allrows.getString(4));
                  }
                  //check email
                  if(allrows.getString(6).equals("null") || allrows.getString(6).equals(null) || allrows.getString(6).equals("")) {
@@ -249,14 +242,11 @@ public class job_details_1 extends ActionBarActivity {
 
                  //check phone
                  tel.setText(allrows.getString(3));//Phone
-                 Log.i("Tell", allrows.getString(3));
                  if(allrows.getString(3).equals("1") || allrows.getString(3).equals(null) || allrows.getString(3).equals("null") || allrows.getString(3).equals("")) {
                      tel.setText(allrows.getString(4));//Mobile
-                     Log.i("Mobile", tel.getText().toString());
                  }
                  if (tel.getText().equals("1") || tel.getText().equals(null) || tel.getText().equals("null") || tel.getText().equals("")) {
                      tel.setVisibility(View.GONE);
-                     Log.i("ifMobile", allrows.getString(4));
                  }
                  //check email
                  if(allrows.getString(6).equals("null") || allrows.getString(6).equals(null) || allrows.getString(6).equals("")){
@@ -288,7 +278,6 @@ public class job_details_1 extends ActionBarActivity {
                  subset.setText(query.getsubsetName(allrows.getInt(14)));//Subset
 
                  for (int i = 0; i < 7; i++) {
-                     Log.i("CounterFor", String.valueOf(allrows.getInt((22) + (i))));
                      if (allrows.getInt((22) + (i)) > 0) {
 
                          Cursor rows3 = db.select_FieldActivityName(allrows.getInt((22) + (i)));
@@ -315,14 +304,11 @@ public class job_details_1 extends ActionBarActivity {
 
                  //check phone
                  tel.setText(allrows.getString(2));//Phone
-                 Log.i("Tell", allrows.getString(2));
                  if(allrows.getString(2).equals("1") || allrows.getString(2).equals(null) || allrows.getString(2).equals("null") || allrows.getString(2).equals("")) {
                      tel.setText(allrows.getString(3));//Mobile
-                     Log.i("Mobile", tel.getText().toString());
                  }
                  if (tel.getText().equals("1") || tel.getText().equals(null) || tel.getText().equals("null") || tel.getText().equals("")) {
                      tel.setVisibility(View.GONE);
-                     Log.i("ifMobile", allrows.getString(3));
                  }
                  //check email
                  if(allrows.getString(5).equals("null") || allrows.getString(5).equals(null) || allrows.getString(5).equals("")){
@@ -352,7 +338,6 @@ public class job_details_1 extends ActionBarActivity {
                  subset.setText(query.getsubsetName(allrows.getInt(9)));//Subset
 
                  for (int i = 0; i < 7; i++) {
-                     Log.i("CounterFor", String.valueOf(allrows.getInt((12) + (i))));
                      if (allrows.getInt((12) + (i)) > 0) {
 
                          Cursor rows3 = db.select_FieldActivityName(allrows.getInt((12) + (i)));

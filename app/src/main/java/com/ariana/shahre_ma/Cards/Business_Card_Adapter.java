@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
@@ -105,7 +103,6 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
         viewHolder.tvNature.setTag(nature.getId());
        // viewHolder.tvDesNature.setText(nature.getmAddress());
         viewHolder.Rates.setRating((float) nature.getRate());
-        Log.i("image",nature.getNameImage());
         String image_url_1 = "http://www.shahrma.com/image/business/" + nature.getNameImage();
         Picasso.with(context).load(image_url_1).placeholder(R.drawable.img_not_found).into(viewHolder.img1);
 
@@ -145,11 +142,9 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
                 @Override
                 public void onClick(View v) {
                     fab.hide();
-                    Log.i("Idbusiness",String.valueOf(tvNature.getTag()));
                     fc.SetBusiness_Id(Integer.valueOf(String.valueOf(tvNature.getTag())));
                     Intent i = new Intent(context, Edit_business.class);
                     context.startActivity(i);
-                    Log.i("clicked", tvNature.getText().toString());
                 }
             });
 
@@ -160,7 +155,6 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
                     fc.SetBusiness_Id(Integer.valueOf(String.valueOf(tvNature.getTag())));
                     Intent i = new Intent(context, Discount.class);
                     context.startActivity(i);
-                    Log.i("clicked", tvNature.getText().toString());
                 }
             });
 
@@ -170,7 +164,6 @@ public class Business_Card_Adapter extends RecyclerView.Adapter<Business_Card_Ad
                 @Override
                 public void onClick(View v) {
 
-                    Log.i("ON_______CLICK", tvNature.getText().toString());
                     fab.hide();
 
                 }

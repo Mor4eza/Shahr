@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AbsListView;
@@ -65,7 +64,6 @@ public class Download_dialog extends Dialog {
 
     items = new ArrayList<City_Dialog_Items>();
 
-        Log.i("selectedSubset",String.valueOf(My_City_Adapter.selectedsubset.size()));
         for(int i=0;i<My_City_Adapter.selectedsubset.size();i++){
             items.add(new City_Dialog_Items(query.getsubsetName(Integer.valueOf(My_City_Adapter.selectedsubset.get(i))),0));
         }
@@ -79,7 +77,6 @@ public class Download_dialog extends Dialog {
             try {
 
                 final Integer position = intent.getIntExtra("received", 0);
-                Log.i("received", position.toString());
                 downloadCount.setText("در حال دانلود "+(position+1) + " از " +My_City_Adapter.selectedsubset.size()+"مورد");
                 listView.smoothScrollToPosition(position + 2);
                 View load = listView.getChildAt(position);

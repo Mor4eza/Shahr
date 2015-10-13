@@ -109,7 +109,6 @@ public class Add_New_Business extends ActionBarActivity  {
         Market_city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("onItemClick", Market_city.getText().toString());
                 GetNameArea(Market_city.getText().toString());
             }
         });
@@ -194,7 +193,6 @@ public class Add_New_Business extends ActionBarActivity  {
                         "null", "null",query.getMemberId(),Market_field.getText().toString());
 
 
-                Log.i("JSONnewBusiness", str);
                 HTTPPostBusinessJson httpbusiness = new HTTPPostBusinessJson(this);
                 httpbusiness.SetBusinessJson(str);
                 httpbusiness.execute();
@@ -268,7 +266,6 @@ public class Add_New_Business extends ActionBarActivity  {
         Cursor allrows  = db.select_Area(cityid);
         if (allrows.moveToFirst()) {
             do {
-                Log.i("area",allrows.getString(1));
                 studentList.add(allrows.getString(1));
             } while (allrows.moveToNext());
         }
@@ -298,7 +295,7 @@ public class Add_New_Business extends ActionBarActivity  {
         if (allrows.moveToFirst()) {
             do {
 
-                Log.i("city",allrows.getString(1));
+
                 studentList.add(allrows.getString(1));
 
 

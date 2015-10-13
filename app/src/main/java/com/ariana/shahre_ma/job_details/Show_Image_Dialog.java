@@ -7,7 +7,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -47,7 +46,6 @@ public class Show_Image_Dialog extends Dialog {
         imgPreview=(ImageView)findViewById(R.id.img_preview);
         close=(ImageView)findViewById(R.id.img_close);
         download=(Button)findViewById(R.id.btn_download);
-        Log.i("url", Url);
 
         if (!ns.checkInternetConnection()){
             download.setVisibility(View.GONE);

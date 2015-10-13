@@ -2,7 +2,6 @@ package com.ariana.shahre_ma.DateBaseSqlite;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;

@@ -120,7 +120,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
         Market_city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("onItemClick", Market_city.getText().toString());
+
                 GetNameArea(Market_city.getText().toString());
             }
         });
@@ -158,7 +158,6 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
 
        try {
            SelectDataBaseSqlite sdb=new SelectDataBaseSqlite(this);
-            Log.i("id", String.valueOf(fc.GetBusiness_Id()));
             Cursor rows = sdb.select_AllBusinessId(fc.GetBusiness_Id());
             rows.moveToFirst();
 
@@ -178,7 +177,6 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
             Market_area.setText(rows2.getString(0));
 
            for (int i = 0; i < 7; i++) {
-                Log.i("CounterFor", String.valueOf(rows.getInt((12) + (i))));
                 if (rows.getInt((12) + (i)) > 0) {
 
                     Cursor rows3 = sdb.select_FieldActivityName(rows.getInt((12) + (i)));
@@ -204,18 +202,15 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
 
             String strmulti = Market_field.getText().toString();
             String strCount[] = strmulti.split(",");
-            Log.i("length", String.valueOf(strCount.length));
             for (int i = 0; i < 7; i++)
                 Fields_ID[i] = 0;
             for (int i = 0; i < strCount.length - 1; i++) {
 
                 String resultNameField = strCount[i].replace(",", "");
                 String namefield = resultNameField.replaceAll("^\\s+|\\s+$", "");
-                Log.i("resultNameField", resultNameField);
                 Cursor rows = db.select_FieldActivityId(namefield);
                 rows.moveToFirst();
                 try {
-                    Log.e("rows.getInt", String.valueOf(rows.getInt(0)));
                     Fields_ID[i] = rows.getInt(0);
 
 
@@ -276,7 +271,6 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
                         Fields_ID[3], Fields_ID[4], Fields_ID[5], Fields_ID[6]);
 
 
-                Log.i("JSONeditBusines", str);
                 HTTPPostBusinessEditJson httpbusiness = new HTTPPostBusinessEditJson(this);
                 httpbusiness.SetBusinessJson(str);
                 httpbusiness.execute();
@@ -298,7 +292,6 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
             do {
 
                 studentList.add(allrows.getString(1));
-                Log.i("FieldActivity", String.valueOf(allrows.getInt(0)) + " : " + allrows.getString(1));
 
 
             } while (allrows.moveToNext());
@@ -381,7 +374,6 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
         if (allrows.moveToFirst()) {
             do {
 
-                Log.i("area", allrows.getString(1));
                 studentList.add(allrows.getString(1));
 
 
@@ -411,7 +403,6 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
         if (allrows.moveToFirst()) {
             do {
 
-                Log.i("city",allrows.getString(1));
                 studentList.add(allrows.getString(1));
 
 
@@ -482,7 +473,6 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
                 ViewId = v.getId();
                 if (item.getTitle().equals("دوربین")) {
                     if (v.getTag() != null) {
-                        Log.i("Tag",v.getTag().toString());
                         Toast.makeText(getApplicationContext(), "ابتدا تصویر قبلی را حذف نمایید", Toast.LENGTH_LONG).show();
                     }else{
                         openCamera();
@@ -490,7 +480,6 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
 
                 } else if (item.getTitle().equals("گالری"))
                     if (v.getTag() != null) {
-                        Log.i("Tag",v.getTag().toString());
                         Toast.makeText(getApplicationContext(), "ابتدا تصویر قبلی را حذف نمایید", Toast.LENGTH_LONG).show();
                     }else{
                         selectImageFromGallery();
@@ -600,9 +589,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
                 {
                     if(i<=3) {
                         urlImage[i] = "http://www.shahrma.com/image/business/" + rows.getString(2);
-                        Log.i("AddressImage", urlImage[i]);
                         imageName[i] = rows.getString(2);
-                        Log.i("ImageName", imageName[i]);
                     }
                     i++;
 

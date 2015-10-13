@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
@@ -79,7 +78,7 @@ public class My_Interest extends ActionBarActivity implements TotalListener {
 
     public void SendPostInterest(View v) {
        SqliteTOjson json=new SqliteTOjson(this);
-        Log.i("", json.getSqliteInterestTOjson());
+
         if(ns.checkInternetConnection())
         {
             HTTPPostInterestJson httpinterest = new HTTPPostInterestJson(this);

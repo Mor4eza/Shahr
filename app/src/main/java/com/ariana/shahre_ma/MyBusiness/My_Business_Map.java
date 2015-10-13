@@ -3,7 +3,6 @@ package com.ariana.shahre_ma.MyBusiness;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -69,8 +68,7 @@ public class My_Business_Map extends ActionBarActivity {
                 marker.showInfoWindow();
                 selecteLat=latLng.latitude;
                 selecteLong=latLng.longitude;
-                Log.i("lat", String.valueOf(latLng.latitude));
-                Log.i("long",String.valueOf(latLng.longitude));
+
             }
         });
 

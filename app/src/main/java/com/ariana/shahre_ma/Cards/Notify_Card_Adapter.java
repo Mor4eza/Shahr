@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,8 +70,6 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
 
                 if(fc.GetNotificationGooMorning())
                 {
-                    Log.i("ShowNotifi", "if");
-
                     if(rowalls.getInt(3)==1) {
                         nci = new Notify_Card_Items();
 
@@ -97,10 +94,8 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
                 }
                 else
                 {
-                    Log.i("ShowNotifi", String.valueOf(rowalls.getInt(3)));
                     if(rowalls.getInt(3)==0)
                     {
-                        Log.i("ShowNotifi","elseto");
                         nci = new Notify_Card_Items();
                         ct.setIranianDate(Integer.parseInt(rowalls.getString(5).substring(0, 4)),Integer.parseInt(rowalls.getString(5).substring(5, 7)),Integer.parseInt(rowalls.getString(5).substring(8,10)));
 
@@ -173,7 +168,6 @@ public class Notify_Card_Adapter  extends RecyclerView.Adapter<Notify_Card_Adapt
                 @Override
                 public void onClick(View v) {
 
-                    Log.i("ON_______CLICK", tvmarket.getText().toString());
 
                     if((Integer)tvmarket.getTag()==0)
                     {

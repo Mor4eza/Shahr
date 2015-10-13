@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ import android.widget.Toast;
 import com.androidmapsextensions.GoogleMap;
 import com.androidmapsextensions.Marker;
 import com.androidmapsextensions.MarkerOptions;
+import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.Fields.FieldDataBusiness;
@@ -33,7 +36,10 @@ import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceSend.HTTPSendNearMeURL;
 import com.ariana.shahre_ma.job_details.Job_details;
 import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 import fr.quentinklein.slt.LocationTracker;
@@ -49,6 +55,7 @@ public class NearMeActivity extends ActionBarActivity {
     LocationManager locationManager;
     Double curLat=0.0;
     Double curLong=0.0;
+    Query query=new Query(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +78,6 @@ public class NearMeActivity extends ActionBarActivity {
                 final View window = getLayoutInflater().inflate(
                         R.layout.jobs_info_windows, null);
 
-               // fdb.ClearAll();
 
                 String title = marker.getTitle();
                 double rate = Double.parseDouble(marker.getSnippet());
@@ -131,9 +137,25 @@ public class NearMeActivity extends ActionBarActivity {
         mMap.clear();
         for(int i=0;i<fdb.GetMarketBusiness().size();i++)
         {
-            Marker marker=   mMap.addMarker(new MarkerOptions().position(new LatLng(fdb.GetLatitudeBusiness().get(i), fdb.GetLongtiudeBusiness().get(i))).title("\u200e" + fdb.GetMarketBusiness().get(i)).snippet(String.valueOf(fdb.GetRateBusiness().get(i))));
+           final Marker marker=   mMap.addMarker(new MarkerOptions().position(new LatLng(fdb.GetLatitudeBusiness().get(i), fdb.GetLongtiudeBusiness().get(i))).title("\u200e" + fdb.GetMarketBusiness().get(i)).snippet(String.valueOf(fdb.GetRateBusiness().get(i))));
             marker.setData(fdb.GetIdBusiness().get(i));
-           // marker.animatePosition(new LatLng(Double.valueOf(rows.getString(15)), Double.valueOf(rows.getString(16))));
+            Picasso.with(this).load("http://www.shahrma.com/app/img/markers/"+ fdb.GetSubsetId().get(i)+ ".png").resize(80, 90).into(new Target() {
+
+                @Override
+                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                    marker.setIcon(BitmapDescriptorFactory.fromBitmap(bitmap));
+                }
+
+                @Override
+                public void onBitmapFailed(final Drawable errorDrawable) {
+                    Log.d("TAG", "FAILED");
+                }
+
+                @Override
+                public void onPrepareLoad(final Drawable placeHolderDrawable) {
+                    Log.d("TAG", "Prepare Load");
+                }
+            });
         }
 
     }
@@ -144,9 +166,26 @@ public class NearMeActivity extends ActionBarActivity {
             Log.i("Count", String.valueOf(rows.getCount()));
             if (rows.moveToFirst()) {
                 do {
-                    Marker marker=   mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(rows.getString(15)), Double.valueOf(rows.getString(16)))).title("\u200e" + rows.getString(1)).snippet(String.valueOf(rows.getDouble(30))));
+                    final   Marker marker=   mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(rows.getString(15)), Double.valueOf(rows.getString(16)))).title("\u200e" + rows.getString(1)).snippet(String.valueOf(rows.getDouble(30))));
                     marker.setData(rows.getInt(0));
                     marker.animatePosition(new LatLng(Double.valueOf(rows.getString(15)), Double.valueOf(rows.getString(16))));
+
+                    Picasso.with(this).load("http://www.shahrma.com/app/img/markers/"+ query.getCollectionId(rows.getInt(14))+ ".png").resize(80,90).into(new Target() {
+                        @Override
+                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                            marker.setIcon(BitmapDescriptorFactory.fromBitmap(bitmap));
+                        }
+
+                        @Override
+                        public void onBitmapFailed(final Drawable errorDrawable) {
+                            Log.d("TAG", "FAILED");
+                        }
+
+                        @Override
+                        public void onPrepareLoad(final Drawable placeHolderDrawable) {
+                            Log.d("TAG", "Prepare Load");
+                        }
+                    });
                     len++;
                 } while (rows.moveToNext());
             }
@@ -259,7 +298,8 @@ public class NearMeActivity extends ActionBarActivity {
                         if (rows.moveToFirst()) {
                         do
                         {
-                            mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(rows.getString(15)), Double.valueOf(rows.getString(16)))).title("\u200e" + rows.getString(1)));
+                            mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(rows.getString(15)), Double.valueOf(rows.getString(16)))).title("\u200e" + rows.getString(1)).snippet(String.valueOf(rows.getDouble(30))).data(rows.getInt(0)));
+
                             len++;
                         } while (rows.moveToNext());
 

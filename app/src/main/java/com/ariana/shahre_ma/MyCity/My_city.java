@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -216,14 +215,12 @@ public class My_city extends ActionBarActivity{
     protected void onDestroy() {
         super.onDestroy();
         fc.GetNameSubset().clear();
-        Log.i("Subset",String.valueOf(fc.GetNameSubset().size()));
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         fc.GetNameSubset().clear();
-        Log.i("Subset",String.valueOf(fc.GetNameSubset().size()));
     }
     @Override
     protected void attachBaseContext(Context newBase) {

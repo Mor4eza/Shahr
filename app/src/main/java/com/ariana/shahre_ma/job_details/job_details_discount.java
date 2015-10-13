@@ -6,7 +6,6 @@ import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,16 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.Date.CalendarTool;
-import com.ariana.shahre_ma.DateBaseSqlite.DataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.DateBaseSqlite.SelectDataBaseSqlite;
 import com.ariana.shahre_ma.Fields.FieldClass;
 import com.ariana.shahre_ma.NetWorkInternet.NetState;
 import com.ariana.shahre_ma.R;
 import com.ariana.shahre_ma.WebServiceSend.HTTPSendLikeDisCount;
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.squareup.picasso.Picasso;
 
 
@@ -89,7 +84,6 @@ public class job_details_discount extends FragmentActivity {
            try {
                 SelectDataBaseSqlite db = new SelectDataBaseSqlite(getActivity());
                 Cursor cursor = db.select_DisCount(fc.GetBusiness_Id());
-//                Log.i("IDdiscount",String.valueOf(cursor.getInt(0)));
                 if(cursor.getCount()<=0)
                 {
                     tv_dis_percent.setVisibility(View.INVISIBLE);
