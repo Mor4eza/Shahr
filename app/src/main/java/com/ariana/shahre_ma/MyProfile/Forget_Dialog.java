@@ -34,14 +34,24 @@ public class Forget_Dialog extends Dialog {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                HTTPSendForgetMemberURL httpSendForgetMemberURL=new HTTPSendForgetMemberURL(context);
-                httpSendForgetMemberURL.Setusername(etEmail.getText().toString());
-                httpSendForgetMemberURL.execute();
-                dismiss();
-                Toast.makeText(getContext(),"رمز عبور به ایمیل شما ارسال شد",Toast.LENGTH_LONG).show();
+                if (!isValidEmail(etEmail.getText())){
+                   etEmail.setError("آدرس ایمیل نا معتبر است!");
+                }else {
+                    HTTPSendForgetMemberURL httpSendForgetMemberURL = new HTTPSendForgetMemberURL(context);
+                    httpSendForgetMemberURL.Setusername(etEmail.getText().toString());
+                    httpSendForgetMemberURL.execute();
+                    dismiss();
+                    Toast.makeText(getContext(), "رمز عبور به ایمیل شما ارسال شد", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
+    }
+    public final static boolean isValidEmail(CharSequence target) {
+        if (target == null) {
+            return false;
+        } else {
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+        }
     }
 }

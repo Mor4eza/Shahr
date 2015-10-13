@@ -46,6 +46,7 @@ public class FilterDialog extends Dialog {
     private  List<String>  selectMobile=new ArrayList<String>();
     private  List<String>  selectAddress=new ArrayList<>();
     private  List<String>  selectMarketName=new ArrayList<String>();
+    private  List<Integer>  SelectSubsetId=new ArrayList<>();
 
     private static Integer _SIZE=0;
 
@@ -106,6 +107,7 @@ public class FilterDialog extends Dialog {
                             selectLatitude.add(rows.getDouble(15));
                             selectLongtiude.add(rows.getDouble(16));
                             selectRate.add(rows.getDouble(30));
+                            SelectSubsetId.add(rows.getInt(14));
                         } while (rows.moveToNext());
                     }
                 }
@@ -118,7 +120,7 @@ public class FilterDialog extends Dialog {
                 fdb.SetMarketBusiness(selectMarketName);
                 fdb.SetPhoneBusiness(selectPhone);
                 fdb.SetMobileBusiness(selectMobile);
-
+                fdb.SetSubsetId(SelectSubsetId);
                 Intent intent = new Intent("filtered");
                 intent.putExtra("received", "filters");
                 LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
@@ -142,7 +144,6 @@ public class FilterDialog extends Dialog {
 
         for (int i = 0; i < keepMarketName.size(); i++) {
 
-            Log.i("for1",String.valueOf(keepSubsetId.get(i)));
                 if(!subsetId.contains(keepSubsetId.get(i))) {
                     subsetId.add(keepSubsetId.get(i));
 

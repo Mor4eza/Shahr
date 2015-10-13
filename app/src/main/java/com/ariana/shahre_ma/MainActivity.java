@@ -52,6 +52,7 @@ import com.ariana.shahre_ma.Settings.KeySettings;
 import com.ariana.shahre_ma.Settings.Setting;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetAdvertismentJson;
 import com.ariana.shahre_ma.WebServiceGet.HTTPGetTopsBusinessJson;
+import com.ariana.shahre_ma.WebServiceGet.HTTPGetUpdate;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
@@ -101,8 +102,6 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        Log.i("resume", "true");
 
         HTTPGetAdvertismentJson httpGetAdvertismentJson=new HTTPGetAdvertismentJson(this);
         httpGetAdvertismentJson.SetAdvertisment(query.getCityId(setting.getCityName()));
@@ -155,10 +154,10 @@ public class MainActivity extends ActionBarActivity {
         }
         else
         {
-          /*  String url= "http://uplod.ir/tpy6oft0407u/app-debug.apk.htm";
+            String url= "http://uplod.ir/tpy6oft0407u/app-debug.apk.htm";
             HTTPGetUpdate update=new HTTPGetUpdate(this);
             update.execute(url);
-            */
+
 
             HTTPGetTopsBusinessJson httpGetTopsBusinessJson=new HTTPGetTopsBusinessJson(this);
             httpGetTopsBusinessJson.SetTopBusiness(query.getCityId(setting.getCityName()));
