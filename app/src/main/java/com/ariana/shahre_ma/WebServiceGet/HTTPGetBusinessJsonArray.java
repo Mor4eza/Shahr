@@ -10,6 +10,7 @@ import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.DeleteDataBaseSqlite;
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
+import com.ariana.shahre_ma.MessageDialog;
 import com.ariana.shahre_ma.MyCity.My_city;
 import com.ariana.shahre_ma.Settings.KeySettings;
 
@@ -77,7 +78,7 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
 
     Integer likediscount[];
     Integer dislikediscount[];
-
+    MessageDialog messageDialog;
     Integer len=0;
     Integer i=0;
     Integer URLLEN=0;
@@ -108,6 +109,7 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
      */
     public HTTPGetBusinessJsonArray(Context c) {
         this.context = c;
+         messageDialog = new MessageDialog(context);
     }
 
     /**
@@ -168,8 +170,10 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                 if(compareLen.equals(URLLEN))
                 {
-                   // Toast.makeText(context.getApplicationContext(),"دانلود شد",Toast.LENGTH_LONG).show();
                     My_city.myDialog.dismiss();
+
+                   // messageDialog.ShowMessage("پیام", "دریافت مشاغل ها تمام شد . شما می توانید از این زیر مجموعه به صورت آفلاین استفاده کنید.", "باشه", "false");
+
 
                 }
                 else
@@ -208,8 +212,8 @@ public class HTTPGetBusinessJsonArray extends AsyncTask<String, String, String>
 
                 if(compareLen.equals(URLLEN))
                 {
-                   // Toast.makeText(context.getApplicationContext(),"دانلود شد",Toast.LENGTH_LONG).show();
                     My_city.myDialog.dismiss();
+                  //  messageDialog.ShowMessage("پیام", "دریافت مشاغل ها تمام شد . شما می توانید از این زیر مجموعه به صورت آفلاین استفاده کنید.", "باشه", "false");
                 }
                 else
                 {

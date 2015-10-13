@@ -48,7 +48,7 @@ public class SearchOfline
     Integer LenWord=0;
     Integer threesearch=0;
     Integer SubsetCount=0;
-    ProgressDialog pd;
+
 
     int length = 0;
 
@@ -130,14 +130,11 @@ public class SearchOfline
 
                  i = 0;
                  //Search FieldActivity
-                 pd = new ProgressDialog(context);
-                 pd.setMessage("جستجو آفلاین  . لطفا منتظر بمانید .");
-                 pd.setCancelable(false);
-                 pd.show();
+
 
                  SearchFieldActivity(textSearch.toString());
                  Log.i("size len word", String.valueOf(LenWord));
-                // if(LenWord==1) {
+
                      OneSearch(textSearch.toString().trim(), selectedWord[0], cityid, _FieldActivityId[0], _FieldActivityId[1], _FieldActivityId[2]);
                      if (onesearch > 0)//One Search
                      {
@@ -420,7 +417,7 @@ public class SearchOfline
                 fdb.SetSrc(selectSrc);
 
                 fc.SetSearchOffline(true);
-                pd.dismiss();
+
                 Intent intent = new Intent(context, SearchListActivity.class);
                 context.startActivity(intent);
             } else {
@@ -543,7 +540,7 @@ public class SearchOfline
                 fdb.SetRateCount(selectRateCount);
 
                 fc.SetSearchOffline(true);
-                pd.dismiss();
+
                 Intent intent = new Intent(context, SearchListActivity.class);
                 context.startActivity(intent);
             } else {
@@ -621,12 +618,11 @@ public class SearchOfline
                 fdb.SetRateCount(selectRateCount);
 
                 fc.SetSearchOffline(true);
-                pd.dismiss();
                 Intent intent = new Intent(context, SearchListActivity.class);
                 context.startActivity(intent);
             } else {
                 fc.SetSearchOffline(true);
-                pd.dismiss();
+
                 Intent intent = new Intent(context, SearchListActivity.class);
                 context.startActivity(intent);
             }
@@ -634,7 +630,6 @@ public class SearchOfline
         catch (Exception e)
         {
             fc.SetSearchOffline(true);
-            pd.dismiss();
             Intent intent = new Intent(context, SearchListActivity.class);
             context.startActivity(intent);
         }

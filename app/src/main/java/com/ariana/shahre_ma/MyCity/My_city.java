@@ -32,6 +32,7 @@ import com.software.shell.fab.ActionButton;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -114,25 +115,22 @@ public class My_city extends ActionBarActivity{
 
     public void download(View v){
         // download multiple Business
-      //  try{
+        try{
 
             if(ns.checkInternetConnection()) {
                 Integer Result = 0;
                 Integer i = 0;
-                List<String> listurl = new ArrayList<String>();
+
                 String url[] = new String[fc.GetNameSubset().size()];
                 for (String name : fc.GetNameSubset()) {
-                    url[i] = "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=" + name + "&cityid=" + query.getCityId(cityname);
-                    listurl.add("http://test.shahrma.com/api/ApiGiveBusiness?subsetId=" + name + "&cityid=" + query.getCityId(cityname));
-                    Log.i("", "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=" + name + "&cityid=" + query.getCityId(cityname));
+                    url[i] = "http://test.shahrma.com/api/ApiGiveBusiness?subsetId=" + name + "&cityid=" + query.getCityId(setting.getCityName());
+                     // listurl.add("http://test.shahrma.com/api/ApiGiveBusiness?subsetId=" + name + "&cityid=" + query.getCityId(setting.getCityName()));
+
                     i++;
                 }
+                List<String> listurl = Arrays.asList(url);
 
-                if (cityname.equals(""))
-                {
-                    Toast.makeText(getApplicationContext(), "شهر انتخاب نشده است", Toast.LENGTH_LONG).show();
-                }
-                else if(listurl.size() == 0)
+                if(listurl.size() == 0)
                 {
                     Toast.makeText(getApplicationContext(), "زیر مجموعه انتخاب نشده است", Toast.LENGTH_LONG).show();
                 }
@@ -148,9 +146,10 @@ public class My_city extends ActionBarActivity{
                 messageDialog.ShowMessage("هشدار","اینترنت قطع می باشد","باشه","false");
             }
 
-     /*   }catch (Exception e){
-
-        }*/
+       }catch (Exception e){
+            MessageDialog messageDialog=new MessageDialog(this);
+            messageDialog.ShowMessage("پیام","لطفا دوباره امتحان کنید","باشه","false");
+        }
 
     }
 

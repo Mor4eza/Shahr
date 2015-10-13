@@ -912,10 +912,8 @@ public class DataBaseSqlite extends SQLiteOpenHelper
         query="";
         Log.i("select_BusinessSearch","one");
         query = "select * from " + instructionsSqlite.TABLE_NAME_BUSINESS + " where(" +
-                " Market like'%" + market +"%'" +
-                " or Market like'%" + market +"%'" +
-                " or Address like '%" + namemarket +
-                "%'"+" ) AND (CityId="+cityid+") " +" ORDER BY (RateValue * RateCount) DESC";
+                " Market like '%" + market +"%'" +
+                " ) AND (CityId="+cityid+") " +" ORDER BY (RateValue * RateCount) DESC";
 
         Log.i("select_BusinessSearch",query);
         SQLiteDatabase db = this.getReadableDatabase();
