@@ -18,6 +18,7 @@ import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.ariana.shahre_ma.DateBaseSqlite.Query;
 import com.ariana.shahre_ma.Fields.FieldClass;
@@ -31,6 +32,7 @@ public class Download_dialog extends Dialog {
     public static City_Dialog_Adapter adapter;
     ListView listView;
     Button cancel;
+    TextView downloadCount;
     FieldClass fc=new FieldClass();
     Query query=new Query(getContext());
     ArrayList<City_Dialog_Items> items;
@@ -43,10 +45,10 @@ public class Download_dialog extends Dialog {
         setContentView(R.layout.download_dialog);
         setCanceledOnTouchOutside(false);
         listView=(ListView)findViewById(R.id.dialog_listview);
+        downloadCount =(TextView)findViewById(R.id.tv_download_count);
         adapter= new City_Dialog_Adapter(getContext(),generateData());
         listView.setAdapter(adapter);
         listView.setEnabled(false);
-
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(mMessageReceiver, new IntentFilter("myCity_Download"));
         cancel=(Button)findViewById(R.id.cancel);
 
@@ -78,7 +80,8 @@ public class Download_dialog extends Dialog {
 
                 final Integer position = intent.getIntExtra("received", 0);
                 Log.i("received", position.toString());
-                listView.smoothScrollToPosition(position);
+                downloadCount.setText("در حال دانلود "+position + " از " +My_City_Adapter.selectedsubset.size()+"مورد");
+                listView.smoothScrollToPosition(position + 2);
                 View load = listView.getChildAt(position);
                 RotateLoading loading = (RotateLoading) load.findViewById(R.id.loading);
                 loading.stop();
