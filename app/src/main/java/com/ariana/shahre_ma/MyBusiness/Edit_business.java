@@ -271,6 +271,7 @@ public class Edit_business extends ActionBarActivity implements ImageView.OnClic
                         Fields_ID[3], Fields_ID[4], Fields_ID[5], Fields_ID[6]);
 
 
+                fc.SetEditBusiness_Json(str);
                 HTTPPostBusinessEditJson httpbusiness = new HTTPPostBusinessEditJson(this);
                 httpbusiness.SetBusinessJson(str);
                 httpbusiness.execute();

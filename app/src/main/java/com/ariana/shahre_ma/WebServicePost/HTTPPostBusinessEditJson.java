@@ -3,6 +3,7 @@ package com.ariana.shahre_ma.WebServicePost;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.ariana.shahre_ma.DateBaseSqlite.AddDataBaseSqlite;
@@ -22,6 +23,7 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * Created by ariana on 7/5/2015.
@@ -104,21 +106,24 @@ public class HTTPPostBusinessEditJson extends AsyncTask<String,Long,Integer>
     @Override
     protected void onPostExecute(Integer integer) {
         super.onPostExecute(integer);
+        try {
+            if (integer == 1) {
 
-        if(integer==1)
-        {
-            AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
-            DeleteDataBaseSqlite ddb=new DeleteDataBaseSqlite(context);
-            ddb.delete_BusinessId(fc.GetBusiness_Id());
-
-            ((Activity)context).finish();
-            Toast.makeText(context, "تغییرات شما پس از تایید اعمال میشود!", Toast.LENGTH_LONG).show();
-            Edit_business.save_edit.setProgress(100);
+                AddDataBaseSqlite adb = new AddDataBaseSqlite(context);
+                DeleteDataBaseSqlite ddb = new DeleteDataBaseSqlite(context);
+                ddb.delete_BusinessId(fc.GetBusiness_Id());
+                JSONObject json = new JSONObject(fc.GetEditBusiness_Json());
+                adb.Add_business(json.getInt("Id"),json.getString("Market"),json.getString("Code"),json.getString("Phone"),json.getString("Mobile"),json.getString("Fax"),json.getString("Email"),json.getString("BusinessOwner"),json.getString("Address"),
+                        json.getString("Description"),json.getString("StartDate"),json.getString("ExpirationDate"),json.getString("Inactive"),json.getString("Subset"),json.getInt("SubsetId"),json.getDouble("Latitude"),json.getDouble("Longitude"),json.getInt("AreaId"),json.getString("Area")
+                ,json.getString("User"),json.getInt("CityId"),json.getInt("UserId"),json.getInt("Field1"),json.getInt("Field2"),json.getInt("Field3"),json.getInt("Field4"),json.getInt("Field5"),json.getInt("Field6"),json.getInt("Field7"),json.getInt("RateCount"),json.getDouble("RateValue"),json.getString("Src"));
+                ((Activity) context).finish();
+                Toast.makeText(context, "تغییرات شما پس از تایید اعمال میشود!", Toast.LENGTH_LONG).show();
+                Edit_business.save_edit.setProgress(100);
+            } else {
+                Edit_business.save_edit.setProgress(-1);
+                Toast.makeText(context, "تغییرات ثبت نشد. دوباره امتحان کنید", Toast.LENGTH_LONG).show();
+            }
         }
-        else
-        {
-            Edit_business.save_edit.setProgress(-1);
-            Toast.makeText(context, "تغییرات ثبت نشد. دوباره امتحان کنید", Toast.LENGTH_LONG).show();
-        }
+        catch(Exception e){}
     }
 }
