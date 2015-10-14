@@ -164,11 +164,12 @@ public class job_details_1 extends ActionBarActivity {
         private  void display_detail() {
 
              SelectDataBaseSqlite db = new SelectDataBaseSqlite(getActivity());
-            try {
+         //   try {
              if(fc.GetBusinessTops())
              {
-
+                 Log.i("id jobs", String.valueOf(fc.GetBusiness_Id()));
                  Cursor allrows = db.select_AllBusinessTops(fc.GetBusiness_Id());
+                 Log.i("id jobs", String.valueOf(fc.GetBusiness_Id())+"    ,"+ String.valueOf(allrows.getCount()));
                  allrows.moveToNext();
 
                  fc.SetBusiness_Id(allrows.getInt(0));//Id
@@ -361,10 +362,10 @@ public class job_details_1 extends ActionBarActivity {
              }
 
 
-       }
+     /*  }
         catch (Exception e){
 
-        }
+        }*/
 
     }
 

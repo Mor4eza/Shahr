@@ -53,13 +53,13 @@
                 android:layout_weight="1"
                 android:onClick="btn_nearme"
                 android:textSize="17sp"
-                android:layout_margin="1dp"
+                android:layout_margin="2dp"
                 android:textColor="@color/md_white_1000"
                 android:drawableRight="@drawable/near_me_filled_50"
                 android:background="@drawable/oval_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+
 
               />
             <Button
@@ -71,7 +71,7 @@
                 android:textColor="@color/md_white_1000"
                 android:layout_marginLeft="10dp"
                 android:onClick="btn_jobs"
-                android:layout_margin="1dp"
+                android:layout_margin="2dp"
                 android:textSize="17sp"
                 android:background="@drawable/oval_button"
                 android:drawableRight="@drawable/us_dollar_50"

@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.ariana.shahre_ma.AboutUs">
@@ -32,14 +32,18 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/textView8"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         android:scrollbars="none"
-        android:layout_above="@+id/textView10">
+        android:layout_above="@+id/texttell"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:gravity="right"
+            android:layout_margin="5dp"
             android:lineSpacingMultiplier="1.5"
             android:textSize="18sp"
             android:text="در عصر تکنولوژی و اینترنت با توجه به استفاده روز افزون  از موبایل دیگر زمان تبلیغات و اگهی به صورت روزنامه و مجله و غیره به سر امده چرا که سیستم جدید تبلیغات در هر زمان و در هر مکان «365 روز سال 7 روز هفته 24 ساعته » در دسترس عموم است بر عکس روزنامه و مجله . خیلی کامل تر و جامع تر و راحت تر با تعداد کادرهای نامحدود شما می توانید اگهی خود را در صفحه اختصاصی خود قرار داده و هر زمان که تمایل داشته باشید تغییرات مورد نظر خود را اعمال کنید. تمامی تولید کنندگان و صاحبان مشاغل می توانند تولیدات - کالاها و خدماتشان را بوسیله صفحه اختصاصی خود هم در سایت هم در اپلیکیشن موبایل به معرفی و اطلاع مردم عزیز سراسر ایران برسانند و به کسب و کار خود رونق ببخشند . راستی اپلیکیشن شهر ما به صورت افلاین در دسترس هست .
@@ -72,6 +76,20 @@
         android:layout_centerHorizontal="true" />
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="02165532264"
+        android:id="@+id/texttell"
+        android:textColor="#ff4fbee8"
+        android:gravity="center"
+        android:autoLink="phone"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="70dp"
+        android:layout_above="@+id/frameLayout2"
+        android:layout_centerHorizontal="true"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

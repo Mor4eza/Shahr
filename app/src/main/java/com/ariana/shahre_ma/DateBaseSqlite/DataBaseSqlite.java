@@ -1232,6 +1232,7 @@ public class DataBaseSqlite extends SQLiteOpenHelper
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
+        Log.i("query s: ","SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS_TOPS+" WHERE Id="+businessid);
         return db.rawQuery("SELECT * FROM " + InstructionsSqlite.TABLE_NAME_BUSINESS_TOPS+" WHERE Id="+businessid, null);
 
     }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,7 @@ public class TopBusiness_Card_Adapter extends RecyclerView.Adapter<TopBusiness_C
 
         if(rows.moveToFirst()) {
             do {
-
+                Log.i("id if",String.valueOf(rows.getInt(0)));
                 nature = new TopBusiness_Item();
                 nature.setName(rows.getString(1));
                 nature.setDes(rows.getString(8));
@@ -48,6 +49,7 @@ public class TopBusiness_Card_Adapter extends RecyclerView.Adapter<TopBusiness_C
                 nature.setThumbnail(R.drawable.pooshak);
                 mItems.add(nature);
             }while (rows.moveToNext());
+
         }
 
 
@@ -111,6 +113,7 @@ public class TopBusiness_Card_Adapter extends RecyclerView.Adapter<TopBusiness_C
                 public void onClick(View v) {
                     fc.SetMarket_Business(tvNature.getText().toString());
                     fc.SetBusiness_Id(Integer.valueOf(String.valueOf(tvDesNature.getTag())));
+                    Log.i("id", String.valueOf(tvDesNature.getTag()));
                     fc.SetBusinessTops(true);
                     Intent i=new Intent(context, Job_details.class);
                     context.startActivity(i);
