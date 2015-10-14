@@ -163,7 +163,6 @@ public class NearMeActivity extends ActionBarActivity {
     private void setUpMap() {
         SelectDataBaseSqlite sdb = new SelectDataBaseSqlite(this);
             Cursor rows = sdb.select_BusinessSearchNearMe(curLat,curLong,0.01);
-            Log.i("Count", String.valueOf(rows.getCount()));
             if (rows.moveToFirst()) {
                 do {
                     final   Marker marker=   mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(rows.getString(15)), Double.valueOf(rows.getString(16)))).title("\u200e" + rows.getString(1)).snippet(String.valueOf(rows.getDouble(30))));
@@ -222,7 +221,6 @@ public class NearMeActivity extends ActionBarActivity {
         public void onReceive(Context context, Intent intent) {
             // Get extra data included in the Intent
             String message = intent.getStringExtra("message");
-            Log.i("receiver", "Got message: " + message);
             setUpMap();
             map_progress.setVisibility(View.INVISIBLE);
         }
@@ -233,7 +231,6 @@ public class NearMeActivity extends ActionBarActivity {
         public void onReceive(Context context, Intent intent) {
             // Get extra data included in the Intent
             String message = intent.getStringExtra("message");
-            Log.i("receiver", "Got message: " + message);
            filtered();
         }
 
@@ -294,7 +291,6 @@ public class NearMeActivity extends ActionBarActivity {
                     if(!ns.checkInternetConnection()) {
                         SelectDataBaseSqlite sdb = new SelectDataBaseSqlite(getApplicationContext());
                         Cursor rows = sdb.select_BusinessSearchNearMe(location.getLatitude(),location.getLongitude(),0.002);
-                        Log.i("Count",String.valueOf(rows.getCount()));
                         if (rows.moveToFirst()) {
                         do
                         {

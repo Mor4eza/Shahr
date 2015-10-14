@@ -24,8 +24,6 @@ public class ConnectionChangeReceiver extends BroadcastReceiver
 
 
 
-        Log.i("ConnectionChange","000");
-
         if(net.checkInternetConnection())//Show Net State
         {
             //Run Service

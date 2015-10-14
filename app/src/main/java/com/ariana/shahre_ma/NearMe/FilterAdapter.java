@@ -1,7 +1,6 @@
 package com.ariana.shahre_ma.NearMe;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +28,6 @@ public class FilterAdapter extends ArrayAdapter<FilterItems> {
         this.context = context;
         this.itemsArrayList = itemsArrayList;
         mCheckedState = new boolean[itemsArrayList.size()];
-        Log.i("Size", String.valueOf(itemsArrayList.size()));
     }
 
     @Override
@@ -60,12 +58,10 @@ public class FilterAdapter extends ArrayAdapter<FilterItems> {
                 if(isChecked){
                     mCheckedState[position]=true;
                     selectedsubset.add(labelView.getText().toString());
-                    Log.i("selectedsubset",selectedsubset.toString());
                 }
                 else{
                     mCheckedState[position]=false;
                     selectedsubset.remove(labelView.getText().toString());
-                    Log.i("selectedsubset", selectedsubset.toString());
                 }
             }
         });
@@ -85,7 +81,6 @@ public class FilterAdapter extends ArrayAdapter<FilterItems> {
                         notifyDataSetChanged();
                     }
                     selectedsubset.clear();
-                    Log.i("selectedsubsetSize", String.valueOf(selectedsubset.size()));
                 }
             }
         });
