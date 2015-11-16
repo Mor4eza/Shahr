@@ -6,11 +6,12 @@
     <color name="material_blue_nav">#ff36a7d2</color>
     <color name="material_text_primary">#F5F5F5</color>
     <color name="material_drawer_icons">#37474F</color>
+    <color name="material_drawer_primary">#E71167</color>
 
     <color name="primary">#00a4b3</color>
     <color name="primary_dark">#028995</color>
     <color name="primary_light">#B2DFDB</color>
-    <color name="accent">#AB47BC</color>
+    <color name="accent">#E71167</color>
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#727272</color>
     <color name="icons">#FFFFFF</color>
